@@ -1,0 +1,202 @@
+using System.Text.Json;
+
+namespace KardsSim.Core;
+
+/// <summary>卡牌的静态定义，直接从客户端 CDO 提取，对局中不变。</summary>
+public sealed class CardDef
+{
+    public string Id;
+    public string Asset;
+    public string Name;
+    public string Text;
+    public CardType Type;
+    public Faction Faction;
+    public Rarity Rarity;
+    public string CardSet;
+    public string FlavorText;
+
+    public int Kredits;
+    public int Attack;
+    public int Defense;
+    public int Range = 1;
+    public int OperationCost;
+    public int HeavyArmor;
+
+    public Kw Keywords;
+    public List<Trigger> Triggers = new();
+    public List<string> Tags = new();
+    public List<string> SpawnCardNames = new();
+    public List<string> ChooseOneCards = new();
+
+    /// <summary>CDO 原始属性，未归一化。转译效果代码时要用到。</summary>
+    public Dictionary<string, JsonElement> Raw = new();
+
+    public bool Has(Kw k) => (Keywords & k) != 0;
+
+    /// <summary>单位才能攻击/被攻击；location 与 order 不能。</summary>
+    public bool IsUnit => Type is CardType.Infantry or CardType.Tank or CardType.Fighter
+                              or CardType.Bomber or CardType.Artillery or CardType.Gotcha;
+
+    public bool IsOrder => Type == CardType.Order;
+    public bool IsLocation => Type == CardType.Location;
+    public bool IsOnBoard => IsUnit || IsLocation;
+}
+
+public static class CardDb
+{
+    public static readonly Dictionary<string, CardDef> ById = new(StringComparer.OrdinalIgnoreCase);
+    public static readonly List<CardDef> All = new();
+    /// <summary>UI 显示名（如 "HAMPSHIRE REGIMENT"）→ 定义，用于解析 spawnCardName / 卡面文案。</summary>
+    public static readonly Dictionary<string, CardDef> ByTitle = new(StringComparer.OrdinalIgnoreCase);
+
+    public static CardDef Get(string id) => id != null && ById.TryGetValue(id, out var d) ? d : null;
+
+    /// <summary>按 id、asset 名或 title 查找，容忍卡面文案里的大写写法。</summary>
+    public static CardDef Resolve(string token)
+    {
+        if (string.IsNullOrWhiteSpace(token)) return null;
+        var t = token.Trim();
+        if (ById.TryGetValue(t, out var d)) return d;
+        if (ByTitle.TryGetValue(t, out d)) return d;
+        var norm = Norm(t);
+        if (ByTitle.TryGetValue(norm, out d)) return d;
+        foreach (var c in All)
+            if (Norm(c.Name) == norm || Norm(c.Id) == norm) return c;
+        return null;
+    }
+
+    private static string Norm(string s)
+    {
+        var sb = new System.Text.StringBuilder(s.Length);
+        foreach (var ch in s)
+            if (char.IsLetterOrDigit(ch)) sb.Append(char.ToUpperInvariant(ch));
+        return sb.ToString();
+    }
+
+    public static void Load(string path)
+    {
+        using var fs = File.OpenRead(path);
+        using var doc = JsonDocument.Parse(fs);
+        foreach (var e in doc.RootElement.EnumerateArray())
+        {
+            var d = Parse(e);
+            All.Add(d);
+            ById[d.Id] = d;
+            if (!string.IsNullOrWhiteSpace(d.Name)) ByTitle[d.Name] = d;
+        }
+    }
+
+    private static CardDef Parse(JsonElement e)
+    {
+        var d = new CardDef
+        {
+            Asset = S(e, "asset"),
+            Id = S(e, "id"),
+            Name = S(e, "name"),
+            Text = S(e, "text"),
+            CardSet = S(e, "cardSet"),
+            Type = ParseType(S(e, "type")),
+            Faction = ParseEnum<Faction>(S(e, "faction")),
+            Rarity = ParseEnum<Rarity>(S(e, "rarity")),
+        };
+        if (string.IsNullOrEmpty(d.Id)) d.Id = d.Asset;
+
+        if (e.TryGetProperty("raw", out var raw) && raw.ValueKind == JsonValueKind.Object)
+        {
+            foreach (var p in raw.EnumerateObject()) d.Raw[p.Name] = p.Value.Clone();
+            d.Kredits = I(raw, "kredits");
+            d.Attack = I(raw, "attack");
+            d.Defense = I(raw, "defense");
+            d.Range = raw.TryGetProperty("range", out var rg) ? Math.Max(0, rg.GetInt32()) : 1;
+            d.OperationCost = I(raw, "operationCost");
+            d.HeavyArmor = I(raw, "heavyArmor");
+            d.FlavorText = Str(raw, "flavorText");
+        }
+
+        if (e.TryGetProperty("flags", out var fl) && fl.ValueKind == JsonValueKind.Object)
+            d.Keywords = ParseKeywords(fl);
+
+        if (e.TryGetProperty("usedTriggers", out var tg) && tg.ValueKind == JsonValueKind.Array)
+            foreach (var t in tg.EnumerateArray())
+            {
+                var n = t.GetString();
+                if (!string.IsNullOrEmpty(n) && Enum.TryParse<Trigger>(n, true, out var tv)) d.Triggers.Add(tv);
+            }
+
+        if (e.TryGetProperty("gameplayTags", out var gt) && gt.ValueKind == JsonValueKind.Array)
+            foreach (var t in gt.EnumerateArray())
+            {
+                var n = t.GetString();
+                if (n != null) d.Tags.Add(n);
+            }
+
+        var spawn = S(e, "spawnCardName");
+        if (!string.IsNullOrEmpty(spawn))
+            d.SpawnCardNames.AddRange(spawn.Split(';', StringSplitOptions.RemoveEmptyEntries)
+                                           .Select(x => x.Trim()).Where(x => x.Length > 0));
+
+        if (e.TryGetProperty("chooseOneCards", out var co) && co.ValueKind == JsonValueKind.Array)
+            foreach (var t in co.EnumerateArray())
+            {
+                var n = t.GetString();
+                if (!string.IsNullOrEmpty(n)) d.ChooseOneCards.Add(n.Trim());
+            }
+
+        return d;
+    }
+
+    private static Kw ParseKeywords(JsonElement flags)
+    {
+        var k = Kw.None;
+        foreach (var p in flags.EnumerateObject())
+        {
+            if (p.Value.ValueKind != JsonValueKind.True) continue;
+            var n = p.Name;
+            if (n.Length > 3 && n.StartsWith("has", StringComparison.OrdinalIgnoreCase)) n = n[3..];
+            k |= n.ToLowerInvariant() switch
+            {
+                "guard" => Kw.Guard,
+                "blitz" => Kw.Blitz,
+                "smokescreen" => Kw.Smokescreen,
+                "ambush" => Kw.Ambush,
+                "mobilize" => Kw.Mobilize,
+                "heavyarmor" or "armor" => Kw.HeavyArmor,
+                "deployment" => Kw.Deployment,
+                "veteran" => Kw.Veteran,
+                "fury" => Kw.Fury,
+                "covert" => Kw.Covert,
+                "bond" => Kw.Bond,
+                "develop" => Kw.Develop,
+                "forecast" => Kw.Forecast,
+                "scrying" => Kw.Scrying,
+                "salvage" => Kw.Salvage,
+                _ => Kw.None,
+            };
+        }
+        return k;
+    }
+
+    private static CardType ParseType(string s) => (s ?? "").ToLowerInvariant() switch
+    {
+        "infantry" => CardType.Infantry,
+        "tank" => CardType.Tank,
+        "fighter" => CardType.Fighter,
+        "bomber" => CardType.Bomber,
+        "artillery" => CardType.Artillery,
+        "location" => CardType.Location,
+        "gotcha" => CardType.Gotcha,
+        _ => CardType.Order,
+    };
+
+    private static T ParseEnum<T>(string s) where T : struct
+        => Enum.TryParse<T>(s, true, out var v) ? v : default;
+
+    private static string S(JsonElement e, string k)
+        => e.TryGetProperty(k, out var v) && v.ValueKind == JsonValueKind.String ? v.GetString() : null;
+
+    private static string Str(JsonElement e, string k)
+        => e.TryGetProperty(k, out var v) && v.ValueKind == JsonValueKind.String ? v.GetString() : null;
+
+    private static int I(JsonElement e, string k)
+        => e.TryGetProperty(k, out var v) && v.ValueKind == JsonValueKind.Number ? v.GetInt32() : 0;
+}

@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <AssemblyName>KardsSim</AssemblyName>
+    <RootNamespace>KardsSim</RootNamespace>
+    <!-- 直译产物里有大量 goto/label 与不可达分支，编译器会刷警告，这些都不是问题 -->
+    <NoWarn>CS0168;CS0219;CS8632;CS0162;CS0164;CS0649;CS8510;CS8321</NoWarn>
+    <!-- 单次编译要吞 36 万行生成代码，关掉并发的分析器开销 -->
+    <ConcurrentBuild>false</ConcurrentBuild>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(SkipGenerated)' != 'true'">
+    <DefineConstants>$(DefineConstants);HAS_GENERATED</DefineConstants>
+  </PropertyGroup>
+
+  <!--
+    Kismet 直译产物放在 Generated/ 下，由 SDK 默认的 Compile glob 自动纳入，
+    所以这里不要再加 <Compile Include>，否则会和默认项重复（NETSDK1022）。
+    想跳过生成代码编译时用：dotnet build -p:SkipGenerated=true
+  -->
+
+  <ItemGroup>
+    <PackageReference Include="UAssetAPI" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="cards.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

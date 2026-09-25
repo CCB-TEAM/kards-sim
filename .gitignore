@@ -1,0 +1,18 @@
+# ---------- 构建输出 ----------
+[Bb]in/
+[Oo]bj/
+*.user
+.vs/
+
+# ---------- 游戏原始资产，不入库（版权 + 体积）----------
+# 自行放置：把导出的 .../Content/Blueprints/Cards 拷进来，再跑转译器。
+_input/
+
+# ---------- 旧的转译输出 ----------
+# 必须写成 /generated/（带前导斜杠）锚定仓库根目录。
+# 写成 generated/ 的话，Windows 下 git 大小写不敏感，会连带把
+# KardsSim/Generated/（真正在用的那份产物）一起忽略掉。
+/generated/
+
+# 转译器自己的诊断产物
+KardsSim/Generated/_transpile-report.txt
