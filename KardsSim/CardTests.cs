@@ -35,6 +35,7 @@ public static class CardTests
         KreditSlotCapIs24();
         GotchaActivatesWhenPlayed();
         TwoPhaseChoiceIsAnActionDimension();
+        AuraAppliesAndRetracts();
 
         Console.WriteLine();
         Console.WriteLine($"通过 {_pass} / 失败 {_fail}");
@@ -601,6 +602,117 @@ public static class CardTests
         Check("回调 OnHandTargetSelected 没有报未实现",
             !h.Unhandled.Keys.Any(k => k.Contains("OnHandTargetSelected")),
             string.Join(",", h.Unhandled.Keys.Where(k => k.Contains("OnHandTargetSelected"))));
+    }
+
+    /// <summary>
+    /// 持续站场的光环（aura）要能<b>加上去、也要能精确撤下来</b>。
+    ///
+    /// <para>
+    /// 取 <c>card_unit_flaming_matilda_anzac</c>：「Units to the left of this unit have +2 attack」。
+    /// 它的实现全部走客户端裸自事件与 <c>GetCardsToTheLeft</c>：
+    /// </para>
+    /// <list type="number">
+    ///   <item><c>OnEnterPlay</c> → 给左侧每张牌 <c>ChangeAttack(牌, self.cardID, 2, 0)</c>；</item>
+    ///   <item><c>OnOtherCardLeaveBoardOrOwner</c> → 自己离场时对每张被自己 buff 过的牌
+    ///         <c>ChangeAttack(牌, self.cardID, 0, 4)</c> 撤销。</item>
+    /// </list>
+    /// <para>
+    /// 这些名字不是 <c>ERegisteredCardFunction</c> 触发点，客户端靠一张没被蓝图初始化的
+    /// 表来分派，所以引擎必须在真实时机直接补调。三条断言分别盯住三个静默失效点：
+    /// 左邻加没加上、右侧不该加的有没有被误加、撤销是不是只撤了自己那份。
+    /// </para>
+    /// </summary>
+    private static void AuraAppliesAndRetracts()
+    {
+        var def = CardDb.Get("card_unit_flaming_matilda_anzac");
+        if (def is null) { Check("卡池里有 flaming_matilda", false, "找不到"); return; }
+
+        var sample = CardDb.All.FirstOrDefault(d =>
+            d.Type == CardType.Infantry && d.Attack > 0 && d.Defense > 0 && d.Id != def.Id);
+        if (sample is null) { Check("找得到做左邻的步兵样本", false, "卡池里没有"); return; }
+
+        var g = new Engine.GameEngine(101, null, null, false);
+        var h = new Bridge.EngineHost(g);
+        g.Host = h;
+        g.S.Current = Side.Left;
+        g.S.Left.Kredits = 99;
+
+        // 前线先站两张己方单位（编号 0、1）；matilda 随后落在最右（编号 2）。
+        var left0 = PlaceInFrontline(g, Side.Left, sample);
+        var left1 = PlaceInFrontline(g, Side.Left, sample);
+        var base0 = left0.TotalAttack;
+        var base1 = left1.TotalAttack;
+
+        var matilda = PlaceInHand(g, Side.Left, def);
+        var hi = g.S.Left.Hand.IndexOf(matilda);
+        var played = g.Apply(new GameAction
+        {
+            Type = ActionType.PlayCard, HandIndex = hi, SourceId = matilda.InstanceId, TargetId = -1,
+        });
+        Check($"flaming_matilda({def.Id})能打出", played, "Apply 返回 false");
+        Check("matilda 落在前线最右（左侧才有邻牌可加）",
+            matilda.OnFrontline && matilda.LocationNumber == 2,
+            $"onFrontline={matilda.OnFrontline} locationNumber={matilda.LocationNumber}");
+
+        Check("左邻 1 拿到光环 +2", left0.TotalAttack == base0 + 2,
+            $"{base0} -> {left0.TotalAttack}");
+        Check("左邻 2 拿到光环 +2", left1.TotalAttack == base1 + 2,
+            $"{base1} -> {left1.TotalAttack}");
+        Check("光环不给右侧的牌加成（matilda 自己不加）",
+            matilda.TotalAttack == def.Attack, $"{def.Attack} -> {matilda.TotalAttack}");
+        Check("按来源记账：加成挂在 matilda 的 instanceId 上",
+            left0.AttackBuffBySource.TryGetValue(matilda.InstanceId, out var src) && src == 2,
+            string.Join(",", left0.AttackBuffBySource.Select(kv => $"{kv.Key}={kv.Value}")));
+
+        // 镜像字段也要跟上：客户端规则库读的是 attackBuff，不是引擎实体字段。
+        var mirror = h.Obj(left0).Get("attackBuff").AsInt();
+        Check("镜像 attackBuff 与实体一致", mirror == left0.BuffAttack,
+            $"mirror={mirror} entity={left0.BuffAttack}");
+
+        // ── 第二个光环：叠加时各记各的账，撤销时只撤自己的那一份 ──────────────
+        // 这一条是「按来源记账」存在的理由：只记总额的实现会把两张光环的加成
+        // 混成一个数，先走的那张一撤销就把另一张也抹了。
+        var matilda2def = CardDb.Get("card_unit_flaming_matilda_anzac");
+        var m2 = PlaceInHand(g, Side.Left, matilda2def);
+        var hi2 = g.S.Left.Hand.IndexOf(m2);
+        g.Apply(new GameAction
+        {
+            Type = ActionType.PlayCard, HandIndex = hi2, SourceId = m2.InstanceId, TargetId = -1,
+        });
+        Check("两个光环叠加：左邻 1 拿到 +4", left0.TotalAttack == base0 + 4,
+            $"{base0 + 2} -> {left0.TotalAttack}");
+
+        g.DestroyCard(m2);
+        Check("只撤掉离场那张光环的 +2（另一张还在）", left0.TotalAttack == base0 + 2,
+            $"{base0 + 4} -> {left0.TotalAttack}");
+        Check("另一张光环的账还在",
+            left0.AttackBuffBySource.TryGetValue(matilda.InstanceId, out var keep) && keep == 2,
+            string.Join(",", left0.AttackBuffBySource.Select(kv => $"{kv.Key}={kv.Value}")));
+
+        // 撤销：matilda 也离场，左邻回到基础值。
+        g.DestroyCard(matilda);
+        Check("matilda 离场后左邻 1 的光环被撤销", left0.TotalAttack == base0,
+            $"{base0 + 2} -> {left0.TotalAttack}");
+        Check("matilda 离场后左邻 2 的光环被撤销", left1.TotalAttack == base1,
+            $"{base1 + 2} -> {left1.TotalAttack}");
+        Check("撤销后按来源的账也清空", left0.AttackBuffBySource.Count == 0,
+            string.Join(",", left0.AttackBuffBySource.Select(kv => $"{kv.Key}={kv.Value}")));
+        Check("没有未实现的宿主调用",
+            h.Unhandled.Count == 0,
+            string.Join(",", h.Unhandled.Keys.Take(5)));
+    }
+
+    /// <summary>把一张牌直接放到前线（编号由 <see cref="Engine.GameEngine.RefreshAllLocations"/> 重排）。</summary>
+    private static Card PlaceInFrontline(Engine.GameEngine g, Side s, CardDef def)
+    {
+        var c = g.S.NewCard(def, s);
+        c.Loc = Loc.Frontline;
+        c.OnFrontline = true;
+        c.EnterPlayTurn = 0;
+        g.S.Frontline.Add(c);
+        if (g.S.FrontlineOwner == Side.None) g.S.FrontlineOwner = s;
+        g.RefreshAllLocations();
+        return c;
     }
 
     private static Card PlaceInHand(Engine.GameEngine g, Side s, CardDef def)

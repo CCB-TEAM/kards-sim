@@ -125,6 +125,12 @@ public sealed partial class GameEngine
     public void DestroyCard(Card c, Card killer = null, bool inCombat = false)
     {
         if (c == null || c.Destroyed) return;
+
+        // 客户端销毁流程的第一步是 ExecuteOnBeforeLeaveBoardOrOwnerEvents，
+        // 此时牌还在原位置。这一步必须在标 Destroyed / 移出行**之前**跑，
+        // 否则卡自己的离场逻辑里 GetCardsToTheLeft(self) 恒空（详见该方法说明）。
+        FireBareLeaveBoardOrOwner(c);
+
         c.Destroyed = true;
         FireBeforeDestroyTriggers(c, killer, inCombat);
 

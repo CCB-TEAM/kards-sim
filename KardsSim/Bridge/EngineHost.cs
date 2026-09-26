@@ -604,8 +604,51 @@ public sealed class EngineHost : Host
     }
 
     /// <summary>
-    /// 结算一次「选牌」回调：调发起卡自己的
-    /// <c>OnHandTargetSelected(handTargetCardID, instigatorID)</c>。
+    /// 调一张卡自己的裸事件 stub（不是 ERegisteredCardFunction 触发点）。
+    ///
+    /// <para>
+    /// 客户端 BP_CardFunctions 的分派器会调这些名字：OnEnterPlay、OnLeaveBoardOrOwner、
+    /// OnMoveToFrontline、OnMoveFromFrontline。无头模拟不走它依赖的
+    /// CardFunctionTriggers / FetchAllCardsWithEventTrigger（那张表没有被蓝图初始化），
+    /// 所以引擎在真实时机直接补调。
+    /// </para>
+    /// </summary>
+    private void InvokeBareEvent(Card card, string name, params Val[] args)
+    {
+        if (card?.Id is null) return;
+        var fn = FnIndex.Find(card.Id, name);
+        if (fn is null) return; // 该卡没覆盖这个可选事件，正常 no-op
+        ResetBudget();
+        try
+        {
+            fn(this, Val.Ref(Obj(card)), args ?? Array.Empty<Val>());
+            SyncBack(Obj(card));
+        }
+        catch (EffectBudgetException) { NoteBudgetTrip(); }
+        catch (Exception ex)
+        {
+            var key = $"{name}({card.Id}) 抛异常: {ex.GetType().Name}";
+            Unhandled[key] = Unhandled.TryGetValue(key, out var n) ? n + 1 : 1;
+        }
+    }
+
+    /// <summary>卡牌进场时的裸自事件。method 对齐 EOnEnterPlayMethod：1=OnPlayedFromHand。</summary>
+    public void InvokeOnEnterPlay(Card card, int method = 1)
+        => InvokeBareEvent(card, "OnEnterPlay", Val.Of(method));
+
+    /// <summary>卡牌离场时的裸自事件。method 对齐 EOnLeavePlayMethod：1=OnDestroyed。</summary>
+    public void InvokeOnLeaveBoardOrOwner(Card card, int goingToLocation, int method = 1)
+        => InvokeBareEvent(card, "OnLeaveBoardOrOwner", Val.Of(goingToLocation), Val.Of(method));
+
+    /// <summary>卡牌进入前线时的裸自事件。</summary>
+    public void InvokeOnMoveToFrontline(Card card, bool forceMove = false, int moveCost = 0)
+        => InvokeBareEvent(card, "OnMoveToFrontline", Val.Of(forceMove), Val.Of(moveCost));
+
+    /// <summary>卡牌离开前线时的裸自事件。</summary>
+    public void InvokeOnMoveFromFrontline(Card card)
+        => InvokeBareEvent(card, "OnMoveFromFrontline");
+
+    /// <summary>二段式选牌回调的公用入口。</summary>
     ///
     /// <para>
     /// 这是客户端 UI 在玩家点完之后做的事，无头模拟里由引擎代劳
@@ -1486,13 +1529,27 @@ public sealed class EngineHost : Host
                 Out(a, Math.Max(0, h.Card_(a[0])?.KreditCost ?? 0)),
             ["getCardsBuffedByThisCard"] = (h, a) =>
             {
+                // getCardsBuffedByThisCard(out cards)：本卡给出的加成落在哪些卡上。
+                // 按来源记账之后这是精确查询，不再靠镜像里的单值 buffedBy 近似。
                 var me = h.Card_(a[0])?.InstanceId ?? -1;
-                var ids = h.Engine.S.AllOnBoard()
-                    .Where(c => h.Obj(c).Get("buffedBy").AsInt() == me)
-                    .Select(c => Val.Of(c.InstanceId));
+                var ids = me <= 0
+                    ? Enumerable.Empty<Val>()
+                    : h.Engine.S.AllOnBoard()
+                        .Where(c => c.AttackBuffBySource.TryGetValue(me, out var v) && v != 0)
+                        .Select(c => Val.Of(c.InstanceId));
                 Val.TrySetOut(a[^1], Val.Ref(new KArr(ids)));
                 return Val.Nothing;
             },
+            // GetCardsToTheLeft / GetCardsToTheRight **故意不在这里实现**。
+            //
+            // 它们本身就是 BP_CardFunctions 里的蓝图函数（形参 Card / unitsOnly /
+            // includeCovert / out cards），语义是「同一 location 上、locationNumber
+            // 更小（更大）的牌」。原语表里再写一份就等于把同一套规则实现两遍，迟早漂移；
+            // 更何况引擎侧副本很容易漏掉蓝图里的那道守卫「本卡 location ∈ 场上（5/6/7）」，
+            // 漏掉之后离场中的牌（location 已经变成弃牌堆）也能查出「左邻」，
+            // 行为就和客户端不一样了。所以放行给 BP_CardFunctions，
+            // 引擎只负责把 location / locationNumber 喂对（见
+            // <c>GameEngine.RefreshLocationNumbers</c>）。
 
             // ---------- 战役 / 加密 / 静态数据：无头模拟里是空实现 ----------
             ["InitializeEncryption"] = (h, a) => Val.Nothing,
@@ -1831,29 +1888,64 @@ public sealed class EngineHost : Host
 
             ["isBuffedByCard"] = (h, a) =>
             {
-                // isBuffedByCard(instigatorID, out isBuffed)：判断本卡是否被指定来源 buff 过。
-                // 引擎目前只记总额，没有按来源记账，所以按「总额非零」近似。
+                // 这是卡上的原生方法（UHT 里没有导出形参表），实参布局按调用点定：
+                //   card.isBuffedByCard(instigatorID, out isBuffed)
+                //   → a[0]=卡（接收者）a[1]=instigatorID a[2]=out
+                // 曾经按「a[1] 是卡」写，于是拿 instigatorID（一个整数）当卡查，
+                // 恒查不到 → 撤销光环的那道 !isBuffedByCard 守卫永远不通过。
+                //
+                // 客户端查的是卡上的 buffsFromCards 映射（键 instigatorID），所以这里
+                // 按来源记账精确回答。只有「没有任何按来源记录、但总额非零」时才退回
+                // 「总额非零」的近似 —— 那说明这笔加成是别的路径写进去的（例如效果
+                // 规划器直接加 BuffAttack），至少不比以前差。
                 var c = h.Card_(a[0]);
-                Val.TrySetOut(a[^1], Val.Of((c?.BuffAttack ?? 0) != 0));
+                var instigator = a.Length > 1 ? (int)a[1].AsInt() : 0;
+                var yes = c is not null && (
+                    (c.AttackBuffBySource.TryGetValue(instigator, out var v) && v != 0)
+                    || (c.AttackBuffBySource.Count == 0 && c.BuffAttackFromNoSource == 0 && c.BuffAttack != 0));
+                Val.TrySetOut(a[^1], Val.Of(yes));
                 return Val.Nothing;
             },
 
             // ---------- 改数值 ----------
+            //
+            // ChangeAttack(card, instigatorID, amount, changeType, skipAction, out qqq)
+            // 形参名来自 UHT：见 Generated/_index.g.cs 的 ChangeAttack 条目。
+            //
+            // changeType 是 EChangeType（客户端枚举），实际用到的只有四种：
+            //   0/1 = 加成（1 是「临时」那一支，结算时按来源记账）
+            //   2   = SetValue（把加成直接设成 amount）
+            //   4   = 撤销<b>该来源</b>的加成（全池 64 处调用点都带自己的 cardID 当 instigatorID）
+            // 其余值按「加成」处理，与原来的兜底一致。
+            //
+            // 关键点：**必须按 instigatorID 分开记账**。光环卡的撤销路径都是
+            // ChangeAttack(某张左邻, self.cardID, 0, 4)，只知道「撤销谁给的」，
+            // 不知道也不该知道总额。只记总额的话，两个光环叠在同一张卡上时，
+            // 先离场的那张会把另一张的加成一起清零；而 isBuffedByCard 也只能
+            // 用「总额非零」近似，让「还没被本光环加成过」的守卫误判。
             ["ChangeAttack"] = (h, a) =>
             {
-                // ChangeAttack(card, instigatorID, amount, ChangeType, skipAction, out qqq)
                 var c = h.Card_(a[1]);
+                var instigator = (int)a[2].AsInt();
                 var amount = (int)a[3].AsInt();
                 var ct = (int)a[4].AsInt();
                 if (c is not null)
                 {
-                    c.BuffAttack = ct switch
+                    switch (ct)
                     {
-                        2 => amount,             // SetValue
-                        4 => 0,                  // tempBuffRemove
-                        _ => c.BuffAttack + amount,
-                    };
-                    h.Obj(c).Set("attackBuff", Val.Of(c.BuffAttack));
+                        case 2: // SetValue：清掉全部来源，只留这一个
+                            c.AttackBuffBySource.Clear();
+                            c.BuffAttackFromNoSource = 0;
+                            AddSource(c, instigator, amount);
+                            break;
+                        case 4: // 撤销指定来源的加成
+                            RemoveSource(c, instigator);
+                            break;
+                        default: // 0 / 1 / 其它：按来源累加
+                            AddSource(c, instigator, amount);
+                            break;
+                    }
+                    WriteAttackBuff(h, c);
                 }
                 Val.TrySetOut(a[^1], Val.True);
                 return Val.Nothing;
@@ -2229,6 +2321,61 @@ public sealed class EngineHost : Host
         };
 
     // ===================== 原语辅助 =====================
+
+    /// <summary>
+    /// 记一笔攻击加成（<c>ChangeAttack</c> 的加分支）。
+    ///
+    /// <para>
+    /// <paramref name="instigator"/> ≤ 0 表示没有来源的匿名加成，记在
+    /// <see cref="Card.BuffAttackFromNoSource"/> 上；有来源的记进
+    /// <see cref="Card.AttackBuffBySource"/>。两边都不直接改
+    /// <see cref="Card.BuffAttack"/> —— 总额由 <see cref="WriteAttackBuff"/> 重算，
+    /// 保证「总额 = 各来源之和」，不会出现账实不符。
+    /// </para>
+    /// </summary>
+    private static void AddSource(Card c, int instigator, int amount)
+    {
+        if (instigator > 0)
+        {
+            c.AttackBuffBySource.TryGetValue(instigator, out var cur);
+            var now = cur + amount;
+            if (now == 0) c.AttackBuffBySource.Remove(instigator);
+            else c.AttackBuffBySource[instigator] = now;
+        }
+        else c.BuffAttackFromNoSource += amount;
+    }
+
+    /// <summary>
+    /// 撤销 <paramref name="instigator"/> 这一个来源的攻击加成（<c>changeType == 4</c>）。
+    ///
+    /// <para>
+    /// 找不到该来源的记录时分两种可能：一是这笔加成根本不存在（撤销是幂等的空操作），
+    /// 二是加成来自不按来源记账的路径。后者按旧行为把总额清零，避免「撤销不掉、
+    /// 加成永久残留」——残留比多清更糟，它会让同一张卡越打越强。
+    /// </para>
+    /// </summary>
+    private static void RemoveSource(Card c, int instigator)
+    {
+        if (c.AttackBuffBySource.Remove(instigator)) return;
+        if (instigator > 0 && c.AttackBuffBySource.Count == 0 && c.BuffAttackFromNoSource == 0)
+        {
+            c.BuffAttack = 0;   // 没有任何按来源的账 → 退回旧的「清总额」语义
+        }
+    }
+
+    /// <summary>把按来源的账重算成总额，并同步镜像字段 <c>attackBuff</c>。</summary>
+    private static void WriteAttackBuff(EngineHost h, Card c)
+    {
+        var total = c.BuffAttackFromNoSource;
+        foreach (var v in c.AttackBuffBySource.Values) total += v;
+        c.BuffAttack = total;
+
+        var k = h.Obj(c);
+        k.Set("attackBuff", Val.Of(c.BuffAttack));
+        // 镜像里那份「单一来源」视图：只有恰好一个来源时才写得出来，
+        // 多来源没有等价表示，写 0 而不是随便挑一个（挑一个会让读它的逻辑看到假数据）。
+        k.Set("buffedBy", Val.Of(c.AttackBuffBySource.Count == 1 ? c.AttackBuffBySource.Keys.First() : 0));
+    }
 
     /// <summary>
     /// 处理「void F(..., T&amp; out x)」这形态：把结果写进最后一个实参槽并返回 none。

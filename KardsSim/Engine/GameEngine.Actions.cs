@@ -482,6 +482,11 @@ public sealed partial class GameEngine
             AfterBoardChange();
         }
 
+        // 客户端裸自事件 OnEnterPlay(card, method=OnPlayedFromHand=1)。
+        // 这些不是 ERegisteredCardFunction，不能靠 CardDispatch.Fire 找到；
+        // 光环/位置型卡（70 张定义它）靠这个入口建立持久 buff。
+        if (Host is not null) Host.InvokeOnEnterPlay(c, 1);
+
         FirePlayTriggers(c);
         FireEnterPlayTriggers(c);
 
@@ -527,6 +532,7 @@ public sealed partial class GameEngine
         // 只有归属真的变了才发归属变更：客户端也是在 UpdateFrontlineIfNeeded 里判断的，
         // 无脑发会让「前线归属改变」类卡牌反复触发。
         if (before != S.FrontlineOwner) Fire(Trigger.OnFrontlineOwnershipChange, c);
+        if (Host is not null) Host.InvokeOnMoveToFrontline(c);
         Fire(Trigger.OnOtherCardMoveToFrontline, c);
         FireLocationMovedTriggers(c);
         AfterBoardChange();
@@ -625,6 +631,7 @@ public sealed partial class GameEngine
             var hadOwner = S.FrontlineOwner;
             if (S.Frontline.Count == 0) S.FrontlineOwner = Side.None;
             S.Log.Line($"  {u.Id} retreats to support line");
+            if (Host is not null) Host.InvokeOnMoveFromFrontline(u);
             FireMoveFromFrontlineTriggers(u);
             FireRetreatTriggers(u);
         }

@@ -83,6 +83,29 @@ public sealed class Card
     public int BuffDefense;
 
     /// <summary>
+    /// 攻击力加成<b>按来源记账</b>：来源卡的 InstanceId → 它加了多少攻击。
+    ///
+    /// <para>
+    /// 客户端把这份账存在卡上的 <c>buffsFromCards</c> 映射里（键就是 instigatorID），
+    /// <c>ChangeBuffsFromCards</c> 全靠它做增减，<c>isBuffedByCard(card, instigatorID)</c>
+    /// 也是查这张表。引擎以前只记 <see cref="BuffAttack"/> 总额，于是：
+    /// </para>
+    /// <list type="bullet">
+    ///   <item>「撤销某个来源的加成」只能粗暴地把总额清零 —— 两个光环叠加时先走的那张
+    ///         会把另一张的加成一起抹掉；</item>
+    ///   <item><c>isBuffedByCard</c> 只能用「总额非零」近似 —— 一张已经被别的来源
+    ///         buff 过的卡，不会再被新光环加成（<c>!isBuffedByCard(...)</c> 守卫提前退出）。</item>
+    /// </list>
+    /// <para>
+    /// 归类为「无来源」（instigatorID ≤ 0）的加成记在 <see cref="BuffAttackFromNoSource"/>。
+    /// </para>
+    /// </summary>
+    public Dictionary<int, int> AttackBuffBySource = new();
+
+    /// <summary>instigatorID ≤ 0（匿名加成）累计出来的攻击加成。</summary>
+    public int BuffAttackFromNoSource;
+
+    /// <summary>
     /// Intel（情报）值：打出本卡时随机翻开对手手牌的张数。
     /// 客户端存在 <c>cipher</c> 字段里（AddIntelToCard 会把它 clamp 到 0..9），
     /// 所以这里沿用同一个名字，语义才能和直译产物对齐。
@@ -113,6 +136,7 @@ public sealed class Card
     public Card Clone()
     {
         var c = (Card)MemberwiseClone();
+        c.AttackBuffBySource = new Dictionary<int, int>(AttackBuffBySource);
         return c;
     }
 

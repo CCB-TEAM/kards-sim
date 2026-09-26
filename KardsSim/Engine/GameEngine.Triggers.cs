@@ -118,6 +118,37 @@ public sealed partial class GameEngine
         Fire(Trigger.OnAfterOtherCardLeaveBoardOrOwner, c);
     }
 
+    /// <summary>
+    /// 卡牌自己的裸事件 <c>OnLeaveBoardOrOwner</c>（不是 <c>ERegisteredCardFunction</c> 触发点）。
+    ///
+    /// <para>
+    /// <b>必须在这张牌还站在场上时调</b>：客户端的销毁流程第一步就是
+    /// <c>ExecuteOnBeforeLeaveBoardOrOwnerEvents</c>（见 BP_CardFunctions，
+    /// 它先取旧位置、再 <c>CardLocationMoved</c>），此时牌还在原位置。
+    /// 光环型卡（flaming_matilda / royal_west_kents 等）就在这一步撤销自己发出去的加成，
+    /// 而它们要先 <c>GetCardsToTheLeft(self)</c> 找回那些牌 —— 那道查询的第一条守卫是
+    /// 「本卡 <c>location</c> ∈ 场上（5/6/7）」。
+    /// </para>
+    ///
+    /// <para>
+    /// 曾经是在 <c>FireDestroyTriggers</c> 里调的，那时牌早已标了 <c>Destroyed</c>、
+    /// <c>Loc</c> 也变成弃牌堆，于是查询恒空、撤销静默失效：加成永久留在左邻身上
+    /// （光环比没有还糟，因为它再也撤不掉）。所以这里同样按客户端守卫裁掉
+    /// 「本来就不在场上」的牌（手牌/牌库里的 order 被丢弃时不该走这个事件）。
+    /// </para>
+    /// </summary>
+    /// <param name="newLocation">离场去向（客户端 <c>ECardLocationEnum</c>，8 = 弃牌堆）。</param>
+    /// <param name="leaveMethod">
+    /// 对齐 <c>EOnLeavePlayMethod</c>：1 = OnDestroyed。本方法只服务销毁路径 ——
+    /// 「是不是战斗致死」由 <c>destroyedInCombat</c> 等载荷传达，不走这个枚举。
+    /// </param>
+    internal void FireBareLeaveBoardOrOwner(Card c, int newLocation = 8, int leaveMethod = 1)
+    {
+        if (Host is null || c is null) return;
+        if (!c.OnFrontline && c.Loc != Loc.Board) return;   // 不在场上 → 客户端也会提前退出
+        Host.InvokeOnLeaveBoardOrOwner(c, newLocation, leaveMethod);
+    }
+
     // ===================== 移动 =====================
 
     internal void FireMoveToFrontlineTriggers(Card c)
