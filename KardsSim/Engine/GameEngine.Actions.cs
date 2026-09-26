@@ -638,6 +638,109 @@ public sealed partial class GameEngine
         return true;
     }
 
+    /// <summary>
+    /// <b>效果驱动的位移</b>：蓝图侧把一张牌挪走之后（<c>CardLocationMoved</c> →
+    /// <c>InjectCardIntoLocation</c> / <c>MoveCardFromBoardToOwnersHand</c> →
+    /// <c>SetCardLocationAndLocNumber</c>），让引擎的场面跟着变。
+    ///
+    /// <para>
+    /// 为什么需要：卡牌效果自己挪牌走的是蓝图侧的镜像操作，引擎的列表不会自己变 ——
+    /// <c>MakeCardRetreat</c>（KARDS 的「撤退」= 从前线退到支援线，支援线满时才回手牌）
+    /// 因此在无头模拟里等于没发生。宿主在 <c>SetCardLocationAndLocNumber</c> 处
+    /// 把这个位移接回引擎，这里做实际的状态转移。
+    /// </para>
+    ///
+    /// <para>
+    /// <b>范围（只做「撤退」用得到的那几支）</b>：
+    /// </para>
+    /// <list type="bullet">
+    /// <item>前线 → 支援线（5/6，<c>CardLocationMoved</c> 那一支）；</item>
+    /// <item>场上 → 场外（3/4 手牌、1/2 牌库、8 弃牌堆；支援线满时回手牌那一支）。</item>
+    /// </list>
+    /// <para>
+    /// 「场外 → 场上」（出牌、生成、效果把牌放上场）不在范围内：那由引擎自己的放置流程
+    /// （<c>DoPlayCard</c> / <c>TryPlaceOnFrontline</c>）负责，这里遇到就直接返回 false。
+    /// </para>
+    ///
+    /// <para>
+    /// <b>只补蓝图没发的那几个通知</b>：<c>CardLocationMoved</c> 自己会调
+    /// <c>ExecuteOnCardLocationMoved</c>（注册触发点 <c>OnOtherCardLocationMoved</c>）与
+    /// <c>ExecuteOnCardMoveFromFrontline</c>（注册触发点 <c>OnOtherCardMoveFromFrontline</c>），
+    /// 所以引擎不再发这两个；但**裸自事件** <c>OnMoveFromFrontline</c> 在这条路上没人调
+    /// （它只由 <c>ExecuteOnMoveFromFrontlineCardEffects</c> 发，而那个函数的唯一调用者是
+    /// 「支援线→前线」那个动作），所以由引擎补 —— 光环卡正是靠它撤销自己发出去的加成。
+    /// </para>
+    ///
+    /// <para>离场那几支的顺序与 <see cref="DestroyCard"/> 一致：先在牌还站在场上时发
+    /// 「离场前」的裸自事件，再从占位里摘掉、归档、发离场的注册触发点、重排位置号。</para>
+    /// </summary>
+    /// <param name="newClientLocation">客户端位置枚举：1/2 牌库、3/4 手牌、5/6 支援线、7 前线、8 弃牌堆。</param>
+    public bool ApplyEffectDrivenLocationChange(Card c, int newClientLocation)
+    {
+        if (c is null || c.Destroyed) return false;
+        var onBoard = c.OnFrontline || c.Loc == Loc.Board;
+        if (!onBoard) return false;                       // 不在场上 → 交给引擎自己的放置流程
+
+        var p = S.Player(c.Owner);
+
+        // ── 前线 → 支援线（「撤退」的主路径） ─────────────────────────────
+        if (newClientLocation is 5 or 6)
+        {
+            if (!c.OnFrontline) return false;             // 已经在支援线，没什么可做
+            S.Frontline.Remove(c);
+            if (S.Frontline.Count == 0) S.FrontlineOwner = Side.None;
+            c.OnFrontline = false;
+            c.Loc = Loc.Board;
+            p.Board.Add(c);
+            S.Log.Line($"  {c.Id} retreats to support line (effect)");
+            // 裸自事件必须**换行之后**再发，顺序与 DoMove 一致：
+            // 位移类事件体的写法是「先全撤自己发的加成，再按*当前*位置的左右邻重加」
+            // （见 card_unit_flaming_matilda_anzac 的 OnMoveFromFrontline）。
+            // 换行前发的话，它会按旧位置（前线）的左邻重加回来 —— 等于什么也没撤掉。
+            RenumberRows();
+            // **不补发** OnMoveFromFrontline：蓝图那条路自己会发 ——
+            // MoveCardFromBoardToOwnersHand → … → ExecuteOnMoveFromFrontlineCardEffects →
+            // 卡的 OnMoveFromFrontline。补一次会让「撤退时做点什么」的效果变成双份。
+            //（这条路径上引擎只负责把场面搬到支援线。）
+            AfterBoardChange();
+            return true;
+        }
+
+        // 回场上（7）或其它枚举：不在范围内
+        if (newClientLocation is 7) return false;
+        if (newClientLocation is not (1 or 2 or 3 or 4 or 8)) return false;
+
+        // ── 场上 → 场外：送回手牌 / 洗回牌库 / 丢弃 ──────────────────────
+        // 摘出占位 + 归档。
+        //
+        // **不发任何离场事件**：这条路（MoveCardFromBoardToOwnersHand /
+        // CardLocationMoved 的非场上分支）蓝图自己会发 ——
+        // ExecuteOnBeforeLeaveBoardOrOwnerEvents（卡的裸 OnLeaveBoardOrOwner +
+        // 其他卡的 OnOtherCardLeaveBoardOrOwner）与 ExecuteOnAfterLeaveBoardOrOwnerEvents。
+        // 引擎再发一遍就是双份，而且顺序也不对：蓝图那两次是**在引擎改占位之前**跑的
+        // （所以卡的离场逻辑问 GetCardsToTheLeft(self) 时牌还在场上），
+        // 引擎这里只管把场面搬到目标区。
+        if (c.OnFrontline)
+        {
+            S.Frontline.Remove(c);
+            if (S.Frontline.Count == 0) S.FrontlineOwner = Side.None;
+        }
+        else p.Board.Remove(c);
+        c.OnFrontline = false;
+
+        // 落点用引擎自己的 Owner，不看蓝图的 originalSide —— 那个字段宿主没 seed
+        switch (newClientLocation)
+        {
+            case 3 or 4: c.Loc = Loc.Hand; p.Hand.Add(c); S.Log.Line($"    {c.Id} retreats to hand"); break;
+            case 1 or 2: c.Loc = Loc.Deck; p.Deck.Add(c); S.Log.Line($"    {c.Id} returns to deck"); break;
+            default: c.Loc = Loc.Discard; p.Discard.Add(c); S.Log.Line($"    {c.Id} discarded"); break;
+        }
+
+        // 占位变了 → 位置号与掩护状态重算
+        AfterBoardChange();
+        return true;
+    }
+
     private bool DoMove(GameAction a, bool toFront)
     {
         var u = S.FindCard(a.SourceId);

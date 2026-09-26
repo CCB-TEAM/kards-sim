@@ -41,7 +41,7 @@ public static class CardTests
         RangeOneNeedsTheFrontlineForTheEnemySupportLine();
         HttpActionListIsAligned();
         TempAttackBuffExpiresAtEndOfTurn();
-        RetreatToHandIsAKnownGap();
+        RetreatToHandMovesTheCardAndRetractsAura();
         ByRefFixMakesRandomTargetsWork();
 
         Console.WriteLine();
@@ -1084,28 +1084,29 @@ public static class CardTests
     }
 
     /// <summary>
-    /// 「送回手牌」（Retreat）也要撤销光环 —— 走真实卡牌效果，端到端。
+    /// 「送回手牌」（Retreat）要真的把牌送回手牌，并撤销光环 —— 走真实卡牌效果，端到端。
     ///
     /// <para>
-    /// 用 <c>card_event_tactical_withdrawal</c>（「Retreat a friendly unit in the frontline」）：
+    /// 用 <c>card_event_delaying_tactics</c>（「All units in the frontline must Retreat.」）：
     /// 它内部调 <c>MakeCardRetreat</c>，链是
     /// <c>MakeCardRetreat → ApplyMakeCardRetreat → CardLocationMoved →
-    /// ApplyRemoveCardFromBoard → ExecuteOnBeforeLeaveBoardOrOwnerEvents →
-    /// 卡的 OnLeaveBoardOrOwner</c>。
+    /// SetCardLocationAndLocNumber</c>。
     /// </para>
     ///
     /// <para>
-    /// 这条链曾经整段是空操作：<c>ApplyMakeCardRetreat(cards, …)</c> 的 <c>cards</c> 被发射成
-    /// 纯 out 形参（本地槽零初始化），而它第一句就读 <c>Array_Length(cards)</c> ——
-    /// 读到空数组直接返回。修法是转译器把 out 按 in-out 发射（见 <c>--mode byref</c>）。
+    /// 这条链修过两次：先是 <c>ApplyMakeCardRetreat(cards, …)</c> 的 <c>cards</c> 被发射成纯 out
+    /// 形参（本地槽零初始化）而它第一句就读 <c>Array_Length(cards)</c> —— 读到空数组直接返回
+    /// （by-ref 修复）；然后是它的位移只在蓝图侧生效，引擎的列表不变（宿主在
+    /// <c>SetCardLocationAndLocNumber</c> 处接回引擎，见
+    /// <see cref="Engine.GameEngine.ApplyEffectDrivenDeparture"/>）。
     /// </para>
     ///
     /// <para>
-    /// 必须走真实效果而不是直接调 <c>MakeCardRetreat</c>：链上有
-    /// <c>IsActionProcess</c> 这道门（「结算中」才走），测试里直接调的话它恒为假。
+    /// 必须走真实效果而不是直接调 <c>MakeCardRetreat</c>：链上有 <c>IsActionProcess</c>
+    /// 这道门（「结算中」才走），测试里直接调的话它恒为假。
     /// </para>
     /// </summary>
-    private static void RetreatToHandIsAKnownGap()
+    private static void RetreatToHandMovesTheCardAndRetractsAura()
     {
         var def = CardDb.Get("card_unit_flaming_matilda_anzac");
         var orderDef = CardDb.Get("card_event_delaying_tactics");
@@ -1141,28 +1142,71 @@ public static class CardTests
 
         var order = PlaceInHand(g, Side.Left, orderDef);
         var hi = g.S.Left.Hand.IndexOf(order);
-        var trace = new List<string>();
-        h.CallTrace = n => { if (trace.Count < 4000) trace.Add(n); };
         var played = g.Apply(new GameAction
         {
             Type = ActionType.PlayCard, HandIndex = hi,
             SourceId = order.InstanceId, TargetId = -1,
         });
-        h.CallTrace = null;
 
         Check("「前线单位必须撤退」能打出", played, "Apply 返回 false");
-        // 修好 by-ref 之后这条链真的跑起来了（以前第一句 Array_Length(cards) 就返回）
-        Check("撤退链跑到了蓝图侧的位置变更（by-ref 修复的效果）",
-            trace.Contains("MakeCardRetreat") && trace.Contains("ApplyMakeCardRetreat")
-            && trace.Contains("CardLocationMoved"),
-            string.Join(" > ", trace.Where(n => n is "MakeCardRetreat" or "ApplyMakeCardRetreat" or "CardLocationMoved")));
+        Check("三张都从前线退到支援线（引擎的列表真的跟着变了）",
+            g.S.Frontline.Count == 0 && g.S.Left.Board.Count == 3
+            && !matilda.OnFrontline && matilda.Loc == Loc.Board && g.S.Left.Board.Contains(matilda),
+            $"frontline={g.S.Frontline.Count} support={g.S.Left.Board.Count} loc={matilda.Loc} onFront={matilda.OnFrontline}");
+        Check("前线清空后归属回到无主", g.S.FrontlineOwner == Side.None, g.S.FrontlineOwner.ToString());
+        Check("支援线里的顺序与前线一致（位置号重排过）",
+            matilda.LocationNumber == 2 && g.S.Left.Board[2] == matilda,
+            $"locNum={matilda.LocationNumber}");
 
-        // 但**引擎侧的场面没有跟着变**：CardLocationMoved 是蓝图自己挪镜像，
-        // 宿主没有把这种「效果驱动的位移」同步回 GameState 的列表，
-        // 所以引擎仍认为这张牌在前线（下一节「已知缺口」）。
-        Check("已知缺口：效果驱动的位移没同步回引擎（matilda 还在引擎的前线列表里）",
-            g.S.Frontline.Contains(matilda),
-            "它居然同步了！缺口已修 → 换成「回手牌后光环被撤销」的正式断言");
+        // 光环**跟着换行**：事件体的语义是「先全撤自己发的加成，再按新位置的左右邻重加」。
+        // 三张一起退到支援线、相对顺序不变，所以 matilda 左边仍然是那两张 → +2 保留。
+        // （这一步同时证明撤退路径上的 OnMoveFromFrontline 真的被调到了。）
+        Check("撤退后光环跟着搬到支援线（左邻仍是那两张）",
+            left0.TotalAttack == base0 + 2 && left1.TotalAttack == base1 + 2,
+            $"{left0.TotalAttack}/{left1.TotalAttack}");
+
+        // ── 支援线满时那一支：撤退改为「回手牌」 ────────────────────────────
+        // 先把支援线填满（再退就没位置了），前线放回两张，光环重新挂给左边那张。
+        while (g.S.Left.Board.Count < Rules.MaxCardsPerRow)
+        {
+            var filler = g.S.NewCard(sample, Side.Left);
+            filler.Loc = Loc.Board;
+            filler.EnterPlayTurn = 0;
+            g.S.Left.Board.Add(filler);
+        }
+        var b0 = PlaceInFrontline(g, Side.Left, sample);
+        var b1 = PlaceInFrontline(g, Side.Left, def);      // matilda 在 b0 右边
+        g.RefreshAllLocations();
+        var b0Base = b0.TotalAttack;
+        h.Call("ChangeAttack", new Val[]
+        {
+            Val.Ref(h.CardFunctions), Val.Ref(h.Obj(b0)),
+            Val.Of(b1.InstanceId), Val.Of(2), Val.Of(0), Val.False, Val.Out(_ => { }),
+        });
+        Check("前置：支援线已满、前线两张且光环挂在左边那张",
+            g.S.Left.Board.Count == Rules.MaxCardsPerRow && b0.TotalAttack == b0Base + 2,
+            $"support={g.S.Left.Board.Count} atk={b0.TotalAttack}");
+
+        var order2 = PlaceInHand(g, Side.Left, orderDef);
+        var hi2 = g.S.Left.Hand.IndexOf(order2);
+        var played2 = g.Apply(new GameAction
+        {
+            Type = ActionType.PlayCard, HandIndex = hi2,
+            SourceId = order2.InstanceId, TargetId = -1,
+        });
+        Check("支援线满时撤退改为回手牌", played2 && b0.Loc == Loc.Hand && b1.Loc == Loc.Hand,
+            $"b0={b0.Loc} b1={b1.Loc}");
+        Check("  两张都进了手牌、前线空了",
+            g.S.Left.Hand.Contains(b0) && g.S.Left.Hand.Contains(b1) && g.S.Frontline.Count == 0,
+            $"inHand={g.S.Left.Hand.Contains(b0)}/{g.S.Left.Hand.Contains(b1)} frontline={g.S.Frontline.Count}");
+        // 已知怪相（与客户端同源，不当作正确行为）：一批牌是一张一张搬的 ——
+        // 先搬走的 b0 已经不在场上，等后搬的 matilda 用「我左边有谁」去找自己加过 buff 的牌时
+        // 已经找不到它，于是 +2 留在了一张已经在手牌里的牌上。
+        // 要彻底修得让「撤掉某个来源的加成」按来源查全场（而不是按左右邻），那是另一件事。
+        Check("已知怪相：一批一起撤时，先搬走那张不会被后搬的光环卡撤掉",
+            b0.TotalAttack == b0Base + 2, $"{b0.TotalAttack}（已知会带 +2 回手牌）");
+        Check("撤退效果没有留下未实现的宿主调用", h.Unhandled.Count == 0,
+            string.Join(",", h.Unhandled.Keys.Take(5)));
     }
 
     /// <summary>
@@ -1239,6 +1283,7 @@ public static class CardTests
         else { _fail++; Console.WriteLine($"  FAIL  {what}   {detail}"); }
     }
 }
+
 
 
 

@@ -435,7 +435,7 @@ Execute*Events  →  逐个调响应卡的事件函数
   的 Develop 结果在客户端是**UI 直接做的**，它们没有自己的 `OnHandTargetSelected`，
   无头模拟里选择能被发起和结算，但效果不落地
 - 已修：by-ref 形参被当成纯 out（曾经 48 处 / 40 个函数，`--mode byref` 现在 **0**）
-- 已知缺口：**效果驱动的位移没有同步回引擎** —— 见下一节
+- 已修：撤退（效果驱动的位移接回引擎，含「支援线满改回手牌」那一支）
 
 ---
 
@@ -497,30 +497,51 @@ L["cards"] = Val.Nothing;          // ← 读到的永远是空（旧形态）
 
 ---
 
-## 已知缺口：效果驱动的位移没有同步回引擎
+## 已修：撤退（效果驱动的位移接回引擎）
 
-卡牌效果自己挪动一张牌时（`MakeCardRetreat` → `ApplyMakeCardRetreat` →
-`CardLocationMoved` → `InjectCardIntoLocation`）走的是**蓝图侧**的镜像操作，
-宿主没有把这次位移同步回 `GameState` 的列表：
+KARDS 的 **Retreat**（<c>MakeCardRetreat</c>）= 前线退到支援线；**支援线满时改回手牌**。
+这条链整段是蓝图自己走的：
 
 ```text
---mode tests 的 RetreatToHandIsAKnownGap：
-  「前线单位必须撤退」能打出，蓝图链也跑到了 CardLocationMoved，
-  但引擎仍认为那张牌在前线（Loc / OnFrontline / S.Frontline 都没变）。
+MakeCardRetreat → ApplyMakeCardRetreat
+  ├─ 支援线有空位 → CardLocationMoved(newLocation=5/6) → InjectCardIntoLocation
+  └─ 支援线满     → MoveCardFromBoardToOwnersHand → CardLocationMoved(newLocation=3/4)
+                       两条最后都落到 SetCardLocationAndLocNumber
 ```
 
-后果：撤退类卡牌在无头模拟里等于没发生；依赖「离场」的效果（光环撤销）也不会被触发。
-修法有两条路，都还没做：
+`SetCardLocationAndLocNumber` 只写**镜像**的位置，引擎自己的列表不会变 ——
+于是「撤退」在无头模拟里等于没发生。宿主现在在这一步把位移接回引擎
+（`GameEngine.ApplyEffectDrivenLocationChange`）：
 
-1. 宿主实现 `InjectCardIntoLocation`（客户端位置枚举 → 引擎列表），把蓝图侧位移落回引擎，
-   同时补上「离场事件」的分派（`CardLocationMoved` 这条路上
-   `ExecuteOnBeforeLeaveBoardOrOwnerEvents` 没有被调到）；
-2. 或者把「送回手牌」接成引擎原语，直接走 `DoMove` 那一套 —— 更省事，但绕开了蓝图。
+- **前线 → 支援线**：摘出前线、放进支援线、重排位置号、重算掩护；前线清空时归属回无主；
+- **场上 → 场外**（手牌 3/4、牌库 1/2、弃牌堆 8）：摘出占位、归档，落点用引擎自己的
+  `Owner`（蓝图的 `originalSide` 宿主没 seed，读出来是空，靠它选边会把牌塞到对面去）；
+- **不补发任何事件**：这两条路上蓝图自己会发（`ExecuteOnMoveFromFrontlineCardEffects`、
+  `ExecuteOnBefore/AfterLeaveBoardOrOwnerEvents`），引擎再发就是双份；
+  引擎只负责把场面搬对。
+- 范围**只到撤退用得到的两支**：场外 → 场上（出牌 / 生成）仍由引擎自己的放置流程负责，
+  遇到就直接不动。
 
-第一条更忠实，第二条更简单；选哪条要看后续还有多少「效果驱动的位移」要覆盖
-（撤退、洗回牌库、交换位置……）。
+顺带修掉两个让这条链跑不通的宿主缺口：
 
----
+| 缺口 | 后果 |
+|---|---|
+| `FetchCardsByLocation` 的 `isLocationFull` 恒返回 false | 蓝图永远以为支援线有空位 → 所有撤退都往支援线塞、突破行容量；现在按真实容量答（手牌 9、行 5） |
+| `GetHandLocationBySide` 只有 out 槽、没有返回值 | 有一处调用点读的是**返回值**（`ApplyMakeCardRetreat` 决定去支援线还是手牌那句），拿到的恒为空 → 回手牌那一支落点算成 `none` 而整段不动。现在 out 槽与返回值都给（这不是本次翻新引入的：入库产物同样如此） |
+| `originalSide` 没 seed | 卡的「原属阵营」读成空，回手牌 / 洗回牌库的落点算到对面 |
+
+回归哨兵是 `--mode tests` 的 `RetreatToHandMovesTheCardAndRetractsAura`：
+三张一起从「必须撤退」退到支援线（引擎列表真的变了、位置号重排、归属回无主、
+光环跟着换行）、支援线满时改回手牌（两张都进手牌、前线清空）。
+
+**已知怪相**（与客户端同源，不当作正确行为）：一批牌一起撤时是一张一张搬的 ——
+先搬走的那张已经不在场上，等后搬的光环卡用「我左边有谁」去找自己加过 buff 的牌时
+已经找不到它，+2 会留在那张已经在手牌里的牌上。要彻底修得让「撤掉某个来源的加成」
+按来源查全场（而不是按左右邻），那是另一件事；测试里用 `已知怪相：…` 那条断言记录着。
+
+调试开关（默认关闭，读一次环境变量存静态字段）：`KARDS_TRACE_CA=1` 打印每次
+`ChangeAttack` 的 (目标, 来源, 增量, changeType)；`KARDS_TRACE_LOC=1` 打印每次
+效果驱动的位移请求。查加成/位移时序时省事。
 
 ---
 
@@ -568,11 +589,11 @@ dotnet run --project KardsTranspiler -c Release -- \
   ubergraph，非战斗逻辑）
 - 47.5 万行直译代码 **0 错误编译通过**
 - 自对弈 150 局：**0 异常 / 0 卡死 / 0 非法动作**，宿主未实现调用 **0%**
-- 单卡机制验证（`--mode tests`）**121/121 通过**：Intel、事件载荷、老兵升级、Blitz、
+- 单卡机制验证（`--mode tests`）**128/128 通过**：Intel、事件载荷、老兵升级、Blitz、
   数据表、三选一、CDO 标志位、移动/攻击二选一、指挥点槽 24、反制指令、二段式抉择、
   持续站场光环的加/撤与跟随移动（`card_unit_flaming_matilda_anzac`）、
   「前线只有一条且要抢」「射程 1 上前线才够得到敌方支援线」、
-  「本回合 +N 攻击」到期撤销、by-ref 修复后随机目标真的取得到牌，以及 HTTP 侧动作列表按下标对齐（用真路由跑）
+  「本回合 +N 攻击」到期撤销、by-ref 修复后随机目标真的取得到牌，撤退（引擎列表真的跟着变）、以及 HTTP 侧动作列表按下标对齐（用真路由跑）
 
 ---
 
@@ -718,5 +739,6 @@ HTTP 侧有**抉择预览**：`GET /games/{id}/state` 会给出
 
 `cards.json` 与 `KardsSim/Generated/` 是从游戏客户端资产派生的，仅供本地研究 /
 AI 训练，请勿再分发。游戏资产本身（`_input/`）不入库。
+
 
 

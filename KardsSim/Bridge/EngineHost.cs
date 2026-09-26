@@ -434,6 +434,12 @@ public sealed class EngineHost : Host
         k.Set("heavyArmor", Val.Of(c.HeavyArmor));
         k.Set("enterPlayOnTurn", Val.Of(c.EnterPlayTurn));
         k.Set("side", Val.Of((int)c.Owner));
+        // originalSide：卡牌「原本属于哪一方」。客户端用它算落点（回手牌走哪个位置、
+        // 洗回谁的牌库）。宿主以前没 seed，读出来是空 → GetHandLocationBySide(Nothing)
+        // 落到 else 分支返回 4（右手牌），于是「送回手牌」这条链会把牌算到对面去，
+        // 甚至因为落点非法而整段不动（撤退在支援线满时的回手牌分支就是这样）。
+        // 这个模拟里阵营不换边，所以 Owner 就是 originalSide。
+        k.Set("originalSide", Val.Of((int)c.Owner));
 
         // 行动次数：引擎侧用两个布尔建模，客户端读的是计数/标志位，这里换算过去。
         // 规则库的 has_already_attacked 读 attackCountThisTurn，
@@ -1353,10 +1359,16 @@ public sealed class EngineHost : Host
             {
                 var list = h.CardsInClientLocation((int)a[1].AsInt());
                 var vals = list.Select(c => Val.Ref(h.Obj(c))).ToList();
+                // isLocationFull 必须按**真实容量**答，不能恒 false：
+                // 「撤退」（MakeCardRetreat）就是靠它决定「退到支援线」还是「支援线满了改回手牌」，
+                // 恒 false 会让所有撤退都往支援线塞，行容量被突破。
+                var loc = (int)a[1].AsInt();
+                var cap = loc is 3 or 4 ? Rules.MaxCardsOnHand : Rules.MaxCardsPerRow;
+                var full = list.Count >= cap;
                 if (a.Length >= 7)
                 {
                     Val.TrySetOut(a[^5], Val.Of(list.Count));
-                    Val.TrySetOut(a[^4], Val.False);
+                    Val.TrySetOut(a[^4], Val.Of(full));
                     Val.TrySetOut(a[^3], Val.Ref(new KArr(vals)));
                     Val.TrySetOut(a[^2], vals.Count > 0 ? vals[0] : Val.Nothing);
                     Val.TrySetOut(a[^1], Val.Ref(new KArr(list.Select(c => Val.Of(c.InstanceId)))));
@@ -1365,7 +1377,7 @@ public sealed class EngineHost : Host
                 {
                     // 老的三 out 形态（少数调用点）
                     Val.TrySetOut(a[^3], Val.Of(list.Count));
-                    Val.TrySetOut(a[^2], Val.False);
+                    Val.TrySetOut(a[^2], Val.Of(full));
                     Val.TrySetOut(a[^1], Val.Ref(new KArr(vals)));
                 }
                 return Val.Nothing;
@@ -1856,6 +1868,21 @@ public sealed class EngineHost : Host
                 var s = (Side)a[1].AsInt();
                 return Val.Of(s == Side.Left ? 5 : 6);
             },
+            ["GetHandLocationBySide"] = (h, a) =>
+            {
+                // 签名：void GetHandLocationBySide(ESideEnum side, ECardLocationEnum& handLocation)
+                // （Left=3, Right=4，见 ECardLocationEnum）
+                //
+                // 直译产物里的两处调用点取用方式**不一致**：一处读 out 槽，
+                // 另一处（ApplyMakeCardRetreat 决定「撤退到支援线还是回手牌」那句）
+                // 把调用结果赋给 `CallFunc_GetHandLocationBySide_ReturnValue` ——
+                // 读的是**返回值**，而它的 out 实参在字节码里是 Val.Nothing，写不回去。
+                // 这不是本次翻新的产物：入库的那份产物同样如此。
+                // 两边都满足：能写 out 槽就写，同时把值也返回。
+                var loc = a.Length > 1 && (int)a[1].AsInt() == (int)Side.Left ? 3 : 4;
+                Val.TrySetOut(a[^1], Val.Of(loc));
+                return Val.Of(loc);
+            },
 
             // UHT: void getTotalDefense(int32& totalDefense)
             // 调用方读 out 槽，直接 return 会让它恒为 0。
@@ -1975,6 +2002,10 @@ public sealed class EngineHost : Host
                 var instigator = (int)a[2].AsInt();
                 var amount = (int)a[3].AsInt();
                 var ct = (int)a[4].AsInt();
+                // 排查加成/撤销时序时的开关：设 KARDS_TRACE_CA=1 就把每次改动的四元组打出来。
+                // 读一次环境变量存成静态字段 —— 这条路径在自对弈里要被调用几百万次。
+                if (TraceChangeAttack)
+                    Console.WriteLine($"    [CA] card={c?.InstanceId} inst={instigator} amount={amount} type={ct}");
                 if (c is not null)
                 {
                     switch (ct)
@@ -2164,6 +2195,34 @@ public sealed class EngineHost : Host
             },
 
             // ---------- 场地 ----------
+            //
+            // SetCardLocationAndLocNumber(cardID, Location, LocationNumber)
+            //
+            // 客户端用它把「这张牌的客户端位置现在是 (location, locationNumber)」写进镜像。
+            // 无头模拟里位置是**引擎权威**（RefreshMirror 每次读成员都从实体回填），
+            // 所以这里反过来：让引擎的场面跟着变。
+            //
+            // 不这么做的话，卡牌效果自己挪牌（MakeCardRetreat → ApplyMakeCardRetreat →
+            // CardLocationMoved / MoveCardFromBoardToOwnersHand → 这里）就只挪了蓝图侧的镜像：
+            // KARDS 的「撤退」（从前线退到支援线，支援线满时回手牌）在引擎看来等于没发生，
+            // 依赖位移的后续效果（光环撤销）也不会被触发。
+            // 只做「撤退」用得到的那几支，见 GameEngine.ApplyEffectDrivenLocationChange。
+            //
+            // 蓝图那一半（写镜像的 location/locationNumber）仍然照跑，行为不变。
+            ["SetCardLocationAndLocNumber"] = (h, a) =>
+            {
+                if (a.Length >= 3)
+                {
+                    var card = h.Engine.S.FindCard((int)a[1].AsInt());
+                    if (TraceLocationChange)
+                        Console.WriteLine($"    [LOC] card={card?.Id}#{card?.InstanceId} newLoc={a[2]} " +
+                                          $"onFront={card?.OnFrontline} loc={card?.Loc}");
+                    if (card is not null) h.Engine.ApplyEffectDrivenLocationChange(card, (int)a[2].AsInt());
+                }
+                var fn = FnIndex.Find("BP_CardFunctions", "SetCardLocationAndLocNumber");
+                if (fn is null) return Val.Nothing;
+                return fn(h, Val.Ref(h.CardFunctions), a.Length > 1 ? a[1..] : a);
+            },
             ["GetCardsOnBoardBySide"] = (h, a) =>
             {
                 var s = (Side)a[1].AsInt();
@@ -2425,6 +2484,18 @@ public sealed class EngineHost : Host
 
     /// <summary>供引擎侧按来源清账后同步镜像（见 <c>GameEngine.ExpireTempBuffs</c>）。</summary>
     public void WriteMirrorAttackBuff(Card c) => WriteAttackBuff(this, c);
+
+    /// <summary>
+    /// 排查「加成/撤销时序」的开关（环境变量 <c>KARDS_TRACE_CA=1</c>）：
+    /// 每次 <c>ChangeAttack</c> 都打印 (目标卡, 来源, 增量, changeType)。
+    /// 静态只读，避免在热路径上反复查环境变量。
+    /// </summary>
+    private static readonly bool TraceChangeAttack =
+        Environment.GetEnvironmentVariable("KARDS_TRACE_CA") == "1";
+
+    /// <summary>同上，开关是 <c>KARDS_TRACE_LOC=1</c>：打印每次效果驱动的位移请求。</summary>
+    private static readonly bool TraceLocationChange =
+        Environment.GetEnvironmentVariable("KARDS_TRACE_LOC") == "1";
 
     /// <summary>
     /// 处理「void F(..., T&amp; out x)」这形态：把结果写进最后一个实参槽并返回 none。
