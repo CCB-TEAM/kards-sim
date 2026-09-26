@@ -113,7 +113,7 @@ HTTP.sys 与 URL ACL，需要额外权限，受限环境直接起不来。
 | POST | `/games` | `{seed?,leftDeck?,rightDeck?,log?}` | 建局，返回第一帧观测（含 `sessionId`） |
 | GET | `/games/{id}` | — | 等价于 `/state` |
 | GET | `/games/{id}/state` | — | 当前观测：状态向量 + 双方视图 + **共享前线**（`frontline{owner,count,cards}`）+ 合法动作 + 抉择预览 |
-| GET | `/games/{id}/legal` | — | `{actions, indices, mask}`，只要动作集时用它（不带 204 维向量） |
+| GET | `/games/{id}/legal` | — | `{actions, indices, mask, allActions}`，只要动作集时用它（不带 204 维向量） |
 | POST | `/games/{id}/step` | `{index:N}` 或 `{action:{...}}` | 推进一步：`{ok, applied, reward, obs, done}` |
 | POST | `/games/{id}/reset` | `{seed?}` | 用同一套卡组重开（`seed` 省略则沿用） |
 | GET | `/games/{id}/log` | — | 引擎的可读日志（`log:true` 建局才有内容） |
@@ -201,29 +201,30 @@ curl -s -X POST http://127.0.0.1:8642/games/1a2bf118b/step \
 出牌目标槽里**前线也只有一份**：前线被谁占着是唯一状态，分「己方前线 / 敌方前线」
 两套槽位必然有一套恒空。攻击目标槽同理（敌方占着前线时，第 0..4 格就是那些单位）。
 
-### ⚠️ 坑：`actions` 与 `indices` **不能按下标配对**
+### 合法动作怎么读（`actions` / `indices` / `mask` / `allActions`）
 
-`GET /legal` 里 `actions` 来自 `LegalActions()` 原始列表，`indices` 来自 `Enc.Mask()`
-——后者会**丢掉没有动作槽位的动作**，所以两者长度可能不同、按下标 zip 会错位。
-观测里同样是裸的 `legalActions` 对过滤过的 `legalIndices`。
+`GET /legal` 与观测里的动作列表**按下标一一对应**：
 
-具体会差在哪：手牌上限是 9 张，而出牌区只编码 `handIndex < 5`（`PerRow`），
-所以**手牌第 6 张起没有下标能表达它**（引擎本身允许打，只是动作空间里没这个格子）。
-实测手牌 7 张时：
+| 字段 | 含义 |
+|---|---|
+| `indices[i]` | 第 i 个合法动作在动作空间里的下标（`/legal` 的 `indices`、观测的 `legalIndices`） |
+| `actions[i]` / `legalActions[i]` | 与 `indices[i]` 对应的同一个动作（`text` 可读形式 + `Type`/`SourceId`/`TargetId`/`HandIndex`） |
+| `mask` | 长度 = `actionSize` 的 0/1 数组，非零个数 = `indices` 个数，可直接当策略网络的合法动作掩码 |
+| `allActions` | **原始**合法动作（只有可读文本）。它会比 `indices` 长：出牌区只编码 5 张手牌，手牌第 6 张起的出牌没有槽位 |
 
+三条不变量（`--mode tests` 的 `HttpActionListIsAligned` 用真的 HTTP 路由验过）：
+`actions.Length == indices.Length`、`mask.Length == actionSize`、`mask` 非零个数 `== indices.Length`。
+
+**手牌超过 5 张时**：第 6 张起仍然**打得出去**，只是没有下标
+（动作空间是给模型用的稠密编码，不是引擎的能力边界）—— 用动作对象即可：
+
+```bash
+curl -s -X POST .../games/{id}/step -H 'content-type: application/json' \
+     -d '{"action":{"type":"PlayCard","handIndex":5}}'      # 实测 ok=true
 ```
-GET /games/{id}/legal  →  actions=7 条  indices=6 个  [0,32,64,96,128,290]
-  actions: Play(hand=0) … Play(hand=5) EndTurn      ← hand=5 那个动作没有下标
-```
 
-所以：
-
-- **模型 / 远端后端只用 `indices`（配合 `mask`）**，`actions` 当可读日志看；
-- 手牌那 5 张以外的牌**引擎允许打**，用动作对象即可：
-  `{"action":{"type":"PlayCard","handIndex":5}}` —— 受限的只是动作空间编码，不是引擎；
-- 需要严格对齐的接口，得改 `Server/HttpServer.cs`（把 `actions` 也按 `indices` 过滤，
-  或把出牌区从 5 张手牌扩到 9 张）。**当前没有改**，因为它会改变 `actionSize` 与响应长度，
-  已经按 299 训练/对接的一方会受影响。
+想把这 4 张也纳入动作空间就得把出牌区从 5 张手牌扩到 9 张（`PlayBlock` 160 → 288），
+`actionSize` 会跟着从 299 变到 427。**当前没有改**，因为已经按 299 训练/对接的一方会受影响。
 
 ### 抉择预览（`pendingChoice`）
 
@@ -414,6 +415,7 @@ Execute*Events  →  逐个调响应卡的事件函数
 | 「是否被本卡加成过」判断永远错 | `isBuffedByCard` 是卡上的原生方法，实参是 `(instigatorID, out)`，接收者才是卡；按 `a[1]` 取卡等于拿一个整数当卡查 |
 | 观测/动作空间里有**两条前线** | 前线本来只有一条且同时只被一方占据，编码却按「己方前线 / 敌方前线」写了两份 → 恒有一份空着（白占 60 维 + 5 个目标槽） |
 | 支援线上的射程 1 单位完全不能攻击 | `CanAttack` 里写死了 `!OnFrontline && Range < 2 → false`；客户端只在「双方都不在前线」时才要求射程 ≥ 2，打敌方前线本来是可以的 |
+| HTTP 的 `actions` 与 `indices` 按下标配对会错位 | `actions` 取的是 `LegalActions()` 原始列表，`indices` 取自 `Enc.Mask()`（丢掉没有动作槽位的动作）→ 两者长度不同。现在都从同一份列表来，原始列表挪到 `allActions` |
 
 ---
 
@@ -478,10 +480,11 @@ dotnet run --project KardsTranspiler -c Release -- \
   ubergraph，非战斗逻辑）
 - 47.5 万行直译代码 **0 错误编译通过**
 - 自对弈 150 局：**0 异常 / 0 卡死 / 0 非法动作**，宿主未实现调用 **0%**
-- 单卡机制验证（`--mode tests`）**98/98 通过**：Intel、事件载荷、老兵升级、Blitz、
+- 单卡机制验证（`--mode tests`）**108/108 通过**：Intel、事件载荷、老兵升级、Blitz、
   数据表、三选一、CDO 标志位、移动/攻击二选一、指挥点槽 24、反制指令、二段式抉择、
-  持续站场光环的加/撤与跟随移动（`card_unit_flaming_matilda_anzac`），
-  以及「前线只有一条且要抢」「射程 1 上前线才够得到敌方支援线」
+  持续站场光环的加/撤与跟随移动（`card_unit_flaming_matilda_anzac`）、
+  「前线只有一条且要抢」「射程 1 上前线才够得到敌方支援线」，
+  以及 HTTP 侧动作列表按下标对齐（`HttpActionListIsAligned`，用真路由跑）
 
 ---
 

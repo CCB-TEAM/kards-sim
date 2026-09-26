@@ -423,16 +423,28 @@ public sealed class HttpServer
         };
     }
 
+    /// <summary>
+    /// 合法动作 + 动作空间掩码。
+    ///
+    /// <para>
+    /// <b><c>actions[i]</c> 与 <c>indices[i]</c> 一一对应</b>：两者都从
+    /// <see cref="Enc.Mask"/> 的同一份列表来。以前 <c>actions</c> 取的是
+    /// <c>LegalActions()</c> 原始列表，而 <c>Enc.Mask</c> 会丢掉「没有动作槽位」的动作
+    /// （手牌上限 9 张，出牌区只编码 handIndex &lt; 5），于是两者长度不同、
+    /// 按下标配对会静默错位。原始列表改到 <c>allActions</c>（只有可读文本，
+    /// 用于展示 / 调试：哪些动作存在但进不了动作空间）。
+    /// </para>
+    /// </summary>
     private object Legal(Session s)
     {
-        var legal = s.Engine.LegalActions();
         var (mask, acts) = Enc.Mask(s.Engine);
         return new
         {
             id = s.Id,
-            actions = legal.Select(a => new { text = a.ToString(), a.Type, a.SourceId, a.TargetId, a.HandIndex }).ToArray(),
+            actions = acts.Select(a => new { text = a.ToString(), a.Type, a.SourceId, a.TargetId, a.HandIndex }).ToArray(),
             indices = acts.Select(a => Enc.Index(s.Engine, a)).ToArray(),
             mask,
+            allActions = s.Engine.LegalActions().Select(a => a.ToString()).ToArray(),
         };
     }
 
@@ -440,6 +452,9 @@ public sealed class HttpServer
     {
         var g = s.Engine;
         var me = g.S.Current;
+        // 只算一次：legalActions 必须与 legalIndices 一一对应（都来自这份过滤后的列表），
+        // 原始合法动作（含动作空间里没槽位的）放到 allActions。
+        var (_, acts) = Enc.Mask(g);
         return new
         {
             sessionId = s.Id,
@@ -451,7 +466,7 @@ public sealed class HttpServer
             state = Enc.Encode(g),
             stateSize = Enc.StateSize,
             actionSize = Enc.ActionSize,
-            legalIndices = Enc.Mask(g).actions.Select(a => Enc.Index(g, a)).ToArray(),
+            legalIndices = acts.Select(a => Enc.Index(g, a)).ToArray(),
             left = View(g, Side.Left),
             right = View(g, Side.Right),
             // 前线**只有一条**：双方共用，同时只能被一方占据（无敌方单位时才能进，
@@ -463,7 +478,8 @@ public sealed class HttpServer
                 count = g.S.Frontline.Count,
                 cards = g.S.Frontline.Select(CardView).ToArray(),
             },
-            legalActions = g.LegalActions().Select(a => new { text = a.ToString(), a.Type, a.SourceId, a.TargetId, a.HandIndex }).ToArray(),
+            legalActions = acts.Select(a => new { text = a.ToString(), a.Type, a.SourceId, a.TargetId, a.HandIndex }).ToArray(),
+            allActions = g.LegalActions().Select(a => a.ToString()).ToArray(),
             stats = new { illegal = s.Illegal, triggers = g.TriggerFireCount, unhandled = g.Unhandled.Count },
             // 抉择预览：效果跑到一半要求选牌时，这里给出候选项，
             // 同时 legalActions / legalIndices 里只会剩 ChooseCard 这一种动作。

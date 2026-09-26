@@ -39,6 +39,7 @@ public static class CardTests
         AuraFollowsTheUnitWhenItMoves();
         FrontlineIsOneSharedRow();
         RangeOneNeedsTheFrontlineForTheEnemySupportLine();
+        HttpActionListIsAligned();
 
         Console.WriteLine();
         Console.WriteLine($"通过 {_pass} / 失败 {_fail}");
@@ -938,6 +939,79 @@ public static class CardTests
         Check("  （此时客户端不再给 not_enough_range）",
             g2.ClientCanAttack(mineB, foeSupport, out var why2),
             $"reason='{why2}'");
+    }
+
+    /// <summary>
+    /// HTTP 的合法动作列表必须<b>按下标一一对应</b>。
+    ///
+    /// <para>
+    /// <c>actions[i]</c> 与 <c>indices[i]</c> 都从 <c>Enc.Mask</c> 的同一份列表来。
+    /// 以前 <c>actions</c> 取的是 <c>LegalActions()</c> 原始列表，而 <c>Enc.Mask</c> 会丢掉
+    /// 「没有动作槽位」的动作（手牌上限 9 张，出牌区只编码 <c>handIndex &lt; 5</c>），
+    /// 两者长度不同 —— 按下标 zip 会静默错位。这条用真的 HTTP 路由跑一遍：
+    /// 手牌 6 张时原始列表比下标列表多一条，而对齐后的两者必须等长。
+    /// </para>
+    /// </summary>
+    private static void HttpActionListIsAligned()
+    {
+        var srv = new Server.HttpServer("http://127.0.0.1:8642/");
+        var q = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        var deck = string.Join(",", Enumerable.Repeat("card_event_bpf", 30));
+        var (code, json) = srv.Route("POST", "/games", q,
+            "{\"seed\":5,\"leftDeck\":\"" + deck + "\",\"rightDeck\":\"" + deck + "\"}");
+        if (code != 200) { Check("POST /games 成功", false, $"{code}: {json}"); return; }
+
+        string sid;
+        using (var doc = System.Text.Json.JsonDocument.Parse(json))
+            sid = doc.RootElement.GetProperty("sessionId").GetString();
+
+        // 各结束一次回合 → 轮到 Left 第 2 回合，手牌 6 张（出牌区只编码前 5 张）
+        for (var i = 0; i < 2; i++)
+        {
+            var (sc, sj) = srv.Route("POST", $"/games/{sid}/step", q, "{\"action\":{\"type\":\"EndTurn\"}}");
+            if (sc != 200) { Check("EndTurn 推进成功", false, $"{sc}: {sj}"); return; }
+        }
+
+        var (lc, lj) = srv.Route("GET", $"/games/{sid}/legal", q, null);
+        Check("GET /legal 成功", lc == 200, $"{lc}: {lj}");
+        using (var doc = System.Text.Json.JsonDocument.Parse(lj))
+        {
+            var root = doc.RootElement;
+            var actions = root.GetProperty("actions").GetArrayLength();
+            var indices = root.GetProperty("indices").GetArrayLength();
+            var maskLen = root.GetProperty("mask").GetArrayLength();
+            var all = root.GetProperty("allActions").GetArrayLength();
+            var maskOn = root.GetProperty("mask").EnumerateArray().Count(e => e.GetSingle() > 0);
+
+            Check("/legal: actions 与 indices 一一对应（等长）", actions == indices,
+                $"actions={actions} indices={indices}");
+            Check("/legal: mask 长度 = actionSize", maskLen == Ai.Encoder.ActionSize,
+                $"mask={maskLen} actionSize={Ai.Encoder.ActionSize}");
+            Check("/legal: mask 非零个数 = indices 个数", maskOn == indices,
+                $"maskOn={maskOn} indices={indices}");
+            Check("/legal: 原始列表 allActions 更多（手牌第 6 张起没有动作槽位）", all > indices,
+                $"allActions={all} indices={indices}");
+        }
+
+        var (oc, oj) = srv.Route("GET", $"/games/{sid}", q, null);
+        Check("GET /games/{id} 成功", oc == 200, $"{oc}: {oj}");
+        using (var doc = System.Text.Json.JsonDocument.Parse(oj))
+        {
+            var root = doc.RootElement;
+            var hand = root.GetProperty("left").GetProperty("handCount").GetInt32();
+            var indices = root.GetProperty("legalIndices").GetArrayLength();
+            var legal = root.GetProperty("legalActions").GetArrayLength();
+            var all = root.GetProperty("allActions").GetArrayLength();
+            var frontOwner = root.GetProperty("frontline").GetProperty("owner").GetString();
+
+            Check("观测里手牌确实是 6 张（能触发长度差）", hand == 6, $"handCount={hand}");
+            Check("观测: legalActions 与 legalIndices 一一对应（等长）", legal == indices,
+                $"legalActions={legal} legalIndices={indices}");
+            Check("观测: allActions 保留了没有槽位的那些", all > indices,
+                $"allActions={all} legalIndices={indices}");
+            Check("观测: 前线是共享的一条（owner + cards）", frontOwner is not null,
+                "没有 frontline 字段");
+        }
     }
 
     /// <summary>把一张牌直接放到前线（编号由 <see cref="Engine.GameEngine.RefreshAllLocations"/> 重排）。</summary>
