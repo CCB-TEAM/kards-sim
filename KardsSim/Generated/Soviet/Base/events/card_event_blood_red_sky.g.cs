@@ -40,7 +40,7 @@ public static Val ExecuteUbergraph_card_event_blood_red_sky(IHost H, Val self, V
     L_000F:
         __ef.Push(286);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
         H.SetMember(self, "tempCard", GetLocal(L, "CallFunc_Array_Get_Item"));
     L_0062:
@@ -57,7 +57,7 @@ public static Val ExecuteUbergraph_card_event_blood_red_sky(IHost H, Val self, V
             }
         }
     L_0089:
-        _ = H.Call("IsAirUnit", new Val[] { H.GetMember(self, "tempCard"), Val.Out(__v => L["CallFunc_IsAirUnit_isIt"] = __v) });
+        _ = H.Call("IsAirUnit", new Val[] { H.GetMember(self, "tempCard"), Val.Out(GetLocal(L, "CallFunc_IsAirUnit_isIt"), __v => L["CallFunc_IsAirUnit_isIt"] = __v) });
     L_00B2:
         if (!(GetLocal(L, "CallFunc_IsAirUnit_isIt")).AsBool())
         {
@@ -70,7 +70,7 @@ public static Val ExecuteUbergraph_card_event_blood_red_sky(IHost H, Val self, V
             }
         }
     L_00BC:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(H.GetMember(self, "tempCard"), "faction"), Val.Of(4), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(H.GetMember(self, "tempCard"), "faction"), Val.Of(4), Val.Out(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), __v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_00F0:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_010F:
@@ -107,9 +107,9 @@ public static Val ExecuteUbergraph_card_event_blood_red_sky(IHost H, Val self, V
     L_01E9:
         goto L_000F;
     L_01EE:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Of(2), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Of(2), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_0235:
-        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Of(2), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
+        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Of(2), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeDefense_qqq"), __v => L["CallFunc_ChangeDefense_qqq"] = __v) });
     L_027C:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -127,7 +127,7 @@ public static Val ExecuteUbergraph_card_event_blood_red_sky(IHost H, Val self, V
     L_02B0:
         goto L_027D;
     L_02B5:
-        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
+        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), __v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
     L_02ED:
         goto L_0299;
     L_02F2:

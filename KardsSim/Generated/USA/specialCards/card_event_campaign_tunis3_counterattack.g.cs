@@ -34,15 +34,15 @@ public static Val ExecuteUbergraph_card_event_campaign_tunis3_counterattack(IHos
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_001D:
-        _ = H.Call("DoesSideControlTheFrontline", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(__v => L["CallFunc_DoesSideControlTheFrontline_doesHe"] = __v) });
+        _ = H.Call("DoesSideControlTheFrontline", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(GetLocal(L, "CallFunc_DoesSideControlTheFrontline_doesHe"), __v => L["CallFunc_DoesSideControlTheFrontline_doesHe"] = __v) });
     L_0053:
         if (!(GetLocal(L, "CallFunc_DoesSideControlTheFrontline_doesHe")).AsBool()) goto L_00F4;
     L_0061:
-        _ = H.Call("GetAllCardsInFrontline", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllCardsInFrontline_cards"] = __v) });
+        _ = H.Call("GetAllCardsInFrontline", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllCardsInFrontline_cards"), __v => L["CallFunc_GetAllCardsInFrontline_cards"] = __v) });
     L_008F:
-        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetAllCardsInFrontline_cards"] = __v), Val.False, Val.Out(__v => L["CallFunc_GetRandomCard_randomCard"] = __v) });
+        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetAllCardsInFrontline_cards"), __v => L["CallFunc_GetAllCardsInFrontline_cards"] = __v), Val.False, Val.Out(GetLocal(L, "CallFunc_GetRandomCard_randomCard"), __v => L["CallFunc_GetRandomCard_randomCard"] = __v) });
     L_00C6:
         _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetRandomCard_randomCard"), self });
     L_00F4:

@@ -34,13 +34,13 @@ public static Val ExecuteUbergraph_card_unit_anzac_hurricane_ii_c_trop(IHost H, 
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("WasRightMostCardWhenPlayedFromHand", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(__v => L["CallFunc_WasRightMostCardWhenPlayedFromHand_WasRightMost"] = __v) });
+        _ = H.Call("WasRightMostCardWhenPlayedFromHand", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(GetLocal(L, "CallFunc_WasRightMostCardWhenPlayedFromHand_WasRightMost"), __v => L["CallFunc_WasRightMostCardWhenPlayedFromHand_WasRightMost"] = __v) });
     L_0038:
         if (!(GetLocal(L, "CallFunc_WasRightMostCardWhenPlayedFromHand_WasRightMost")).AsBool()) goto L_00FA;
     L_0046:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_0085:
-        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
+        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeDefense_qqq"), __v => L["CallFunc_ChangeDefense_qqq"] = __v) });
     L_00C4:
         _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "cardID") });
     L_00FA:
@@ -87,9 +87,9 @@ public static Val ShouldHighlightInHand(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_shouldHighlight = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["shouldHighlight"] = Val.Nothing;
+        L["shouldHighlight"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
-        _ = H.Call("GetRightMostCardInHand", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(__v => L["CallFunc_GetRightMostCardInHand_WasFound"] = __v), Val.Out(__v => L["CallFunc_GetRightMostCardInHand_RightMostCard"] = __v) });
+        _ = H.Call("GetRightMostCardInHand", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(GetLocal(L, "CallFunc_GetRightMostCardInHand_WasFound"), __v => L["CallFunc_GetRightMostCardInHand_WasFound"] = __v), Val.Out(GetLocal(L, "CallFunc_GetRightMostCardInHand_RightMostCard"), __v => L["CallFunc_GetRightMostCardInHand_RightMostCard"] = __v) });
     L_0037:
         L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_GetRightMostCardInHand_RightMostCard"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_0073:

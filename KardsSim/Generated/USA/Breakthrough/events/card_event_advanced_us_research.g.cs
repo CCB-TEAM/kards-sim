@@ -74,7 +74,7 @@ public static Val ExecuteUbergraph_card_event_advanced_us_research(IHost H, Val 
     L_0179:
         L["Temp_text_Variable"] = Val.Of("Hand is full");
     L_01BF:
-        _ = H.Call("ShowNotification", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["Temp_text_Variable"] = __v) });
+        _ = H.Call("ShowNotification", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v) });
     L_01F5:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -84,7 +84,7 @@ public static Val ExecuteUbergraph_card_event_advanced_us_research(IHost H, Val 
             default: goto __halt;
         }
     L_01F6:
-        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_event_manhattan_project"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable_1"] = __v), Val.Of(0), Val.Out(__v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_event_manhattan_project"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(GetLocal(L, "Temp_text_Variable_1"), __v => L["Temp_text_Variable_1"] = __v), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_SpawnCardinHandbySide_spawnedCardID"), __v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID"] = __v) });
     L_0252:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -100,7 +100,7 @@ public static Val ExecuteUbergraph_card_event_advanced_us_research(IHost H, Val 
     L_0281:
         goto L_00BA;
     L_0286:
-        _ = H.Call("WhichChooseOne", new Val[] { self, Val.Out(__v => L["CallFunc_WhichChooseOne_Branches"] = __v) });
+        _ = H.Call("WhichChooseOne", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_WhichChooseOne_Branches"), __v => L["CallFunc_WhichChooseOne_Branches"] = __v) });
     L_0299:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_WhichChooseOne_Branches"), Val.Of(0)) != 0);
     L_02B8:
@@ -118,7 +118,7 @@ public static Val ExecuteUbergraph_card_event_advanced_us_research(IHost H, Val 
             default: goto __halt;
         }
     L_02F4:
-        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_event_penicillin"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable_3"] = __v), Val.Of(0), Val.Out(__v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID_2"] = __v) });
+        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_event_penicillin"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(GetLocal(L, "Temp_text_Variable_3"), __v => L["Temp_text_Variable_3"] = __v), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_SpawnCardinHandbySide_spawnedCardID_2"), __v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID_2"] = __v) });
     L_0350:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -128,9 +128,9 @@ public static Val ExecuteUbergraph_card_event_advanced_us_research(IHost H, Val 
             default: goto __halt;
         }
     L_0351:
-        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_event_manhattan_project"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable_2"] = __v), Val.Of(0), Val.Out(__v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID_1"] = __v) });
+        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_event_manhattan_project"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(GetLocal(L, "Temp_text_Variable_2"), __v => L["Temp_text_Variable_2"] = __v), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_SpawnCardinHandbySide_spawnedCardID_1"), __v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID_1"] = __v) });
     L_03AD:
-        _ = H.Call("GetCardsInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetCardsInHandBySide_cards"] = __v) });
+        _ = H.Call("GetCardsInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), __v => L["CallFunc_GetCardsInHandBySide_cards"] = __v) });
     L_03E3:
         goto L_0253;
     L_03E8:

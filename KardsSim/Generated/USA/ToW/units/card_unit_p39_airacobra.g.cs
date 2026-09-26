@@ -32,13 +32,13 @@ public static Val OnOtherCardDealDamageAddDamage(IHost H, Val self, Val[] args)
         L["fromAttack"] = args.Length > 3 ? args[3] : Val.Nothing;
         L["isDefenderDamage"] = args.Length > 4 ? args[4] : Val.Nothing;
         var __out_damageToAdd = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["damageToAdd"] = Val.Nothing;
+        L["damageToAdd"] = args.Length > 5 ? args[5].In : Val.Nothing;
         var __out_reRunAtEnd = args.Length > 6 ? args[6].As<Action<Val>>() : null;
-        L["reRunAtEnd"] = Val.Nothing;
+        L["reRunAtEnd"] = args.Length > 6 ? args[6].In : Val.Nothing;
     L_0000:
         if (!(GetLocal(L, "fromAttack")).AsBool()) goto L_00D7;
     L_000E:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0021:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_00D7;
     L_002F:
@@ -46,7 +46,7 @@ public static Val OnOtherCardDealDamageAddDamage(IHost H, Val self, Val[] args)
     L_006B:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_00D7;
     L_0079:
-        _ = H.Call("IsGroundUnit", new Val[] { GetLocal(L, "cardDealingDamage"), Val.Out(__v => L["CallFunc_IsGroundUnit_isIt"] = __v) });
+        _ = H.Call("IsGroundUnit", new Val[] { GetLocal(L, "cardDealingDamage"), Val.Out(GetLocal(L, "CallFunc_IsGroundUnit_isIt"), __v => L["CallFunc_IsGroundUnit_isIt"] = __v) });
     L_00A2:
         if (!(GetLocal(L, "CallFunc_IsGroundUnit_isIt")).AsBool()) goto L_00D7;
     L_00B0:

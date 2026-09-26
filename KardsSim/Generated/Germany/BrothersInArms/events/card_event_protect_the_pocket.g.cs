@@ -41,9 +41,9 @@ public static Val ExecuteUbergraph_card_event_protect_the_pocket(IHost H, Val se
     L_000F:
         H.SetMember(self, "count", Val.Of(0));
     L_0026:
-        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(4), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
+        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(4), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DrawCardsFromDeckbySide_cardsIDs"), __v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
     L_0071:
-        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
+        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), __v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
     L_00A9:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_00C0:
@@ -59,9 +59,9 @@ public static Val ExecuteUbergraph_card_event_protect_the_pocket(IHost H, Val se
     L_0161:
         __ef.Push(717);
     L_0166:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_01A1:
-        _ = H.Call("hasActivePincerEffect", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_hasActivePincerEffect_doesIt"] = __v) });
+        _ = H.Call("hasActivePincerEffect", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_hasActivePincerEffect_doesIt"), __v => L["CallFunc_hasActivePincerEffect_doesIt"] = __v) });
     L_01CA:
         if (!(GetLocal(L, "CallFunc_hasActivePincerEffect_doesIt")).AsBool())
         {
@@ -101,7 +101,7 @@ public static Val ExecuteUbergraph_card_event_protect_the_pocket(IHost H, Val se
             }
         }
     L_0261:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("inEffect"), Val.Of(0), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("inEffect"), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_JSON_SetInt_found"), __v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_029E:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_02CC:
@@ -121,7 +121,7 @@ public static Val ExecuteUbergraph_card_event_protect_the_pocket(IHost H, Val se
     L_0317:
         goto L_000F;
     L_031C:
-        _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("inEffect"), Val.Out(__v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found"] = __v) });
+        _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("inEffect"), Val.Out(GetLocal(L, "CallFunc_JSON_GetInt_value"), __v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetInt_found"), __v => L["CallFunc_JSON_GetInt_found"] = __v) });
     L_035D:
         if (!(GetLocal(L, "CallFunc_JSON_GetInt_found")).AsBool())
         {
@@ -134,11 +134,11 @@ public static Val ExecuteUbergraph_card_event_protect_the_pocket(IHost H, Val se
             }
         }
     L_0367:
-        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
+        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsSideActive_active"), __v => L["CallFunc_IsSideActive_active"] = __v) });
     L_0383:
         if (!(GetLocal(L, "CallFunc_IsSideActive_active")).AsBool()) goto L_03F8;
     L_0391:
-        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("inEffect"), Val.Out(__v => L["CallFunc_JSON_Clear_found"] = __v) });
+        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("inEffect"), Val.Out(GetLocal(L, "CallFunc_JSON_Clear_found"), __v => L["CallFunc_JSON_Clear_found"] = __v) });
     L_03C9:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_03F7:
@@ -227,13 +227,13 @@ public static Val ShouldHighlightInHand(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_shouldHighlight = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["shouldHighlight"] = Val.Nothing;
+        L["shouldHighlight"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         __ef.Push(634);
     L_0005:
         H.SetMember(self, "count", Val.Of(0));
     L_001C:
-        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
+        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), __v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
     L_0054:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_006B:
@@ -249,9 +249,9 @@ public static Val ShouldHighlightInHand(IHost H, Val self, Val[] args)
     L_010C:
         __ef.Push(560);
     L_0111:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_014C:
-        _ = H.Call("hasActivePincerEffect", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_hasActivePincerEffect_doesIt"] = __v) });
+        _ = H.Call("hasActivePincerEffect", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_hasActivePincerEffect_doesIt"), __v => L["CallFunc_hasActivePincerEffect_doesIt"] = __v) });
     L_0175:
         if (!(GetLocal(L, "CallFunc_hasActivePincerEffect_doesIt")).AsBool())
         {

@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_unit_l6_40(IHost H, Val self, Val[] args
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
+        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), __v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
     L_0042:
         _ = H.Call("MakeCardRetreat", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), H.GetMember(self, "cardID") });
     L_0078:

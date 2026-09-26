@@ -28,7 +28,7 @@ public static Val GetBeforeAttackAttackBuff(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["asAttacker"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_amount = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["amount"] = Val.Nothing;
+        L["amount"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         if (!(H.GetMember(self, "isSuppressed")).AsBool()) goto L_002A;
     L_000E:
@@ -60,21 +60,21 @@ public static Val OnOtherCardAttacks(IHost H, Val self, Val[] args)
         L["cardAttacking"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["defenderCard"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_stopAttack = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["stopAttack"] = Val.Nothing;
+        L["stopAttack"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_AttackedAndStopped = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["AttackedAndStopped"] = Val.Nothing;
+        L["AttackedAndStopped"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "defenderCard"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_003C:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_00E7;
     L_004A:
-        _ = H.Call("getAndDecryptAttack", new Val[] { self, Val.Out(__v => L["CallFunc_getAndDecryptAttack_decryptedAttack"] = __v) });
+        _ = H.Call("getAndDecryptAttack", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_getAndDecryptAttack_decryptedAttack"), __v => L["CallFunc_getAndDecryptAttack_decryptedAttack"] = __v) });
     L_005D:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getAndDecryptAttack_decryptedAttack"), Val.Of(1)) > 0);
     L_007F:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_00E7;
     L_008D:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(-1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(-1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_00CC:
         L["stopAttack"] = Val.False;
     L_00D7:

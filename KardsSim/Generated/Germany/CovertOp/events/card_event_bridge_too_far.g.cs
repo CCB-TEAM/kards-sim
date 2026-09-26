@@ -44,7 +44,7 @@ public static Val ExecuteUbergraph_card_event_bridge_too_far(IHost H, Val self, 
     L_002A:
         __ef.Push(197);
     L_002F:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsInFrontline_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsInFrontline_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_006A:
         L["CallFunc_Array_Add_ReturnValue"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "frontlineCards"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID") });
     L_00C4:
@@ -70,7 +70,7 @@ public static Val ExecuteUbergraph_card_event_bridge_too_far(IHost H, Val self, 
     L_0179:
         goto L_000F;
     L_017E:
-        _ = H.Call("DestroyMultipleCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "frontlineCards"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_DestroyMultipleCards_qqq"] = __v) });
+        _ = H.Call("DestroyMultipleCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "frontlineCards"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_DestroyMultipleCards_qqq"), __v => L["CallFunc_DestroyMultipleCards_qqq"] = __v) });
     L_01BD:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -90,7 +90,7 @@ public static Val ExecuteUbergraph_card_event_bridge_too_far(IHost H, Val self, 
     L_01F1:
         goto L_01BE;
     L_01F6:
-        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, Val.Nothing, Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
+        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, Val.Nothing, Val.Out(GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt"), __v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
     L_020A:
         if (!(GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt")).AsBool())
         {
@@ -105,7 +105,7 @@ public static Val ExecuteUbergraph_card_event_bridge_too_far(IHost H, Val self, 
             }
         }
     L_0214:
-        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
+        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_GotchaTriggered_qqq"), __v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
     L_024D:
         H.SetMember(self, "canNotAddToFrontline", Val.False);
     L_0258:
@@ -113,7 +113,7 @@ public static Val ExecuteUbergraph_card_event_bridge_too_far(IHost H, Val self, 
     L_025D:
         __ef.Push(839);
     L_0262:
-        _ = H.Call("IsLocationFull", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(7), Val.Out(__v => L["CallFunc_IsLocationFull_isFull"] = __v) });
+        _ = H.Call("IsLocationFull", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(7), Val.Out(GetLocal(L, "CallFunc_IsLocationFull_isFull"), __v => L["CallFunc_IsLocationFull_isFull"] = __v) });
     L_0291:
         H.SetMember(self, "canNotAddToFrontline", GetLocal(L, "CallFunc_IsLocationFull_isFull"));
     L_02A4:
@@ -129,11 +129,11 @@ public static Val ExecuteUbergraph_card_event_bridge_too_far(IHost H, Val self, 
     L_02A5:
         if (!(H.GetMember(self, "canNotAddToFrontline")).AsBool()) goto L_02E6;
     L_02B3:
-        _ = H.Call("GetAllCardsInFrontline", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllCardsInFrontline_cards"] = __v) });
+        _ = H.Call("GetAllCardsInFrontline", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllCardsInFrontline_cards"), __v => L["CallFunc_GetAllCardsInFrontline_cards"] = __v) });
     L_02E1:
         goto L_01DA;
     L_02E6:
-        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.Name("card_unit_panzer_iii_j"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), Val.Of(0), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.Name("card_unit_panzer_iii_j"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), Val.Of(0), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnCardonBattlefield_spawnedCardID"), __v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
     L_0346:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -145,9 +145,9 @@ public static Val ExecuteUbergraph_card_event_bridge_too_far(IHost H, Val self, 
             default: goto __halt;
         }
     L_0347:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_035A:
-        _ = H.Call("DoesSideControlTheFrontline", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(__v => L["CallFunc_DoesSideControlTheFrontline_doesHe"] = __v) });
+        _ = H.Call("DoesSideControlTheFrontline", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(GetLocal(L, "CallFunc_DoesSideControlTheFrontline_doesHe"), __v => L["CallFunc_DoesSideControlTheFrontline_doesHe"] = __v) });
     L_0390:
         if (!(GetLocal(L, "CallFunc_DoesSideControlTheFrontline_doesHe")).AsBool())
         {

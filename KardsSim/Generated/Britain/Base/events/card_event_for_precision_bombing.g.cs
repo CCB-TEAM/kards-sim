@@ -27,23 +27,23 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_canIt = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["canIt"] = Val.Nothing;
+        L["canIt"] = args.Length > 0 ? args[0].In : Val.Nothing;
         var __out_reason = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["reason"] = Val.Nothing;
+        L["reason"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_reasonParam1 = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["reasonParam1"] = Val.Nothing;
+        L["reasonParam1"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_reasonParam2 = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["reasonParam2"] = Val.Nothing;
+        L["reasonParam2"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_targetedCard = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["targetedCard"] = Val.Nothing;
+        L["targetedCard"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
-        _ = H.Call("GetTargetedCard", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(__v => L["CallFunc_GetTargetedCard_hasTarget"] = __v), Val.Out(__v => L["CallFunc_GetTargetedCard_card"] = __v) });
+        _ = H.Call("GetTargetedCard", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(GetLocal(L, "CallFunc_GetTargetedCard_hasTarget"), __v => L["CallFunc_GetTargetedCard_hasTarget"] = __v), Val.Out(GetLocal(L, "CallFunc_GetTargetedCard_card"), __v => L["CallFunc_GetTargetedCard_card"] = __v) });
     L_0037:
         if (!(GetLocal(L, "CallFunc_GetTargetedCard_hasTarget")).AsBool()) goto L_00F7;
     L_0045:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_0058:
-        _ = H.Call("IsSameSideUnit", new Val[] { GetLocal(L, "CallFunc_GetTargetedCard_card"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(__v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
+        _ = H.Call("IsSameSideUnit", new Val[] { GetLocal(L, "CallFunc_GetTargetedCard_card"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(GetLocal(L, "CallFunc_IsSameSideUnit_isIt"), __v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
     L_008A:
         if (!(GetLocal(L, "CallFunc_IsSameSideUnit_isIt")).AsBool()) goto L_00F7;
     L_0098:
@@ -93,15 +93,15 @@ public static Val CheckAndUpdateCost(IHost H, Val self, Val[] args)
     L_0017:
         L["currentBuff"] = Val.Of(0);
     L_002E:
-        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
+        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedInHand_isIt"), __v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
     L_0041:
         if (!(GetLocal(L, "CallFunc_IsLocatedInHand_isIt")).AsBool()) goto L_01B1;
     L_004F:
-        _ = H.Call("GetHighestBomberAttack", new Val[] { self, Val.Out(__v => L["CallFunc_GetHighestBomberAttack_highestAttack"] = __v) });
+        _ = H.Call("GetHighestBomberAttack", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetHighestBomberAttack_highestAttack"), __v => L["CallFunc_GetHighestBomberAttack_highestAttack"] = __v) });
     L_0066:
         L["highestBomberAttack"] = GetLocal(L, "CallFunc_GetHighestBomberAttack_highestAttack");
     L_0081:
-        _ = H.Call("getKreditTempBuffAmount", new Val[] { self, H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_getKreditTempBuffAmount_tempAmount"] = __v) });
+        _ = H.Call("getKreditTempBuffAmount", new Val[] { self, H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_getKreditTempBuffAmount_tempAmount"), __v => L["CallFunc_getKreditTempBuffAmount_tempAmount"] = __v) });
     L_009D:
         L["currentBuff"] = GetLocal(L, "CallFunc_getKreditTempBuffAmount_tempAmount");
     L_00B8:
@@ -115,7 +115,7 @@ public static Val CheckAndUpdateCost(IHost H, Val self, Val[] args)
     L_0144:
         L["CallFunc_Multiply_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_Add_IntInt_ReturnValue") * Val.Of(-1));
     L_016E:
-        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeKreditCost_qqq"] = __v) });
+        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeKreditCost_qqq"), __v => L["CallFunc_ChangeKreditCost_qqq"] = __v) });
     L_01B1:
         goto __halt;
     L_01B3:
@@ -145,7 +145,7 @@ public static Val ExecuteUbergraph_card_event_for_precision_bombing(IHost H, Val
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsBomber", new Val[] { H.GetVar("K2Node_Event_cardChanged"), Val.Out(__v => L["CallFunc_IsBomber_isIt"] = __v) });
+        _ = H.Call("IsBomber", new Val[] { H.GetVar("K2Node_Event_cardChanged"), Val.Out(GetLocal(L, "CallFunc_IsBomber_isIt"), __v => L["CallFunc_IsBomber_isIt"] = __v) });
     L_0033:
         if (!(GetLocal(L, "CallFunc_IsBomber_isIt")).AsBool()) goto L_010E;
     L_0041:
@@ -157,13 +157,13 @@ public static Val ExecuteUbergraph_card_event_for_precision_bombing(IHost H, Val
     L_0082:
         goto L_010E;
     L_0087:
-        _ = H.Call("IsBomber", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsBomber_isIt_1"] = __v) });
+        _ = H.Call("IsBomber", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(GetLocal(L, "CallFunc_IsBomber_isIt_1"), __v => L["CallFunc_IsBomber_isIt_1"] = __v) });
     L_00B0:
         if (!(GetLocal(L, "CallFunc_IsBomber_isIt_1")).AsBool()) goto L_010E;
     L_00BE:
         goto L_0041;
     L_00C3:
-        _ = H.Call("IsBomber", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc_IsBomber_isIt_2"] = __v) });
+        _ = H.Call("IsBomber", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), Val.Out(GetLocal(L, "CallFunc_IsBomber_isIt_2"), __v => L["CallFunc_IsBomber_isIt_2"] = __v) });
     L_00EC:
         if (!(GetLocal(L, "CallFunc_IsBomber_isIt_2")).AsBool()) goto L_010E;
     L_00FA:
@@ -210,13 +210,13 @@ public static Val GetHighestBomberAttack(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_highestAttack = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["highestAttack"] = Val.Nothing;
+        L["highestAttack"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         __ef.Push(734);
     L_0005:
         L["_highestBomberAttack"] = Val.Of(0);
     L_001C:
-        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
+        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), __v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
     L_0054:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_006B:
@@ -232,11 +232,11 @@ public static Val GetHighestBomberAttack(IHost H, Val self, Val[] args)
     L_010C:
         __ef.Push(660);
     L_0111:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_014C:
-        _ = H.Call("IsBomber", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_IsBomber_isIt"] = __v) });
+        _ = H.Call("IsBomber", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_IsBomber_isIt"), __v => L["CallFunc_IsBomber_isIt"] = __v) });
     L_0175:
-        _ = H.Call("getTotalAttack", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
+        _ = H.Call("getTotalAttack", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_getTotalAttack_totalAttack"), __v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
     L_019E:
         L["CallFunc_Less_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "_highestBomberAttack"), GetLocal(L, "CallFunc_getTotalAttack_totalAttack")) < 0);
     L_01C4:
@@ -253,9 +253,9 @@ public static Val GetHighestBomberAttack(IHost H, Val self, Val[] args)
             }
         }
     L_01F4:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_022F:
-        _ = H.Call("getTotalAttack", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
+        _ = H.Call("getTotalAttack", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_getTotalAttack_totalAttack"), __v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
     L_0258:
         L["_highestBomberAttack"] = GetLocal(L, "CallFunc_getTotalAttack_totalAttack");
     L_0273:

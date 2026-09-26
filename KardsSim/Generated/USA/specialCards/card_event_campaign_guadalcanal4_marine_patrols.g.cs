@@ -43,7 +43,7 @@ public static Val ExecuteUbergraph_card_event_campaign_guadalcanal4_marine_patro
     L_002A:
         __ef.Push(410);
     L_002F:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_006A:
         L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "side"), H.GetMember(self, "side")) != 0);
     L_00A6:
@@ -58,9 +58,9 @@ public static Val ExecuteUbergraph_card_event_campaign_guadalcanal4_marine_patro
             }
         }
     L_00B0:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_00EB:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_IsUnit_isIt_1"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt_1"), __v => L["CallFunc_IsUnit_isIt_1"] = __v) });
     L_0114:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt_1")).AsBool())
         {
@@ -73,7 +73,7 @@ public static Val ExecuteUbergraph_card_event_campaign_guadalcanal4_marine_patro
             }
         }
     L_011E:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0159:
         _ = H.Call("ChangeOperationCost", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.False, Val.False });
     L_0199:
@@ -114,7 +114,7 @@ public static Val ExecuteUbergraph_card_event_campaign_guadalcanal4_marine_patro
     L_0282:
         goto L_024F;
     L_0287:
-        _ = H.Call("GetAllCardsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllCardsOnBoard_cards"] = __v) });
+        _ = H.Call("GetAllCardsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), __v => L["CallFunc_GetAllCardsOnBoard_cards"] = __v) });
     L_02B5:
         goto L_026B;
     L_02BA:
@@ -144,7 +144,7 @@ public static Val ExecuteUbergraph_card_event_campaign_guadalcanal4_marine_patro
             }
         }
     L_032C:
-        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0355:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool())
         {

@@ -45,7 +45,7 @@ public static Val ExecuteUbergraph_card_event_the_tide_turns(IHost H, Val self, 
     L_000F:
         __ef.Push(96);
     L_0014:
-        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
+        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DrawCardsFromDeckbySide_cardsIDs"), __v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
     L_005F:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -90,9 +90,9 @@ public static Val ExecuteUbergraph_card_event_the_tide_turns(IHost H, Val self, 
     L_00F6:
         __ef.Push(638);
     L_00FB:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0136:
-        _ = H.Call("getHasGameplayTag", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), H.MakeArray(new Val[] { Val.Name("subtype.navy") }), Val.Out(__v => L["CallFunc_getHasGameplayTag_hasTag"] = __v) });
+        _ = H.Call("getHasGameplayTag", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), H.MakeArray(new Val[] { Val.Name("subtype.navy") }), Val.Out(GetLocal(L, "CallFunc_getHasGameplayTag_hasTag"), __v => L["CallFunc_getHasGameplayTag_hasTag"] = __v) });
     L_017A:
         if (!(GetLocal(L, "CallFunc_getHasGameplayTag_hasTag")).AsBool()) goto L_01E8;
     L_0188:
@@ -102,7 +102,7 @@ public static Val ExecuteUbergraph_card_event_the_tide_turns(IHost H, Val self, 
     L_01CD:
         H.SetMember(self, "navyCount", GetLocal(L, "Temp_int_Variable_1"));
     L_01E8:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0223:
         L["CallFunc_Array_Add_ReturnValue_1"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "cardIDS"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID") });
     L_027D:
@@ -133,7 +133,7 @@ public static Val ExecuteUbergraph_card_event_the_tide_turns(IHost H, Val self, 
     L_034D:
         goto L_00F6;
     L_0352:
-        _ = H.Call("MoveMultipleCardsToTopOfOwnersDeck", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardIDS"), H.GetMember(self, "cardID"), Val.Of(0), Val.Out(__v => L["CallFunc_MoveMultipleCardsToTopOfOwnersDeck_qqq"] = __v) });
+        _ = H.Call("MoveMultipleCardsToTopOfOwnersDeck", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardIDS"), H.GetMember(self, "cardID"), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_MoveMultipleCardsToTopOfOwnersDeck_qqq"), __v => L["CallFunc_MoveMultipleCardsToTopOfOwnersDeck_qqq"] = __v) });
     L_0396:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -162,7 +162,7 @@ public static Val ExecuteUbergraph_card_event_the_tide_turns(IHost H, Val self, 
     L_0466:
         __ef.Push(919);
     L_046B:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_04A6:
         L["CallFunc_Array_Add_ReturnValue"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "cardsToDamage"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "cardID") });
     L_0500:
@@ -179,7 +179,7 @@ public static Val ExecuteUbergraph_card_event_the_tide_turns(IHost H, Val self, 
             default: goto __halt;
         }
     L_0501:
-        _ = H.Call("DamageMultipleCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardsToDamage"), H.GetMember(self, "navyCount"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_DamageMultipleCards_cardsDestroyed"] = __v) });
+        _ = H.Call("DamageMultipleCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardsToDamage"), H.GetMember(self, "navyCount"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_DamageMultipleCards_cardsDestroyed"), __v => L["CallFunc_DamageMultipleCards_cardsDestroyed"] = __v) });
     L_0549:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -212,7 +212,7 @@ public static Val ExecuteUbergraph_card_event_the_tide_turns(IHost H, Val self, 
     L_05BA:
         __ef.Push(1752);
     L_05BF:
-        _ = H.Call("GetCardsInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetCardsInHandBySide_cards"] = __v) });
+        _ = H.Call("GetCardsInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), __v => L["CallFunc_GetCardsInHandBySide_cards"] = __v) });
     L_05F5:
         L["CallFunc_Array_Length_ReturnValue_1"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInHandBySide_cards") });
     L_0630:
@@ -240,11 +240,11 @@ public static Val ExecuteUbergraph_card_event_the_tide_turns(IHost H, Val self, 
             }
         }
     L_06A5:
-        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
+        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), __v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
     L_06D3:
         goto L_054A;
     L_06D8:
-        _ = H.Call("ShuffleDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_ShuffleDeckBySide_qqq"] = __v) });
+        _ = H.Call("ShuffleDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_ShuffleDeckBySide_qqq"), __v => L["CallFunc_ShuffleDeckBySide_qqq"] = __v) });
     L_0718:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

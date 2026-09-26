@@ -29,15 +29,15 @@ public static Val OnOtherCardAttacks(IHost H, Val self, Val[] args)
         L["cardAttacking"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["defenderCard"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_stopAttack = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["stopAttack"] = Val.Nothing;
+        L["stopAttack"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_AttackedAndStopped = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["AttackedAndStopped"] = Val.Nothing;
+        L["AttackedAndStopped"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "defenderCard"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "defenderCard"), Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0029:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "defenderCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "defenderCard"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0052:
-        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, GetLocal(L, "cardAttacking"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
+        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, GetLocal(L, "cardAttacking"), Val.Out(GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt"), __v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
     L_006E:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt")).AsBool() && (GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool());
     L_0094:
@@ -45,7 +45,7 @@ public static Val OnOtherCardAttacks(IHost H, Val self, Val[] args)
     L_00BA:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_1")).AsBool()) goto L_01E8;
     L_00C8:
-        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(GetLocal(L, "cardAttacking"), "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
+        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(GetLocal(L, "cardAttacking"), "cardID"), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_GotchaTriggered_qqq"), __v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
     L_0117:
         L["tempCard"] = GetLocal(L, "defenderCard");
     L_012A:
@@ -53,9 +53,9 @@ public static Val OnOtherCardAttacks(IHost H, Val self, Val[] args)
     L_0147:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_01FE;
     L_0155:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "tempCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "tempCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_019C:
-        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "tempCard"), H.GetMember(self, "cardID"), Val.Of(2), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
+        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "tempCard"), H.GetMember(self, "cardID"), Val.Of(2), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeDefense_qqq"), __v => L["CallFunc_ChangeDefense_qqq"] = __v) });
     L_01E3:
         goto L_01FE;
     L_01E8:

@@ -79,9 +79,9 @@ public static Val ExecuteUbergraph_card_event_prolonged_siege(IHost H, Val self,
     L_00DB:
         __ef.Push(343);
     L_00E0:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_DrawCardsFromDeckBySide_cardsIDs"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_2"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_DrawCardsFromDeckBySide_cardsIDs"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_2"), __v => L["CallFunc_Array_Get_Item_2"] = __v) });
     L_011B:
-        _ = H.Call("SetCountdown", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item_2"), Val.Of(2), Val.Out(__v => L["CallFunc_SetCountdown_qqq"] = __v) });
+        _ = H.Call("SetCountdown", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item_2"), Val.Of(2), Val.Out(GetLocal(L, "CallFunc_SetCountdown_qqq"), __v => L["CallFunc_SetCountdown_qqq"] = __v) });
     L_0156:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -111,9 +111,9 @@ public static Val ExecuteUbergraph_card_event_prolonged_siege(IHost H, Val self,
     L_0242:
         __ef.Push(812);
     L_0247:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_JSON_GetIntArray_values_1"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_JSON_GetIntArray_values_1"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_0282:
-        _ = H.Call("DiscardCardFromHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item_1"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_DiscardCardFromHand_success"] = __v) });
+        _ = H.Call("DiscardCardFromHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item_1"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DiscardCardFromHand_success"), __v => L["CallFunc_DiscardCardFromHand_success"] = __v) });
     L_02C3:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -125,7 +125,7 @@ public static Val ExecuteUbergraph_card_event_prolonged_siege(IHost H, Val self,
             default: goto __halt;
         }
     L_02C4:
-        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("burncards"), Val.Out(__v => L["CallFunc_JSON_Clear_found"] = __v) });
+        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("burncards"), Val.Out(GetLocal(L, "CallFunc_JSON_Clear_found"), __v => L["CallFunc_JSON_Clear_found"] = __v) });
     L_02FD:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_032B:
@@ -147,9 +147,9 @@ public static Val ExecuteUbergraph_card_event_prolonged_siege(IHost H, Val self,
     L_0376:
         __ef.Push(1014);
     L_037B:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_JSON_GetIntArray_values"), GetLocal(L, "Temp_int_Array_Index_Variable_2"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_JSON_GetIntArray_values"), GetLocal(L, "Temp_int_Array_Index_Variable_2"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_03B6:
-        _ = H.Call("DecrementCountdown", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_DecrementCountdown_countdownFinished"] = __v), Val.Out(__v => L["CallFunc_DecrementCountdown_countdownFound"] = __v) });
+        _ = H.Call("DecrementCountdown", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_DecrementCountdown_countdownFinished"), __v => L["CallFunc_DecrementCountdown_countdownFinished"] = __v), Val.Out(GetLocal(L, "CallFunc_DecrementCountdown_countdownFound"), __v => L["CallFunc_DecrementCountdown_countdownFound"] = __v) });
     L_03F5:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -188,17 +188,17 @@ public static Val ExecuteUbergraph_card_event_prolonged_siege(IHost H, Val self,
             }
         }
     L_04D4:
-        _ = H.Call("JSON_GetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("burnNow"), Val.Out(__v => L["CallFunc_JSON_GetBool_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetBool_found"] = __v) });
+        _ = H.Call("JSON_GetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("burnNow"), Val.Out(GetLocal(L, "CallFunc_JSON_GetBool_value"), __v => L["CallFunc_JSON_GetBool_value"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetBool_found"), __v => L["CallFunc_JSON_GetBool_found"] = __v) });
     L_0514:
         if (!(GetLocal(L, "CallFunc_JSON_GetBool_found")).AsBool()) goto L_0580;
     L_0522:
-        _ = H.Call("JSON_GetIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("burncards"), Val.Out(__v => L["CallFunc_JSON_GetIntArray_values_1"] = __v), Val.Out(__v => L["CallFunc_JSON_GetIntArray_found_1"] = __v) });
+        _ = H.Call("JSON_GetIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("burncards"), Val.Out(GetLocal(L, "CallFunc_JSON_GetIntArray_values_1"), __v => L["CallFunc_JSON_GetIntArray_values_1"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetIntArray_found_1"), __v => L["CallFunc_JSON_GetIntArray_found_1"] = __v) });
     L_0564:
         L["Temp_int_Loop_Counter_Variable_2"] = Val.Of(0);
     L_057B:
         goto L_01A1;
     L_0580:
-        _ = H.Call("JSON_SetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("burnNow"), Val.True, Val.Out(__v => L["CallFunc_JSON_SetBool_found"] = __v) });
+        _ = H.Call("JSON_SetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("burnNow"), Val.True, Val.Out(GetLocal(L, "CallFunc_JSON_SetBool_found"), __v => L["CallFunc_JSON_SetBool_found"] = __v) });
     L_05B8:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_05E6:
@@ -218,15 +218,15 @@ public static Val ExecuteUbergraph_card_event_prolonged_siege(IHost H, Val self,
     L_0615:
         goto L_043B;
     L_061A:
-        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(4), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckBySide_cardsIDs"] = __v), Val.Of(0.4f) });
+        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(4), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DrawCardsFromDeckBySide_cardsIDs"), __v => L["CallFunc_DrawCardsFromDeckBySide_cardsIDs"] = __v), Val.Of(0.4f) });
     L_0665:
-        _ = H.Call("JSON_SetIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("burncards"), GetLocal(L, "CallFunc_DrawCardsFromDeckBySide_cardsIDs"), Val.Out(__v => L["CallFunc_JSON_SetIntArray_found"] = __v) });
+        _ = H.Call("JSON_SetIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("burncards"), GetLocal(L, "CallFunc_DrawCardsFromDeckBySide_cardsIDs"), Val.Out(GetLocal(L, "CallFunc_JSON_SetIntArray_found"), __v => L["CallFunc_JSON_SetIntArray_found"] = __v) });
     L_06A7:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_06D5:
         goto L_0027;
     L_06DA:
-        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
+        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsSideActive_active"), __v => L["CallFunc_IsSideActive_active"] = __v) });
     L_06F6:
         if (!(GetLocal(L, "CallFunc_IsSideActive_active")).AsBool())
         {
@@ -241,7 +241,7 @@ public static Val ExecuteUbergraph_card_event_prolonged_siege(IHost H, Val self,
             }
         }
     L_0700:
-        _ = H.Call("JSON_GetIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("burncards"), Val.Out(__v => L["CallFunc_JSON_GetIntArray_values"] = __v), Val.Out(__v => L["CallFunc_JSON_GetIntArray_found"] = __v) });
+        _ = H.Call("JSON_GetIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("burncards"), Val.Out(GetLocal(L, "CallFunc_JSON_GetIntArray_values"), __v => L["CallFunc_JSON_GetIntArray_values"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetIntArray_found"), __v => L["CallFunc_JSON_GetIntArray_found"] = __v) });
     L_0742:
         goto L_05E7;
     L_0747:
@@ -335,8 +335,9 @@ public static Val updateCustomJsonIfNeeded(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         L["cardToClear"] = args.Length > 0 ? args[0] : Val.Nothing;
+        L["affectedCards"] = H.MakeArray(new Val[] { });
     L_0000:
-        _ = H.Call("JSON_GetIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("burncards"), Val.Out(__v => L["CallFunc_JSON_GetIntArray_values"] = __v), Val.Out(__v => L["CallFunc_JSON_GetIntArray_found"] = __v) });
+        _ = H.Call("JSON_GetIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("burncards"), Val.Out(GetLocal(L, "CallFunc_JSON_GetIntArray_values"), __v => L["CallFunc_JSON_GetIntArray_values"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetIntArray_found"), __v => L["CallFunc_JSON_GetIntArray_found"] = __v) });
     L_0042:
         if (!(GetLocal(L, "CallFunc_JSON_GetIntArray_found")).AsBool()) goto L_01E5;
     L_0050:
@@ -352,13 +353,13 @@ public static Val updateCustomJsonIfNeeded(IHost H, Val self, Val[] args)
     L_0124:
         if (!(GetLocal(L, "CallFunc_Array_IsNotEmpty_ReturnValue")).AsBool()) goto L_01A7;
     L_0132:
-        _ = H.Call("JSON_SetIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("burncards"), GetLocal(L, "affectedCards"), Val.Out(__v => L["CallFunc_JSON_SetIntArray_found"] = __v) });
+        _ = H.Call("JSON_SetIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("burncards"), GetLocal(L, "affectedCards"), Val.Out(GetLocal(L, "CallFunc_JSON_SetIntArray_found"), __v => L["CallFunc_JSON_SetIntArray_found"] = __v) });
     L_0174:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_01A2:
         goto L_01E5;
     L_01A7:
-        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("burncards"), Val.Out(__v => L["CallFunc_JSON_Clear_found"] = __v) });
+        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("burncards"), Val.Out(GetLocal(L, "CallFunc_JSON_Clear_found"), __v => L["CallFunc_JSON_Clear_found"] = __v) });
     L_01E0:
         goto L_0174;
     L_01E5:

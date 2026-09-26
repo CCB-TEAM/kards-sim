@@ -41,7 +41,7 @@ public static Val ExecuteUbergraph_card_unit_p1y_ginga(IHost H, Val self, Val[] 
     L_000F:
         __ef.Push(170);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
         L["CallFunc_Array_Add_ReturnValue"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "cardsToDamage"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID") });
     L_00A9:
@@ -67,9 +67,9 @@ public static Val ExecuteUbergraph_card_unit_p1y_ginga(IHost H, Val self, Val[] 
     L_0179:
         goto L_000F;
     L_017E:
-        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, self, Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
+        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, self, Val.Out(GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), __v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_0196:
-        _ = H.Call("DamageMultipleCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardsToDamage"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_DamageMultipleCards_cardsDestroyed"] = __v) });
+        _ = H.Call("DamageMultipleCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardsToDamage"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_DamageMultipleCards_cardsDestroyed"), __v => L["CallFunc_DamageMultipleCards_cardsDestroyed"] = __v) });
     L_01DE:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -87,7 +87,7 @@ public static Val ExecuteUbergraph_card_unit_p1y_ginga(IHost H, Val self, Val[] 
     L_0212:
         goto L_01DF;
     L_0217:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_discarderID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_discarderID"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_024D:
         L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "name"), Val.Name("card_unit_sendai_regiment")) == 0);
     L_028D:
@@ -111,9 +111,9 @@ public static Val ExecuteUbergraph_card_unit_p1y_ginga(IHost H, Val self, Val[] 
     L_0368:
         _ = H.Call("Array_Clear", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "cardsToDamage") });
     L_0391:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_03A4:
-        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
+        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), __v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
     L_03DC:
         goto L_01FB;
     L_03E1:
@@ -145,7 +145,7 @@ public static Val GetPlayFromHandDamage(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["targetCard"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_damage = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["damage"] = Val.Nothing;
+        L["damage"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["damage"] = Val.Of(1);
     L_0017:

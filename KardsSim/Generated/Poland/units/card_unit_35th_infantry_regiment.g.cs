@@ -40,7 +40,7 @@ public static Val ExecuteUbergraph_card_unit_35th_infantry_regiment(IHost H, Val
     L_000F:
         __ef.Push(280);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
         H.SetMember(self, "tempCard", GetLocal(L, "CallFunc_Array_Get_Item"));
     L_0062:
@@ -57,9 +57,9 @@ public static Val ExecuteUbergraph_card_unit_35th_infantry_regiment(IHost H, Val
             }
         }
     L_0089:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_00D0:
-        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
+        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeDefense_qqq"), __v => L["CallFunc_ChangeDefense_qqq"] = __v) });
     L_0117:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -100,7 +100,7 @@ public static Val ExecuteUbergraph_card_unit_35th_infantry_regiment(IHost H, Val
     L_021B:
         goto L_01E8;
     L_0220:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0233:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool())
         {
@@ -113,7 +113,7 @@ public static Val ExecuteUbergraph_card_unit_35th_infantry_regiment(IHost H, Val
             }
         }
     L_023D:
-        _ = H.Call("getMoveReason", new Val[] { self, H.GetVar("K2Node_Event_MoveReason"), Val.Out(__v => L["CallFunc_getMoveReason_moveReason"] = __v) });
+        _ = H.Call("getMoveReason", new Val[] { self, H.GetVar("K2Node_Event_MoveReason"), Val.Out(GetLocal(L, "CallFunc_getMoveReason_moveReason"), __v => L["CallFunc_getMoveReason_moveReason"] = __v) });
     L_025D:
         L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { Val.Of(0), Val.Of(1) });
     L_026C:
@@ -142,7 +142,7 @@ public static Val ExecuteUbergraph_card_unit_35th_infantry_regiment(IHost H, Val
             default: goto __halt;
         }
     L_02FD:
-        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
+        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), __v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
     L_0335:
         goto L_0204;
     L_033A:
@@ -170,7 +170,7 @@ public static Val getMoveReason(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["moveReasonString"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_moveReason = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["moveReason"] = Val.Nothing;
+        L["moveReason"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         __ef.Push(679);
     L_0005:

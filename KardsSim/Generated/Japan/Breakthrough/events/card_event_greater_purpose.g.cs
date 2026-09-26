@@ -60,9 +60,9 @@ public static Val ExecuteUbergraph_card_event_greater_purpose(IHost H, Val self,
     L_00AC:
         __ef.Push(513);
     L_00B1:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_00EC:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0115:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "side"), H.GetMember(self, "side")) == 0);
     L_0151:
@@ -79,9 +79,9 @@ public static Val ExecuteUbergraph_card_event_greater_purpose(IHost H, Val self,
             }
         }
     L_0181:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_01BC:
-        _ = H.Call("isAlreadyAffectedByOtherGreater", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID"), Val.Out(__v => L["CallFunc_isAlreadyAffectedByOtherGreater_isIt"] = __v) });
+        _ = H.Call("isAlreadyAffectedByOtherGreater", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID"), Val.Out(GetLocal(L, "CallFunc_isAlreadyAffectedByOtherGreater_isIt"), __v => L["CallFunc_isAlreadyAffectedByOtherGreater_isIt"] = __v) });
     L_01F2:
         if (!(GetLocal(L, "CallFunc_isAlreadyAffectedByOtherGreater_isIt")).AsBool()) goto L_024B;
     L_0200:
@@ -99,9 +99,9 @@ public static Val ExecuteUbergraph_card_event_greater_purpose(IHost H, Val self,
     L_0246:
         goto L_0026;
     L_024B:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0286:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("destruction"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("destruction"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_CustomAbilityAdd_qqq"), __v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_02EB:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -115,7 +115,7 @@ public static Val ExecuteUbergraph_card_event_greater_purpose(IHost H, Val self,
     L_0303:
         goto L_000F;
     L_0308:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt"), __v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_0347:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt")).AsBool())
         {
@@ -128,7 +128,7 @@ public static Val ExecuteUbergraph_card_event_greater_purpose(IHost H, Val self,
             }
         }
     L_0351:
-        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side"), Val.Of(1), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
+        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side"), Val.Of(1), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DrawCardsFromDeckbySide_cardsIDs"), __v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
     L_03B2:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -138,7 +138,7 @@ public static Val ExecuteUbergraph_card_event_greater_purpose(IHost H, Val self,
             default: goto __halt;
         }
     L_03B3:
-        _ = H.Call("GetAllCardsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllCardsOnBoard_cards"] = __v) });
+        _ = H.Call("GetAllCardsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), __v => L["CallFunc_GetAllCardsOnBoard_cards"] = __v) });
     L_03E1:
         goto L_02EC;
     L_03E6:
@@ -168,13 +168,13 @@ public static Val isAlreadyAffectedByOtherGreater(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["cardChecking"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_isIt = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["isIt"] = Val.Nothing;
+        L["isIt"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         __ef.Push(1047);
     L_0005:
         L["Temp_string_Variable"] = Val.Of("destruction");
     L_0024:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "cardChecking"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "cardChecking"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_005A:
         L["CallFunc_Map_Find_ReturnValue"] = H.Call("Map_Find", new Val[] { Val.Ref("BlueprintMapLibrary"), H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "receivedAbilitiesFromCards"), GetLocal(L, "Temp_string_Variable"), GetLocal(L, "CallFunc_Map_Find_Value") });
     L_00B5:
@@ -186,7 +186,7 @@ public static Val isAlreadyAffectedByOtherGreater(IHost H, Val self, Val[] args)
     L_00F1:
         L["Temp_string_Variable"] = Val.Of("destruction");
     L_0110:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "cardChecking"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "cardChecking"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0146:
         L["CallFunc_Map_Find_ReturnValue"] = H.Call("Map_Find", new Val[] { Val.Ref("BlueprintMapLibrary"), H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "receivedAbilitiesFromCards"), GetLocal(L, "Temp_string_Variable"), GetLocal(L, "CallFunc_Map_Find_Value") });
     L_01A1:
@@ -202,13 +202,13 @@ public static Val isAlreadyAffectedByOtherGreater(IHost H, Val self, Val[] args)
     L_0239:
         L["Temp_string_Variable"] = Val.Of("destruction");
     L_0258:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "cardChecking"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "cardChecking"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_028E:
         L["CallFunc_Map_Find_ReturnValue"] = H.Call("Map_Find", new Val[] { Val.Ref("BlueprintMapLibrary"), H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "receivedAbilitiesFromCards"), GetLocal(L, "Temp_string_Variable"), GetLocal(L, "CallFunc_Map_Find_Value") });
     L_02E9:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(GetLocal(L, "CallFunc_Map_Find_Value"), "cardsGivingAbility"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(GetLocal(L, "CallFunc_Map_Find_Value"), "cardsGivingAbility"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_032D:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_GetCardFromID_card_1"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card_1"), __v => L["CallFunc_GetCardFromID_card_1"] = __v) });
     L_0363:
         L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card_1"), "name"), Val.Name("card_event_greater_purpose")) == 0);
     L_03A3:

@@ -35,13 +35,13 @@ public static Val ExecuteUbergraph_card_unit_seabees(IHost H, Val self, Val[] ar
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_01C2;
     L_002B:
         H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardRepaired"));
     L_003E:
-        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "tempCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "tempCard"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0067:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool()) goto L_01C2;
     L_0075:
@@ -51,13 +51,13 @@ public static Val ExecuteUbergraph_card_unit_seabees(IHost H, Val self, Val[] ar
     L_00BF:
         _ = H.Call("ChangeOperationCost", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Of(-1), Val.Of(1), Val.False, Val.False, Val.False });
     L_00FF:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq_1"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq_1"), __v => L["CallFunc_ChangeAttack_qqq_1"] = __v) });
     L_0146:
         goto L_01C2;
     L_014B:
         _ = H.Call("ChangeOperationCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(-1), Val.Of(1), Val.False, Val.False, Val.False });
     L_0183:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_01C2:
         goto __halt;
     L_01C4:

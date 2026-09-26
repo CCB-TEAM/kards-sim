@@ -32,21 +32,21 @@ public static Val OnCardDealDamage(IHost H, Val self, Val[] args)
         L["CounterDamage"] = args.Length > 3 ? args[3] : Val.Nothing;
         L["isRedirected"] = args.Length > 4 ? args[4] : Val.Nothing;
         var __out_qqq = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["qqq"] = Val.Nothing;
+        L["qqq"] = args.Length > 5 ? args[5].In : Val.Nothing;
     L_0000:
         __ef.Push(615);
     L_0005:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "damage"), Val.Of(0)) > 0);
     L_0027:
-        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "toCard"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
+        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "toCard"), Val.Out(GetLocal(L, "CallFunc_IsLocation_isIt"), __v => L["CallFunc_IsLocation_isIt"] = __v) });
     L_0050:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsLocation_isIt")).AsBool() && (GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool());
     L_0076:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_020D;
     L_0084:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_0097:
-        _ = H.Call("GetCardsInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(__v => L["CallFunc_GetCardsInHandBySide_cards"] = __v) });
+        _ = H.Call("GetCardsInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), __v => L["CallFunc_GetCardsInHandBySide_cards"] = __v) });
     L_00CD:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_00E4:
@@ -62,9 +62,9 @@ public static Val OnCardDealDamage(IHost H, Val self, Val[] args)
     L_0185:
         __ef.Push(541);
     L_018A:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_01C5:
-        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeKreditCost_qqq"] = __v) });
+        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeKreditCost_qqq"), __v => L["CallFunc_ChangeKreditCost_qqq"] = __v) });
     L_020C:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

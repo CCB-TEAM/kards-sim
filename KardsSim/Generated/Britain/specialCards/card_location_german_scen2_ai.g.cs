@@ -41,19 +41,19 @@ public static Val ExecuteUbergraph_card_location_german_scen2_ai(IHost H, Val se
     L_005A:
         if (!(GetLocal(L, "CallFunc_GreaterEqual_IntInt_ReturnValue")).AsBool()) goto L_01B3;
     L_0068:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide_2"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_2"), __v => L["CallFunc_GetOppositeSide_oppositeSide_2"] = __v) });
     L_007B:
-        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card_2"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID_2"] = __v), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_2") });
+        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_card_2"), __v => L["CallFunc_GetLocationCardBySide_card_2"] = __v), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID_2"), __v => L["CallFunc_GetLocationCardBySide_locationCardID_2"] = __v), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_2") });
     L_00BA:
         _ = H.Call("CustomName1Add", new Val[] { GetLocal(L, "CallFunc_GetLocationCardBySide_card_2"), Val.Of("hqDamage") });
     L_00E4:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide_2"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_2"), __v => L["CallFunc_GetOppositeSide_oppositeSide_2"] = __v) });
     L_00F7:
-        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card_2"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID_2"] = __v), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_2") });
+        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_card_2"), __v => L["CallFunc_GetLocationCardBySide_card_2"] = __v), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID_2"), __v => L["CallFunc_GetLocationCardBySide_locationCardID_2"] = __v), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_2") });
     L_0136:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "CallFunc_GetLocationCardBySide_card_2"), "cardID"), Val.False });
     L_017A:
-        _ = H.Call("UpdateCampaignStarStatus", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(3), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.Of(3) });
+        _ = H.Call("UpdateCampaignStarStatus", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(3), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.Of(3) });
     L_01AE:
         goto L_064C;
     L_01B3:
@@ -61,11 +61,11 @@ public static Val ExecuteUbergraph_card_location_german_scen2_ai(IHost H, Val se
     L_01E1:
         H.SetMember(self, "dmgCount", GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"));
     L_01FC:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_020F:
-        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide") });
+        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_card"), __v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID"), __v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide") });
     L_024E:
-        _ = H.Call("CustomName1HasAttribute", new Val[] { GetLocal(L, "CallFunc_GetLocationCardBySide_card"), Val.Of("hqDamage"), Val.Out(__v => L["CallFunc_CustomName1HasAttribute_doesIt"] = __v) });
+        _ = H.Call("CustomName1HasAttribute", new Val[] { GetLocal(L, "CallFunc_GetLocationCardBySide_card"), Val.Of("hqDamage"), Val.Out(GetLocal(L, "CallFunc_CustomName1HasAttribute_doesIt"), __v => L["CallFunc_CustomName1HasAttribute_doesIt"] = __v) });
     L_0281:
         if (!(GetLocal(L, "CallFunc_CustomName1HasAttribute_doesIt")).AsBool()) goto L_0294;
     L_028F:
@@ -91,17 +91,17 @@ public static Val ExecuteUbergraph_card_location_german_scen2_ai(IHost H, Val se
     L_03AC:
         L["CallFunc_Format_ReturnValue_1"] = H.Call("Format", new Val[] { Val.Ref("KismetTextLibrary"), Val.Of(" ({num})"), GetLocal(L, "K2Node_MakeArray_Array_1") });
     L_03DD:
-        _ = H.Call("UpdateCampaignStarStatus", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(3), Val.Out(__v => L["CallFunc_Format_ReturnValue_1"] = __v), Val.Of(1) });
+        _ = H.Call("UpdateCampaignStarStatus", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(3), Val.Out(GetLocal(L, "CallFunc_Format_ReturnValue_1"), __v => L["CallFunc_Format_ReturnValue_1"] = __v), Val.Of(1) });
     L_0411:
         goto L_064C;
     L_0416:
         H.SetMember(self, "dmgCount", Val.Of(0));
     L_042D:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide_1"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_1"), __v => L["CallFunc_GetOppositeSide_oppositeSide_1"] = __v) });
     L_0440:
-        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card_1"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID_1"] = __v), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_1") });
+        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_card_1"), __v => L["CallFunc_GetLocationCardBySide_card_1"] = __v), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID_1"), __v => L["CallFunc_GetLocationCardBySide_locationCardID_1"] = __v), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_1") });
     L_047F:
-        _ = H.Call("CustomName1HasAttribute", new Val[] { GetLocal(L, "CallFunc_GetLocationCardBySide_card_1"), Val.Of("hqDamage"), Val.Out(__v => L["CallFunc_CustomName1HasAttribute_doesIt_1"] = __v) });
+        _ = H.Call("CustomName1HasAttribute", new Val[] { GetLocal(L, "CallFunc_GetLocationCardBySide_card_1"), Val.Of("hqDamage"), Val.Out(GetLocal(L, "CallFunc_CustomName1HasAttribute_doesIt_1"), __v => L["CallFunc_CustomName1HasAttribute_doesIt_1"] = __v) });
     L_04B2:
         if (!(GetLocal(L, "CallFunc_CustomName1HasAttribute_doesIt_1")).AsBool()) goto L_04C5;
     L_04C0:
@@ -127,7 +127,7 @@ public static Val ExecuteUbergraph_card_location_german_scen2_ai(IHost H, Val se
     L_05DD:
         L["CallFunc_Format_ReturnValue"] = H.Call("Format", new Val[] { Val.Ref("KismetTextLibrary"), Val.Of(" ({num})"), GetLocal(L, "K2Node_MakeArray_Array") });
     L_060E:
-        _ = H.Call("UpdateCampaignStarStatus", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(3), Val.Out(__v => L["CallFunc_Format_ReturnValue"] = __v), Val.Of(1) });
+        _ = H.Call("UpdateCampaignStarStatus", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(3), Val.Out(GetLocal(L, "CallFunc_Format_ReturnValue"), __v => L["CallFunc_Format_ReturnValue"] = __v), Val.Of(1) });
     L_0642:
         goto L_064C;
     L_0647:

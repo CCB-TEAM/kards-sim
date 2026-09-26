@@ -36,9 +36,9 @@ public static Val ExecuteUbergraph_card_unit_78th_steel_regiment(IHost H, Val se
     L_000A:
         H.SetMember(self, "count", Val.Of(0));
     L_0021:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_0034:
-        _ = H.Call("GetCardsInFrontlineBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.True, Val.Out(__v => L["CallFunc_GetCardsInFrontlineBySide_cards"] = __v) });
+        _ = H.Call("GetCardsInFrontlineBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.True, Val.Out(GetLocal(L, "CallFunc_GetCardsInFrontlineBySide_cards"), __v => L["CallFunc_GetCardsInFrontlineBySide_cards"] = __v) });
     L_006B:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInFrontlineBySide_cards") });
     L_00A6:
@@ -50,11 +50,11 @@ public static Val ExecuteUbergraph_card_unit_78th_steel_regiment(IHost H, Val se
     L_00F1:
         L["CallFunc_Multiply_IntInt_ReturnValue"] = (H.GetMember(self, "count") * Val.Of(2));
     L_011B:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue"), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue"), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_015E:
         L["CallFunc_Multiply_IntInt_ReturnValue_1"] = (H.GetMember(self, "count") * Val.Of(2));
     L_0188:
-        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue_1"), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
+        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue_1"), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeDefense_qqq"), __v => L["CallFunc_ChangeDefense_qqq"] = __v) });
     L_01CB:
         goto __halt;
     L_01CD:

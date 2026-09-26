@@ -29,7 +29,7 @@ public static Val DeactivateOtherNFS(IHost H, Val self, Val[] args)
     L_0000:
         __ef.Push(654);
     L_0005:
-        _ = H.Call("GetCardsInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetCardsInHandBySide_cards"] = __v) });
+        _ = H.Call("GetCardsInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), __v => L["CallFunc_GetCardsInHandBySide_cards"] = __v) });
     L_003B:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_0052:
@@ -54,7 +54,7 @@ public static Val DeactivateOtherNFS(IHost H, Val self, Val[] args)
     L_00EF:
         __ef.Push(580);
     L_00F4:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_012F:
         L["CallFunc_NotEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID"), H.GetMember(self, "cardID")) != 0);
     L_016B:
@@ -73,7 +73,7 @@ public static Val DeactivateOtherNFS(IHost H, Val self, Val[] args)
             }
         }
     L_01DB:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0216:
         H.SetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "gotchaActivated", Val.Of(0));
     L_0243:
@@ -113,7 +113,7 @@ public static Val ExecuteUbergraph_card_event_national_fire_service(IHost H, Val
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("isActive"), Val.Out(__v => L["CallFunc_JSON_Clear_found"] = __v) });
+        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("isActive"), Val.Out(GetLocal(L, "CallFunc_JSON_Clear_found"), __v => L["CallFunc_JSON_Clear_found"] = __v) });
     L_0042:
         if (!(GetLocal(L, "CallFunc_JSON_Clear_found")).AsBool()) goto L_007E;
     L_0050:
@@ -167,13 +167,13 @@ public static Val OnOtherCardDealDamageAddDamage(IHost H, Val self, Val[] args)
         L["fromAttack"] = args.Length > 3 ? args[3] : Val.Nothing;
         L["isDefenderDamage"] = args.Length > 4 ? args[4] : Val.Nothing;
         var __out_damageToAdd = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["damageToAdd"] = Val.Nothing;
+        L["damageToAdd"] = args.Length > 5 ? args[5].In : Val.Nothing;
         var __out_reRunAtEnd = args.Length > 6 ? args[6].As<Action<Val>>() : null;
-        L["reRunAtEnd"] = Val.Nothing;
+        L["reRunAtEnd"] = args.Length > 6 ? args[6].In : Val.Nothing;
     L_0000:
-        _ = H.Call("JSON_GetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("isActive"), Val.Out(__v => L["CallFunc_JSON_GetBool_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetBool_found"] = __v) });
+        _ = H.Call("JSON_GetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("isActive"), Val.Out(GetLocal(L, "CallFunc_JSON_GetBool_value"), __v => L["CallFunc_JSON_GetBool_value"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetBool_found"), __v => L["CallFunc_JSON_GetBool_found"] = __v) });
     L_0041:
-        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "toCard"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
+        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "toCard"), Val.Out(GetLocal(L, "CallFunc_IsLocation_isIt"), __v => L["CallFunc_IsLocation_isIt"] = __v) });
     L_006A:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(GetLocal(L, "toCard"), "side")) == 0);
     L_00A6:
@@ -231,15 +231,15 @@ public static Val OnOtherCardDealDamageAddDamageAfterCalc(IHost H, Val self, Val
         L["fromAttack"] = args.Length > 3 ? args[3] : Val.Nothing;
         L["isRedirected"] = args.Length > 4 ? args[4] : Val.Nothing;
         var __out_damageToAdd = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["damageToAdd"] = Val.Nothing;
+        L["damageToAdd"] = args.Length > 5 ? args[5].In : Val.Nothing;
         var __out_stopAdding = args.Length > 6 ? args[6].As<Action<Val>>() : null;
-        L["stopAdding"] = Val.Nothing;
+        L["stopAdding"] = args.Length > 6 ? args[6].In : Val.Nothing;
     L_0000:
-        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, GetLocal(L, "cardDealingDamage"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
+        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, GetLocal(L, "cardDealingDamage"), Val.Out(GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt"), __v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
     L_001C:
         if (!(GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt")).AsBool()) goto L_0079;
     L_002A:
-        _ = H.Call("JSON_GetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("isActive"), Val.Out(__v => L["CallFunc_JSON_GetBool_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetBool_found"] = __v) });
+        _ = H.Call("JSON_GetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("isActive"), Val.Out(GetLocal(L, "CallFunc_JSON_GetBool_value"), __v => L["CallFunc_JSON_GetBool_value"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetBool_found"), __v => L["CallFunc_JSON_GetBool_found"] = __v) });
     L_006B:
         if (!(GetLocal(L, "CallFunc_JSON_GetBool_value")).AsBool()) goto L_00A0;
     L_0079:
@@ -253,7 +253,7 @@ public static Val OnOtherCardDealDamageAddDamageAfterCalc(IHost H, Val self, Val
     L_00C2:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "toCard"), "side"), H.GetMember(self, "side")) == 0);
     L_00FE:
-        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "toCard"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
+        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "toCard"), Val.Out(GetLocal(L, "CallFunc_IsLocation_isIt"), __v => L["CallFunc_IsLocation_isIt"] = __v) });
     L_0127:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_IsLocation_isIt")).AsBool());
     L_014D:
@@ -263,9 +263,9 @@ public static Val OnOtherCardDealDamageAddDamageAfterCalc(IHost H, Val self, Val
     L_0181:
         _ = H.Call("DeactivateOtherNFS", new Val[] { self });
     L_018F:
-        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(GetLocal(L, "cardDealingDamage"), "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
+        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(GetLocal(L, "cardDealingDamage"), "cardID"), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_GotchaTriggered_qqq"), __v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
     L_01DE:
-        _ = H.Call("JSON_SetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("isActive"), Val.True, Val.Out(__v => L["CallFunc_JSON_SetBool_found"] = __v) });
+        _ = H.Call("JSON_SetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("isActive"), Val.True, Val.Out(GetLocal(L, "CallFunc_JSON_SetBool_found"), __v => L["CallFunc_JSON_SetBool_found"] = __v) });
     L_0217:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_0245:

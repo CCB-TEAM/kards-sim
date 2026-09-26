@@ -36,7 +36,7 @@ public static Val ExecuteUbergraph_card_location_british_scen3_ai(IHost H, Val s
     L_000A:
         L["Temp_text_Variable"] = Val.Of("The pass has fallen and Rommel is driving on towards Thala. An American unit has arrived to reinforce our defense of the town.");
     L_00C2:
-        _ = H.Call("ShowCampaignMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.True, Val.False, Val.Of(0f), Val.False });
+        _ = H.Call("ShowCampaignMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.True, Val.False, Val.Of(0f), Val.False });
     L_00F7:
         goto __halt;
     L_00F9:

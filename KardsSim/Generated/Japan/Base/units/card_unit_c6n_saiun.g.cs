@@ -35,13 +35,13 @@ public static Val ExecuteUbergraph_card_unit_c6n_saiun(IHost H, Val self, Val[] 
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("RemoveGameplaySideEffect", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.MakeArray(new Val[] { Val.Name("sideeffect.blockgotcha") }), self, Val.Out(__v => L["CallFunc_RemoveGameplaySideEffect_qqq"] = __v) });
+        _ = H.Call("RemoveGameplaySideEffect", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.MakeArray(new Val[] { Val.Name("sideeffect.blockgotcha") }), self, Val.Out(GetLocal(L, "CallFunc_RemoveGameplaySideEffect_qqq"), __v => L["CallFunc_RemoveGameplaySideEffect_qqq"] = __v) });
     L_005C:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide_1"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_1"), __v => L["CallFunc_GetOppositeSide_oppositeSide_1"] = __v) });
     L_006F:
-        _ = H.Call("RemoveGameplaySideEffect", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_1"), H.MakeArray(new Val[] { Val.Name("sideeffect.blockgotcha") }), self, Val.Out(__v => L["CallFunc_RemoveGameplaySideEffect_qqq_1"] = __v) });
+        _ = H.Call("RemoveGameplaySideEffect", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_1"), H.MakeArray(new Val[] { Val.Name("sideeffect.blockgotcha") }), self, Val.Out(GetLocal(L, "CallFunc_RemoveGameplaySideEffect_qqq_1"), __v => L["CallFunc_RemoveGameplaySideEffect_qqq_1"] = __v) });
     L_00C1:
-        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("stop_gotcha"), Val.Out(__v => L["CallFunc_JSON_Clear_found"] = __v) });
+        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("stop_gotcha"), Val.Out(GetLocal(L, "CallFunc_JSON_Clear_found"), __v => L["CallFunc_JSON_Clear_found"] = __v) });
     L_00FC:
         if (!(GetLocal(L, "CallFunc_JSON_Clear_found")).AsBool()) goto L_039F;
     L_010A:
@@ -69,17 +69,17 @@ public static Val ExecuteUbergraph_card_unit_c6n_saiun(IHost H, Val self, Val[] 
     L_023C:
         if (!(GetLocal(L, "CallFunc_NotEqual_ByteByte_ReturnValue")).AsBool()) goto L_039F;
     L_024A:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_025D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_000A;
     L_026B:
-        _ = H.Call("ApplyGameplaySideEffect", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.MakeArray(new Val[] { Val.Name("sideeffect.blockgotcha") }), self, Val.Of(3), Val.Of(0), Val.Out(__v => L["CallFunc_ApplyGameplaySideEffect_qqq"] = __v) });
+        _ = H.Call("ApplyGameplaySideEffect", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.MakeArray(new Val[] { Val.Name("sideeffect.blockgotcha") }), self, Val.Of(3), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_ApplyGameplaySideEffect_qqq"), __v => L["CallFunc_ApplyGameplaySideEffect_qqq"] = __v) });
     L_02C4:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_02D7:
-        _ = H.Call("ApplyGameplaySideEffect", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), H.MakeArray(new Val[] { Val.Name("sideeffect.blockgotcha") }), self, Val.Of(3), Val.Of(0), Val.Out(__v => L["CallFunc_ApplyGameplaySideEffect_qqq_1"] = __v) });
+        _ = H.Call("ApplyGameplaySideEffect", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), H.MakeArray(new Val[] { Val.Name("sideeffect.blockgotcha") }), self, Val.Of(3), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_ApplyGameplaySideEffect_qqq_1"), __v => L["CallFunc_ApplyGameplaySideEffect_qqq_1"] = __v) });
     L_0330:
-        _ = H.Call("JSON_SetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("stop_gotcha"), Val.True, Val.Out(__v => L["CallFunc_JSON_SetBool_found"] = __v) });
+        _ = H.Call("JSON_SetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("stop_gotcha"), Val.True, Val.Out(GetLocal(L, "CallFunc_JSON_SetBool_found"), __v => L["CallFunc_JSON_SetBool_found"] = __v) });
     L_036C:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_039A:

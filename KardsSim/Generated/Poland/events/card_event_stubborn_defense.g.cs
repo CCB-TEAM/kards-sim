@@ -35,7 +35,7 @@ public static Val ExecuteUbergraph_card_event_stubborn_defense(IHost H, Val self
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("isTriggered"), Val.Out(__v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found"] = __v) });
+        _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("isTriggered"), Val.Out(GetLocal(L, "CallFunc_JSON_GetInt_value"), __v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetInt_found"), __v => L["CallFunc_JSON_GetInt_found"] = __v) });
     L_004E:
         if (!(GetLocal(L, "CallFunc_JSON_GetInt_found")).AsBool()) goto L_021A;
     L_005C:
@@ -43,19 +43,19 @@ public static Val ExecuteUbergraph_card_event_stubborn_defense(IHost H, Val self
     L_0098:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_021A;
     L_00A6:
-        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
+        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DrawCardsFromDeckbySide_cardsIDs"), __v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
     L_00F1:
-        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("isTriggered"), Val.Out(__v => L["CallFunc_JSON_Clear_found"] = __v) });
+        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("isTriggered"), Val.Out(GetLocal(L, "CallFunc_JSON_Clear_found"), __v => L["CallFunc_JSON_Clear_found"] = __v) });
     L_012C:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_015A:
         goto L_021A;
     L_015F:
-        _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("isTriggered"), Val.Out(__v => L["CallFunc_JSON_GetInt_value_1"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found_1"] = __v) });
+        _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("isTriggered"), Val.Out(GetLocal(L, "CallFunc_JSON_GetInt_value_1"), __v => L["CallFunc_JSON_GetInt_value_1"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetInt_found_1"), __v => L["CallFunc_JSON_GetInt_found_1"] = __v) });
     L_01A3:
         if (!(GetLocal(L, "CallFunc_JSON_GetInt_found_1")).AsBool()) goto L_021A;
     L_01B1:
-        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("isTriggered"), Val.Out(__v => L["CallFunc_JSON_Clear_found_1"] = __v) });
+        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("isTriggered"), Val.Out(GetLocal(L, "CallFunc_JSON_Clear_found_1"), __v => L["CallFunc_JSON_Clear_found_1"] = __v) });
     L_01EC:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_021A:
@@ -106,15 +106,15 @@ public static Val OnOtherCardAttacks(IHost H, Val self, Val[] args)
         L["cardAttacking"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["defenderCard"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_stopAttack = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["stopAttack"] = Val.Nothing;
+        L["stopAttack"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_AttackedAndStopped = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["AttackedAndStopped"] = Val.Nothing;
+        L["AttackedAndStopped"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "defenderCard"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "defenderCard"), Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0029:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "defenderCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "defenderCard"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0052:
-        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, GetLocal(L, "cardAttacking"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
+        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, GetLocal(L, "cardAttacking"), Val.Out(GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt"), __v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
     L_006E:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt")).AsBool() && (GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool());
     L_0094:
@@ -122,11 +122,11 @@ public static Val OnOtherCardAttacks(IHost H, Val self, Val[] args)
     L_00BA:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_1")).AsBool()) goto L_01EB;
     L_00C8:
-        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(GetLocal(L, "cardAttacking"), "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
+        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(GetLocal(L, "cardAttacking"), "cardID"), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_GotchaTriggered_qqq"), __v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
     L_0117:
-        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "defenderCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
+        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "defenderCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeDefense_qqq"), __v => L["CallFunc_ChangeDefense_qqq"] = __v) });
     L_015E:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("isTriggered"), H.GetMember(GetLocal(L, "defenderCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("isTriggered"), H.GetMember(GetLocal(L, "defenderCard"), "cardID"), Val.Out(GetLocal(L, "CallFunc_JSON_SetInt_found"), __v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_01B8:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_01E6:

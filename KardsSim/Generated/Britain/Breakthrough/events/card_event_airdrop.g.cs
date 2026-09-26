@@ -27,29 +27,29 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_canIt = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["canIt"] = Val.Nothing;
+        L["canIt"] = args.Length > 0 ? args[0].In : Val.Nothing;
         var __out_reason = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["reason"] = Val.Nothing;
+        L["reason"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_reasonParam1 = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["reasonParam1"] = Val.Nothing;
+        L["reasonParam1"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_reasonParam2 = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["reasonParam2"] = Val.Nothing;
+        L["reasonParam2"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_targetedCard = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["targetedCard"] = Val.Nothing;
+        L["targetedCard"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
-        _ = H.Call("GetTargetedCard", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(__v => L["CallFunc_GetTargetedCard_hasTarget"] = __v), Val.Out(__v => L["CallFunc_GetTargetedCard_card"] = __v) });
+        _ = H.Call("GetTargetedCard", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(GetLocal(L, "CallFunc_GetTargetedCard_hasTarget"), __v => L["CallFunc_GetTargetedCard_hasTarget"] = __v), Val.Out(GetLocal(L, "CallFunc_GetTargetedCard_card"), __v => L["CallFunc_GetTargetedCard_card"] = __v) });
     L_0037:
         if (!(GetLocal(L, "CallFunc_GetTargetedCard_hasTarget")).AsBool()) goto L_013E;
     L_0045:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_0058:
-        _ = H.Call("IsSameSideUnit", new Val[] { GetLocal(L, "CallFunc_GetTargetedCard_card"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(__v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
+        _ = H.Call("IsSameSideUnit", new Val[] { GetLocal(L, "CallFunc_GetTargetedCard_card"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(GetLocal(L, "CallFunc_IsSameSideUnit_isIt"), __v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
     L_008A:
         if (!(GetLocal(L, "CallFunc_IsSameSideUnit_isIt")).AsBool()) goto L_01A9;
     L_0098:
         H.SetMember(self, "targetOverride", GetLocal(L, "CallFunc_GetTargetedCard_card"));
     L_00AB:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "location"), Val.Of(7), Val.Out(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), __v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_00DF:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_00FE:
@@ -85,7 +85,7 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
     L_020D:
         goto L_031A;
     L_0212:
-        _ = H.Call("HasCustomAbility", new Val[] { GetLocal(L, "CallFunc_GetTargetedCard_card"), Val.Of("cantRetreat"), Val.Out(__v => L["CallFunc_HasCustomAbility_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbility", new Val[] { GetLocal(L, "CallFunc_GetTargetedCard_card"), Val.Of("cantRetreat"), Val.Out(GetLocal(L, "CallFunc_HasCustomAbility_doesIt"), __v => L["CallFunc_HasCustomAbility_doesIt"] = __v) });
     L_0248:
         if (!(GetLocal(L, "CallFunc_HasCustomAbility_doesIt")).AsBool()) goto L_02C0;
     L_0256:
@@ -146,17 +146,17 @@ public static Val ExecuteUbergraph_card_event_airdrop(IHost H, Val self, Val[] a
     L_0049:
         _ = H.Call("MakeCardRetreat", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_MakeArray_Array"), H.GetMember(self, "cardID") });
     L_007F:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_0092:
-        _ = H.Call("DoesSideControlTheFrontline", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(__v => L["CallFunc_DoesSideControlTheFrontline_doesHe"] = __v) });
+        _ = H.Call("DoesSideControlTheFrontline", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(GetLocal(L, "CallFunc_DoesSideControlTheFrontline_doesHe"), __v => L["CallFunc_DoesSideControlTheFrontline_doesHe"] = __v) });
     L_00C8:
         if (!(GetLocal(L, "CallFunc_DoesSideControlTheFrontline_doesHe")).AsBool()) goto L_00DB;
     L_00D6:
         goto L_0197;
     L_00DB:
-        _ = H.Call("SpawnCardInFrontline", new Val[] { H.GetMember(self, "cardFunction"), Val.Name("card_unit_2nd_parachute"), H.GetMember(self, "side"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable_1"] = __v), Val.False, Val.Out(__v => L["CallFunc_SpawnCardInFrontline_spawnedCardID"] = __v), Val.Of(0), Val.Of(-1), Val.False });
+        _ = H.Call("SpawnCardInFrontline", new Val[] { H.GetMember(self, "cardFunction"), Val.Name("card_unit_2nd_parachute"), H.GetMember(self, "side"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "Temp_text_Variable_1"), __v => L["Temp_text_Variable_1"] = __v), Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnCardInFrontline_spawnedCardID"), __v => L["CallFunc_SpawnCardInFrontline_spawnedCardID"] = __v), Val.Of(0), Val.Of(-1), Val.False });
     L_0139:
-        _ = H.Call("SpawnCardInFrontline", new Val[] { H.GetMember(self, "cardFunction"), Val.Name("card_unit_2nd_parachute"), H.GetMember(self, "side"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, Val.Out(__v => L["CallFunc_SpawnCardInFrontline_spawnedCardID_1"] = __v), Val.Of(0), Val.Of(-1), Val.False });
+        _ = H.Call("SpawnCardInFrontline", new Val[] { H.GetMember(self, "cardFunction"), Val.Name("card_unit_2nd_parachute"), H.GetMember(self, "side"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnCardInFrontline_spawnedCardID_1"), __v => L["CallFunc_SpawnCardInFrontline_spawnedCardID_1"] = __v), Val.Of(0), Val.Of(-1), Val.False });
     L_0197:
         goto __halt;
     L_0199:

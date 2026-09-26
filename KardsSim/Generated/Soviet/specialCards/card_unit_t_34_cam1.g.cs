@@ -42,7 +42,7 @@ public static Val ExecuteUbergraph_card_unit_t_34_cam1(IHost H, Val self, Val[] 
     L_000F:
         __ef.Push(368);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "activeUpgrades"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "activeUpgrades"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
         L["K2Node_SwitchInteger_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Array_Get_Item"), Val.Of(1)) != 0);
     L_0071:
@@ -101,7 +101,7 @@ public static Val ExecuteUbergraph_card_unit_t_34_cam1(IHost H, Val self, Val[] 
     L_0240:
         L["Temp_text_Variable"] = Val.Of("Deployment: Reduce operation cost by 1 this turn.");
     L_02AB:
-        _ = H.Call("CampaignSetText", new Val[] { self, Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False });
+        _ = H.Call("CampaignSetText", new Val[] { self, Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.False });
     L_02CD:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -173,7 +173,7 @@ public static Val ExecuteUbergraph_card_unit_t_34_cam1(IHost H, Val self, Val[] 
     L_03BC:
         goto L_03A0;
     L_03C1:
-        _ = H.Call("HasCampaignUpgrade", new Val[] { self, Val.Of(1), Val.Out(__v => L["CallFunc_HasCampaignUpgrade_doesIt"] = __v) });
+        _ = H.Call("HasCampaignUpgrade", new Val[] { self, Val.Of(1), Val.Out(GetLocal(L, "CallFunc_HasCampaignUpgrade_doesIt"), __v => L["CallFunc_HasCampaignUpgrade_doesIt"] = __v) });
     L_03D9:
         if (!(GetLocal(L, "CallFunc_HasCampaignUpgrade_doesIt")).AsBool())
         {
@@ -213,7 +213,7 @@ public static Val ExecuteUbergraph_card_unit_t_34_cam1(IHost H, Val self, Val[] 
             }
         }
     L_0494:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_04A7:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool())
         {

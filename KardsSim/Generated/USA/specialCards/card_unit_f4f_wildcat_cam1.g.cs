@@ -42,7 +42,7 @@ public static Val ExecuteUbergraph_card_unit_f4f_wildcat_cam1(IHost H, Val self,
     L_000F:
         __ef.Push(368);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "activeUpgrades"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "activeUpgrades"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
         L["K2Node_SwitchInteger_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Array_Get_Item"), Val.Of(1)) != 0);
     L_0071:
@@ -155,9 +155,9 @@ public static Val ExecuteUbergraph_card_unit_f4f_wildcat_cam1(IHost H, Val self,
     L_0313:
         L["Temp_text_Variable"] = Val.Of("Cannot be targeted by enemy orders.");
     L_0370:
-        _ = H.Call("AppendText", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => H.SetMember(self, "text", __v)), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.Out(__v => L["CallFunc_AppendText_text"] = __v) });
+        _ = H.Call("AppendText", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(H.GetMember(self, "text"), __v => H.SetMember(self, "text", __v)), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.Out(GetLocal(L, "CallFunc_AppendText_text"), __v => L["CallFunc_AppendText_text"] = __v) });
     L_03AF:
-        _ = H.Call("CampaignSetText", new Val[] { self, Val.Out(__v => L["CallFunc_AppendText_text"] = __v), Val.True });
+        _ = H.Call("CampaignSetText", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_AppendText_text"), __v => L["CallFunc_AppendText_text"] = __v), Val.True });
     L_03D1:
         _ = H.Call("CustomName1Add", new Val[] { self, Val.Of("cantBeTargetedByEnemyOrder") });
     L_03F7:
@@ -179,7 +179,7 @@ public static Val ExecuteUbergraph_card_unit_f4f_wildcat_cam1(IHost H, Val self,
     L_0459:
         goto L_0426;
     L_045E:
-        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card_1"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID_1"] = __v), H.GetMember(self, "side") });
+        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_card_1"), __v => L["CallFunc_GetLocationCardBySide_card_1"] = __v), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID_1"), __v => L["CallFunc_GetLocationCardBySide_locationCardID_1"] = __v), H.GetMember(self, "side") });
     L_049D:
         _ = H.Call("RemoveSmokescreen", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "CallFunc_GetLocationCardBySide_card_1"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False });
     L_04EB:
@@ -191,7 +191,7 @@ public static Val ExecuteUbergraph_card_unit_f4f_wildcat_cam1(IHost H, Val self,
             default: goto __halt;
         }
     L_04EC:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_04FF:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool())
         {
@@ -204,7 +204,7 @@ public static Val ExecuteUbergraph_card_unit_f4f_wildcat_cam1(IHost H, Val self,
             }
         }
     L_0509:
-        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(self, "side") });
+        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_card"), __v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID"), __v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(self, "side") });
     L_0548:
         _ = H.Call("GiveSmokescreen", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "CallFunc_GetLocationCardBySide_card"), "cardID"), H.GetMember(self, "cardID") });
     L_0594:

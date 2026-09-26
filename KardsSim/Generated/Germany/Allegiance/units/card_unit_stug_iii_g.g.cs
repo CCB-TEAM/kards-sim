@@ -31,9 +31,9 @@ public static Val OnCardDealDamage_ModifyDamageDealt(IHost H, Val self, Val[] ar
         L["fromAttack"] = args.Length > 2 ? args[2] : Val.Nothing;
         L["fromFight"] = args.Length > 3 ? args[3] : Val.Nothing;
         var __out_newDamage = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["newDamage"] = Val.Nothing;
+        L["newDamage"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
-        _ = H.Call("getTotalHeavyArmor", new Val[] { GetLocal(L, "toCard"), Val.Out(__v => L["CallFunc_getTotalHeavyArmor_totalHeavyArmor"] = __v) });
+        _ = H.Call("getTotalHeavyArmor", new Val[] { GetLocal(L, "toCard"), Val.Out(GetLocal(L, "CallFunc_getTotalHeavyArmor_totalHeavyArmor"), __v => L["CallFunc_getTotalHeavyArmor_totalHeavyArmor"] = __v) });
     L_0029:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalHeavyArmor_totalHeavyArmor"), Val.Of(0)) > 0);
     L_004B:
@@ -41,7 +41,7 @@ public static Val OnCardDealDamage_ModifyDamageDealt(IHost H, Val self, Val[] ar
     L_0071:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_00F6;
     L_007F:
-        _ = H.Call("getTotalHeavyArmor", new Val[] { GetLocal(L, "toCard"), Val.Out(__v => L["CallFunc_getTotalHeavyArmor_totalHeavyArmor"] = __v) });
+        _ = H.Call("getTotalHeavyArmor", new Val[] { GetLocal(L, "toCard"), Val.Out(GetLocal(L, "CallFunc_getTotalHeavyArmor_totalHeavyArmor"), __v => L["CallFunc_getTotalHeavyArmor_totalHeavyArmor"] = __v) });
     L_00A8:
         L["CallFunc_Add_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_getTotalHeavyArmor_totalHeavyArmor") + GetLocal(L, "damage"));
     L_00D6:

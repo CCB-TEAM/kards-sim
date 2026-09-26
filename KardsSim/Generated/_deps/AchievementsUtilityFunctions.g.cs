@@ -773,7 +773,7 @@ public static Val CompleteAchievements(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_achievementNames = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["achievementNames"] = Val.Nothing;
+        L["achievementNames"] = args.Length > 0 ? args[0].In : Val.Nothing;
         L["showPopup"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
     L_0000:
@@ -884,7 +884,7 @@ public static Val GetFeaturedAchievements(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_achievements = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["achievements"] = Val.Nothing;
+        L["achievements"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L["ach"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(609);

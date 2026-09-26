@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_event_delaying_tactics(IHost H, Val self
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("GetAllCardsInFrontline", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllCardsInFrontline_cards"] = __v) });
+        _ = H.Call("GetAllCardsInFrontline", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllCardsInFrontline_cards"), __v => L["CallFunc_GetAllCardsInFrontline_cards"] = __v) });
     L_0038:
         _ = H.Call("MakeCardRetreat", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetAllCardsInFrontline_cards"), H.GetMember(self, "cardID") });
     L_006E:

@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_event_expanded_us_research(IHost H, Val 
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("WhichChooseOne", new Val[] { self, Val.Out(__v => L["CallFunc_WhichChooseOne_Branches"] = __v) });
+        _ = H.Call("WhichChooseOne", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_WhichChooseOne_Branches"), __v => L["CallFunc_WhichChooseOne_Branches"] = __v) });
     L_001D:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_WhichChooseOne_Branches"), Val.Of(0)) != 0);
     L_003C:
@@ -46,11 +46,11 @@ public static Val ExecuteUbergraph_card_event_expanded_us_research(IHost H, Val 
     L_0077:
         goto L_0139;
     L_007C:
-        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_event_pressurized_cabin"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.Of(0), Val.Out(__v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_event_pressurized_cabin"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_SpawnCardinHandbySide_spawnedCardID"), __v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID"] = __v) });
     L_00D8:
         goto L_0139;
     L_00DD:
-        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_event_advanced_us_research"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable_1"] = __v), Val.Of(0), Val.Out(__v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID_1"] = __v) });
+        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_event_advanced_us_research"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(GetLocal(L, "Temp_text_Variable_1"), __v => L["Temp_text_Variable_1"] = __v), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_SpawnCardinHandbySide_spawnedCardID_1"), __v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID_1"] = __v) });
     L_0139:
         goto __halt;
     L_013B:

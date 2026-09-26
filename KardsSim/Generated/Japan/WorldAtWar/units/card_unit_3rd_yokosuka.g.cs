@@ -36,15 +36,15 @@ public static Val ExecuteUbergraph_card_unit_3rd_yokosuka(IHost H, Val self, Val
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_01B4;
     L_002B:
-        _ = H.Call("get_adjacent_japan_units_count", new Val[] { self, Val.Out(__v => L["CallFunc_get_adjacent_japan_units_count_count"] = __v) });
+        _ = H.Call("get_adjacent_japan_units_count", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_get_adjacent_japan_units_count_count"), __v => L["CallFunc_get_adjacent_japan_units_count_count"] = __v) });
     L_0042:
         H.SetMember(self, "newCount", GetLocal(L, "CallFunc_get_adjacent_japan_units_count_count"));
     L_005D:
-        _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("preCount"), Val.Out(__v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found"] = __v) });
+        _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("preCount"), Val.Out(GetLocal(L, "CallFunc_JSON_GetInt_value"), __v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetInt_found"), __v => L["CallFunc_JSON_GetInt_found"] = __v) });
     L_009E:
         if (!(GetLocal(L, "CallFunc_JSON_GetInt_found")).AsBool()) goto L_022D;
     L_00AC:
@@ -58,13 +58,13 @@ public static Val ExecuteUbergraph_card_unit_3rd_yokosuka(IHost H, Val self, Val
     L_0132:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_0249;
     L_0140:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("preCount"), H.GetMember(self, "newCount"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("preCount"), H.GetMember(self, "newCount"), Val.Out(GetLocal(L, "CallFunc_JSON_SetInt_found"), __v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_0181:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_01AF:
         goto L_035E;
     L_01B4:
-        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("preCount"), Val.Out(__v => L["CallFunc_JSON_Clear_found"] = __v) });
+        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("preCount"), Val.Out(GetLocal(L, "CallFunc_JSON_Clear_found"), __v => L["CallFunc_JSON_Clear_found"] = __v) });
     L_01EC:
         if (!(GetLocal(L, "CallFunc_JSON_Clear_found")).AsBool()) goto L_035E;
     L_01FA:
@@ -78,7 +78,7 @@ public static Val ExecuteUbergraph_card_unit_3rd_yokosuka(IHost H, Val self, Val
     L_0249:
         L["CallFunc_Multiply_IntInt_ReturnValue"] = (H.GetMember(self, "differ") * Val.Of(1));
     L_0273:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_02B6:
         goto L_0140;
     L_02BB:
@@ -86,7 +86,7 @@ public static Val ExecuteUbergraph_card_unit_3rd_yokosuka(IHost H, Val self, Val
     L_02C0:
         goto L_000A;
     L_02C5:
-        _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("preCount"), Val.Out(__v => L["CallFunc_JSON_GetInt_value_1"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found_1"] = __v) });
+        _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("preCount"), Val.Out(GetLocal(L, "CallFunc_JSON_GetInt_value_1"), __v => L["CallFunc_JSON_GetInt_value_1"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetInt_found_1"), __v => L["CallFunc_JSON_GetInt_found_1"] = __v) });
     L_0306:
         if (!(GetLocal(L, "CallFunc_JSON_GetInt_found_1")).AsBool()) goto L_035E;
     L_0314:
@@ -123,11 +123,11 @@ public static Val get_adjacent_japan_units_count(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_count = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["count"] = Val.Nothing;
+        L["count"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         __ef.Push(711);
     L_0005:
-        _ = H.Call("GetAdjacentCards", new Val[] { H.GetMember(self, "cardFunction"), self, Val.False, Val.Out(__v => L["CallFunc_GetAdjacentCards_adjacentCards"] = __v) });
+        _ = H.Call("GetAdjacentCards", new Val[] { H.GetMember(self, "cardFunction"), self, Val.False, Val.Out(GetLocal(L, "CallFunc_GetAdjacentCards_adjacentCards"), __v => L["CallFunc_GetAdjacentCards_adjacentCards"] = __v) });
     L_0034:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_004B:
@@ -143,9 +143,9 @@ public static Val get_adjacent_japan_units_count(IHost H, Val self, Val[] args)
     L_00EC:
         __ef.Push(540);
     L_00F1:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAdjacentCards_adjacentCards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAdjacentCards_adjacentCards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_012C:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0155:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool())
         {
@@ -158,9 +158,9 @@ public static Val get_adjacent_japan_units_count(IHost H, Val self, Val[] args)
             }
         }
     L_015F:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAdjacentCards_adjacentCards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAdjacentCards_adjacentCards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_019A:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "faction"), Val.Of(3), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "faction"), Val.Of(3), Val.Out(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), __v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_01CE:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_01ED:

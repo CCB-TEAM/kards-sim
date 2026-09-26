@@ -29,9 +29,9 @@ public static Val BreakRewardIntoIdAndCount(IHost H, Val self, Val[] args)
         L["InString"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_Id = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["Id"] = Val.Nothing;
+        L["Id"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_Count = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["Count"] = Val.Nothing;
+        L["Count"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         L["CallFunc_Split_ReturnValue"] = H.Call("Split", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "InString"), Val.Of(":"), GetLocal(L, "CallFunc_Split_LeftS"), GetLocal(L, "CallFunc_Split_RightS"), Val.Of(1), Val.Of(0) });
     L_0036:
@@ -76,7 +76,7 @@ public static Val ConvertJsonRewardtoClientRewardString(IHost H, Val self, Val[]
         L["InJsonRaw"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_OutReward = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["OutReward"] = Val.Nothing;
+        L["OutReward"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_Conv_StringToText_ReturnValue"] = H.Call("Conv_StringToText", new Val[] { Val.Ref("KismetTextLibrary"), GetLocal(L, "InJsonRaw") });
     L_0025:
@@ -267,13 +267,13 @@ public static Val GetNationalRewardTextAndWidgetOrTexture2D(IHost H, Val self, V
         L["InFaction"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_OutText = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["OutText"] = Val.Nothing;
+        L["OutText"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_OutWidget = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["OutWidget"] = Val.Nothing;
+        L["OutWidget"] = args.Length > 4 ? args[4].In : Val.Nothing;
         var __out_OutTex2D = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["OutTex2D"] = Val.Nothing;
+        L["OutTex2D"] = args.Length > 5 ? args[5].In : Val.Nothing;
         var __out_OutSoftTex2D = args.Length > 6 ? args[6].As<Action<Val>>() : null;
-        L["OutSoftTex2D"] = Val.Nothing;
+        L["OutSoftTex2D"] = args.Length > 6 ? args[6].In : Val.Nothing;
     L_0000:
         __ef.Push(4783);
     L_0005:
@@ -632,11 +632,11 @@ public static Val GetRewardCardDetailsByName(IHost H, Val self, Val[] args)
         L["CardName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_text = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["text"] = Val.Nothing;
+        L["text"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_icon = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["icon"] = Val.Nothing;
+        L["icon"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_bubbleString = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["bubbleString"] = Val.Nothing;
+        L["bubbleString"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
         __ef.Push(846);
     L_0005:
@@ -774,11 +774,11 @@ public static Val GetRewardCardDetailsByRarity(IHost H, Val self, Val[] args)
         L["sourceString"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_text = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["text"] = Val.Nothing;
+        L["text"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_icon = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["icon"] = Val.Nothing;
+        L["icon"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_bubbleString = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["bubbleString"] = Val.Nothing;
+        L["bubbleString"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "sourceString") });
     L_0025:
@@ -868,15 +868,15 @@ public static Val GetRewardDisplayInfo(IHost H, Val self, Val[] args)
         L["Item"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_text = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["text"] = Val.Nothing;
+        L["text"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_icon = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["icon"] = Val.Nothing;
+        L["icon"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_hideQuantity = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["hideQuantity"] = Val.Nothing;
+        L["hideQuantity"] = args.Length > 4 ? args[4].In : Val.Nothing;
         var __out_helpBubbleString = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["helpBubbleString"] = Val.Nothing;
+        L["helpBubbleString"] = args.Length > 5 ? args[5].In : Val.Nothing;
         var __out_factionSpecific = args.Length > 6 ? args[6].As<Action<Val>>() : null;
-        L["factionSpecific"] = Val.Nothing;
+        L["factionSpecific"] = args.Length > 6 ? args[6].In : Val.Nothing;
     L_0000:
         __ef.Push(5964);
     L_0005:
@@ -1402,13 +1402,13 @@ public static Val GetRewardPackInfo(IHost H, Val self, Val[] args)
         L["Item"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_cardSet = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["cardSet"] = Val.Nothing;
+        L["cardSet"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_officerPack = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["officerPack"] = Val.Nothing;
+        L["officerPack"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_icon = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["icon"] = Val.Nothing;
+        L["icon"] = args.Length > 4 ? args[4].In : Val.Nothing;
         var __out_helpBubbleString = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["helpBubbleString"] = Val.Nothing;
+        L["helpBubbleString"] = args.Length > 5 ? args[5].In : Val.Nothing;
     L_0000:
         L["texture"] = Val.Ref("pack_base");
     L_0013:
@@ -1698,9 +1698,9 @@ public static Val GetRewardPackTextureAndBubbleString(IHost H, Val self, Val[] a
         L["InOfficer"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_OutTexture = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["OutTexture"] = Val.Nothing;
+        L["OutTexture"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_OutBubbleString = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["OutBubbleString"] = Val.Nothing;
+        L["OutBubbleString"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetEnumeratorName_ReturnValue"] = H.Call("GetEnumeratorName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("ECardSetEnum"), GetLocal(L, "InSet") });
     L_002E:
@@ -1739,7 +1739,7 @@ public static Val GetRewardStaticCardName(IHost H, Val self, Val[] args)
         L["StaticCardName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_text = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["text"] = Val.Nothing;
+        L["text"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "StaticCardName") });
     L_0025:
@@ -1799,7 +1799,7 @@ public static Val GetRewardWildCardIcon(IHost H, Val self, Val[] args)
         L["cardName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_Icon = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["Icon"] = Val.Nothing;
+        L["Icon"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_Split_ReturnValue"] = H.Call("Split", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "cardName"), Val.Of("card_"), GetLocal(L, "CallFunc_Split_LeftS"), GetLocal(L, "CallFunc_Split_RightS"), Val.Of(1), Val.Of(0) });
     L_003A:
@@ -1865,9 +1865,9 @@ public static Val GetRewardWildCardText(IHost H, Val self, Val[] args)
         L["cardName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_Result = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["Result"] = Val.Nothing;
+        L["Result"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_bubbleString = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["bubbleString"] = Val.Nothing;
+        L["bubbleString"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         L["StoreHelpString"] = Val.Of("standard_wildcard");
     L_0025:
@@ -1987,9 +1987,9 @@ public static Val GetWildcardTex2D(IHost H, Val self, Val[] args)
         L["InRarity"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_OutTex2D = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["OutTex2D"] = Val.Nothing;
+        L["OutTex2D"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_OutTex2D_Big = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["OutTex2D_Big"] = Val.Nothing;
+        L["OutTex2D_Big"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
         _ = H.Call("useChinaAlternatives", new Val[] { Val.Ref("PlatformUtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_useChinaAlternatives_yes"] = __v) });
     L_0036:
@@ -2416,9 +2416,9 @@ public static Val GetWildcardTex2D_2x(IHost H, Val self, Val[] args)
         L["InFaction"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_OutWildTex2x = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["OutWildTex2x"] = Val.Nothing;
+        L["OutWildTex2x"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_OutWildTex2x_Big = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["OutWildTex2x_Big"] = Val.Nothing;
+        L["OutWildTex2x_Big"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         _ = H.Call("useChinaAlternatives", new Val[] { Val.Ref("PlatformUtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_useChinaAlternatives_yes"] = __v) });
     L_0036:
@@ -2572,27 +2572,27 @@ public static Val PrepareNationalProgressReward(IHost H, Val self, Val[] args)
         L["InCount"] = args.Length > 3 ? args[3] : Val.Nothing;
         L["__WorldContext"] = args.Length > 4 ? args[4] : Val.Nothing;
         var __out_OutImageTex2D = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["OutImageTex2D"] = Val.Nothing;
+        L["OutImageTex2D"] = args.Length > 5 ? args[5].In : Val.Nothing;
         var __out_OutBiggerImageTex2D = args.Length > 6 ? args[6].As<Action<Val>>() : null;
-        L["OutBiggerImageTex2D"] = Val.Nothing;
+        L["OutBiggerImageTex2D"] = args.Length > 6 ? args[6].In : Val.Nothing;
         var __out_OutRarityTex2D = args.Length > 7 ? args[7].As<Action<Val>>() : null;
-        L["OutRarityTex2D"] = Val.Nothing;
+        L["OutRarityTex2D"] = args.Length > 7 ? args[7].In : Val.Nothing;
         var __out_OutText = args.Length > 8 ? args[8].As<Action<Val>>() : null;
-        L["OutText"] = Val.Nothing;
+        L["OutText"] = args.Length > 8 ? args[8].In : Val.Nothing;
         var __out_OutExtraText = args.Length > 9 ? args[9].As<Action<Val>>() : null;
-        L["OutExtraText"] = Val.Nothing;
+        L["OutExtraText"] = args.Length > 9 ? args[9].In : Val.Nothing;
         var __out_OutImageSize = args.Length > 10 ? args[10].As<Action<Val>>() : null;
-        L["OutImageSize"] = Val.Nothing;
+        L["OutImageSize"] = args.Length > 10 ? args[10].In : Val.Nothing;
         var __out_OutDeckName = args.Length > 11 ? args[11].As<Action<Val>>() : null;
-        L["OutDeckName"] = Val.Nothing;
+        L["OutDeckName"] = args.Length > 11 ? args[11].In : Val.Nothing;
         var __out_OutCardNameToCreate = args.Length > 12 ? args[12].As<Action<Val>>() : null;
-        L["OutCardNameToCreate"] = Val.Nothing;
+        L["OutCardNameToCreate"] = args.Length > 12 ? args[12].In : Val.Nothing;
         var __out_OutCreateDeck = args.Length > 13 ? args[13].As<Action<Val>>() : null;
-        L["OutCreateDeck"] = Val.Nothing;
+        L["OutCreateDeck"] = args.Length > 13 ? args[13].In : Val.Nothing;
         var __out_OutCreateCard = args.Length > 14 ? args[14].As<Action<Val>>() : null;
-        L["OutCreateCard"] = Val.Nothing;
+        L["OutCreateCard"] = args.Length > 14 ? args[14].In : Val.Nothing;
         var __out_OutUseShadow = args.Length > 15 ? args[15].As<Action<Val>>() : null;
-        L["OutUseShadow"] = Val.Nothing;
+        L["OutUseShadow"] = args.Length > 15 ? args[15].In : Val.Nothing;
     L_0000:
         __ef.Push(20801);
     L_0005:

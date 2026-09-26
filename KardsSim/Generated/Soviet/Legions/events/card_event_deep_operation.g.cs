@@ -41,11 +41,11 @@ public static Val ExecuteUbergraph_card_event_deep_operation(IHost H, Val self, 
     L_000F:
         __ef.Push(446);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
         H.SetMember(self, "TmpCard", GetLocal(L, "CallFunc_Array_Get_Item"));
     L_0062:
-        _ = H.Call("IsLocatedInHand", new Val[] { H.GetMember(self, "TmpCard"), Val.Out(__v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
+        _ = H.Call("IsLocatedInHand", new Val[] { H.GetMember(self, "TmpCard"), Val.Out(GetLocal(L, "CallFunc_IsLocatedInHand_isIt"), __v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
     L_008B:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetMember(self, "TmpCard"), "side"), H.GetMember(self, "side")) == 0);
     L_00C7:
@@ -66,7 +66,7 @@ public static Val ExecuteUbergraph_card_event_deep_operation(IHost H, Val self, 
             }
         }
     L_015D:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("custom"), H.GetMember(H.GetMember(self, "TmpCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("custom"), H.GetMember(H.GetMember(self, "TmpCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_CustomAbilityAdd_qqq"), __v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_01BD:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -107,11 +107,11 @@ public static Val ExecuteUbergraph_card_event_deep_operation(IHost H, Val self, 
     L_02C1:
         goto L_028E;
     L_02C6:
-        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_unit_light_infantry"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable_1"] = __v), Val.Of(0), Val.Out(__v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID_1"] = __v) });
+        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_unit_light_infantry"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(GetLocal(L, "Temp_text_Variable_1"), __v => L["Temp_text_Variable_1"] = __v), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_SpawnCardinHandbySide_spawnedCardID_1"), __v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID_1"] = __v) });
     L_0322:
-        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_unit_light_infantry"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.Of(0), Val.Out(__v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_unit_light_infantry"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_SpawnCardinHandbySide_spawnedCardID"), __v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID"] = __v) });
     L_037E:
-        _ = H.Call("GetAllCards", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetAllCards_cards"] = __v) });
+        _ = H.Call("GetAllCards", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetAllCards_cards"), __v => L["CallFunc_GetAllCards_cards"] = __v) });
     L_03AB:
         goto L_02AA;
     L_03B0:
@@ -128,7 +128,7 @@ public static Val ExecuteUbergraph_card_event_deep_operation(IHost H, Val self, 
             }
         }
     L_03DC:
-        _ = H.Call("isBuffedByCard", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
+        _ = H.Call("isBuffedByCard", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed"), __v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
     L_040E:
         if (!(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed")).AsBool())
         {
@@ -145,7 +145,7 @@ public static Val ExecuteUbergraph_card_event_deep_operation(IHost H, Val self, 
     L_042B:
         _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetMember(self, "TmpCard"), "cardID"), H.GetMember(self, "cardID") });
     L_0477:
-        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("custom"), H.GetMember(H.GetMember(self, "TmpCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
+        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("custom"), H.GetMember(H.GetMember(self, "TmpCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(GetLocal(L, "CallFunc_CustomAbilityRemove_qqq"), __v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
     L_04D5:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

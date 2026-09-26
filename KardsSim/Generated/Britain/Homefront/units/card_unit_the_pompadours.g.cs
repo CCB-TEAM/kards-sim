@@ -34,9 +34,9 @@ public static Val ExecuteUbergraph_card_unit_the_pompadours(IHost H, Val self, V
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
+        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedInHand_isIt"), __v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
     L_001D:
-        _ = H.Call("HasBond", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_HasBond_hasIt"] = __v) });
+        _ = H.Call("HasBond", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(GetLocal(L, "CallFunc_HasBond_hasIt"), __v => L["CallFunc_HasBond_hasIt"] = __v) });
     L_0046:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_0082:
@@ -46,11 +46,11 @@ public static Val ExecuteUbergraph_card_unit_the_pompadours(IHost H, Val self, V
     L_00CE:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_1")).AsBool()) goto L_01A1;
     L_00DC:
-        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(self, "side") });
+        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_card"), __v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID"), __v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(self, "side") });
     L_011B:
-        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetLocationCardBySide_card"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
+        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetLocationCardBySide_card"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeDefense_qqq"), __v => L["CallFunc_ChangeDefense_qqq"] = __v) });
     L_0162:
-        _ = H.Call("SetCardSeen", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_SetCardSeen_qqq"] = __v) });
+        _ = H.Call("SetCardSeen", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_SetCardSeen_qqq"), __v => L["CallFunc_SetCardSeen_qqq"] = __v) });
     L_01A1:
         goto __halt;
     L_01A3:

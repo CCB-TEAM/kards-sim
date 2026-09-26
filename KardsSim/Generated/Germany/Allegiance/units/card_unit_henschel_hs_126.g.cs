@@ -27,25 +27,25 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_canIt = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["canIt"] = Val.Nothing;
+        L["canIt"] = args.Length > 0 ? args[0].In : Val.Nothing;
         var __out_reason = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["reason"] = Val.Nothing;
+        L["reason"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_reasonParam1 = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["reasonParam1"] = Val.Nothing;
+        L["reasonParam1"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_reasonParam2 = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["reasonParam2"] = Val.Nothing;
+        L["reasonParam2"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_targetedCard = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["targetedCard"] = Val.Nothing;
+        L["targetedCard"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
-        _ = H.Call("GetTargetedCard", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(__v => L["CallFunc_GetTargetedCard_hasTarget"] = __v), Val.Out(__v => L["CallFunc_GetTargetedCard_card"] = __v) });
+        _ = H.Call("GetTargetedCard", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(GetLocal(L, "CallFunc_GetTargetedCard_hasTarget"), __v => L["CallFunc_GetTargetedCard_hasTarget"] = __v), Val.Out(GetLocal(L, "CallFunc_GetTargetedCard_card"), __v => L["CallFunc_GetTargetedCard_card"] = __v) });
     L_0037:
         if (!(GetLocal(L, "CallFunc_GetTargetedCard_hasTarget")).AsBool()) goto L_011B;
     L_0045:
-        _ = H.Call("IsSameSideUnit", new Val[] { GetLocal(L, "CallFunc_GetTargetedCard_card"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
+        _ = H.Call("IsSameSideUnit", new Val[] { GetLocal(L, "CallFunc_GetTargetedCard_card"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsSameSideUnit_isIt"), __v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
     L_0077:
         if (!(GetLocal(L, "CallFunc_IsSameSideUnit_isIt")).AsBool()) goto L_011B;
     L_0085:
-        _ = H.Call("IsTank", new Val[] { GetLocal(L, "CallFunc_GetTargetedCard_card"), Val.Out(__v => L["CallFunc_IsTank_isIt"] = __v) });
+        _ = H.Call("IsTank", new Val[] { GetLocal(L, "CallFunc_GetTargetedCard_card"), Val.Out(GetLocal(L, "CallFunc_IsTank_isIt"), __v => L["CallFunc_IsTank_isIt"] = __v) });
     L_00AE:
         if (!(GetLocal(L, "CallFunc_IsTank_isIt")).AsBool()) goto L_011B;
     L_00BC:
@@ -107,7 +107,7 @@ public static Val ExecuteUbergraph_card_unit_henschel_hs_126(IHost H, Val self, 
     L_000F:
         __ef.Push(345);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "location"), H.GetMember(self, "tanklocation")) == 0);
     L_008B:
@@ -131,9 +131,9 @@ public static Val ExecuteUbergraph_card_unit_henschel_hs_126(IHost H, Val self, 
     L_009F:
         __ef.Push(826);
     L_00A4:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_00DF:
-        _ = H.Call("IsInfantry", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_IsInfantry_isIt"] = __v) });
+        _ = H.Call("IsInfantry", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_IsInfantry_isIt"), __v => L["CallFunc_IsInfantry_isIt"] = __v) });
     L_0108:
         if (!(GetLocal(L, "CallFunc_IsInfantry_isIt")).AsBool())
         {
@@ -180,11 +180,11 @@ public static Val ExecuteUbergraph_card_unit_henschel_hs_126(IHost H, Val self, 
     L_022D:
         L["CallFunc_Set_Length_ReturnValue"] = H.Call("Set_Length", new Val[] { Val.Ref("BlueprintSetLibrary"), H.GetMember(self, "typecounts") });
     L_0268:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Set_Length_ReturnValue"), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Set_Length_ReturnValue"), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_02B3:
         L["CallFunc_Set_Length_ReturnValue"] = H.Call("Set_Length", new Val[] { Val.Ref("BlueprintSetLibrary"), H.GetMember(self, "typecounts") });
     L_02EE:
-        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Set_Length_ReturnValue"), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
+        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Set_Length_ReturnValue"), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeDefense_qqq"), __v => L["CallFunc_ChangeDefense_qqq"] = __v) });
     L_0339:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -197,9 +197,9 @@ public static Val ExecuteUbergraph_card_unit_henschel_hs_126(IHost H, Val self, 
             default: goto __halt;
         }
     L_033A:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0375:
-        _ = H.Call("IsFighter", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_IsFighter_isIt"] = __v) });
+        _ = H.Call("IsFighter", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_IsFighter_isIt"), __v => L["CallFunc_IsFighter_isIt"] = __v) });
     L_039E:
         if (!(GetLocal(L, "CallFunc_IsFighter_isIt")).AsBool())
         {
@@ -230,9 +230,9 @@ public static Val ExecuteUbergraph_card_unit_henschel_hs_126(IHost H, Val self, 
             default: goto __halt;
         }
     L_03EF:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_042A:
-        _ = H.Call("IsBomber", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_IsBomber_isIt"] = __v) });
+        _ = H.Call("IsBomber", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_IsBomber_isIt"), __v => L["CallFunc_IsBomber_isIt"] = __v) });
     L_0453:
         if (!(GetLocal(L, "CallFunc_IsBomber_isIt")).AsBool())
         {
@@ -263,9 +263,9 @@ public static Val ExecuteUbergraph_card_unit_henschel_hs_126(IHost H, Val self, 
             default: goto __halt;
         }
     L_04A4:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_04DF:
-        _ = H.Call("IsArtillery", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_IsArtillery_isIt"] = __v) });
+        _ = H.Call("IsArtillery", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_IsArtillery_isIt"), __v => L["CallFunc_IsArtillery_isIt"] = __v) });
     L_0508:
         if (!(GetLocal(L, "CallFunc_IsArtillery_isIt")).AsBool())
         {
@@ -316,7 +316,7 @@ public static Val ExecuteUbergraph_card_unit_henschel_hs_126(IHost H, Val self, 
     L_05A9:
         H.SetMember(self, "tanklocation", H.GetMember(H.GetMember(self, "tempCard"), "location"));
     L_05DA:
-        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
+        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), __v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
     L_0612:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_0629:

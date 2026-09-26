@@ -27,21 +27,21 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_canIt = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["canIt"] = Val.Nothing;
+        L["canIt"] = args.Length > 0 ? args[0].In : Val.Nothing;
         var __out_reason = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["reason"] = Val.Nothing;
+        L["reason"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_reasonParam1 = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["reasonParam1"] = Val.Nothing;
+        L["reasonParam1"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_reasonParam2 = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["reasonParam2"] = Val.Nothing;
+        L["reasonParam2"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_targetedCard = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["targetedCard"] = Val.Nothing;
+        L["targetedCard"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
-        _ = H.Call("GetTargetedCard", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(__v => L["CallFunc_GetTargetedCard_hasTarget"] = __v), Val.Out(__v => L["CallFunc_GetTargetedCard_card"] = __v) });
+        _ = H.Call("GetTargetedCard", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(GetLocal(L, "CallFunc_GetTargetedCard_hasTarget"), __v => L["CallFunc_GetTargetedCard_hasTarget"] = __v), Val.Out(GetLocal(L, "CallFunc_GetTargetedCard_card"), __v => L["CallFunc_GetTargetedCard_card"] = __v) });
     L_0037:
         if (!(GetLocal(L, "CallFunc_GetTargetedCard_hasTarget")).AsBool()) goto L_00E4;
     L_0045:
-        _ = H.Call("IsSameSideUnit", new Val[] { GetLocal(L, "CallFunc_GetTargetedCard_card"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
+        _ = H.Call("IsSameSideUnit", new Val[] { GetLocal(L, "CallFunc_GetTargetedCard_card"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsSameSideUnit_isIt"), __v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
     L_0077:
         if (!(GetLocal(L, "CallFunc_IsSameSideUnit_isIt")).AsBool()) goto L_00E4;
     L_0085:
@@ -100,7 +100,7 @@ public static Val ExecuteUbergraph_card_event_rapid_engagement(IHost H, Val self
     L_0035:
         H.SetMember(self, "Target Card", H.GetVar("K2Node_Event_targetCard"));
     L_0048:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(H.GetMember(self, "Target Card"), "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(H.GetMember(self, "Target Card"), "location"), Val.Of(7), Val.Out(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), __v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_007C:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_009B:
@@ -114,9 +114,9 @@ public static Val ExecuteUbergraph_card_event_rapid_engagement(IHost H, Val self
     L_00DB:
         H.SetMember(self, "inFront", Val.True);
     L_00E6:
-        _ = H.Call("RemoveCardFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetMember(self, "Target Card"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RemoveCardFromBoard_qqq"] = __v) });
+        _ = H.Call("RemoveCardFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetMember(self, "Target Card"), "cardID"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_RemoveCardFromBoard_qqq"), __v => L["CallFunc_RemoveCardFromBoard_qqq"] = __v) });
     L_013B:
-        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.GetMember(self, "inFront"), H.GetMember(H.GetMember(self, "Target Card"), "name"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.True, Val.Of(-1), H.GetMember(H.GetMember(self, "Target Card"), "salvageFaction"), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.GetMember(self, "inFront"), H.GetMember(H.GetMember(self, "Target Card"), "name"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.True, Val.Of(-1), H.GetMember(H.GetMember(self, "Target Card"), "salvageFaction"), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnCardonBattlefield_spawnedCardID"), __v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
     L_01D2:
         goto __halt;
     L_01D4:

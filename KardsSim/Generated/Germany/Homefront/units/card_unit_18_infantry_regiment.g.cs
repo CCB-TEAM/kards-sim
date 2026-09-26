@@ -34,19 +34,19 @@ public static Val ExecuteUbergraph_card_unit_18_infantry_regiment(IHost H, Val s
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocationFull", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(7), Val.Out(__v => L["CallFunc_IsLocationFull_isFull"] = __v) });
+        _ = H.Call("IsLocationFull", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(7), Val.Out(GetLocal(L, "CallFunc_IsLocationFull_isFull"), __v => L["CallFunc_IsLocationFull_isFull"] = __v) });
     L_0039:
         if (!(GetLocal(L, "CallFunc_IsLocationFull_isFull")).AsBool()) goto L_004C;
     L_0047:
         goto L_00DF;
     L_004C:
-        _ = H.Call("MoveUnitFromSupportToFrontLine", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_MoveUnitFromSupportToFrontLine_qqq"] = __v) });
+        _ = H.Call("MoveUnitFromSupportToFrontLine", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_MoveUnitFromSupportToFrontLine_qqq"), __v => L["CallFunc_MoveUnitFromSupportToFrontLine_qqq"] = __v) });
     L_0083:
         goto L_00DF;
     L_0088:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_009B:
-        _ = H.Call("DoesSideControlTheFrontline", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(__v => L["CallFunc_DoesSideControlTheFrontline_doesHe"] = __v) });
+        _ = H.Call("DoesSideControlTheFrontline", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(GetLocal(L, "CallFunc_DoesSideControlTheFrontline_doesHe"), __v => L["CallFunc_DoesSideControlTheFrontline_doesHe"] = __v) });
     L_00D1:
         if (!(GetLocal(L, "CallFunc_DoesSideControlTheFrontline_doesHe")).AsBool()) goto L_000A;
     L_00DF:

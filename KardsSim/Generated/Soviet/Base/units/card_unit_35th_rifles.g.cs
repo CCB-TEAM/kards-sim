@@ -38,25 +38,25 @@ public static Val ExecuteUbergraph_card_unit_35th_rifles(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("JSON_GetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("friendlyunitdestroyed"), Val.Out(__v => L["CallFunc_JSON_GetBool_value_1"] = __v), Val.Out(__v => L["CallFunc_JSON_GetBool_found_1"] = __v) });
+        _ = H.Call("JSON_GetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("friendlyunitdestroyed"), Val.Out(GetLocal(L, "CallFunc_JSON_GetBool_value_1"), __v => L["CallFunc_JSON_GetBool_value_1"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetBool_found_1"), __v => L["CallFunc_JSON_GetBool_found_1"] = __v) });
     L_0058:
         if (!(GetLocal(L, "CallFunc_JSON_GetBool_value_1")).AsBool()) goto L_03A1;
     L_0066:
-        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
+        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedInHand_isIt"), __v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
     L_0079:
         if (!(GetLocal(L, "CallFunc_IsLocatedInHand_isIt")).AsBool()) goto L_03A1;
     L_0087:
-        _ = H.Call("getTotalKreditCost", new Val[] { self, Val.Out(__v => L["CallFunc_getTotalKreditCost_totalKreditCost"] = __v) });
+        _ = H.Call("getTotalKreditCost", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost"), __v => L["CallFunc_getTotalKreditCost_totalKreditCost"] = __v) });
     L_009A:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost"), Val.Of(0)) > 0);
     L_00BC:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_03A1;
     L_00CA:
-        _ = H.Call("getTotalKreditCost", new Val[] { self, Val.Out(__v => L["CallFunc_getTotalKreditCost_totalKreditCost_1"] = __v) });
+        _ = H.Call("getTotalKreditCost", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost_1"), __v => L["CallFunc_getTotalKreditCost_totalKreditCost_1"] = __v) });
     L_00DD:
         L["CallFunc_Multiply_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost_1") * Val.Of(-1));
     L_0107:
-        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeKreditCost_qqq"] = __v) });
+        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeKreditCost_qqq"), __v => L["CallFunc_ChangeKreditCost_qqq"] = __v) });
     L_014A:
         goto L_03A1;
     L_014F:
@@ -64,7 +64,7 @@ public static Val ExecuteUbergraph_card_unit_35th_rifles(IHost H, Val self, Val[
     L_015D:
         goto L_03A1;
     L_0162:
-        _ = H.Call("JSON_GetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("friendlyunitdestroyed"), Val.Out(__v => L["CallFunc_JSON_GetBool_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetBool_found"] = __v) });
+        _ = H.Call("JSON_GetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("friendlyunitdestroyed"), Val.Out(GetLocal(L, "CallFunc_JSON_GetBool_value"), __v => L["CallFunc_JSON_GetBool_value"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetBool_found"), __v => L["CallFunc_JSON_GetBool_found"] = __v) });
     L_01B0:
         if (!(GetLocal(L, "CallFunc_JSON_GetBool_value")).AsBool()) goto L_01C3;
     L_01BE:
@@ -74,25 +74,25 @@ public static Val ExecuteUbergraph_card_unit_35th_rifles(IHost H, Val self, Val[
     L_01FF:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_03A1;
     L_020D:
-        _ = H.Call("JSON_SetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("friendlyunitdestroyed"), Val.True, Val.Out(__v => L["CallFunc_JSON_SetBool_found"] = __v) });
+        _ = H.Call("JSON_SetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("friendlyunitdestroyed"), Val.True, Val.Out(GetLocal(L, "CallFunc_JSON_SetBool_found"), __v => L["CallFunc_JSON_SetBool_found"] = __v) });
     L_0253:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_0281:
         goto L_0066;
     L_0286:
-        _ = H.Call("JSON_SetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("friendlyunitdestroyed"), Val.False, Val.Out(__v => L["CallFunc_JSON_SetBool_found_1"] = __v) });
+        _ = H.Call("JSON_SetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("friendlyunitdestroyed"), Val.False, Val.Out(GetLocal(L, "CallFunc_JSON_SetBool_found_1"), __v => L["CallFunc_JSON_SetBool_found_1"] = __v) });
     L_02CC:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_02FA:
-        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedInHand_isIt_1"] = __v) });
+        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedInHand_isIt_1"), __v => L["CallFunc_IsLocatedInHand_isIt_1"] = __v) });
     L_030D:
         if (!(GetLocal(L, "CallFunc_IsLocatedInHand_isIt_1")).AsBool()) goto L_03A1;
     L_031B:
-        _ = H.Call("isBuffedByCard", new Val[] { self, H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
+        _ = H.Call("isBuffedByCard", new Val[] { self, H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed"), __v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
     L_0345:
         if (!(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed")).AsBool()) goto L_03A1;
     L_0353:
-        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(__v => L["CallFunc_ChangeKreditCost_qqq_1"] = __v) });
+        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeKreditCost_qqq_1"), __v => L["CallFunc_ChangeKreditCost_qqq_1"] = __v) });
     L_0392:
         goto L_03A1;
     L_0397:

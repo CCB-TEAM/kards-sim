@@ -42,13 +42,13 @@ public static Val ExecuteUbergraph_card_event_campaign_alamein3_spring_the_reser
     L_000F:
         __ef.Push(255);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
         H.SetMember(self, "tmpCard", GetLocal(L, "CallFunc_Array_Get_Item"));
     L_0062:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_009D:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "faction"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "faction"), Val.Of(7), Val.Out(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), __v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_00D1:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_00F0:
@@ -87,7 +87,7 @@ public static Val ExecuteUbergraph_card_event_campaign_alamein3_spring_the_reser
     L_01CA:
         goto L_000F;
     L_01CF:
-        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "tmpCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "tmpCard"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_01F8:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool())
         {
@@ -101,7 +101,7 @@ public static Val ExecuteUbergraph_card_event_campaign_alamein3_spring_the_reser
             }
         }
     L_0202:
-        _ = H.Call("getTotalKreditCost", new Val[] { H.GetMember(self, "tmpCard"), Val.Out(__v => L["CallFunc_getTotalKreditCost_totalKreditCost"] = __v) });
+        _ = H.Call("getTotalKreditCost", new Val[] { H.GetMember(self, "tmpCard"), Val.Out(GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost"), __v => L["CallFunc_getTotalKreditCost_totalKreditCost"] = __v) });
     L_022B:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost"), Val.Of(0)) > 0);
     L_024D:
@@ -117,11 +117,11 @@ public static Val ExecuteUbergraph_card_event_campaign_alamein3_spring_the_reser
             }
         }
     L_0257:
-        _ = H.Call("getTotalKreditCost", new Val[] { H.GetMember(self, "tmpCard"), Val.Out(__v => L["CallFunc_getTotalKreditCost_totalKreditCost"] = __v) });
+        _ = H.Call("getTotalKreditCost", new Val[] { H.GetMember(self, "tmpCard"), Val.Out(GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost"), __v => L["CallFunc_getTotalKreditCost_totalKreditCost"] = __v) });
     L_0280:
         L["CallFunc_Multiply_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost") * Val.Of(-1));
     L_02AA:
-        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tmpCard"), H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeKreditCost_qqq"] = __v) });
+        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tmpCard"), H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeKreditCost_qqq"), __v => L["CallFunc_ChangeKreditCost_qqq"] = __v) });
     L_02F5:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -138,11 +138,11 @@ public static Val ExecuteUbergraph_card_event_campaign_alamein3_spring_the_reser
     L_0312:
         __ef.Push(1001);
     L_0317:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInHandBySide_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInHandBySide_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_0352:
         H.SetMember(self, "tmpCard", GetLocal(L, "CallFunc_Array_Get_Item_1"));
     L_0365:
-        _ = H.Call("isBuffedByCard", new Val[] { H.GetMember(self, "tmpCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
+        _ = H.Call("isBuffedByCard", new Val[] { H.GetMember(self, "tmpCard"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed"), __v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
     L_0397:
         if (!(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed")).AsBool())
         {
@@ -156,7 +156,7 @@ public static Val ExecuteUbergraph_card_event_campaign_alamein3_spring_the_reser
             }
         }
     L_03A1:
-        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tmpCard"), H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(__v => L["CallFunc_ChangeKreditCost_qqq_1"] = __v) });
+        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tmpCard"), H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeKreditCost_qqq_1"), __v => L["CallFunc_ChangeKreditCost_qqq_1"] = __v) });
     L_03E8:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -197,7 +197,7 @@ public static Val ExecuteUbergraph_card_event_campaign_alamein3_spring_the_reser
     L_04E7:
         goto L_042E;
     L_04EC:
-        _ = H.Call("GetCardsInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetCardsInHandBySide_cards"] = __v) });
+        _ = H.Call("GetCardsInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), __v => L["CallFunc_GetCardsInHandBySide_cards"] = __v) });
     L_0522:
         L["Temp_int_Loop_Counter_Variable_1"] = Val.Of(0);
     L_0539:
@@ -221,7 +221,7 @@ public static Val ExecuteUbergraph_card_event_campaign_alamein3_spring_the_reser
             }
         }
     L_05B6:
-        _ = H.Call("GetCardsInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetCardsInHandBySide_cards_1"] = __v) });
+        _ = H.Call("GetCardsInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetCardsInHandBySide_cards_1"), __v => L["CallFunc_GetCardsInHandBySide_cards_1"] = __v) });
     L_05EC:
         goto L_04B9;
     L_05F1:

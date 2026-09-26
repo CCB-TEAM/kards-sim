@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_unit_royal_sussex_regiment(IHost H, Val 
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_001D:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_0059:
@@ -46,7 +46,7 @@ public static Val ExecuteUbergraph_card_unit_royal_sussex_regiment(IHost H, Val 
     L_00CD:
         if (!(GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue")).AsBool()) goto L_0141;
     L_00DB:
-        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckBySide_cardsIDs"] = __v), Val.Of(0.4f) });
+        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DrawCardsFromDeckBySide_cardsIDs"), __v => L["CallFunc_DrawCardsFromDeckBySide_cardsIDs"] = __v), Val.Of(0.4f) });
     L_013C:
         goto L_01E9;
     L_0141:
@@ -54,7 +54,7 @@ public static Val ExecuteUbergraph_card_unit_royal_sussex_regiment(IHost H, Val 
     L_0181:
         if (!(GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue_1")).AsBool()) goto L_01E9;
     L_018F:
-        _ = H.Call("GiveKreditsBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Of(1), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), Val.Out(__v => L["CallFunc_GiveKreditsBySide_qqq"] = __v) });
+        _ = H.Call("GiveKreditsBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Of(1), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), Val.Out(GetLocal(L, "CallFunc_GiveKreditsBySide_qqq"), __v => L["CallFunc_GiveKreditsBySide_qqq"] = __v) });
     L_01E9:
         goto __halt;
     L_01EB:
@@ -84,11 +84,11 @@ public static Val OnOtherCardDealDamageAddDamage(IHost H, Val self, Val[] args)
         L["fromAttack"] = args.Length > 3 ? args[3] : Val.Nothing;
         L["isDefenderDamage"] = args.Length > 4 ? args[4] : Val.Nothing;
         var __out_damageToAdd = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["damageToAdd"] = Val.Nothing;
+        L["damageToAdd"] = args.Length > 5 ? args[5].In : Val.Nothing;
         var __out_reRunAtEnd = args.Length > 6 ? args[6].As<Action<Val>>() : null;
-        L["reRunAtEnd"] = Val.Nothing;
+        L["reRunAtEnd"] = args.Length > 6 ? args[6].In : Val.Nothing;
     L_0000:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0013:
         L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "cardDealingDamage"), "name"), Val.Name("card_event_blast")) == 0);
     L_0053:

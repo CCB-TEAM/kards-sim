@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_unit_5th_rangers(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("WhichChooseOne", new Val[] { self, Val.Out(__v => L["CallFunc_WhichChooseOne_Branches"] = __v) });
+        _ = H.Call("WhichChooseOne", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_WhichChooseOne_Branches"), __v => L["CallFunc_WhichChooseOne_Branches"] = __v) });
     L_001D:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_WhichChooseOne_Branches"), Val.Of(0)) != 0);
     L_003C:
@@ -50,9 +50,9 @@ public static Val ExecuteUbergraph_card_unit_5th_rangers(IHost H, Val self, Val[
     L_00B4:
         goto L_0137;
     L_00B9:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(4), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(4), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_00F8:
-        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(4), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
+        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(4), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeDefense_qqq"), __v => L["CallFunc_ChangeDefense_qqq"] = __v) });
     L_0137:
         goto __halt;
     L_0139:

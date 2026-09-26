@@ -40,9 +40,9 @@ public static Val ExecuteUbergraph_card_unit_4th_alabama(IHost H, Val self, Val[
     L_000F:
         __ef.Push(184);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "side"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), __v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_008A:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_00A9:
@@ -70,7 +70,7 @@ public static Val ExecuteUbergraph_card_unit_4th_alabama(IHost H, Val self, Val[
     L_0187:
         goto L_000F;
     L_018C:
-        _ = H.Call("SetCardSeen", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_SetCardSeen_qqq"] = __v) });
+        _ = H.Call("SetCardSeen", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_SetCardSeen_qqq"), __v => L["CallFunc_SetCardSeen_qqq"] = __v) });
     L_01CB:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -80,7 +80,7 @@ public static Val ExecuteUbergraph_card_unit_4th_alabama(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_01CC:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0207:
         _ = H.Call("AddAttackUntilEndOfTurn", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), H.GetMember(self, "cardID"), Val.Of(1) });
     L_0242:
@@ -102,11 +102,11 @@ public static Val ExecuteUbergraph_card_unit_4th_alabama(IHost H, Val self, Val[
     L_027B:
         L["Temp_text_Variable"] = Val.Of("4th ALABAMA: +1 attack until end of turn");
     L_02DD:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_02F0:
-        _ = H.Call("ShowNotification", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(__v => L["Temp_text_Variable"] = __v) });
+        _ = H.Call("ShowNotification", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v) });
     L_0326:
-        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
+        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), __v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
     L_0354:
         goto L_025F;
     L_0359:

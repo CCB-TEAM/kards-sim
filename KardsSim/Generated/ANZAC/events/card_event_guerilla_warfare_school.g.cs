@@ -44,15 +44,15 @@ public static Val ExecuteUbergraph_card_event_guerilla_warfare_school(IHost H, V
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
+        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedInHand_isIt"), __v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedInHand_isIt")).AsBool()) goto L_0386;
     L_002B:
-        _ = H.Call("isBuffedByCard", new Val[] { self, H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
+        _ = H.Call("isBuffedByCard", new Val[] { self, H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed"), __v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
     L_0055:
         if (!(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed")).AsBool()) goto L_00E9;
     L_0063:
-        _ = H.Call("GetRightMostCardInHand", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(__v => L["CallFunc_GetRightMostCardInHand_WasFound"] = __v), Val.Out(__v => L["CallFunc_GetRightMostCardInHand_RightMostCard"] = __v) });
+        _ = H.Call("GetRightMostCardInHand", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(GetLocal(L, "CallFunc_GetRightMostCardInHand_WasFound"), __v => L["CallFunc_GetRightMostCardInHand_WasFound"] = __v), Val.Out(GetLocal(L, "CallFunc_GetRightMostCardInHand_RightMostCard"), __v => L["CallFunc_GetRightMostCardInHand_RightMostCard"] = __v) });
     L_009A:
         L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_GetRightMostCardInHand_RightMostCard"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_00D6:
@@ -60,23 +60,23 @@ public static Val ExecuteUbergraph_card_event_guerilla_warfare_school(IHost H, V
     L_00E4:
         goto L_0386;
     L_00E9:
-        _ = H.Call("GetRightMostCardInHand", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(__v => L["CallFunc_GetRightMostCardInHand_WasFound"] = __v), Val.Out(__v => L["CallFunc_GetRightMostCardInHand_RightMostCard"] = __v) });
+        _ = H.Call("GetRightMostCardInHand", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(GetLocal(L, "CallFunc_GetRightMostCardInHand_WasFound"), __v => L["CallFunc_GetRightMostCardInHand_WasFound"] = __v), Val.Out(GetLocal(L, "CallFunc_GetRightMostCardInHand_RightMostCard"), __v => L["CallFunc_GetRightMostCardInHand_RightMostCard"] = __v) });
     L_0120:
         L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_GetRightMostCardInHand_RightMostCard"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_015C:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_0386;
     L_016A:
-        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(-1), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeKreditCost_qqq_1"] = __v) });
+        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(-1), Val.Of(0), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeKreditCost_qqq_1"), __v => L["CallFunc_ChangeKreditCost_qqq_1"] = __v) });
     L_01A9:
         goto L_0386;
     L_01AE:
-        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(__v => L["CallFunc_ChangeKreditCost_qqq"] = __v) });
+        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeKreditCost_qqq"), __v => L["CallFunc_ChangeKreditCost_qqq"] = __v) });
     L_01ED:
         goto L_0386;
     L_01F2:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_0205:
-        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
+        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), __v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
     L_023D:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards") });
     L_0278:
@@ -84,7 +84,7 @@ public static Val ExecuteUbergraph_card_event_guerilla_warfare_school(IHost H, V
     L_029A:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_0386;
     L_02A8:
-        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v), Val.False, Val.Out(__v => L["CallFunc_GetRandomCard_randomCard"] = __v) });
+        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), __v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v), Val.False, Val.Out(GetLocal(L, "CallFunc_GetRandomCard_randomCard"), __v => L["CallFunc_GetRandomCard_randomCard"] = __v) });
     L_02DF:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "CallFunc_GetRandomCard_randomCard") });
     L_02FC:
@@ -389,9 +389,9 @@ public static Val ShouldHighlightInHand(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_shouldHighlight = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["shouldHighlight"] = Val.Nothing;
+        L["shouldHighlight"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
-        _ = H.Call("GetRightMostCardInHand", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(__v => L["CallFunc_GetRightMostCardInHand_WasFound"] = __v), Val.Out(__v => L["CallFunc_GetRightMostCardInHand_RightMostCard"] = __v) });
+        _ = H.Call("GetRightMostCardInHand", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(GetLocal(L, "CallFunc_GetRightMostCardInHand_WasFound"), __v => L["CallFunc_GetRightMostCardInHand_WasFound"] = __v), Val.Out(GetLocal(L, "CallFunc_GetRightMostCardInHand_RightMostCard"), __v => L["CallFunc_GetRightMostCardInHand_RightMostCard"] = __v) });
     L_0037:
         L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_GetRightMostCardInHand_RightMostCard"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_0073:

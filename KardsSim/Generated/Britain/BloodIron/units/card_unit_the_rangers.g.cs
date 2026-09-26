@@ -85,9 +85,9 @@ public static Val OnOtherCardDealDamageAddDamage(IHost H, Val self, Val[] args)
         L["fromAttack"] = args.Length > 3 ? args[3] : Val.Nothing;
         L["isDefenderDamage"] = args.Length > 4 ? args[4] : Val.Nothing;
         var __out_damageToAdd = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["damageToAdd"] = Val.Nothing;
+        L["damageToAdd"] = args.Length > 5 ? args[5].In : Val.Nothing;
         var __out_reRunAtEnd = args.Length > 6 ? args[6].As<Action<Val>>() : null;
-        L["reRunAtEnd"] = Val.Nothing;
+        L["reRunAtEnd"] = args.Length > 6 ? args[6].In : Val.Nothing;
     L_0000:
         L["CallFunc_Not_PreBool_ReturnValue"] = H.Call("Not_PreBool", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "isDefenderDamage") });
     L_001D:
@@ -95,13 +95,13 @@ public static Val OnOtherCardDealDamageAddDamage(IHost H, Val self, Val[] args)
     L_003A:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "damage"), Val.Of(0)) > 0);
     L_005C:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "cardDealingDamage"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "cardDealingDamage"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0085:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "cardDealingDamage"), "side"), H.GetMember(self, "side")) == 0);
     L_00C1:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool());
     L_00E7:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_00FA:
         L["CallFunc_BooleanAND_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_0120:

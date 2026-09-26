@@ -34,11 +34,11 @@ public static Val ExecuteUbergraph_card_event_test_resistance2(IHost H, Val self
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_001D:
-        _ = H.Call("SpawnCardInDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Name("card_event_resistance_new"), H.GetMember(self, "cardID"), Val.Of(2), Val.Of(0), Val.False, Val.False, Val.False, Val.False, Val.True, Val.Out(__v => L["CallFunc_SpawnCardInDeckBySide_spawnedCardIDs"] = __v) });
+        _ = H.Call("SpawnCardInDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Name("card_event_resistance_new"), H.GetMember(self, "cardID"), Val.Of(2), Val.Of(0), Val.False, Val.False, Val.False, Val.False, Val.True, Val.Out(GetLocal(L, "CallFunc_SpawnCardInDeckBySide_spawnedCardIDs"), __v => L["CallFunc_SpawnCardInDeckBySide_spawnedCardIDs"] = __v) });
     L_0075:
-        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
+        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DrawCardsFromDeckbySide_cardsIDs"), __v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
     L_00C0:
         goto __halt;
     L_00C2:

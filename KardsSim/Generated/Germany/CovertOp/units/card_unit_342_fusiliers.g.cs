@@ -40,7 +40,7 @@ public static Val ExecuteUbergraph_card_unit_342_fusiliers(IHost H, Val self, Va
     L_000F:
         __ef.Push(235);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
         H.SetMember(self, "tempCard", GetLocal(L, "CallFunc_Array_Get_Item"));
     L_0062:
@@ -57,7 +57,7 @@ public static Val ExecuteUbergraph_card_unit_342_fusiliers(IHost H, Val self, Va
             }
         }
     L_0089:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(H.GetMember(self, "tempCard"), "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(H.GetMember(self, "tempCard"), "location"), Val.Of(7), Val.Out(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), __v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_00BD:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_00DC:
@@ -94,7 +94,7 @@ public static Val ExecuteUbergraph_card_unit_342_fusiliers(IHost H, Val self, Va
     L_01B6:
         goto L_000F;
     L_01BB:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Of(2), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Of(2), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_0202:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -112,7 +112,7 @@ public static Val ExecuteUbergraph_card_unit_342_fusiliers(IHost H, Val self, Va
     L_0236:
         goto L_0203;
     L_023B:
-        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
+        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), __v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
     L_0269:
         goto L_021F;
     L_026E:

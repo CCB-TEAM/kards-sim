@@ -45,7 +45,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
     L_000F:
         __ef.Push(468);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "side")) == 0);
     L_008B:
@@ -61,9 +61,9 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_0095:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_00D0:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Of("ignoreCantAttack_location"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt_1"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Of("ignoreCantAttack_location"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt_1"), __v => L["CallFunc_HasCustomAbilityFromCard_doesIt_1"] = __v) });
     L_011D:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt_1")).AsBool())
         {
@@ -77,9 +77,9 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_0127:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0162:
-        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("ignoreCantAttack_location"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
+        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("ignoreCantAttack_location"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(GetLocal(L, "CallFunc_CustomAbilityRemove_qqq"), __v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
     L_01D3:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -118,7 +118,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
     L_02BB:
         goto L_0219;
     L_02C0:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1"), __v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_02D3:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1")).AsBool())
         {
@@ -132,7 +132,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_02DD:
-        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
+        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), __v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
     L_030B:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_0322:
@@ -158,7 +158,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
     L_03BF:
         __ef.Push(1268);
     L_03C4:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_03FF:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "side")) == 0);
     L_043B:
@@ -174,9 +174,9 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_0445:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_0480:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("ignoreCantAttack_location"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq_1"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("ignoreCantAttack_location"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_CustomAbilityAdd_qqq_1"), __v => L["CallFunc_CustomAbilityAdd_qqq_1"] = __v) });
     L_04F3:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -193,7 +193,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
     L_0539:
         goto L_0339;
     L_053E:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_4"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_4"), __v => L["CallFunc_IsLocatedOnBoard_isIt_4"] = __v) });
     L_0551:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_4")).AsBool())
         {
@@ -207,7 +207,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_055B:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0584:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool())
         {
@@ -221,7 +221,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_058E:
-        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_05B7:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool())
         {
@@ -249,7 +249,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_0607:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("ignoreCantAttack_location"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("ignoreCantAttack_location"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_CustomAbilityAdd_qqq"), __v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_067A:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -260,13 +260,13 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             default: goto __halt;
         }
     L_067B:
-        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllUnitsOnBoard_cards_1"] = __v) });
+        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards_1"), __v => L["CallFunc_GetAllUnitsOnBoard_cards_1"] = __v) });
     L_06A9:
         L["Temp_int_Loop_Counter_Variable_1"] = Val.Of(0);
     L_06C0:
         goto L_02A4;
     L_06C5:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_2"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_2"), __v => L["CallFunc_IsLocatedOnBoard_isIt_2"] = __v) });
     L_06D8:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_2")).AsBool())
         {
@@ -280,7 +280,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_06E2:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_3"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_3"), __v => L["CallFunc_IsLocatedOnBoard_isIt_3"] = __v) });
     L_070B:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_3")).AsBool())
         {
@@ -294,7 +294,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_0715:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), Val.Of("ignoreCantAttack_location"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), Val.Of("ignoreCantAttack_location"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt"), __v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_0762:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt")).AsBool())
         {
@@ -308,7 +308,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_076C:
-        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("ignoreCantAttack_location"), H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq_1"] = __v) });
+        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("ignoreCantAttack_location"), H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(GetLocal(L, "CallFunc_CustomAbilityRemove_qqq_1"), __v => L["CallFunc_CustomAbilityRemove_qqq_1"] = __v) });
     L_07DD:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -319,7 +319,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             default: goto __halt;
         }
     L_07DE:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_5"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_5"), __v => L["CallFunc_IsLocatedOnBoard_isIt_5"] = __v) });
     L_07F1:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_5")).AsBool())
         {
@@ -333,7 +333,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_07FB:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_card"), Val.Of("ignoreCantAttack_location"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt_2"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_card"), Val.Of("ignoreCantAttack_location"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt_2"), __v => L["CallFunc_HasCustomAbilityFromCard_doesIt_2"] = __v) });
     L_0848:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt_2")).AsBool())
         {
@@ -347,7 +347,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_0852:
-        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("ignoreCantAttack_location"), H.GetMember(H.GetVar("K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq_2"] = __v) });
+        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("ignoreCantAttack_location"), H.GetMember(H.GetVar("K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(GetLocal(L, "CallFunc_CustomAbilityRemove_qqq_2"), __v => L["CallFunc_CustomAbilityRemove_qqq_2"] = __v) });
     L_08C3:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

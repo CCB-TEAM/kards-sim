@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_event_resistance(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("WhichChooseOne", new Val[] { self, Val.Out(__v => L["CallFunc_WhichChooseOne_Branches"] = __v) });
+        _ = H.Call("WhichChooseOne", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_WhichChooseOne_Branches"), __v => L["CallFunc_WhichChooseOne_Branches"] = __v) });
     L_001D:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_WhichChooseOne_Branches"), Val.Of(0)) != 0);
     L_003C:
@@ -46,15 +46,15 @@ public static Val ExecuteUbergraph_card_event_resistance(IHost H, Val self, Val[
     L_0077:
         goto L_0184;
     L_007C:
-        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(self, "side") });
+        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_card"), __v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID"), __v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(self, "side") });
     L_00BB:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetLocationCardBySide_card"), Val.Of(1), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetLocationCardBySide_card"), Val.Of(1), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DamageCard_targetDestroyed"), __v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_0102:
         goto L_0184;
     L_0107:
-        _ = H.Call("GetDeckByside", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetDeckByside_deckCardIDs"] = __v) });
+        _ = H.Call("GetDeckByside", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs"), __v => L["CallFunc_GetDeckByside_deckCardIDs"] = __v) });
     L_013D:
-        _ = H.Call("DiscardCardFromDeck", new Val[] { H.GetMember(self, "cardFunction"), H.ArrayGet(GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs"), (int)(Val.Of(0)).AsInt()), H.GetMember(self, "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_DiscardCardFromDeck_success"] = __v) });
+        _ = H.Call("DiscardCardFromDeck", new Val[] { H.GetMember(self, "cardFunction"), H.ArrayGet(GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs"), (int)(Val.Of(0)).AsInt()), H.GetMember(self, "cardID"), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DiscardCardFromDeck_success"), __v => L["CallFunc_DiscardCardFromDeck_success"] = __v) });
     L_0184:
         goto __halt;
     L_0186:

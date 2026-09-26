@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_unit_m24_chaffee(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("SpawnNextToCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Name("card_unit_m24_chaffee"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_SpawnNextToCard_spawnedCardID"] = __v), Val.False, Val.False, H.GetMember(self, "salvageFaction"), Val.False });
+        _ = H.Call("SpawnNextToCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Name("card_unit_m24_chaffee"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_SpawnNextToCard_spawnedCardID"), __v => L["CallFunc_SpawnNextToCard_spawnedCardID"] = __v), Val.False, Val.False, H.GetMember(self, "salvageFaction"), Val.False });
     L_0062:
         goto __halt;
     L_0064:

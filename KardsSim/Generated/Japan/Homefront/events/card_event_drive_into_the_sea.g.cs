@@ -27,21 +27,21 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_canIt = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["canIt"] = Val.Nothing;
+        L["canIt"] = args.Length > 0 ? args[0].In : Val.Nothing;
         var __out_reason = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["reason"] = Val.Nothing;
+        L["reason"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_reasonParam1 = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["reasonParam1"] = Val.Nothing;
+        L["reasonParam1"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_reasonParam2 = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["reasonParam2"] = Val.Nothing;
+        L["reasonParam2"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_targetedCard = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["targetedCard"] = Val.Nothing;
+        L["targetedCard"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
-        _ = H.Call("GetTargetedCard", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(__v => L["CallFunc_GetTargetedCard_hasTarget"] = __v), Val.Out(__v => L["CallFunc_GetTargetedCard_card"] = __v) });
+        _ = H.Call("GetTargetedCard", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(GetLocal(L, "CallFunc_GetTargetedCard_hasTarget"), __v => L["CallFunc_GetTargetedCard_hasTarget"] = __v), Val.Out(GetLocal(L, "CallFunc_GetTargetedCard_card"), __v => L["CallFunc_GetTargetedCard_card"] = __v) });
     L_0037:
         if (!(GetLocal(L, "CallFunc_GetTargetedCard_hasTarget")).AsBool()) goto L_00DB;
     L_0045:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "CallFunc_GetTargetedCard_card"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "CallFunc_GetTargetedCard_card"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_006E:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool()) goto L_00DB;
     L_007C:
@@ -99,15 +99,15 @@ public static Val ExecuteUbergraph_card_event_drive_into_the_sea(IHost H, Val se
     L_0027:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_0559;
     L_0035:
-        _ = H.Call("RemoveCardFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RemoveCardFromBoard_qqq"] = __v) });
+        _ = H.Call("RemoveCardFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_RemoveCardFromBoard_qqq"), __v => L["CallFunc_RemoveCardFromBoard_qqq"] = __v) });
     L_008A:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardID"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardID"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), Val.Out(GetLocal(L, "CallFunc_JSON_SetInt_found"), __v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_00DF:
         if (!(H.GetMember(H.GetVar("K2Node_Event_targetCard"), "isSalvaged")).AsBool()) goto L_018F;
     L_0103:
         L["CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"] = H.Call("GetEnumeratorUserFriendlyName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("EFactionEnum"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "salvageFaction") });
     L_0147:
-        _ = H.Call("JSON_SetString", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("salvage_faction"), GetLocal(L, "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"), Val.Out(__v => L["CallFunc_JSON_SetString_found"] = __v) });
+        _ = H.Call("JSON_SetString", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("salvage_faction"), GetLocal(L, "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"), Val.Out(GetLocal(L, "CallFunc_JSON_SetString_found"), __v => L["CallFunc_JSON_SetString_found"] = __v) });
     L_018F:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_01BD:
@@ -123,13 +123,13 @@ public static Val ExecuteUbergraph_card_event_drive_into_the_sea(IHost H, Val se
     L_025A:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_0559;
     L_0268:
-        _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardID"), Val.Out(__v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found"] = __v) });
+        _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardID"), Val.Out(GetLocal(L, "CallFunc_JSON_GetInt_value"), __v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetInt_found"), __v => L["CallFunc_JSON_GetInt_found"] = __v) });
     L_02A7:
-        _ = H.Call("JSON_GetString", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("salvage_faction"), Val.Out(__v => L["CallFunc_JSON_GetString_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetString_found"] = __v) });
+        _ = H.Call("JSON_GetString", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("salvage_faction"), Val.Out(GetLocal(L, "CallFunc_JSON_GetString_value"), __v => L["CallFunc_JSON_GetString_value"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetString_found"), __v => L["CallFunc_JSON_GetString_found"] = __v) });
     L_02EF:
         L["Temp_byte_Variable"] = Val.Of(0);
     L_0303:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_JSON_GetInt_value"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_JSON_GetInt_value"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0339:
         L["Temp_bool_Variable"] = GetLocal(L, "CallFunc_JSON_GetString_found");
     L_034C:
@@ -137,13 +137,13 @@ public static Val ExecuteUbergraph_card_event_drive_into_the_sea(IHost H, Val se
     L_0371:
         L["CallFunc_GetFactionEnum_ReturnValue"] = H.Call("GetFactionEnum", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue") });
     L_0396:
-        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "side"), Val.False, H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "name"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), Val.Switch(GetLocal(L, "Temp_bool_Variable"), new[] { ValueTuple.Create(Val.False, GetLocal(L, "Temp_byte_Variable")), ValueTuple.Create(Val.True, GetLocal(L, "CallFunc_GetFactionEnum_ReturnValue")) }, GetLocal(L, "K2Node_Select_Default")), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "side"), Val.False, H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "name"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), Val.Switch(GetLocal(L, "Temp_bool_Variable"), new[] { ValueTuple.Create(Val.False, GetLocal(L, "Temp_byte_Variable")), ValueTuple.Create(Val.True, GetLocal(L, "CallFunc_GetFactionEnum_ReturnValue")) }, GetLocal(L, "K2Node_Select_Default")), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnCardonBattlefield_spawnedCardID"), __v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
     L_0451:
-        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardID"), Val.Out(__v => L["CallFunc_JSON_Clear_found"] = __v) });
+        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardID"), Val.Out(GetLocal(L, "CallFunc_JSON_Clear_found"), __v => L["CallFunc_JSON_Clear_found"] = __v) });
     L_0487:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_04B5:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_SpawnCardonBattlefield_spawnedCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card_1"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_SpawnCardonBattlefield_spawnedCardID"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card_1"), __v => L["CallFunc_GetCardFromID_card_1"] = __v) });
     L_04EB:
         _ = H.Call("MoveUnitFromBoardToOwnersHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetCardFromID_card_1"), H.GetMember(self, "cardID") });
     L_0521:

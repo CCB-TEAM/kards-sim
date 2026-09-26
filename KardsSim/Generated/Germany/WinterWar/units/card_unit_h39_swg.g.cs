@@ -34,11 +34,11 @@ public static Val ExecuteUbergraph_card_unit_h39_swg(IHost H, Val self, Val[] ar
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_defenderCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_defenderCard"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0033:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool()) goto L_0096;
     L_0041:
-        _ = H.Call("SuppressUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_defenderCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_SuppressUnit_qqq"] = __v) });
+        _ = H.Call("SuppressUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_defenderCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_SuppressUnit_qqq"), __v => L["CallFunc_SuppressUnit_qqq"] = __v) });
     L_0096:
         goto __halt;
     L_0098:

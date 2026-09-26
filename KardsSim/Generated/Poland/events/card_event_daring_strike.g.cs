@@ -27,17 +27,17 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_canIt = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["canIt"] = Val.Nothing;
+        L["canIt"] = args.Length > 0 ? args[0].In : Val.Nothing;
         var __out_reason = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["reason"] = Val.Nothing;
+        L["reason"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_reasonParam1 = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["reasonParam1"] = Val.Nothing;
+        L["reasonParam1"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_reasonParam2 = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["reasonParam2"] = Val.Nothing;
+        L["reasonParam2"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_targetedCard = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["targetedCard"] = Val.Nothing;
+        L["targetedCard"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
-        _ = H.Call("GetTargetedCard", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(__v => L["CallFunc_GetTargetedCard_hasTarget"] = __v), Val.Out(__v => L["CallFunc_GetTargetedCard_card"] = __v) });
+        _ = H.Call("GetTargetedCard", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(GetLocal(L, "CallFunc_GetTargetedCard_hasTarget"), __v => L["CallFunc_GetTargetedCard_hasTarget"] = __v), Val.Out(GetLocal(L, "CallFunc_GetTargetedCard_card"), __v => L["CallFunc_GetTargetedCard_card"] = __v) });
     L_0037:
         if (!(GetLocal(L, "CallFunc_GetTargetedCard_hasTarget")).AsBool()) goto L_00A4;
     L_0045:
@@ -99,7 +99,7 @@ public static Val ExecuteUbergraph_card_event_daring_strike(IHost H, Val self, V
             default: goto __halt;
         }
     L_000F:
-        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedInHand_isIt_3"] = __v) });
+        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedInHand_isIt_3"), __v => L["CallFunc_IsLocatedInHand_isIt_3"] = __v) });
     L_0022:
         if (!(GetLocal(L, "CallFunc_IsLocatedInHand_isIt_3")).AsBool())
         {
@@ -114,7 +114,7 @@ public static Val ExecuteUbergraph_card_event_daring_strike(IHost H, Val self, V
     L_002C:
         H.SetMember(self, "exileCount", Val.Of(0));
     L_0043:
-        _ = H.Call("GetAllCardsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllCardsOnBoard_cards"] = __v) });
+        _ = H.Call("GetAllCardsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), __v => L["CallFunc_GetAllCardsOnBoard_cards"] = __v) });
     L_0071:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_0088:
@@ -130,11 +130,11 @@ public static Val ExecuteUbergraph_card_event_daring_strike(IHost H, Val self, V
     L_0129:
         __ef.Push(840);
     L_012E:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0169:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_IsUnit_isIt_1"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt_1"), __v => L["CallFunc_IsUnit_isIt_1"] = __v) });
     L_0192:
-        _ = H.Call("IsExile", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_IsExile_isIt_1"] = __v) });
+        _ = H.Call("IsExile", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_IsExile_isIt_1"), __v => L["CallFunc_IsExile_isIt_1"] = __v) });
     L_01BB:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "side"), H.GetMember(self, "side")) == 0);
     L_01F7:
@@ -182,7 +182,7 @@ public static Val ExecuteUbergraph_card_event_daring_strike(IHost H, Val self, V
     L_02DA:
         L["CallFunc_Multiply_IntInt_ReturnValue"] = (H.GetMember(self, "exileCount") * Val.Of(-2));
     L_0304:
-        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeKreditCost_qqq_2"] = __v) });
+        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeKreditCost_qqq_2"), __v => L["CallFunc_ChangeKreditCost_qqq_2"] = __v) });
     L_0347:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -198,9 +198,9 @@ public static Val ExecuteUbergraph_card_event_daring_strike(IHost H, Val self, V
     L_038D:
         goto L_009F;
     L_0392:
-        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
+        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, H.GetVar("K2Node_Event_targetCard"), Val.Out(GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), __v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_03B2:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DamageCard_targetDestroyed"), __v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_03FD:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -210,7 +210,7 @@ public static Val ExecuteUbergraph_card_event_daring_strike(IHost H, Val self, V
             default: goto __halt;
         }
     L_03FE:
-        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
+        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedInHand_isIt"), __v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
     L_0411:
         if (!(GetLocal(L, "CallFunc_IsLocatedInHand_isIt")).AsBool())
         {
@@ -223,9 +223,9 @@ public static Val ExecuteUbergraph_card_event_daring_strike(IHost H, Val self, V
             }
         }
     L_041B:
-        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0444:
-        _ = H.Call("IsExile", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsExile_isIt"] = __v) });
+        _ = H.Call("IsExile", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(GetLocal(L, "CallFunc_IsExile_isIt"), __v => L["CallFunc_IsExile_isIt"] = __v) });
     L_046D:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_04A9:
@@ -244,7 +244,7 @@ public static Val ExecuteUbergraph_card_event_daring_strike(IHost H, Val self, V
             }
         }
     L_04FF:
-        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(-2), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeKreditCost_qqq_1"] = __v) });
+        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(-2), Val.Of(0), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeKreditCost_qqq_1"), __v => L["CallFunc_ChangeKreditCost_qqq_1"] = __v) });
     L_053E:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -254,7 +254,7 @@ public static Val ExecuteUbergraph_card_event_daring_strike(IHost H, Val self, V
             default: goto __halt;
         }
     L_053F:
-        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedInHand_isIt_1"] = __v) });
+        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedInHand_isIt_1"), __v => L["CallFunc_IsLocatedInHand_isIt_1"] = __v) });
     L_0552:
         if (!(GetLocal(L, "CallFunc_IsLocatedInHand_isIt_1")).AsBool())
         {
@@ -269,9 +269,9 @@ public static Val ExecuteUbergraph_card_event_daring_strike(IHost H, Val self, V
     L_055C:
         H.SetMember(self, "tmpCard", H.GetVar("K2Node_Event_cardLeaving"));
     L_056F:
-        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "tmpCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt_2"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "tmpCard"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt_2"), __v => L["CallFunc_IsUnit_isIt_2"] = __v) });
     L_0598:
-        _ = H.Call("IsExile", new Val[] { H.GetMember(self, "tmpCard"), Val.Out(__v => L["CallFunc_IsExile_isIt_2"] = __v) });
+        _ = H.Call("IsExile", new Val[] { H.GetMember(self, "tmpCard"), Val.Out(GetLocal(L, "CallFunc_IsExile_isIt_2"), __v => L["CallFunc_IsExile_isIt_2"] = __v) });
     L_05C1:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetMember(H.GetMember(self, "tmpCard"), "side"), H.GetMember(self, "side")) == 0);
     L_05FD:
@@ -290,7 +290,7 @@ public static Val ExecuteUbergraph_card_event_daring_strike(IHost H, Val self, V
             }
         }
     L_0653:
-        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(2), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeKreditCost_qqq"] = __v) });
+        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(2), Val.Of(0), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeKreditCost_qqq"), __v => L["CallFunc_ChangeKreditCost_qqq"] = __v) });
     L_0692:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -300,7 +300,7 @@ public static Val ExecuteUbergraph_card_event_daring_strike(IHost H, Val self, V
             default: goto __halt;
         }
     L_0693:
-        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedInHand_isIt_2"] = __v) });
+        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedInHand_isIt_2"), __v => L["CallFunc_IsLocatedInHand_isIt_2"] = __v) });
     L_06A6:
         if (!(GetLocal(L, "CallFunc_IsLocatedInHand_isIt_2")).AsBool())
         {
@@ -353,7 +353,7 @@ public static Val GetPlayFromHandDamage(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["targetCard"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_damage = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["damage"] = Val.Nothing;
+        L["damage"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["damage"] = Val.Of(2);
     L_0017:

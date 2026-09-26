@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_location_british_scen1_ai(IHost H, Val s
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("SpawnCardInFrontline", new Val[] { H.GetMember(self, "cardFunction"), Val.Name("card_unit_pak_36"), H.GetMember(self, "side"), Val.Of(0), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, Val.Out(__v => L["CallFunc_SpawnCardInFrontline_spawnedCardID"] = __v), Val.Of(0), Val.Of(-1), Val.False });
+        _ = H.Call("SpawnCardInFrontline", new Val[] { H.GetMember(self, "cardFunction"), Val.Name("card_unit_pak_36"), H.GetMember(self, "side"), Val.Of(0), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnCardInFrontline_spawnedCardID"), __v => L["CallFunc_SpawnCardInFrontline_spawnedCardID"] = __v), Val.Of(0), Val.Of(-1), Val.False });
     L_0064:
         goto __halt;
     L_0066:

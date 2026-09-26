@@ -27,14 +27,14 @@ public static Val OnAttemptedDiscard(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_cancelDiscard = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["cancelDiscard"] = Val.Nothing;
+        L["cancelDiscard"] = args.Length > 0 ? args[0].In : Val.Nothing;
         L["discarderID"] = args.Length > 1 ? args[1] : Val.Nothing;
     L_0000:
-        _ = H.Call("IsLocatedInDeck", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedInDeck_isIt"] = __v) });
+        _ = H.Call("IsLocatedInDeck", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedInDeck_isIt"), __v => L["CallFunc_IsLocatedInDeck_isIt"] = __v) });
     L_0013:
         if (!(GetLocal(L, "CallFunc_IsLocatedInDeck_isIt")).AsBool()) goto L_0091;
     L_0021:
-        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, Val.Name("card_unit_35th_mountain_rifles"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), Val.Of(0), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, Val.Name("card_unit_35th_mountain_rifles"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), Val.Of(0), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnCardonBattlefield_spawnedCardID"), __v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
     L_0081:
         L["cancelDiscard"] = Val.False;
     L_008C:

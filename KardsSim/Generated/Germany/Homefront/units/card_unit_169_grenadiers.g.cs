@@ -34,11 +34,11 @@ public static Val ExecuteUbergraph_card_unit_169_grenadiers(IHost H, Val self, V
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_010D;
     L_002B:
-        _ = H.Call("IsOrder", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
+        _ = H.Call("IsOrder", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(GetLocal(L, "CallFunc_IsOrder_isIt"), __v => L["CallFunc_IsOrder_isIt"] = __v) });
     L_0054:
         if (!(GetLocal(L, "CallFunc_IsOrder_isIt")).AsBool()) goto L_010D;
     L_0062:
@@ -48,9 +48,9 @@ public static Val ExecuteUbergraph_card_unit_169_grenadiers(IHost H, Val self, V
     L_00AC:
         goto L_010D;
     L_00B1:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_00C4:
-        _ = H.Call("DiscardRandomCardFromHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_DiscardRandomCardFromHand_discardedCardID"] = __v) });
+        _ = H.Call("DiscardRandomCardFromHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_DiscardRandomCardFromHand_discardedCardID"), __v => L["CallFunc_DiscardRandomCardFromHand_discardedCardID"] = __v) });
     L_0103:
         goto L_010D;
     L_0108:

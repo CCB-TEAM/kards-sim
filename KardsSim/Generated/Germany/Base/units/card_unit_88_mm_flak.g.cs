@@ -31,11 +31,11 @@ public static Val OnCardDealDamage_ModifyDamageDealt(IHost H, Val self, Val[] ar
         L["fromAttack"] = args.Length > 2 ? args[2] : Val.Nothing;
         L["fromFight"] = args.Length > 3 ? args[3] : Val.Nothing;
         var __out_newDamage = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["newDamage"] = Val.Nothing;
+        L["newDamage"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
-        _ = H.Call("IsAirUnit", new Val[] { GetLocal(L, "toCard"), Val.Out(__v => L["CallFunc_IsAirUnit_isIt"] = __v) });
+        _ = H.Call("IsAirUnit", new Val[] { GetLocal(L, "toCard"), Val.Out(GetLocal(L, "CallFunc_IsAirUnit_isIt"), __v => L["CallFunc_IsAirUnit_isIt"] = __v) });
     L_0029:
-        _ = H.Call("IsTank", new Val[] { GetLocal(L, "toCard"), Val.Out(__v => L["CallFunc_IsTank_isIt"] = __v) });
+        _ = H.Call("IsTank", new Val[] { GetLocal(L, "toCard"), Val.Out(GetLocal(L, "CallFunc_IsTank_isIt"), __v => L["CallFunc_IsTank_isIt"] = __v) });
     L_0052:
         L["CallFunc_BooleanOR_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsAirUnit_isIt")).AsBool() || (GetLocal(L, "CallFunc_IsTank_isIt")).AsBool());
     L_0078:

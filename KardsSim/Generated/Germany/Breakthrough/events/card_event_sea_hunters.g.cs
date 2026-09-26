@@ -36,15 +36,15 @@ public static Val ExecuteUbergraph_card_event_sea_hunters(IHost H, Val self, Val
     L_000A:
         H.SetMember(self, "Card Played", H.GetVar("K2Node_Event_cardPlayed"));
     L_001D:
-        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, H.GetMember(self, "Card Played"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
+        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, H.GetMember(self, "Card Played"), Val.Out(GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt"), __v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
     L_0039:
-        _ = H.Call("IsUnrevealedCovertCard", new Val[] { H.GetMember(self, "Card Played"), Val.Out(__v => L["CallFunc_IsUnrevealedCovertCard_isIt"] = __v) });
+        _ = H.Call("IsUnrevealedCovertCard", new Val[] { H.GetMember(self, "Card Played"), Val.Out(GetLocal(L, "CallFunc_IsUnrevealedCovertCard_isIt"), __v => L["CallFunc_IsUnrevealedCovertCard_isIt"] = __v) });
     L_0062:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetMember(self, "Card Played"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetMember(self, "Card Played"), Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_008B:
         L["CallFunc_Not_PreBool_ReturnValue"] = H.Call("Not_PreBool", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_IsUnrevealedCovertCard_isIt") });
     L_00A8:
-        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "Card Played"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "Card Played"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_00D1:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt")).AsBool() && (GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool());
     L_00F7:
@@ -54,11 +54,11 @@ public static Val ExecuteUbergraph_card_event_sea_hunters(IHost H, Val self, Val
     L_0143:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_2")).AsBool()) goto L_0219;
     L_0151:
-        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(H.GetMember(self, "Card Played"), "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
+        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(H.GetMember(self, "Card Played"), "cardID"), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_GotchaTriggered_qqq"), __v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
     L_01A0:
         _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "Card Played"), self });
     L_01CE:
-        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
+        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DrawCardsFromDeckbySide_cardsIDs"), __v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
     L_0219:
         goto __halt;
     L_021B:

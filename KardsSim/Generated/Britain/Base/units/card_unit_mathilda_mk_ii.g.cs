@@ -32,7 +32,7 @@ public static Val OnCardDealDamage(IHost H, Val self, Val[] args)
         L["CounterDamage"] = args.Length > 3 ? args[3] : Val.Nothing;
         L["isRedirected"] = args.Length > 4 ? args[4] : Val.Nothing;
         var __out_qqq = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["qqq"] = Val.Nothing;
+        L["qqq"] = args.Length > 5 ? args[5].In : Val.Nothing;
     L_0000:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "damage"), Val.Of(0)) > 0);
     L_0022:
@@ -48,7 +48,7 @@ public static Val OnCardDealDamage(IHost H, Val self, Val[] args)
     L_008C:
         goto L_0119;
     L_0091:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "toCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "toCard"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_00BA:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool()) goto L_0081;
     L_00C8:

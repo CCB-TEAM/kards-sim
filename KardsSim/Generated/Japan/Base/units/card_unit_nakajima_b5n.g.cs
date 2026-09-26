@@ -41,7 +41,7 @@ public static Val ExecuteUbergraph_card_unit_nakajima_b5n(IHost H, Val self, Val
     L_000F:
         __ef.Push(170);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
         L["CallFunc_Array_Add_ReturnValue"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "cards_ids_to_damage"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID") });
     L_00A9:
@@ -86,7 +86,7 @@ public static Val ExecuteUbergraph_card_unit_nakajima_b5n(IHost H, Val self, Val
     L_01AD:
         goto L_017A;
     L_01B2:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_01C5:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool())
         {
@@ -100,7 +100,7 @@ public static Val ExecuteUbergraph_card_unit_nakajima_b5n(IHost H, Val self, Val
             }
         }
     L_01CF:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_discardedCard"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_discardedCard"), "side"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), __v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_020A:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_0229:
@@ -119,13 +119,13 @@ public static Val ExecuteUbergraph_card_unit_nakajima_b5n(IHost H, Val self, Val
     L_0261:
         __ef.Push(694);
     L_0266:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_0279:
-        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
+        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), __v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
     L_02B1:
         goto L_0196;
     L_02B6:
-        _ = H.Call("DamageMultipleCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cards_ids_to_damage"), Val.Of(1), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_DamageMultipleCards_cardsDestroyed"] = __v) });
+        _ = H.Call("DamageMultipleCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cards_ids_to_damage"), Val.Of(1), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_DamageMultipleCards_cardsDestroyed"), __v => L["CallFunc_DamageMultipleCards_cardsDestroyed"] = __v) });
     L_02FA:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

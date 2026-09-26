@@ -27,14 +27,16 @@ public static Val DiscardHighestCostCardBySide(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         L["_side"] = args.Length > 0 ? args[0] : Val.Nothing;
+        L["allCards"] = H.MakeArray(new Val[] { });
+        L["possibleCards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1421);
     L_0005:
         L["currentHighestCost"] = Val.Of(-1);
     L_001C:
-        _ = H.Call("GetCardsInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "_side"), Val.Out(__v => L["CallFunc_GetCardsInHandBySide_cards"] = __v) });
+        _ = H.Call("GetCardsInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "_side"), Val.Out(GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), __v => L["CallFunc_GetCardsInHandBySide_cards"] = __v) });
     L_0052:
-        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "_side"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
+        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "_side"), Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), __v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
     L_008A:
         L["allCards"] = GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards");
     L_00A5:
@@ -54,9 +56,9 @@ public static Val DiscardHighestCostCardBySide(IHost H, Val self, Val[] args)
     L_018F:
         __ef.Push(1219);
     L_0194:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "allCards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "allCards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_01CF:
-        _ = H.Call("getTotalKreditCost", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_getTotalKreditCost_totalKreditCost"] = __v) });
+        _ = H.Call("getTotalKreditCost", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost"), __v => L["CallFunc_getTotalKreditCost_totalKreditCost"] = __v) });
     L_01F8:
         L["CallFunc_GreaterEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost"), GetLocal(L, "currentHighestCost")) >= 0);
     L_021E:
@@ -74,9 +76,9 @@ public static Val DiscardHighestCostCardBySide(IHost H, Val self, Val[] args)
     L_0228:
         __ef.Push(1293);
     L_022D:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "allCards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "allCards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0268:
-        _ = H.Call("getTotalKreditCost", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_getTotalKreditCost_totalKreditCost"] = __v) });
+        _ = H.Call("getTotalKreditCost", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost"), __v => L["CallFunc_getTotalKreditCost_totalKreditCost"] = __v) });
     L_0291:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost"), GetLocal(L, "currentHighestCost")) > 0);
     L_02B7:
@@ -94,9 +96,9 @@ public static Val DiscardHighestCostCardBySide(IHost H, Val self, Val[] args)
     L_02C1:
         _ = H.Call("Array_Clear", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "possibleCards") });
     L_02EA:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "allCards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "allCards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0325:
-        _ = H.Call("getTotalKreditCost", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_getTotalKreditCost_totalKreditCost"] = __v) });
+        _ = H.Call("getTotalKreditCost", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost"), __v => L["CallFunc_getTotalKreditCost_totalKreditCost"] = __v) });
     L_034E:
         L["currentHighestCost"] = GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost");
     L_0369:
@@ -123,13 +125,13 @@ public static Val DiscardHighestCostCardBySide(IHost H, Val self, Val[] args)
             }
         }
     L_03A7:
-        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["possibleCards"] = __v), Val.False, Val.Out(__v => L["CallFunc_GetRandomCard_randomCard"] = __v) });
+        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "possibleCards"), __v => L["possibleCards"] = __v), Val.False, Val.Out(GetLocal(L, "CallFunc_GetRandomCard_randomCard"), __v => L["CallFunc_GetRandomCard_randomCard"] = __v) });
     L_03DE:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "CallFunc_GetRandomCard_randomCard"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "CallFunc_GetRandomCard_randomCard"), Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0407:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_046B;
     L_0415:
-        _ = H.Call("RemoveCardFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "CallFunc_GetRandomCard_randomCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RemoveCardFromBoard_qqq"] = __v) });
+        _ = H.Call("RemoveCardFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "CallFunc_GetRandomCard_randomCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_RemoveCardFromBoard_qqq"), __v => L["CallFunc_RemoveCardFromBoard_qqq"] = __v) });
     L_046A:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -140,7 +142,7 @@ public static Val DiscardHighestCostCardBySide(IHost H, Val self, Val[] args)
             default: goto __halt;
         }
     L_046B:
-        _ = H.Call("DiscardCardFromHand", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "CallFunc_GetRandomCard_randomCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.True, Val.Out(__v => L["CallFunc_DiscardCardFromHand_success"] = __v) });
+        _ = H.Call("DiscardCardFromHand", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "CallFunc_GetRandomCard_randomCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.True, Val.Out(GetLocal(L, "CallFunc_DiscardCardFromHand_success"), __v => L["CallFunc_DiscardCardFromHand_success"] = __v) });
     L_04C2:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -157,7 +159,7 @@ public static Val DiscardHighestCostCardBySide(IHost H, Val self, Val[] args)
     L_0508:
         goto L_0105;
     L_050D:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "allCards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "allCards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0548:
         L["CallFunc_Array_Add_ReturnValue"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "possibleCards"), GetLocal(L, "CallFunc_Array_Get_Item") });
     L_058C:
@@ -198,7 +200,7 @@ public static Val ExecuteUbergraph_card_event_rain4_monsoon_rain(IHost H, Val se
     L_000F:
         __ef.Push(86);
     L_0014:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_0027:
         _ = H.Call("DiscardHighestCostCardBySide", new Val[] { self, GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide") });
     L_003E:

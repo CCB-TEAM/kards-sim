@@ -55,7 +55,7 @@ public static Val ExecuteUbergraph_card_unit_866th_rifles(IHost H, Val self, Val
     L_0052:
         __ef.Push(180);
     L_0057:
-        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_event_blast"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.Of(0), Val.Out(__v => L["CallFunc_SpawnCardInHandBySide_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_event_blast"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_SpawnCardInHandBySide_spawnedCardID"), __v => L["CallFunc_SpawnCardInHandBySide_spawnedCardID"] = __v) });
     L_00B3:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

@@ -40,7 +40,7 @@ public static Val ExecuteUbergraph_card_unit_33rd_livorno_cam1(IHost H, Val self
     L_000F:
         __ef.Push(368);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "activeUpgrades"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "activeUpgrades"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
         L["K2Node_SwitchInteger_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Array_Get_Item"), Val.Of(1)) != 0);
     L_0071:
@@ -129,7 +129,7 @@ public static Val ExecuteUbergraph_card_unit_33rd_livorno_cam1(IHost H, Val self
             default: goto __halt;
         }
     L_02B7:
-        _ = H.Call("CampaignSetText", new Val[] { self, Val.Out(__v => L["Temp_text_Variable"] = __v), Val.True });
+        _ = H.Call("CampaignSetText", new Val[] { self, Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.True });
     L_02D9:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -213,11 +213,11 @@ public static Val OnOtherCardAttacks(IHost H, Val self, Val[] args)
         L["cardAttacking"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["defenderCard"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_stopAttack = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["stopAttack"] = Val.Nothing;
+        L["stopAttack"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_AttackedAndStopped = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["AttackedAndStopped"] = Val.Nothing;
+        L["AttackedAndStopped"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
-        _ = H.Call("HasCampaignUpgrade", new Val[] { self, Val.Of(4), Val.Out(__v => L["CallFunc_HasCampaignUpgrade_doesIt"] = __v) });
+        _ = H.Call("HasCampaignUpgrade", new Val[] { self, Val.Of(4), Val.Out(GetLocal(L, "CallFunc_HasCampaignUpgrade_doesIt"), __v => L["CallFunc_HasCampaignUpgrade_doesIt"] = __v) });
     L_0018:
         if (!(GetLocal(L, "CallFunc_HasCampaignUpgrade_doesIt")).AsBool()) goto L_010D;
     L_0026:
@@ -225,13 +225,13 @@ public static Val OnOtherCardAttacks(IHost H, Val self, Val[] args)
     L_0062:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_010D;
     L_0070:
-        _ = H.Call("getAndDecryptAttack", new Val[] { self, Val.Out(__v => L["CallFunc_getAndDecryptAttack_decryptedAttack"] = __v) });
+        _ = H.Call("getAndDecryptAttack", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_getAndDecryptAttack_decryptedAttack"), __v => L["CallFunc_getAndDecryptAttack_decryptedAttack"] = __v) });
     L_0083:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getAndDecryptAttack_decryptedAttack"), Val.Of(1)) > 0);
     L_00A5:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_010D;
     L_00B3:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(-1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(-1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_00F2:
         L["stopAttack"] = Val.False;
     L_00FD:

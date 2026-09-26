@@ -45,9 +45,9 @@ public static Val ExecuteUbergraph_card_unit_p38_lightning(IHost H, Val self, Va
     L_000F:
         __ef.Push(457);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
-        _ = H.Call("IsBomber", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_IsBomber_isIt"] = __v) });
+        _ = H.Call("IsBomber", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_IsBomber_isIt"), __v => L["CallFunc_IsBomber_isIt"] = __v) });
     L_0078:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "side")) == 0);
     L_00B4:
@@ -69,9 +69,9 @@ public static Val ExecuteUbergraph_card_unit_p38_lightning(IHost H, Val self, Va
             }
         }
     L_0146:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0181:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), H.GetMember(self, "cardID"), Val.Of(2), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), H.GetMember(self, "cardID"), Val.Of(2), Val.Of(0), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_01C8:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -108,9 +108,9 @@ public static Val ExecuteUbergraph_card_unit_p38_lightning(IHost H, Val self, Va
     L_0299:
         __ef.Push(1107);
     L_029E:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_02D9:
-        _ = H.Call("IsBomber", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_1"), Val.Out(__v => L["CallFunc_IsBomber_isIt_1"] = __v) });
+        _ = H.Call("IsBomber", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_1"), Val.Out(GetLocal(L, "CallFunc_IsBomber_isIt_1"), __v => L["CallFunc_IsBomber_isIt_1"] = __v) });
     L_0302:
         L["CallFunc_NotEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "cardID"), H.GetMember(self, "cardID")) != 0);
     L_033E:
@@ -132,9 +132,9 @@ public static Val ExecuteUbergraph_card_unit_p38_lightning(IHost H, Val self, Va
             }
         }
     L_03D0:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_040B:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item_1"), H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq_1"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item_1"), H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq_1"), __v => L["CallFunc_ChangeAttack_qqq_1"] = __v) });
     L_0452:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -175,7 +175,7 @@ public static Val ExecuteUbergraph_card_unit_p38_lightning(IHost H, Val self, Va
     L_0551:
         goto L_0498;
     L_0556:
-        _ = H.Call("GetAllCardsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllCardsOnBoard_cards_1"] = __v) });
+        _ = H.Call("GetAllCardsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards_1"), __v => L["CallFunc_GetAllCardsOnBoard_cards_1"] = __v) });
     L_0584:
         goto L_0523;
     L_0589:
@@ -195,7 +195,7 @@ public static Val ExecuteUbergraph_card_unit_p38_lightning(IHost H, Val self, Va
     L_05B2:
         H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardPlayed_1"));
     L_05C5:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_05D8:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool())
         {
@@ -209,9 +209,9 @@ public static Val ExecuteUbergraph_card_unit_p38_lightning(IHost H, Val self, Va
             }
         }
     L_05E2:
-        _ = H.Call("IsBomber", new Val[] { H.GetMember(self, "_tmp_card"), Val.Out(__v => L["CallFunc_IsBomber_isIt_3"] = __v) });
+        _ = H.Call("IsBomber", new Val[] { H.GetMember(self, "_tmp_card"), Val.Out(GetLocal(L, "CallFunc_IsBomber_isIt_3"), __v => L["CallFunc_IsBomber_isIt_3"] = __v) });
     L_060B:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetMember(self, "_tmp_card"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_3"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetMember(self, "_tmp_card"), Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_3"), __v => L["CallFunc_IsLocatedOnBoard_isIt_3"] = __v) });
     L_0634:
         L["CallFunc_BooleanAND_ReturnValue_6"] = Val.Of((GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_3")).AsBool() && (GetLocal(L, "CallFunc_IsBomber_isIt_3")).AsBool());
     L_065A:
@@ -231,7 +231,7 @@ public static Val ExecuteUbergraph_card_unit_p38_lightning(IHost H, Val self, Va
             }
         }
     L_06C6:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "_tmp_card"), H.GetMember(self, "cardID"), Val.Of(2), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq_2"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "_tmp_card"), H.GetMember(self, "cardID"), Val.Of(2), Val.Of(0), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq_2"), __v => L["CallFunc_ChangeAttack_qqq_2"] = __v) });
     L_070D:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -242,7 +242,7 @@ public static Val ExecuteUbergraph_card_unit_p38_lightning(IHost H, Val self, Va
             default: goto __halt;
         }
     L_070E:
-        _ = H.Call("GetAllCardsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllCardsOnBoard_cards"] = __v) });
+        _ = H.Call("GetAllCardsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), __v => L["CallFunc_GetAllCardsOnBoard_cards"] = __v) });
     L_073C:
         L["Temp_int_Loop_Counter_Variable_1"] = Val.Of(0);
     L_0753:
@@ -250,7 +250,7 @@ public static Val ExecuteUbergraph_card_unit_p38_lightning(IHost H, Val self, Va
     L_076A:
         goto L_020E;
     L_076F:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1"), __v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_0782:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1")).AsBool())
         {
@@ -264,9 +264,9 @@ public static Val ExecuteUbergraph_card_unit_p38_lightning(IHost H, Val self, Va
             }
         }
     L_078C:
-        _ = H.Call("IsBomber", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc_IsBomber_isIt_2"] = __v) });
+        _ = H.Call("IsBomber", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), Val.Out(GetLocal(L, "CallFunc_IsBomber_isIt_2"), __v => L["CallFunc_IsBomber_isIt_2"] = __v) });
     L_07B5:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_2"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_2"), __v => L["CallFunc_IsLocatedOnBoard_isIt_2"] = __v) });
     L_07DE:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "side")) == 0);
     L_081A:
@@ -286,7 +286,7 @@ public static Val ExecuteUbergraph_card_unit_p38_lightning(IHost H, Val self, Va
             }
         }
     L_0870:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardLeaving"), H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq_3"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardLeaving"), H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq_3"), __v => L["CallFunc_ChangeAttack_qqq_3"] = __v) });
     L_08B7:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

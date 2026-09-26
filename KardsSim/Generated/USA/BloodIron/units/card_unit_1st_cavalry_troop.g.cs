@@ -40,9 +40,9 @@ public static Val ExecuteUbergraph_card_unit_1st_cavalry_troop(IHost H, Val self
     L_003A:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_0186;
     L_0048:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_005B:
-        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "tempCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "tempCard"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0084:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetMember(self, "tempCard"), "side"), H.GetMember(self, "side")) == 0);
     L_00C0:
@@ -52,9 +52,9 @@ public static Val ExecuteUbergraph_card_unit_1st_cavalry_troop(IHost H, Val self
     L_010C:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_1")).AsBool()) goto L_0186;
     L_011A:
-        _ = H.Call("getTotalOperationCost", new Val[] { H.GetMember(self, "tempCard"), Val.Out(__v => L["CallFunc_getTotalOperationCost_totalOperationCost"] = __v) });
+        _ = H.Call("getTotalOperationCost", new Val[] { H.GetMember(self, "tempCard"), Val.Out(GetLocal(L, "CallFunc_getTotalOperationCost_totalOperationCost"), __v => L["CallFunc_getTotalOperationCost_totalOperationCost"] = __v) });
     L_0143:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_getTotalOperationCost_totalOperationCost"), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_getTotalOperationCost_totalOperationCost"), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_0186:
         goto __halt;
     L_0188:

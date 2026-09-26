@@ -56,7 +56,7 @@ public static Val ExecuteUbergraph_card_event_no_surrender(IHost H, Val self, Va
             default: goto __halt;
         }
     L_00A8:
-        _ = H.Call("SpawnMultipleCardsOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(self, "lightInfantries"), H.GetMember(self, "cardID"), Val.True, Val.Out(__v => L["CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs"] = __v), Val.False });
+        _ = H.Call("SpawnMultipleCardsOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(self, "lightInfantries"), H.GetMember(self, "cardID"), Val.True, Val.Out(GetLocal(L, "CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs"), __v => L["CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs"] = __v), Val.False });
     L_00F3:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -72,7 +72,7 @@ public static Val ExecuteUbergraph_card_event_no_surrender(IHost H, Val self, Va
     L_0139:
         goto L_000F;
     L_013E:
-        _ = H.Call("GetCardsInSupportLineBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, Val.True, Val.Out(__v => L["CallFunc_GetCardsInSupportLineBySide_cards"] = __v) });
+        _ = H.Call("GetCardsInSupportLineBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, Val.True, Val.Out(GetLocal(L, "CallFunc_GetCardsInSupportLineBySide_cards"), __v => L["CallFunc_GetCardsInSupportLineBySide_cards"] = __v) });
     L_0176:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInSupportLineBySide_cards") });
     L_01B1:

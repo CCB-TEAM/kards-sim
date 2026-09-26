@@ -92,7 +92,7 @@ public static Val GetOrSpawnCampaignBP(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_OutCampaignBP = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["OutCampaignBP"] = Val.Nothing;
+        L["OutCampaignBP"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetKardsGameInstance", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetKardsGameInstance_instance"] = __v) });
     L_0036:
@@ -135,7 +135,7 @@ public static Val IsSkirmishModeActive(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_IsActive = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["IsActive"] = Val.Nothing;
+        L["IsActive"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetDSession", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetDSession_dSession"] = __v) });
     L_0036:
@@ -166,7 +166,7 @@ public static Val IsTournamenthModeActive(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_IsActive = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["IsActive"] = Val.Nothing;
+        L["IsActive"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetDSession", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetDSession_dSession"] = __v) });
     L_0036:

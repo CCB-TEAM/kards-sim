@@ -35,11 +35,11 @@ public static Val ExecuteUbergraph_card_unit_120mm_m1_gun(IHost H, Val self, Val
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("custom"), H.GetMember(self, "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("custom"), H.GetMember(self, "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_CustomAbilityAdd_qqq"), __v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_0054:
         goto L_00A1;
     L_0059:
-        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("custom"), H.GetMember(self, "cardID"), H.GetMember(self, "cardID"), Val.True, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
+        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("custom"), H.GetMember(self, "cardID"), H.GetMember(self, "cardID"), Val.True, Val.Out(GetLocal(L, "CallFunc_CustomAbilityRemove_qqq"), __v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
     L_00A1:
         goto __halt;
     L_00A3:
@@ -70,13 +70,13 @@ public static Val OnCardDealDamage_ModifyDamageDealt(IHost H, Val self, Val[] ar
         L["fromAttack"] = args.Length > 2 ? args[2] : Val.Nothing;
         L["fromFight"] = args.Length > 3 ? args[3] : Val.Nothing;
         var __out_newDamage = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["newDamage"] = Val.Nothing;
+        L["newDamage"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
-        _ = H.Call("HasCustomAbility", new Val[] { self, Val.Of("custom"), Val.Out(__v => L["CallFunc_HasCustomAbility_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbility", new Val[] { self, Val.Of("custom"), Val.Out(GetLocal(L, "CallFunc_HasCustomAbility_doesIt"), __v => L["CallFunc_HasCustomAbility_doesIt"] = __v) });
     L_001B:
         if (!(GetLocal(L, "CallFunc_HasCustomAbility_doesIt")).AsBool()) goto L_00F2;
     L_0029:
-        _ = H.Call("IsTank", new Val[] { GetLocal(L, "toCard"), Val.Out(__v => L["CallFunc_IsTank_isIt"] = __v) });
+        _ = H.Call("IsTank", new Val[] { GetLocal(L, "toCard"), Val.Out(GetLocal(L, "CallFunc_IsTank_isIt"), __v => L["CallFunc_IsTank_isIt"] = __v) });
     L_0052:
         L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(self, "chooseOneIndex"), Val.Of(1)) == 0);
     L_0074:
@@ -94,7 +94,7 @@ public static Val OnCardDealDamage_ModifyDamageDealt(IHost H, Val self, Val[] ar
     L_010D:
         goto L_01B1;
     L_0112:
-        _ = H.Call("IsAirUnit", new Val[] { GetLocal(L, "toCard"), Val.Out(__v => L["CallFunc_IsAirUnit_isIt"] = __v) });
+        _ = H.Call("IsAirUnit", new Val[] { GetLocal(L, "toCard"), Val.Out(GetLocal(L, "CallFunc_IsAirUnit_isIt"), __v => L["CallFunc_IsAirUnit_isIt"] = __v) });
     L_013B:
         L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "chooseOneIndex"), Val.Of(0)) == 0);
     L_015D:

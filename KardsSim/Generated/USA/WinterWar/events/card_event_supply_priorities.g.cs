@@ -42,7 +42,7 @@ public static Val ExecuteUbergraph_card_event_supply_priorities(IHost H, Val sel
     L_000F:
         _ = H.Call("Array_Clear", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "damagedCards") });
     L_0038:
-        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllUnitsOnBoard_cards_1"] = __v) });
+        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards_1"), __v => L["CallFunc_GetAllUnitsOnBoard_cards_1"] = __v) });
     L_0066:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_007D:
@@ -58,9 +58,9 @@ public static Val ExecuteUbergraph_card_event_supply_priorities(IHost H, Val sel
     L_011E:
         __ef.Push(911);
     L_0123:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_015E:
-        _ = H.Call("IsDamaged", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_1"), Val.Out(__v => L["CallFunc_IsDamaged_isIt"] = __v) });
+        _ = H.Call("IsDamaged", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_1"), Val.Out(GetLocal(L, "CallFunc_IsDamaged_isIt"), __v => L["CallFunc_IsDamaged_isIt"] = __v) });
     L_0187:
         if (!(GetLocal(L, "CallFunc_IsDamaged_isIt")).AsBool())
         {
@@ -75,7 +75,7 @@ public static Val ExecuteUbergraph_card_event_supply_priorities(IHost H, Val sel
             }
         }
     L_0191:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_01CC:
         L["CallFunc_Array_Add_ReturnValue_1"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "damagedCards"), GetLocal(L, "CallFunc_Array_Get_Item_1") });
     L_0210:
@@ -114,9 +114,9 @@ public static Val ExecuteUbergraph_card_event_supply_priorities(IHost H, Val sel
     L_02C5:
         __ef.Push(837);
     L_02CA:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "damagedCards"), GetLocal(L, "Temp_int_Array_Index_Variable_2"), Val.Out(__v => L["CallFunc_Array_Get_Item_2"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "damagedCards"), GetLocal(L, "Temp_int_Array_Index_Variable_2"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_2"), __v => L["CallFunc_Array_Get_Item_2"] = __v) });
     L_0305:
-        _ = H.Call("FullyHealCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item_2"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_FullyHealCard_HealedAmount"] = __v) });
+        _ = H.Call("FullyHealCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item_2"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_FullyHealCard_HealedAmount"), __v => L["CallFunc_FullyHealCard_HealedAmount"] = __v) });
     L_0344:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -152,7 +152,7 @@ public static Val ExecuteUbergraph_card_event_supply_priorities(IHost H, Val sel
     L_047A:
         __ef.Push(1301);
     L_047F:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_04BA:
         L["CallFunc_Array_Add_ReturnValue"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "cardsToDamage"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID") });
     L_0514:
@@ -172,9 +172,9 @@ public static Val ExecuteUbergraph_card_event_supply_priorities(IHost H, Val sel
     L_055A:
         goto L_03F0;
     L_055F:
-        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, self, Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
+        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, self, Val.Out(GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), __v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_0577:
-        _ = H.Call("DamageMultipleCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardsToDamage"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_DamageMultipleCards_cardsDestroyed"] = __v) });
+        _ = H.Call("DamageMultipleCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardsToDamage"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_DamageMultipleCards_cardsDestroyed"), __v => L["CallFunc_DamageMultipleCards_cardsDestroyed"] = __v) });
     L_05BF:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -186,7 +186,7 @@ public static Val ExecuteUbergraph_card_event_supply_priorities(IHost H, Val sel
             default: goto __halt;
         }
     L_05C0:
-        _ = H.Call("WhichChooseOne", new Val[] { self, Val.Out(__v => L["CallFunc_WhichChooseOne_Branches"] = __v) });
+        _ = H.Call("WhichChooseOne", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_WhichChooseOne_Branches"), __v => L["CallFunc_WhichChooseOne_Branches"] = __v) });
     L_05D3:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_WhichChooseOne_Branches"), Val.Of(0)) != 0);
     L_05F2:
@@ -206,7 +206,7 @@ public static Val ExecuteUbergraph_card_event_supply_priorities(IHost H, Val sel
             default: goto __halt;
         }
     L_062E:
-        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
+        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), __v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
     L_065C:
         L["Temp_int_Loop_Counter_Variable_2"] = Val.Of(0);
     L_0673:
@@ -236,7 +236,7 @@ public static Val GetPlayFromHandDamage(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["targetCard"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_damage = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["damage"] = Val.Nothing;
+        L["damage"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["damage"] = Val.Of(1);
     L_0017:

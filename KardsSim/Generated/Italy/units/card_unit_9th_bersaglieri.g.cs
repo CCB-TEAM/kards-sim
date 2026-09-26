@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_unit_9th_bersaglieri(IHost H, Val self, 
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("SpawnCardInDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_unit_18th_bersaglieri"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(0), Val.False, Val.False, Val.True, Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardInDeckBySide_spawnedCardIDs"] = __v) });
+        _ = H.Call("SpawnCardInDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_unit_18th_bersaglieri"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(0), Val.False, Val.False, Val.True, Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnCardInDeckBySide_spawnedCardIDs"), __v => L["CallFunc_SpawnCardInDeckBySide_spawnedCardIDs"] = __v) });
     L_0062:
         goto __halt;
     L_0064:

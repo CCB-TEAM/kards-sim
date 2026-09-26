@@ -36,9 +36,9 @@ public static Val ExecuteUbergraph_card_unit_16th_tarnow_regiment(IHost H, Val s
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1"), __v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_001D:
-        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
+        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsSideActive_active"), __v => L["CallFunc_IsSideActive_active"] = __v) });
     L_0039:
         L["CallFunc_BooleanAND_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1")).AsBool() && (GetLocal(L, "CallFunc_IsSideActive_active")).AsBool());
     L_005F:
@@ -56,19 +56,19 @@ public static Val ExecuteUbergraph_card_unit_16th_tarnow_regiment(IHost H, Val s
     L_0171:
         if (!(GetLocal(L, "CallFunc_BooleanOR_ReturnValue_1")).AsBool()) goto L_0409;
     L_017F:
-        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(self, "side") });
+        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_card"), __v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID"), __v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(self, "side") });
     L_01BE:
         L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetMember(GetLocal(L, "CallFunc_GetLocationCardBySide_card"), "locationNumber") + Val.Of(1));
     L_01FE:
-        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, Val.Name("card_unit_legion_pol"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, Val.Name("card_unit_legion_pol"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.False, GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnCardonBattlefield_spawnedCardID"), __v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
     L_0262:
-        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
+        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DrawCardsFromDeckbySide_cardsIDs"), __v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
     L_02AD:
         goto L_0409;
     L_02B2:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_02C5:
-        _ = H.Call("IsGotcha", new Val[] { H.GetVar("K2Node_Event_intelCard"), Val.Out(__v => L["CallFunc_IsGotcha_isIt"] = __v) });
+        _ = H.Call("IsGotcha", new Val[] { H.GetVar("K2Node_Event_intelCard"), Val.Out(GetLocal(L, "CallFunc_IsGotcha_isIt"), __v => L["CallFunc_IsGotcha_isIt"] = __v) });
     L_02EE:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool() && (GetLocal(L, "CallFunc_IsGotcha_isIt")).AsBool());
     L_0314:
@@ -84,9 +84,9 @@ public static Val ExecuteUbergraph_card_unit_16th_tarnow_regiment(IHost H, Val s
     L_039C:
         goto L_017F;
     L_03A1:
-        _ = H.Call("HasIntel", new Val[] { self, Val.Out(__v => L["CallFunc_HasIntel_doesIt"] = __v) });
+        _ = H.Call("HasIntel", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_HasIntel_doesIt"), __v => L["CallFunc_HasIntel_doesIt"] = __v) });
     L_03B4:
-        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active_1"] = __v) });
+        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsSideActive_active_1"), __v => L["CallFunc_IsSideActive_active_1"] = __v) });
     L_03D0:
         L["CallFunc_BooleanAND_ReturnValue_2"] = Val.Of((GetLocal(L, "CallFunc_HasIntel_doesIt")).AsBool() && (GetLocal(L, "CallFunc_IsSideActive_active_1")).AsBool());
     L_03F6:

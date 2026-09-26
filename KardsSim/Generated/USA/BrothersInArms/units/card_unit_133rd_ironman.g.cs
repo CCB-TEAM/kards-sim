@@ -37,9 +37,9 @@ public static Val ExecuteUbergraph_card_unit_133rd_ironman(IHost H, Val self, Va
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("GetTurnNumber", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetTurnNumber_turnNumber"] = __v) });
+        _ = H.Call("GetTurnNumber", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetTurnNumber_turnNumber"), __v => L["CallFunc_GetTurnNumber_turnNumber"] = __v) });
     L_0037:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("turnEntered"), GetLocal(L, "CallFunc_GetTurnNumber_turnNumber"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("turnEntered"), GetLocal(L, "CallFunc_GetTurnNumber_turnNumber"), Val.Out(GetLocal(L, "CallFunc_JSON_SetInt_found"), __v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_007B:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_00A9:
@@ -47,13 +47,13 @@ public static Val ExecuteUbergraph_card_unit_133rd_ironman(IHost H, Val self, Va
     L_00AE:
         L["CallFunc_MakeLiteralText_ReturnValue"] = H.Call("MakeLiteralText", new Val[] { Val.Ref("KismetSystemLibrary"), Val.Of("") });
     L_00CC:
-        _ = H.Call("AddNumberToText", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_MakeLiteralText_ReturnValue"] = __v), Val.Of(0), Val.Out(__v => L["CallFunc_AddNumberToText_qqq"] = __v) });
+        _ = H.Call("AddNumberToText", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_MakeLiteralText_ReturnValue"), __v => L["CallFunc_MakeLiteralText_ReturnValue"] = __v), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_AddNumberToText_qqq"), __v => L["CallFunc_AddNumberToText_qqq"] = __v) });
     L_010D:
-        _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("turnEntered"), Val.Out(__v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found"] = __v) });
+        _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("turnEntered"), Val.Out(GetLocal(L, "CallFunc_JSON_GetInt_value"), __v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetInt_found"), __v => L["CallFunc_JSON_GetInt_found"] = __v) });
     L_0151:
         if (!(GetLocal(L, "CallFunc_JSON_GetInt_found")).AsBool()) goto L_072A;
     L_015F:
-        _ = H.Call("GetTurnNumber", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetTurnNumber_turnNumber_1"] = __v) });
+        _ = H.Call("GetTurnNumber", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetTurnNumber_turnNumber_1"), __v => L["CallFunc_GetTurnNumber_turnNumber_1"] = __v) });
     L_018C:
         L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_GetTurnNumber_turnNumber_1") - GetLocal(L, "CallFunc_JSON_GetInt_value"));
     L_01BA:
@@ -67,7 +67,7 @@ public static Val ExecuteUbergraph_card_unit_133rd_ironman(IHost H, Val self, Va
     L_025A:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_072A;
     L_0268:
-        _ = H.Call("GetTurnNumber", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetTurnNumber_turnNumber_1"] = __v) });
+        _ = H.Call("GetTurnNumber", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetTurnNumber_turnNumber_1"), __v => L["CallFunc_GetTurnNumber_turnNumber_1"] = __v) });
     L_0295:
         L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_GetTurnNumber_turnNumber_1") - GetLocal(L, "CallFunc_JSON_GetInt_value"));
     L_02C3:
@@ -75,17 +75,17 @@ public static Val ExecuteUbergraph_card_unit_133rd_ironman(IHost H, Val self, Va
     L_02ED:
         L["CallFunc_Divide_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue_1") / Val.Of(2));
     L_0317:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_032A:
         L["CallFunc_Multiply_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_Divide_IntInt_ReturnValue") * Val.Of(3));
     L_0354:
-        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide") });
+        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_card"), __v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID"), __v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide") });
     L_0393:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetLocationCardBySide_card"), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetLocationCardBySide_card"), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DamageCard_targetDestroyed"), __v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_03DE:
         goto L_072A;
     L_03E3:
-        _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("turnEntered"), Val.Out(__v => L["CallFunc_JSON_GetInt_value_1"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found_1"] = __v) });
+        _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("turnEntered"), Val.Out(GetLocal(L, "CallFunc_JSON_GetInt_value_1"), __v => L["CallFunc_JSON_GetInt_value_1"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetInt_found_1"), __v => L["CallFunc_JSON_GetInt_found_1"] = __v) });
     L_0427:
         if (!(GetLocal(L, "CallFunc_JSON_GetInt_found_1")).AsBool()) goto L_072A;
     L_0435:
@@ -99,15 +99,15 @@ public static Val ExecuteUbergraph_card_unit_133rd_ironman(IHost H, Val self, Va
     L_04E1:
         L["CallFunc_Conv_IntToText_ReturnValue"] = H.Call("Conv_IntToText", new Val[] { Val.Ref("KismetTextLibrary"), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue_1"), Val.False, Val.True, Val.Of(1), Val.Of(324) });
     L_0512:
-        _ = H.Call("AddNumberToText", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_Conv_IntToText_ReturnValue"] = __v), Val.Of(0), Val.Out(__v => L["CallFunc_AddNumberToText_qqq_1"] = __v) });
+        _ = H.Call("AddNumberToText", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_Conv_IntToText_ReturnValue"), __v => L["CallFunc_Conv_IntToText_ReturnValue"] = __v), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_AddNumberToText_qqq_1"), __v => L["CallFunc_AddNumberToText_qqq_1"] = __v) });
     L_0553:
         goto L_072A;
     L_0558:
-        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
+        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsSideActive_active"), __v => L["CallFunc_IsSideActive_active"] = __v) });
     L_0574:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0587:
-        _ = H.Call("IsUnrevealedCovertCard", new Val[] { self, Val.Out(__v => L["CallFunc_IsUnrevealedCovertCard_isIt_1"] = __v) });
+        _ = H.Call("IsUnrevealedCovertCard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsUnrevealedCovertCard_isIt_1"), __v => L["CallFunc_IsUnrevealedCovertCard_isIt_1"] = __v) });
     L_059A:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsSideActive_active")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_05C0:
@@ -119,7 +119,7 @@ public static Val ExecuteUbergraph_card_unit_133rd_ironman(IHost H, Val self, Va
     L_05F9:
         goto L_0558;
     L_05FE:
-        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("turnEntered"), Val.Out(__v => L["CallFunc_JSON_Clear_found"] = __v) });
+        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("turnEntered"), Val.Out(GetLocal(L, "CallFunc_JSON_Clear_found"), __v => L["CallFunc_JSON_Clear_found"] = __v) });
     L_0639:
         if (!(GetLocal(L, "CallFunc_JSON_Clear_found")).AsBool()) goto L_072A;
     L_0647:
@@ -127,7 +127,7 @@ public static Val ExecuteUbergraph_card_unit_133rd_ironman(IHost H, Val self, Va
     L_0675:
         goto L_072A;
     L_067A:
-        _ = H.Call("IsUnrevealedCovertCard", new Val[] { self, Val.Out(__v => L["CallFunc_IsUnrevealedCovertCard_isIt"] = __v) });
+        _ = H.Call("IsUnrevealedCovertCard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsUnrevealedCovertCard_isIt"), __v => L["CallFunc_IsUnrevealedCovertCard_isIt"] = __v) });
     L_068D:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_newLocation"), Val.Of(7)) == 0);
     L_06AC:

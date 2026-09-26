@@ -41,7 +41,7 @@ public static Val ExecuteUbergraph_card_unit_katyusha_cam1(IHost H, Val self, Va
     L_000F:
         __ef.Push(368);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "activeUpgrades"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "activeUpgrades"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
         L["K2Node_SwitchInteger_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Array_Get_Item"), Val.Of(1)) != 0);
     L_0071:
@@ -110,7 +110,7 @@ public static Val ExecuteUbergraph_card_unit_katyusha_cam1(IHost H, Val self, Va
     L_025F:
         L["Temp_text_Variable"] = Val.Of("When KATYUSHA attacks, it deals 0-2 additional damage.");
     L_02CF:
-        _ = H.Call("CampaignSetText", new Val[] { self, Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False });
+        _ = H.Call("CampaignSetText", new Val[] { self, Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.False });
     L_02F1:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -172,7 +172,7 @@ public static Val ExecuteUbergraph_card_unit_katyusha_cam1(IHost H, Val self, Va
     L_03D5:
         goto L_03A2;
     L_03DA:
-        _ = H.Call("getTotalDefense", new Val[] { H.GetVar("K2Node_Event_defenderCard"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
+        _ = H.Call("getTotalDefense", new Val[] { H.GetVar("K2Node_Event_defenderCard"), Val.Out(GetLocal(L, "CallFunc_getTotalDefense_totalDefense"), __v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
     L_0403:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalDefense_totalDefense"), Val.Of(0)) > 0);
     L_0425:
@@ -187,13 +187,13 @@ public static Val ExecuteUbergraph_card_unit_katyusha_cam1(IHost H, Val self, Va
             }
         }
     L_042F:
-        _ = H.Call("HasCampaignUpgrade", new Val[] { self, Val.Of(2), Val.Out(__v => L["CallFunc_HasCampaignUpgrade_doesIt"] = __v) });
+        _ = H.Call("HasCampaignUpgrade", new Val[] { self, Val.Of(2), Val.Out(GetLocal(L, "CallFunc_HasCampaignUpgrade_doesIt"), __v => L["CallFunc_HasCampaignUpgrade_doesIt"] = __v) });
     L_0447:
         L["CallFunc_SelectInt_ReturnValue"] = H.Call("SelectInt", new Val[] { Val.Ref("KismetMathLibrary"), Val.Of(2), Val.Of(1), GetLocal(L, "CallFunc_HasCampaignUpgrade_doesIt") });
     L_0476:
-        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), GetLocal(L, "CallFunc_SelectInt_ReturnValue"), Val.Out(__v => L["CallFunc_RandomIntFromRangeWithStream_randomResult"] = __v) });
+        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), GetLocal(L, "CallFunc_SelectInt_ReturnValue"), Val.Out(GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), __v => L["CallFunc_RandomIntFromRangeWithStream_randomResult"] = __v) });
     L_04B1:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_defenderCard"), GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_defenderCard"), GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DamageCard_targetDestroyed"), __v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_04FC:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

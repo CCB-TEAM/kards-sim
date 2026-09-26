@@ -46,13 +46,13 @@ public static Val ExecuteUbergraph_card_unit_universal_carrier(IHost H, Val self
     L_000F:
         __ef.Push(421);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
         H.SetMember(self, "TempCard", GetLocal(L, "CallFunc_Array_Get_Item"));
     L_0062:
         L["CallFunc_EqualEqual_NameName_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.GetMember(self, "TempCard"), "name"), Val.Name("card_event_plan")) == 0);
     L_00A2:
-        _ = H.Call("IsLocatedInHand", new Val[] { H.GetMember(self, "TempCard"), Val.Out(__v => L["CallFunc_IsLocatedInHand_isIt_1"] = __v) });
+        _ = H.Call("IsLocatedInHand", new Val[] { H.GetMember(self, "TempCard"), Val.Out(GetLocal(L, "CallFunc_IsLocatedInHand_isIt_1"), __v => L["CallFunc_IsLocatedInHand_isIt_1"] = __v) });
     L_00CB:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.GetMember(self, "TempCard"), "side"), H.GetMember(self, "side")) == 0);
     L_0107:
@@ -72,7 +72,7 @@ public static Val ExecuteUbergraph_card_unit_universal_carrier(IHost H, Val self
             }
         }
     L_015D:
-        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "TempCard"), H.GetMember(self, "cardID"), Val.Of(-1), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeKreditCost_qqq_1"] = __v) });
+        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "TempCard"), H.GetMember(self, "cardID"), Val.Of(-1), Val.Of(0), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeKreditCost_qqq_1"), __v => L["CallFunc_ChangeKreditCost_qqq_1"] = __v) });
     L_01A4:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -113,7 +113,7 @@ public static Val ExecuteUbergraph_card_unit_universal_carrier(IHost H, Val self
     L_0291:
         __ef.Push(1123);
     L_0296:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCards_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCards_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_02D1:
         H.SetMember(self, "TempCard", GetLocal(L, "CallFunc_Array_Get_Item_1"));
     L_02E4:
@@ -121,7 +121,7 @@ public static Val ExecuteUbergraph_card_unit_universal_carrier(IHost H, Val self
     L_0324:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetMember(H.GetMember(self, "TempCard"), "side"), H.GetMember(self, "side")) == 0);
     L_0360:
-        _ = H.Call("IsLocatedInHand", new Val[] { H.GetMember(self, "TempCard"), Val.Out(__v => L["CallFunc_IsLocatedInHand_isIt_2"] = __v) });
+        _ = H.Call("IsLocatedInHand", new Val[] { H.GetMember(self, "TempCard"), Val.Out(GetLocal(L, "CallFunc_IsLocatedInHand_isIt_2"), __v => L["CallFunc_IsLocatedInHand_isIt_2"] = __v) });
     L_0389:
         L["CallFunc_BooleanAND_ReturnValue_2"] = Val.Of((GetLocal(L, "CallFunc_IsLocatedInHand_isIt_2")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_2")).AsBool());
     L_03AF:
@@ -139,7 +139,7 @@ public static Val ExecuteUbergraph_card_unit_universal_carrier(IHost H, Val self
             }
         }
     L_03DF:
-        _ = H.Call("isBuffedByCard", new Val[] { H.GetMember(self, "TempCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
+        _ = H.Call("isBuffedByCard", new Val[] { H.GetMember(self, "TempCard"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed"), __v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
     L_0411:
         if (!(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed")).AsBool())
         {
@@ -153,7 +153,7 @@ public static Val ExecuteUbergraph_card_unit_universal_carrier(IHost H, Val self
             }
         }
     L_041B:
-        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "TempCard"), H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(__v => L["CallFunc_ChangeKreditCost_qqq_2"] = __v) });
+        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "TempCard"), H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeKreditCost_qqq_2"), __v => L["CallFunc_ChangeKreditCost_qqq_2"] = __v) });
     L_0462:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -194,7 +194,7 @@ public static Val ExecuteUbergraph_card_unit_universal_carrier(IHost H, Val self
     L_0561:
         goto L_04A8;
     L_0566:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0579:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool())
         {
@@ -208,7 +208,7 @@ public static Val ExecuteUbergraph_card_unit_universal_carrier(IHost H, Val self
             }
         }
     L_0583:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCardID"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_05B9:
         H.SetMember(self, "TempCard", GetLocal(L, "CallFunc_GetCardFromID_card"));
     L_05CC:
@@ -254,7 +254,7 @@ public static Val ExecuteUbergraph_card_unit_universal_carrier(IHost H, Val self
             }
         }
     L_0683:
-        _ = H.Call("IsLocatedInHand", new Val[] { H.GetMember(self, "TempCard"), Val.Out(__v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
+        _ = H.Call("IsLocatedInHand", new Val[] { H.GetMember(self, "TempCard"), Val.Out(GetLocal(L, "CallFunc_IsLocatedInHand_isIt"), __v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
     L_06AC:
         if (!(GetLocal(L, "CallFunc_IsLocatedInHand_isIt")).AsBool())
         {
@@ -268,7 +268,7 @@ public static Val ExecuteUbergraph_card_unit_universal_carrier(IHost H, Val self
             }
         }
     L_06B6:
-        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "TempCard"), H.GetMember(self, "cardID"), Val.Of(-1), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeKreditCost_qqq"] = __v) });
+        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "TempCard"), H.GetMember(self, "cardID"), Val.Of(-1), Val.Of(0), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeKreditCost_qqq"), __v => L["CallFunc_ChangeKreditCost_qqq"] = __v) });
     L_06FD:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -279,13 +279,13 @@ public static Val ExecuteUbergraph_card_unit_universal_carrier(IHost H, Val self
             default: goto __halt;
         }
     L_06FE:
-        _ = H.Call("GetAllCards", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetAllCards_cards"] = __v) });
+        _ = H.Call("GetAllCards", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetAllCards_cards"), __v => L["CallFunc_GetAllCards_cards"] = __v) });
     L_072B:
         L["Temp_int_Loop_Counter_Variable_1"] = Val.Of(0);
     L_0742:
         goto L_0275;
     L_0747:
-        _ = H.Call("GetAllCards", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetAllCards_cards_1"] = __v) });
+        _ = H.Call("GetAllCards", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetAllCards_cards_1"), __v => L["CallFunc_GetAllCards_cards_1"] = __v) });
     L_0774:
         goto L_0533;
     L_0779:
@@ -301,7 +301,7 @@ public static Val ExecuteUbergraph_card_unit_universal_carrier(IHost H, Val self
     L_07D4:
         goto L_0566;
     L_07D9:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1"), __v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_07EC:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1")).AsBool())
         {
@@ -333,7 +333,7 @@ public static Val ExecuteUbergraph_card_unit_universal_carrier(IHost H, Val self
             }
         }
     L_08A2:
-        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_event_blast"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.Of(0), Val.Out(__v => L["CallFunc_SpawnCardInHandBySide_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_event_blast"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_SpawnCardInHandBySide_spawnedCardID"), __v => L["CallFunc_SpawnCardInHandBySide_spawnedCardID"] = __v) });
     L_08FE:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_unit_is_i(IHost H, Val self, Val[] args)
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetVar("K2Node_Event_goingToLocation"), Val.Of(4), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches_1"] = __v) });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetVar("K2Node_Event_goingToLocation"), Val.Of(4), Val.Out(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches_1"), __v => L["CallFunc_EnumCompareCardLocation_Branches_1"] = __v) });
     L_0028:
         L["K2Node_SwitchEnum_CmpSuccess_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches_1"), Val.Of(0)) != 0);
     L_0047:
@@ -46,15 +46,15 @@ public static Val ExecuteUbergraph_card_unit_is_i(IHost H, Val self, Val[] args)
     L_0082:
         goto L_01B5;
     L_0087:
-        _ = H.Call("GetCardsInSupportLineBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, Val.True, Val.Out(__v => L["CallFunc_GetCardsInSupportLineBySide_cards"] = __v) });
+        _ = H.Call("GetCardsInSupportLineBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, Val.True, Val.Out(GetLocal(L, "CallFunc_GetCardsInSupportLineBySide_cards"), __v => L["CallFunc_GetCardsInSupportLineBySide_cards"] = __v) });
     L_00BF:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInSupportLineBySide_cards") });
     L_00FA:
-        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, Val.Name("card_unit_is_i"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, GetLocal(L, "CallFunc_Array_Length_ReturnValue"), H.GetMember(self, "salvageFaction"), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, Val.Name("card_unit_is_i"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.False, GetLocal(L, "CallFunc_Array_Length_ReturnValue"), H.GetMember(self, "salvageFaction"), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnCardonBattlefield_spawnedCardID"), __v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
     L_0165:
         goto L_01B5;
     L_016A:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetVar("K2Node_Event_goingToLocation"), Val.Of(3), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetVar("K2Node_Event_goingToLocation"), Val.Of(3), Val.Out(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), __v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_0188:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_01A7:

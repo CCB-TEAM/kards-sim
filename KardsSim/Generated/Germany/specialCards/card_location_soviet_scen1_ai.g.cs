@@ -36,7 +36,7 @@ public static Val ExecuteUbergraph_card_location_soviet_scen1_ai(IHost H, Val se
     L_000A:
         L["Temp_text_Variable"] = Val.Of("Your troops are about to get trapped in the Bryansk pocket, get them out as fast as you can!");
     L_00A0:
-        _ = H.Call("ShowCampaignMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.True, Val.False, Val.Of(0f), Val.False });
+        _ = H.Call("ShowCampaignMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.True, Val.False, Val.Of(0f), Val.False });
     L_00D5:
         goto __halt;
     L_00D7:

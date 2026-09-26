@@ -36,13 +36,13 @@ public static Val ExecuteUbergraph_card_event_from_the_deep(IHost H, Val self, V
     L_000A:
         H.SetMember(self, "Card Played", H.GetVar("K2Node_Event_cardPlayed"));
     L_001D:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetMember(self, "Card Played"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetMember(self, "Card Played"), Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0046:
-        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "Card Played"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "Card Played"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_006F:
-        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, H.GetMember(self, "Card Played"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
+        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, H.GetMember(self, "Card Played"), Val.Out(GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt"), __v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
     L_008B:
-        _ = H.Call("IsUnrevealedCovertCard", new Val[] { H.GetMember(self, "Card Played"), Val.Out(__v => L["CallFunc_IsUnrevealedCovertCard_isIt"] = __v) });
+        _ = H.Call("IsUnrevealedCovertCard", new Val[] { H.GetMember(self, "Card Played"), Val.Out(GetLocal(L, "CallFunc_IsUnrevealedCovertCard_isIt"), __v => L["CallFunc_IsUnrevealedCovertCard_isIt"] = __v) });
     L_00B4:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt")).AsBool() && (GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool());
     L_00DA:
@@ -54,7 +54,7 @@ public static Val ExecuteUbergraph_card_event_from_the_deep(IHost H, Val self, V
     L_0143:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_2")).AsBool()) goto L_01CE;
     L_0151:
-        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(H.GetMember(self, "Card Played"), "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
+        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(H.GetMember(self, "Card Played"), "cardID"), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_GotchaTriggered_qqq"), __v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
     L_01A0:
         _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "Card Played"), self });
     L_01CE:

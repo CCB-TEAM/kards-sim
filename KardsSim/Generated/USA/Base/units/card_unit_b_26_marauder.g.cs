@@ -29,9 +29,9 @@ public static Val OnDeploymentEffectTriggered(IHost H, Val self, Val[] args)
         L["cardTriggered"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["instigatorID"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_TriggerMultiple = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["TriggerMultiple"] = Val.Nothing;
+        L["TriggerMultiple"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0013:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "cardTriggered"), "side"), H.GetMember(self, "side")) == 0);
     L_004F:

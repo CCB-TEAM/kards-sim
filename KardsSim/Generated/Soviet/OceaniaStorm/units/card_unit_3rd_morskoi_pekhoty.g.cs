@@ -34,9 +34,9 @@ public static Val ExecuteUbergraph_card_unit_3rd_morskoi_pekhoty(IHost H, Val se
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, Val.Name("card_unit_light_infantry"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), Val.Of(0), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardOnBattlefield_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, Val.Name("card_unit_light_infantry"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), Val.Of(0), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnCardOnBattlefield_spawnedCardID"), __v => L["CallFunc_SpawnCardOnBattlefield_spawnedCardID"] = __v) });
     L_006A:
-        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_event_blast"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable_1"] = __v), Val.Of(0), Val.Out(__v => L["CallFunc_SpawnCardInHandBySide_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_event_blast"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(GetLocal(L, "Temp_text_Variable_1"), __v => L["Temp_text_Variable_1"] = __v), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_SpawnCardInHandBySide_spawnedCardID"), __v => L["CallFunc_SpawnCardInHandBySide_spawnedCardID"] = __v) });
     L_00C6:
         goto __halt;
     L_00C8:

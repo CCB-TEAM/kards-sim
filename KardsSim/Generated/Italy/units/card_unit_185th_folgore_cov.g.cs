@@ -35,9 +35,9 @@ public static Val ExecuteUbergraph_card_unit_185th_folgore_cov(IHost H, Val self
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("GetStartingSide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetStartingSide_side"] = __v) });
+        _ = H.Call("GetStartingSide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetStartingSide_side"), __v => L["CallFunc_GetStartingSide_side"] = __v) });
     L_0037:
-        _ = H.Call("EnumCompareSide", new Val[] { self, GetLocal(L, "CallFunc_GetStartingSide_side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
+        _ = H.Call("EnumCompareSide", new Val[] { self, GetLocal(L, "CallFunc_GetStartingSide_side"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), __v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_005C:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_007B:
@@ -45,7 +45,7 @@ public static Val ExecuteUbergraph_card_unit_185th_folgore_cov(IHost H, Val self
     L_0089:
         goto L_00D7;
     L_008E:
-        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeKreditCost_qqq"] = __v) });
+        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeKreditCost_qqq"), __v => L["CallFunc_ChangeKreditCost_qqq"] = __v) });
     L_00CD:
         goto L_00D7;
     L_00D2:

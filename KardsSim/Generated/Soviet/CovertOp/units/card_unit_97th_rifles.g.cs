@@ -34,9 +34,9 @@ public static Val ExecuteUbergraph_card_unit_97th_rifles(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("SpawnCardInDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_unit_414th_rifles"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(0), Val.False, Val.False, Val.True, Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardInDeckBySide_spawnedCardIDs"] = __v) });
+        _ = H.Call("SpawnCardInDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_unit_414th_rifles"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(0), Val.False, Val.False, Val.True, Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnCardInDeckBySide_spawnedCardIDs"), __v => L["CallFunc_SpawnCardInDeckBySide_spawnedCardIDs"] = __v) });
     L_0062:
-        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
+        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DrawCardsFromDeckbySide_cardsIDs"), __v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
     L_00AD:
         goto __halt;
     L_00AF:

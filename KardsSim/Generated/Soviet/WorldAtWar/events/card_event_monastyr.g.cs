@@ -40,11 +40,11 @@ public static Val ExecuteUbergraph_card_event_monastyr(IHost H, Val self, Val[] 
     L_000F:
         __ef.Push(189);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
         L["CallFunc_GetCombatKeywords_keywords"] = H.MakeArray(new Val[] {  });
     L_005A:
-        _ = H.Call("GetCombatKeywords", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_GetCombatKeywords_keywords"] = __v), Val.Out(__v => L["CallFunc_GetCombatKeywords_numberOfKeywords"] = __v) });
+        _ = H.Call("GetCombatKeywords", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_GetCombatKeywords_keywords"), __v => L["CallFunc_GetCombatKeywords_keywords"] = __v), Val.Out(GetLocal(L, "CallFunc_GetCombatKeywords_numberOfKeywords"), __v => L["CallFunc_GetCombatKeywords_numberOfKeywords"] = __v) });
     L_008C:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetCombatKeywords_numberOfKeywords"), Val.Of(1)) > 0);
     L_00AE:
@@ -87,7 +87,7 @@ public static Val ExecuteUbergraph_card_event_monastyr(IHost H, Val self, Val[] 
             }
         }
     L_01F8:
-        _ = H.Call("DestroyMultipleCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cards_to_destroy"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_DestroyMultipleCards_qqq"] = __v) });
+        _ = H.Call("DestroyMultipleCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cards_to_destroy"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_DestroyMultipleCards_qqq"), __v => L["CallFunc_DestroyMultipleCards_qqq"] = __v) });
     L_0237:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -97,7 +97,7 @@ public static Val ExecuteUbergraph_card_event_monastyr(IHost H, Val self, Val[] 
             default: goto __halt;
         }
     L_0238:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0273:
         L["CallFunc_Array_Add_ReturnValue"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "cards_to_destroy"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID") });
     L_02CD:
@@ -117,7 +117,7 @@ public static Val ExecuteUbergraph_card_event_monastyr(IHost H, Val self, Val[] 
     L_0301:
         goto L_02CE;
     L_0306:
-        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
+        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), __v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
     L_0334:
         goto L_02EA;
     L_0339:

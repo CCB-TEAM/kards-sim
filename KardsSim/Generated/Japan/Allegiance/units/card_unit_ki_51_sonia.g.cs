@@ -34,11 +34,11 @@ public static Val ExecuteUbergraph_card_unit_ki_51_sonia(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_defenderCard"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_defenderCard"), Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0033:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_00A6;
     L_0041:
-        _ = H.Call("IsPinned", new Val[] { H.GetVar("K2Node_Event_defenderCard"), Val.Out(__v => L["CallFunc_IsPinned_isPinned"] = __v) });
+        _ = H.Call("IsPinned", new Val[] { H.GetVar("K2Node_Event_defenderCard"), Val.Out(GetLocal(L, "CallFunc_IsPinned_isPinned"), __v => L["CallFunc_IsPinned_isPinned"] = __v) });
     L_006A:
         if (!(GetLocal(L, "CallFunc_IsPinned_isPinned")).AsBool()) goto L_00A6;
     L_0078:

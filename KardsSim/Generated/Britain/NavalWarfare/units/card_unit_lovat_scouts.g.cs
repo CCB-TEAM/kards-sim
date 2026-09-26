@@ -40,7 +40,7 @@ public static Val ExecuteUbergraph_card_unit_lovat_scouts(IHost H, Val self, Val
             default: goto __halt;
         }
     L_000F:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0022:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool())
         {
@@ -53,9 +53,9 @@ public static Val ExecuteUbergraph_card_unit_lovat_scouts(IHost H, Val self, Val
             }
         }
     L_002C:
-        _ = H.Call("GetDeckByside", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetDeckByside_deckCardIDs"] = __v) });
+        _ = H.Call("GetDeckByside", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs"), __v => L["CallFunc_GetDeckByside_deckCardIDs"] = __v) });
     L_0062:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs"), Val.Of(0), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs"), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0099:
         H.SetMember(self, "affectedCardID", GetLocal(L, "CallFunc_Array_Get_Item"));
     L_00B4:
@@ -72,9 +72,9 @@ public static Val ExecuteUbergraph_card_unit_lovat_scouts(IHost H, Val self, Val
             }
         }
     L_00E0:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affectedCardID"), H.GetMember(self, "affectedCardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affectedCardID"), H.GetMember(self, "affectedCardID"), Val.Out(GetLocal(L, "CallFunc_JSON_SetInt_found"), __v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_0127:
-        _ = H.Call("AddCustomGameplayTag", new Val[] { H.GetMember(self, "cardFunction"), H.MakeArray(new Val[] { Val.Name("subtype.navy") }), H.GetMember(self, "affectedCardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_AddCustomGameplayTag_qqq"] = __v) });
+        _ = H.Call("AddCustomGameplayTag", new Val[] { H.GetMember(self, "cardFunction"), H.MakeArray(new Val[] { Val.Name("subtype.navy") }), H.GetMember(self, "affectedCardID"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_AddCustomGameplayTag_qqq"), __v => L["CallFunc_AddCustomGameplayTag_qqq"] = __v) });
     L_0181:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -84,7 +84,7 @@ public static Val ExecuteUbergraph_card_unit_lovat_scouts(IHost H, Val self, Val
             default: goto __halt;
         }
     L_0182:
-        _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affectedCardID"), Val.Out(__v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found"] = __v) });
+        _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affectedCardID"), Val.Out(GetLocal(L, "CallFunc_JSON_GetInt_value"), __v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetInt_found"), __v => L["CallFunc_JSON_GetInt_found"] = __v) });
     L_01C9:
         if (!(GetLocal(L, "CallFunc_JSON_GetInt_found")).AsBool())
         {
@@ -99,9 +99,9 @@ public static Val ExecuteUbergraph_card_unit_lovat_scouts(IHost H, Val self, Val
     L_01D3:
         H.SetMember(self, "affectedCardID", GetLocal(L, "CallFunc_JSON_GetInt_value"));
     L_01EE:
-        _ = H.Call("RemoveCustomGameplayTag", new Val[] { H.GetMember(self, "cardFunction"), H.MakeArray(new Val[] { Val.Name("subtype.navy") }), H.GetMember(self, "affectedCardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_RemoveCustomGameplayTag_qqq"] = __v) });
+        _ = H.Call("RemoveCustomGameplayTag", new Val[] { H.GetMember(self, "cardFunction"), H.MakeArray(new Val[] { Val.Name("subtype.navy") }), H.GetMember(self, "affectedCardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(GetLocal(L, "CallFunc_RemoveCustomGameplayTag_qqq"), __v => L["CallFunc_RemoveCustomGameplayTag_qqq"] = __v) });
     L_0249:
-        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affectedCardID"), Val.Out(__v => L["CallFunc_JSON_Clear_found"] = __v) });
+        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affectedCardID"), Val.Out(GetLocal(L, "CallFunc_JSON_Clear_found"), __v => L["CallFunc_JSON_Clear_found"] = __v) });
     L_0287:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -111,7 +111,7 @@ public static Val ExecuteUbergraph_card_unit_lovat_scouts(IHost H, Val self, Val
             default: goto __halt;
         }
     L_0288:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1"), __v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_029B:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1")).AsBool())
         {

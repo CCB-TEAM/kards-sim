@@ -40,23 +40,23 @@ public static Val ExecuteUbergraph_card_event_on_the_ascend(IHost H, Val self, V
     L_000F:
         __ef.Push(490);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
-        _ = H.Call("getTotalAttack", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
+        _ = H.Call("getTotalAttack", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_getTotalAttack_totalAttack"), __v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
     L_0078:
         L["CallFunc_Less_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalAttack_totalAttack"), H.GetMember(self, "attackValue")) < 0);
     L_009E:
         if (!(GetLocal(L, "CallFunc_Less_IntInt_ReturnValue_1")).AsBool()) goto L_033D;
     L_00AC:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_00E7:
-        _ = H.Call("getTotalAttack", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
+        _ = H.Call("getTotalAttack", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_getTotalAttack_totalAttack"), __v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
     L_0110:
         H.SetMember(self, "attackValue", GetLocal(L, "CallFunc_getTotalAttack_totalAttack"));
     L_012B:
         _ = H.Call("Array_Clear", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "affectedUnits") });
     L_0154:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_018F:
         L["CallFunc_Array_Add_ReturnValue"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "affectedUnits"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID") });
     L_01E9:
@@ -82,9 +82,9 @@ public static Val ExecuteUbergraph_card_event_on_the_ascend(IHost H, Val self, V
     L_02B9:
         goto L_000F;
     L_02BE:
-        _ = H.Call("DestroyMultipleCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "affectedUnits"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_DestroyMultipleCards_qqq"] = __v) });
+        _ = H.Call("DestroyMultipleCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "affectedUnits"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_DestroyMultipleCards_qqq"), __v => L["CallFunc_DestroyMultipleCards_qqq"] = __v) });
     L_02FD:
-        _ = H.Call("SalvageMultipleUnits", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "affectedUnits"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_SalvageMultipleUnits_qqq"] = __v) });
+        _ = H.Call("SalvageMultipleUnits", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "affectedUnits"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_SalvageMultipleUnits_qqq"), __v => L["CallFunc_SalvageMultipleUnits_qqq"] = __v) });
     L_033C:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -94,9 +94,9 @@ public static Val ExecuteUbergraph_card_event_on_the_ascend(IHost H, Val self, V
             default: goto __halt;
         }
     L_033D:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0378:
-        _ = H.Call("getTotalAttack", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
+        _ = H.Call("getTotalAttack", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_getTotalAttack_totalAttack"), __v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
     L_03A1:
         L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalAttack_totalAttack"), H.GetMember(self, "attackValue")) == 0);
     L_03C7:
@@ -123,7 +123,7 @@ public static Val ExecuteUbergraph_card_event_on_the_ascend(IHost H, Val self, V
     L_040E:
         H.SetMember(self, "attackValue", Val.Of(100));
     L_0425:
-        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
+        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), __v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
     L_0453:
         goto L_03F2;
     L_0458:

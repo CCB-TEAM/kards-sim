@@ -29,7 +29,7 @@ public static Val Get_Hours_and_Minutes_from_Timespan(IHost H, Val self, Val[] a
         L["InTimespan"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_OutHoursAndMinutesString = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["OutHoursAndMinutesString"] = Val.Nothing;
+        L["OutHoursAndMinutesString"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("BreakTimespan2", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "InTimespan"), Val.Out(__v => L["CallFunc_BreakTimespan2_Days"] = __v), Val.Out(__v => L["CallFunc_BreakTimespan2_Hours"] = __v), Val.Out(__v => L["CallFunc_BreakTimespan2_Minutes"] = __v), Val.Out(__v => L["CallFunc_BreakTimespan2_Seconds"] = __v), Val.Out(__v => L["CallFunc_BreakTimespan2_FractionNano"] = __v) });
     L_0040:

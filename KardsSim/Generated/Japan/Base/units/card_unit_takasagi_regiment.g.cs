@@ -34,9 +34,9 @@ public static Val ExecuteUbergraph_card_unit_takasagi_regiment(IHost H, Val self
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_001D:
-        _ = H.Call("DiscardRandomCardFromHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_DiscardRandomCardFromHand_discardedCardID"] = __v) });
+        _ = H.Call("DiscardRandomCardFromHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_DiscardRandomCardFromHand_discardedCardID"), __v => L["CallFunc_DiscardRandomCardFromHand_discardedCardID"] = __v) });
     L_005C:
         goto __halt;
     L_005E:

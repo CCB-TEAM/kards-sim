@@ -471,7 +471,7 @@ public static Val CanPlayWeatherCard(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_can = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["can"] = Val.Nothing;
+        L["can"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         L["CallFunc_Not_PreBool_ReturnValue"] = H.Call("Not_PreBool", new Val[] { Val.Ref("KismetMathLibrary"), H.GetMember(self, "hasPlayedWeatherCardThisTurn") });
     L_001D:
@@ -1008,7 +1008,7 @@ public static Val FetchAllCardsWithEventTrigger(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["TriggerToFetch"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_cardsWithThisTrigger = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["cardsWithThisTrigger"] = Val.Nothing;
+        L["cardsWithThisTrigger"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L["triggerCards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1171);
@@ -1113,7 +1113,7 @@ public static Val FetchCardFromCardID(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["card_ID_To_Fetch"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_fetchedCard = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["fetchedCard"] = Val.Nothing;
+        L["fetchedCard"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_LessEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "card_ID_To_Fetch"), Val.Of(0)) <= 0);
     L_0022:
@@ -1152,15 +1152,15 @@ public static Val FetchCardsByLocation(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["location"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_QtyInLocation = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["QtyInLocation"] = Val.Nothing;
+        L["QtyInLocation"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_isLocationFull = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["isLocationFull"] = Val.Nothing;
+        L["isLocationFull"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_AllCardsInLocation = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["AllCardsInLocation"] = Val.Nothing;
+        L["AllCardsInLocation"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_FirstCard = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["FirstCard"] = Val.Nothing;
+        L["FirstCard"] = args.Length > 4 ? args[4].In : Val.Nothing;
         var __out_fetchedCardsIDs = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["fetchedCardsIDs"] = Val.Nothing;
+        L["fetchedCardsIDs"] = args.Length > 5 ? args[5].In : Val.Nothing;
     L["TmpFetchedCards"] = H.MakeArray(new Val[] { });
     L["TmpFetchedCardsIDs"] = H.MakeArray(new Val[] { });
     L_0000:
@@ -1423,7 +1423,7 @@ public static Val FetchCardsByLocationSorted(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["location"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_cardIDs = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["cardIDs"] = Val.Nothing;
+        L["cardIDs"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L["_cardIDs"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1072);
@@ -1555,7 +1555,7 @@ public static Val GenerateNextCardID(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["turnNumber"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_nextCardID = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["nextCardID"] = Val.Nothing;
+        L["nextCardID"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("IncrementCardsCreatedThisTurn", new Val[] { self });
     L_000E:
@@ -1579,7 +1579,7 @@ public static Val GetAllCardInBattle(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_AllCardsInBattle = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["AllCardsInBattle"] = Val.Nothing;
+        L["AllCardsInBattle"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         L["CallFunc_Map_Values_Values"] = H.MakeArray(new Val[] {  });
     L_000B:
@@ -1603,7 +1603,7 @@ public static Val GetAllCardInBattleAsMap(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_AllCardsInBattle = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["AllCardsInBattle"] = Val.Nothing;
+        L["AllCardsInBattle"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         L["AllCardsInBattle"] = H.GetMember(self, "AllCardsInBattle");
     L_001B:
@@ -1623,7 +1623,7 @@ public static Val GetAllStaticCardsSortedByName(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_OutAllStaticCards = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["OutAllStaticCards"] = Val.Nothing;
+        L["OutAllStaticCards"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         L["OutAllStaticCards"] = H.GetMember(self, "AllStaticCardsSortedByName");
     L_001B:
@@ -1644,7 +1644,7 @@ public static Val GetAllyFactionBySide(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["SideToGet"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_AllyFaction = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["AllyFaction"] = Val.Nothing;
+        L["AllyFaction"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "SideToGet"), Val.Of(0)) != 0);
     L_001F:
@@ -1686,7 +1686,7 @@ public static Val GetAutoPlayCards(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_AutoPlayerCardIDs = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["AutoPlayerCardIDs"] = Val.Nothing;
+        L["AutoPlayerCardIDs"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         L["AutoPlayerCardIDs"] = H.GetMember(self, "AutoPlayerCardIDs");
     L_001B:
@@ -1706,7 +1706,7 @@ public static Val GetBuffsToRemoveEndOfTurn(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_BuffsToRemove = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["BuffsToRemove"] = Val.Nothing;
+        L["BuffsToRemove"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         L["BuffsToRemove"] = H.GetMember(self, "BuffsToRemoveEndOfTurn");
     L_001B:
@@ -1727,7 +1727,7 @@ public static Val getCardsPlayedFromHandByTurn(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["turnNumber"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_cardsPlayed = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["cardsPlayed"] = Val.Nothing;
+        L["cardsPlayed"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "turnNumber"), Val.Of(0)) > 0);
     L_0022:
@@ -1761,7 +1761,7 @@ public static Val GetClientSideLocationCard(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_LocationCard = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["LocationCard"] = Val.Nothing;
+        L["LocationCard"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetClientSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetClientSide_OutClientSide"] = __v) });
     L_0013:
@@ -1798,7 +1798,7 @@ public static Val GetCurrentCardID(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["turnNumber"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_currentCardID = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["currentCardID"] = Val.Nothing;
+        L["currentCardID"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "turnNumber"), Val.Of(0)) == 0);
     L_0022:
@@ -1827,7 +1827,7 @@ public static Val GetDeckBySide(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["deckSide"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_DeckCardIDs = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["DeckCardIDs"] = Val.Nothing;
+        L["DeckCardIDs"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "deckSide"), Val.Of(1)) != 0);
     L_001F:
@@ -1862,7 +1862,7 @@ public static Val GetDestroyedCardsCountBySide(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["sideToGet"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_count = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["count"] = Val.Nothing;
+        L["count"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "sideToGet"), Val.Of(1)) != 0);
     L_001F:
@@ -1900,7 +1900,7 @@ public static Val GetDestroyedCardsIDs(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_DestroyedCardsIDs = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["DestroyedCardsIDs"] = Val.Nothing;
+        L["DestroyedCardsIDs"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         L["DestroyedCardsIDs"] = H.GetMember(self, "DestroyedCardsIDs_All");
     L_001B:
@@ -1921,7 +1921,7 @@ public static Val GetDestroyedCardsIDsByTurn(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["turnID"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_DestroyedCardsIDs = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["DestroyedCardsIDs"] = Val.Nothing;
+        L["DestroyedCardsIDs"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_Map_Find_ReturnValue"] = H.Call("Map_Find", new Val[] { Val.Ref("BlueprintMapLibrary"), H.GetMember(self, "DestroyedCardIDsByTurnNumber"), GetLocal(L, "turnID"), GetLocal(L, "CallFunc_Map_Find_Value") });
     L_0045:
@@ -1943,7 +1943,7 @@ public static Val GetExecuteWaitPlayFromHand(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_ShouldExecuteWait = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["ShouldExecuteWait"] = Val.Nothing;
+        L["ShouldExecuteWait"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         L["ShouldExecuteWait"] = H.GetMember(self, "ShouldExecuteWaitPlayFromHand");
     L_0013:
@@ -1964,7 +1964,7 @@ public static Val GetFatigueDamageBySide(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["SideToGet"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_FatigueDamage = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["FatigueDamage"] = Val.Nothing;
+        L["FatigueDamage"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "SideToGet"), Val.Of(0)) != 0);
     L_001F:
@@ -2006,7 +2006,7 @@ public static Val GetFrontlineOwnerSide(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_ownerSide = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["ownerSide"] = Val.Nothing;
+        L["ownerSide"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         L["ownerSide"] = H.GetMember(self, "FrontlineOwner");
     L_001B:
@@ -2027,7 +2027,7 @@ public static Val GetHQ_DamagedAmountThisTurn(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["HQ_Side"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_damagedAmount = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["damagedAmount"] = Val.Nothing;
+        L["damagedAmount"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "HQ_Side"), Val.Of(1)) != 0);
     L_001F:
@@ -2061,7 +2061,7 @@ public static Val GetIsLocalClientTurn(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_IsClientTurn = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["IsClientTurn"] = Val.Nothing;
+        L["IsClientTurn"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         L["IsClientTurn"] = H.GetMember(self, "IsLocalClientTurn");
     L_0013:
@@ -2082,7 +2082,7 @@ public static Val getKreditSlotsLostBySide(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["sideToGet"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_KreditSlotsLost = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["KreditSlotsLost"] = Val.Nothing;
+        L["KreditSlotsLost"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "sideToGet"), Val.Of(1)) != 0);
     L_001F:
@@ -2120,7 +2120,7 @@ public static Val getKreditsSpentThisTurn(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_OperationKreditsSpent = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["OperationKreditsSpent"] = Val.Nothing;
+        L["OperationKreditsSpent"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         L["OperationKreditsSpent"] = H.GetMember(self, "OperationKreditsSpentThisTurn");
     L_001B:
@@ -2141,9 +2141,9 @@ public static Val GetLocationCardBySide(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["SideToGet"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_LocationCard = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["LocationCard"] = Val.Nothing;
+        L["LocationCard"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_LocationCardID = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["LocationCardID"] = Val.Nothing;
+        L["LocationCardID"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "SideToGet"), Val.Of(1)) != 0);
     L_001F:
@@ -2183,7 +2183,7 @@ public static Val GetMainFactionBySide(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["SideToGet"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_MainFaction = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["MainFaction"] = Val.Nothing;
+        L["MainFaction"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "SideToGet"), Val.Of(0)) != 0);
     L_001F:
@@ -2225,7 +2225,7 @@ public static Val GetMatchFinished(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_OutFinished = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["OutFinished"] = Val.Nothing;
+        L["OutFinished"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         L["OutFinished"] = H.GetMember(self, "MatchFinished");
     L_0013:
@@ -2245,7 +2245,7 @@ public static Val GetOpponentSideLocationCard(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_LocationCard = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["LocationCard"] = Val.Nothing;
+        L["LocationCard"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetOpponentSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOpponentSide_OutOpponentSide"] = __v) });
     L_0013:
@@ -2282,7 +2282,7 @@ public static Val GetSideEffectHolderBySide(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["SideToGet"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_EffectHolder = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["EffectHolder"] = Val.Nothing;
+        L["EffectHolder"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "SideToGet"), Val.Of(1)) != 0);
     L_001F:
@@ -2316,7 +2316,7 @@ public static Val GetStartingSide(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_StartingSide = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["StartingSide"] = Val.Nothing;
+        L["StartingSide"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         L["StartingSide"] = H.GetMember(self, "StartingSide");
     L_001B:
@@ -2336,7 +2336,7 @@ public static Val getStateAsJsonString(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_stateJsonString = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["stateJsonString"] = Val.Nothing;
+        L["stateJsonString"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         __ef.Push(2338);
     L_0005:
@@ -2558,7 +2558,7 @@ public static Val GetStopAttack(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_stopAttack = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["stopAttack"] = Val.Nothing;
+        L["stopAttack"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         L["stopAttack"] = H.GetMember(self, "stopAttack");
     L_0013:
@@ -2578,7 +2578,7 @@ public static Val GetStopFurtherActions(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_stopFurtherActions = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["stopFurtherActions"] = Val.Nothing;
+        L["stopFurtherActions"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         L["stopFurtherActions"] = H.GetMember(self, "stopFurtherActions");
     L_0013:
@@ -2598,7 +2598,7 @@ public static Val GetTurnNumber(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_TurnNumber = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["TurnNumber"] = Val.Nothing;
+        L["TurnNumber"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         L["TurnNumber"] = H.GetMember(self, "CurrentTurnNumberInBattle");
     L_001B:
@@ -2618,7 +2618,7 @@ public static Val GetUnitDestroyedThisTurn(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_UnitDestroyed = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["UnitDestroyed"] = Val.Nothing;
+        L["UnitDestroyed"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         L["UnitDestroyed"] = H.GetMember(self, "UnitDestroyedThisTurn");
     L_0013:
@@ -2638,7 +2638,7 @@ public static Val GetWaitPlayFromHandCards(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_WaitPlayFromHandCards = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["WaitPlayFromHandCards"] = Val.Nothing;
+        L["WaitPlayFromHandCards"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         L["WaitPlayFromHandCards"] = H.GetMember(self, "WaitPlayFromHandCards");
     L_001B:
@@ -2800,7 +2800,7 @@ public static Val IsActionProcess(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_ActionProcess = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["ActionProcess"] = Val.Nothing;
+        L["ActionProcess"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         L["ActionProcess"] = H.GetMember(self, "ActionProcess");
     L_0013:
@@ -2823,7 +2823,7 @@ public static Val IsCheatGameplayRestrictionActive(IHost H, Val self, Val[] args
         L["restriction"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["cheatCardID"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_isRestricted = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["isRestricted"] = Val.Nothing;
+        L["isRestricted"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         __ef.Push(690);
     L_0005:
@@ -2910,7 +2910,7 @@ public static Val IsFrontlineLimited(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_FrontlineLimited = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["FrontlineLimited"] = Val.Nothing;
+        L["FrontlineLimited"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         L["CallFunc_Set_IsNotEmpty_ReturnValue"] = H.Call("Set_IsNotEmpty", new Val[] { Val.Ref("BlueprintSetLibrary"), H.GetMember(self, "FrontlineLimiters") });
     L_0033:
@@ -2934,7 +2934,7 @@ public static Val IsThereGameplayRestriction(IHost H, Val self, Val[] args)
         L["side"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["restriction"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_isRestricted = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["isRestricted"] = Val.Nothing;
+        L["isRestricted"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(605);
     L_0005:
@@ -3036,7 +3036,7 @@ public static Val RemoveCardFromDeckBySide(IHost H, Val self, Val[] args)
         L["deckSide"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["cardToRemove"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_removedIndex = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["removedIndex"] = Val.Nothing;
+        L["removedIndex"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["_removedIndex"] = Val.Of(0);
     L_0017:
@@ -3347,7 +3347,7 @@ public static Val SetAllStaticCardsSortedByName(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_InAllStaticCards = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["InAllStaticCards"] = Val.Nothing;
+        L["InAllStaticCards"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         H.SetMember(self, "AllStaticCardsSortedByName", GetLocal(L, "InAllStaticCards"));
     L_001B:
@@ -3401,7 +3401,7 @@ public static Val SetDeckBySide(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["deckSide"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_deckCardIDs = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["deckCardIDs"] = Val.Nothing;
+        L["deckCardIDs"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "deckSide"), Val.Of(1)) != 0);
     L_001F:
@@ -3667,9 +3667,9 @@ public static Val SortCardsByLocationNumber(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_cards = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["cards"] = Val.Nothing;
+        L["cards"] = args.Length > 0 ? args[0].In : Val.Nothing;
         var __out_sortedCards = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["sortedCards"] = Val.Nothing;
+        L["sortedCards"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         __ef.Push(1160);
     L_0005:

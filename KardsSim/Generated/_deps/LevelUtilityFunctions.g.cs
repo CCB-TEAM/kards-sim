@@ -60,7 +60,7 @@ public static Val IsCurrentLevel(IHost H, Val self, Val[] args)
         L["LevelName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_IsCurrentLevel = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["IsCurrentLevel"] = Val.Nothing;
+        L["IsCurrentLevel"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetCurrentStreamingLevelName", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetCurrentStreamingLevelName_Current_Level"] = __v) });
     L_0020:

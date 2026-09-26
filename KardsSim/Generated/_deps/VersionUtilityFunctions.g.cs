@@ -29,13 +29,13 @@ public static Val GetProjectSemanticVersion(IHost H, Val self, Val[] args)
         L["InVersionOptional"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_FullString = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["FullString"] = Val.Nothing;
+        L["FullString"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_Major = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["Major"] = Val.Nothing;
+        L["Major"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_Minor = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["Minor"] = Val.Nothing;
+        L["Minor"] = args.Length > 4 ? args[4].In : Val.Nothing;
         var __out_Patch = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["Patch"] = Val.Nothing;
+        L["Patch"] = args.Length > 5 ? args[5].In : Val.Nothing;
     L_0000:
         L["CallFunc_Len_ReturnValue"] = H.Call("Len", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "InVersionOptional") });
     L_0025:
@@ -125,7 +125,7 @@ public static Val HasKardsAccount(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_OutHasKardsAccount = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["OutHasKardsAccount"] = Val.Nothing;
+        L["OutHasKardsAccount"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetDSession", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetDSession_dSession"] = __v) });
     L_0036:
@@ -152,9 +152,9 @@ public static Val Is_Client_Version_OK(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_isIt = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["isIt"] = Val.Nothing;
+        L["isIt"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_failReason = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["failReason"] = Val.Nothing;
+        L["failReason"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(6391);
     L_0005:
@@ -537,11 +537,11 @@ public static Val Split_Version_Into_Ints(IHost H, Val self, Val[] args)
         L["InVersion"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_Major = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["Major"] = Val.Nothing;
+        L["Major"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_Minor = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["Minor"] = Val.Nothing;
+        L["Minor"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_Patch = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["Patch"] = Val.Nothing;
+        L["Patch"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
         __ef.Push(1063);
     L_0005:

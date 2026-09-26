@@ -40,7 +40,7 @@ public static Val ExecuteUbergraph_card_event_to_the_last_man(IHost H, Val self,
     L_000F:
         __ef.Push(170);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
         L["CallFunc_Array_Add_ReturnValue"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "cardsToDestroy"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID") });
     L_00A9:
@@ -81,7 +81,7 @@ public static Val ExecuteUbergraph_card_event_to_the_last_man(IHost H, Val self,
             }
         }
     L_01E5:
-        _ = H.Call("DestroyMultipleCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardsToDestroy"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_DestroyMultipleCards_qqq"] = __v) });
+        _ = H.Call("DestroyMultipleCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardsToDestroy"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_DestroyMultipleCards_qqq"), __v => L["CallFunc_DestroyMultipleCards_qqq"] = __v) });
     L_0224:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -95,7 +95,7 @@ public static Val ExecuteUbergraph_card_event_to_the_last_man(IHost H, Val self,
     L_023C:
         goto L_00EF;
     L_0241:
-        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
+        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), __v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
     L_026F:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_0286:

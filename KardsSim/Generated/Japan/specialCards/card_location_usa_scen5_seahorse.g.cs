@@ -29,13 +29,13 @@ public static Val OnOtherCardAttacks(IHost H, Val self, Val[] args)
         L["cardAttacking"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["defenderCard"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_stopAttack = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["stopAttack"] = Val.Nothing;
+        L["stopAttack"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_AttackedAndStopped = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["AttackedAndStopped"] = Val.Nothing;
+        L["AttackedAndStopped"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0013:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "cardAttacking"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "cardAttacking"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_003C:
         L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "defenderCard"), "name"), Val.Name("card_location_usa_scen5_ai")) == 0);
     L_007C:
@@ -45,7 +45,7 @@ public static Val OnOtherCardAttacks(IHost H, Val self, Val[] args)
     L_00C8:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_1")).AsBool()) goto L_0138;
     L_00D6:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "cardAttacking"), Val.Of(2), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "cardAttacking"), Val.Of(2), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DamageCard_targetDestroyed"), __v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_011D:
         L["stopAttack"] = Val.False;
     L_0128:

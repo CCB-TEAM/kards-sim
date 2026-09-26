@@ -27,11 +27,11 @@ public static Val didPlayBritishInfantryLastTurn(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_didSo = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["didSo"] = Val.Nothing;
+        L["didSo"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         __ef.Push(703);
     L_0005:
-        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
+        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsSideActive_active"), __v => L["CallFunc_IsSideActive_active"] = __v) });
     L_0021:
         if (!(GetLocal(L, "CallFunc_IsSideActive_active")).AsBool()) goto L_0255;
     L_002F:
@@ -39,7 +39,7 @@ public static Val didPlayBritishInfantryLastTurn(IHost H, Val self, Val[] args)
     L_0046:
         L["Temp_int_Array_Index_Variable"] = Val.Of(0);
     L_005D:
-        _ = H.Call("GetCardsPlayedFromHandLastTurn", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetCardsPlayedFromHandLastTurn_CardIDsPlayedLastTurn"] = __v) });
+        _ = H.Call("GetCardsPlayedFromHandLastTurn", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetCardsPlayedFromHandLastTurn_CardIDsPlayedLastTurn"), __v => L["CallFunc_GetCardsPlayedFromHandLastTurn_CardIDsPlayedLastTurn"] = __v) });
     L_008A:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsPlayedFromHandLastTurn_CardIDsPlayedLastTurn") });
     L_00C5:
@@ -51,13 +51,13 @@ public static Val didPlayBritishInfantryLastTurn(IHost H, Val self, Val[] args)
     L_0114:
         __ef.Push(629);
     L_0119:
-        _ = H.Call("GetCardsPlayedFromHandLastTurn", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetCardsPlayedFromHandLastTurn_CardIDsPlayedLastTurn"] = __v) });
+        _ = H.Call("GetCardsPlayedFromHandLastTurn", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetCardsPlayedFromHandLastTurn_CardIDsPlayedLastTurn"), __v => L["CallFunc_GetCardsPlayedFromHandLastTurn_CardIDsPlayedLastTurn"] = __v) });
     L_0146:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsPlayedFromHandLastTurn_CardIDsPlayedLastTurn"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsPlayedFromHandLastTurn_CardIDsPlayedLastTurn"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0181:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_01B7:
-        _ = H.Call("IsInfantry", new Val[] { GetLocal(L, "CallFunc_GetCardFromID_card"), Val.Out(__v => L["CallFunc_IsInfantry_isIt"] = __v) });
+        _ = H.Call("IsInfantry", new Val[] { GetLocal(L, "CallFunc_GetCardFromID_card"), Val.Out(GetLocal(L, "CallFunc_IsInfantry_isIt"), __v => L["CallFunc_IsInfantry_isIt"] = __v) });
     L_01E0:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "faction"), Val.Of(2)) == 0);
     L_0215:
@@ -116,15 +116,15 @@ public static Val ExecuteUbergraph_card_unit_defiant_mk_i(IHost H, Val self, Val
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_001D:
-        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
+        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsSideActive_active"), __v => L["CallFunc_IsSideActive_active"] = __v) });
     L_0039:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool() && (GetLocal(L, "CallFunc_IsSideActive_active")).AsBool());
     L_005F:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_00CF;
     L_006D:
-        _ = H.Call("didPlayBritishInfantryLastTurn", new Val[] { self, Val.Out(__v => L["CallFunc_didPlayBritishInfantryLastTurn_didSo"] = __v) });
+        _ = H.Call("didPlayBritishInfantryLastTurn", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_didPlayBritishInfantryLastTurn_didSo"), __v => L["CallFunc_didPlayBritishInfantryLastTurn_didSo"] = __v) });
     L_0084:
         if (!(GetLocal(L, "CallFunc_didPlayBritishInfantryLastTurn_didSo")).AsBool()) goto L_00CF;
     L_0092:

@@ -29,17 +29,17 @@ public static Val OnBeforeOtherCardGainDefenseAfterAdd(IHost H, Val self, Val[] 
         L["cardGainingDefense"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["defenseGaining"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_stopAction = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["stopAction"] = Val.Nothing;
+        L["stopAction"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
-        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "cardGainingDefense"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
+        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "cardGainingDefense"), Val.Out(GetLocal(L, "CallFunc_IsLocation_isIt"), __v => L["CallFunc_IsLocation_isIt"] = __v) });
     L_0029:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_003C:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsLocation_isIt")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_0062:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_00CB;
     L_0070:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "cardGainingDefense"), GetLocal(L, "defenseGaining"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "cardGainingDefense"), GetLocal(L, "defenseGaining"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DamageCard_targetDestroyed"), __v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_00BB:
         L["stopAction"] = Val.True;
     L_00C6:

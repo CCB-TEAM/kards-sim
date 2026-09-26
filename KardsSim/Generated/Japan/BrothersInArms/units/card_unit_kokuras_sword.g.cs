@@ -41,9 +41,9 @@ public static Val ExecuteUbergraph_card_unit_kokuras_sword(IHost H, Val self, Va
             default: goto __halt;
         }
     L_000F:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide_1"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_1"), __v => L["CallFunc_GetOppositeSide_oppositeSide_1"] = __v) });
     L_0022:
-        _ = H.Call("IsSideActive", new Val[] { self, GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_1"), Val.Out(__v => L["CallFunc_IsSideActive_active_1"] = __v) });
+        _ = H.Call("IsSideActive", new Val[] { self, GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_1"), Val.Out(GetLocal(L, "CallFunc_IsSideActive_active_1"), __v => L["CallFunc_IsSideActive_active_1"] = __v) });
     L_003E:
         if (!(GetLocal(L, "CallFunc_IsSideActive_active_1")).AsBool())
         {
@@ -60,9 +60,9 @@ public static Val ExecuteUbergraph_card_unit_kokuras_sword(IHost H, Val self, Va
     L_0063:
         H.SetMember(self, "cardDestroyed", H.GetMember(self, "cardID"));
     L_007E:
-        _ = H.Call("GetSupportLineLocationBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tmpSide"), Val.Out(__v => L["CallFunc_GetSupportLineLocationBySide_location"] = __v) });
+        _ = H.Call("GetSupportLineLocationBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tmpSide"), Val.Out(GetLocal(L, "CallFunc_GetSupportLineLocationBySide_location"), __v => L["CallFunc_GetSupportLineLocationBySide_location"] = __v) });
     L_00B4:
-        _ = H.Call("IsLocationFull", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetSupportLineLocationBySide_location"), Val.Out(__v => L["CallFunc_IsLocationFull_isFull"] = __v) });
+        _ = H.Call("IsLocationFull", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetSupportLineLocationBySide_location"), Val.Out(GetLocal(L, "CallFunc_IsLocationFull_isFull"), __v => L["CallFunc_IsLocationFull_isFull"] = __v) });
     L_00EA:
         if (!(GetLocal(L, "CallFunc_IsLocationFull_isFull")).AsBool()) goto L_00F9;
     L_00F8:
@@ -76,9 +76,9 @@ public static Val ExecuteUbergraph_card_unit_kokuras_sword(IHost H, Val self, Va
     L_00F9:
         _ = H.Call("Array_Clear", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "possibleCards") });
     L_0122:
-        _ = H.Call("IsCardReserved", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "name"), Val.Out(__v => L["CallFunc_IsCardReserved_IsReserved"] = __v) });
+        _ = H.Call("IsCardReserved", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "name"), Val.Out(GetLocal(L, "CallFunc_IsCardReserved_IsReserved"), __v => L["CallFunc_IsCardReserved_IsReserved"] = __v) });
     L_0158:
-        _ = H.Call("GetAllActiveStaticCards", new Val[] { H.GetMember(self, "cardFunction"), Val.False, GetLocal(L, "CallFunc_IsCardReserved_IsReserved"), Val.Out(__v => L["CallFunc_GetAllActiveStaticCards_cards"] = __v) });
+        _ = H.Call("GetAllActiveStaticCards", new Val[] { H.GetMember(self, "cardFunction"), Val.False, GetLocal(L, "CallFunc_IsCardReserved_IsReserved"), Val.Out(GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), __v => L["CallFunc_GetAllActiveStaticCards_cards"] = __v) });
     L_018F:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_01A6:
@@ -94,9 +94,9 @@ public static Val ExecuteUbergraph_card_unit_kokuras_sword(IHost H, Val self, Va
     L_0247:
         __ef.Push(1138);
     L_024C:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0287:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "faction"), Val.Of(3), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "faction"), Val.Of(3), Val.Out(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), __v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_02BB:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_02DA:
@@ -123,7 +123,7 @@ public static Val ExecuteUbergraph_card_unit_kokuras_sword(IHost H, Val self, Va
             }
         }
     L_0326:
-        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => H.SetMember(self, "possibleCards", __v)), Val.False, Val.Out(__v => L["CallFunc_GetRandomCard_randomCard"] = __v) });
+        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(H.GetMember(self, "possibleCards"), __v => H.SetMember(self, "possibleCards", __v)), Val.False, Val.Out(GetLocal(L, "CallFunc_GetRandomCard_randomCard"), __v => L["CallFunc_GetRandomCard_randomCard"] = __v) });
     L_035D:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "CallFunc_GetRandomCard_randomCard") });
     L_037A:
@@ -138,7 +138,7 @@ public static Val ExecuteUbergraph_card_unit_kokuras_sword(IHost H, Val self, Va
             }
         }
     L_0384:
-        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tmpSide"), Val.False, H.GetMember(GetLocal(L, "CallFunc_GetRandomCard_randomCard"), "name"), H.GetMember(self, "cardDestroyed"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), Val.Of(0), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tmpSide"), Val.False, H.GetMember(GetLocal(L, "CallFunc_GetRandomCard_randomCard"), "name"), H.GetMember(self, "cardDestroyed"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), Val.Of(0), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnCardonBattlefield_spawnedCardID"), __v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
     L_03F6:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_SpawnCardonBattlefield_spawnedCardID"), Val.Of(0)) > 0);
     L_0418:
@@ -153,7 +153,7 @@ public static Val ExecuteUbergraph_card_unit_kokuras_sword(IHost H, Val self, Va
             }
         }
     L_0422:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("destruction"), GetLocal(L, "CallFunc_SpawnCardonBattlefield_spawnedCardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("destruction"), GetLocal(L, "CallFunc_SpawnCardonBattlefield_spawnedCardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_CustomAbilityAdd_qqq"), __v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_0471:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -169,9 +169,9 @@ public static Val ExecuteUbergraph_card_unit_kokuras_sword(IHost H, Val self, Va
     L_04B7:
         goto L_01BD;
     L_04BC:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_04F7:
-        _ = H.Call("IsGroundUnit", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_IsGroundUnit_isIt"] = __v) });
+        _ = H.Call("IsGroundUnit", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_IsGroundUnit_isIt"), __v => L["CallFunc_IsGroundUnit_isIt"] = __v) });
     L_0520:
         if (!(GetLocal(L, "CallFunc_IsGroundUnit_isIt")).AsBool())
         {
@@ -184,7 +184,7 @@ public static Val ExecuteUbergraph_card_unit_kokuras_sword(IHost H, Val self, Va
             }
         }
     L_052A:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0565:
         L["CallFunc_Array_Add_ReturnValue"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "possibleCards"), GetLocal(L, "CallFunc_Array_Get_Item") });
     L_05A9:
@@ -196,9 +196,9 @@ public static Val ExecuteUbergraph_card_unit_kokuras_sword(IHost H, Val self, Va
             default: goto __halt;
         }
     L_05AA:
-        _ = H.Call("GetOppositeSide", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_05D3:
-        _ = H.Call("IsSideActive", new Val[] { self, GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
+        _ = H.Call("IsSideActive", new Val[] { self, GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(GetLocal(L, "CallFunc_IsSideActive_active"), __v => L["CallFunc_IsSideActive_active"] = __v) });
     L_05EF:
         if (!(GetLocal(L, "CallFunc_IsSideActive_active")).AsBool())
         {
@@ -211,7 +211,7 @@ public static Val ExecuteUbergraph_card_unit_kokuras_sword(IHost H, Val self, Va
             }
         }
     L_05F9:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt"), __v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_0638:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt")).AsBool())
         {
@@ -230,7 +230,7 @@ public static Val ExecuteUbergraph_card_unit_kokuras_sword(IHost H, Val self, Va
     L_06A4:
         goto L_007E;
     L_06A9:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_cardReset"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt_1"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_cardReset"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt_1"), __v => L["CallFunc_HasCustomAbilityFromCard_doesIt_1"] = __v) });
     L_06E8:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt_1")).AsBool())
         {
@@ -243,7 +243,7 @@ public static Val ExecuteUbergraph_card_unit_kokuras_sword(IHost H, Val self, Va
             }
         }
     L_06F2:
-        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("destruction"), H.GetMember(H.GetVar("K2Node_Event_cardReset"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
+        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("destruction"), H.GetMember(H.GetVar("K2Node_Event_cardReset"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(GetLocal(L, "CallFunc_CustomAbilityRemove_qqq"), __v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
     L_0755:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -253,7 +253,7 @@ public static Val ExecuteUbergraph_card_unit_kokuras_sword(IHost H, Val self, Va
             default: goto __halt;
         }
     L_0756:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_card"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt_2"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_card"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt_2"), __v => L["CallFunc_HasCustomAbilityFromCard_doesIt_2"] = __v) });
     L_0795:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt_2")).AsBool())
         {
@@ -266,7 +266,7 @@ public static Val ExecuteUbergraph_card_unit_kokuras_sword(IHost H, Val self, Va
             }
         }
     L_079F:
-        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("destruction"), H.GetMember(H.GetVar("K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq_1"] = __v) });
+        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("destruction"), H.GetMember(H.GetVar("K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(GetLocal(L, "CallFunc_CustomAbilityRemove_qqq_1"), __v => L["CallFunc_CustomAbilityRemove_qqq_1"] = __v) });
     L_0802:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

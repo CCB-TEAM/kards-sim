@@ -37,29 +37,29 @@ public static Val ExecuteUbergraph_card_unit_144th_infantry_regiment(IHost H, Va
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("GetTotalKreditsLostThisBattle", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetTotalKreditsLostThisBattle_kreditsLost"] = __v) });
+        _ = H.Call("GetTotalKreditsLostThisBattle", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetTotalKreditsLostThisBattle_kreditsLost"), __v => L["CallFunc_GetTotalKreditsLostThisBattle_kreditsLost"] = __v) });
     L_0040:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("slots_lost"), GetLocal(L, "CallFunc_GetTotalKreditsLostThisBattle_kreditsLost"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("slots_lost"), GetLocal(L, "CallFunc_GetTotalKreditsLostThisBattle_kreditsLost"), Val.Out(GetLocal(L, "CallFunc_JSON_SetInt_found"), __v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_0083:
         L["CallFunc_Conv_IntToText_ReturnValue"] = H.Call("Conv_IntToText", new Val[] { Val.Ref("KismetTextLibrary"), GetLocal(L, "CallFunc_GetTotalKreditsLostThisBattle_kreditsLost"), Val.False, Val.True, Val.Of(1), Val.Of(324) });
     L_00B4:
-        _ = H.Call("AddNumberToText", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_Conv_IntToText_ReturnValue"] = __v), Val.Of(0), Val.Out(__v => L["CallFunc_AddNumberToText_qqq"] = __v) });
+        _ = H.Call("AddNumberToText", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_Conv_IntToText_ReturnValue"), __v => L["CallFunc_Conv_IntToText_ReturnValue"] = __v), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_AddNumberToText_qqq"), __v => L["CallFunc_AddNumberToText_qqq"] = __v) });
     L_00F5:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_0123:
         goto L_045E;
     L_0128:
-        _ = H.Call("GetTotalKreditsLostThisBattle", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetTotalKreditsLostThisBattle_kreditsLost_1"] = __v) });
+        _ = H.Call("GetTotalKreditsLostThisBattle", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetTotalKreditsLostThisBattle_kreditsLost_1"), __v => L["CallFunc_GetTotalKreditsLostThisBattle_kreditsLost_1"] = __v) });
     L_015E:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetTotalKreditsLostThisBattle_kreditsLost_1"), Val.Of(0)) > 0);
     L_0180:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_045E;
     L_018E:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_01A1:
-        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide") });
+        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_card"), __v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID"), __v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide") });
     L_01E0:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetLocationCardBySide_card"), GetLocal(L, "CallFunc_GetTotalKreditsLostThisBattle_kreditsLost_1"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetLocationCardBySide_card"), GetLocal(L, "CallFunc_GetTotalKreditsLostThisBattle_kreditsLost_1"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DamageCard_targetDestroyed"), __v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_022B:
         goto L_045E;
     L_0230:
@@ -69,7 +69,7 @@ public static Val ExecuteUbergraph_card_unit_144th_infantry_regiment(IHost H, Va
     L_027A:
         goto L_000A;
     L_027F:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetVar("K2Node_Event_sideGaining"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetVar("K2Node_Event_sideGaining"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), __v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_02A4:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_02C3:
@@ -79,11 +79,11 @@ public static Val ExecuteUbergraph_card_unit_144th_infantry_regiment(IHost H, Va
     L_02D6:
         if (!(H.GetVar("K2Node_Event_isNegativeGain")).AsBool()) goto L_045E;
     L_02E4:
-        _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("slots_lost"), Val.Out(__v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found"] = __v) });
+        _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("slots_lost"), Val.Out(GetLocal(L, "CallFunc_JSON_GetInt_value"), __v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetInt_found"), __v => L["CallFunc_JSON_GetInt_found"] = __v) });
     L_0327:
         L["CallFunc_Add_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_JSON_GetInt_value") + Val.Of(1));
     L_0351:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("slots_lost"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), Val.Out(__v => L["CallFunc_JSON_SetInt_found_1"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("slots_lost"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), Val.Out(GetLocal(L, "CallFunc_JSON_SetInt_found_1"), __v => L["CallFunc_JSON_SetInt_found_1"] = __v) });
     L_0394:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_03C2:
@@ -91,7 +91,7 @@ public static Val ExecuteUbergraph_card_unit_144th_infantry_regiment(IHost H, Va
     L_03EC:
         L["CallFunc_Conv_IntToText_ReturnValue_1"] = H.Call("Conv_IntToText", new Val[] { Val.Ref("KismetTextLibrary"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), Val.False, Val.True, Val.Of(1), Val.Of(324) });
     L_041D:
-        _ = H.Call("AddNumberToText", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_Conv_IntToText_ReturnValue_1"] = __v), Val.Of(0), Val.Out(__v => L["CallFunc_AddNumberToText_qqq_1"] = __v) });
+        _ = H.Call("AddNumberToText", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_Conv_IntToText_ReturnValue_1"), __v => L["CallFunc_Conv_IntToText_ReturnValue_1"] = __v), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_AddNumberToText_qqq_1"), __v => L["CallFunc_AddNumberToText_qqq_1"] = __v) });
     L_045E:
         goto __halt;
     L_0460:

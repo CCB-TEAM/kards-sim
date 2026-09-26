@@ -31,9 +31,9 @@ public static Val OnCardDealDamage_ModifyDamageDealt(IHost H, Val self, Val[] ar
         L["fromAttack"] = args.Length > 2 ? args[2] : Val.Nothing;
         L["fromFight"] = args.Length > 3 ? args[3] : Val.Nothing;
         var __out_newDamage = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["newDamage"] = Val.Nothing;
+        L["newDamage"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
-        _ = H.Call("GetMaxKreditsBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetMaxKreditsBySide_maxkredits"] = __v) });
+        _ = H.Call("GetMaxKreditsBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetMaxKreditsBySide_maxkredits"), __v => L["CallFunc_GetMaxKreditsBySide_maxkredits"] = __v) });
     L_0036:
         L["CallFunc_LessEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetMaxKreditsBySide_maxkredits"), Val.Of(3)) <= 0);
     L_0058:

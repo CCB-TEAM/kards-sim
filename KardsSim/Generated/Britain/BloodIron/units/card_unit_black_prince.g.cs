@@ -37,27 +37,27 @@ public static Val ExecuteUbergraph_card_unit_black_prince(IHost H, Val self, Val
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_0132;
     L_002B:
-        _ = H.Call("ChangeFrontlineLimiter", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_ChangeFrontlineLimiter_qqq"] = __v) });
+        _ = H.Call("ChangeFrontlineLimiter", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeFrontlineLimiter_qqq"), __v => L["CallFunc_ChangeFrontlineLimiter_qqq"] = __v) });
     L_0062:
         goto L_0132;
     L_0067:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1"), __v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_007A:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1")).AsBool()) goto L_008D;
     L_0088:
         goto L_0132;
     L_008D:
-        _ = H.Call("ChangeFrontlineLimiter", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.True, Val.Out(__v => L["CallFunc_ChangeFrontlineLimiter_qqq_1"] = __v) });
+        _ = H.Call("ChangeFrontlineLimiter", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.True, Val.Out(GetLocal(L, "CallFunc_ChangeFrontlineLimiter_qqq_1"), __v => L["CallFunc_ChangeFrontlineLimiter_qqq_1"] = __v) });
     L_00C4:
         goto L_0132;
     L_00C9:
         goto L_008D;
     L_00CE:
-        _ = H.Call("GetAllCardsInFrontline", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllCardsInFrontline_cards"] = __v) });
+        _ = H.Call("GetAllCardsInFrontline", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllCardsInFrontline_cards"), __v => L["CallFunc_GetAllCardsInFrontline_cards"] = __v) });
     L_00FC:
         _ = H.Call("MakeCardRetreat", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetAllCardsInFrontline_cards"), H.GetMember(self, "cardID") });
     L_0132:

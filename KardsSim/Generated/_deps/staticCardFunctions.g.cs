@@ -29,7 +29,7 @@ public static Val Get_GoldEmblem(IHost H, Val self, Val[] args)
         L["CardName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_NewParam1 = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["NewParam1"] = Val.Nothing;
+        L["NewParam1"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetStaticFaction", new Val[] { self, GetLocal(L, "CardName"), Val.Out(__v => L["CallFunc_GetStaticFaction_faction"] = __v) });
     L_001C:
@@ -131,7 +131,7 @@ public static Val GetCardFactionPrimaryColor(IHost H, Val self, Val[] args)
         L["cardName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_factionColor = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["factionColor"] = Val.Nothing;
+        L["factionColor"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetStaticFaction", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticFaction_faction"] = __v) });
     L_001C:
@@ -217,7 +217,7 @@ public static Val GetCardTypeIconAsTexture(IHost H, Val self, Val[] args)
         L["cardName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_texture = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["texture"] = Val.Nothing;
+        L["texture"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetStaticType", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticType_type"] = __v) });
     L_001C:
@@ -331,7 +331,7 @@ public static Val GetExileFactionIconAsTexture(IHost H, Val self, Val[] args)
         L["cardName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_Texture = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["Texture"] = Val.Nothing;
+        L["Texture"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetStaticExileFaction", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticExileFaction_exileFaction"] = __v) });
     L_001C:
@@ -363,7 +363,7 @@ public static Val GetFactionIconAsMaterial(IHost H, Val self, Val[] args)
         L["cardName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_material = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["material"] = Val.Nothing;
+        L["material"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetStaticType", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticType_type"] = __v) });
     L_001C:
@@ -537,7 +537,7 @@ public static Val GetFactionIconAsTexture(IHost H, Val self, Val[] args)
         L["cardName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_OutSoftTexture2 = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["OutSoftTexture2"] = Val.Nothing;
+        L["OutSoftTexture2"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetStaticType", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticType_type"] = __v) });
     L_001C:
@@ -626,7 +626,7 @@ public static Val GetFactionIconTexture(IHost H, Val self, Val[] args)
         L["airUnitIcon"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_OutSoftTexRef = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["OutSoftTexRef"] = Val.Nothing;
+        L["OutSoftTexRef"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         if (!(GetLocal(L, "airUnitIcon")).AsBool()) goto L_006D;
     L_000E:
@@ -658,7 +658,7 @@ public static Val GetTypeIcon(IHost H, Val self, Val[] args)
         L["cardName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_material = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["material"] = Val.Nothing;
+        L["material"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetStaticType", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticType_type"] = __v) });
     L_001C:
@@ -772,7 +772,7 @@ public static Val GetTypeIconAsTexture(IHost H, Val self, Val[] args)
         L["cardName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_texture = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["texture"] = Val.Nothing;
+        L["texture"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetStaticType", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticType_type"] = __v) });
     L_001C:

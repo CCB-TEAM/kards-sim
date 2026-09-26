@@ -46,11 +46,11 @@ public static Val ExecuteUbergraph_card_unit_obice_da_75_13(IHost H, Val self, V
     L_000F:
         __ef.Push(912);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_004F:
-        _ = H.Call("getHasAlpine", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_1"), Val.Out(__v => L["CallFunc_getHasAlpine_doesIt_1"] = __v) });
+        _ = H.Call("getHasAlpine", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_1"), Val.Out(GetLocal(L, "CallFunc_getHasAlpine_doesIt_1"), __v => L["CallFunc_getHasAlpine_doesIt_1"] = __v) });
     L_0078:
-        _ = H.Call("CustomName1HasAttribute", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_1"), Val.Of("CanMoveAndAttackInTheSameTurn"), Val.Out(__v => L["CallFunc_CustomName1HasAttribute_doesIt_1"] = __v) });
+        _ = H.Call("CustomName1HasAttribute", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_1"), Val.Of("CanMoveAndAttackInTheSameTurn"), Val.Out(GetLocal(L, "CallFunc_CustomName1HasAttribute_doesIt_1"), __v => L["CallFunc_CustomName1HasAttribute_doesIt_1"] = __v) });
     L_00C0:
         L["CallFunc_Not_PreBool_ReturnValue_1"] = H.Call("Not_PreBool", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_CustomName1HasAttribute_doesIt_1") });
     L_00DD:
@@ -77,17 +77,17 @@ public static Val ExecuteUbergraph_card_unit_obice_da_75_13(IHost H, Val self, V
             }
         }
     L_01D1:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_020C:
-        _ = H.Call("JSON_AddToIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardsAffected"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "cardID"), Val.Out(__v => L["CallFunc_JSON_AddToIntArray_found_1"] = __v) });
+        _ = H.Call("JSON_AddToIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardsAffected"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "cardID"), Val.Out(GetLocal(L, "CallFunc_JSON_AddToIntArray_found_1"), __v => L["CallFunc_JSON_AddToIntArray_found_1"] = __v) });
     L_0268:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_02A3:
         _ = H.Call("CustomName1Add", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_1"), Val.Of("CanMoveAndAttackInTheSameTurn") });
     L_02E2:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_0310:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_034B:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "cardID"), Val.False });
     L_038F:
@@ -132,17 +132,17 @@ public static Val ExecuteUbergraph_card_unit_obice_da_75_13(IHost H, Val self, V
     L_047C:
         __ef.Push(1552);
     L_0481:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_JSON_GetIntArray_values"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_JSON_GetIntArray_values"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_04BC:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_04F2:
         _ = H.Call("CustomName1Remove", new Val[] { GetLocal(L, "CallFunc_GetCardFromID_card"), Val.Of("CanMoveAndAttackInTheSameTurn") });
     L_0531:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_JSON_GetIntArray_values"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_JSON_GetIntArray_values"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_056C:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.False });
     L_059A:
-        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardsAffected"), Val.Out(__v => L["CallFunc_JSON_Clear_found"] = __v) });
+        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardsAffected"), Val.Out(GetLocal(L, "CallFunc_JSON_Clear_found"), __v => L["CallFunc_JSON_Clear_found"] = __v) });
     L_05D7:
         if (!(GetLocal(L, "CallFunc_JSON_Clear_found")).AsBool())
         {
@@ -204,7 +204,7 @@ public static Val ExecuteUbergraph_card_unit_obice_da_75_13(IHost H, Val self, V
     L_072A:
         goto L_0460;
     L_072F:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0742:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool())
         {
@@ -219,11 +219,11 @@ public static Val ExecuteUbergraph_card_unit_obice_da_75_13(IHost H, Val self, V
             }
         }
     L_074C:
-        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
+        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), __v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
     L_077A:
         goto L_0713;
     L_077F:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1"), __v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_0792:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_07CE:
@@ -242,9 +242,9 @@ public static Val ExecuteUbergraph_card_unit_obice_da_75_13(IHost H, Val self, V
             }
         }
     L_07FE:
-        _ = H.Call("getHasAlpine", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getHasAlpine_doesIt"] = __v) });
+        _ = H.Call("getHasAlpine", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(GetLocal(L, "CallFunc_getHasAlpine_doesIt"), __v => L["CallFunc_getHasAlpine_doesIt"] = __v) });
     L_0827:
-        _ = H.Call("CustomName1HasAttribute", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Of("CanMoveAndAttackInTheSameTurn"), Val.Out(__v => L["CallFunc_CustomName1HasAttribute_doesIt"] = __v) });
+        _ = H.Call("CustomName1HasAttribute", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Of("CanMoveAndAttackInTheSameTurn"), Val.Out(GetLocal(L, "CallFunc_CustomName1HasAttribute_doesIt"), __v => L["CallFunc_CustomName1HasAttribute_doesIt"] = __v) });
     L_086F:
         L["CallFunc_Not_PreBool_ReturnValue"] = H.Call("Not_PreBool", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_CustomName1HasAttribute_doesIt") });
     L_088C:
@@ -263,7 +263,7 @@ public static Val ExecuteUbergraph_card_unit_obice_da_75_13(IHost H, Val self, V
             }
         }
     L_08BC:
-        _ = H.Call("JSON_AddToIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardsAffected"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), Val.Out(__v => L["CallFunc_JSON_AddToIntArray_found"] = __v) });
+        _ = H.Call("JSON_AddToIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardsAffected"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), Val.Out(GetLocal(L, "CallFunc_JSON_AddToIntArray_found"), __v => L["CallFunc_JSON_AddToIntArray_found"] = __v) });
     L_0918:
         _ = H.Call("CustomName1Add", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Of("CanMoveAndAttackInTheSameTurn") });
     L_0957:
@@ -281,7 +281,7 @@ public static Val ExecuteUbergraph_card_unit_obice_da_75_13(IHost H, Val self, V
             default: goto __halt;
         }
     L_09CA:
-        _ = H.Call("JSON_GetIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardsAffected"), Val.Out(__v => L["CallFunc_JSON_GetIntArray_values"] = __v), Val.Out(__v => L["CallFunc_JSON_GetIntArray_found"] = __v) });
+        _ = H.Call("JSON_GetIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardsAffected"), Val.Out(GetLocal(L, "CallFunc_JSON_GetIntArray_values"), __v => L["CallFunc_JSON_GetIntArray_values"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetIntArray_found"), __v => L["CallFunc_JSON_GetIntArray_found"] = __v) });
     L_0A10:
         goto L_06E0;
     L_0A15:
@@ -295,7 +295,7 @@ public static Val ExecuteUbergraph_card_unit_obice_da_75_13(IHost H, Val self, V
             default: goto __halt;
         }
     L_0A16:
-        _ = H.Call("JSON_GetIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardsAffected"), Val.Out(__v => L["CallFunc_JSON_GetIntArray_values_1"] = __v), Val.Out(__v => L["CallFunc_JSON_GetIntArray_found_1"] = __v) });
+        _ = H.Call("JSON_GetIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardsAffected"), Val.Out(GetLocal(L, "CallFunc_JSON_GetIntArray_values_1"), __v => L["CallFunc_JSON_GetIntArray_values_1"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetIntArray_found_1"), __v => L["CallFunc_JSON_GetIntArray_found_1"] = __v) });
     L_0A5C:
         L["CallFunc_Array_Contains_ReturnValue"] = H.Call("Array_Contains", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_JSON_GetIntArray_values_1"), H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "cardID") });
     L_0AAE:
@@ -312,13 +312,13 @@ public static Val ExecuteUbergraph_card_unit_obice_da_75_13(IHost H, Val self, V
             }
         }
     L_0AB8:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "cardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card_1"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "cardID"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card_1"), __v => L["CallFunc_GetCardFromID_card_1"] = __v) });
     L_0B04:
         _ = H.Call("CustomName1Remove", new Val[] { GetLocal(L, "CallFunc_GetCardFromID_card_1"), Val.Of("CanMoveAndAttackInTheSameTurn") });
     L_0B43:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "cardID"), Val.False });
     L_0B87:
-        _ = H.Call("JSON_RemoveFromIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardsAffected"), H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "cardID"), Val.Out(__v => L["CallFunc_JSON_RemoveFromIntArray_found"] = __v) });
+        _ = H.Call("JSON_RemoveFromIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardsAffected"), H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "cardID"), Val.Out(GetLocal(L, "CallFunc_JSON_RemoveFromIntArray_found"), __v => L["CallFunc_JSON_RemoveFromIntArray_found"] = __v) });
     L_0BE3:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_0C11:

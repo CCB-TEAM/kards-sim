@@ -34,19 +34,19 @@ public static Val ExecuteUbergraph_card_unit_katyusha(IHost H, Val self, Val[] a
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("getTotalDefense", new Val[] { H.GetVar("K2Node_Event_defenderCard"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
+        _ = H.Call("getTotalDefense", new Val[] { H.GetVar("K2Node_Event_defenderCard"), Val.Out(GetLocal(L, "CallFunc_getTotalDefense_totalDefense"), __v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
     L_0033:
         L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalDefense_totalDefense"), Val.Of(0)) > 0);
     L_0055:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue_1")).AsBool()) goto L_0111;
     L_0063:
-        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), Val.Of(1), Val.Out(__v => L["CallFunc_RandomIntFromRangeWithStream_randomResult"] = __v) });
+        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), Val.Of(1), Val.Out(GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), __v => L["CallFunc_RandomIntFromRangeWithStream_randomResult"] = __v) });
     L_009A:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), Val.Of(0)) > 0);
     L_00BC:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_0111;
     L_00CA:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_defenderCard"), Val.Of(1), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_defenderCard"), Val.Of(1), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DamageCard_targetDestroyed"), __v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_0111:
         goto __halt;
     L_0113:

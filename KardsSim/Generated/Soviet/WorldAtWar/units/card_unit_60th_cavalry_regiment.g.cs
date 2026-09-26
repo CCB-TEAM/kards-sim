@@ -42,7 +42,7 @@ public static Val ExecuteUbergraph_card_unit_60th_cavalry_regiment(IHost H, Val 
             default: goto __halt;
         }
     L_000F:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0022:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool())
         {
@@ -56,7 +56,7 @@ public static Val ExecuteUbergraph_card_unit_60th_cavalry_regiment(IHost H, Val 
             }
         }
     L_002C:
-        _ = H.Call("IsOrder", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
+        _ = H.Call("IsOrder", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(GetLocal(L, "CallFunc_IsOrder_isIt"), __v => L["CallFunc_IsOrder_isIt"] = __v) });
     L_0055:
         if (!(GetLocal(L, "CallFunc_IsOrder_isIt")).AsBool())
         {
@@ -91,7 +91,7 @@ public static Val ExecuteUbergraph_card_unit_60th_cavalry_regiment(IHost H, Val 
     L_00EB:
         _ = H.Call("AddGameplayRestriction", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(1), Val.Of(2), H.GetMember(self, "cardID"), Val.Of(1) });
     L_0121:
-        _ = H.Call("JSON_SetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("leftSideRestricted"), Val.True, Val.Out(__v => L["CallFunc_JSON_SetBool_found"] = __v) });
+        _ = H.Call("JSON_SetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("leftSideRestricted"), Val.True, Val.Out(GetLocal(L, "CallFunc_JSON_SetBool_found"), __v => L["CallFunc_JSON_SetBool_found"] = __v) });
     L_0164:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -104,7 +104,7 @@ public static Val ExecuteUbergraph_card_unit_60th_cavalry_regiment(IHost H, Val 
     L_0165:
         _ = H.Call("AddGameplayRestriction", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(2), Val.Of(2), H.GetMember(self, "cardID"), Val.Of(1) });
     L_019B:
-        _ = H.Call("JSON_SetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("rightSideRestricted"), Val.True, Val.Out(__v => L["CallFunc_JSON_SetBool_found_1"] = __v) });
+        _ = H.Call("JSON_SetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("rightSideRestricted"), Val.True, Val.Out(GetLocal(L, "CallFunc_JSON_SetBool_found_1"), __v => L["CallFunc_JSON_SetBool_found_1"] = __v) });
     L_01DF:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -117,7 +117,7 @@ public static Val ExecuteUbergraph_card_unit_60th_cavalry_regiment(IHost H, Val 
     L_01E0:
         __ef.Push(621);
     L_01E5:
-        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("leftSideRestricted"), Val.Out(__v => L["CallFunc_JSON_Clear_found"] = __v) });
+        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("leftSideRestricted"), Val.Out(GetLocal(L, "CallFunc_JSON_Clear_found"), __v => L["CallFunc_JSON_Clear_found"] = __v) });
     L_0227:
         if (!(GetLocal(L, "CallFunc_JSON_Clear_found")).AsBool())
         {
@@ -131,7 +131,7 @@ public static Val ExecuteUbergraph_card_unit_60th_cavalry_regiment(IHost H, Val 
             }
         }
     L_0231:
-        _ = H.Call("RemoveGameplayRestriction", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(1), Val.Of(2), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_RemoveGameplayRestriction_qqq"] = __v) });
+        _ = H.Call("RemoveGameplayRestriction", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(1), Val.Of(2), H.GetMember(self, "cardID"), Val.False, Val.Out(GetLocal(L, "CallFunc_RemoveGameplayRestriction_qqq"), __v => L["CallFunc_RemoveGameplayRestriction_qqq"] = __v) });
     L_026C:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -142,7 +142,7 @@ public static Val ExecuteUbergraph_card_unit_60th_cavalry_regiment(IHost H, Val 
             default: goto __halt;
         }
     L_026D:
-        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("rightSideRestricted"), Val.Out(__v => L["CallFunc_JSON_Clear_found_1"] = __v) });
+        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("rightSideRestricted"), Val.Out(GetLocal(L, "CallFunc_JSON_Clear_found_1"), __v => L["CallFunc_JSON_Clear_found_1"] = __v) });
     L_02B0:
         if (!(GetLocal(L, "CallFunc_JSON_Clear_found_1")).AsBool())
         {
@@ -156,7 +156,7 @@ public static Val ExecuteUbergraph_card_unit_60th_cavalry_regiment(IHost H, Val 
             }
         }
     L_02BA:
-        _ = H.Call("RemoveGameplayRestriction", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(2), Val.Of(2), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_RemoveGameplayRestriction_qqq_1"] = __v) });
+        _ = H.Call("RemoveGameplayRestriction", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(2), Val.Of(2), H.GetMember(self, "cardID"), Val.False, Val.Out(GetLocal(L, "CallFunc_RemoveGameplayRestriction_qqq_1"), __v => L["CallFunc_RemoveGameplayRestriction_qqq_1"] = __v) });
     L_02F5:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -167,7 +167,7 @@ public static Val ExecuteUbergraph_card_unit_60th_cavalry_regiment(IHost H, Val 
             default: goto __halt;
         }
     L_02F6:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1"), __v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_0309:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1")).AsBool())
         {
@@ -183,7 +183,7 @@ public static Val ExecuteUbergraph_card_unit_60th_cavalry_regiment(IHost H, Val 
     L_0313:
         H.SetMember(self, "orderPlayed", Val.Nothing);
     L_031E:
-        _ = H.Call("GetAllCards", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetAllCards_cards"] = __v) });
+        _ = H.Call("GetAllCards", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetAllCards_cards"), __v => L["CallFunc_GetAllCards_cards"] = __v) });
     L_034B:
         L["Temp_bool_True_if_break_was_hit_Variable"] = Val.False;
     L_0356:
@@ -205,11 +205,11 @@ public static Val ExecuteUbergraph_card_unit_60th_cavalry_regiment(IHost H, Val 
     L_0451:
         __ef.Push(1453);
     L_0456:
-        _ = H.Call("GetTurnNumber", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetTurnNumber_turnNumber"] = __v) });
+        _ = H.Call("GetTurnNumber", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetTurnNumber_turnNumber"), __v => L["CallFunc_GetTurnNumber_turnNumber"] = __v) });
     L_0483:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_04BE:
-        _ = H.Call("IsOrder", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_IsOrder_isIt_1"] = __v) });
+        _ = H.Call("IsOrder", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_IsOrder_isIt_1"), __v => L["CallFunc_IsOrder_isIt_1"] = __v) });
     L_04E7:
         L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "enterPlayOnTurn"), GetLocal(L, "CallFunc_GetTurnNumber_turnNumber")) == 0);
     L_0523:
@@ -227,7 +227,7 @@ public static Val ExecuteUbergraph_card_unit_60th_cavalry_regiment(IHost H, Val 
             }
         }
     L_0553:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_058E:
         H.SetMember(self, "orderPlayed", GetLocal(L, "CallFunc_Array_Get_Item"));
     L_05A1:

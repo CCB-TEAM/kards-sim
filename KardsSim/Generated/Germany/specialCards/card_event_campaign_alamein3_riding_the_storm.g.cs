@@ -42,21 +42,21 @@ public static Val ExecuteUbergraph_card_event_campaign_alamein3_riding_the_storm
     L_000F:
         __ef.Push(546);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_004F:
-        _ = H.Call("IsPinned", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_1"), Val.Out(__v => L["CallFunc_IsPinned_isPinned"] = __v) });
+        _ = H.Call("IsPinned", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_1"), Val.Out(GetLocal(L, "CallFunc_IsPinned_isPinned"), __v => L["CallFunc_IsPinned_isPinned"] = __v) });
     L_0078:
         if (!(GetLocal(L, "CallFunc_IsPinned_isPinned")).AsBool()) goto L_00F7;
     L_0086:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_00C1:
-        _ = H.Call("RemovePin", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item_1"), Val.Out(__v => L["CallFunc_RemovePin_qqq"] = __v) });
+        _ = H.Call("RemovePin", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item_1"), Val.Out(GetLocal(L, "CallFunc_RemovePin_qqq"), __v => L["CallFunc_RemovePin_qqq"] = __v) });
     L_00F7:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_0132:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("cantBePinned"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "cardID"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("cantBePinned"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "cardID"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_CustomAbilityAdd_qqq"), __v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_0198:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_01D3:
         L["CallFunc_Conv_IntToString_ReturnValue"] = H.Call("Conv_IntToString", new Val[] { Val.Ref("KismetStringLibrary"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "cardID") });
     L_020E:
@@ -96,7 +96,7 @@ public static Val ExecuteUbergraph_card_event_campaign_alamein3_riding_the_storm
             default: goto __halt;
         }
     L_0325:
-        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
+        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsSideActive_active"), __v => L["CallFunc_IsSideActive_active"] = __v) });
     L_0341:
         if (!(GetLocal(L, "CallFunc_IsSideActive_active")).AsBool())
         {
@@ -110,7 +110,7 @@ public static Val ExecuteUbergraph_card_event_campaign_alamein3_riding_the_storm
             }
         }
     L_034B:
-        _ = H.Call("CustomName1HasAttribute", new Val[] { self, Val.Of("played"), Val.Out(__v => L["CallFunc_CustomName1HasAttribute_doesIt"] = __v) });
+        _ = H.Call("CustomName1HasAttribute", new Val[] { self, Val.Of("played"), Val.Out(GetLocal(L, "CallFunc_CustomName1HasAttribute_doesIt"), __v => L["CallFunc_CustomName1HasAttribute_doesIt"] = __v) });
     L_0366:
         if (!(GetLocal(L, "CallFunc_CustomName1HasAttribute_doesIt")).AsBool())
         {
@@ -134,7 +134,7 @@ public static Val ExecuteUbergraph_card_event_campaign_alamein3_riding_the_storm
     L_03DE:
         L["CallFunc_GetCustomName2Attributes_attributes"] = H.MakeArray(new Val[] {  });
     L_03E9:
-        _ = H.Call("GetCustomName2Attributes", new Val[] { self, Val.Out(__v => L["CallFunc_GetCustomName2Attributes_attributes"] = __v) });
+        _ = H.Call("GetCustomName2Attributes", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetCustomName2Attributes_attributes"), __v => L["CallFunc_GetCustomName2Attributes_attributes"] = __v) });
     L_03FC:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCustomName2Attributes_attributes") });
     L_0437:
@@ -158,13 +158,13 @@ public static Val ExecuteUbergraph_card_event_campaign_alamein3_riding_the_storm
     L_0487:
         L["CallFunc_GetCustomName2Attributes_attributes"] = H.MakeArray(new Val[] {  });
     L_0492:
-        _ = H.Call("GetCustomName2Attributes", new Val[] { self, Val.Out(__v => L["CallFunc_GetCustomName2Attributes_attributes"] = __v) });
+        _ = H.Call("GetCustomName2Attributes", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetCustomName2Attributes_attributes"), __v => L["CallFunc_GetCustomName2Attributes_attributes"] = __v) });
     L_04A5:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCustomName2Attributes_attributes"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCustomName2Attributes_attributes"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_04E0:
         L["CallFunc_Conv_StringToInt_ReturnValue"] = H.Call("Conv_StringToInt", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_Array_Get_Item") });
     L_0505:
-        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("cantBePinned"), GetLocal(L, "CallFunc_Conv_StringToInt_ReturnValue"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
+        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("cantBePinned"), GetLocal(L, "CallFunc_Conv_StringToInt_ReturnValue"), H.GetMember(self, "cardID"), Val.False, Val.Out(GetLocal(L, "CallFunc_CustomAbilityRemove_qqq"), __v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
     L_0553:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -187,7 +187,7 @@ public static Val ExecuteUbergraph_card_event_campaign_alamein3_riding_the_storm
     L_05BA:
         _ = H.Call("CustomName1Add", new Val[] { self, Val.Of("played") });
     L_05CC:
-        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
+        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), __v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
     L_0604:
         L["Temp_int_Loop_Counter_Variable_1"] = Val.Of(0);
     L_061B:

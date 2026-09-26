@@ -28,7 +28,7 @@ public static Val GetAccountLinkingURL(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_URL = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["URL"] = Val.Nothing;
+        L["URL"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetEngineSubsystem_ReturnValue"] = H.Call("GetEngineSubsystem", new Val[] { self, Val.Ref("ConfigSubsystem") });
     L_001D:

@@ -35,17 +35,17 @@ public static Val ExecuteUbergraph_card_unit_22nd_marines(IHost H, Val self, Val
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsVeteran", new Val[] { self, Val.False, Val.Out(__v => L["CallFunc_IsVeteran_isIt"] = __v) });
+        _ = H.Call("IsVeteran", new Val[] { self, Val.False, Val.Out(GetLocal(L, "CallFunc_IsVeteran_isIt"), __v => L["CallFunc_IsVeteran_isIt"] = __v) });
     L_001E:
         if (!(GetLocal(L, "CallFunc_IsVeteran_isIt")).AsBool()) goto L_0031;
     L_002C:
         goto L_0194;
     L_0031:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0044:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_0194;
     L_0052:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_cardPlayed_1"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_cardPlayed_1"), "side"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), __v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_008D:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_00AC:
@@ -53,13 +53,13 @@ public static Val ExecuteUbergraph_card_unit_22nd_marines(IHost H, Val self, Val
     L_00BA:
         goto L_0194;
     L_00BF:
-        _ = H.Call("getHasGameplayTag", new Val[] { H.GetVar("K2Node_Event_cardPlayed_1"), H.MakeArray(new Val[] { Val.Name("subtype.navy") }), Val.Out(__v => L["CallFunc_GetHasGameplayTag_hasTag"] = __v) });
+        _ = H.Call("getHasGameplayTag", new Val[] { H.GetVar("K2Node_Event_cardPlayed_1"), H.MakeArray(new Val[] { Val.Name("subtype.navy") }), Val.Out(GetLocal(L, "CallFunc_GetHasGameplayTag_hasTag"), __v => L["CallFunc_GetHasGameplayTag_hasTag"] = __v) });
     L_0103:
         if (!(GetLocal(L, "CallFunc_GetHasGameplayTag_hasTag")).AsBool()) goto L_0194;
     L_0111:
-        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckBySide_cardsIDs"] = __v), Val.Of(0.4f) });
+        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DrawCardsFromDeckBySide_cardsIDs"), __v => L["CallFunc_DrawCardsFromDeckBySide_cardsIDs"] = __v), Val.Of(0.4f) });
     L_015C:
-        _ = H.Call("MakeVeteran", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(__v => L["CallFunc_MakeVeteran_qqq"] = __v) });
+        _ = H.Call("MakeVeteran", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(GetLocal(L, "CallFunc_MakeVeteran_qqq"), __v => L["CallFunc_MakeVeteran_qqq"] = __v) });
     L_018A:
         goto L_0194;
     L_018F:
@@ -114,7 +114,7 @@ public static Val OnCardDealDamage_ModifyDamageDealt(IHost H, Val self, Val[] ar
         L["fromAttack"] = args.Length > 2 ? args[2] : Val.Nothing;
         L["fromFight"] = args.Length > 3 ? args[3] : Val.Nothing;
         var __out_newDamage = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["newDamage"] = Val.Nothing;
+        L["newDamage"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
         L["CallFunc_BooleanOR_ReturnValue"] = Val.Of((GetLocal(L, "fromAttack")).AsBool() || (GetLocal(L, "fromFight")).AsBool());
     L_0026:
@@ -124,11 +124,11 @@ public static Val OnCardDealDamage_ModifyDamageDealt(IHost H, Val self, Val[] ar
     L_004F:
         goto L_00FF;
     L_0054:
-        _ = H.Call("IsVeteran", new Val[] { self, Val.False, Val.Out(__v => L["CallFunc_IsVeteran_isIt"] = __v) });
+        _ = H.Call("IsVeteran", new Val[] { self, Val.False, Val.Out(GetLocal(L, "CallFunc_IsVeteran_isIt"), __v => L["CallFunc_IsVeteran_isIt"] = __v) });
     L_0068:
         if (!(GetLocal(L, "CallFunc_IsVeteran_isIt")).AsBool()) goto L_0034;
     L_0076:
-        _ = H.Call("IsTopDeckNavy", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsTopDeckNavy_isNavy"] = __v) });
+        _ = H.Call("IsTopDeckNavy", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsTopDeckNavy_isNavy"), __v => L["CallFunc_IsTopDeckNavy_isNavy"] = __v) });
     L_00AC:
         if (!(GetLocal(L, "CallFunc_IsTopDeckNavy_isNavy")).AsBool()) goto L_0034;
     L_00BA:
@@ -153,19 +153,19 @@ public static Val OnCounterMeasureTriggered(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["countermeasureTriggering"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_qqq = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["qqq"] = Val.Nothing;
+        L["qqq"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0013:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_0175;
     L_0021:
-        _ = H.Call("IsVeteran", new Val[] { self, Val.False, Val.Out(__v => L["CallFunc_IsVeteran_isIt"] = __v) });
+        _ = H.Call("IsVeteran", new Val[] { self, Val.False, Val.Out(GetLocal(L, "CallFunc_IsVeteran_isIt"), __v => L["CallFunc_IsVeteran_isIt"] = __v) });
     L_0035:
         if (!(GetLocal(L, "CallFunc_IsVeteran_isIt")).AsBool()) goto L_0048;
     L_0043:
         goto L_0175;
     L_0048:
-        _ = H.Call("getHasGameplayTag", new Val[] { GetLocal(L, "countermeasureTriggering"), H.MakeArray(new Val[] { Val.Name("subtype.navy") }), Val.Out(__v => L["CallFunc_GetHasGameplayTag_hasTag"] = __v) });
+        _ = H.Call("getHasGameplayTag", new Val[] { GetLocal(L, "countermeasureTriggering"), H.MakeArray(new Val[] { Val.Name("subtype.navy") }), Val.Out(GetLocal(L, "CallFunc_GetHasGameplayTag_hasTag"), __v => L["CallFunc_GetHasGameplayTag_hasTag"] = __v) });
     L_008C:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "countermeasureTriggering"), "side"), H.GetMember(self, "side")) == 0);
     L_00C8:
@@ -173,9 +173,9 @@ public static Val OnCounterMeasureTriggered(IHost H, Val self, Val[] args)
     L_00EE:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_0175;
     L_00FC:
-        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckBySide_cardsIDs"] = __v), Val.Of(0.4f) });
+        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DrawCardsFromDeckBySide_cardsIDs"), __v => L["CallFunc_DrawCardsFromDeckBySide_cardsIDs"] = __v), Val.Of(0.4f) });
     L_0147:
-        _ = H.Call("MakeVeteran", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(__v => L["CallFunc_MakeVeteran_qqq"] = __v) });
+        _ = H.Call("MakeVeteran", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(GetLocal(L, "CallFunc_MakeVeteran_qqq"), __v => L["CallFunc_MakeVeteran_qqq"] = __v) });
     L_0175:
         goto __halt;
     L_0177:
@@ -198,13 +198,13 @@ public static Val OnDealDamageAddDamageAfterCalc(IHost H, Val self, Val[] args)
         L["isAttacker"] = args.Length > 3 ? args[3] : Val.Nothing;
         L["isRedirected"] = args.Length > 4 ? args[4] : Val.Nothing;
         var __out_damageToAdd = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["damageToAdd"] = Val.Nothing;
+        L["damageToAdd"] = args.Length > 5 ? args[5].In : Val.Nothing;
     L_0000:
-        _ = H.Call("IsVeteran", new Val[] { self, Val.False, Val.Out(__v => L["CallFunc_IsVeteran_isIt"] = __v) });
+        _ = H.Call("IsVeteran", new Val[] { self, Val.False, Val.Out(GetLocal(L, "CallFunc_IsVeteran_isIt"), __v => L["CallFunc_IsVeteran_isIt"] = __v) });
     L_0014:
         if (!(GetLocal(L, "CallFunc_IsVeteran_isIt")).AsBool()) goto L_0096;
     L_0022:
-        _ = H.Call("IsTopDeckNavy", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsTopDeckNavy_isNavy"] = __v) });
+        _ = H.Call("IsTopDeckNavy", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsTopDeckNavy_isNavy"), __v => L["CallFunc_IsTopDeckNavy_isNavy"] = __v) });
     L_0058:
         if (!(GetLocal(L, "CallFunc_IsTopDeckNavy_isNavy")).AsBool()) goto L_0096;
     L_0066:
@@ -216,7 +216,7 @@ public static Val OnDealDamageAddDamageAfterCalc(IHost H, Val self, Val[] args)
     L_00AD:
         goto L_0124;
     L_00B2:
-        _ = H.Call("getTotalHeavyArmor", new Val[] { GetLocal(L, "toCard"), Val.Out(__v => L["CallFunc_getTotalHeavyArmor_totalHeavyArmor"] = __v) });
+        _ = H.Call("getTotalHeavyArmor", new Val[] { GetLocal(L, "toCard"), Val.Out(GetLocal(L, "CallFunc_getTotalHeavyArmor_totalHeavyArmor"), __v => L["CallFunc_getTotalHeavyArmor_totalHeavyArmor"] = __v) });
     L_00DB:
         L["CallFunc_Add_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_getTotalHeavyArmor_totalHeavyArmor") + GetLocal(L, "damage"));
     L_0109:

@@ -29,7 +29,7 @@ public static Val GetFPSFromSave(IHost H, Val self, Val[] args)
         L["FromScalabilityLevel"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_FPS = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["FPS"] = Val.Nothing;
+        L["FPS"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(1527);
     L_0005:
@@ -189,7 +189,7 @@ public static Val IsStreamerMode(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_OutIsStreamerMode = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["OutIsStreamerMode"] = Val.Nothing;
+        L["OutIsStreamerMode"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("LoadOtherSettings", new Val[] { self, Val.Out(__v => L["CallFunc_LoadOtherSettings_IsStreamerMode"] = __v), Val.Out(__v => L["CallFunc_LoadOtherSettings_SaveFileValid"] = __v) });
     L_001C:
@@ -257,7 +257,7 @@ public static Val LoadDevChinaISBN(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_isISBN = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["isISBN"] = Val.Nothing;
+        L["isISBN"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("LoadDeveloperSettings", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_LoadDeveloperSettings_DeveloperSettings"] = __v) });
     L_0020:
@@ -280,7 +280,7 @@ public static Val LoadDeveloperSettings(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_DeveloperSettings = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["DeveloperSettings"] = Val.Nothing;
+        L["DeveloperSettings"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["SaveSlot"] = Val.Of(0);
     L_0014:
@@ -329,7 +329,7 @@ public static Val LoadIsDefaultCallsign(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_IsDefaultCallsign = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["IsDefaultCallsign"] = Val.Nothing;
+        L["IsDefaultCallsign"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_LoadGameFromSlot_ReturnValue"] = H.Call("LoadGameFromSlot", new Val[] { Val.Ref("GameplayStatics"), Val.Of("IsDefaultCallsign"), Val.Of(0) });
     L_002C:
@@ -362,7 +362,7 @@ public static Val LoadLocalNotificationTest(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_NotificationTest = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["NotificationTest"] = Val.Nothing;
+        L["NotificationTest"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("LoadDeveloperSettings", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_LoadDeveloperSettings_DeveloperSettings"] = __v) });
     L_0020:
@@ -385,7 +385,7 @@ public static Val LoadMSSDKAutoLogin(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_OutAutoLogin = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["OutAutoLogin"] = Val.Nothing;
+        L["OutAutoLogin"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_LoadGameFromSlot_ReturnValue"] = H.Call("LoadGameFromSlot", new Val[] { Val.Ref("GameplayStatics"), Val.Of("MSSDKAutoLogin"), Val.Of(0) });
     L_0029:
@@ -418,7 +418,7 @@ public static Val LoadOrCreateMobileContentScaleFactorFromSave(IHost H, Val self
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_MobileContentScaleFactor = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["MobileContentScaleFactor"] = Val.Nothing;
+        L["MobileContentScaleFactor"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["MobileContentSaveSlot"] = Val.Of(4);
     L_0014:
@@ -495,7 +495,7 @@ public static Val LoadSentFTUEEvents(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_sentFTUEEvents = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["sentFTUEEvents"] = Val.Nothing;
+        L["sentFTUEEvents"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_LoadGameFromSlot_ReturnValue"] = H.Call("LoadGameFromSlot", new Val[] { Val.Ref("GameplayStatics"), Val.Of("SentFTUEEvents"), Val.Of(0) });
     L_0029:
@@ -528,7 +528,7 @@ public static Val LoadShowDevUI(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_ShowDevUI = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["ShowDevUI"] = Val.Nothing;
+        L["ShowDevUI"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("LoadDeveloperSettings", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_LoadDeveloperSettings_DeveloperSettings"] = __v) });
     L_0020:
@@ -551,7 +551,7 @@ public static Val LoadShowFPS(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_ShowFPS = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["ShowFPS"] = Val.Nothing;
+        L["ShowFPS"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("LoadDeveloperSettings", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_LoadDeveloperSettings_DeveloperSettings"] = __v) });
     L_0020:
@@ -574,7 +574,7 @@ public static Val LoadShowMoveNumbers(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_ShowMoveNumbers = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["ShowMoveNumbers"] = Val.Nothing;
+        L["ShowMoveNumbers"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("LoadDeveloperSettings", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_LoadDeveloperSettings_DeveloperSettings"] = __v) });
     L_0020:
@@ -597,7 +597,7 @@ public static Val LoadShowScreenMessages(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_ShowScreenMessages = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["ShowScreenMessages"] = Val.Nothing;
+        L["ShowScreenMessages"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("LoadDeveloperSettings", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_LoadDeveloperSettings_DeveloperSettings"] = __v) });
     L_0020:
@@ -620,7 +620,7 @@ public static Val LoadSolstenSurveyShown(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_IsSolstenSurveyShown = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["IsSolstenSurveyShown"] = Val.Nothing;
+        L["IsSolstenSurveyShown"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_DoesSaveGameExist_ReturnValue"] = H.Call("DoesSaveGameExist", new Val[] { Val.Ref("GameplayStatics"), Val.Of("MobileAppReview"), Val.Of(0) });
     L_002A:
@@ -663,7 +663,7 @@ public static Val LoadSubscribeTest(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_SubscribeTest = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["SubscribeTest"] = Val.Nothing;
+        L["SubscribeTest"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("LoadDeveloperSettings", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_LoadDeveloperSettings_DeveloperSettings"] = __v) });
     L_0020:
@@ -835,7 +835,7 @@ public static Val SaveSentFTUEEvent(IHost H, Val self, Val[] args)
         L["newFTUEEvent"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_alreadyExists = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["alreadyExists"] = Val.Nothing;
+        L["alreadyExists"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("LoadSentFTUEEvents", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_LoadSentFTUEEvents_sentFTUEEvents"] = __v) });
     L_0020:

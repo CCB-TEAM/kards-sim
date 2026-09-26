@@ -39,11 +39,11 @@ public static Val ExecuteUbergraph_card_unit_type_88_aa_gun(IHost H, Val self, V
     L_0046:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_01CD;
     L_0054:
-        _ = H.Call("IsAirUnit", new Val[] { H.GetVar("K2Node_Event_attackerCard"), Val.Out(__v => L["CallFunc_IsAirUnit_isIt_1"] = __v) });
+        _ = H.Call("IsAirUnit", new Val[] { H.GetVar("K2Node_Event_attackerCard"), Val.Out(GetLocal(L, "CallFunc_IsAirUnit_isIt_1"), __v => L["CallFunc_IsAirUnit_isIt_1"] = __v) });
     L_007D:
         if (!(GetLocal(L, "CallFunc_IsAirUnit_isIt_1")).AsBool()) goto L_01CD;
     L_008B:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_attackerCard"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_attackerCard"), Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1"), __v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_00B4:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1")).AsBool()) goto L_01CD;
     L_00C2:
@@ -51,11 +51,11 @@ public static Val ExecuteUbergraph_card_unit_type_88_aa_gun(IHost H, Val self, V
     L_010E:
         goto L_01CD;
     L_0113:
-        _ = H.Call("IsAirUnit", new Val[] { H.GetVar("K2Node_Event_defenderCard_1"), Val.Out(__v => L["CallFunc_IsAirUnit_isIt"] = __v) });
+        _ = H.Call("IsAirUnit", new Val[] { H.GetVar("K2Node_Event_defenderCard_1"), Val.Out(GetLocal(L, "CallFunc_IsAirUnit_isIt"), __v => L["CallFunc_IsAirUnit_isIt"] = __v) });
     L_013C:
         if (!(GetLocal(L, "CallFunc_IsAirUnit_isIt")).AsBool()) goto L_01CD;
     L_014A:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_defenderCard_1"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_defenderCard_1"), Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0173:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_01CD;
     L_0181:

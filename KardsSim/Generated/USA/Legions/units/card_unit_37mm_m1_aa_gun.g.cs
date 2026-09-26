@@ -44,7 +44,7 @@ public static Val ExecuteUbergraph_card_unit_37mm_m1_aa_gun(IHost H, Val self, V
     L_0038:
         H.SetMember(self, "staticCardAttack", Val.Of(1));
     L_004F:
-        _ = H.Call("getAndDecryptAttack", new Val[] { H.GetMember(self, "defenderCard"), Val.Out(__v => L["CallFunc_getAndDecryptAttack_decryptedAttack"] = __v) });
+        _ = H.Call("getAndDecryptAttack", new Val[] { H.GetMember(self, "defenderCard"), Val.Out(GetLocal(L, "CallFunc_getAndDecryptAttack_decryptedAttack"), __v => L["CallFunc_getAndDecryptAttack_decryptedAttack"] = __v) });
     L_0078:
         L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_getAndDecryptAttack_decryptedAttack") - H.GetMember(self, "staticCardAttack"));
     L_00A6:
@@ -63,7 +63,7 @@ public static Val ExecuteUbergraph_card_unit_37mm_m1_aa_gun(IHost H, Val self, V
             }
         }
     L_00ED:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "defenderCard"), H.GetMember(self, "cardID"), H.GetMember(self, "staticCardAttack"), Val.Of(2), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "defenderCard"), H.GetMember(self, "cardID"), H.GetMember(self, "staticCardAttack"), Val.Of(2), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_0138:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -97,13 +97,13 @@ public static Val ExecuteUbergraph_card_unit_37mm_m1_aa_gun(IHost H, Val self, V
             default: goto __halt;
         }
     L_0200:
-        _ = H.Call("IsVeteran", new Val[] { H.GetMember(self, "defenderCard"), Val.False, Val.Out(__v => L["CallFunc_IsVeteran_isIt"] = __v) });
+        _ = H.Call("IsVeteran", new Val[] { H.GetMember(self, "defenderCard"), Val.False, Val.Out(GetLocal(L, "CallFunc_IsVeteran_isIt"), __v => L["CallFunc_IsVeteran_isIt"] = __v) });
     L_022A:
         if (!(GetLocal(L, "CallFunc_IsVeteran_isIt")).AsBool()) goto L_02AA;
     L_0238:
-        _ = H.Call("getStaticVeteranUpgrade", new Val[] { H.GetMember(self, "defenderCard"), Val.Out(__v => L["CallFunc_getStaticVeteranUpgrade_staticVeteranCard"] = __v) });
+        _ = H.Call("getStaticVeteranUpgrade", new Val[] { H.GetMember(self, "defenderCard"), Val.Out(GetLocal(L, "CallFunc_getStaticVeteranUpgrade_staticVeteranCard"), __v => L["CallFunc_getStaticVeteranUpgrade_staticVeteranCard"] = __v) });
     L_0261:
-        _ = H.Call("getAndDecryptAttack", new Val[] { GetLocal(L, "CallFunc_getStaticVeteranUpgrade_staticVeteranCard"), Val.Out(__v => L["CallFunc_getAndDecryptAttack_decryptedAttack_1"] = __v) });
+        _ = H.Call("getAndDecryptAttack", new Val[] { GetLocal(L, "CallFunc_getStaticVeteranUpgrade_staticVeteranCard"), Val.Out(GetLocal(L, "CallFunc_getAndDecryptAttack_decryptedAttack_1"), __v => L["CallFunc_getAndDecryptAttack_decryptedAttack_1"] = __v) });
     L_028A:
         H.SetMember(self, "staticCardAttack", GetLocal(L, "CallFunc_getAndDecryptAttack_decryptedAttack_1"));
     L_02A5:
@@ -111,7 +111,7 @@ public static Val ExecuteUbergraph_card_unit_37mm_m1_aa_gun(IHost H, Val self, V
     L_02AA:
         L["CallFunc_GetStaticCard_ReturnValue"] = H.Call("GetStaticCard", new Val[] { self, H.GetMember(H.GetMember(self, "defenderCard"), "name") });
     L_02DD:
-        _ = H.Call("getAndDecryptAttack", new Val[] { GetLocal(L, "CallFunc_GetStaticCard_ReturnValue"), Val.Out(__v => L["CallFunc_getAndDecryptAttack_decryptedAttack_2"] = __v) });
+        _ = H.Call("getAndDecryptAttack", new Val[] { GetLocal(L, "CallFunc_GetStaticCard_ReturnValue"), Val.Out(GetLocal(L, "CallFunc_getAndDecryptAttack_decryptedAttack_2"), __v => L["CallFunc_getAndDecryptAttack_decryptedAttack_2"] = __v) });
     L_0306:
         H.SetMember(self, "staticCardAttack", GetLocal(L, "CallFunc_getAndDecryptAttack_decryptedAttack_2"));
     L_0321:
@@ -119,7 +119,7 @@ public static Val ExecuteUbergraph_card_unit_37mm_m1_aa_gun(IHost H, Val self, V
     L_0326:
         H.SetMember(self, "defenderCard", H.GetVar("K2Node_Event_defenderCard"));
     L_0339:
-        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "defenderCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "defenderCard"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0362:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool())
         {

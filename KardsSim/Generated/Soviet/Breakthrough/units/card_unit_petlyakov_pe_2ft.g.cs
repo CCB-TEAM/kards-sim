@@ -28,9 +28,9 @@ public static Val OnBeforeOtherCardDeploymentTrigger(IHost H, Val self, Val[] ar
         var __ret = Val.Nothing;
         L["cardDeploying"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_cancelDeploymentEffect = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["cancelDeploymentEffect"] = Val.Nothing;
+        L["cancelDeploymentEffect"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0013:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((H.GetMember(GetLocal(L, "cardDeploying"), "hasDeployment")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_004F:

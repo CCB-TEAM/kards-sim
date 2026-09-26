@@ -43,11 +43,11 @@ public static Val ExecuteUbergraph_card_event_special_reinforcements(IHost H, Va
     L_000F:
         __ef.Push(426);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "allCardsDestroyedThisBattle"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "allCardsDestroyedThisBattle"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0085:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "CallFunc_GetCardFromID_card"), Val.Out(__v => L["CallFunc_IsUnit_isIt_1"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "CallFunc_GetCardFromID_card"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt_1"), __v => L["CallFunc_IsUnit_isIt_1"] = __v) });
     L_00AE:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "side")) == 0);
     L_00EA:
@@ -65,9 +65,9 @@ public static Val ExecuteUbergraph_card_event_special_reinforcements(IHost H, Va
             }
         }
     L_011A:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "allCardsDestroyedThisBattle"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "allCardsDestroyedThisBattle"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0155:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_018B:
         H.SetMember(self, "lastDestroyedCard", GetLocal(L, "CallFunc_GetCardFromID_card"));
     L_019E:
@@ -114,7 +114,7 @@ public static Val ExecuteUbergraph_card_event_special_reinforcements(IHost H, Va
     L_02D4:
         goto L_01EF;
     L_02D9:
-        _ = H.Call("JSON_GetString", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("spawn_card_name"), Val.Out(__v => L["CallFunc_JSON_GetString_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetString_found"] = __v) });
+        _ = H.Call("JSON_GetString", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("spawn_card_name"), Val.Out(GetLocal(L, "CallFunc_JSON_GetString_value"), __v => L["CallFunc_JSON_GetString_value"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetString_found"), __v => L["CallFunc_JSON_GetString_found"] = __v) });
     L_0321:
         if (!(GetLocal(L, "CallFunc_JSON_GetString_found")).AsBool()) goto L_0487;
     L_032F:
@@ -130,7 +130,7 @@ public static Val ExecuteUbergraph_card_event_special_reinforcements(IHost H, Va
     L_03E8:
         L["Temp_bool_Variable"] = GetLocal(L, "CallFunc_Split_ReturnValue");
     L_03FB:
-        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_1"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.Switch(GetLocal(L, "Temp_bool_Variable"), new[] { ValueTuple.Create(Val.False, GetLocal(L, "Temp_byte_Variable")), ValueTuple.Create(Val.True, GetLocal(L, "CallFunc_GetFactionEnum_ReturnValue")) }, GetLocal(L, "K2Node_Select_Default")), Val.Out(__v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_1"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.Switch(GetLocal(L, "Temp_bool_Variable"), new[] { ValueTuple.Create(Val.False, GetLocal(L, "Temp_byte_Variable")), ValueTuple.Create(Val.True, GetLocal(L, "CallFunc_GetFactionEnum_ReturnValue")) }, GetLocal(L, "K2Node_Select_Default")), Val.Out(GetLocal(L, "CallFunc_SpawnCardinHandbySide_spawnedCardID"), __v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID"] = __v) });
     L_0486:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -143,7 +143,7 @@ public static Val ExecuteUbergraph_card_event_special_reinforcements(IHost H, Va
     L_0487:
         L["Temp_text_Variable_1"] = Val.Of("No friendly units have been destroyed this battle.");
     L_04F3:
-        _ = H.Call("ShowNotification", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["Temp_text_Variable_1"] = __v) });
+        _ = H.Call("ShowNotification", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "Temp_text_Variable_1"), __v => L["Temp_text_Variable_1"] = __v) });
     L_0529:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -154,9 +154,9 @@ public static Val ExecuteUbergraph_card_event_special_reinforcements(IHost H, Va
             default: goto __halt;
         }
     L_052A:
-        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
+        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedInHand_isIt"), __v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
     L_053D:
-        _ = H.Call("IsLocatedInDeck", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedInDeck_isIt"] = __v) });
+        _ = H.Call("IsLocatedInDeck", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedInDeck_isIt"), __v => L["CallFunc_IsLocatedInDeck_isIt"] = __v) });
     L_0550:
         L["CallFunc_BooleanOR_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsLocatedInHand_isIt")).AsBool() || (GetLocal(L, "CallFunc_IsLocatedInDeck_isIt")).AsBool());
     L_0576:
@@ -172,7 +172,7 @@ public static Val ExecuteUbergraph_card_event_special_reinforcements(IHost H, Va
             }
         }
     L_0580:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), __v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_05BB:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_05DA:
@@ -187,7 +187,7 @@ public static Val ExecuteUbergraph_card_event_special_reinforcements(IHost H, Va
             default: goto __halt;
         }
     L_05E9:
-        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0612:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool())
         {
@@ -209,7 +209,7 @@ public static Val ExecuteUbergraph_card_event_special_reinforcements(IHost H, Va
     L_06C3:
         L["CallFunc_Concat_StrStr_ReturnValue_1"] = H.Call("Concat_StrStr", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_Concat_StrStr_ReturnValue"), GetLocal(L, "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue") });
     L_06F1:
-        _ = H.Call("JSON_SetString", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("spawn_card_name"), GetLocal(L, "CallFunc_Concat_StrStr_ReturnValue_1"), Val.Out(__v => L["CallFunc_JSON_SetString_found"] = __v) });
+        _ = H.Call("JSON_SetString", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("spawn_card_name"), GetLocal(L, "CallFunc_Concat_StrStr_ReturnValue_1"), Val.Out(GetLocal(L, "CallFunc_JSON_SetString_found"), __v => L["CallFunc_JSON_SetString_found"] = __v) });
     L_0739:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_0767:
@@ -222,7 +222,7 @@ public static Val ExecuteUbergraph_card_event_special_reinforcements(IHost H, Va
             default: goto __halt;
         }
     L_0768:
-        _ = H.Call("GetDestroyedCardsIDsThisBattle", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetDestroyedCardsIDsThisBattle_destroyedCardsIDs"] = __v) });
+        _ = H.Call("GetDestroyedCardsIDsThisBattle", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetDestroyedCardsIDsThisBattle_destroyedCardsIDs"), __v => L["CallFunc_GetDestroyedCardsIDsThisBattle_destroyedCardsIDs"] = __v) });
     L_0795:
         H.SetMember(self, "allCardsDestroyedThisBattle", GetLocal(L, "CallFunc_GetDestroyedCardsIDsThisBattle_destroyedCardsIDs"));
     L_07B0:
@@ -276,7 +276,7 @@ public static Val ExecuteUbergraph_card_event_special_reinforcements(IHost H, Va
     L_090B:
         L["CallFunc_Concat_StrStr_ReturnValue_3"] = H.Call("Concat_StrStr", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_Concat_StrStr_ReturnValue_2"), GetLocal(L, "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue_1") });
     L_0939:
-        _ = H.Call("JSON_SetString", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("spawn_card_name"), GetLocal(L, "CallFunc_Concat_StrStr_ReturnValue_3"), Val.Out(__v => L["CallFunc_JSON_SetString_found_1"] = __v) });
+        _ = H.Call("JSON_SetString", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("spawn_card_name"), GetLocal(L, "CallFunc_Concat_StrStr_ReturnValue_3"), Val.Out(GetLocal(L, "CallFunc_JSON_SetString_found_1"), __v => L["CallFunc_JSON_SetString_found_1"] = __v) });
     L_0981:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_09AF:

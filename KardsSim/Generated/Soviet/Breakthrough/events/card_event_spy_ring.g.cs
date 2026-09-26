@@ -121,7 +121,7 @@ public static Val ExecuteUbergraph_card_event_spy_ring(IHost H, Val self, Val[] 
     L_01A0:
         goto L_000F;
     L_01A5:
-        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.GetMember(self, "card to spawn"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.Of(0), Val.Out(__v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.GetMember(self, "card to spawn"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Of(""), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_SpawnCardinHandbySide_spawnedCardID"), __v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID"] = __v) });
     L_01FD:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -131,7 +131,7 @@ public static Val ExecuteUbergraph_card_event_spy_ring(IHost H, Val self, Val[] 
             default: goto __halt;
         }
     L_01FE:
-        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), Val.Of(4), Val.Out(__v => L["CallFunc_RandomIntFromRangeWithStream_randomResult"] = __v) });
+        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), Val.Of(4), Val.Out(GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), __v => L["CallFunc_RandomIntFromRangeWithStream_randomResult"] = __v) });
     L_0235:
         H.SetMember(self, "randNumber", GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"));
     L_0250:

@@ -41,7 +41,7 @@ public static Val ExecuteUbergraph_card_event_fliegerfuhrer_atlantik(IHost H, Va
     L_000F:
         L["Temp_int_Array_Index_Variable"] = Val.Of(0);
     L_0026:
-        _ = H.Call("GetDeckByside", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetDeckByside_deckCardIDs"] = __v) });
+        _ = H.Call("GetDeckByside", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs"), __v => L["CallFunc_GetDeckByside_deckCardIDs"] = __v) });
     L_005C:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs") });
     L_0097:
@@ -53,13 +53,13 @@ public static Val ExecuteUbergraph_card_event_fliegerfuhrer_atlantik(IHost H, Va
     L_00E6:
         __ef.Push(1413);
     L_00EB:
-        _ = H.Call("GetDeckByside", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetDeckByside_deckCardIDs"] = __v) });
+        _ = H.Call("GetDeckByside", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs"), __v => L["CallFunc_GetDeckByside_deckCardIDs"] = __v) });
     L_0121:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_015C:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0192:
-        _ = H.Call("getHasGameplayTag", new Val[] { GetLocal(L, "CallFunc_GetCardFromID_card"), H.MakeArray(new Val[] { Val.Name("subtype.navy") }), Val.Out(__v => L["CallFunc_GetHasGameplayTag_hasTag"] = __v) });
+        _ = H.Call("getHasGameplayTag", new Val[] { GetLocal(L, "CallFunc_GetCardFromID_card"), H.MakeArray(new Val[] { Val.Name("subtype.navy") }), Val.Out(GetLocal(L, "CallFunc_GetHasGameplayTag_hasTag"), __v => L["CallFunc_GetHasGameplayTag_hasTag"] = __v) });
     L_01D6:
         if (!(GetLocal(L, "CallFunc_GetHasGameplayTag_hasTag")).AsBool())
         {
@@ -73,11 +73,11 @@ public static Val ExecuteUbergraph_card_event_fliegerfuhrer_atlantik(IHost H, Va
             }
         }
     L_01E0:
-        _ = H.Call("GetDeckByside", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetDeckByside_deckCardIDs"] = __v) });
+        _ = H.Call("GetDeckByside", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs"), __v => L["CallFunc_GetDeckByside_deckCardIDs"] = __v) });
     L_0216:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0251:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0287:
         L["CallFunc_Array_Add_ReturnValue"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "possibleCards"), GetLocal(L, "CallFunc_GetCardFromID_card") });
     L_02CB:
@@ -129,7 +129,7 @@ public static Val ExecuteUbergraph_card_event_fliegerfuhrer_atlantik(IHost H, Va
     L_03E6:
         __ef.Push(1487);
     L_03EB:
-        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => H.SetMember(self, "possibleCards", __v)), Val.False, Val.Out(__v => L["CallFunc_GetRandomCard_randomCard"] = __v) });
+        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(H.GetMember(self, "possibleCards"), __v => H.SetMember(self, "possibleCards", __v)), Val.False, Val.Out(GetLocal(L, "CallFunc_GetRandomCard_randomCard"), __v => L["CallFunc_GetRandomCard_randomCard"] = __v) });
     L_0422:
         H.SetMember(self, "pickedCard", GetLocal(L, "CallFunc_GetRandomCard_randomCard"));
     L_0435:
@@ -147,7 +147,7 @@ public static Val ExecuteUbergraph_card_event_fliegerfuhrer_atlantik(IHost H, Va
             }
         }
     L_045C:
-        _ = H.Call("AdjustCardPositionInDeck", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.GetMember(H.GetMember(self, "pickedCard"), "cardID"), Val.Of(0), Val.Out(__v => L["CallFunc_AdjustCardPositionInDeck_qqq_1"] = __v) });
+        _ = H.Call("AdjustCardPositionInDeck", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.GetMember(H.GetMember(self, "pickedCard"), "cardID"), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_AdjustCardPositionInDeck_qqq_1"), __v => L["CallFunc_AdjustCardPositionInDeck_qqq_1"] = __v) });
     L_04B6:
         L["CallFunc_Array_RemoveItem_ReturnValue"] = H.Call("Array_RemoveItem", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "possibleCards"), H.GetMember(self, "pickedCard") });
     L_04F2:
@@ -160,9 +160,9 @@ public static Val ExecuteUbergraph_card_event_fliegerfuhrer_atlantik(IHost H, Va
             default: goto __halt;
         }
     L_04F3:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "possibleCards"), Val.Of(0), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "possibleCards"), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_052A:
-        _ = H.Call("AdjustCardPositionInDeck", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "cardID"), Val.Of(0), Val.Out(__v => L["CallFunc_AdjustCardPositionInDeck_qqq"] = __v) });
+        _ = H.Call("AdjustCardPositionInDeck", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "cardID"), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_AdjustCardPositionInDeck_qqq"), __v => L["CallFunc_AdjustCardPositionInDeck_qqq"] = __v) });
     L_0584:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

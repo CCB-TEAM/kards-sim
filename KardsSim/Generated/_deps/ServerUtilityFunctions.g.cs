@@ -30,7 +30,7 @@ public static Val GetServerConfigFloat(IHost H, Val self, Val[] args)
         L["DefaultValue"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_Value = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["Value"] = Val.Nothing;
+        L["Value"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         L["LocalKey"] = GetLocal(L, "Key");
     L_001B:
@@ -70,7 +70,7 @@ public static Val GetServerConfigInt(IHost H, Val self, Val[] args)
         L["Key"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_Value = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["Value"] = Val.Nothing;
+        L["Value"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetEngineSubsystem_ReturnValue"] = H.Call("GetEngineSubsystem", new Val[] { self, Val.Ref("ConfigSubsystem") });
     L_001D:
@@ -107,7 +107,7 @@ public static Val IsBetaExpired(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_betaExpired = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["betaExpired"] = Val.Nothing;
+        L["betaExpired"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("PrintString", new Val[] { Val.Ref("KismetSystemLibrary"), Val.Nothing, Val.Of("Checking IsBetaExpired"), Val.True, Val.True, H.MakeArray(new Val[] { Val.Of(0f), Val.Of(0.66f), Val.Of(1f), Val.Of(1f) }), Val.Of(2f), Val.Name("None") });
     L_0059:
@@ -148,7 +148,7 @@ public static Val IsDevServer(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_IsDevServer = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["IsDevServer"] = Val.Nothing;
+        L["IsDevServer"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetServerInfo", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetServerInfo_ServerName"] = __v) });
     L_0036:
@@ -173,7 +173,7 @@ public static Val IsLiveServer(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_IsLiveServer = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["IsLiveServer"] = Val.Nothing;
+        L["IsLiveServer"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetServerInfo", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetServerInfo_ServerName"] = __v) });
     L_0036:
@@ -198,7 +198,7 @@ public static Val LoadOrCreateUISettings(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_Settings = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["Settings"] = Val.Nothing;
+        L["Settings"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("PrintString", new Val[] { Val.Ref("KismetSystemLibrary"), Val.Nothing, Val.Of("LoadOrCreateUISettings"), Val.True, Val.True, H.MakeArray(new Val[] { Val.Of(0f), Val.Of(0.66f), Val.Of(1f), Val.Of(1f) }), Val.Of(2f), Val.Name("None") });
     L_0059:
@@ -278,7 +278,7 @@ public static Val ReadAndSaveServerConfigDefaultOptionsForNui(IHost H, Val self,
         L["UISettings"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_SavedUISettings = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["SavedUISettings"] = Val.Nothing;
+        L["SavedUISettings"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(1237);
     L_0005:

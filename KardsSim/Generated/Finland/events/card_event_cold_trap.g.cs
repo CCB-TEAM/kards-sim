@@ -29,9 +29,9 @@ public static Val OnOtherCardAttackSwitchTarget(IHost H, Val self, Val[] args)
         L["cardAttacking"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["oldDefender"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_newDefender = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["newDefender"] = Val.Nothing;
+        L["newDefender"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
-        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, GetLocal(L, "cardAttacking"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
+        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, GetLocal(L, "cardAttacking"), Val.Out(GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt"), __v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
     L_001C:
         if (!(GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt")).AsBool()) goto L_00E6;
     L_002A:
@@ -39,7 +39,7 @@ public static Val OnOtherCardAttackSwitchTarget(IHost H, Val self, Val[] args)
     L_0066:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_1")).AsBool()) goto L_00E6;
     L_0074:
-        _ = H.Call("IsLocationFull", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "oldDefender"), "location"), Val.Out(__v => L["CallFunc_IsLocationFull_isFull"] = __v) });
+        _ = H.Call("IsLocationFull", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "oldDefender"), "location"), Val.Out(GetLocal(L, "CallFunc_IsLocationFull_isFull"), __v => L["CallFunc_IsLocationFull_isFull"] = __v) });
     L_00C0:
         if (!(GetLocal(L, "CallFunc_IsLocationFull_isFull")).AsBool()) goto L_00FE;
     L_00CE:
@@ -51,15 +51,15 @@ public static Val OnOtherCardAttackSwitchTarget(IHost H, Val self, Val[] args)
     L_00F9:
         goto L_0277;
     L_00FE:
-        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(GetLocal(L, "cardAttacking"), "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
+        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(GetLocal(L, "cardAttacking"), "cardID"), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_GotchaTriggered_qqq"), __v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
     L_014D:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "oldDefender"), "location"), Val.Of(7)) == 0);
     L_0182:
         L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetMember(GetLocal(L, "oldDefender"), "locationNumber") + Val.Of(1));
     L_01C2:
-        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue"), Val.Name("card_unit_sissi"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue"), Val.Name("card_unit_sissi"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.False, GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnCardonBattlefield_spawnedCardID"), __v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
     L_022E:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_SpawnCardonBattlefield_spawnedCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_SpawnCardonBattlefield_spawnedCardID"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0264:
         L["newDefender"] = GetLocal(L, "CallFunc_GetCardFromID_card");
     L_0277:

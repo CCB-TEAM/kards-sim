@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_event_hasty_reinforcements(IHost H, Val 
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), Val.Of(2), Val.Out(__v => L["CallFunc_RandomIntFromRangeWithStream_randomResult"] = __v) });
+        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), Val.Of(2), Val.Out(GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), __v => L["CallFunc_RandomIntFromRangeWithStream_randomResult"] = __v) });
     L_0041:
         H.SetMember(self, "ranNumb", GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"));
     L_005C:
@@ -42,9 +42,9 @@ public static Val ExecuteUbergraph_card_event_hasty_reinforcements(IHost H, Val 
     L_007E:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_011F;
     L_008C:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_00D3:
-        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
+        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeDefense_qqq"), __v => L["CallFunc_ChangeDefense_qqq"] = __v) });
     L_011A:
         goto L_0438;
     L_011F:
@@ -52,7 +52,7 @@ public static Val ExecuteUbergraph_card_event_hasty_reinforcements(IHost H, Val 
     L_0141:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_1")).AsBool()) goto L_018B;
     L_014F:
-        _ = H.Call("getHasBlitz", new Val[] { H.GetMember(self, "tempCard"), Val.Out(__v => L["CallFunc_getHasBlitz_doesIt"] = __v) });
+        _ = H.Call("getHasBlitz", new Val[] { H.GetMember(self, "tempCard"), Val.Out(GetLocal(L, "CallFunc_getHasBlitz_doesIt"), __v => L["CallFunc_getHasBlitz_doesIt"] = __v) });
     L_0178:
         if (!(GetLocal(L, "CallFunc_getHasBlitz_doesIt")).AsBool()) goto L_0248;
     L_0186:
@@ -62,7 +62,7 @@ public static Val ExecuteUbergraph_card_event_hasty_reinforcements(IHost H, Val 
     L_01AD:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_2")).AsBool()) goto L_0438;
     L_01BB:
-        _ = H.Call("getHasAmbush", new Val[] { H.GetMember(self, "tempCard"), Val.Out(__v => L["CallFunc_getHasAmbush_doesIt"] = __v) });
+        _ = H.Call("getHasAmbush", new Val[] { H.GetMember(self, "tempCard"), Val.Out(GetLocal(L, "CallFunc_getHasAmbush_doesIt"), __v => L["CallFunc_getHasAmbush_doesIt"] = __v) });
     L_01E4:
         if (!(GetLocal(L, "CallFunc_getHasAmbush_doesIt")).AsBool()) goto L_01F7;
     L_01F2:
@@ -82,7 +82,7 @@ public static Val ExecuteUbergraph_card_event_hasty_reinforcements(IHost H, Val 
     L_02C6:
         goto L_0438;
     L_02CB:
-        _ = H.Call("GetTurnNumber", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetTurnNumber_turnNumber"] = __v) });
+        _ = H.Call("GetTurnNumber", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetTurnNumber_turnNumber"), __v => L["CallFunc_GetTurnNumber_turnNumber"] = __v) });
     L_02F8:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "enterPlayOnTurn"), Val.Of(0)) > 0);
     L_031A:
@@ -102,7 +102,7 @@ public static Val ExecuteUbergraph_card_event_hasty_reinforcements(IHost H, Val 
     L_03EE:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_1")).AsBool()) goto L_0438;
     L_03FC:
-        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "tempCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "tempCard"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0425:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool()) goto L_0438;
     L_0433:

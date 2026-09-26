@@ -62,7 +62,7 @@ public static Val ExecuteUbergraph_card_event_sunny2_heatwave2(IHost H, Val self
     L_00AC:
         __ef.Push(418);
     L_00B1:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_00EC:
         H.SetMember(self, "tempCard", GetLocal(L, "CallFunc_Array_Get_Item_1"));
     L_00FF:
@@ -101,9 +101,9 @@ public static Val ExecuteUbergraph_card_event_sunny2_heatwave2(IHost H, Val self
     L_01EC:
         __ef.Push(784);
     L_01F1:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "buffedCards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "buffedCards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_022C:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0262:
         H.SetMember(self, "tempCard", GetLocal(L, "CallFunc_GetCardFromID_card"));
     L_0275:
@@ -121,7 +121,7 @@ public static Val ExecuteUbergraph_card_event_sunny2_heatwave2(IHost H, Val self
             }
         }
     L_029C:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetMember(self, "tempCard"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetMember(self, "tempCard"), Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_02C5:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool())
         {
@@ -176,7 +176,7 @@ public static Val ExecuteUbergraph_card_event_sunny2_heatwave2(IHost H, Val self
     L_040E:
         goto L_0355;
     L_0413:
-        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
+        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), __v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
     L_044B:
         L["Temp_int_Loop_Counter_Variable_1"] = Val.Of(0);
     L_0462:
@@ -202,7 +202,7 @@ public static Val ExecuteUbergraph_card_event_sunny2_heatwave2(IHost H, Val self
     L_04DF:
         L["CallFunc_getCardsBuffedByThisCard_cards"] = H.MakeArray(new Val[] {  });
     L_04EA:
-        _ = H.Call("getCardsBuffedByThisCard", new Val[] { self, Val.Out(__v => L["CallFunc_getCardsBuffedByThisCard_cards"] = __v) });
+        _ = H.Call("getCardsBuffedByThisCard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_getCardsBuffedByThisCard_cards"), __v => L["CallFunc_getCardsBuffedByThisCard_cards"] = __v) });
     L_04FD:
         H.SetMember(self, "buffedCards", GetLocal(L, "CallFunc_getCardsBuffedByThisCard_cards"));
     L_0518:

@@ -34,15 +34,15 @@ public static Val ExecuteUbergraph_card_event_mass_deployment(IHost H, Val self,
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("GetUSAUnitsAndKredits", new Val[] { self, Val.Out(__v => L["CallFunc_GetUSAUnitsAndKredits_outAllUSAUnits"] = __v), Val.Out(__v => L["CallFunc_GetUSAUnitsAndKredits_outAllKredits"] = __v) });
+        _ = H.Call("GetUSAUnitsAndKredits", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetUSAUnitsAndKredits_outAllUSAUnits"), __v => L["CallFunc_GetUSAUnitsAndKredits_outAllUSAUnits"] = __v), Val.Out(GetLocal(L, "CallFunc_GetUSAUnitsAndKredits_outAllKredits"), __v => L["CallFunc_GetUSAUnitsAndKredits_outAllKredits"] = __v) });
     L_002A:
-        _ = H.Call("GetMaxKreditsBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetMaxKreditsBySide_maxkredits"] = __v) });
+        _ = H.Call("GetMaxKreditsBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetMaxKreditsBySide_maxkredits"), __v => L["CallFunc_GetMaxKreditsBySide_maxkredits"] = __v) });
     L_0060:
-        _ = H.Call("GetRandomKreditCombo", new Val[] { self, Val.Out(__v => L["CallFunc_GetUSAUnitsAndKredits_outAllKredits"] = __v), GetLocal(L, "CallFunc_GetMaxKreditsBySide_maxkredits"), Val.Out(__v => L["CallFunc_GetRandomKreditCombo_outCombo"] = __v), Val.Out(__v => L["CallFunc_GetRandomKreditCombo_ComboFound"] = __v) });
+        _ = H.Call("GetRandomKreditCombo", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetUSAUnitsAndKredits_outAllKredits"), __v => L["CallFunc_GetUSAUnitsAndKredits_outAllKredits"] = __v), GetLocal(L, "CallFunc_GetMaxKreditsBySide_maxkredits"), Val.Out(GetLocal(L, "CallFunc_GetRandomKreditCombo_outCombo"), __v => L["CallFunc_GetRandomKreditCombo_outCombo"] = __v), Val.Out(GetLocal(L, "CallFunc_GetRandomKreditCombo_ComboFound"), __v => L["CallFunc_GetRandomKreditCombo_ComboFound"] = __v) });
     L_0092:
         if (!(GetLocal(L, "CallFunc_GetRandomKreditCombo_ComboFound")).AsBool()) goto L_00CA;
     L_00A0:
-        _ = H.Call("SpawnUnitsWithKreditCombo", new Val[] { self, Val.Out(__v => L["CallFunc_GetUSAUnitsAndKredits_outAllUSAUnits"] = __v), GetLocal(L, "CallFunc_GetRandomKreditCombo_outCombo") });
+        _ = H.Call("SpawnUnitsWithKreditCombo", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetUSAUnitsAndKredits_outAllUSAUnits"), __v => L["CallFunc_GetUSAUnitsAndKredits_outAllUSAUnits"] = __v), GetLocal(L, "CallFunc_GetRandomKreditCombo_outCombo") });
     L_00C0:
         goto L_00CA;
     L_00C5:
@@ -71,13 +71,13 @@ public static Val GetRandomKreditCombo(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_InAllKreidts = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["InAllKreidts"] = Val.Nothing;
+        L["InAllKreidts"] = args.Length > 0 ? args[0].In : Val.Nothing;
         L["InKreditSlot"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_outCombo = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["outCombo"] = Val.Nothing;
+        L["outCombo"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_ComboFound = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["ComboFound"] = Val.Nothing;
-    L["localAllCombos"] = H.MakeArray(new Val[] { });
+        L["ComboFound"] = args.Length > 3 ? args[3].In : Val.Nothing;
+        L["localAllCombos"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1695);
     L_0005:
@@ -95,7 +95,7 @@ public static Val GetRandomKreditCombo(IHost H, Val self, Val[] args)
     L_00A9:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_Conv_IntToString_ReturnValue") });
     L_00CE:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("kreditCombinationsUSUnits"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("kreditCombinationsUSUnits"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow"), __v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0113:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool())
         {
@@ -123,9 +123,9 @@ public static Val GetRandomKreditCombo(IHost H, Val self, Val[] args)
     L_01DE:
         __ef.Push(1621);
     L_01E3:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow"), "combos_4_561CC77D4BB75053570144B4E1CA91A4"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow"), "combos_4_561CC77D4BB75053570144B4E1CA91A4"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0227:
-        _ = H.Call("BreakVector", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_BreakVector_X"] = __v), Val.Out(__v => L["CallFunc_BreakVector_Y"] = __v), Val.Out(__v => L["CallFunc_BreakVector_Z"] = __v) });
+        _ = H.Call("BreakVector", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_BreakVector_X"), __v => L["CallFunc_BreakVector_X"] = __v), Val.Out(GetLocal(L, "CallFunc_BreakVector_Y"), __v => L["CallFunc_BreakVector_Y"] = __v), Val.Out(GetLocal(L, "CallFunc_BreakVector_Z"), __v => L["CallFunc_BreakVector_Z"] = __v) });
     L_0255:
         L["CallFunc_FTrunc_ReturnValue"] = H.Call("FTrunc", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_BreakVector_Z") });
     L_027A:
@@ -155,7 +155,7 @@ public static Val GetRandomKreditCombo(IHost H, Val self, Val[] args)
             }
         }
     L_03CE:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow"), "combos_4_561CC77D4BB75053570144B4E1CA91A4"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow"), "combos_4_561CC77D4BB75053570144B4E1CA91A4"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0412:
         L["CallFunc_Array_Add_ReturnValue"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "localAllCombos"), GetLocal(L, "CallFunc_Array_Get_Item") });
     L_0456:
@@ -182,9 +182,9 @@ public static Val GetRandomKreditCombo(IHost H, Val self, Val[] args)
     L_050E:
         L["CallFunc_Subtract_IntInt_ReturnValue_1"] = (GetLocal(L, "CallFunc_Array_Length_ReturnValue_1") - Val.Of(1));
     L_0538:
-        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue_1"), Val.Out(__v => L["CallFunc_RandomIntFromRangeWithStream_randomResult"] = __v) });
+        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue_1"), Val.Out(GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), __v => L["CallFunc_RandomIntFromRangeWithStream_randomResult"] = __v) });
     L_0573:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "localAllCombos"), GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "localAllCombos"), GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_05AE:
         L["localOutCombo"] = GetLocal(L, "CallFunc_Array_Get_Item_1");
     L_05C9:
@@ -233,17 +233,17 @@ public static Val GetUSAUnitsAndKredits(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_outAllUSAUnits = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["outAllUSAUnits"] = Val.Nothing;
+        L["outAllUSAUnits"] = args.Length > 0 ? args[0].In : Val.Nothing;
         var __out_outAllKredits = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["outAllKredits"] = Val.Nothing;
-    L["localAllKredits"] = H.MakeArray(new Val[] { });
-    L["localAllUSAUnits"] = H.MakeArray(new Val[] { });
+        L["outAllKredits"] = args.Length > 1 ? args[1].In : Val.Nothing;
+        L["localAllKredits"] = H.MakeArray(new Val[] { });
+        L["localAllUSAUnits"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(841);
     L_0005:
-        _ = H.Call("IsCardReserved", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "name"), Val.Out(__v => L["CallFunc_IsCardReserved_IsReserved"] = __v) });
+        _ = H.Call("IsCardReserved", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "name"), Val.Out(GetLocal(L, "CallFunc_IsCardReserved_IsReserved"), __v => L["CallFunc_IsCardReserved_IsReserved"] = __v) });
     L_003B:
-        _ = H.Call("GetAllActiveStaticCards", new Val[] { H.GetMember(self, "cardFunction"), Val.False, GetLocal(L, "CallFunc_IsCardReserved_IsReserved"), Val.Out(__v => L["CallFunc_GetAllActiveStaticCards_cards"] = __v) });
+        _ = H.Call("GetAllActiveStaticCards", new Val[] { H.GetMember(self, "cardFunction"), Val.False, GetLocal(L, "CallFunc_IsCardReserved_IsReserved"), Val.Out(GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), __v => L["CallFunc_GetAllActiveStaticCards_cards"] = __v) });
     L_0072:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_0089:
@@ -259,11 +259,11 @@ public static Val GetUSAUnitsAndKredits(IHost H, Val self, Val[] args)
     L_012A:
         __ef.Push(589);
     L_012F:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_016A:
         L["localTempCard"] = GetLocal(L, "CallFunc_Array_Get_Item");
     L_017D:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "localTempCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "localTempCard"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_01A6:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool())
         {
@@ -276,7 +276,7 @@ public static Val GetUSAUnitsAndKredits(IHost H, Val self, Val[] args)
             }
         }
     L_01B0:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "localTempCard"), "faction"), Val.Of(5), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "localTempCard"), "faction"), Val.Of(5), Val.Out(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), __v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_01E4:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_0203:
@@ -304,7 +304,7 @@ public static Val GetUSAUnitsAndKredits(IHost H, Val self, Val[] args)
     L_0297:
         L["CallFunc_Array_Add_ReturnValue"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "localAllUSAUnits"), GetLocal(L, "localTempCard") });
     L_02DB:
-        _ = H.Call("getAndDecryptKredit", new Val[] { GetLocal(L, "localTempCard"), Val.Out(__v => L["CallFunc_getAndDecryptKredit_decryptedKredit"] = __v) });
+        _ = H.Call("getAndDecryptKredit", new Val[] { GetLocal(L, "localTempCard"), Val.Out(GetLocal(L, "CallFunc_getAndDecryptKredit_decryptedKredit"), __v => L["CallFunc_getAndDecryptKredit_decryptedKredit"] = __v) });
     L_0304:
         L["CallFunc_Array_AddUnique_ReturnValue"] = H.Call("Array_AddUnique", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "localAllKredits"), GetLocal(L, "CallFunc_getAndDecryptKredit_decryptedKredit") });
     L_0348:
@@ -353,9 +353,12 @@ public static Val SpawnUnitsWithKreditCombo(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_InAllUSAUnits = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["InAllUSAUnits"] = Val.Nothing;
+        L["InAllUSAUnits"] = args.Length > 0 ? args[0].In : Val.Nothing;
         L["InCombo"] = args.Length > 1 ? args[1] : Val.Nothing;
-    L["UnitsToSpawn"] = H.MakeArray(new Val[] { });
+        L["NumberXUnits"] = H.MakeArray(new Val[] { });
+        L["NumberYUnits"] = H.MakeArray(new Val[] { });
+        L["NumberZUnits"] = H.MakeArray(new Val[] { });
+        L["UnitsToSpawn"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(2583);
     L_0005:
@@ -391,15 +394,15 @@ public static Val SpawnUnitsWithKreditCombo(IHost H, Val self, Val[] args)
     L_00DE:
         __ef.Push(1677);
     L_00E3:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "InAllUSAUnits"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "InAllUSAUnits"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_011E:
         L["localUnit"] = GetLocal(L, "CallFunc_Array_Get_Item");
     L_0131:
-        _ = H.Call("getAndDecryptKredit", new Val[] { GetLocal(L, "localUnit"), Val.Out(__v => L["CallFunc_getAndDecryptKredit_decryptedKredit"] = __v) });
+        _ = H.Call("getAndDecryptKredit", new Val[] { GetLocal(L, "localUnit"), Val.Out(GetLocal(L, "CallFunc_getAndDecryptKredit_decryptedKredit"), __v => L["CallFunc_getAndDecryptKredit_decryptedKredit"] = __v) });
     L_015A:
         L["CallFunc_Conv_IntToDouble_ReturnValue_2"] = H.Call("Conv_IntToDouble", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_getAndDecryptKredit_decryptedKredit") });
     L_017F:
-        _ = H.Call("BreakVector", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "InCombo"), Val.Out(__v => L["CallFunc_BreakVector_X_3"] = __v), Val.Out(__v => L["CallFunc_BreakVector_Y_3"] = __v), Val.Out(__v => L["CallFunc_BreakVector_Z_3"] = __v) });
+        _ = H.Call("BreakVector", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "InCombo"), Val.Out(GetLocal(L, "CallFunc_BreakVector_X_3"), __v => L["CallFunc_BreakVector_X_3"] = __v), Val.Out(GetLocal(L, "CallFunc_BreakVector_Y_3"), __v => L["CallFunc_BreakVector_Y_3"] = __v), Val.Out(GetLocal(L, "CallFunc_BreakVector_Z_3"), __v => L["CallFunc_BreakVector_Z_3"] = __v) });
     L_01AD:
         L["CallFunc_EqualEqual_DoubleDouble_ReturnValue_5"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Conv_IntToDouble_ReturnValue_2"), GetLocal(L, "CallFunc_BreakVector_X_3")) == 0);
     L_01D3:
@@ -418,27 +421,27 @@ public static Val SpawnUnitsWithKreditCombo(IHost H, Val self, Val[] args)
             default: goto __halt;
         }
     L_0226:
-        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["NumberXUnits"] = __v), Val.True, Val.Out(__v => L["CallFunc_GetRandomCard_randomCard_5"] = __v) });
+        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "NumberXUnits"), __v => L["NumberXUnits"] = __v), Val.True, Val.Out(GetLocal(L, "CallFunc_GetRandomCard_randomCard_5"), __v => L["CallFunc_GetRandomCard_randomCard_5"] = __v) });
     L_025D:
         L["CallFunc_Array_Add_ReturnValue_8"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "UnitsToSpawn"), GetLocal(L, "CallFunc_GetRandomCard_randomCard_5") });
     L_02A1:
-        _ = H.Call("BreakVector", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "InCombo"), Val.Out(__v => L["CallFunc_BreakVector_X_2"] = __v), Val.Out(__v => L["CallFunc_BreakVector_Y_2"] = __v), Val.Out(__v => L["CallFunc_BreakVector_Z_2"] = __v) });
+        _ = H.Call("BreakVector", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "InCombo"), Val.Out(GetLocal(L, "CallFunc_BreakVector_X_2"), __v => L["CallFunc_BreakVector_X_2"] = __v), Val.Out(GetLocal(L, "CallFunc_BreakVector_Y_2"), __v => L["CallFunc_BreakVector_Y_2"] = __v), Val.Out(GetLocal(L, "CallFunc_BreakVector_Z_2"), __v => L["CallFunc_BreakVector_Z_2"] = __v) });
     L_02CF:
         L["CallFunc_EqualEqual_DoubleDouble_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_BreakVector_X_2"), GetLocal(L, "CallFunc_BreakVector_Y_2")) == 0);
     L_02F5:
         if (!(GetLocal(L, "CallFunc_EqualEqual_DoubleDouble_ReturnValue_2")).AsBool()) goto L_045C;
     L_0303:
-        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["NumberXUnits"] = __v), Val.True, Val.Out(__v => L["CallFunc_GetRandomCard_randomCard_2"] = __v) });
+        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "NumberXUnits"), __v => L["NumberXUnits"] = __v), Val.True, Val.Out(GetLocal(L, "CallFunc_GetRandomCard_randomCard_2"), __v => L["CallFunc_GetRandomCard_randomCard_2"] = __v) });
     L_033A:
         L["CallFunc_Array_Add_ReturnValue_2"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "UnitsToSpawn"), GetLocal(L, "CallFunc_GetRandomCard_randomCard_2") });
     L_037E:
-        _ = H.Call("BreakVector", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "InCombo"), Val.Out(__v => L["CallFunc_BreakVector_X_1"] = __v), Val.Out(__v => L["CallFunc_BreakVector_Y_1"] = __v), Val.Out(__v => L["CallFunc_BreakVector_Z_1"] = __v) });
+        _ = H.Call("BreakVector", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "InCombo"), Val.Out(GetLocal(L, "CallFunc_BreakVector_X_1"), __v => L["CallFunc_BreakVector_X_1"] = __v), Val.Out(GetLocal(L, "CallFunc_BreakVector_Y_1"), __v => L["CallFunc_BreakVector_Y_1"] = __v), Val.Out(GetLocal(L, "CallFunc_BreakVector_Z_1"), __v => L["CallFunc_BreakVector_Z_1"] = __v) });
     L_03AC:
         L["CallFunc_EqualEqual_DoubleDouble_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_BreakVector_X_1"), GetLocal(L, "CallFunc_BreakVector_Z_1")) == 0);
     L_03D2:
         if (!(GetLocal(L, "CallFunc_EqualEqual_DoubleDouble_ReturnValue_1")).AsBool()) goto L_08BD;
     L_03E0:
-        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["NumberXUnits"] = __v), Val.True, Val.Out(__v => L["CallFunc_GetRandomCard_randomCard_1"] = __v) });
+        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "NumberXUnits"), __v => L["NumberXUnits"] = __v), Val.True, Val.Out(GetLocal(L, "CallFunc_GetRandomCard_randomCard_1"), __v => L["CallFunc_GetRandomCard_randomCard_1"] = __v) });
     L_0417:
         L["CallFunc_Array_Add_ReturnValue_1"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "UnitsToSpawn"), GetLocal(L, "CallFunc_GetRandomCard_randomCard_1") });
     L_045B:
@@ -453,7 +456,7 @@ public static Val SpawnUnitsWithKreditCombo(IHost H, Val self, Val[] args)
             default: goto __halt;
         }
     L_045C:
-        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["NumberYUnits"] = __v), Val.True, Val.Out(__v => L["CallFunc_GetRandomCard_randomCard_4"] = __v) });
+        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "NumberYUnits"), __v => L["NumberYUnits"] = __v), Val.True, Val.Out(GetLocal(L, "CallFunc_GetRandomCard_randomCard_4"), __v => L["CallFunc_GetRandomCard_randomCard_4"] = __v) });
     L_0493:
         L["CallFunc_Array_Add_ReturnValue_4"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "UnitsToSpawn"), GetLocal(L, "CallFunc_GetRandomCard_randomCard_4") });
     L_04D7:
@@ -485,9 +488,9 @@ public static Val SpawnUnitsWithKreditCombo(IHost H, Val self, Val[] args)
     L_0590:
         __ef.Push(1603);
     L_0595:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "UnitsToSpawn"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "UnitsToSpawn"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_05D0:
-        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "name"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), Val.Of(0), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardOnBattlefield_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "name"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), Val.Of(0), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnCardOnBattlefield_spawnedCardID"), __v => L["CallFunc_SpawnCardOnBattlefield_spawnedCardID"] = __v) });
     L_0642:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -512,11 +515,11 @@ public static Val SpawnUnitsWithKreditCombo(IHost H, Val self, Val[] args)
     L_06D2:
         goto L_0058;
     L_06D7:
-        _ = H.Call("getAndDecryptKredit", new Val[] { GetLocal(L, "localUnit"), Val.Out(__v => L["CallFunc_getAndDecryptKredit_decryptedKredit"] = __v) });
+        _ = H.Call("getAndDecryptKredit", new Val[] { GetLocal(L, "localUnit"), Val.Out(GetLocal(L, "CallFunc_getAndDecryptKredit_decryptedKredit"), __v => L["CallFunc_getAndDecryptKredit_decryptedKredit"] = __v) });
     L_0700:
         L["CallFunc_Conv_IntToDouble_ReturnValue_1"] = H.Call("Conv_IntToDouble", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_getAndDecryptKredit_decryptedKredit") });
     L_0725:
-        _ = H.Call("BreakVector", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "InCombo"), Val.Out(__v => L["CallFunc_BreakVector_X_3"] = __v), Val.Out(__v => L["CallFunc_BreakVector_Y_3"] = __v), Val.Out(__v => L["CallFunc_BreakVector_Z_3"] = __v) });
+        _ = H.Call("BreakVector", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "InCombo"), Val.Out(GetLocal(L, "CallFunc_BreakVector_X_3"), __v => L["CallFunc_BreakVector_X_3"] = __v), Val.Out(GetLocal(L, "CallFunc_BreakVector_Y_3"), __v => L["CallFunc_BreakVector_Y_3"] = __v), Val.Out(GetLocal(L, "CallFunc_BreakVector_Z_3"), __v => L["CallFunc_BreakVector_Z_3"] = __v) });
     L_0753:
         L["CallFunc_EqualEqual_DoubleDouble_ReturnValue_4"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Conv_IntToDouble_ReturnValue_1"), GetLocal(L, "CallFunc_BreakVector_Y_3")) == 0);
     L_0779:
@@ -535,11 +538,11 @@ public static Val SpawnUnitsWithKreditCombo(IHost H, Val self, Val[] args)
             default: goto __halt;
         }
     L_07CC:
-        _ = H.Call("getAndDecryptKredit", new Val[] { GetLocal(L, "localUnit"), Val.Out(__v => L["CallFunc_getAndDecryptKredit_decryptedKredit"] = __v) });
+        _ = H.Call("getAndDecryptKredit", new Val[] { GetLocal(L, "localUnit"), Val.Out(GetLocal(L, "CallFunc_getAndDecryptKredit_decryptedKredit"), __v => L["CallFunc_getAndDecryptKredit_decryptedKredit"] = __v) });
     L_07F5:
         L["CallFunc_Conv_IntToDouble_ReturnValue"] = H.Call("Conv_IntToDouble", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_getAndDecryptKredit_decryptedKredit") });
     L_081A:
-        _ = H.Call("BreakVector", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "InCombo"), Val.Out(__v => L["CallFunc_BreakVector_X_3"] = __v), Val.Out(__v => L["CallFunc_BreakVector_Y_3"] = __v), Val.Out(__v => L["CallFunc_BreakVector_Z_3"] = __v) });
+        _ = H.Call("BreakVector", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "InCombo"), Val.Out(GetLocal(L, "CallFunc_BreakVector_X_3"), __v => L["CallFunc_BreakVector_X_3"] = __v), Val.Out(GetLocal(L, "CallFunc_BreakVector_Y_3"), __v => L["CallFunc_BreakVector_Y_3"] = __v), Val.Out(GetLocal(L, "CallFunc_BreakVector_Z_3"), __v => L["CallFunc_BreakVector_Z_3"] = __v) });
     L_0848:
         L["CallFunc_EqualEqual_DoubleDouble_ReturnValue_3"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Conv_IntToDouble_ReturnValue"), GetLocal(L, "CallFunc_BreakVector_Z_3")) == 0);
     L_086E:
@@ -570,13 +573,13 @@ public static Val SpawnUnitsWithKreditCombo(IHost H, Val self, Val[] args)
             default: goto __halt;
         }
     L_08BD:
-        _ = H.Call("BreakVector", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "InCombo"), Val.Out(__v => L["CallFunc_BreakVector_X"] = __v), Val.Out(__v => L["CallFunc_BreakVector_Y"] = __v), Val.Out(__v => L["CallFunc_BreakVector_Z"] = __v) });
+        _ = H.Call("BreakVector", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "InCombo"), Val.Out(GetLocal(L, "CallFunc_BreakVector_X"), __v => L["CallFunc_BreakVector_X"] = __v), Val.Out(GetLocal(L, "CallFunc_BreakVector_Y"), __v => L["CallFunc_BreakVector_Y"] = __v), Val.Out(GetLocal(L, "CallFunc_BreakVector_Z"), __v => L["CallFunc_BreakVector_Z"] = __v) });
     L_08EB:
         L["CallFunc_EqualEqual_DoubleDouble_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_BreakVector_Y"), GetLocal(L, "CallFunc_BreakVector_Z")) == 0);
     L_0911:
         if (!(GetLocal(L, "CallFunc_EqualEqual_DoubleDouble_ReturnValue")).AsBool()) goto L_099B;
     L_091F:
-        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["NumberYUnits"] = __v), Val.True, Val.Out(__v => L["CallFunc_GetRandomCard_randomCard"] = __v) });
+        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "NumberYUnits"), __v => L["NumberYUnits"] = __v), Val.True, Val.Out(GetLocal(L, "CallFunc_GetRandomCard_randomCard"), __v => L["CallFunc_GetRandomCard_randomCard"] = __v) });
     L_0956:
         L["CallFunc_Array_Add_ReturnValue"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "UnitsToSpawn"), GetLocal(L, "CallFunc_GetRandomCard_randomCard") });
     L_099A:
@@ -591,7 +594,7 @@ public static Val SpawnUnitsWithKreditCombo(IHost H, Val self, Val[] args)
             default: goto __halt;
         }
     L_099B:
-        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["NumberZUnits"] = __v), Val.True, Val.Out(__v => L["CallFunc_GetRandomCard_randomCard_3"] = __v) });
+        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "NumberZUnits"), __v => L["NumberZUnits"] = __v), Val.True, Val.Out(GetLocal(L, "CallFunc_GetRandomCard_randomCard_3"), __v => L["CallFunc_GetRandomCard_randomCard_3"] = __v) });
     L_09D2:
         L["CallFunc_Array_Add_ReturnValue_3"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "UnitsToSpawn"), GetLocal(L, "CallFunc_GetRandomCard_randomCard_3") });
     L_0A16:

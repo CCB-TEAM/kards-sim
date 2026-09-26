@@ -299,6 +299,21 @@ public class Host : IHost
                 return Hit(Val.Nothing);
             case "Set_Length":
                 return Hit(Val.Of(a[1].O is KArr kl ? kl.Count : SetOf(a[1])?.Count ?? 0));
+            // void Set_IsNotEmpty(TSet set, bool& isNotEmpty) / Set_IsEmpty —— 谓词，
+            // 结果走 out 槽。和 Set_Length 一样两种载体都要认（真 Set 变量 / 集合字面量 KArr）。
+            // 缺了它们这类守卫读出来是空值 → 恒为假，整段效果静默跳过。
+            case "Set_IsNotEmpty":
+                {
+                    var n = a[1].O is KArr kne ? kne.Count : SetOf(a[1])?.Count ?? 0;
+                    Val.TrySetOut(a[^1], Val.Of(n != 0));
+                    return Hit(Val.Nothing);
+                }
+            case "Set_IsEmpty":
+                {
+                    var n = a[1].O is KArr kie ? kie.Count : SetOf(a[1])?.Count ?? 0;
+                    Val.TrySetOut(a[^1], Val.Of(n == 0));
+                    return Hit(Val.Nothing);
+                }
             case "Set_Contains":
                 {
                     var x = a[2].AsInt();

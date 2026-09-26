@@ -60,9 +60,9 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_000F:
         __ef.Push(192);
     L_0014:
-        _ = H.Call("GetCardsToTheLeft", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsToTheLeft_cards_2"] = __v) });
+        _ = H.Call("GetCardsToTheLeft", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsToTheLeft_cards_2"), __v => L["CallFunc_GetCardsToTheLeft_cards_2"] = __v) });
     L_0044:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsToTheLeft_cards_2"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_4"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsToTheLeft_cards_2"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_4"), __v => L["CallFunc_Array_Get_Item_4"] = __v) });
     L_007F:
         _ = H.Call("ChangeOperationCost", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item_4"), H.GetMember(self, "cardID"), Val.Of(-1), Val.Of(0), Val.True, Val.False, Val.False });
     L_00BF:
@@ -84,7 +84,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_00EA:
         L["Temp_int_Loop_Counter_Variable_5"] = GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_5");
     L_0105:
-        _ = H.Call("GetCardsToTheLeft", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsToTheLeft_cards_2"] = __v) });
+        _ = H.Call("GetCardsToTheLeft", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsToTheLeft_cards_2"), __v => L["CallFunc_GetCardsToTheLeft_cards_2"] = __v) });
     L_0135:
         L["CallFunc_Array_Length_ReturnValue_5"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsToTheLeft_cards_2") });
     L_0170:
@@ -119,7 +119,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_01F3:
         L["Temp_int_Array_Index_Variable_5"] = Val.Of(0);
     L_020A:
-        _ = H.Call("GetCardsToTheLeft", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsToTheLeft_cards_1"] = __v) });
+        _ = H.Call("GetCardsToTheLeft", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsToTheLeft_cards_1"), __v => L["CallFunc_GetCardsToTheLeft_cards_1"] = __v) });
     L_023A:
         L["CallFunc_Array_Length_ReturnValue_2"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsToTheLeft_cards_1") });
     L_0275:
@@ -146,15 +146,15 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_02C0:
         __ef.Push(1267);
     L_02C5:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetMember(self, "_tmp_card"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_2"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetMember(self, "_tmp_card"), Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_2"), __v => L["CallFunc_IsLocatedOnBoard_isIt_2"] = __v) });
     L_02EE:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetMember(self, "_tmp_card"), "side"), H.GetMember(self, "side")) == 0);
     L_032A:
-        _ = H.Call("GetCardsToTheLeft", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsToTheLeft_cards_1"] = __v) });
+        _ = H.Call("GetCardsToTheLeft", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsToTheLeft_cards_1"), __v => L["CallFunc_GetCardsToTheLeft_cards_1"] = __v) });
     L_035A:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsToTheLeft_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable_5"), Val.Out(__v => L["CallFunc_Array_Get_Item_3"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsToTheLeft_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable_5"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_3"), __v => L["CallFunc_Array_Get_Item_3"] = __v) });
     L_0395:
-        _ = H.Call("isBuffedByCard", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_3"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed_5"] = __v) });
+        _ = H.Call("isBuffedByCard", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_3"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed_5"), __v => L["CallFunc_isBuffedByCard_isBuffed_5"] = __v) });
     L_03C7:
         L["CallFunc_Not_PreBool_ReturnValue"] = H.Call("Not_PreBool", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_isBuffedByCard_isBuffed_5") });
     L_03E4:
@@ -207,9 +207,9 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_053D:
         __ef.Push(1518);
     L_0542:
-        _ = H.Call("GetCardsToTheLeft", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsToTheLeft_cards"] = __v) });
+        _ = H.Call("GetCardsToTheLeft", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsToTheLeft_cards"), __v => L["CallFunc_GetCardsToTheLeft_cards"] = __v) });
     L_0572:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsToTheLeft_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_6"), Val.Out(__v => L["CallFunc_Array_Get_Item_2"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsToTheLeft_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_6"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_2"), __v => L["CallFunc_Array_Get_Item_2"] = __v) });
     L_05AD:
         _ = H.Call("ChangeOperationCost", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item_2"), H.GetMember(self, "cardID"), Val.Of(-1), Val.Of(0), Val.True, Val.False, Val.False });
     L_05ED:
@@ -231,7 +231,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_0618:
         L["Temp_int_Loop_Counter_Variable_6"] = GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_6");
     L_0633:
-        _ = H.Call("GetCardsToTheLeft", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsToTheLeft_cards"] = __v) });
+        _ = H.Call("GetCardsToTheLeft", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsToTheLeft_cards"), __v => L["CallFunc_GetCardsToTheLeft_cards"] = __v) });
     L_0663:
         L["CallFunc_Array_Length_ReturnValue_3"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsToTheLeft_cards") });
     L_069E:
@@ -260,9 +260,9 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_06EE:
         __ef.Push(2022);
     L_06F3:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_072E:
-        _ = H.Call("isBuffedByCard", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed_1"] = __v) });
+        _ = H.Call("isBuffedByCard", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed_1"), __v => L["CallFunc_isBuffedByCard_isBuffed_1"] = __v) });
     L_0760:
         if (!(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed_1")).AsBool())
         {
@@ -281,7 +281,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
             }
         }
     L_076A:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_07A5:
         _ = H.Call("ChangeOperationCost", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.True, Val.False, Val.False });
     L_07E5:
@@ -313,7 +313,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_08B5:
         goto L_06EE;
     L_08BA:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_3"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_3"), __v => L["CallFunc_IsLocatedOnBoard_isIt_3"] = __v) });
     L_08CD:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_3")).AsBool())
         {
@@ -369,9 +369,9 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_09C3:
         __ef.Push(2747);
     L_09C8:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_2"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_2"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_0A03:
-        _ = H.Call("isBuffedByCard", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_1"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed_4"] = __v) });
+        _ = H.Call("isBuffedByCard", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_1"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed_4"), __v => L["CallFunc_isBuffedByCard_isBuffed_4"] = __v) });
     L_0A35:
         if (!(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed_4")).AsBool())
         {
@@ -390,7 +390,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
             }
         }
     L_0A3F:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_2"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_2"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_0A7A:
         _ = H.Call("ChangeOperationCost", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item_1"), H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.True, Val.False, Val.False });
     L_0ABA:
@@ -416,9 +416,9 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_0B05:
         __ef.Push(3090);
     L_0B0A:
-        _ = H.Call("GetCardsToTheLeft", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsToTheLeft_cards_3"] = __v) });
+        _ = H.Call("GetCardsToTheLeft", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsToTheLeft_cards_3"), __v => L["CallFunc_GetCardsToTheLeft_cards_3"] = __v) });
     L_0B3A:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsToTheLeft_cards_3"), GetLocal(L, "Temp_int_Array_Index_Variable_3"), Val.Out(__v => L["CallFunc_Array_Get_Item_5"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsToTheLeft_cards_3"), GetLocal(L, "Temp_int_Array_Index_Variable_3"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_5"), __v => L["CallFunc_Array_Get_Item_5"] = __v) });
     L_0B75:
         L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_5"), "cardID"), H.GetMember(H.GetMember(self, "_tmp_card"), "cardID")) == 0);
     L_0BC7:
@@ -459,7 +459,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_0C3C:
         L["Temp_int_Loop_Counter_Variable_2"] = GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_2");
     L_0C57:
-        _ = H.Call("GetCardsToTheLeft", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsToTheLeft_cards_3"] = __v) });
+        _ = H.Call("GetCardsToTheLeft", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsToTheLeft_cards_3"), __v => L["CallFunc_GetCardsToTheLeft_cards_3"] = __v) });
     L_0C87:
         L["CallFunc_Array_Length_ReturnValue_4"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsToTheLeft_cards_3") });
     L_0CC2:
@@ -498,9 +498,9 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_0D61:
         __ef.Push(3694);
     L_0D66:
-        _ = H.Call("GetCardsToTheLeft", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsToTheLeft_cards_4"] = __v) });
+        _ = H.Call("GetCardsToTheLeft", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsToTheLeft_cards_4"), __v => L["CallFunc_GetCardsToTheLeft_cards_4"] = __v) });
     L_0D96:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsToTheLeft_cards_4"), GetLocal(L, "Temp_int_Array_Index_Variable_4"), Val.Out(__v => L["CallFunc_Array_Get_Item_6"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsToTheLeft_cards_4"), GetLocal(L, "Temp_int_Array_Index_Variable_4"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_6"), __v => L["CallFunc_Array_Get_Item_6"] = __v) });
     L_0DD1:
         L["CallFunc_EqualEqual_IntInt_ReturnValue_3"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_6"), "cardID"), H.GetMember(H.GetMember(self, "_tmp_card"), "cardID")) == 0);
     L_0E23:
@@ -541,7 +541,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_0E98:
         L["Temp_int_Loop_Counter_Variable_4"] = GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_4");
     L_0EB3:
-        _ = H.Call("GetCardsToTheLeft", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsToTheLeft_cards_4"] = __v) });
+        _ = H.Call("GetCardsToTheLeft", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsToTheLeft_cards_4"), __v => L["CallFunc_GetCardsToTheLeft_cards_4"] = __v) });
     L_0EE3:
         L["CallFunc_Array_Length_ReturnValue_6"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsToTheLeft_cards_4") });
     L_0F1E:
@@ -574,7 +574,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_0F9C:
         goto L_0EB3;
     L_0FA1:
-        _ = H.Call("IsVeteran", new Val[] { self, Val.False, Val.Out(__v => L["CallFunc_IsVeteran_isIt"] = __v) });
+        _ = H.Call("IsVeteran", new Val[] { self, Val.False, Val.Out(GetLocal(L, "CallFunc_IsVeteran_isIt"), __v => L["CallFunc_IsVeteran_isIt"] = __v) });
     L_0FB5:
         if (!(GetLocal(L, "CallFunc_IsVeteran_isIt")).AsBool()) goto L_0FC4;
     L_0FC3:
@@ -592,7 +592,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_0FC4:
-        _ = H.Call("MakeVeteran", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(__v => L["CallFunc_MakeVeteran_qqq"] = __v) });
+        _ = H.Call("MakeVeteran", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(GetLocal(L, "CallFunc_MakeVeteran_qqq"), __v => L["CallFunc_MakeVeteran_qqq"] = __v) });
     L_0FF2:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -608,15 +608,15 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_0FF3:
-        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
+        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), __v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
     L_102B:
         goto L_0D45;
     L_1030:
         H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardPlayed_1"));
     L_1043:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_1056:
-        _ = H.Call("IsVeteran", new Val[] { self, Val.False, Val.Out(__v => L["CallFunc_IsVeteran_isIt_2"] = __v) });
+        _ = H.Call("IsVeteran", new Val[] { self, Val.False, Val.Out(GetLocal(L, "CallFunc_IsVeteran_isIt_2"), __v => L["CallFunc_IsVeteran_isIt_2"] = __v) });
     L_106A:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool() && (GetLocal(L, "CallFunc_IsVeteran_isIt_2")).AsBool());
     L_1090:
@@ -639,7 +639,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_109A:
         goto L_01DC;
     L_109F:
-        _ = H.Call("IsVeteran", new Val[] { self, Val.False, Val.Out(__v => L["CallFunc_IsVeteran_isIt_1"] = __v) });
+        _ = H.Call("IsVeteran", new Val[] { self, Val.False, Val.Out(GetLocal(L, "CallFunc_IsVeteran_isIt_1"), __v => L["CallFunc_IsVeteran_isIt_1"] = __v) });
     L_10B3:
         if (!(GetLocal(L, "CallFunc_IsVeteran_isIt_1")).AsBool())
         {
@@ -664,7 +664,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_10EB:
         goto L_0633;
     L_10F0:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1"), __v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_1103:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1")).AsBool())
         {
@@ -683,7 +683,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
             }
         }
     L_110D:
-        _ = H.Call("isBuffedByCard", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
+        _ = H.Call("isBuffedByCard", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed"), __v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
     L_113F:
         if (!(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed")).AsBool())
         {
@@ -743,9 +743,9 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_11CA:
         goto L_10BD;
     L_11CF:
-        _ = H.Call("Forecast", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(__v => L["CallFunc_Forecast_qqq"] = __v) });
+        _ = H.Call("Forecast", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(GetLocal(L, "CallFunc_Forecast_qqq"), __v => L["CallFunc_Forecast_qqq"] = __v) });
     L_11FD:
-        _ = H.Call("JSON_SetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("didForecast"), Val.True, Val.Out(__v => L["CallFunc_JSON_SetBool_found"] = __v) });
+        _ = H.Call("JSON_SetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("didForecast"), Val.True, Val.Out(GetLocal(L, "CallFunc_JSON_SetBool_found"), __v => L["CallFunc_JSON_SetBool_found"] = __v) });
     L_1239:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_1267:
@@ -763,7 +763,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_1268:
-        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
+        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), __v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
     L_1296:
         goto L_08F3;
     L_129B:
@@ -771,7 +771,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_12A0:
         H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardMoved_1"));
     L_12B3:
-        _ = H.Call("isBuffedByCard", new Val[] { H.GetMember(self, "_tmp_card"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed_3"] = __v) });
+        _ = H.Call("isBuffedByCard", new Val[] { H.GetMember(self, "_tmp_card"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed_3"), __v => L["CallFunc_isBuffedByCard_isBuffed_3"] = __v) });
     L_12E5:
         if (!(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed_3")).AsBool()) goto L_1334;
     L_12F3:
@@ -791,7 +791,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_1334:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_5"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_5"), __v => L["CallFunc_IsLocatedOnBoard_isIt_5"] = __v) });
     L_1347:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_5")).AsBool())
         {
@@ -814,7 +814,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_1356:
         H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardMoved"));
     L_1369:
-        _ = H.Call("isBuffedByCard", new Val[] { H.GetMember(self, "_tmp_card"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed_2"] = __v) });
+        _ = H.Call("isBuffedByCard", new Val[] { H.GetMember(self, "_tmp_card"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed_2"), __v => L["CallFunc_isBuffedByCard_isBuffed_2"] = __v) });
     L_139B:
         if (!(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed_2")).AsBool()) goto L_13EA;
     L_13A9:
@@ -834,7 +834,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_13EA:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_4"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_4"), __v => L["CallFunc_IsLocatedOnBoard_isIt_4"] = __v) });
     L_13FD:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_4")).AsBool())
         {
@@ -884,7 +884,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
             }
         }
     L_14B8:
-        _ = H.Call("JSON_GetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("didForecast"), Val.Out(__v => L["CallFunc_JSON_GetBool_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetBool_found"] = __v) });
+        _ = H.Call("JSON_GetBool", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("didForecast"), Val.Out(GetLocal(L, "CallFunc_JSON_GetBool_value"), __v => L["CallFunc_JSON_GetBool_value"] = __v), Val.Out(GetLocal(L, "CallFunc_JSON_GetBool_found"), __v => L["CallFunc_JSON_GetBool_found"] = __v) });
     L_14FC:
         if (!(GetLocal(L, "CallFunc_JSON_GetBool_found")).AsBool())
         {
@@ -905,7 +905,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_1506:
         _ = H.Call("AddToBattleLog", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "cardID"), Val.False, Val.True });
     L_153E:
-        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("didForecast"), Val.Out(__v => L["CallFunc_JSON_Clear_found"] = __v) });
+        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("didForecast"), Val.Out(GetLocal(L, "CallFunc_JSON_Clear_found"), __v => L["CallFunc_JSON_Clear_found"] = __v) });
     L_1579:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_15A7:

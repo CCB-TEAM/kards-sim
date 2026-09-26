@@ -36,7 +36,7 @@ public static Val ExecuteUbergraph_card_unit_6th_infantry_brigade(IHost H, Val s
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("GetTurnNumber", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetTurnNumber_turnNumber"] = __v) });
+        _ = H.Call("GetTurnNumber", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetTurnNumber_turnNumber"), __v => L["CallFunc_GetTurnNumber_turnNumber"] = __v) });
     L_0037:
         L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetTurnNumber_turnNumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
     L_005D:
@@ -46,7 +46,7 @@ public static Val ExecuteUbergraph_card_unit_6th_infantry_brigade(IHost H, Val s
     L_00A3:
         goto L_012B;
     L_00A8:
-        _ = H.Call("getTotalOperationCost", new Val[] { self, Val.Out(__v => L["CallFunc_getTotalOperationCost_totalOperationCost"] = __v) });
+        _ = H.Call("getTotalOperationCost", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_getTotalOperationCost_totalOperationCost"), __v => L["CallFunc_getTotalOperationCost_totalOperationCost"] = __v) });
     L_00BB:
         L["CallFunc_Multiply_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_getTotalOperationCost_totalOperationCost") * Val.Of(-1));
     L_00E5:

@@ -36,7 +36,7 @@ public static Val ExecuteUbergraph_card_unit_hurricane_mk_ii_c_trop(IHost H, Val
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("MakeVeteran", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(__v => L["CallFunc_MakeVeteran_qqq"] = __v) });
+        _ = H.Call("MakeVeteran", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(GetLocal(L, "CallFunc_MakeVeteran_qqq"), __v => L["CallFunc_MakeVeteran_qqq"] = __v) });
     L_0038:
         goto L_0042;
     L_003D:

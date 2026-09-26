@@ -40,13 +40,13 @@ public static Val ExecuteUbergraph_card_unit_jet_protoype_a(IHost H, Val self, V
     L_000F:
         __ef.Push(454);
     L_0014:
-        _ = H.Call("GetDeckByside", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetDeckByside_deckCardIDs"] = __v) });
+        _ = H.Call("GetDeckByside", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs"), __v => L["CallFunc_GetDeckByside_deckCardIDs"] = __v) });
     L_004A:
         H.SetMember(self, "topCardId", H.ArrayGet(GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs"), (int)(Val.Of(0)).AsInt()));
     L_006B:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "topCardId"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "topCardId"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_00A1:
-        _ = H.Call("getAndDecryptKredit", new Val[] { GetLocal(L, "CallFunc_GetCardFromID_card"), Val.Out(__v => L["CallFunc_getAndDecryptKredit_decryptedKredit"] = __v) });
+        _ = H.Call("getAndDecryptKredit", new Val[] { GetLocal(L, "CallFunc_GetCardFromID_card"), Val.Out(GetLocal(L, "CallFunc_getAndDecryptKredit_decryptedKredit"), __v => L["CallFunc_getAndDecryptKredit_decryptedKredit"] = __v) });
     L_00CA:
         L["CallFunc_Percent_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_getAndDecryptKredit_decryptedKredit") % Val.Of(2));
     L_00F4:
@@ -60,7 +60,7 @@ public static Val ExecuteUbergraph_card_unit_jet_protoype_a(IHost H, Val self, V
     L_0169:
         H.SetMember(self, "evenCount", GetLocal(L, "Temp_int_Variable"));
     L_0184:
-        _ = H.Call("DiscardCardFromDeck", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "topCardId"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_DiscardCardFromDeck_success"] = __v) });
+        _ = H.Call("DiscardCardFromDeck", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "topCardId"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DiscardCardFromDeck_success"), __v => L["CallFunc_DiscardCardFromDeck_success"] = __v) });
     L_01C5:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -109,7 +109,7 @@ public static Val ExecuteUbergraph_card_unit_jet_protoype_a(IHost H, Val self, V
     L_0301:
         H.SetMember(self, "evenCount", Val.Of(0));
     L_0318:
-        _ = H.Call("GetDeckByside", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetDeckByside_deckCardIDs_1"] = __v) });
+        _ = H.Call("GetDeckByside", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs_1"), __v => L["CallFunc_GetDeckByside_deckCardIDs_1"] = __v) });
     L_034E:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs_1") });
     L_0389:

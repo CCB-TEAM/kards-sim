@@ -74,7 +74,7 @@ public static Val GetDefaultInputConfig(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_UIInputConfig = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["UIInputConfig"] = Val.Nothing;
+        L["UIInputConfig"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         H.SetMember(GetLocal(L, "K2Node_MakeStruct_UIInputConfig"), "bIgnoreMoveInput", Val.False);
     L_0014:
@@ -107,9 +107,9 @@ public static Val GetMousePosBreak(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_OutMousePosX = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["OutMousePosX"] = Val.Nothing;
+        L["OutMousePosX"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_OutMousePosY = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["OutMousePosY"] = Val.Nothing;
+        L["OutMousePosY"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetPlayerControllerBP", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetPlayerControllerBP_outBPPlayerController"] = __v) });
     L_0020:
@@ -137,7 +137,7 @@ public static Val GetMousePosition(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_OutMousePosVec2 = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["OutMousePosVec2"] = Val.Nothing;
+        L["OutMousePosVec2"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetPlayerControllerBP", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetPlayerControllerBP_outBPPlayerController"] = __v) });
     L_0020:
@@ -176,7 +176,7 @@ public static Val GetMousePosX(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_OutMousePosX = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["OutMousePosX"] = Val.Nothing;
+        L["OutMousePosX"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetPlayerControllerBP", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetPlayerControllerBP_outBPPlayerController"] = __v) });
     L_0020:
@@ -201,7 +201,7 @@ public static Val GetMousePosY(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_OutMousePosY = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["OutMousePosY"] = Val.Nothing;
+        L["OutMousePosY"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetPlayerControllerBP", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetPlayerControllerBP_outBPPlayerController"] = __v) });
     L_0020:
@@ -226,7 +226,7 @@ public static Val GetPlayerControllerBP(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_outBPPlayerController = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["outBPPlayerController"] = Val.Nothing;
+        L["outBPPlayerController"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetPlayerController_ReturnValue"] = H.Call("GetPlayerController", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Of(0) });
     L_0022:
@@ -255,7 +255,7 @@ public static Val IsAcceptBackInverted(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_IsInverted = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["IsInverted"] = Val.Nothing;
+        L["IsInverted"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetPlatformName_ReturnValue"] = H.Call("GetPlatformName", new Val[] { Val.Ref("GameplayStatics") });
     L_001C:
@@ -335,7 +335,7 @@ public static Val IsInputBlocked(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_OutIsInputBlocked = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["OutIsInputBlocked"] = Val.Nothing;
+        L["OutIsInputBlocked"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetPlayerControllerBP", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetPlayerControllerBP_outBPPlayerController"] = __v) });
     L_0020:

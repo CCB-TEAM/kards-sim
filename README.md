@@ -315,7 +315,7 @@ not_enough_range  ⟺  defender.location != 7   // 7 = 前线
 | `triggers` | 对照「卡牌注册 / 引擎发出 / 游戏侧分派器」三张表 | 找出白板卡 |
 | `rules` | 客户端规则库（`cardsCheckFunctions`）的 18 条否决理由 vs 引擎侧现状，外加一个 Guard 行为抽检 | 规则只在客户端存在时，AI 会学到不存在的规则 |
 | `paramaudit` | 把引擎原语的实现和 UHT 头文件签名逐条比对，找「UHT 是 void 带 out、实现却直接 return」 | 这类缺陷不报错、不进 `Unhandled`，只是值永远传不回来 |
-| `byref` | 扫直译产物：形参被判成纯 `out`、函数体里却**先读后写**的那些函数 | UE 里被调帧能读到调用方传的值，直译产物读成 `Val.Nothing` → 整条效果空转（见 [已知缺口](#已知缺口by-ref-形参被当成纯-out)） |
+| `byref` | 扫直译产物：out 形参的本地槽还是零初始化、函数体里却先读的那些函数 | UE 里被调帧能读到调用方传的值，旧发射形态读成 `Val.Nothing` → 整条效果空转。**已清零**（见下方「已修：by-ref」），留着当回归哨兵 |
 | `repro1` | issue #1 的端到端复现：击杀 → 变老兵 → 打 HQ 3 点 | 跨「事件载荷 → 持久帧变量 → 老兵换用 → HQ 合成对象」四层，是回归哨兵 |
 
 ### out 参数：两类静默失败
@@ -434,31 +434,29 @@ Execute*Events  →  逐个调响应卡的事件函数
 - 已知未做：没有 UI 就无法复现的选择点 —— 部分卡（如 `card_unit_hampshire_regiment`）
   的 Develop 结果在客户端是**UI 直接做的**，它们没有自己的 `OnHandTargetSelected`，
   无头模拟里选择能被发起和结算，但效果不落地
-- 已知未做：卡组 40 张（`Rules.DeckSize=30`，wiki 说 40，但客户端 CDO 说 30，倾向信客户端）
-- 已知缺口：**by-ref 形参被当成纯 out** —— 见下一节，48 处 / 40 个函数
+- 已修：by-ref 形参被当成纯 out（曾经 48 处 / 40 个函数，`--mode byref` 现在 **0**）
+- 已知缺口：**效果驱动的位移没有同步回引擎** —— 见下一节
 
 ---
 
-## 已知缺口：by-ref 形参被当成纯 out
+## 已修：by-ref 形参被当成纯 out（`--mode byref` 已清零）
 
-直译产物把 out 形参发射成「调用方不传值，退出时回调写回」：
+直译产物曾经把 out 形参发射成「调用方不传值，退出时回调写回」：
 
 ```csharp
 var __out_cards = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-L["cards"] = Val.Nothing;          // ← 读到的永远是空
+L["cards"] = Val.Nothing;          // ← 读到的永远是空（旧形态）
 ```
 
 这在**只写不读**时是对的。但 UE 的 Kismet 里所有形参都是把求值结果送进被调帧的：
 被调函数<b>能读到</b>调用方传进来的值，`out` 只表示「退出时还要写回」。
-于是凡是「把 out 形参当输入读」的函数，在直译产物里都是**空操作** ——
-不报错、不进 `Unhandled`、`smoke` 与自对弈也全绿。
+于是凡是「把 out 形参当输入读」的函数都是**空操作** —— 不报错、不进 `Unhandled`、
+`smoke` 与自对弈也全绿。实测 48 处 / 40 个函数，影响对局的包括：
 
-`--mode byref` 会扫出全部（实测 **48 处 / 40 个函数 / 16 个文件**），影响对局的包括：
-
-| 函数 | 后果 |
+| 函数 | 后果（修好前） |
 |---|---|
 | `GetRandomCard(cards)` | **所有「随机一个敌方单位」类效果空转**（返回空） |
-| `ApplyMakeCardRetreat(cards)` | 把单位「送回手牌」什么也不做（光环也不会被撤销） |
+| `ApplyMakeCardRetreat(cards)` | 把单位「送回手牌」什么也不做 |
 | `ApplySetCardsSeenByCipher(card)` | Intel 的翻牌链 |
 | `AttackCard(defenderCardID)` / `ApplyDestroyMultipleCards` | 攻击/批量摧毁的分派 |
 | `ExecuteOnDestructionEffectTriggered` | 摧毁效果分派 |
@@ -467,19 +465,62 @@ L["cards"] = Val.Nothing;          // ← 读到的永远是空
 | `SortCardsByLocationNumber` / `GetNewLocationNumbers` / `CreateLocationNumberGapForCard` | 撤退时的位置重排 |
 | `CanAttack(cardsInAttackedLocation)` | 规则库里「未明牌 Covert」那一段（读的是空数组 → 循环不执行） |
 
-`--mode tests` 里的 `SentToHandIsAKnownGap` 是**刻意的反向断言**：它记录「现在
-`MakeCardRetreat` 是空操作」。等修好落地，这条会失败，正好提醒换成正式断言。
+现在按 **in-out** 发射：
 
-**修法**（在转译器侧，不需要改引擎）：UE 的 out 形参在字节码里也是把调用方求值后的
-参数送进被调帧，所以 out 应当按 **in-out** 发射 ——
-调用点 <code>Val.Out(当前值, 写回)</code>、被调帧
-<code>L["x"] = args[i].In</code>。改完重新生成，`--mode byref` 应当清零。
+- 调用点：<code>Val.Out(当前值, 写回回调)</code> —— `Val` 里新增 `OutSlot` 承载
+  「初值 + 回调」，`Val.In` 读初值；旧形态 `Val.Out(回调)` 仍然兼容；
+- 被调帧：<code>L["x"] = args[i].In</code>；
+- **out 形参被当容器就地追加时**（`GetNewLocationNumbers` 这类）额外补一句
+  <code>if (L["x"].IsNothing) L["x"] = H.MakeArray(new Val[] { });</code> ——
+  调用方的局部在 UE 里是零初始化（空容器），直译产物读成 `Nothing` 而
+  `Array_Add(Nothing, x)` 是空操作；但也不能无条件清零，那会把调用方送进来的列表冲掉。
 
-**重新生成要注意**：仓库里只有 `BP_CardFunctions` 与 `BP_Logic` 的资产，转译
-`_deps/`（`BP_GameState_Battle`、`Library/*`、`cardsCheckFunctions`）需要的 uasset
-不在 `_input/` 里，`_index.g.cs` 也不能照抄 —— 否则 `FnIndex` 会丢掉那些资产。
-所以这一步要么拿到完整资产做全量重新生成，要么只覆盖能生成的部分并保留 `_deps/`
-（后者会让 `_deps` 里那几处继续坏着）。
+### 缺资产时怎么保证重新生成是对的
+
+`--sigdeps` 需要 `BP_GameState_Battle` / `Library/*` 的 uasset，而仓库里只有
+`_input/Cards` 与 `_input/Logic`。缺了它们，`GameStateRef.<谓词>(out x)` 这一族
+（`GetAllCardInBattle`、`IsThereGameplayRestriction`…）会判不出 out，实参被当成 in。
+对策是 `KardsTranspiler/CommittedOutParams.cs`：**从已入库的那份产物反推签名** ——
+那份产物是资产齐全时生成的，它的调用点就是权威证据（扫全仓带 `Val.Out` 的实参，
+按 `(函数, 形参个数)` 归并，同一个键必须一致；本次 **95 个键零冲突**）。
+它只作为资产签名查不到时的兜底一级（`Emitter.ParamMods` 的 2d），拿到完整资产后不再命中。
+
+这次落地的范围：只覆盖能生成的部分（Cards + `BP_CardFunctions` + `BP_Logic`），
+保留 `_deps/` 与 `_index.g.cs`（后者照抄会丢掉依赖资产的索引）；
+`_deps/` 里 out 形参的绑定行按同一规则手工改成 in-out 形态（501 行，机械替换）。
+拿到完整资产后应当整棵重新生成一次，把这两处手工痕迹抹掉。
+
+修好的正向证据是 `--mode tests` 的 `ByRefFixMakesRandomTargetsWork`：
+`GetRandomCard` 从候选里取到了牌（修好前恒为空），空候选返回空而不崩。
+顺带暴露并补上的宿主缺口：`SetStaticCampaignName`（静态元数据，no-op）、
+`OnBeforeRetreat`（原生事件默认体：不阻止）、`Set_IsNotEmpty`/`Set_IsEmpty`（集合谓词，走 out 槽）。
+
+---
+
+## 已知缺口：效果驱动的位移没有同步回引擎
+
+卡牌效果自己挪动一张牌时（`MakeCardRetreat` → `ApplyMakeCardRetreat` →
+`CardLocationMoved` → `InjectCardIntoLocation`）走的是**蓝图侧**的镜像操作，
+宿主没有把这次位移同步回 `GameState` 的列表：
+
+```text
+--mode tests 的 RetreatToHandIsAKnownGap：
+  「前线单位必须撤退」能打出，蓝图链也跑到了 CardLocationMoved，
+  但引擎仍认为那张牌在前线（Loc / OnFrontline / S.Frontline 都没变）。
+```
+
+后果：撤退类卡牌在无头模拟里等于没发生；依赖「离场」的效果（光环撤销）也不会被触发。
+修法有两条路，都还没做：
+
+1. 宿主实现 `InjectCardIntoLocation`（客户端位置枚举 → 引擎列表），把蓝图侧位移落回引擎，
+   同时补上「离场事件」的分派（`CardLocationMoved` 这条路上
+   `ExecuteOnBeforeLeaveBoardOrOwnerEvents` 没有被调到）；
+2. 或者把「送回手牌」接成引擎原语，直接走 `DoMove` 那一套 —— 更省事，但绕开了蓝图。
+
+第一条更忠实，第二条更简单；选哪条要看后续还有多少「效果驱动的位移」要覆盖
+（撤退、洗回牌库、交换位置……）。
+
+---
 
 ---
 
@@ -527,11 +568,11 @@ dotnet run --project KardsTranspiler -c Release -- \
   ubergraph，非战斗逻辑）
 - 47.5 万行直译代码 **0 错误编译通过**
 - 自对弈 150 局：**0 异常 / 0 卡死 / 0 非法动作**，宿主未实现调用 **0%**
-- 单卡机制验证（`--mode tests`）**115/115 通过**：Intel、事件载荷、老兵升级、Blitz、
+- 单卡机制验证（`--mode tests`）**121/121 通过**：Intel、事件载荷、老兵升级、Blitz、
   数据表、三选一、CDO 标志位、移动/攻击二选一、指挥点槽 24、反制指令、二段式抉择、
   持续站场光环的加/撤与跟随移动（`card_unit_flaming_matilda_anzac`）、
   「前线只有一条且要抢」「射程 1 上前线才够得到敌方支援线」、
-  「本回合 +N 攻击」到期撤销，以及 HTTP 侧动作列表按下标对齐（用真路由跑）
+  「本回合 +N 攻击」到期撤销、by-ref 修复后随机目标真的取得到牌，以及 HTTP 侧动作列表按下标对齐（用真路由跑）
 
 ---
 
@@ -677,4 +718,5 @@ HTTP 侧有**抉择预览**：`GET /games/{id}/state` 会给出
 
 `cards.json` 与 `KardsSim/Generated/` 是从游戏客户端资产派生的，仅供本地研究 /
 AI 训练，请勿再分发。游戏资产本身（`_input/`）不入库。
+
 

@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_unit_185th_folgore(IHost H, Val self, Va
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_0102;
     L_002B:
@@ -42,7 +42,7 @@ public static Val ExecuteUbergraph_card_unit_185th_folgore(IHost H, Val self, Va
     L_0067:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_0102;
     L_0075:
-        _ = H.Call("getHasAlpine", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getHasAlpine_doesIt"] = __v) });
+        _ = H.Call("getHasAlpine", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(GetLocal(L, "CallFunc_getHasAlpine_doesIt"), __v => L["CallFunc_getHasAlpine_doesIt"] = __v) });
     L_009E:
         if (!(GetLocal(L, "CallFunc_getHasAlpine_doesIt")).AsBool()) goto L_0102;
     L_00AC:

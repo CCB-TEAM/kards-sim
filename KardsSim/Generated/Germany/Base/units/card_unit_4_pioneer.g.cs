@@ -40,7 +40,7 @@ public static Val ExecuteUbergraph_card_unit_4_pioneer(IHost H, Val self, Val[] 
     L_000F:
         __ef.Push(358);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInFrontlineBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInFrontlineBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
         H.SetMember(self, "tempCard", GetLocal(L, "CallFunc_Array_Get_Item"));
     L_0062:
@@ -57,7 +57,7 @@ public static Val ExecuteUbergraph_card_unit_4_pioneer(IHost H, Val self, Val[] 
             }
         }
     L_0089:
-        _ = H.Call("IsGroundUnit", new Val[] { H.GetMember(self, "tempCard"), Val.Out(__v => L["CallFunc_IsGroundUnit_isIt"] = __v) });
+        _ = H.Call("IsGroundUnit", new Val[] { H.GetMember(self, "tempCard"), Val.Out(GetLocal(L, "CallFunc_IsGroundUnit_isIt"), __v => L["CallFunc_IsGroundUnit_isIt"] = __v) });
     L_00B2:
         L["CallFunc_NotEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetMember(self, "tempCard"), "cardID"), H.GetMember(self, "cardID")) != 0);
     L_00EE:
@@ -74,7 +74,7 @@ public static Val ExecuteUbergraph_card_unit_4_pioneer(IHost H, Val self, Val[] 
             }
         }
     L_011E:
-        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
+        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeDefense_qqq"), __v => L["CallFunc_ChangeDefense_qqq"] = __v) });
     L_0165:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -115,7 +115,7 @@ public static Val ExecuteUbergraph_card_unit_4_pioneer(IHost H, Val self, Val[] 
     L_0269:
         goto L_0236;
     L_026E:
-        _ = H.Call("GetCardsInFrontlineBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, Val.Out(__v => L["CallFunc_GetCardsInFrontlineBySide_cards"] = __v) });
+        _ = H.Call("GetCardsInFrontlineBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsInFrontlineBySide_cards"), __v => L["CallFunc_GetCardsInFrontlineBySide_cards"] = __v) });
     L_02A5:
         goto L_0252;
     L_02AA:

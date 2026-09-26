@@ -36,17 +36,17 @@ public static Val ExecuteUbergraph_card_event_rain1_mist(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("selectCardToDraw", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False, Val.True, Val.Out(__v => L["CallFunc_selectCardToDraw_drawnCardID"] = __v) });
+        _ = H.Call("selectCardToDraw", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False, Val.True, Val.Out(GetLocal(L, "CallFunc_selectCardToDraw_drawnCardID"), __v => L["CallFunc_selectCardToDraw_drawnCardID"] = __v) });
     L_0042:
         goto L_017B;
     L_0047:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_007D:
         H.SetMember(self, "weatherCardChosen", GetLocal(L, "CallFunc_GetCardFromID_card"));
     L_0090:
         goto L_017B;
     L_0095:
-        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
+        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsSideActive_active"), __v => L["CallFunc_IsSideActive_active"] = __v) });
     L_00B1:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "weatherCardChosen") });
     L_00CE:
@@ -54,7 +54,7 @@ public static Val ExecuteUbergraph_card_event_rain1_mist(IHost H, Val self, Val[
     L_00F4:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_017B;
     L_0102:
-        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.GetMember(H.GetMember(self, "weatherCardChosen"), "name"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.Of(0), Val.Out(__v => L["CallFunc_SpawnCardInHandBySide_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.GetMember(H.GetMember(self, "weatherCardChosen"), "name"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Of(""), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_SpawnCardInHandBySide_spawnedCardID"), __v => L["CallFunc_SpawnCardInHandBySide_spawnedCardID"] = __v) });
     L_0170:
         H.SetMember(self, "weatherCardChosen", Val.Nothing);
     L_017B:
@@ -85,14 +85,14 @@ public static Val GetChooseSpawnCards(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_cards = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["cards"] = Val.Nothing;
+        L["cards"] = args.Length > 0 ? args[0].In : Val.Nothing;
         var __out_markAsSeen = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["markAsSeen"] = Val.Nothing;
+        L["markAsSeen"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_keepOrder = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["keepOrder"] = Val.Nothing;
-    L["_heavyWeatherCards"] = H.MakeArray(new Val[] { });
-    L["_lightWeatherCards"] = H.MakeArray(new Val[] { });
-    L["_mediumWeatherCards"] = H.MakeArray(new Val[] { });
+        L["keepOrder"] = args.Length > 2 ? args[2].In : Val.Nothing;
+        L["_heavyWeatherCards"] = H.MakeArray(new Val[] { });
+        L["_lightWeatherCards"] = H.MakeArray(new Val[] { });
+        L["_mediumWeatherCards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(2111);
     L_0005:
@@ -112,7 +112,7 @@ public static Val GetChooseSpawnCards(IHost H, Val self, Val[] args)
             }
         }
     L_0047:
-        _ = H.Call("GetAllActiveStaticCards", new Val[] { H.GetMember(self, "cardFunction"), Val.True, Val.True, Val.Out(__v => L["CallFunc_GetAllActiveStaticCards_cards"] = __v) });
+        _ = H.Call("GetAllActiveStaticCards", new Val[] { H.GetMember(self, "cardFunction"), Val.True, Val.True, Val.Out(GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), __v => L["CallFunc_GetAllActiveStaticCards_cards"] = __v) });
     L_0076:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_008D:
@@ -128,9 +128,9 @@ public static Val GetChooseSpawnCards(IHost H, Val self, Val[] args)
     L_012E:
         __ef.Push(1503);
     L_0133:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_3"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_3"), __v => L["CallFunc_Array_Get_Item_3"] = __v) });
     L_016E:
-        _ = H.Call("getHasGameplayTag", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_3"), H.MakeArray(new Val[] { Val.Name("subtype.rain") }), Val.Out(__v => L["CallFunc_getHasGameplayTag_hasTag_3"] = __v) });
+        _ = H.Call("getHasGameplayTag", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_3"), H.MakeArray(new Val[] { Val.Name("subtype.rain") }), Val.Out(GetLocal(L, "CallFunc_getHasGameplayTag_hasTag_3"), __v => L["CallFunc_getHasGameplayTag_hasTag_3"] = __v) });
     L_01B2:
         if (!(GetLocal(L, "CallFunc_getHasGameplayTag_hasTag_3")).AsBool())
         {
@@ -144,13 +144,13 @@ public static Val GetChooseSpawnCards(IHost H, Val self, Val[] args)
             }
         }
     L_01BC:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_3"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_3"), __v => L["CallFunc_Array_Get_Item_3"] = __v) });
     L_01F7:
-        _ = H.Call("getHasGameplayTag", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_3"), H.MakeArray(new Val[] { Val.Name("subtype.heavyWeather") }), Val.Out(__v => L["CallFunc_getHasGameplayTag_hasTag_2"] = __v) });
+        _ = H.Call("getHasGameplayTag", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_3"), H.MakeArray(new Val[] { Val.Name("subtype.heavyWeather") }), Val.Out(GetLocal(L, "CallFunc_getHasGameplayTag_hasTag_2"), __v => L["CallFunc_getHasGameplayTag_hasTag_2"] = __v) });
     L_023B:
         if (!(GetLocal(L, "CallFunc_getHasGameplayTag_hasTag_2")).AsBool()) goto L_0629;
     L_0249:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_3"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_3"), __v => L["CallFunc_Array_Get_Item_3"] = __v) });
     L_0284:
         L["CallFunc_Array_Add_ReturnValue_3"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "_heavyWeatherCards"), GetLocal(L, "CallFunc_Array_Get_Item_3") });
     L_02C8:
@@ -173,25 +173,25 @@ public static Val GetChooseSpawnCards(IHost H, Val self, Val[] args)
     L_02FF:
         L["CallFunc_Array_LastIndex_ReturnValue_2"] = H.Call("Array_LastIndex", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "_lightWeatherCards") });
     L_033A:
-        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), GetLocal(L, "CallFunc_Array_LastIndex_ReturnValue_2"), Val.Out(__v => L["CallFunc_RandomIntFromRangeWithStream_randomResult_2"] = __v) });
+        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), GetLocal(L, "CallFunc_Array_LastIndex_ReturnValue_2"), Val.Out(GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult_2"), __v => L["CallFunc_RandomIntFromRangeWithStream_randomResult_2"] = __v) });
     L_0375:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "_lightWeatherCards"), GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult_2"), Val.Out(__v => L["CallFunc_Array_Get_Item_2"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "_lightWeatherCards"), GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult_2"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_2"), __v => L["CallFunc_Array_Get_Item_2"] = __v) });
     L_03B0:
         L["CallFunc_Array_Add_ReturnValue_2"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "_forecastOptions"), GetLocal(L, "CallFunc_Array_Get_Item_2") });
     L_03F4:
         L["CallFunc_Array_LastIndex_ReturnValue_1"] = H.Call("Array_LastIndex", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "_mediumWeatherCards") });
     L_042F:
-        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), GetLocal(L, "CallFunc_Array_LastIndex_ReturnValue_1"), Val.Out(__v => L["CallFunc_RandomIntFromRangeWithStream_randomResult_1"] = __v) });
+        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), GetLocal(L, "CallFunc_Array_LastIndex_ReturnValue_1"), Val.Out(GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult_1"), __v => L["CallFunc_RandomIntFromRangeWithStream_randomResult_1"] = __v) });
     L_046A:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "_mediumWeatherCards"), GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult_1"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "_mediumWeatherCards"), GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_04A5:
         L["CallFunc_Array_Add_ReturnValue_1"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "_forecastOptions"), GetLocal(L, "CallFunc_Array_Get_Item_1") });
     L_04E9:
         L["CallFunc_Array_LastIndex_ReturnValue"] = H.Call("Array_LastIndex", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "_heavyWeatherCards") });
     L_0524:
-        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), GetLocal(L, "CallFunc_Array_LastIndex_ReturnValue"), Val.Out(__v => L["CallFunc_RandomIntFromRangeWithStream_randomResult"] = __v) });
+        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), GetLocal(L, "CallFunc_Array_LastIndex_ReturnValue"), Val.Out(GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), __v => L["CallFunc_RandomIntFromRangeWithStream_randomResult"] = __v) });
     L_055F:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "_heavyWeatherCards"), GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "_heavyWeatherCards"), GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_059A:
         L["CallFunc_Array_Add_ReturnValue"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "_forecastOptions"), GetLocal(L, "CallFunc_Array_Get_Item") });
     L_05DE:
@@ -210,13 +210,13 @@ public static Val GetChooseSpawnCards(IHost H, Val self, Val[] args)
     L_0624:
         goto L_00A4;
     L_0629:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_3"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_3"), __v => L["CallFunc_Array_Get_Item_3"] = __v) });
     L_0664:
-        _ = H.Call("getHasGameplayTag", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_3"), H.MakeArray(new Val[] { Val.Name("subtype.mediumWeather") }), Val.Out(__v => L["CallFunc_getHasGameplayTag_hasTag_1"] = __v) });
+        _ = H.Call("getHasGameplayTag", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_3"), H.MakeArray(new Val[] { Val.Name("subtype.mediumWeather") }), Val.Out(GetLocal(L, "CallFunc_getHasGameplayTag_hasTag_1"), __v => L["CallFunc_getHasGameplayTag_hasTag_1"] = __v) });
     L_06A8:
         if (!(GetLocal(L, "CallFunc_getHasGameplayTag_hasTag_1")).AsBool()) goto L_0736;
     L_06B6:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_3"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_3"), __v => L["CallFunc_Array_Get_Item_3"] = __v) });
     L_06F1:
         L["CallFunc_Array_Add_ReturnValue_5"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "_mediumWeatherCards"), GetLocal(L, "CallFunc_Array_Get_Item_3") });
     L_0735:
@@ -229,9 +229,9 @@ public static Val GetChooseSpawnCards(IHost H, Val self, Val[] args)
             default: goto __halt;
         }
     L_0736:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_3"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_3"), __v => L["CallFunc_Array_Get_Item_3"] = __v) });
     L_0771:
-        _ = H.Call("getHasGameplayTag", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_3"), H.MakeArray(new Val[] { Val.Name("subtype.lightWeather") }), Val.Out(__v => L["CallFunc_getHasGameplayTag_hasTag"] = __v) });
+        _ = H.Call("getHasGameplayTag", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_3"), H.MakeArray(new Val[] { Val.Name("subtype.lightWeather") }), Val.Out(GetLocal(L, "CallFunc_getHasGameplayTag_hasTag"), __v => L["CallFunc_getHasGameplayTag_hasTag"] = __v) });
     L_07B5:
         if (!(GetLocal(L, "CallFunc_getHasGameplayTag_hasTag")).AsBool())
         {
@@ -245,7 +245,7 @@ public static Val GetChooseSpawnCards(IHost H, Val self, Val[] args)
             }
         }
     L_07BF:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_3"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_3"), __v => L["CallFunc_Array_Get_Item_3"] = __v) });
     L_07FA:
         L["CallFunc_Array_Add_ReturnValue_4"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "_lightWeatherCards"), GetLocal(L, "CallFunc_Array_Get_Item_3") });
     L_083E:

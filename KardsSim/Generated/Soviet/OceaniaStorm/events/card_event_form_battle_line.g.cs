@@ -64,7 +64,7 @@ public static Val ExecuteUbergraph_card_event_form_battle_line(IHost H, Val self
     L_00ED:
         goto L_000F;
     L_00F2:
-        _ = H.Call("WhichChooseOne", new Val[] { self, Val.Out(__v => L["CallFunc_WhichChooseOne_Branches"] = __v) });
+        _ = H.Call("WhichChooseOne", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_WhichChooseOne_Branches"), __v => L["CallFunc_WhichChooseOne_Branches"] = __v) });
     L_0105:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_WhichChooseOne_Branches"), Val.Of(0)) != 0);
     L_0124:
@@ -83,7 +83,7 @@ public static Val ExecuteUbergraph_card_event_form_battle_line(IHost H, Val self
             default: goto __halt;
         }
     L_0160:
-        _ = H.Call("SpawnMultipleCardsOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(self, "lightInfantries"), H.GetMember(self, "cardID"), Val.True, Val.Out(__v => L["CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs"] = __v), Val.False });
+        _ = H.Call("SpawnMultipleCardsOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(self, "lightInfantries"), H.GetMember(self, "cardID"), Val.True, Val.Out(GetLocal(L, "CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs"), __v => L["CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs"] = __v), Val.False });
     L_01AB:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -94,7 +94,7 @@ public static Val ExecuteUbergraph_card_event_form_battle_line(IHost H, Val self
             default: goto __halt;
         }
     L_01AC:
-        _ = H.Call("SpawnMultipleCardsOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(self, "lightInfantries"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_1"] = __v), Val.False });
+        _ = H.Call("SpawnMultipleCardsOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(self, "lightInfantries"), H.GetMember(self, "cardID"), Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_1"), __v => L["CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_1"] = __v), Val.False });
     L_01F7:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_020E:
@@ -120,17 +120,17 @@ public static Val ExecuteUbergraph_card_event_form_battle_line(IHost H, Val self
     L_02AB:
         __ef.Push(1057);
     L_02B0:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_02EB:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0321:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetCardFromID_card"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetCardFromID_card"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_0368:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_03A3:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_03D9:
-        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetCardFromID_card"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
+        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetCardFromID_card"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeDefense_qqq"), __v => L["CallFunc_ChangeDefense_qqq"] = __v) });
     L_0420:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

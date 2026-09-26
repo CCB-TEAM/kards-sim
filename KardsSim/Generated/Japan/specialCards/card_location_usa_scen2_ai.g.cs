@@ -36,7 +36,7 @@ public static Val ExecuteUbergraph_card_location_usa_scen2_ai(IHost H, Val self,
     L_000A:
         L["Temp_text_Variable"] = Val.Of("The enemy has crossed the Lunga River. Our defense is now concentrated on the Lunga Ridge. It cannot fail.");
     L_00AE:
-        _ = H.Call("ShowCampaignMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.True, Val.False, Val.Of(0f), Val.False });
+        _ = H.Call("ShowCampaignMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.True, Val.False, Val.Of(0f), Val.False });
     L_00E3:
         goto __halt;
     L_00E5:

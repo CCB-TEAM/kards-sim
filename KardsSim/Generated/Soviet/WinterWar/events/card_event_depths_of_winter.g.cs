@@ -28,8 +28,8 @@ public static Val CreateLightInfantryArr(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["number"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_arr = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["arr"] = Val.Nothing;
-    L["array"] = H.MakeArray(new Val[] { });
+        L["arr"] = args.Length > 1 ? args[1].In : Val.Nothing;
+        L["array"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(333);
     L_0005:
@@ -96,7 +96,7 @@ public static Val ExecuteUbergraph_card_event_depths_of_winter(IHost H, Val self
     L_000F:
         __ef.Push(281);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "location"), Val.Of(5)) != 0);
     L_0084:
@@ -136,7 +136,7 @@ public static Val ExecuteUbergraph_card_event_depths_of_winter(IHost H, Val self
     L_01ED:
         __ef.Push(619);
     L_01F2:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(self, "side"), Val.Of(1), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(self, "side"), Val.Of(1), Val.Out(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), __v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_0210:
         L["K2Node_SwitchEnum_CmpSuccess_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_022F:
@@ -156,7 +156,7 @@ public static Val ExecuteUbergraph_card_event_depths_of_winter(IHost H, Val self
             default: goto __halt;
         }
     L_026B:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(self, "side"), Val.Of(1), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches_1"] = __v) });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(self, "side"), Val.Of(1), Val.Out(GetLocal(L, "CallFunc_EnumCompareSide_Branches_1"), __v => L["CallFunc_EnumCompareSide_Branches_1"] = __v) });
     L_0289:
         L["K2Node_SwitchEnum_CmpSuccess_2"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches_1"), Val.Of(0)) != 0);
     L_02A8:
@@ -178,9 +178,9 @@ public static Val ExecuteUbergraph_card_event_depths_of_winter(IHost H, Val self
     L_02E4:
         L["CallFunc_Array_Length_ReturnValue_2"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "bordLeftCardIDs") });
     L_031F:
-        _ = H.Call("CreateLightInfantryArr", new Val[] { self, GetLocal(L, "CallFunc_Array_Length_ReturnValue_2"), Val.Out(__v => L["CallFunc_CreateLightInfantryArr_arr_1"] = __v) });
+        _ = H.Call("CreateLightInfantryArr", new Val[] { self, GetLocal(L, "CallFunc_Array_Length_ReturnValue_2"), Val.Out(GetLocal(L, "CallFunc_CreateLightInfantryArr_arr_1"), __v => L["CallFunc_CreateLightInfantryArr_arr_1"] = __v) });
     L_033F:
-        _ = H.Call("SpawnMultipleCardsOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(1), Val.False, GetLocal(L, "CallFunc_CreateLightInfantryArr_arr_1"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_1"] = __v), Val.False });
+        _ = H.Call("SpawnMultipleCardsOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(1), Val.False, GetLocal(L, "CallFunc_CreateLightInfantryArr_arr_1"), H.GetMember(self, "cardID"), Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_1"), __v => L["CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_1"] = __v), Val.False });
     L_0383:
         L["Temp_byte_Variable_2"] = Val.Of(1);
     L_0397:
@@ -188,17 +188,17 @@ public static Val ExecuteUbergraph_card_event_depths_of_winter(IHost H, Val self
     L_03AB:
         L["CallFunc_Array_Length_ReturnValue_6"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "boardFrontlineCardIDs") });
     L_03E6:
-        _ = H.Call("CreateLightInfantryArr", new Val[] { self, GetLocal(L, "CallFunc_Array_Length_ReturnValue_6"), Val.Out(__v => L["CallFunc_CreateLightInfantryArr_arr_5"] = __v) });
+        _ = H.Call("CreateLightInfantryArr", new Val[] { self, GetLocal(L, "CallFunc_Array_Length_ReturnValue_6"), Val.Out(GetLocal(L, "CallFunc_CreateLightInfantryArr_arr_5"), __v => L["CallFunc_CreateLightInfantryArr_arr_5"] = __v) });
     L_0406:
         L["Temp_bool_Variable_1"] = H.GetMember(self, "sideOfThisCardHasFrontline");
     L_0419:
-        _ = H.Call("SpawnMultipleCardsOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), Val.Switch(GetLocal(L, "Temp_bool_Variable_1"), new[] { ValueTuple.Create(Val.False, GetLocal(L, "Temp_byte_Variable_3")), ValueTuple.Create(Val.True, GetLocal(L, "Temp_byte_Variable_2")) }, GetLocal(L, "K2Node_Select_Default_1")), Val.True, GetLocal(L, "CallFunc_CreateLightInfantryArr_arr_5"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_5"] = __v), Val.False });
+        _ = H.Call("SpawnMultipleCardsOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), Val.Switch(GetLocal(L, "Temp_bool_Variable_1"), new[] { ValueTuple.Create(Val.False, GetLocal(L, "Temp_byte_Variable_3")), ValueTuple.Create(Val.True, GetLocal(L, "Temp_byte_Variable_2")) }, GetLocal(L, "K2Node_Select_Default_1")), Val.True, GetLocal(L, "CallFunc_CreateLightInfantryArr_arr_5"), H.GetMember(self, "cardID"), Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_5"), __v => L["CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_5"] = __v), Val.False });
     L_0490:
         L["CallFunc_Array_Length_ReturnValue_4"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "boardRightCardIDs") });
     L_04CB:
-        _ = H.Call("CreateLightInfantryArr", new Val[] { self, GetLocal(L, "CallFunc_Array_Length_ReturnValue_4"), Val.Out(__v => L["CallFunc_CreateLightInfantryArr_arr_3"] = __v) });
+        _ = H.Call("CreateLightInfantryArr", new Val[] { self, GetLocal(L, "CallFunc_Array_Length_ReturnValue_4"), Val.Out(GetLocal(L, "CallFunc_CreateLightInfantryArr_arr_3"), __v => L["CallFunc_CreateLightInfantryArr_arr_3"] = __v) });
     L_04EB:
-        _ = H.Call("SpawnMultipleCardsOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(2), Val.False, GetLocal(L, "CallFunc_CreateLightInfantryArr_arr_3"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_3"] = __v), Val.False });
+        _ = H.Call("SpawnMultipleCardsOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(2), Val.False, GetLocal(L, "CallFunc_CreateLightInfantryArr_arr_3"), H.GetMember(self, "cardID"), Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_3"), __v => L["CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_3"] = __v), Val.False });
     L_052F:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -210,7 +210,7 @@ public static Val ExecuteUbergraph_card_event_depths_of_winter(IHost H, Val self
             default: goto __halt;
         }
     L_0530:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_056B:
         L["CallFunc_Array_Add_ReturnValue"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "bordLeftCardIDs"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID") });
     L_05C5:
@@ -224,7 +224,7 @@ public static Val ExecuteUbergraph_card_event_depths_of_winter(IHost H, Val self
             default: goto __halt;
         }
     L_05C6:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0601:
         L["CallFunc_Array_Add_ReturnValue_1"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "boardRightCardIDs"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID") });
     L_065B:
@@ -238,7 +238,7 @@ public static Val ExecuteUbergraph_card_event_depths_of_winter(IHost H, Val self
             default: goto __halt;
         }
     L_065C:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0697:
         L["CallFunc_Array_Add_ReturnValue_2"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "boardFrontlineCardIDs"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID") });
     L_06F1:
@@ -252,11 +252,11 @@ public static Val ExecuteUbergraph_card_event_depths_of_winter(IHost H, Val self
             default: goto __halt;
         }
     L_06F2:
-        _ = H.Call("RemoveMultipleCardsFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "bordLeftCardIDs"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RemoveMultipleCardsFromBoard_qqq"] = __v) });
+        _ = H.Call("RemoveMultipleCardsFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "bordLeftCardIDs"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_RemoveMultipleCardsFromBoard_qqq"), __v => L["CallFunc_RemoveMultipleCardsFromBoard_qqq"] = __v) });
     L_0731:
-        _ = H.Call("RemoveMultipleCardsFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "boardFrontlineCardIDs"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RemoveMultipleCardsFromBoard_qqq_1"] = __v) });
+        _ = H.Call("RemoveMultipleCardsFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "boardFrontlineCardIDs"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_RemoveMultipleCardsFromBoard_qqq_1"), __v => L["CallFunc_RemoveMultipleCardsFromBoard_qqq_1"] = __v) });
     L_0770:
-        _ = H.Call("RemoveMultipleCardsFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "boardRightCardIDs"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RemoveMultipleCardsFromBoard_qqq_2"] = __v) });
+        _ = H.Call("RemoveMultipleCardsFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "boardRightCardIDs"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_RemoveMultipleCardsFromBoard_qqq_2"), __v => L["CallFunc_RemoveMultipleCardsFromBoard_qqq_2"] = __v) });
     L_07AF:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -268,11 +268,11 @@ public static Val ExecuteUbergraph_card_event_depths_of_winter(IHost H, Val self
             default: goto __halt;
         }
     L_07B0:
-        _ = H.Call("RemoveMultipleCardsFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "boardRightCardIDs"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RemoveMultipleCardsFromBoard_qqq_3"] = __v) });
+        _ = H.Call("RemoveMultipleCardsFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "boardRightCardIDs"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_RemoveMultipleCardsFromBoard_qqq_3"), __v => L["CallFunc_RemoveMultipleCardsFromBoard_qqq_3"] = __v) });
     L_07EF:
-        _ = H.Call("RemoveMultipleCardsFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "boardFrontlineCardIDs"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RemoveMultipleCardsFromBoard_qqq_4"] = __v) });
+        _ = H.Call("RemoveMultipleCardsFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "boardFrontlineCardIDs"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_RemoveMultipleCardsFromBoard_qqq_4"), __v => L["CallFunc_RemoveMultipleCardsFromBoard_qqq_4"] = __v) });
     L_082E:
-        _ = H.Call("RemoveMultipleCardsFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "bordLeftCardIDs"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RemoveMultipleCardsFromBoard_qqq_5"] = __v) });
+        _ = H.Call("RemoveMultipleCardsFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "bordLeftCardIDs"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_RemoveMultipleCardsFromBoard_qqq_5"), __v => L["CallFunc_RemoveMultipleCardsFromBoard_qqq_5"] = __v) });
     L_086D:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -286,9 +286,9 @@ public static Val ExecuteUbergraph_card_event_depths_of_winter(IHost H, Val self
     L_086E:
         L["CallFunc_Array_Length_ReturnValue_1"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "boardRightCardIDs") });
     L_08A9:
-        _ = H.Call("CreateLightInfantryArr", new Val[] { self, GetLocal(L, "CallFunc_Array_Length_ReturnValue_1"), Val.Out(__v => L["CallFunc_CreateLightInfantryArr_arr"] = __v) });
+        _ = H.Call("CreateLightInfantryArr", new Val[] { self, GetLocal(L, "CallFunc_Array_Length_ReturnValue_1"), Val.Out(GetLocal(L, "CallFunc_CreateLightInfantryArr_arr"), __v => L["CallFunc_CreateLightInfantryArr_arr"] = __v) });
     L_08C9:
-        _ = H.Call("SpawnMultipleCardsOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(2), Val.False, GetLocal(L, "CallFunc_CreateLightInfantryArr_arr"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs"] = __v), Val.False });
+        _ = H.Call("SpawnMultipleCardsOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(2), Val.False, GetLocal(L, "CallFunc_CreateLightInfantryArr_arr"), H.GetMember(self, "cardID"), Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs"), __v => L["CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs"] = __v), Val.False });
     L_090D:
         L["Temp_bool_Variable"] = H.GetMember(self, "sideOfThisCardHasFrontline");
     L_0920:
@@ -298,15 +298,15 @@ public static Val ExecuteUbergraph_card_event_depths_of_winter(IHost H, Val self
     L_0948:
         L["CallFunc_Array_Length_ReturnValue_5"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "boardFrontlineCardIDs") });
     L_0983:
-        _ = H.Call("CreateLightInfantryArr", new Val[] { self, GetLocal(L, "CallFunc_Array_Length_ReturnValue_5"), Val.Out(__v => L["CallFunc_CreateLightInfantryArr_arr_4"] = __v) });
+        _ = H.Call("CreateLightInfantryArr", new Val[] { self, GetLocal(L, "CallFunc_Array_Length_ReturnValue_5"), Val.Out(GetLocal(L, "CallFunc_CreateLightInfantryArr_arr_4"), __v => L["CallFunc_CreateLightInfantryArr_arr_4"] = __v) });
     L_09A3:
-        _ = H.Call("SpawnMultipleCardsOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), Val.Switch(GetLocal(L, "Temp_bool_Variable"), new[] { ValueTuple.Create(Val.False, GetLocal(L, "Temp_byte_Variable_1")), ValueTuple.Create(Val.True, GetLocal(L, "Temp_byte_Variable")) }, GetLocal(L, "K2Node_Select_Default")), Val.True, GetLocal(L, "CallFunc_CreateLightInfantryArr_arr_4"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_4"] = __v), Val.False });
+        _ = H.Call("SpawnMultipleCardsOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), Val.Switch(GetLocal(L, "Temp_bool_Variable"), new[] { ValueTuple.Create(Val.False, GetLocal(L, "Temp_byte_Variable_1")), ValueTuple.Create(Val.True, GetLocal(L, "Temp_byte_Variable")) }, GetLocal(L, "K2Node_Select_Default")), Val.True, GetLocal(L, "CallFunc_CreateLightInfantryArr_arr_4"), H.GetMember(self, "cardID"), Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_4"), __v => L["CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_4"] = __v), Val.False });
     L_0A1A:
         L["CallFunc_Array_Length_ReturnValue_3"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "bordLeftCardIDs") });
     L_0A55:
-        _ = H.Call("CreateLightInfantryArr", new Val[] { self, GetLocal(L, "CallFunc_Array_Length_ReturnValue_3"), Val.Out(__v => L["CallFunc_CreateLightInfantryArr_arr_2"] = __v) });
+        _ = H.Call("CreateLightInfantryArr", new Val[] { self, GetLocal(L, "CallFunc_Array_Length_ReturnValue_3"), Val.Out(GetLocal(L, "CallFunc_CreateLightInfantryArr_arr_2"), __v => L["CallFunc_CreateLightInfantryArr_arr_2"] = __v) });
     L_0A75:
-        _ = H.Call("SpawnMultipleCardsOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(1), Val.False, GetLocal(L, "CallFunc_CreateLightInfantryArr_arr_2"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_2"] = __v), Val.False });
+        _ = H.Call("SpawnMultipleCardsOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(1), Val.False, GetLocal(L, "CallFunc_CreateLightInfantryArr_arr_2"), H.GetMember(self, "cardID"), Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_2"), __v => L["CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs_2"] = __v), Val.False });
     L_0AB9:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -328,7 +328,7 @@ public static Val ExecuteUbergraph_card_event_depths_of_winter(IHost H, Val self
     L_0AF2:
         __ef.Push(2881);
     L_0AF7:
-        _ = H.Call("DoesSideControlTheFrontline", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_DoesSideControlTheFrontline_doesHe"] = __v) });
+        _ = H.Call("DoesSideControlTheFrontline", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_DoesSideControlTheFrontline_doesHe"), __v => L["CallFunc_DoesSideControlTheFrontline_doesHe"] = __v) });
     L_0B2D:
         H.SetMember(self, "sideOfThisCardHasFrontline", GetLocal(L, "CallFunc_DoesSideControlTheFrontline_doesHe"));
     L_0B40:
@@ -342,7 +342,7 @@ public static Val ExecuteUbergraph_card_event_depths_of_winter(IHost H, Val self
             default: goto __halt;
         }
     L_0B41:
-        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
+        _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), __v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
     L_0B6F:
         goto L_0AD6;
     L_0B74:

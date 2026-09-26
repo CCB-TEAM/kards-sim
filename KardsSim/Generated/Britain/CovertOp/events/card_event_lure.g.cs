@@ -34,15 +34,15 @@ public static Val ExecuteUbergraph_card_event_lure(IHost H, Val self, Val[] args
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
+        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, H.GetVar("K2Node_Event_cardPlayed"), Val.Out(GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt"), __v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
     L_0026:
         if (!(GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt")).AsBool()) goto L_00C7;
     L_0034:
-        _ = H.Call("isSecondOrderThisTurn", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), Val.Out(__v => L["CallFunc_isSecondOrderThisTurn_isSecondOrder"] = __v) });
+        _ = H.Call("isSecondOrderThisTurn", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), Val.Out(GetLocal(L, "CallFunc_isSecondOrderThisTurn_isSecondOrder"), __v => L["CallFunc_isSecondOrderThisTurn_isSecondOrder"] = __v) });
     L_006A:
         if (!(GetLocal(L, "CallFunc_isSecondOrderThisTurn_isSecondOrder")).AsBool()) goto L_00C7;
     L_0078:
-        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
+        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GotchaTriggered_qqq"), __v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
     L_00C7:
         goto __halt;
     L_00C9:
@@ -68,13 +68,13 @@ public static Val isSecondOrderThisTurn(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["SideToCheck"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_isSecondOrder = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["isSecondOrder"] = Val.Nothing;
+        L["isSecondOrder"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         __ef.Push(1011);
     L_0005:
         L["localIsSecondOrder"] = Val.False;
     L_0010:
-        _ = H.Call("GetCardsPlayedThisTurn", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetCardsPlayedThisTurn_cards"] = __v) });
+        _ = H.Call("GetCardsPlayedThisTurn", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetCardsPlayedThisTurn_cards"), __v => L["CallFunc_GetCardsPlayedThisTurn_cards"] = __v) });
     L_003D:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsPlayedThisTurn_cards") });
     L_0078:
@@ -102,7 +102,7 @@ public static Val isSecondOrderThisTurn(IHost H, Val self, Val[] args)
     L_01AE:
         __ef.Push(865);
     L_01B3:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsPlayedThisTurn_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsPlayedThisTurn_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_01EE:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "side"), GetLocal(L, "SideToCheck")) == 0);
     L_022A:
@@ -117,9 +117,9 @@ public static Val isSecondOrderThisTurn(IHost H, Val self, Val[] args)
             }
         }
     L_0234:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsPlayedThisTurn_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsPlayedThisTurn_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_026F:
-        _ = H.Call("IsOrder", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
+        _ = H.Call("IsOrder", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_IsOrder_isIt"), __v => L["CallFunc_IsOrder_isIt"] = __v) });
     L_0298:
         if (!(GetLocal(L, "CallFunc_IsOrder_isIt")).AsBool())
         {

@@ -52,11 +52,11 @@ public static Val ExecuteUbergraph_card_event_gambit(IHost H, Val self, Val[] ar
     L_00B0:
         __ef.Push(984);
     L_00B5:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_00F0:
         H.SetMember(self, "loopCard", GetLocal(L, "CallFunc_Array_Get_Item"));
     L_0103:
-        _ = H.Call("IsLocatedInHand", new Val[] { H.GetMember(self, "loopCard"), Val.Out(__v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
+        _ = H.Call("IsLocatedInHand", new Val[] { H.GetMember(self, "loopCard"), Val.Out(GetLocal(L, "CallFunc_IsLocatedInHand_isIt"), __v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
     L_012C:
         if (!(GetLocal(L, "CallFunc_IsLocatedInHand_isIt")).AsBool())
         {
@@ -71,7 +71,7 @@ public static Val ExecuteUbergraph_card_event_gambit(IHost H, Val self, Val[] ar
             }
         }
     L_0136:
-        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "loopCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "loopCard"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_015F:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool())
         {
@@ -103,7 +103,7 @@ public static Val ExecuteUbergraph_card_event_gambit(IHost H, Val self, Val[] ar
             }
         }
     L_01B4:
-        _ = H.Call("getTotalKreditCost", new Val[] { H.GetMember(self, "loopCard"), Val.Out(__v => L["CallFunc_getTotalKreditCost_totalKreditCost"] = __v) });
+        _ = H.Call("getTotalKreditCost", new Val[] { H.GetMember(self, "loopCard"), Val.Out(GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost"), __v => L["CallFunc_getTotalKreditCost_totalKreditCost"] = __v) });
     L_01DD:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost"), H.GetMember(self, "highestCostSameSide")) > 0);
     L_0203:
@@ -120,7 +120,7 @@ public static Val ExecuteUbergraph_card_event_gambit(IHost H, Val self, Val[] ar
             }
         }
     L_020D:
-        _ = H.Call("getTotalKreditCost", new Val[] { H.GetMember(self, "loopCard"), Val.Out(__v => L["CallFunc_getTotalKreditCost_totalKreditCost"] = __v) });
+        _ = H.Call("getTotalKreditCost", new Val[] { H.GetMember(self, "loopCard"), Val.Out(GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost"), __v => L["CallFunc_getTotalKreditCost_totalKreditCost"] = __v) });
     L_0236:
         H.SetMember(self, "highestCostSameSide", GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost"));
     L_0251:
@@ -153,9 +153,9 @@ public static Val ExecuteUbergraph_card_event_gambit(IHost H, Val self, Val[] ar
             }
         }
     L_02B4:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "unitToPlaySameSide"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "unitToPlaySameSide"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_02EA:
-        _ = H.Call("PlayCardDirectlyFromHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetCardFromID_card"), Val.False, H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_PlayCardDirectlyFromHand_qqq"] = __v), Val.Of(-1) });
+        _ = H.Call("PlayCardDirectlyFromHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetCardFromID_card"), Val.False, H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_PlayCardDirectlyFromHand_qqq"), __v => L["CallFunc_PlayCardDirectlyFromHand_qqq"] = __v), Val.Of(-1) });
     L_032F:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -182,9 +182,9 @@ public static Val ExecuteUbergraph_card_event_gambit(IHost H, Val self, Val[] ar
             }
         }
     L_035C:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "enemyUnitToPlay"), Val.Out(__v => L["CallFunc_GetCardFromID_card_1"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "enemyUnitToPlay"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card_1"), __v => L["CallFunc_GetCardFromID_card_1"] = __v) });
     L_0392:
-        _ = H.Call("PlayCardDirectlyFromHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetCardFromID_card_1"), Val.False, H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_PlayCardDirectlyFromHand_qqq_1"] = __v), Val.Of(-1) });
+        _ = H.Call("PlayCardDirectlyFromHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetCardFromID_card_1"), Val.False, H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_PlayCardDirectlyFromHand_qqq_1"), __v => L["CallFunc_PlayCardDirectlyFromHand_qqq_1"] = __v), Val.Of(-1) });
     L_03D7:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -202,7 +202,7 @@ public static Val ExecuteUbergraph_card_event_gambit(IHost H, Val self, Val[] ar
     L_041D:
         goto L_0026;
     L_0422:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_0435:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.GetMember(self, "loopCard"), "side"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide")) == 0);
     L_0471:
@@ -219,7 +219,7 @@ public static Val ExecuteUbergraph_card_event_gambit(IHost H, Val self, Val[] ar
             }
         }
     L_047B:
-        _ = H.Call("getTotalKreditCost", new Val[] { H.GetMember(self, "loopCard"), Val.Out(__v => L["CallFunc_getTotalKreditCost_totalKreditCost_1"] = __v) });
+        _ = H.Call("getTotalKreditCost", new Val[] { H.GetMember(self, "loopCard"), Val.Out(GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost_1"), __v => L["CallFunc_getTotalKreditCost_totalKreditCost_1"] = __v) });
     L_04A4:
         L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost_1"), H.GetMember(self, "highestEnemyCost")) > 0);
     L_04CA:
@@ -236,7 +236,7 @@ public static Val ExecuteUbergraph_card_event_gambit(IHost H, Val self, Val[] ar
             }
         }
     L_04D4:
-        _ = H.Call("getTotalKreditCost", new Val[] { H.GetMember(self, "loopCard"), Val.Out(__v => L["CallFunc_getTotalKreditCost_totalKreditCost_1"] = __v) });
+        _ = H.Call("getTotalKreditCost", new Val[] { H.GetMember(self, "loopCard"), Val.Out(GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost_1"), __v => L["CallFunc_getTotalKreditCost_totalKreditCost_1"] = __v) });
     L_04FD:
         H.SetMember(self, "highestEnemyCost", GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost_1"));
     L_0518:
@@ -258,7 +258,7 @@ public static Val ExecuteUbergraph_card_event_gambit(IHost H, Val self, Val[] ar
     L_0566:
         H.SetMember(self, "loopCard", Val.Nothing);
     L_0571:
-        _ = H.Call("GetAllCards", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetAllCards_cards"] = __v) });
+        _ = H.Call("GetAllCards", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetAllCards_cards"), __v => L["CallFunc_GetAllCards_cards"] = __v) });
     L_059E:
         goto L_054A;
     L_05A3:

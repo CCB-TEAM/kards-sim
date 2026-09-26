@@ -83,13 +83,13 @@ public static Val ExecuteUbergraph_card_unit_m8_greyhound(IHost H, Val self, Val
             }
         }
     L_00D5:
-        _ = H.Call("GetSupportLineLocationBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetSupportLineLocationBySide_location_1"] = __v) });
+        _ = H.Call("GetSupportLineLocationBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetSupportLineLocationBySide_location_1"), __v => L["CallFunc_GetSupportLineLocationBySide_location_1"] = __v) });
     L_010B:
         H.SetMember(self, "tmpSupportLine", GetLocal(L, "CallFunc_GetSupportLineLocationBySide_location_1"));
     L_0126:
         H.SetMember(self, "attak_buff", Val.Of(1));
     L_013D:
-        _ = H.Call("GetAllCardsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.True, Val.Out(__v => L["CallFunc_GetAllCardsOnBoard_cards"] = __v) });
+        _ = H.Call("GetAllCardsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.True, Val.Out(GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), __v => L["CallFunc_GetAllCardsOnBoard_cards"] = __v) });
     L_016B:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_0182:
@@ -116,7 +116,7 @@ public static Val ExecuteUbergraph_card_unit_m8_greyhound(IHost H, Val self, Val
     L_021F:
         __ef.Push(1399);
     L_0224:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_025F:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue_3"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "location"), H.GetMember(self, "tmpSupportLine")) == 0);
     L_029B:
@@ -133,9 +133,9 @@ public static Val ExecuteUbergraph_card_unit_m8_greyhound(IHost H, Val self, Val
             }
         }
     L_02A5:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_02E0:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0309:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool())
         {
@@ -150,7 +150,7 @@ public static Val ExecuteUbergraph_card_unit_m8_greyhound(IHost H, Val self, Val
             }
         }
     L_0313:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_034E:
         L["CallFunc_NotEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "cardID"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID")) != 0);
     L_038A:
@@ -167,9 +167,9 @@ public static Val ExecuteUbergraph_card_unit_m8_greyhound(IHost H, Val self, Val
             }
         }
     L_0394:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_03CF:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), H.GetMember(self, "cardID"), H.GetMember(self, "attak_buff"), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), H.GetMember(self, "cardID"), H.GetMember(self, "attak_buff"), Val.Of(0), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_041A:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -215,9 +215,9 @@ public static Val ExecuteUbergraph_card_unit_m8_greyhound(IHost H, Val self, Val
     L_0493:
         if (!(H.GetMember(self, "changeOwner")).AsBool()) goto L_0521;
     L_04A1:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_04B4:
-        _ = H.Call("GetSupportLineLocationBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(__v => L["CallFunc_GetSupportLineLocationBySide_location"] = __v) });
+        _ = H.Call("GetSupportLineLocationBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(GetLocal(L, "CallFunc_GetSupportLineLocationBySide_location"), __v => L["CallFunc_GetSupportLineLocationBySide_location"] = __v) });
     L_04EA:
         H.SetMember(self, "tmpSupportLine", GetLocal(L, "CallFunc_GetSupportLineLocationBySide_location"));
     L_0505:
@@ -225,7 +225,7 @@ public static Val ExecuteUbergraph_card_unit_m8_greyhound(IHost H, Val self, Val
     L_051C:
         goto L_013D;
     L_0521:
-        _ = H.Call("GetSupportLineLocationBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetSupportLineLocationBySide_location_2"] = __v) });
+        _ = H.Call("GetSupportLineLocationBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetSupportLineLocationBySide_location_2"), __v => L["CallFunc_GetSupportLineLocationBySide_location_2"] = __v) });
     L_0557:
         H.SetMember(self, "tmpSupportLine", GetLocal(L, "CallFunc_GetSupportLineLocationBySide_location_2"));
     L_0572:
@@ -252,7 +252,7 @@ public static Val ExecuteUbergraph_card_unit_m8_greyhound(IHost H, Val self, Val
             }
         }
     L_05EA:
-        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "cardMoved"), Val.Out(__v => L["CallFunc_IsUnit_isIt_2"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "cardMoved"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt_2"), __v => L["CallFunc_IsUnit_isIt_2"] = __v) });
     L_0613:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt_2")).AsBool())
         {
@@ -267,7 +267,7 @@ public static Val ExecuteUbergraph_card_unit_m8_greyhound(IHost H, Val self, Val
             }
         }
     L_061D:
-        _ = H.Call("GetSupportLineLocationBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetSupportLineLocationBySide_location_5"] = __v) });
+        _ = H.Call("GetSupportLineLocationBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetSupportLineLocationBySide_location_5"), __v => L["CallFunc_GetSupportLineLocationBySide_location_5"] = __v) });
     L_0653:
         H.SetMember(self, "tmpSupportLine", GetLocal(L, "CallFunc_GetSupportLineLocationBySide_location_5"));
     L_066E:
@@ -288,7 +288,7 @@ public static Val ExecuteUbergraph_card_unit_m8_greyhound(IHost H, Val self, Val
     L_06B4:
         H.SetMember(self, "attak_buff", Val.Of(1));
     L_06CB:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardMoved"), H.GetMember(self, "cardID"), H.GetMember(self, "attak_buff"), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq_2"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardMoved"), H.GetMember(self, "cardID"), H.GetMember(self, "attak_buff"), Val.Of(0), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq_2"), __v => L["CallFunc_ChangeAttack_qqq_2"] = __v) });
     L_0716:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -321,7 +321,7 @@ public static Val ExecuteUbergraph_card_unit_m8_greyhound(IHost H, Val self, Val
     L_076E:
         H.SetMember(self, "newLocation", H.GetVar("K2Node_Event_newLocation"));
     L_0789:
-        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "cardMoved"), Val.Out(__v => L["CallFunc_IsUnit_isIt_1"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "cardMoved"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt_1"), __v => L["CallFunc_IsUnit_isIt_1"] = __v) });
     L_07B2:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt_1")).AsBool())
         {
@@ -336,7 +336,7 @@ public static Val ExecuteUbergraph_card_unit_m8_greyhound(IHost H, Val self, Val
             }
         }
     L_07BC:
-        _ = H.Call("GetSupportLineLocationBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetSupportLineLocationBySide_location_3"] = __v) });
+        _ = H.Call("GetSupportLineLocationBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetSupportLineLocationBySide_location_3"), __v => L["CallFunc_GetSupportLineLocationBySide_location_3"] = __v) });
     L_07F2:
         H.SetMember(self, "tmpSupportLine", GetLocal(L, "CallFunc_GetSupportLineLocationBySide_location_3"));
     L_080D:
@@ -374,7 +374,7 @@ public static Val ExecuteUbergraph_card_unit_m8_greyhound(IHost H, Val self, Val
     L_0872:
         H.SetMember(self, "attak_buff", Val.Of(1));
     L_0889:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardMoved"), H.GetMember(self, "cardID"), H.GetMember(self, "attak_buff"), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq_1"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardMoved"), H.GetMember(self, "cardID"), H.GetMember(self, "attak_buff"), Val.Of(0), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq_1"), __v => L["CallFunc_ChangeAttack_qqq_1"] = __v) });
     L_08D4:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -416,9 +416,9 @@ public static Val ExecuteUbergraph_card_unit_m8_greyhound(IHost H, Val self, Val
             }
         }
     L_0935:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetMember(self, "cardMoved"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetMember(self, "cardMoved"), Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_095E:
-        _ = H.Call("isBuffedByCard", new Val[] { H.GetMember(self, "cardMoved"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
+        _ = H.Call("isBuffedByCard", new Val[] { H.GetMember(self, "cardMoved"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed"), __v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
     L_0990:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool() && (GetLocal(L, "CallFunc_isBuffedByCard_isBuffed")).AsBool());
     L_09B6:
@@ -456,7 +456,7 @@ public static Val ExecuteUbergraph_card_unit_m8_greyhound(IHost H, Val self, Val
     L_0A05:
         H.SetMember(self, "attak_buff", Val.Of(-1));
     L_0A1C:
-        _ = H.Call("GetSupportLineLocationBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetSupportLineLocationBySide_location_4"] = __v) });
+        _ = H.Call("GetSupportLineLocationBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetSupportLineLocationBySide_location_4"), __v => L["CallFunc_GetSupportLineLocationBySide_location_4"] = __v) });
     L_0A52:
         H.SetMember(self, "tmpSupportLine", GetLocal(L, "CallFunc_GetSupportLineLocationBySide_location_4"));
     L_0A6D:

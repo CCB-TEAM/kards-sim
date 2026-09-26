@@ -39,7 +39,7 @@ public static Val ExecuteUbergraph_card_unit_finnish_boys(IHost H, Val self, Val
     L_0047:
         goto L_008E;
     L_004C:
-        _ = H.Call("RemoveGameplayRestriction", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Of(5), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_RemoveGameplayRestriction_qqq"] = __v) });
+        _ = H.Call("RemoveGameplayRestriction", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Of(5), H.GetMember(self, "cardID"), Val.False, Val.Out(GetLocal(L, "CallFunc_RemoveGameplayRestriction_qqq"), __v => L["CallFunc_RemoveGameplayRestriction_qqq"] = __v) });
     L_008E:
         goto __halt;
     L_0090:

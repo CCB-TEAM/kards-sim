@@ -66,7 +66,7 @@ public static Val ExecuteUbergraph_card_event_the_peoples_army(IHost H, Val self
     L_00ED:
         goto L_000F;
     L_00F2:
-        _ = H.Call("SpawnMultipleCardsOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(self, "lightInfantries"), H.GetMember(self, "cardID"), Val.True, Val.Out(__v => L["CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs"] = __v), Val.False });
+        _ = H.Call("SpawnMultipleCardsOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(self, "lightInfantries"), H.GetMember(self, "cardID"), Val.True, Val.Out(GetLocal(L, "CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs"), __v => L["CallFunc_SpawnMultipleCardsOnBattlefield_spawnedCardIDs"] = __v), Val.False });
     L_013D:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -80,7 +80,7 @@ public static Val ExecuteUbergraph_card_event_the_peoples_army(IHost H, Val self
     L_013E:
         __ef.Push(470);
     L_0143:
-        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_unit_light_infantry"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.Of(0), Val.Out(__v => L["CallFunc_SpawnCardInHandBySide_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_unit_light_infantry"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.Of(0), Val.Out(GetLocal(L, "CallFunc_SpawnCardInHandBySide_spawnedCardID"), __v => L["CallFunc_SpawnCardInHandBySide_spawnedCardID"] = __v) });
     L_019F:
         _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_SpawnCardInHandBySide_spawnedCardID"), H.GetMember(self, "cardID") });
     L_01D5:
@@ -125,7 +125,7 @@ public static Val ExecuteUbergraph_card_event_the_peoples_army(IHost H, Val self
     L_02D1:
         __ef.Push(915);
     L_02D6:
-        _ = H.Call("GetCardsInSupportLineBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, Val.True, Val.Out(__v => L["CallFunc_GetCardsInSupportLineBySide_cards"] = __v) });
+        _ = H.Call("GetCardsInSupportLineBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, Val.True, Val.Out(GetLocal(L, "CallFunc_GetCardsInSupportLineBySide_cards"), __v => L["CallFunc_GetCardsInSupportLineBySide_cards"] = __v) });
     L_030E:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInSupportLineBySide_cards") });
     L_0349:
@@ -135,7 +135,7 @@ public static Val ExecuteUbergraph_card_event_the_peoples_army(IHost H, Val self
     L_038E:
         goto L_00BD;
     L_0393:
-        _ = H.Call("GetCardsInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetCardsInHandBySide_cards"] = __v) });
+        _ = H.Call("GetCardsInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), __v => L["CallFunc_GetCardsInHandBySide_cards"] = __v) });
     L_03C9:
         goto L_02B5;
     L_03CE:

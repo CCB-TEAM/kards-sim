@@ -50,7 +50,7 @@ public static Val GetAndroidProvider(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_OutAndroidProvider = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["OutAndroidProvider"] = Val.Nothing;
+        L["OutAndroidProvider"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetVersionInfo", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetVersionInfo_Version"] = __v) });
     L_0036:
@@ -159,7 +159,7 @@ public static Val GetAPKDownloadLinkFromKSP(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_OutLink = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["OutLink"] = Val.Nothing;
+        L["OutLink"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetAndroidProvider", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetAndroidProvider_OutAndroidProvider"] = __v) });
     L_0020:
@@ -294,7 +294,7 @@ public static Val GetAPKUpgradeToIAPVersionLinkFromKSP(IHost H, Val self, Val[] 
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_OutLink = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["OutLink"] = Val.Nothing;
+        L["OutLink"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         __ef.Push(2277);
     L_0005:
@@ -443,7 +443,7 @@ public static Val GetMSSDKManager(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_MSSDKManager = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["MSSDKManager"] = Val.Nothing;
+        L["MSSDKManager"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetActorOfClass_ReturnValue"] = H.Call("GetActorOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_MSSDKManager") });
     L_0026:
@@ -466,7 +466,7 @@ public static Val Is_Tablet_TODO_Replace_Old_Version(IHost H, Val self, Val[] ar
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_Tablet = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["Tablet"] = Val.Nothing;
+        L["Tablet"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_isConsole_ReturnValue"] = H.Call("isConsole", new Val[] { self });
     L_0014:
@@ -555,7 +555,7 @@ public static Val IsChinaISBN(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_is_ISBN = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["is_ISBN"] = Val.Nothing;
+        L["is_ISBN"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_IsEditor_ReturnValue"] = H.Call("IsEditor", new Val[] { self });
     L_0014:
@@ -634,7 +634,7 @@ public static Val IsDebugANR(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_OutIsDebugANR = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["OutIsDebugANR"] = Val.Nothing;
+        L["OutIsDebugANR"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetKardsGameInstancePure", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetKardsGameInstancePure_instance"] = __v) });
     L_0036:
@@ -669,7 +669,7 @@ public static Val isDevRole(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_HasRole = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["HasRole"] = Val.Nothing;
+        L["HasRole"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetDSession", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetDSession_dSession"] = __v) });
     L_0036:
@@ -694,7 +694,7 @@ public static Val isDevRolePure(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_HasRole = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["HasRole"] = Val.Nothing;
+        L["HasRole"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetDSession", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetDSession_dSession"] = __v) });
     L_0036:
@@ -719,7 +719,7 @@ public static Val IsNoiapBuild(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_OutIsNoiap = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["OutIsNoiap"] = Val.Nothing;
+        L["OutIsNoiap"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetDSession", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetDSession_dSession"] = __v) });
     L_0036:
@@ -825,7 +825,7 @@ public static Val useChinaAlternatives(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_yes = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["yes"] = Val.Nothing;
+        L["yes"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetAndroidProvider", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetAndroidProvider_OutAndroidProvider"] = __v) });
     L_0020:

@@ -29,7 +29,7 @@ public static Val CapitalizeText(IHost H, Val self, Val[] args)
         L["Input"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_Capitalized = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["Capitalized"] = Val.Nothing;
+        L["Capitalized"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_Conv_TextToString_ReturnValue"] = H.Call("Conv_TextToString", new Val[] { Val.Ref("KismetTextLibrary"), GetLocal(L, "Input") });
     L_0025:
@@ -376,7 +376,7 @@ public static Val GameModeStringToEnum(IHost H, Val self, Val[] args)
         L["string"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_gameMode = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["gameMode"] = Val.Nothing;
+        L["gameMode"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchString_CmpSuccess"] = H.Call("NotEqual_StriStri", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "string"), Val.Of("training") });
     L_0027:
@@ -466,7 +466,7 @@ public static Val Get_Pack_Text(IHost H, Val self, Val[] args)
         L["guaranteedGolds"] = args.Length > 4 ? args[4] : Val.Nothing;
         L["__WorldContext"] = args.Length > 5 ? args[5] : Val.Nothing;
         var __out_Text = args.Length > 6 ? args[6].As<Action<Val>>() : null;
-        L["Text"] = Val.Nothing;
+        L["Text"] = args.Length > 6 ? args[6].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"] = H.Call("GetEnumeratorUserFriendlyName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("ECardSetEnum"), GetLocal(L, "Set") });
     L_002E:
@@ -632,11 +632,11 @@ public static Val Get_Pack_Text_and_Texture(IHost H, Val self, Val[] args)
         L["Item"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_PluralisedTextWithQuantity = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["PluralisedTextWithQuantity"] = Val.Nothing;
+        L["PluralisedTextWithQuantity"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_JustPluralised = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["JustPluralised"] = Val.Nothing;
+        L["JustPluralised"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_Texture = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["Texture"] = Val.Nothing;
+        L["Texture"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetCardPackInfo", new Val[] { self, GetLocal(L, "Item"), Val.Out(__v => L["CallFunc_GetCardPackInfo_CardSet"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bIsOfficerPack"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_GuaranteedElites"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bHasFactionRestriction"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_Faction"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_GuaranteedGold"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bIsValid"] = __v) });
     L_0052:
@@ -733,7 +733,7 @@ public static Val Get_Unclaimabled_National_Rewards(IHost H, Val self, Val[] arg
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_ClaimableFound = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["ClaimableFound"] = Val.Nothing;
+        L["ClaimableFound"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         __ef.Push(596);
     L_0005:
@@ -814,7 +814,7 @@ public static Val Get_Widget_Size(IHost H, Val self, Val[] args)
         L["InUserWidget"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_OutSize = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["OutSize"] = Val.Nothing;
+        L["OutSize"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetDesiredSize_ReturnValue"] = H.Call("GetDesiredSize", new Val[] { GetLocal(L, "InUserWidget") });
     L_0032:
@@ -847,7 +847,7 @@ public static Val GetAppScaleDefaultParametersFromSave(IHost H, Val self, Val[] 
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_AppScaleParameters = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["AppScaleParameters"] = Val.Nothing;
+        L["AppScaleParameters"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("PrintString", new Val[] { Val.Ref("KismetSystemLibrary"), Val.Nothing, Val.Of("GetAppScaleFromSave"), Val.True, Val.True, H.MakeArray(new Val[] { Val.Of(0f), Val.Of(0.66f), Val.Of(1f), Val.Of(1f) }), Val.Of(2f), Val.Name("None") });
     L_0056:
@@ -896,7 +896,7 @@ public static Val GetAppScaleDefaultParametersFromSaveNoTabletSupport(IHost H, V
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_AppScaleParameters = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["AppScaleParameters"] = Val.Nothing;
+        L["AppScaleParameters"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("PrintString", new Val[] { Val.Ref("KismetSystemLibrary"), Val.Nothing, Val.Of("GetAppScaleFromSave"), Val.True, Val.True, H.MakeArray(new Val[] { Val.Of(0f), Val.Of(0.66f), Val.Of(1f), Val.Of(1f) }), Val.Of(2f), Val.Name("None") });
     L_0056:
@@ -929,7 +929,7 @@ public static Val GetAspectRatio(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_NewParam = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["NewParam"] = Val.Nothing;
+        L["NewParam"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetViewportSize_ReturnValue"] = H.Call("GetViewportSize", new Val[] { Val.Ref("WidgetLayoutLibrary"), GetLocal(L, "__WorldContext") });
     L_003B:
@@ -1067,7 +1067,7 @@ public static Val GetGrayColor(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_grayColor = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["grayColor"] = Val.Nothing;
+        L["grayColor"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetPlatformEnum", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetPlatformEnum_CurrentPlatform"] = __v) });
     L_0036:
@@ -1101,7 +1101,7 @@ public static Val GetOrSpawnNUIBaseLayout(IHost H, Val self, Val[] args)
         L["levelName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_Output = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["Output"] = Val.Nothing;
+        L["Output"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetLogic", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetLogic_Logic"] = __v) });
     L_0036:
@@ -1145,7 +1145,7 @@ public static Val GetPackTexture(IHost H, Val self, Val[] args)
         L["Item"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_Image = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["Image"] = Val.Nothing;
+        L["Image"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["K2Node_MakeVariable_MakeVariableOutput_3"] = H.MakeArray(new Val[] { Val.Of(1), Val.Ref("EX_StringConst"), Val.Of(2), Val.Ref("EX_StringConst"), Val.Of(4), Val.Ref("EX_StringConst"), Val.Of(5), Val.Ref("EX_StringConst"), Val.Of(3), Val.Ref("EX_StringConst"), Val.Of(11), Val.Ref("EX_StringConst") });
     L_0199:
@@ -1223,7 +1223,7 @@ public static Val GetRecruitOrPlayerName(IHost H, Val self, Val[] args)
         L["playerName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_Name = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["Name"] = Val.Nothing;
+        L["Name"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_MakeLiteralText_ReturnValue"] = H.Call("MakeLiteralText", new Val[] { Val.Ref("KismetSystemLibrary"), Val.Of("Recruit") });
     L_0059:
@@ -1251,10 +1251,10 @@ public static Val GetScreenPositionFromWorldPosition(IHost H, Val self, Val[] ar
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_WorldPosition = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["WorldPosition"] = Val.Nothing;
+        L["WorldPosition"] = args.Length > 0 ? args[0].In : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_ScreenPosition = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["ScreenPosition"] = Val.Nothing;
+        L["ScreenPosition"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetPlayerController_ReturnValue"] = H.Call("GetPlayerController", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Of(0) });
     L_0022:
@@ -1280,7 +1280,7 @@ public static Val GetTopBar(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_OutTopBar = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["OutTopBar"] = Val.Nothing;
+        L["OutTopBar"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         __ef.Push(1022);
     L_0005:
@@ -1386,7 +1386,7 @@ public static Val GetVerticalBottomWidget(IHost H, Val self, Val[] args)
         L["Panel"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_Widget = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["Widget"] = Val.Nothing;
+        L["Widget"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(933);
     L_0005:
@@ -1486,7 +1486,7 @@ public static Val GetVerticalTopWidget(IHost H, Val self, Val[] args)
         L["Panel"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_Widget = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["Widget"] = Val.Nothing;
+        L["Widget"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(694);
     L_0005:
@@ -1576,9 +1576,9 @@ public static Val GetViewportLocation(IHost H, Val self, Val[] args)
         L["Widget"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_IsLeft = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["IsLeft"] = Val.Nothing;
+        L["IsLeft"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_IsTop = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["IsTop"] = Val.Nothing;
+        L["IsTop"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetCachedGeometry_ReturnValue"] = H.Call("GetCachedGeometry", new Val[] { GetLocal(L, "Widget") });
     L_0032:
@@ -1618,7 +1618,7 @@ public static Val GetWhiteColor(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_whiteColor = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["whiteColor"] = Val.Nothing;
+        L["whiteColor"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetPlatformEnum", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetPlatformEnum_CurrentPlatform"] = __v) });
     L_0036:
@@ -1652,7 +1652,7 @@ public static Val GetWidgetDefaultFocus(IHost H, Val self, Val[] args)
         L["Widget"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_FocusWidget = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["FocusWidget"] = Val.Nothing;
+        L["FocusWidget"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "Widget") });
     L_001D:
@@ -1700,7 +1700,7 @@ public static Val GetWidgetPosition(IHost H, Val self, Val[] args)
         L["InUserWidget"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_OutPosition = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["OutPosition"] = Val.Nothing;
+        L["OutPosition"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetCachedGeometry_ReturnValue"] = H.Call("GetCachedGeometry", new Val[] { GetLocal(L, "InUserWidget") });
     L_0032:
@@ -1736,7 +1736,7 @@ public static Val GetWorldPositionFromScreenPosition(IHost H, Val self, Val[] ar
         L["screenPosition"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_worldPosition = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["worldPosition"] = Val.Nothing;
+        L["worldPosition"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetPlayerController_ReturnValue"] = H.Call("GetPlayerController", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Of(0) });
     L_0022:
@@ -1775,7 +1775,7 @@ public static Val GetWorldPositionFromViewportPosition(IHost H, Val self, Val[] 
         L["y"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_worldPosition = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["worldPosition"] = Val.Nothing;
+        L["worldPosition"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetViewportSize_ReturnValue"] = H.Call("GetViewportSize", new Val[] { Val.Ref("WidgetLayoutLibrary"), GetLocal(L, "__WorldContext") });
     L_003B:
@@ -1808,7 +1808,7 @@ public static Val GetYellowColor(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_yellowColor = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["yellowColor"] = Val.Nothing;
+        L["yellowColor"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetPlatformEnum", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetPlatformEnum_CurrentPlatform"] = __v) });
     L_0036:
@@ -1841,7 +1841,7 @@ public static Val HasFocusedAnyWidget(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_bHasFocusedWidget = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["bHasFocusedWidget"] = Val.Nothing;
+        L["bHasFocusedWidget"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetPlayerControllerBP", new Val[] { Val.Ref("InputFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetPlayerControllerBP_outBPPlayerController"] = __v) });
     L_0036:
@@ -1946,7 +1946,7 @@ public static Val IsFocusHighlightEnabled(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_bShowFocus = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["bShowFocus"] = Val.Nothing;
+        L["bShowFocus"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_IsGamepad_ReturnValue"] = H.Call("IsGamepad", new Val[] { Val.Ref("InputFunctions"), GetLocal(L, "__WorldContext") });
     L_0037:
@@ -1969,7 +1969,7 @@ public static Val IsFocusInLowerPartOfBackHandlerStack(IHost H, Val self, Val[] 
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_bFocusInLowerBackHandlerStack = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["bFocusInLowerBackHandlerStack"] = Val.Nothing;
+        L["bFocusInLowerBackHandlerStack"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         __ef.Push(1194);
     L_0005:
@@ -2087,7 +2087,7 @@ public static Val Load_Daily_Mission_Reset(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_SaveDailyMissionClick = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["SaveDailyMissionClick"] = Val.Nothing;
+        L["SaveDailyMissionClick"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_DoesSaveGameExist_ReturnValue"] = H.Call("DoesSaveGameExist", new Val[] { Val.Ref("GameplayStatics"), Val.Of("DailyMissionsClicked"), Val.Of(0) });
     L_002F:
@@ -2147,7 +2147,7 @@ public static Val LoadUISettings(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_UISettingsSaveSlot = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["UISettingsSaveSlot"] = Val.Nothing;
+        L["UISettingsSaveSlot"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("PrintString", new Val[] { Val.Ref("KismetSystemLibrary"), Val.Nothing, Val.Of("LoadUISettings"), Val.True, Val.True, H.MakeArray(new Val[] { Val.Of(0f), Val.Of(0.66f), Val.Of(1f), Val.Of(1f) }), Val.Of(2f), Val.Name("None") });
     L_0051:
@@ -2915,7 +2915,7 @@ public static Val Set_Default_App_Scale(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_defaultAppscale = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["defaultAppscale"] = Val.Nothing;
+        L["defaultAppscale"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["Appscale_PC"] = Val.Of(1);
     L_001B:
@@ -3097,7 +3097,7 @@ public static Val SetAppScaleFromSave(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_AppScale = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["AppScale"] = Val.Nothing;
+        L["AppScale"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_LoadGameFromSlot_ReturnValue"] = H.Call("LoadGameFromSlot", new Val[] { Val.Ref("GameplayStatics"), Val.Of("UiSettings"), Val.Of(0) });
     L_0025:

@@ -27,13 +27,13 @@ public static Val GetDefenseBuffFromAdjacentUnits(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_amount = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["amount"] = Val.Nothing;
+        L["amount"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         __ef.Push(619);
     L_0005:
         L["Count"] = Val.Of(0);
     L_001C:
-        _ = H.Call("GetAdjacentCards", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.Out(__v => L["CallFunc_GetAdjacentCards_adjacentCards"] = __v) });
+        _ = H.Call("GetAdjacentCards", new Val[] { H.GetMember(self, "cardFunction"), self, Val.True, Val.Out(GetLocal(L, "CallFunc_GetAdjacentCards_adjacentCards"), __v => L["CallFunc_GetAdjacentCards_adjacentCards"] = __v) });
     L_004B:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_0062:
@@ -49,9 +49,9 @@ public static Val GetDefenseBuffFromAdjacentUnits(IHost H, Val self, Val[] args)
     L_0103:
         __ef.Push(545);
     L_0108:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAdjacentCards_adjacentCards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAdjacentCards_adjacentCards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0143:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_016C:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool())
         {
@@ -106,9 +106,9 @@ public static Val GetPassiveDefenseBuff(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_amount = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["amount"] = Val.Nothing;
+        L["amount"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
-        _ = H.Call("GetDefenseBuffFromAdjacentUnits", new Val[] { self, Val.Out(__v => L["CallFunc_GetDefenseBuffFromAdjacentUnits_amount"] = __v) });
+        _ = H.Call("GetDefenseBuffFromAdjacentUnits", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetDefenseBuffFromAdjacentUnits_amount"), __v => L["CallFunc_GetDefenseBuffFromAdjacentUnits_amount"] = __v) });
     L_0017:
         L["amount"] = GetLocal(L, "CallFunc_GetDefenseBuffFromAdjacentUnits_amount");
     L_0032:
@@ -133,15 +133,15 @@ public static Val OnOtherCardDealDamageAddDamageAfterCalc(IHost H, Val self, Val
         L["fromAttack"] = args.Length > 3 ? args[3] : Val.Nothing;
         L["isRedirected"] = args.Length > 4 ? args[4] : Val.Nothing;
         var __out_damageToAdd = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["damageToAdd"] = Val.Nothing;
+        L["damageToAdd"] = args.Length > 5 ? args[5].In : Val.Nothing;
         var __out_stopAdding = args.Length > 6 ? args[6].As<Action<Val>>() : null;
-        L["stopAdding"] = Val.Nothing;
+        L["stopAdding"] = args.Length > 6 ? args[6].In : Val.Nothing;
     L_0000:
         L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "toCard"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_003C:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_00B6;
     L_004A:
-        _ = H.Call("GetDefenseBuffFromAdjacentUnits", new Val[] { self, Val.Out(__v => L["CallFunc_GetDefenseBuffFromAdjacentUnits_amount"] = __v) });
+        _ = H.Call("GetDefenseBuffFromAdjacentUnits", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetDefenseBuffFromAdjacentUnits_amount"), __v => L["CallFunc_GetDefenseBuffFromAdjacentUnits_amount"] = __v) });
     L_0061:
         L["CallFunc_Multiply_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_GetDefenseBuffFromAdjacentUnits_amount") * Val.Of(-1));
     L_008B:

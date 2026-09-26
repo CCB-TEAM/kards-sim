@@ -172,7 +172,11 @@ public sealed class Emitter
             if (isOut)
             {
                 Line($"var __out_{San(n)} = args.Length > {i} ? args[{i}].As<Action<Val>>() : null;");
-                Line($"L[\"{n}\"] = Val.Nothing;");
+                // 本地槽从「调用方送进来的当前值」初始化，而不是零初始化：
+                // UE 的 Kismet 把实参送进被调帧，out 形参在函数体里读得到那个值
+                // （out 只表示退出时还要写回）。零初始化会让「把 out 当输入读」的
+                // 函数整条变成空操作 —— 见 ByRefAudit / `--mode byref`。
+                Line($"L[\"{n}\"] = args.Length > {i} ? args[{i}].In : Val.Nothing;");
                 _outParams.Add(n);
             }
             else
@@ -204,16 +208,28 @@ public sealed class Emitter
     };
 
     /// <summary>
-    /// 把「被当作容器就地修改目标」的局部变量初始化成空容器。
+    /// 把「被当作容器就地修改目标」的变量初始化成空容器。
     ///
     /// <para>
-    /// 只排除 in 形参（它们的值来自调用方）；out 形参和普通局部都要给空容器 ——
-    /// 与 UE 的零初始化一致。已经赋过值的局部多这一行也无害（随后会被覆盖）。
+    /// <b>普通局部</b>：无条件给空容器，与 UE 的零初始化一致（已赋过值的多这一行也无害）。
+    /// </para>
+    ///
+    /// <para>
+    /// <b>out 形参</b>：只在调用方没给值（<c>IsNothing</c>）时才补一个空容器。
+    /// 这类形参是「调用方的数组 + 被调方往里追加」的用法（<c>GetNewLocationNumbers</c>、
+    /// <c>ApplyMakeCardRetreat</c> 都这样）。不能无条件清零 —— 那会把调用方送进来的
+    /// 列表冲掉；也不能不管 —— 调用方的局部本身就是 UE 的零初始化（空容器），
+    /// 直译产物读成 <c>Nothing</c>，<c>Array_Add(Nothing, x)</c> 是空操作，追加全丢。
+    /// </para>
+    ///
+    /// <para>
+    /// <b>in 形参</b>：一律不动，它的值只来自调用方。
     /// </para>
     /// </summary>
     private void EmitContainerInit(FunctionExport fn)
     {
         var inParams = new HashSet<string>(StringComparer.Ordinal);
+        var outParams = new HashSet<string>(StringComparer.Ordinal);
         if (fn.LoadedProperties is not null)
             foreach (var p in fn.LoadedProperties)
             {
@@ -221,12 +237,17 @@ public sealed class Emitter
                 if (p.PropertyFlags.HasFlag(EPropertyFlags.CPF_ReturnParm)) continue;
                 var isOut = p.PropertyFlags.HasFlag(EPropertyFlags.CPF_OutParm)
                             && !p.PropertyFlags.HasFlag(EPropertyFlags.CPF_ConstParm);
-                if (!isOut) inParams.Add(p.Name.ToString());
+                (isOut ? outParams : inParams).Add(p.Name.ToString());
             }
 
         foreach (var n in CollectContainerLocals(fn).OrderBy(x => x, StringComparer.Ordinal))
-            if (!inParams.Contains(n))
+        {
+            if (inParams.Contains(n)) continue;
+            if (outParams.Contains(n))
+                Line($"if (L[\"{Esc(n)}\"].IsNothing) L[\"{Esc(n)}\"] = H.MakeArray(new Val[] {{ }});");
+            else
                 Line($"L[\"{Esc(n)}\"] = H.MakeArray(new Val[] {{ }});");
+        }
     }
 
     /// <summary>扫出被容器库函数当作修改目标的局部变量名。</summary>
@@ -760,19 +781,40 @@ public sealed class Emitter
     private static bool IsLibraryClass(string cls) => cls is not null && LibraryClasses.Contains(cls);
 
     /// <summary>
-    /// out 实参：包成回调，被调函数用 <c>TrySetOut</c> 触发写回。
-    /// Kismet 的 out 实参必然是可写位置（局部变量 / 成员 / 数组元素），这里按位置生成写入。
+    /// out 实参：包成 <c>Val.Out(当前值, 回调)</c>，被调帧据此初始化本地槽、退出时回调写回。
+    ///
+    /// <para>
+    /// <b>为什么要把当前值也传进去</b>：UE 的 Kismet 把调用方求值后的实参送进被调帧，
+    /// 被调函数读 out 形参读到的是那个值 —— <c>out</c> 只表示「退出时还要写回」。
+    /// 只发射回调（本地槽零初始化）会让「把 out 形参当输入读」的函数全部变成空操作
+    /// （<c>--mode byref</c> 扫出 48 处，含 <c>GetRandomCard</c>、<c>ApplyMakeCardRetreat</c>）。
+    /// </para>
+    ///
+    /// <para>
+    /// Kismet 的 out 实参必然是可写位置（局部变量 / 成员 / 数组元素），
+    /// 所以「读同一个位置」和下面写的回写目标是同一个表达式。
+    /// </para>
     /// </summary>
     private string OutArg(KismetExpression e) => e switch
     {
-        EX_LocalVariable v => $"Val.Out(__v => L[\"{Esc(PropPath(v.Variable))}\"] = __v)",
-        EX_LocalOutVariable v => $"Val.Out(__v => L[\"{Esc(PropPath(v.Variable))}\"] = __v)",
-        EX_InstanceVariable v => $"Val.Out(__v => H.SetMember(self, \"{Esc(PropPath(v.Variable))}\", __v))",
-        EX_Context c => $"Val.Out(__v => H.SetMember({Val(c.ObjectExpression)}, \"{Esc(MemberName(c.ContextExpression))}\", __v))",
-        EX_ArrayGetByRef a => $"Val.Out(__v => H.ArraySet({Val(a.ArrayVariable)}, (int)({Val(a.ArrayIndex)}).AsInt(), __v))",
-        EX_StructMemberContext s => $"Val.Out(__v => H.SetMember({Val(s.StructExpression)}, \"{Esc(PropPath(s.StructMemberExpression))}\", __v))",
+        // 读用 GetLocal（Kismet 局部是零初始化的，字典直读会抛 KeyNotFound）
+        EX_LocalVariable v => OutCall($"GetLocal(L, \"{Esc(PropPath(v.Variable))}\")", $"__v => L[\"{Esc(PropPath(v.Variable))}\"] = __v"),
+        EX_LocalOutVariable v => OutCall($"GetLocal(L, \"{Esc(PropPath(v.Variable))}\")", $"__v => L[\"{Esc(PropPath(v.Variable))}\"] = __v"),
+        EX_InstanceVariable v => OutCall($"H.GetMember(self, \"{Esc(PropPath(v.Variable))}\")", $"__v => H.SetMember(self, \"{Esc(PropPath(v.Variable))}\", __v)"),
+        EX_Context c => OutCall($"H.GetMember({Val(c.ObjectExpression)}, \"{Esc(MemberName(c.ContextExpression))}\")", $"__v => H.SetMember({Val(c.ObjectExpression)}, \"{Esc(MemberName(c.ContextExpression))}\", __v)"),
+        EX_ArrayGetByRef a => OutCall($"H.ArrayGet({Val(a.ArrayVariable)}, (int)({Val(a.ArrayIndex)}).AsInt())", $"__v => H.ArraySet({Val(a.ArrayVariable)}, (int)({Val(a.ArrayIndex)}).AsInt(), __v)"),
+        EX_StructMemberContext s => OutCall($"H.GetMember({Val(s.StructExpression)}, \"{Esc(PropPath(s.StructMemberExpression))}\")", $"__v => H.SetMember({Val(s.StructExpression)}, \"{Esc(PropPath(s.StructMemberExpression))}\", __v)"),
         _ => "Val.Nothing",
     };
+
+    /// <summary>
+    /// 没有可读形式的位置（表达式求不出来）时退回旧形态：只有回写、初值为空。
+    /// 这是安全退化 —— 被调方读到的还是空，与改动前一致，不会引入新的错误值。
+    /// </summary>
+    private static string OutCall(string readExpr, string setter)
+        => string.IsNullOrEmpty(readExpr)
+            ? $"Val.Out({setter})"
+            : $"Val.Out({readExpr}, {setter})";
 
     /// <summary>out 实参的回写目标。Kismet 要求 out 实参是可写位置。</summary>
     private string ContextRead(EX_Context ctx)
@@ -1051,6 +1093,13 @@ public sealed class Emitter
         {
             var nop = NativeOutParams.Mods(name, n);
             if (nop is not null) return nop;
+
+            // 2d. 已入库产物反推的签名：`--sigdeps` 里缺 BP_GameState_Battle / Library/*
+            //     时，GameStateRef.<谓词>(out x) 这一族会判不出 out（写不回来 → 效果静默失效）。
+            //     已经在库的那份产物是资产齐全时生成的，那里的调用点就是权威证据。
+            //     见 CommittedOutParams 的文档。拿到完整资产后这一级不再命中。
+            var cop = CommittedOutParams.Mods(name, n);
+            if (cop is not null) return cop;
         }
 
         // 3. 引擎蓝图库：不在游戏源码里，用显式补充表

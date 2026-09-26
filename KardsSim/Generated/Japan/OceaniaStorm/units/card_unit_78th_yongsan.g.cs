@@ -29,15 +29,15 @@ public static Val _checkAndSetBuff(IHost H, Val self, Val[] args)
     L_0000:
         L["_currentBuff"] = Val.Of(0);
     L_0017:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_002A:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_0206;
     L_0038:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_004B:
-        _ = H.Call("GetMaxKreditsBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(__v => L["CallFunc_GetMaxKreditsBySide_maxkredits"] = __v) });
+        _ = H.Call("GetMaxKreditsBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(GetLocal(L, "CallFunc_GetMaxKreditsBySide_maxkredits"), __v => L["CallFunc_GetMaxKreditsBySide_maxkredits"] = __v) });
     L_0081:
-        _ = H.Call("GetMaxKreditsBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetMaxKreditsBySide_maxkredits_1"] = __v) });
+        _ = H.Call("GetMaxKreditsBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetMaxKreditsBySide_maxkredits_1"), __v => L["CallFunc_GetMaxKreditsBySide_maxkredits_1"] = __v) });
     L_00B7:
         L["CallFunc_Subtract_IntInt_ReturnValue_1"] = (GetLocal(L, "CallFunc_GetMaxKreditsBySide_maxkredits") - GetLocal(L, "CallFunc_GetMaxKreditsBySide_maxkredits_1"));
     L_00E5:
@@ -45,7 +45,7 @@ public static Val _checkAndSetBuff(IHost H, Val self, Val[] args)
     L_010F:
         L["_kreditsUnderEnemy"] = GetLocal(L, "CallFunc_Max_ReturnValue");
     L_012A:
-        _ = H.Call("getAttackTempBuffAmount", new Val[] { self, H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_getAttackTempBuffAmount_tempAmount"] = __v) });
+        _ = H.Call("getAttackTempBuffAmount", new Val[] { self, H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_getAttackTempBuffAmount_tempAmount"), __v => L["CallFunc_getAttackTempBuffAmount_tempAmount"] = __v) });
     L_0146:
         L["_currentBuff"] = GetLocal(L, "CallFunc_getAttackTempBuffAmount_tempAmount");
     L_0161:
@@ -55,7 +55,7 @@ public static Val _checkAndSetBuff(IHost H, Val self, Val[] args)
     L_0195:
         L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "_kreditsUnderEnemy") - GetLocal(L, "_currentBuff"));
     L_01C3:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_0206:
         goto __halt;
     L_0208:
@@ -91,7 +91,7 @@ public static Val ExecuteUbergraph_card_unit_78th_yongsan(IHost H, Val self, Val
     L_0022:
         goto L_000A;
     L_0027:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_0066:
         goto L_0070;
     L_006B:

@@ -47,7 +47,7 @@ public static Val ExecuteUbergraph_card_unit_hudson(IHost H, Val self, Val[] arg
     L_009D:
         goto L_010D;
     L_00A2:
-        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
+        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsSideActive_active"), __v => L["CallFunc_IsSideActive_active"] = __v) });
     L_00BE:
         if (!(GetLocal(L, "CallFunc_IsSideActive_active")).AsBool()) goto L_010D;
     L_00CC:

@@ -29,9 +29,9 @@ public static Val CheckIfEmailIsCorrect(IHost H, Val self, Val[] args)
         L["Email"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_IsValid = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["IsValid"] = Val.Nothing;
+        L["IsValid"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_ShowError = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["ShowError"] = Val.Nothing;
+        L["ShowError"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         L["atSignFoundAt"] = Val.Of(0);
     L_0017:
@@ -160,9 +160,9 @@ public static Val CheckIfNameIsValid(IHost H, Val self, Val[] args)
         L["name"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_valid = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["valid"] = Val.Nothing;
+        L["valid"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_reason = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["reason"] = Val.Nothing;
+        L["reason"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         __ef.Push(909);
     L_0005:
@@ -307,11 +307,11 @@ public static Val CheckIfPasswordIsValid(IHost H, Val self, Val[] args)
         L["bIsNewPassword"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_IsValid = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["IsValid"] = Val.Nothing;
+        L["IsValid"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_Reason = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["Reason"] = Val.Nothing;
+        L["Reason"] = args.Length > 4 ? args[4].In : Val.Nothing;
         var __out_ShowError = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["ShowError"] = Val.Nothing;
+        L["ShowError"] = args.Length > 5 ? args[5].In : Val.Nothing;
     L_0000:
         __ef.Push(1533);
     L_0005:
@@ -538,7 +538,7 @@ public static Val CleanEmail(IHost H, Val self, Val[] args)
         L["email"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_cleanEmail = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["cleanEmail"] = Val.Nothing;
+        L["cleanEmail"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_Trim_ReturnValue"] = H.Call("Trim", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "email") });
     L_0025:
@@ -564,11 +564,11 @@ public static Val CleanNameString(IHost H, Val self, Val[] args)
         L["Name"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_CleanName = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["CleanName"] = Val.Nothing;
+        L["CleanName"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_Changed = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["Changed"] = Val.Nothing;
+        L["Changed"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_ValidNow = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["ValidNow"] = Val.Nothing;
+        L["ValidNow"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
         __ef.Push(2177);
     L_0005:
@@ -740,7 +740,7 @@ public static Val HasLower(IHost H, Val self, Val[] args)
         L["verifyPassword"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_hasLower = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["hasLower"] = Val.Nothing;
+        L["hasLower"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(653);
     L_0005:
@@ -825,7 +825,7 @@ public static Val HasNumeric(IHost H, Val self, Val[] args)
         L["verifyPassword"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_hasNumeric = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["hasNumeric"] = Val.Nothing;
+        L["hasNumeric"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(472);
     L_0005:
@@ -894,7 +894,7 @@ public static Val HasUpper(IHost H, Val self, Val[] args)
         L["verifyPassword"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_hasUpper = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["hasUpper"] = Val.Nothing;
+        L["hasUpper"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(653);
     L_0005:
@@ -980,7 +980,7 @@ public static Val IsCharacterTooManyTimesInRow(IHost H, Val self, Val[] args)
         L["RepeatLimit"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_IsTooManyTimes = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["IsTooManyTimes"] = Val.Nothing;
+        L["IsTooManyTimes"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         __ef.Push(767);
     L_0005:
@@ -1085,7 +1085,7 @@ public static Val NameErrorReasonCodeToString(IHost H, Val self, Val[] args)
         L["InErrorString"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_OutErrorText = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["OutErrorText"] = Val.Nothing;
+        L["OutErrorText"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(618);
     L_0005:

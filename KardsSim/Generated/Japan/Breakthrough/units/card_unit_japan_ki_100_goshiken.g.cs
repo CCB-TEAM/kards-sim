@@ -36,15 +36,15 @@ public static Val ExecuteUbergraph_card_unit_japan_ki_100_goshiken(IHost H, Val 
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_001D:
-        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active_1"] = __v) });
+        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsSideActive_active_1"), __v => L["CallFunc_IsSideActive_active_1"] = __v) });
     L_0039:
         L["CallFunc_BooleanAND_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool() && (GetLocal(L, "CallFunc_IsSideActive_active_1")).AsBool());
     L_005F:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_1")).AsBool()) goto L_021D;
     L_006D:
-        _ = H.Call("GiveImmune", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveImmune_qqq"] = __v) });
+        _ = H.Call("GiveImmune", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_GiveImmune_qqq"), __v => L["CallFunc_GiveImmune_qqq"] = __v) });
     L_00AC:
         _ = H.Call("CustomName2Add", new Val[] { self, Val.Of("goshImmune") });
     L_00C2:
@@ -52,7 +52,7 @@ public static Val ExecuteUbergraph_card_unit_japan_ki_100_goshiken(IHost H, Val 
     L_00F0:
         goto L_021D;
     L_00F5:
-        _ = H.Call("RemoveImmune", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RemoveImmune_qqq"] = __v), Val.False });
+        _ = H.Call("RemoveImmune", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_RemoveImmune_qqq"), __v => L["CallFunc_RemoveImmune_qqq"] = __v), Val.False });
     L_0135:
         _ = H.Call("CustomName2Remove", new Val[] { self, Val.Of("goshImmune") });
     L_014B:
@@ -60,7 +60,7 @@ public static Val ExecuteUbergraph_card_unit_japan_ki_100_goshiken(IHost H, Val 
     L_0179:
         goto L_021D;
     L_017E:
-        _ = H.Call("CustomName2HasAttribute", new Val[] { self, Val.Of("goshImmune"), Val.Out(__v => L["CallFunc_CustomName2HasAttribute_doesIt"] = __v) });
+        _ = H.Call("CustomName2HasAttribute", new Val[] { self, Val.Of("goshImmune"), Val.Out(GetLocal(L, "CallFunc_CustomName2HasAttribute_doesIt"), __v => L["CallFunc_CustomName2HasAttribute_doesIt"] = __v) });
     L_019D:
         if (!(GetLocal(L, "CallFunc_CustomName2HasAttribute_doesIt")).AsBool()) goto L_021D;
     L_01AB:
@@ -68,9 +68,9 @@ public static Val ExecuteUbergraph_card_unit_japan_ki_100_goshiken(IHost H, Val 
     L_01B0:
         goto L_000A;
     L_01B5:
-        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
+        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsSideActive_active"), __v => L["CallFunc_IsSideActive_active"] = __v) });
     L_01D1:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1"), __v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_01E4:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1")).AsBool() && (GetLocal(L, "CallFunc_IsSideActive_active")).AsBool());
     L_020A:

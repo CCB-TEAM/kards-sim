@@ -41,7 +41,8 @@ public static class CardTests
         RangeOneNeedsTheFrontlineForTheEnemySupportLine();
         HttpActionListIsAligned();
         TempAttackBuffExpiresAtEndOfTurn();
-        SentToHandIsAKnownGap();
+        RetreatToHandIsAKnownGap();
+        ByRefFixMakesRandomTargetsWork();
 
         Console.WriteLine();
         Console.WriteLine($"通过 {_pass} / 失败 {_fail}");
@@ -1083,61 +1084,132 @@ public static class CardTests
     }
 
     /// <summary>
-    /// <b>已知缺口（当前是坏的，这条断言记录的就是「它还坏着」）</b>：
-    /// 把单位「送回手牌」什么也不做，所以光环也不会被撤销。
+    /// 「送回手牌」（Retreat）也要撤销光环 —— 走真实卡牌效果，端到端。
     ///
     /// <para>
-    /// 根因不在引擎，而在直译产物：<c>ApplyMakeCardRetreat(cards, instigatorID)</c>
-    /// 的 <c>cards</c> 被发射成**纯 out 形参**（<c>L["cards"] = Val.Nothing;</c>），
-    /// 可函数体第一句就是 <c>Array_Length(cards)</c> —— 读到空数组，整条链直接返回。
-    /// UE 的 Kismet 里被调帧是能读到调用方传进来的值的（所有形参都送进帧），
-    /// out 只是「退出时还要写回」。同一类问题全仓共 45 处，清单见
-    /// <c>--mode byref</c>（含 <c>GetRandomCard</c>、<c>ApplySetCardsSeenByCipher</c>、
-    /// <c>TriggerMultipleDeploymentEffects</c> 等影响对局的函数）。
+    /// 用 <c>card_event_tactical_withdrawal</c>（「Retreat a friendly unit in the frontline」）：
+    /// 它内部调 <c>MakeCardRetreat</c>，链是
+    /// <c>MakeCardRetreat → ApplyMakeCardRetreat → CardLocationMoved →
+    /// ApplyRemoveCardFromBoard → ExecuteOnBeforeLeaveBoardOrOwnerEvents →
+    /// 卡的 OnLeaveBoardOrOwner</c>。
     /// </para>
     ///
     /// <para>
-    /// 修法在转译器 + 重新生成（把 out 按 in-out 发射）。<b>本测试是刻意的反向断言</b>：
-    /// 等那个改动落地，这里会失败，正好提醒把它换成「回手牌后光环被撤销」的正式断言。
+    /// 这条链曾经整段是空操作：<c>ApplyMakeCardRetreat(cards, …)</c> 的 <c>cards</c> 被发射成
+    /// 纯 out 形参（本地槽零初始化），而它第一句就读 <c>Array_Length(cards)</c> ——
+    /// 读到空数组直接返回。修法是转译器把 out 按 in-out 发射（见 <c>--mode byref</c>）。
+    /// </para>
+    ///
+    /// <para>
+    /// 必须走真实效果而不是直接调 <c>MakeCardRetreat</c>：链上有
+    /// <c>IsActionProcess</c> 这道门（「结算中」才走），测试里直接调的话它恒为假。
     /// </para>
     /// </summary>
-    private static void SentToHandIsAKnownGap()
+    private static void RetreatToHandIsAKnownGap()
     {
         var def = CardDb.Get("card_unit_flaming_matilda_anzac");
+        var orderDef = CardDb.Get("card_event_delaying_tactics");
         var sample = CardDb.All.FirstOrDefault(d =>
             d.Type == CardType.Infantry && d.Attack > 0 && d.Defense > 0 && d.Id != def?.Id);
-        if (def is null || sample is null) { Check("找得到 flaming_matilda 与步兵样本", false, "卡池里没有"); return; }
+        if (def is null || orderDef is null || sample is null)
+        {
+            Check("找得到 flaming_matilda / 撤退指令 / 步兵样本", false, "卡池里没有");
+            return;
+        }
 
-        var g = new Engine.GameEngine(401, null, null, false);
+        var g = new Engine.GameEngine(409, null, null, false);
         var h = new Bridge.EngineHost(g);
         g.Host = h;
         g.S.Current = Side.Left;
         g.S.Left.Kredits = 99;
 
         var left0 = PlaceInFrontline(g, Side.Left, sample);
+        var left1 = PlaceInFrontline(g, Side.Left, sample);
         var base0 = left0.TotalAttack;
+        var base1 = left1.TotalAttack;
         var matilda = PlaceInFrontline(g, Side.Left, def);
         g.RefreshAllLocations();
-        h.Call("ChangeAttack", new Val[]
-        {
-            Val.Ref(h.CardFunctions), Val.Ref(h.Obj(left0)),
-            Val.Of(matilda.InstanceId), Val.Of(2), Val.Of(0), Val.False, Val.Out(_ => { }),
-        });
-        Check("前置：左邻带着光环 +2", left0.TotalAttack == base0 + 2, $"{left0.TotalAttack}");
+        // 光环的两条来源（等价于 matilda 正常入场后给左邻加的那份）
+        foreach (var t in new[] { left0, left1 })
+            h.Call("ChangeAttack", new Val[]
+            {
+                Val.Ref(h.CardFunctions), Val.Ref(h.Obj(t)),
+                Val.Of(matilda.InstanceId), Val.Of(2), Val.Of(0), Val.False, Val.Out(_ => { }),
+            });
+        Check("前置：左邻各带着光环 +2", left0.TotalAttack == base0 + 2 && left1.TotalAttack == base1 + 2,
+            $"{left0.TotalAttack}/{left1.TotalAttack}");
 
-        h.Call("MakeCardRetreat", new Val[]
+        var order = PlaceInHand(g, Side.Left, orderDef);
+        var hi = g.S.Left.Hand.IndexOf(order);
+        var trace = new List<string>();
+        h.CallTrace = n => { if (trace.Count < 4000) trace.Add(n); };
+        var played = g.Apply(new GameAction
         {
-            Val.Ref(h.CardFunctions),
-            Val.Ref(new KArr(new[] { Val.Ref(h.Obj(matilda)) })),
-            Val.Of(matilda.InstanceId),
+            Type = ActionType.PlayCard, HandIndex = hi,
+            SourceId = order.InstanceId, TargetId = -1,
         });
+        h.CallTrace = null;
 
-        Check("已知缺口：MakeCardRetreat 现在是空操作（matilda 还在前线）",
+        Check("「前线单位必须撤退」能打出", played, "Apply 返回 false");
+        // 修好 by-ref 之后这条链真的跑起来了（以前第一句 Array_Length(cards) 就返回）
+        Check("撤退链跑到了蓝图侧的位置变更（by-ref 修复的效果）",
+            trace.Contains("MakeCardRetreat") && trace.Contains("ApplyMakeCardRetreat")
+            && trace.Contains("CardLocationMoved"),
+            string.Join(" > ", trace.Where(n => n is "MakeCardRetreat" or "ApplyMakeCardRetreat" or "CardLocationMoved")));
+
+        // 但**引擎侧的场面没有跟着变**：CardLocationMoved 是蓝图自己挪镜像，
+        // 宿主没有把这种「效果驱动的位移」同步回 GameState 的列表，
+        // 所以引擎仍认为这张牌在前线（下一节「已知缺口」）。
+        Check("已知缺口：效果驱动的位移没同步回引擎（matilda 还在引擎的前线列表里）",
             g.S.Frontline.Contains(matilda),
-            "它居然动了！缺口已修 → 把这条换成「回手牌后光环被撤销」的正式断言");
-        Check("已知缺口：所以光环也没被撤销",
-            left0.TotalAttack == base0 + 2,
-            $"{left0.TotalAttack}（期望仍是 {base0 + 2}）");
+            "它居然同步了！缺口已修 → 换成「回手牌后光环被撤销」的正式断言");
+    }
+
+    /// <summary>
+    /// by-ref 修复的正向证据：<c>GetRandomCard</c> 现在真的能取到牌。
+    ///
+    /// <para>
+    /// 它是转译器把 out 形参按 in-out 发射之前最典型的受害者：<c>cards</c> 是**输入**
+    /// （候选列表），却被当成纯 out 零初始化 —— 读成空数组 → 返回空 →
+    /// <b>所有「随机一个敌方单位」类效果静默失效</b>（不报错、不进 Unhandled）。
+    /// 全仓同类共 48 处，见 <c>--mode byref</c>。
+    /// </para>
+    /// </summary>
+    private static void ByRefFixMakesRandomTargetsWork()
+    {
+        var g = new Engine.GameEngine(419, null, null, false);
+        var h = new Bridge.EngineHost(g);
+        g.Host = h;
+        g.S.Current = Side.Left;
+        g.S.Left.Kredits = 99;
+
+        var def = CardDb.All.FirstOrDefault(d => d.IsUnit && d.Attack > 0 && d.Defense > 0);
+        if (def is null) { Check("找得到单位样本（随机目标）", false, "卡池里没有"); return; }
+
+        var a = PlaceInSupport(g, Side.Right, def);
+        var b = PlaceInSupport(g, Side.Right, def);
+        var list = new KArr(new[] { Val.Ref(h.Obj(a)), Val.Ref(h.Obj(b)) });
+
+        Val picked = Val.Nothing;
+        h.Call("GetRandomCard", new Val[]
+        {
+            Val.Ref(h.CardFunctions), Val.Out(Val.Ref(list), v => { }), Val.False,
+            Val.Out(Val.Nothing, v => picked = v),
+        });
+
+        var pickedCard = h.Card_(picked);
+        Check("GetRandomCard 从候选里取到了一张（修好前恒为空）",
+            pickedCard is not null && (pickedCard.InstanceId == a.InstanceId || pickedCard.InstanceId == b.InstanceId),
+            $"拿到 {pickedCard?.Id ?? "(空)"}");
+
+        // 空候选仍然要给出空结果，而不是崩
+        Val empty = Val.Nothing;
+        h.Call("GetRandomCard", new Val[]
+        {
+            Val.Ref(h.CardFunctions), Val.Out(Val.Ref(new KArr(Array.Empty<Val>())), v => { }), Val.False,
+            Val.Out(Val.Nothing, v => empty = v),
+        });
+        Check("候选为空时返回空（不崩）", empty.IsNothing, $"{empty.K}");
     }
 
     /// <summary>把一张牌直接放到前线（编号由 <see cref="Engine.GameEngine.RefreshAllLocations"/> 重排）。</summary>
@@ -1167,4 +1239,6 @@ public static class CardTests
         else { _fail++; Console.WriteLine($"  FAIL  {what}   {detail}"); }
     }
 }
+
+
 

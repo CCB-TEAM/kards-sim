@@ -42,11 +42,11 @@ public static Val ExecuteUbergraph_card_event_mountain_offense(IHost H, Val self
     L_000F:
         __ef.Push(367);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
         H.SetMember(self, "tmpLoopCard", GetLocal(L, "CallFunc_Array_Get_Item"));
     L_0062:
-        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "tmpLoopCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "tmpLoopCard"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_008B:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((H.GetMember(H.GetMember(self, "tmpLoopCard"), "hasAlpine")).AsBool() && (GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool());
     L_00C7:
@@ -63,7 +63,7 @@ public static Val ExecuteUbergraph_card_event_mountain_offense(IHost H, Val self
             }
         }
     L_00D1:
-        _ = H.Call("getAndDecryptKredit", new Val[] { H.GetMember(self, "tmpLoopCard"), Val.Out(__v => L["CallFunc_getAndDecryptKredit_decryptedKredit"] = __v) });
+        _ = H.Call("getAndDecryptKredit", new Val[] { H.GetMember(self, "tmpLoopCard"), Val.Out(GetLocal(L, "CallFunc_getAndDecryptKredit_decryptedKredit"), __v => L["CallFunc_getAndDecryptKredit_decryptedKredit"] = __v) });
     L_00FA:
         L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getAndDecryptKredit_decryptedKredit"), Val.Of(1)) == 0);
     L_011C:
@@ -99,7 +99,7 @@ public static Val ExecuteUbergraph_card_event_mountain_offense(IHost H, Val self
     L_0248:
         __ef.Push(798);
     L_024D:
-        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => H.SetMember(self, "possibleCards1", __v)), Val.True, Val.Out(__v => L["CallFunc_GetRandomCard_randomCard"] = __v) });
+        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(H.GetMember(self, "possibleCards1"), __v => H.SetMember(self, "possibleCards1", __v)), Val.True, Val.Out(GetLocal(L, "CallFunc_GetRandomCard_randomCard"), __v => L["CallFunc_GetRandomCard_randomCard"] = __v) });
     L_0284:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "CallFunc_GetRandomCard_randomCard") });
     L_02A1:
@@ -116,7 +116,7 @@ public static Val ExecuteUbergraph_card_event_mountain_offense(IHost H, Val self
             }
         }
     L_02AB:
-        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(GetLocal(L, "CallFunc_GetRandomCard_randomCard"), "name"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable_1"] = __v), Val.False, Val.Of(-1), Val.Of(0), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardOnBattlefield_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(GetLocal(L, "CallFunc_GetRandomCard_randomCard"), "name"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "Temp_text_Variable_1"), __v => L["Temp_text_Variable_1"] = __v), Val.False, Val.Of(-1), Val.Of(0), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnCardOnBattlefield_spawnedCardID"), __v => L["CallFunc_SpawnCardOnBattlefield_spawnedCardID"] = __v) });
     L_031D:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -128,7 +128,7 @@ public static Val ExecuteUbergraph_card_event_mountain_offense(IHost H, Val self
             default: goto __halt;
         }
     L_031E:
-        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => H.SetMember(self, "possibleCards2", __v)), Val.True, Val.Out(__v => L["CallFunc_GetRandomCard_randomCard_1"] = __v) });
+        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(H.GetMember(self, "possibleCards2"), __v => H.SetMember(self, "possibleCards2", __v)), Val.True, Val.Out(GetLocal(L, "CallFunc_GetRandomCard_randomCard_1"), __v => L["CallFunc_GetRandomCard_randomCard_1"] = __v) });
     L_0355:
         L["CallFunc_IsValid_ReturnValue_2"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "CallFunc_GetRandomCard_randomCard_1") });
     L_0372:
@@ -145,7 +145,7 @@ public static Val ExecuteUbergraph_card_event_mountain_offense(IHost H, Val self
             }
         }
     L_037C:
-        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(GetLocal(L, "CallFunc_GetRandomCard_randomCard_1"), "name"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), Val.Of(0), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardOnBattlefield_spawnedCardID_1"] = __v) });
+        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(GetLocal(L, "CallFunc_GetRandomCard_randomCard_1"), "name"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), Val.Of(0), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnCardOnBattlefield_spawnedCardID_1"), __v => L["CallFunc_SpawnCardOnBattlefield_spawnedCardID_1"] = __v) });
     L_03EE:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -157,7 +157,7 @@ public static Val ExecuteUbergraph_card_event_mountain_offense(IHost H, Val self
             default: goto __halt;
         }
     L_03EF:
-        _ = H.Call("getAndDecryptKredit", new Val[] { H.GetMember(self, "tmpLoopCard"), Val.Out(__v => L["CallFunc_getAndDecryptKredit_decryptedKredit_1"] = __v) });
+        _ = H.Call("getAndDecryptKredit", new Val[] { H.GetMember(self, "tmpLoopCard"), Val.Out(GetLocal(L, "CallFunc_getAndDecryptKredit_decryptedKredit_1"), __v => L["CallFunc_getAndDecryptKredit_decryptedKredit_1"] = __v) });
     L_0418:
         L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getAndDecryptKredit_decryptedKredit_1"), Val.Of(2)) == 0);
     L_043A:
@@ -175,7 +175,7 @@ public static Val ExecuteUbergraph_card_event_mountain_offense(IHost H, Val self
             default: goto __halt;
         }
     L_048D:
-        _ = H.Call("getAndDecryptKredit", new Val[] { H.GetMember(self, "tmpLoopCard"), Val.Out(__v => L["CallFunc_getAndDecryptKredit_decryptedKredit_2"] = __v) });
+        _ = H.Call("getAndDecryptKredit", new Val[] { H.GetMember(self, "tmpLoopCard"), Val.Out(GetLocal(L, "CallFunc_getAndDecryptKredit_decryptedKredit_2"), __v => L["CallFunc_getAndDecryptKredit_decryptedKredit_2"] = __v) });
     L_04B6:
         L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getAndDecryptKredit_decryptedKredit_2"), Val.Of(3)) == 0);
     L_04D8:
@@ -204,7 +204,7 @@ public static Val ExecuteUbergraph_card_event_mountain_offense(IHost H, Val self
             default: goto __halt;
         }
     L_0527:
-        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => H.SetMember(self, "possibleCards3", __v)), Val.True, Val.Out(__v => L["CallFunc_GetRandomCard_randomCard_2"] = __v) });
+        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(H.GetMember(self, "possibleCards3"), __v => H.SetMember(self, "possibleCards3", __v)), Val.True, Val.Out(GetLocal(L, "CallFunc_GetRandomCard_randomCard_2"), __v => L["CallFunc_GetRandomCard_randomCard_2"] = __v) });
     L_055E:
         L["CallFunc_IsValid_ReturnValue_1"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "CallFunc_GetRandomCard_randomCard_2") });
     L_057B:
@@ -221,7 +221,7 @@ public static Val ExecuteUbergraph_card_event_mountain_offense(IHost H, Val self
             }
         }
     L_0585:
-        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(GetLocal(L, "CallFunc_GetRandomCard_randomCard_2"), "name"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable_2"] = __v), Val.False, Val.Of(-1), Val.Of(0), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardOnBattlefield_spawnedCardID_2"] = __v) });
+        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(GetLocal(L, "CallFunc_GetRandomCard_randomCard_2"), "name"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "Temp_text_Variable_2"), __v => L["Temp_text_Variable_2"] = __v), Val.False, Val.Of(-1), Val.Of(0), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnCardOnBattlefield_spawnedCardID_2"), __v => L["CallFunc_SpawnCardOnBattlefield_spawnedCardID_2"] = __v) });
     L_05F7:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -233,9 +233,9 @@ public static Val ExecuteUbergraph_card_event_mountain_offense(IHost H, Val self
             default: goto __halt;
         }
     L_05F8:
-        _ = H.Call("IsCardReserved", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "name"), Val.Out(__v => L["CallFunc_IsCardReserved_IsReserved"] = __v) });
+        _ = H.Call("IsCardReserved", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "name"), Val.Out(GetLocal(L, "CallFunc_IsCardReserved_IsReserved"), __v => L["CallFunc_IsCardReserved_IsReserved"] = __v) });
     L_062E:
-        _ = H.Call("GetAllActiveStaticCards", new Val[] { H.GetMember(self, "cardFunction"), Val.False, GetLocal(L, "CallFunc_IsCardReserved_IsReserved"), Val.Out(__v => L["CallFunc_GetAllActiveStaticCards_cards"] = __v) });
+        _ = H.Call("GetAllActiveStaticCards", new Val[] { H.GetMember(self, "cardFunction"), Val.False, GetLocal(L, "CallFunc_IsCardReserved_IsReserved"), Val.Out(GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), __v => L["CallFunc_GetAllActiveStaticCards_cards"] = __v) });
     L_0665:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_067C:

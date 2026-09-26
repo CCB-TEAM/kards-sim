@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_unit_m4a1(IHost H, Val self, Val[] args)
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocatedInDeck", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedInDeck_isIt"] = __v) });
+        _ = H.Call("IsLocatedInDeck", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedInDeck_isIt"), __v => L["CallFunc_IsLocatedInDeck_isIt"] = __v) });
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedInDeck_isIt")).AsBool()) goto L_0135;
     L_002B:
@@ -42,7 +42,7 @@ public static Val ExecuteUbergraph_card_unit_m4a1(IHost H, Val self, Val[] args)
     L_0067:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_0135;
     L_0075:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_discarderID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_discarderID"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_00AB:
         L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "side")) != 0);
     L_00E7:

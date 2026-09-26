@@ -28,13 +28,13 @@ public static Val OnBeforeOtherCardDeploymentTrigger(IHost H, Val self, Val[] ar
         var __ret = Val.Nothing;
         L["cardDeploying"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_cancelDeploymentEffect = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["cancelDeploymentEffect"] = Val.Nothing;
+        L["cancelDeploymentEffect"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
-        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, GetLocal(L, "cardDeploying"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
+        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, GetLocal(L, "cardDeploying"), Val.Out(GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt"), __v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
     L_001C:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "cardDeploying"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "cardDeploying"), Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0045:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "cardDeploying"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "cardDeploying"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_006E:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt")).AsBool() && (GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool());
     L_0094:
@@ -42,7 +42,7 @@ public static Val OnBeforeOtherCardDeploymentTrigger(IHost H, Val self, Val[] ar
     L_00BA:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_1")).AsBool()) goto L_0127;
     L_00C8:
-        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(GetLocal(L, "cardDeploying"), "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
+        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(GetLocal(L, "cardDeploying"), "cardID"), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_GotchaTriggered_qqq"), __v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
     L_0117:
         L["cancelDeploymentEffect"] = Val.True;
     L_0122:

@@ -29,15 +29,15 @@ public static Val OnBeforeOtherCardGainDefense(IHost H, Val self, Val[] args)
         L["cardGainingDefense"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["defenseToAdd"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_newDefenseToAdd = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["newDefenseToAdd"] = Val.Nothing;
+        L["newDefenseToAdd"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_stopAction = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["stopAction"] = Val.Nothing;
+        L["stopAction"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0013:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_00FF;
     L_0021:
-        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(self, "side") });
+        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_card"), __v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID"), __v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(self, "side") });
     L_0060:
         L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "cardGainingDefense"), "cardID"), GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID")) == 0);
     L_009C:

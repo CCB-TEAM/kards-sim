@@ -30,9 +30,9 @@ public static Val OnDestructionEffectTriggered(IHost H, Val self, Val[] args)
         L["instigatorID"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["SelfAlsoDestroyed"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_TriggerMultiple = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["TriggerMultiple"] = Val.Nothing;
+        L["TriggerMultiple"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0013:
         L["CallFunc_BooleanOR_ReturnValue"] = Val.Of((GetLocal(L, "SelfAlsoDestroyed")).AsBool() || (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_0039:

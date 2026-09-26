@@ -36,7 +36,7 @@ public static Val ExecuteUbergraph_card_location_british_scen2_ai(IHost H, Val s
     L_000A:
         L["Temp_text_Variable"] = Val.Of("The 10th Panzer Division has retaken Tebourba and seems to be on an unstoppable run. We must use every tactic available to delay them until our defenses around Medjez are sufficiently improved.");
     L_0105:
-        _ = H.Call("ShowCampaignMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.True, Val.False, Val.Of(0f), Val.False });
+        _ = H.Call("ShowCampaignMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.True, Val.False, Val.Of(0f), Val.False });
     L_013A:
         goto __halt;
     L_013C:

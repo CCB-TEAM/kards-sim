@@ -29,13 +29,13 @@ public static Val OnBeforeOtherCardGainDefense(IHost H, Val self, Val[] args)
         L["cardGainingDefense"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["defenseToAdd"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_newDefenseToAdd = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["newDefenseToAdd"] = Val.Nothing;
+        L["newDefenseToAdd"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_stopAction = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["stopAction"] = Val.Nothing;
+        L["stopAction"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0013:
-        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "cardGainingDefense"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
+        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "cardGainingDefense"), Val.Out(GetLocal(L, "CallFunc_IsLocation_isIt"), __v => L["CallFunc_IsLocation_isIt"] = __v) });
     L_003C:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsLocation_isIt")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_0062:

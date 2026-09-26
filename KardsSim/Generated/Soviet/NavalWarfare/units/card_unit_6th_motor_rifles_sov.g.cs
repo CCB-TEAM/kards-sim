@@ -39,9 +39,9 @@ public static Val ExecuteUbergraph_card_unit_6th_motor_rifles_sov(IHost H, Val s
             default: goto __halt;
         }
     L_000F:
-        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckBySide_cardsIDs"] = __v), Val.Of(0.4f) });
+        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_DrawCardsFromDeckBySide_cardsIDs"), __v => L["CallFunc_DrawCardsFromDeckBySide_cardsIDs"] = __v), Val.Of(0.4f) });
     L_005A:
-        _ = H.Call("GetDeckByside", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetDeckByside_deckCardIDs"] = __v) });
+        _ = H.Call("GetDeckByside", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs"), __v => L["CallFunc_GetDeckByside_deckCardIDs"] = __v) });
     L_0090:
         H.SetMember(self, "DeckCardIDs", GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs"));
     L_00AB:
@@ -69,9 +69,9 @@ public static Val ExecuteUbergraph_card_unit_6th_motor_rifles_sov(IHost H, Val s
     L_0156:
         L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_Array_Length_ReturnValue") - Val.Of(1));
     L_0180:
-        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue"), Val.Out(__v => L["CallFunc_RandomIntFromRangeWithStream_randomResult"] = __v) });
+        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue"), Val.Out(GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), __v => L["CallFunc_RandomIntFromRangeWithStream_randomResult"] = __v) });
     L_01BB:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "DeckCardIDs"), GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "DeckCardIDs"), GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_01F6:
         H.SetMember(self, "cardToAdd", GetLocal(L, "CallFunc_Array_Get_Item"));
     L_0211:
@@ -106,9 +106,9 @@ public static Val ExecuteUbergraph_card_unit_6th_motor_rifles_sov(IHost H, Val s
     L_030A:
         L["CallFunc_Subtract_IntInt_ReturnValue_1"] = (GetLocal(L, "CallFunc_Array_Length_ReturnValue_1") - Val.Of(1));
     L_0334:
-        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue_1"), Val.Out(__v => L["CallFunc_RandomIntFromRangeWithStream_randomResult_1"] = __v) });
+        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue_1"), Val.Out(GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult_1"), __v => L["CallFunc_RandomIntFromRangeWithStream_randomResult_1"] = __v) });
     L_036F:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "DeckCardIDs"), GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult_1"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "DeckCardIDs"), GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_03AA:
         H.SetMember(self, "cardToAdd", GetLocal(L, "CallFunc_Array_Get_Item_1"));
     L_03C5:
@@ -139,7 +139,7 @@ public static Val ExecuteUbergraph_card_unit_6th_motor_rifles_sov(IHost H, Val s
             }
         }
     L_0483:
-        _ = H.Call("ConvertCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardsToConvert"), H.GetMember(self, "cardID"), Val.Name("card_unit_6th_motor_rifles_sov"), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ConvertCard_newCardIDs"] = __v) });
+        _ = H.Call("ConvertCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardsToConvert"), H.GetMember(self, "cardID"), Val.Name("card_unit_6th_motor_rifles_sov"), Val.Of(0), Val.False, Val.Out(GetLocal(L, "CallFunc_ConvertCard_newCardIDs"), __v => L["CallFunc_ConvertCard_newCardIDs"] = __v) });
     L_04D5:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

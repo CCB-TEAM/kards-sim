@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_unit_14th_brigade_nz(IHost H, Val self, 
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("WasLeftMostCardWhenPlayedFromHand", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(__v => L["CallFunc_WasLeftMostCardWhenPlayedFromHand_WasLeftMost"] = __v) });
+        _ = H.Call("WasLeftMostCardWhenPlayedFromHand", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(GetLocal(L, "CallFunc_WasLeftMostCardWhenPlayedFromHand_WasLeftMost"), __v => L["CallFunc_WasLeftMostCardWhenPlayedFromHand_WasLeftMost"] = __v) });
     L_0038:
         if (!(GetLocal(L, "CallFunc_WasLeftMostCardWhenPlayedFromHand_WasLeftMost")).AsBool()) goto L_0074;
     L_0046:
@@ -83,9 +83,9 @@ public static Val ShouldHighlightInHand(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_shouldHighlight = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["shouldHighlight"] = Val.Nothing;
+        L["shouldHighlight"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
-        _ = H.Call("GetLeftMostCardInHand", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(__v => L["CallFunc_GetLeftMostCardInHand_WasFound"] = __v), Val.Out(__v => L["CallFunc_GetLeftMostCardInHand_LeftMostCard"] = __v) });
+        _ = H.Call("GetLeftMostCardInHand", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(GetLocal(L, "CallFunc_GetLeftMostCardInHand_WasFound"), __v => L["CallFunc_GetLeftMostCardInHand_WasFound"] = __v), Val.Out(GetLocal(L, "CallFunc_GetLeftMostCardInHand_LeftMostCard"), __v => L["CallFunc_GetLeftMostCardInHand_LeftMostCard"] = __v) });
     L_0037:
         L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_GetLeftMostCardInHand_LeftMostCard"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_0073:

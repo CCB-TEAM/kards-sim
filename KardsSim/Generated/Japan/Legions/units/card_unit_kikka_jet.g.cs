@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_unit_kikka_jet(IHost H, Val self, Val[] 
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("SpawnCardInDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_event_kamikaze"), H.GetMember(self, "cardID"), Val.Of(4), Val.Of(0), Val.False, Val.False, Val.True, Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardinDeckbySide_spawnedCardIDs"] = __v) });
+        _ = H.Call("SpawnCardInDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_event_kamikaze"), H.GetMember(self, "cardID"), Val.Of(4), Val.Of(0), Val.False, Val.False, Val.True, Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_SpawnCardinDeckbySide_spawnedCardIDs"), __v => L["CallFunc_SpawnCardinDeckbySide_spawnedCardIDs"] = __v) });
     L_0062:
         goto __halt;
     L_0064:

@@ -35,7 +35,7 @@ public static Val ExecuteUbergraph_card_unit_4tp(IHost H, Val self, Val[] args)
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocation", new Val[] { H.GetVar("K2Node_Event_defenderCard"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
+        _ = H.Call("IsLocation", new Val[] { H.GetVar("K2Node_Event_defenderCard"), Val.Out(GetLocal(L, "CallFunc_IsLocation_isIt"), __v => L["CallFunc_IsLocation_isIt"] = __v) });
     L_0033:
         if (!(GetLocal(L, "CallFunc_IsLocation_isIt")).AsBool()) goto L_00CA;
     L_0041:
@@ -43,11 +43,11 @@ public static Val ExecuteUbergraph_card_unit_4tp(IHost H, Val self, Val[] args)
     L_0067:
         goto L_00CA;
     L_006C:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_007F:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_00CA;
     L_008D:
-        _ = H.Call("HasCustomAbility", new Val[] { self, Val.Of("destroyEndOfTurn"), Val.Out(__v => L["CallFunc_HasCustomAbility_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbility", new Val[] { self, Val.Of("destroyEndOfTurn"), Val.Out(GetLocal(L, "CallFunc_HasCustomAbility_doesIt"), __v => L["CallFunc_HasCustomAbility_doesIt"] = __v) });
     L_00B2:
         if (!(GetLocal(L, "CallFunc_HasCustomAbility_doesIt")).AsBool()) goto L_00CA;
     L_00C0:

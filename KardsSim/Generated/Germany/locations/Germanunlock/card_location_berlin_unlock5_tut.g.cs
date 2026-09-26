@@ -45,9 +45,9 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock5_tut(IHost H, Val
     L_000F:
         __ef.Push(142);
     L_0014:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_2"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_2"), __v => L["CallFunc_Array_Get_Item_2"] = __v) });
     L_004F:
-        _ = H.Call("IsPinned", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_2"), Val.Out(__v => L["CallFunc_IsPinned_isPinned"] = __v) });
+        _ = H.Call("IsPinned", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item_2"), Val.Out(GetLocal(L, "CallFunc_IsPinned_isPinned"), __v => L["CallFunc_IsPinned_isPinned"] = __v) });
     L_0078:
         if (!(GetLocal(L, "CallFunc_IsPinned_isPinned")).AsBool())
         {
@@ -110,7 +110,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock5_tut(IHost H, Val
             }
         }
     L_016C:
-        _ = H.Call("GetAllCards", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetAllCards_cards"] = __v) });
+        _ = H.Call("GetAllCards", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetAllCards_cards"), __v => L["CallFunc_GetAllCards_cards"] = __v) });
     L_0199:
         L["Temp_int_Loop_Counter_Variable_2"] = Val.Of(0);
     L_01B0:
@@ -126,7 +126,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock5_tut(IHost H, Val
     L_0251:
         __ef.Push(1364);
     L_0256:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0291:
         L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "name"), Val.Name("card_event_surazh_gate")) == 0);
     L_02D1:
@@ -146,7 +146,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock5_tut(IHost H, Val
             }
         }
     L_02DB:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0316:
         H.SetMember(self, "surazhGateID", H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID"));
     L_0347:
@@ -165,7 +165,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock5_tut(IHost H, Val
     L_0348:
         L["Temp_text_Variable"] = Val.Of("The enemy has <bold>Pinned</> one of your units. Units that are <bold>Pinned</> can’t move or attack. <bold>Pin</> is removed at the end of the owner's next turn.");
     L_04C7:
-        _ = H.Call("ShowTutorialMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.Of("pin"), H.GetMember(self, "surazhGateID"), Val.Of(2f), Val.Out(__v => L["CallFunc_ShowTutorialMessage_qqq_2"] = __v) });
+        _ = H.Call("ShowTutorialMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.Of("pin"), H.GetMember(self, "surazhGateID"), Val.Of(2f), Val.Out(GetLocal(L, "CallFunc_ShowTutorialMessage_qqq_2"), __v => L["CallFunc_ShowTutorialMessage_qqq_2"] = __v) });
     L_0510:
         _ = H.Call("CustomName2Add", new Val[] { self, Val.Of("pinShown2") });
     L_0525:
@@ -208,7 +208,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock5_tut(IHost H, Val
     L_0672:
         __ef.Push(1897);
     L_0677:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInSupportLineBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_2"), Val.Out(__v => L["CallFunc_Array_Get_Item_3"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInSupportLineBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_2"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_3"), __v => L["CallFunc_Array_Get_Item_3"] = __v) });
     L_06B2:
         L["CallFunc_EqualEqual_NameName_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_3"), "name"), Val.Name("card_unit_3rd_guards")) == 0);
     L_06F2:
@@ -228,7 +228,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock5_tut(IHost H, Val
             }
         }
     L_06FC:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInSupportLineBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_2"), Val.Out(__v => L["CallFunc_Array_Get_Item_3"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInSupportLineBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_2"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_3"), __v => L["CallFunc_Array_Get_Item_3"] = __v) });
     L_0737:
         H.SetMember(self, "ambushID", H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_3"), "cardID"));
     L_0768:
@@ -269,7 +269,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock5_tut(IHost H, Val
             }
         }
     L_07DF:
-        _ = H.Call("CustomName2HasAttribute", new Val[] { self, Val.Of("ambush3rd"), Val.Out(__v => L["CallFunc_CustomName2HasAttribute_doesIt"] = __v) });
+        _ = H.Call("CustomName2HasAttribute", new Val[] { self, Val.Of("ambush3rd"), Val.Out(GetLocal(L, "CallFunc_CustomName2HasAttribute_doesIt"), __v => L["CallFunc_CustomName2HasAttribute_doesIt"] = __v) });
     L_07FD:
         if (!(GetLocal(L, "CallFunc_CustomName2HasAttribute_doesIt")).AsBool()) goto L_080C;
     L_080B:
@@ -288,7 +288,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock5_tut(IHost H, Val
     L_080C:
         L["Temp_text_Variable_3"] = Val.Of("Watch out, the enemy has an <bold>Ambush</> unit! When <bold>Ambush</> units are attacked for the first time each turn, they deal their damage first and receive no damage in return if the attacking enemy unit is destroyed.");
     L_0924:
-        _ = H.Call("ShowTutorialMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable_3"] = __v), Val.Of("ambush"), H.GetMember(self, "ambushID"), Val.Of(2f), Val.Out(__v => L["CallFunc_ShowTutorialMessage_qqq"] = __v) });
+        _ = H.Call("ShowTutorialMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "Temp_text_Variable_3"), __v => L["Temp_text_Variable_3"] = __v), Val.Of("ambush"), H.GetMember(self, "ambushID"), Val.Of(2f), Val.Out(GetLocal(L, "CallFunc_ShowTutorialMessage_qqq"), __v => L["CallFunc_ShowTutorialMessage_qqq"] = __v) });
     L_0970:
         _ = H.Call("CustomName2Add", new Val[] { self, Val.Of("ambush3rd") });
     L_0985:
@@ -313,7 +313,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock5_tut(IHost H, Val
     L_09D0:
         __ef.Push(2759);
     L_09D5:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_3"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_3"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_0A10:
         L["CallFunc_EqualEqual_NameName_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "name"), Val.Name("card_unit_45mm_anti_tank_gun")) == 0);
     L_0A50:
@@ -333,7 +333,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock5_tut(IHost H, Val
             }
         }
     L_0A5A:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_3"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_3"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_0A95:
         H.SetMember(self, "45mmFound", H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "cardID"));
     L_0AC6:
@@ -382,7 +382,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock5_tut(IHost H, Val
             }
         }
     L_0BC7:
-        _ = H.Call("CustomName2HasAttribute", new Val[] { self, Val.Of("artShown"), Val.Out(__v => L["CallFunc_CustomName2HasAttribute_doesIt_2"] = __v) });
+        _ = H.Call("CustomName2HasAttribute", new Val[] { self, Val.Of("artShown"), Val.Out(GetLocal(L, "CallFunc_CustomName2HasAttribute_doesIt_2"), __v => L["CallFunc_CustomName2HasAttribute_doesIt_2"] = __v) });
     L_0BE4:
         if (!(GetLocal(L, "CallFunc_CustomName2HasAttribute_doesIt_2")).AsBool()) goto L_0BF3;
     L_0BF2:
@@ -401,7 +401,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock5_tut(IHost H, Val
     L_0BF3:
         L["Temp_text_Variable_1"] = Val.Of("Your enemy has deployed an <bold>Artillery</> unit. <bold>Artillery</> units can attack targets anywhere on the battlefield and get no damage in return from units they attack.");
     L_0CDC:
-        _ = H.Call("ShowTutorialMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable_1"] = __v), Val.Of("artillery"), H.GetMember(self, "45mmFound"), Val.Of(2.5f), Val.Out(__v => L["CallFunc_ShowTutorialMessage_qqq_1"] = __v) });
+        _ = H.Call("ShowTutorialMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "Temp_text_Variable_1"), __v => L["Temp_text_Variable_1"] = __v), Val.Of("artillery"), H.GetMember(self, "45mmFound"), Val.Of(2.5f), Val.Out(GetLocal(L, "CallFunc_ShowTutorialMessage_qqq_1"), __v => L["CallFunc_ShowTutorialMessage_qqq_1"] = __v) });
     L_0D2B:
         _ = H.Call("CustomName2Add", new Val[] { self, Val.Of("artShown") });
     L_0D3F:
@@ -426,7 +426,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock5_tut(IHost H, Val
     L_0D9C:
         goto L_0B0C;
     L_0DA1:
-        _ = H.Call("GetTurnNumber", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetTurnNumber_turnNumber"] = __v) });
+        _ = H.Call("GetTurnNumber", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetTurnNumber_turnNumber"), __v => L["CallFunc_GetTurnNumber_turnNumber"] = __v) });
     L_0DCE:
         L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetTurnNumber_turnNumber"), Val.Of(3)) > 0);
     L_0DF0:
@@ -450,13 +450,13 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock5_tut(IHost H, Val
     L_0DFF:
         __ef.Push(3774);
     L_0E04:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide_1"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_1"), __v => L["CallFunc_GetOppositeSide_oppositeSide_1"] = __v) });
     L_0E17:
-        _ = H.Call("GetCardsInSupportLineBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_1"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsInSupportLineBySide_cards"] = __v) });
+        _ = H.Call("GetCardsInSupportLineBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_1"), Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsInSupportLineBySide_cards"), __v => L["CallFunc_GetCardsInSupportLineBySide_cards"] = __v) });
     L_0E4F:
         goto L_05BA;
     L_0E54:
-        _ = H.Call("CustomName2HasAttribute", new Val[] { self, Val.Of("pinShown2"), Val.Out(__v => L["CallFunc_CustomName2HasAttribute_doesIt_1"] = __v) });
+        _ = H.Call("CustomName2HasAttribute", new Val[] { self, Val.Of("pinShown2"), Val.Out(GetLocal(L, "CallFunc_CustomName2HasAttribute_doesIt_1"), __v => L["CallFunc_CustomName2HasAttribute_doesIt_1"] = __v) });
     L_0E72:
         if (!(GetLocal(L, "CallFunc_CustomName2HasAttribute_doesIt_1")).AsBool()) goto L_0E81;
     L_0E80:
@@ -473,11 +473,11 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock5_tut(IHost H, Val
             default: goto __halt;
         }
     L_0E81:
-        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards_1"] = __v) });
+        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards_1"), __v => L["CallFunc_GetCardsOnBoardBySide_cards_1"] = __v) });
     L_0EB9:
         goto L_09B4;
     L_0EBE:
-        _ = H.Call("GetTurnNumber", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetTurnNumber_turnNumber_1"] = __v) });
+        _ = H.Call("GetTurnNumber", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetTurnNumber_turnNumber_1"), __v => L["CallFunc_GetTurnNumber_turnNumber_1"] = __v) });
     L_0EEB:
         L["CallFunc_Greater_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetTurnNumber_turnNumber_1"), Val.Of(3)) > 0);
     L_0F0D:
@@ -497,15 +497,15 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock5_tut(IHost H, Val
             }
         }
     L_0F17:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_0F2A:
-        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
+        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), __v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
     L_0F62:
         goto L_0D6E;
     L_0F67:
         L["Temp_text_Variable_2"] = Val.Of("Our offense is going well, but the enemy still has many small units in the area and can strike out at any moment. Operate with care.");
     L_1025:
-        _ = H.Call("ShowCampaignMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable_2"] = __v), Val.True, Val.False, Val.Of(0f), Val.True });
+        _ = H.Call("ShowCampaignMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "Temp_text_Variable_2"), __v => L["Temp_text_Variable_2"] = __v), Val.True, Val.False, Val.Of(0f), Val.True });
     L_105A:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -520,7 +520,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock5_tut(IHost H, Val
             default: goto __halt;
         }
     L_105B:
-        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
+        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsSideActive_active"), __v => L["CallFunc_IsSideActive_active"] = __v) });
     L_1077:
         if (!(GetLocal(L, "CallFunc_IsSideActive_active")).AsBool())
         {

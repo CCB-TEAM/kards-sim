@@ -27,12 +27,12 @@ public static Val AreIntArraysEqual(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_firstArray = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["firstArray"] = Val.Nothing;
+        L["firstArray"] = args.Length > 0 ? args[0].In : Val.Nothing;
         var __out_secondArray = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["secondArray"] = Val.Nothing;
+        L["secondArray"] = args.Length > 1 ? args[1].In : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_equal = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["equal"] = Val.Nothing;
+        L["equal"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         __ef.Push(1320);
     L_0005:
@@ -193,12 +193,12 @@ public static Val AreNameArraysEqual(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_firstArray = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["firstArray"] = Val.Nothing;
+        L["firstArray"] = args.Length > 0 ? args[0].In : Val.Nothing;
         var __out_secondArray = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["secondArray"] = Val.Nothing;
+        L["secondArray"] = args.Length > 1 ? args[1].In : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_equal = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["equal"] = Val.Nothing;
+        L["equal"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         __ef.Push(1164);
     L_0005:
@@ -374,12 +374,12 @@ public static Val Create_Pack_String_From_Card_Set_Array(IHost H, Val self, Val[
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_cardSets = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["cardSets"] = Val.Nothing;
+        L["cardSets"] = args.Length > 0 ? args[0].In : Val.Nothing;
         L["faction"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["isOfficerPack"] = args.Length > 2 ? args[2] : Val.Nothing;
         L["__WorldContext"] = args.Length > 3 ? args[3] : Val.Nothing;
         var __out_packString = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["packString"] = Val.Nothing;
+        L["packString"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
         __ef.Push(870);
     L_0005:
@@ -466,7 +466,7 @@ public static Val CreateCardFromLimitedCardText(IHost H, Val self, Val[] args)
         L["str"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_card = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["card"] = Val.Nothing;
+        L["card"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(4525);
     L_0005:
@@ -878,7 +878,7 @@ public static Val DeckLocationFromSide(IHost H, Val self, Val[] args)
         L["side"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_location = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["location"] = Val.Nothing;
+        L["location"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(273);
     L_0005:
@@ -1211,7 +1211,7 @@ public static Val FactionStringToEnum(IHost H, Val self, Val[] args)
         L["skipErrorCheck"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_faction = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["faction"] = Val.Nothing;
+        L["faction"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         L["CallFunc_IsEmpty_ReturnValue"] = H.Call("IsEmpty", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "factionString") });
     L_001D:
@@ -1335,11 +1335,11 @@ public static Val Get_Card_Set_Name_From_String(IHost H, Val self, Val[] args)
         L["cardSet"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_cardSetText = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["cardSetText"] = Val.Nothing;
+        L["cardSetText"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_nonLocalized = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["nonLocalized"] = Val.Nothing;
+        L["nonLocalized"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_includesOfficer = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["includesOfficer"] = Val.Nothing;
+        L["includesOfficer"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
         L["CallFunc_Split_ReturnValue"] = H.Call("Split", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "cardSet"), Val.Of("|"), GetLocal(L, "CallFunc_Split_LeftS"), GetLocal(L, "CallFunc_Split_RightS"), Val.Of(1), Val.Of(0) });
     L_0036:
@@ -1667,7 +1667,7 @@ public static Val Get_Is_Server_Config(IHost H, Val self, Val[] args)
         L["key"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_KeyTrue = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["KeyTrue"] = Val.Nothing;
+        L["KeyTrue"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetEngineSubsystem_ReturnValue"] = H.Call("GetEngineSubsystem", new Val[] { self, Val.Ref("ConfigSubsystem") });
     L_001D:
@@ -1703,7 +1703,7 @@ public static Val Get_Language_Enum_From_Culture_String(IHost H, Val self, Val[]
         L["culture"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_language = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["language"] = Val.Nothing;
+        L["language"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_ReplaceInline_ReturnValue"] = H.Call("ReplaceInline", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "culture"), Val.Of("_"), Val.Of("-"), Val.Of(1) });
     L_002D:
@@ -1850,7 +1850,7 @@ public static Val Get_Provider_From_Version_String(IHost H, Val self, Val[] args
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_OutProvider = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["OutProvider"] = Val.Nothing;
+        L["OutProvider"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetVersionInfo", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetVersionInfo_Version"] = __v) });
     L_0020:
@@ -1879,7 +1879,7 @@ public static Val Get_Server_UTC(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_serverUTC = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["serverUTC"] = Val.Nothing;
+        L["serverUTC"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("getAntiCheatServerUTC", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_getAntiCheatServerUTC_serverUTC"] = __v) });
     L_0020:
@@ -1903,7 +1903,7 @@ public static Val getAllCardsFromActiveSets(IHost H, Val self, Val[] args)
         L["getHQsAlso"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_cards = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["cards"] = Val.Nothing;
+        L["cards"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L["_staticActiveCards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1854);
@@ -2075,7 +2075,7 @@ public static Val getAntiCheatServerUTC(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_serverUTC = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["serverUTC"] = Val.Nothing;
+        L["serverUTC"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetDSession", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetDSession_dSession"] = __v) });
     L_0020:
@@ -2105,7 +2105,7 @@ public static Val GetAttackSound(IHost H, Val self, Val[] args)
         L["rowName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_soundCue = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["soundCue"] = Val.Nothing;
+        L["soundCue"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("attackSounds"), GetLocal(L, "rowName"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0045:
@@ -2141,7 +2141,7 @@ public static Val GetBlowupSound(IHost H, Val self, Val[] args)
         L["rowName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_soundCue = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["soundCue"] = Val.Nothing;
+        L["soundCue"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("blowUpSounds"), GetLocal(L, "rowName"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0045:
@@ -2176,7 +2176,7 @@ public static Val GetBoard(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_Board = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["Board"] = Val.Nothing;
+        L["Board"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetActorOfClass_ReturnValue"] = H.Call("GetActorOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_Board") });
     L_0026:
@@ -2199,9 +2199,9 @@ public static Val GetBob(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_bob = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["bob"] = Val.Nothing;
+        L["bob"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_bobExists = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["bobExists"] = Val.Nothing;
+        L["bobExists"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetOnlineMatch", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetOnlineMatch_onlineMatch"] = __v) });
     L_0020:
@@ -2239,7 +2239,7 @@ public static Val GetBPLevelParameters(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_LevelParameters = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["LevelParameters"] = Val.Nothing;
+        L["LevelParameters"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
@@ -2275,7 +2275,7 @@ public static Val GetBPPlayerController(IHost H, Val self, Val[] args)
         L["Player0"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_BP_PlayerController = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["BP_PlayerController"] = Val.Nothing;
+        L["BP_PlayerController"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["K2Node_DynamicCast_AsBP_Player_Controller"] = GetLocal(L, "Player0");
     L_0024:
@@ -2302,7 +2302,7 @@ public static Val GetCampaign(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_campaignBP = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["campaignBP"] = Val.Nothing;
+        L["campaignBP"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetKardsGameInstancePure", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetKardsGameInstancePure_instance"] = __v) });
     L_0020:
@@ -2325,7 +2325,7 @@ public static Val getCardbackDeckCodeIDMap(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_cardbackToDeckCodeID = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["cardbackToDeckCodeID"] = Val.Nothing;
+        L["cardbackToDeckCodeID"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L["_cardbackToDeckCodeID"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(829);
@@ -2426,9 +2426,9 @@ public static Val getCardBackImageForNationalRewards(IHost H, Val self, Val[] ar
         L["cardBack"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_image = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["image"] = Val.Nothing;
+        L["image"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_biggerImage = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["biggerImage"] = Val.Nothing;
+        L["biggerImage"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchString_CmpSuccess"] = H.Call("NotEqual_StriStri", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "cardBack"), Val.Of("cardback_german_first_infantry") });
     L_003D:
@@ -2638,7 +2638,7 @@ public static Val GetCardFunctions(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_cardFunctions = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["cardFunctions"] = Val.Nothing;
+        L["cardFunctions"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
@@ -2678,9 +2678,9 @@ public static Val GetCardSound(IHost H, Val self, Val[] args)
         L["RowName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_sound_cue = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["sound_cue"] = Val.Nothing;
+        L["sound_cue"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_found = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["found"] = Val.Nothing;
+        L["found"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("cardFoleySounds"), GetLocal(L, "RowName"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0045:
@@ -2714,7 +2714,7 @@ public static Val GetClientCultureAsTwoCharacterString(IHost H, Val self, Val[] 
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_language = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["language"] = Val.Nothing;
+        L["language"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetCurrentCulture_ReturnValue"] = H.Call("GetCurrentCulture", new Val[] { self });
     L_001C:
@@ -2742,7 +2742,7 @@ public static Val GetCurrentFactionLevel(IHost H, Val self, Val[] args)
         L["faction"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_level = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["level"] = Val.Nothing;
+        L["level"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetKardsGameInstancePure", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetKardsGameInstancePure_instance"] = __v) });
     L_0020:
@@ -2783,7 +2783,7 @@ public static Val GetDailyMissions(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_dailyMissions = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["dailyMissions"] = Val.Nothing;
+        L["dailyMissions"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
@@ -2859,7 +2859,7 @@ public static Val GetDeckBP(IHost H, Val self, Val[] args)
         L["deckForEnemy"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_Deck = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["Deck"] = Val.Nothing;
+        L["Deck"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(544);
     L_0005:
@@ -2929,7 +2929,7 @@ public static Val GetDSession(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_dSession = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["dSession"] = Val.Nothing;
+        L["dSession"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
@@ -2985,7 +2985,7 @@ public static Val GetEnterPlaySound(IHost H, Val self, Val[] args)
         L["rowName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_soundCue = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["soundCue"] = Val.Nothing;
+        L["soundCue"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("enterPlaySounds"), GetLocal(L, "rowName"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0045:
@@ -3020,7 +3020,7 @@ public static Val GetEquipmentBP(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_Equipment = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["Equipment"] = Val.Nothing;
+        L["Equipment"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
@@ -3056,11 +3056,11 @@ public static Val GetEquipmentNameAndType(IHost H, Val self, Val[] args)
         L["name string"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_type = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["type"] = Val.Nothing;
+        L["type"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_DescriptiveName = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["DescriptiveName"] = Val.Nothing;
+        L["DescriptiveName"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_thumbnail = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["thumbnail"] = Val.Nothing;
+        L["thumbnail"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
         L["Item"] = GetLocal(L, "name string");
     L_001B:
@@ -3260,7 +3260,7 @@ public static Val GetFactionColor(IHost H, Val self, Val[] args)
         L["faction"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_factionColor = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["factionColor"] = Val.Nothing;
+        L["factionColor"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "faction"), Val.Of(0)) != 0);
     L_001F:
@@ -3376,7 +3376,7 @@ public static Val GetFactionName(IHost H, Val self, Val[] args)
         L["faction"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_factionName = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["factionName"] = Val.Nothing;
+        L["factionName"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(598);
     L_0005:
@@ -3456,7 +3456,7 @@ public static Val GetGameState(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_GameState = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["GameState"] = Val.Nothing;
+        L["GameState"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetGameState_ReturnValue"] = H.Call("GetGameState", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext") });
     L_001D:
@@ -3491,7 +3491,7 @@ public static Val GetHistory(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_history = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["history"] = Val.Nothing;
+        L["history"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
@@ -3519,7 +3519,7 @@ public static Val GetImpactSound(IHost H, Val self, Val[] args)
         L["rowName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_soundCue = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["soundCue"] = Val.Nothing;
+        L["soundCue"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("projectileImpactSounds"), GetLocal(L, "rowName"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0045:
@@ -3554,7 +3554,7 @@ public static Val GetKardsGameInstance(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_instance = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["instance"] = Val.Nothing;
+        L["instance"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetGameInstance_ReturnValue"] = H.Call("GetGameInstance", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext") });
     L_001D:
@@ -3589,7 +3589,7 @@ public static Val GetKardsGameInstancePure(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_instance = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["instance"] = Val.Nothing;
+        L["instance"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetGameInstance_ReturnValue"] = H.Call("GetGameInstance", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext") });
     L_001D:
@@ -3654,7 +3654,7 @@ public static Val GetLevelManager(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_levelManager = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["levelManager"] = Val.Nothing;
+        L["levelManager"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetActorOfClass_ReturnValue"] = H.Call("GetActorOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_LevelManager") });
     L_0026:
@@ -3678,7 +3678,7 @@ public static Val GetLimitedCardDataAsText(IHost H, Val self, Val[] args)
         L["card"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_str = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["str"] = Val.Nothing;
+        L["str"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("getAndDecryptKredit", new Val[] { GetLocal(L, "card"), Val.Out(__v => L["CallFunc_getAndDecryptKredit_decryptedKredit"] = __v) });
     L_0029:
@@ -3815,7 +3815,7 @@ public static Val GetLogic(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_Logic = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["Logic"] = Val.Nothing;
+        L["Logic"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetGameMode_ReturnValue"] = H.Call("GetGameMode", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext") });
     L_001D:
@@ -3850,7 +3850,7 @@ public static Val GetMainBackgroundImage(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_Brush = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["Brush"] = Val.Nothing;
+        L["Brush"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("BranchOnPlatformType", new Val[] { self, Val.Out(__v => L["CallFunc_BranchOnPlatformType_Branches"] = __v) });
     L_0013:
@@ -3899,7 +3899,7 @@ public static Val GetMainBackgroundImageStill(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_Brush = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["Brush"] = Val.Nothing;
+        L["Brush"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("IsChinaISBN", new Val[] { Val.Ref("PlatformUtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_IsChinaISBN_is_ISBN"] = __v) });
     L_0036:
@@ -3948,7 +3948,7 @@ public static Val GetMatch(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_Match = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["Match"] = Val.Nothing;
+        L["Match"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetMatchController_ReturnValue"] = H.Call("GetMatchController", new Val[] { self, GetLocal(L, "__WorldContext") });
     L_001D:
@@ -3971,7 +3971,7 @@ public static Val GetMatchController(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_MatchController = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["MatchController"] = Val.Nothing;
+        L["MatchController"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
@@ -4007,7 +4007,7 @@ public static Val GetMovementSound(IHost H, Val self, Val[] args)
         L["rowName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_soundCue = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["soundCue"] = Val.Nothing;
+        L["soundCue"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("moveToFrontlineSounds"), GetLocal(L, "rowName"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0045:
@@ -4043,7 +4043,7 @@ public static Val getNationalLevelForFaction(IHost H, Val self, Val[] args)
         L["faction"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_level = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["level"] = Val.Nothing;
+        L["level"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetKardsGameInstancePure", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetKardsGameInstancePure_instance"] = __v) });
     L_0020:
@@ -4086,7 +4086,7 @@ public static Val GetNotificationText(IHost H, Val self, Val[] args)
         L["key"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_text = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["text"] = Val.Nothing;
+        L["text"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("textNotifications"), GetLocal(L, "category"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0045:
@@ -4133,7 +4133,7 @@ public static Val GetOnlineMatch(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_onlineMatch = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["onlineMatch"] = Val.Nothing;
+        L["onlineMatch"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
@@ -4169,7 +4169,7 @@ public static Val GetOrSpawnActorInPersistentLevel(IHost H, Val self, Val[] args
         L["ActorClass"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_Actor = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["Actor"] = Val.Nothing;
+        L["Actor"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
@@ -4216,7 +4216,7 @@ public static Val GetPlatformEnum(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_CurrentPlatform = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["CurrentPlatform"] = Val.Nothing;
+        L["CurrentPlatform"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("BranchOnPlatformType", new Val[] { self, Val.Out(__v => L["CallFunc_BranchOnPlatformType_Branches"] = __v) });
     L_0013:
@@ -4277,7 +4277,7 @@ public static Val GetPlayerStatistics(IHost H, Val self, Val[] args)
         L["forEnemy"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_stats = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["stats"] = Val.Nothing;
+        L["stats"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         if (!(GetLocal(L, "forEnemy")).AsBool()) goto L_005B;
     L_000E:
@@ -4318,7 +4318,7 @@ public static Val GetPressAndHoldTime(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_Time = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["Time"] = Val.Nothing;
+        L["Time"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["Time"] = Val.Of(0.5);
     L_001B:
@@ -4340,15 +4340,15 @@ public static Val GetProductItemDisplayInfo(IHost H, Val self, Val[] args)
         L["productName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_text = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["text"] = Val.Nothing;
+        L["text"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_icon = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["icon"] = Val.Nothing;
+        L["icon"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_hideQuantity = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["hideQuantity"] = Val.Nothing;
+        L["hideQuantity"] = args.Length > 4 ? args[4].In : Val.Nothing;
         var __out_helpBubbleString = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["helpBubbleString"] = Val.Nothing;
+        L["helpBubbleString"] = args.Length > 5 ? args[5].In : Val.Nothing;
         var __out_factionSpecific = args.Length > 6 ? args[6].As<Action<Val>>() : null;
-        L["factionSpecific"] = Val.Nothing;
+        L["factionSpecific"] = args.Length > 6 ? args[6].In : Val.Nothing;
     L_0000:
         L["text"] = Val.Of("");
     L_0014:
@@ -4382,7 +4382,7 @@ public static Val GetProjectileSound(IHost H, Val self, Val[] args)
         L["rowName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_soundCue = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["soundCue"] = Val.Nothing;
+        L["soundCue"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("projectileFiringSounds"), GetLocal(L, "rowName"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0045:
@@ -4417,17 +4417,17 @@ public static Val GetRankInfo(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_rank = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["rank"] = Val.Nothing;
+        L["rank"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_level = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["level"] = Val.Nothing;
+        L["level"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_stars = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["stars"] = Val.Nothing;
+        L["stars"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_badge = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["badge"] = Val.Nothing;
+        L["badge"] = args.Length > 4 ? args[4].In : Val.Nothing;
         var __out_text = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["text"] = Val.Nothing;
+        L["text"] = args.Length > 5 ? args[5].In : Val.Nothing;
         var __out_color = args.Length > 6 ? args[6].As<Action<Val>>() : null;
-        L["color"] = Val.Nothing;
+        L["color"] = args.Length > 6 ? args[6].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetKardsGameInstancePure", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetKardsGameInstancePure_instance"] = __v) });
     L_0020:
@@ -4492,13 +4492,13 @@ public static Val GetRankInfoForStars(IHost H, Val self, Val[] args)
         L["rankStars"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_level = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["level"] = Val.Nothing;
+        L["level"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_stars = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["stars"] = Val.Nothing;
+        L["stars"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_badge = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["badge"] = Val.Nothing;
+        L["badge"] = args.Length > 4 ? args[4].In : Val.Nothing;
         var __out_text = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["text"] = Val.Nothing;
+        L["text"] = args.Length > 5 ? args[5].In : Val.Nothing;
     L_0000:
         L["CallFunc_Divide_IntInt_ReturnValue"] = (GetLocal(L, "rankStars") / Val.Of(5));
     L_002A:
@@ -4547,7 +4547,7 @@ public static Val GetRarityDisplayName(IHost H, Val self, Val[] args)
         L["rarity"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_displayName = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["displayName"] = Val.Nothing;
+        L["displayName"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "rarity"), Val.Of(0)) != 0);
     L_001F:
@@ -4611,7 +4611,7 @@ public static Val GetRarityTextColor(IHost H, Val self, Val[] args)
         L["rarity"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_color = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["color"] = Val.Nothing;
+        L["color"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "rarity"), Val.Of(0)) != 0);
     L_001F:
@@ -4689,9 +4689,9 @@ public static Val GetRewardsFromNationLevelTable(IHost H, Val self, Val[] args)
         L["level"] = args.Length > 2 ? args[2] : Val.Nothing;
         L["__WorldContext"] = args.Length > 3 ? args[3] : Val.Nothing;
         var __out_rewardStruct1 = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["rewardStruct1"] = Val.Nothing;
+        L["rewardStruct1"] = args.Length > 4 ? args[4].In : Val.Nothing;
         var __out_rewardInDetails = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["rewardInDetails"] = Val.Nothing;
+        L["rewardInDetails"] = args.Length > 5 ? args[5].In : Val.Nothing;
     L_0000:
         __ef.Push(7264);
     L_0005:
@@ -5283,7 +5283,7 @@ public static Val GetScrollInput(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_scrollInput = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["scrollInput"] = Val.Nothing;
+        L["scrollInput"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetOrSpawnActor_ReturnValue"] = H.Call("GetOrSpawnActor", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Ref("ScrollInput") });
     L_0026:
@@ -5306,7 +5306,7 @@ public static Val GetServerInfo(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_ServerName = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["ServerName"] = Val.Nothing;
+        L["ServerName"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetDSession", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetDSession_dSession"] = __v) });
     L_0020:
@@ -5357,9 +5357,9 @@ public static Val GetServerLocalizationString(IHost H, Val self, Val[] args)
         L["default"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_localizedString = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["localizedString"] = Val.Nothing;
+        L["localizedString"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_found = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["found"] = Val.Nothing;
+        L["found"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "str") });
     L_0025:
@@ -5395,7 +5395,7 @@ public static Val GetStarterTutorialFaction(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_faction = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["faction"] = Val.Nothing;
+        L["faction"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         __ef.Push(299);
     L_0005:
@@ -5463,7 +5463,7 @@ public static Val GetTargetPointByTag(IHost H, Val self, Val[] args)
         L["Tag"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_Locator = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["Locator"] = Val.Nothing;
+        L["Locator"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(704);
     L_0005:
@@ -5552,7 +5552,7 @@ public static Val GetTournamentByID(IHost H, Val self, Val[] args)
         L["tournamentID"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_tournament = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["tournament"] = Val.Nothing;
+        L["tournament"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(633);
     L_0005:
@@ -5630,7 +5630,7 @@ public static Val GetTournamentDiamondPrice(IHost H, Val self, Val[] args)
         L["tournament"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_price = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["price"] = Val.Nothing;
+        L["price"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_Conv_JsonObjectToJsonValue_ReturnValue"] = H.Call("Conv_JsonObjectToJsonValue", new Val[] { Val.Ref("BlueprintJsonLibrary"), H.GetMember(GetLocal(L, "tournament"), "rules"), Val.Of("entry_prices") });
     L_003C:
@@ -5660,7 +5660,7 @@ public static Val GetTournamentGoldPrice(IHost H, Val self, Val[] args)
         L["tournament"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_price = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["price"] = Val.Nothing;
+        L["price"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_Conv_JsonObjectToJsonValue_ReturnValue"] = H.Call("Conv_JsonObjectToJsonValue", new Val[] { Val.Ref("BlueprintJsonLibrary"), H.GetMember(GetLocal(L, "tournament"), "rules"), Val.Of("entry_prices") });
     L_003C:
@@ -5755,7 +5755,7 @@ public static Val GetTutorialBP(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_NewParam = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["NewParam"] = Val.Nothing;
+        L["NewParam"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
@@ -5783,7 +5783,7 @@ public static Val GetTypeAsText(IHost H, Val self, Val[] args)
         L["type"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_asText = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["asText"] = Val.Nothing;
+        L["asText"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(1383);
     L_0005:
@@ -6121,7 +6121,7 @@ public static Val GetVersionInfo(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_Version = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["Version"] = Val.Nothing;
+        L["Version"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetDSession", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetDSession_dSession"] = __v) });
     L_0020:
@@ -6198,7 +6198,7 @@ public static Val GetVisualController(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_MatchController = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["MatchController"] = Val.Nothing;
+        L["MatchController"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
@@ -6234,7 +6234,7 @@ public static Val HandLocationFromSide(IHost H, Val self, Val[] args)
         L["side"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_location = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["location"] = Val.Nothing;
+        L["location"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(273);
     L_0005:
@@ -6328,7 +6328,7 @@ public static Val HasFinishedTutorial(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_hasFinished = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["hasFinished"] = Val.Nothing;
+        L["hasFinished"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("IsChinaISBN", new Val[] { Val.Ref("PlatformUtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_IsChinaISBN_is_ISBN"] = __v) });
     L_0036:
@@ -6367,7 +6367,7 @@ public static Val InTournamentLobby(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_inLobby = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["inLobby"] = Val.Nothing;
+        L["inLobby"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetDSession", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetDSession_dSession"] = __v) });
     L_0020:
@@ -6391,7 +6391,7 @@ public static Val isCardBlacklisted(IHost H, Val self, Val[] args)
         L["cardName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_itIs = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["itIs"] = Val.Nothing;
+        L["itIs"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetLogic", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetLogic_Logic"] = __v) });
     L_0020:
@@ -6431,7 +6431,7 @@ public static Val isCardComingBackFromReservedSoon(IHost H, Val self, Val[] args
         L["cardName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_comingBackSoon = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["comingBackSoon"] = Val.Nothing;
+        L["comingBackSoon"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(748);
     L_0005:
@@ -6519,7 +6519,7 @@ public static Val isCardLocked(IHost H, Val self, Val[] args)
         L["cardName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_isLocked = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["isLocked"] = Val.Nothing;
+        L["isLocked"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetDSession", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetDSession_dSession"] = __v) });
     L_0020:
@@ -6559,7 +6559,7 @@ public static Val isCardReserved(IHost H, Val self, Val[] args)
         L["cardName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_isReserved = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["isReserved"] = Val.Nothing;
+        L["isReserved"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(1538);
     L_0005:
@@ -6709,7 +6709,7 @@ public static Val IsCardToBeReservedSoon(IHost H, Val self, Val[] args)
         L["cardName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_toBeReservedSoon = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["toBeReservedSoon"] = Val.Nothing;
+        L["toBeReservedSoon"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(748);
     L_0005:
@@ -6882,7 +6882,7 @@ public static Val IsMouseOrFingerDown(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_isDown = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["isDown"] = Val.Nothing;
+        L["isDown"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetPlayerController_ReturnValue"] = H.Call("GetPlayerController", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Of(0) });
     L_0022:
@@ -6911,7 +6911,7 @@ public static Val IsMouseOrFingerUp(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_isUp = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["isUp"] = Val.Nothing;
+        L["isUp"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetPlayerController_ReturnValue"] = H.Call("GetPlayerController", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Of(0) });
     L_0022:
@@ -6944,7 +6944,7 @@ public static Val IsTablet(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_Tablet = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["Tablet"] = Val.Nothing;
+        L["Tablet"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["evalPoint"] = Val.Of(1);
     L_001B:
@@ -7035,7 +7035,7 @@ public static Val IsTargetArrowActive(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_isIt = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["isIt"] = Val.Nothing;
+        L["isIt"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
@@ -7065,13 +7065,13 @@ public static Val IsValidPack(IHost H, Val self, Val[] args)
         L["cardSet"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_valid = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["valid"] = Val.Nothing;
+        L["valid"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_locked = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["locked"] = Val.Nothing;
+        L["locked"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_unlockDate = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["unlockDate"] = Val.Nothing;
+        L["unlockDate"] = args.Length > 4 ? args[4].In : Val.Nothing;
         var __out_localizedPackName = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["localizedPackName"] = Val.Nothing;
+        L["localizedPackName"] = args.Length > 5 ? args[5].In : Val.Nothing;
     L_0000:
         __ef.Push(4005);
     L_0005:
@@ -7367,7 +7367,7 @@ public static Val IsWidgetPressed(IHost H, Val self, Val[] args)
         L["WidgetGeometry"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_IsPressed = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["IsPressed"] = Val.Nothing;
+        L["IsPressed"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetAbsoluteSize_ReturnValue"] = H.Call("GetAbsoluteSize", new Val[] { Val.Ref("SlateBlueprintLibrary"), GetLocal(L, "WidgetGeometry") });
     L_0025:
@@ -7456,7 +7456,7 @@ public static Val LastUnlockingNationPlayed(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_nation = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["nation"] = Val.Nothing;
+        L["nation"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetMatchController", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetMatchController_MatchController"] = __v) });
     L_0020:
@@ -7479,9 +7479,9 @@ public static Val Load_Language_Settings_From_Save(IHost H, Val self, Val[] args
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_cultureString = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["cultureString"] = Val.Nothing;
+        L["cultureString"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_hasSettings = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["hasSettings"] = Val.Nothing;
+        L["hasSettings"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_LoadLanguageSettings_ReturnValue"] = H.Call("LoadLanguageSettings", new Val[] { self, GetLocal(L, "CallFunc_LoadLanguageSettings_SaveFileValid") });
     L_0025:
@@ -7515,7 +7515,7 @@ public static Val LoadAlreadyLoggedIn(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_alreadyLoggedIn = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["alreadyLoggedIn"] = Val.Nothing;
+        L["alreadyLoggedIn"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_LoadGameFromSlot_ReturnValue"] = H.Call("LoadGameFromSlot", new Val[] { Val.Ref("GameplayStatics"), Val.Of("alreadyLoggedIn"), Val.Of(0) });
     L_002A:
@@ -7548,9 +7548,9 @@ public static Val LoadCasualModeOn(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_casualModeOn = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["casualModeOn"] = Val.Nothing;
+        L["casualModeOn"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_hasSettings = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["hasSettings"] = Val.Nothing;
+        L["hasSettings"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_LoadGameFromSlot_ReturnValue"] = H.Call("LoadGameFromSlot", new Val[] { Val.Ref("GameplayStatics"), Val.Of("casualModeOn"), Val.Of(0) });
     L_0027:
@@ -7588,9 +7588,9 @@ public static Val LoadCasualModeSeen(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_casualModeSeen = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["casualModeSeen"] = Val.Nothing;
+        L["casualModeSeen"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_hasSettings = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["hasSettings"] = Val.Nothing;
+        L["hasSettings"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_LoadGameFromSlot_ReturnValue"] = H.Call("LoadGameFromSlot", new Val[] { Val.Ref("GameplayStatics"), Val.Of("casualModeSeen"), Val.Of(0) });
     L_0029:
@@ -7628,7 +7628,7 @@ public static Val LoadClassicModeMessageSeen(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_hasIt = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["hasIt"] = Val.Nothing;
+        L["hasIt"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_LoadGameFromSlot_ReturnValue"] = H.Call("LoadGameFromSlot", new Val[] { Val.Ref("GameplayStatics"), Val.Of("classicModeConfig"), Val.Of(0) });
     L_002C:
@@ -7661,7 +7661,7 @@ public static Val LoadDraftHasBeenClicked(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_hasIt = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["hasIt"] = Val.Nothing;
+        L["hasIt"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_LoadGameFromSlot_ReturnValue"] = H.Call("LoadGameFromSlot", new Val[] { Val.Ref("GameplayStatics"), Val.Of("draftConfig"), Val.Of(0) });
     L_0026:
@@ -7694,9 +7694,9 @@ public static Val LoadGoldFirst(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_goldFirst = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["goldFirst"] = Val.Nothing;
+        L["goldFirst"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_hasSettings = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["hasSettings"] = Val.Nothing;
+        L["hasSettings"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_LoadGameFromSlot_ReturnValue"] = H.Call("LoadGameFromSlot", new Val[] { Val.Ref("GameplayStatics"), Val.Of("goldFirst"), Val.Of(0) });
     L_0024:
@@ -7734,9 +7734,9 @@ public static Val LoadLastRankFaction(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_faction = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["faction"] = Val.Nothing;
+        L["faction"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_hasSettings = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["hasSettings"] = Val.Nothing;
+        L["hasSettings"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_LoadGameFromSlot_ReturnValue"] = H.Call("LoadGameFromSlot", new Val[] { Val.Ref("GameplayStatics"), Val.Of("lastRankFaction"), Val.Of(0) });
     L_002A:
@@ -7774,9 +7774,9 @@ public static Val LoadLastTowCampaign(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_lastTowCampaign = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["lastTowCampaign"] = Val.Nothing;
+        L["lastTowCampaign"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_hasSettings = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["hasSettings"] = Val.Nothing;
+        L["hasSettings"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_DoesSaveGameExist_ReturnValue"] = H.Call("DoesSaveGameExist", new Val[] { Val.Ref("GameplayStatics"), Val.Of("lastTowConfig"), Val.Of(0) });
     L_0028:
@@ -7824,7 +7824,7 @@ public static Val LoadRecyclableCardsSeen(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_recycleCardsSeen = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["recycleCardsSeen"] = Val.Nothing;
+        L["recycleCardsSeen"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_LoadGameFromSlot_ReturnValue"] = H.Call("LoadGameFromSlot", new Val[] { Val.Ref("GameplayStatics"), Val.Of("recyclableCards"), Val.Of(0) });
     L_002A:
@@ -7853,7 +7853,7 @@ public static Val LoadShowVerifyEmail(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_ShowVerifyEmailMessage = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["ShowVerifyEmailMessage"] = Val.Nothing;
+        L["ShowVerifyEmailMessage"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_LoadGameFromSlot_ReturnValue"] = H.Call("LoadGameFromSlot", new Val[] { Val.Ref("GameplayStatics"), Val.Of("ShowVerifyEmail"), Val.Of(0) });
     L_002A:
@@ -7886,11 +7886,11 @@ public static Val loadUserGamePresets(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_chosenDeck = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["chosenDeck"] = Val.Nothing;
+        L["chosenDeck"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_deckID = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["deckID"] = Val.Nothing;
+        L["deckID"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_deckHeader = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["deckHeader"] = Val.Nothing;
+        L["deckHeader"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         L["CallFunc_LoadGameFromSlot_ReturnValue"] = H.Call("LoadGameFromSlot", new Val[] { Val.Ref("GameplayStatics"), Val.Of("UserGamePresets"), Val.Of(0) });
     L_002A:
@@ -7930,7 +7930,7 @@ public static Val LocationStringToEnum(IHost H, Val self, Val[] args)
         L["locationString"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_location = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["location"] = Val.Nothing;
+        L["location"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(935);
     L_0005:
@@ -8161,7 +8161,7 @@ public static Val MapToJsonString(IHost H, Val self, Val[] args)
         L["stringToStringMap"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_jsonString = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["jsonString"] = Val.Nothing;
+        L["jsonString"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(1142);
     L_0005:
@@ -8267,7 +8267,7 @@ public static Val MaxInDeck(IHost H, Val self, Val[] args)
         L["rarity"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_maxCards = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["maxCards"] = Val.Nothing;
+        L["maxCards"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "rarity"), Val.Of(0)) != 0);
     L_001F:
@@ -8336,7 +8336,7 @@ public static Val NotifyPlayer(IHost H, Val self, Val[] args)
         L["position"] = args.Length > 5 ? args[5] : Val.Nothing;
         L["__WorldContext"] = args.Length > 6 ? args[6] : Val.Nothing;
         var __out_theWidget = args.Length > 7 ? args[7].As<Action<Val>>() : null;
-        L["theWidget"] = Val.Nothing;
+        L["theWidget"] = args.Length > 7 ? args[7].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetLogic", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetLogic_Logic"] = __v) });
     L_0020:
@@ -8648,7 +8648,7 @@ public static Val RemoveNumericsFromString(IHost H, Val self, Val[] args)
         L["string"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_newString = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["newString"] = Val.Nothing;
+        L["newString"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(307);
     L_0005:
@@ -9339,7 +9339,7 @@ public static Val shouldShowBalanceChanges(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_ShowBalanceChanges = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["ShowBalanceChanges"] = Val.Nothing;
+        L["ShowBalanceChanges"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         __ef.Push(787);
     L_0005:
@@ -9435,7 +9435,7 @@ public static Val SideStringToEnum(IHost H, Val self, Val[] args)
         L["sideString"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_side = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["side"] = Val.Nothing;
+        L["side"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_IsEmpty_ReturnValue"] = H.Call("IsEmpty", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "sideString") });
     L_001D:
@@ -9479,7 +9479,7 @@ public static Val SpawnSound(IHost H, Val self, Val[] args)
         L["Sound"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_soundSpawned = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["soundSpawned"] = Val.Nothing;
+        L["soundSpawned"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetKardsGameInstance", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetKardsGameInstance_instance"] = __v) });
     L_0020:
@@ -9522,7 +9522,7 @@ public static Val StartDateAndEndDateValid(IHost H, Val self, Val[] args)
         L["endDate"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_isValid = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["isValid"] = Val.Nothing;
+        L["isValid"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         _ = H.Call("Get Server UTC", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_Get_Server_UTC_serverUTC"] = __v) });
     L_0020:
@@ -9633,7 +9633,7 @@ public static Val SupplyLineLocationFromSide(IHost H, Val self, Val[] args)
         L["side"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_location = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["location"] = Val.Nothing;
+        L["location"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "side"), Val.Of(1)) == 0);
     L_001F:

@@ -62,7 +62,7 @@ public static Val AddHQCard(IHost H, Val self, Val[] args)
         L["goldCard"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_AddedCard = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["AddedCard"] = Val.Nothing;
+        L["AddedCard"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetActorOfClass_ReturnValue"] = H.Call("GetActorOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("CardLibrary") });
     L_0026:
@@ -256,9 +256,9 @@ public static Val GetCurrentDeckFaction(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_CurrentFaction = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["CurrentFaction"] = Val.Nothing;
+        L["CurrentFaction"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_AllyFaction = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["AllyFaction"] = Val.Nothing;
+        L["AllyFaction"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetBPLevelParameters", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetBPLevelParameters_LevelParameters"] = __v) });
     L_0036:
@@ -289,9 +289,9 @@ public static Val GetDeckHeaderByID(IHost H, Val self, Val[] args)
         L["deckID"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_deckHeader = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["deckHeader"] = Val.Nothing;
+        L["deckHeader"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_found = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["found"] = Val.Nothing;
+        L["found"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         __ef.Push(1122);
     L_0005:
@@ -383,7 +383,7 @@ public static Val GetDeckName(IHost H, Val self, Val[] args)
         L["deckName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_deckNameOut = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["deckNameOut"] = Val.Nothing;
+        L["deckNameOut"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_Conv_StringToText_ReturnValue"] = H.Call("Conv_StringToText", new Val[] { Val.Ref("KismetTextLibrary"), GetLocal(L, "deckName") });
     L_0025:
@@ -430,7 +430,7 @@ public static Val GetHQCard(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_HQCard = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["HQCard"] = Val.Nothing;
+        L["HQCard"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         __ef.Push(689);
     L_0005:
@@ -513,7 +513,7 @@ public static Val GetLastPlayedDeckHeader(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_lastPlayedDeckHeader = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["lastPlayedDeckHeader"] = Val.Nothing;
+        L["lastPlayedDeckHeader"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         __ef.Push(1121);
     L_0005:
@@ -605,7 +605,7 @@ public static Val hasImportCodeInClipboard(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_hasImportDeckInClipboard = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["hasImportDeckInClipboard"] = Val.Nothing;
+        L["hasImportDeckInClipboard"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         __ef.Push(737);
     L_0005:
@@ -708,7 +708,7 @@ public static Val IsBrothersInArmsActive(IHost H, Val self, Val[] args)
         L["craftingTime"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_isIt = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["isIt"] = Val.Nothing;
+        L["isIt"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetEngineSubsystem_ReturnValue"] = H.Call("GetEngineSubsystem", new Val[] { self, Val.Ref("ConfigSubsystem") });
     L_001D:
@@ -762,7 +762,7 @@ public static Val isCardSetConfigActive(IHost H, Val self, Val[] args)
         L["CardSet"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_isActive = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["isActive"] = Val.Nothing;
+        L["isActive"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_ConvertCardSetEnumToSnakeCase_ReturnValue"] = H.Call("ConvertCardSetEnumToSnakeCase", new Val[] { self, GetLocal(L, "CardSet") });
     L_0025:
@@ -811,7 +811,7 @@ public static Val isCovertOpsActive(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_isIt = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["isIt"] = Val.Nothing;
+        L["isIt"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetEngineSubsystem_ReturnValue"] = H.Call("GetEngineSubsystem", new Val[] { self, Val.Ref("ConfigSubsystem") });
     L_001D:
@@ -852,7 +852,7 @@ public static Val IsHomefrontActive(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_isIt = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["isIt"] = Val.Nothing;
+        L["isIt"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetEngineSubsystem_ReturnValue"] = H.Call("GetEngineSubsystem", new Val[] { self, Val.Ref("ConfigSubsystem") });
     L_001D:
@@ -919,7 +919,7 @@ public static Val isNavalWarfareActive(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_isIt = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["isIt"] = Val.Nothing;
+        L["isIt"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetEngineSubsystem_ReturnValue"] = H.Call("GetEngineSubsystem", new Val[] { self, Val.Ref("ConfigSubsystem") });
     L_001D:
@@ -961,7 +961,7 @@ public static Val IsNeutralHQ(IHost H, Val self, Val[] args)
         L["Card"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_IsNeutralHQ = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["IsNeutralHQ"] = Val.Nothing;
+        L["IsNeutralHQ"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_Conv_NameToString_ReturnValue"] = H.Call("Conv_NameToString", new Val[] { Val.Ref("KismetStringLibrary"), H.GetMember(GetLocal(L, "Card"), "name") });
     L_003B:
@@ -990,7 +990,7 @@ public static Val isWinterWarActive(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_isIt = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["isIt"] = Val.Nothing;
+        L["isIt"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetEngineSubsystem_ReturnValue"] = H.Call("GetEngineSubsystem", new Val[] { self, Val.Ref("ConfigSubsystem") });
     L_001D:
@@ -1031,7 +1031,7 @@ public static Val RemoveHQCard(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_RemovedCard = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["RemovedCard"] = Val.Nothing;
+        L["RemovedCard"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         __ef.Push(945);
     L_0005:
@@ -1156,7 +1156,7 @@ public static Val TranslateNameForStarterDeck(IHost H, Val self, Val[] args)
         L["deckName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_translatedDeckName = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["translatedDeckName"] = Val.Nothing;
+        L["translatedDeckName"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchString_CmpSuccess"] = H.Call("NotEqual_StriStri", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "deckName"), Val.Of("USA Starter") });
     L_002A:

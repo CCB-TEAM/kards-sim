@@ -32,7 +32,7 @@ public static Val GetCardTextureReference(IHost H, Val self, Val[] args)
         var __out_Card_Texture_Reference = args.Length > 3 ? args[3].As<Action<Val>>() : null;
         L["Card Texture Reference"] = Val.Nothing;
         var __out_type = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["type"] = Val.Nothing;
+        L["type"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
         L["faction"] = Val.Of(0);
     L_0014:
@@ -204,7 +204,7 @@ public static Val GetDeepLinkReferrer(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_DeepLinkReferrer = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["DeepLinkReferrer"] = Val.Nothing;
+        L["DeepLinkReferrer"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("Is Android", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_Is_Android_IsAndroid"] = __v) });
     L_0020:
@@ -235,7 +235,7 @@ public static Val GetPlatformName(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_PlatformName = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["PlatformName"] = Val.Nothing;
+        L["PlatformName"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetPlatformName_ReturnValue"] = H.Call("GetPlatformName", new Val[] { Val.Ref("GameplayStatics") });
     L_001C:
@@ -274,7 +274,7 @@ public static Val Is_Android(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_IsAndroid = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["IsAndroid"] = Val.Nothing;
+        L["IsAndroid"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetPlatformName", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetPlatformName_PlatformName"] = __v) });
     L_0020:
@@ -305,7 +305,7 @@ public static Val Is_Android_Xsolla_User(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_isAndroidXsollaUser = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["isAndroidXsollaUser"] = Val.Nothing;
+        L["isAndroidXsollaUser"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("BranchOnProviderWithEditorTestSupport", new Val[] { self, GetLocal(L, "CallFunc_BranchOnProviderWithEditorTestSupport_Branches"), Val.False });
     L_0014:
@@ -370,7 +370,7 @@ public static Val IsAndroidDevice(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_IsAndroidDevice = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["IsAndroidDevice"] = Val.Nothing;
+        L["IsAndroidDevice"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("Is Android", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_Is_Android_IsAndroid"] = __v) });
     L_0020:
@@ -399,7 +399,7 @@ public static Val IsAndroidPhoneTextBoxInUse(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_IsAndroidTextBoxInUse = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["IsAndroidTextBoxInUse"] = Val.Nothing;
+        L["IsAndroidTextBoxInUse"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("IsAndroidDevice", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_IsAndroidDevice_IsAndroidDevice"] = __v) });
     L_0020:
@@ -444,7 +444,7 @@ public static Val IsBeta(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_IsBeta = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["IsBeta"] = Val.Nothing;
+        L["IsBeta"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetMyEditorBetaEnabled_ReturnValue"] = H.Call("GetMyEditorBetaEnabled", new Val[] { self });
     L_0014:
@@ -473,7 +473,7 @@ public static Val IsFirstLaunchFromDeepLink(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_FirstLaunch = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["FirstLaunch"] = Val.Nothing;
+        L["FirstLaunch"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_isConsole_ReturnValue"] = H.Call("isConsole", new Val[] { self });
     L_0014:
@@ -518,7 +518,7 @@ public static Val IsIOS(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_IsIos = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["IsIos"] = Val.Nothing;
+        L["IsIos"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetPlatformName", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetPlatformName_PlatformName"] = __v) });
     L_0020:

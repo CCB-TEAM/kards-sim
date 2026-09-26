@@ -90,7 +90,7 @@ public static Val ExecuteUbergraph_card_event_semper_fi(IHost H, Val self, Val[]
     L_0186:
         H.SetMember(self, "cardNameToConvertInto", Val.Name("card_unit_22nd_marines"));
     L_01A5:
-        _ = H.Call("ConvertCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardsToConvert"), H.GetMember(self, "cardID"), H.GetMember(self, "cardNameToConvertInto"), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ConvertCard_newCardIDs"] = __v) });
+        _ = H.Call("ConvertCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardsToConvert"), H.GetMember(self, "cardID"), H.GetMember(self, "cardNameToConvertInto"), Val.Of(0), Val.False, Val.Out(GetLocal(L, "CallFunc_ConvertCard_newCardIDs"), __v => L["CallFunc_ConvertCard_newCardIDs"] = __v) });
     L_01F3:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_020A:
@@ -116,9 +116,9 @@ public static Val ExecuteUbergraph_card_event_semper_fi(IHost H, Val self, Val[]
     L_02A7:
         __ef.Push(834);
     L_02AC:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_ConvertCard_newCardIDs"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_ConvertCard_newCardIDs"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item_1"), __v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_02E7:
-        _ = H.Call("AddCustomGameplayTag", new Val[] { H.GetMember(self, "cardFunction"), H.MakeArray(new Val[] { Val.Name("subtype.navy") }), GetLocal(L, "CallFunc_Array_Get_Item_1"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_AddCustomGameplayTag_qqq"] = __v) });
+        _ = H.Call("AddCustomGameplayTag", new Val[] { H.GetMember(self, "cardFunction"), H.MakeArray(new Val[] { Val.Name("subtype.navy") }), GetLocal(L, "CallFunc_Array_Get_Item_1"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_AddCustomGameplayTag_qqq"), __v => L["CallFunc_AddCustomGameplayTag_qqq"] = __v) });
     L_0341:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -139,9 +139,9 @@ public static Val ExecuteUbergraph_card_event_semper_fi(IHost H, Val self, Val[]
     L_03C7:
         L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_Array_Length_ReturnValue") - Val.Of(1));
     L_03F1:
-        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue"), Val.Out(__v => L["CallFunc_RandomIntFromRangeWithStream_randomResult"] = __v) });
+        _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue"), Val.Out(GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), __v => L["CallFunc_RandomIntFromRangeWithStream_randomResult"] = __v) });
     L_042C:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "cardsToRandom"), GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "cardsToRandom"), GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0467:
         H.SetMember(self, "tempPickedCard", GetLocal(L, "CallFunc_Array_Get_Item"));
     L_0482:
@@ -164,7 +164,7 @@ public static Val ExecuteUbergraph_card_event_semper_fi(IHost H, Val self, Val[]
     L_0525:
         goto L_00D1;
     L_052A:
-        _ = H.Call("GetDeckByside", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetDeckByside_deckCardIDs"] = __v) });
+        _ = H.Call("GetDeckByside", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs"), __v => L["CallFunc_GetDeckByside_deckCardIDs"] = __v) });
     L_0560:
         H.SetMember(self, "cardsToRandom", GetLocal(L, "CallFunc_GetDeckByside_deckCardIDs"));
     L_057B:

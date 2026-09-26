@@ -28,7 +28,7 @@ public static Val BuddyInviteAcceptedLoad(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_Accepted = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["Accepted"] = Val.Nothing;
+        L["Accepted"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_LoadGameFromSlot_ReturnValue"] = H.Call("LoadGameFromSlot", new Val[] { Val.Ref("GameplayStatics"), Val.Of("buddyProgram"), Val.Of(0) });
     L_0027:
@@ -84,7 +84,7 @@ public static Val CrateDayConfigsLoad(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_CrateDayAsString = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["CrateDayAsString"] = Val.Nothing;
+        L["CrateDayAsString"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_LoadGameFromSlot_ReturnValue"] = H.Call("LoadGameFromSlot", new Val[] { Val.Ref("GameplayStatics"), Val.Of("Crate"), Val.Of(0) });
     L_0020:
@@ -156,7 +156,7 @@ public static Val CrateResetDateLoad(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_CrateResetDate = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["CrateResetDate"] = Val.Nothing;
+        L["CrateResetDate"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_LoadGameFromSlot_ReturnValue"] = H.Call("LoadGameFromSlot", new Val[] { Val.Ref("GameplayStatics"), Val.Of("Crate"), Val.Of(0) });
     L_0020:
@@ -372,7 +372,7 @@ public static Val LastLoginStatusLoad(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_OutIsLastLoginSuccess = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["OutIsLastLoginSuccess"] = Val.Nothing;
+        L["OutIsLastLoginSuccess"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_LoadGameFromSlot_ReturnValue"] = H.Call("LoadGameFromSlot", new Val[] { Val.Ref("GameplayStatics"), Val.Of("lastLoginStatus"), Val.Of(0) });
     L_002A:
@@ -428,7 +428,7 @@ public static Val TournamentNotificationLoad(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_OutTournamentNotificationsUTC = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["OutTournamentNotificationsUTC"] = Val.Nothing;
+        L["OutTournamentNotificationsUTC"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_LoadGameFromSlot_ReturnValue"] = H.Call("LoadGameFromSlot", new Val[] { Val.Ref("GameplayStatics"), Val.Of("TournamentNotifications"), Val.Of(0) });
     L_0032:
@@ -460,7 +460,7 @@ public static Val TournamentNotificationSave(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_InTournamentNotificationsUTC = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["InTournamentNotificationsUTC"] = Val.Nothing;
+        L["InTournamentNotificationsUTC"] = args.Length > 0 ? args[0].In : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
     L_0000:
         L["slotName"] = Val.Of("TournamentNotifications");

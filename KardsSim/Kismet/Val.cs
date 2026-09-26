@@ -6,6 +6,23 @@ namespace KardsSim.Kismet;
 public enum VKind : byte { Nothing, Int, Bool, Float, Str, Name, Obj, Arr }
 
 /// <summary>
+/// 一个 out 实参槽：<b>调用方传进来的当前值</b> + 退出时的回写回调。
+///
+/// <para>
+/// 为什么要带初值：UE 的虚拟机把调用方求值后的实参送进被调帧，被调函数读 out 形参
+/// 读到的是那个值（<c>out</c> 只表示「还要写回」）。直译产物一度只发射回写回调、
+/// 被调帧把本地槽零初始化，于是「把 out 形参当输入读」的函数全部变成空操作
+/// （<c>--mode byref</c> 扫出 48 处）。见 <see cref="Val.In"/>。
+/// </para>
+/// </summary>
+public sealed class OutSlot
+{
+    public readonly Val Initial;
+    public readonly Action<Val> Set;
+    public OutSlot(Val initial, Action<Val> set) { Initial = initial; Set = set; }
+}
+
+/// <summary>
 /// Kismet 值。
 ///
 /// 直译器不做事后类型推断，因此每个值自带标签。逻辑（跳转、比较、时序）仍然是
@@ -39,14 +56,32 @@ public readonly struct Val
     /// <summary>
     /// out 实参占位。Kismet 的 out 参数是「可写位置」，直译时用回调表达：
     /// 宿主调用 <c>SetOut</c> 时回调把值写回局部/成员。
+    ///
+    /// <para>
+    /// <b>但它同时也是「可读位置」</b>：UE 的虚拟机把调用方求值后的实参送进被调帧，
+    /// 被调函数读 out 形参读到的是调用方传来的值，<c>out</c> 只表示「退出时还要写回」。
+    /// 所以真正的载体是 <see cref="OutSlot"/>：初值 + 写回回调。旧的单参重载
+    /// （只有写回、初值为空）仍然保留 —— 已生成的产物用的就是它，
+    /// 行为与以前一致（被调方读到的还是空）。
+    /// </para>
     /// </summary>
-    public static Val Out(Action<Val> setter) => new(VKind.Obj, 0, 0, setter);
+    public static Val Out(Action<Val> setter) => new(VKind.Obj, 0, 0, new OutSlot(Nothing, setter));
+
+    /// <summary>带初值的 out 占位：调用方把当前值一起送进去，被调帧可以读（见 <see cref="In"/>）。</summary>
+    public static Val Out(Val initial, Action<Val> setter) => new(VKind.Obj, 0, 0, new OutSlot(initial, setter));
+
+    /// <summary>out 占位里带着的「调用方当前值」。不是 out 占位时为空值。</summary>
+    public Val In => O is OutSlot s ? s.Initial : Nothing;
 
     /// <summary>若是 out 占位则回写；返回是否消费了该占位。</summary>
     public static bool TrySetOut(Val slot, Val v)
     {
-        if (slot.O is Action<Val> a) { a(v); return true; }
-        return false;
+        switch (slot.O)
+        {
+            case OutSlot s: s.Set(v); return true;
+            case Action<Val> a: a(v); return true;   // 兼容直接构造 Action 的旧路径
+            default: return false;
+        }
     }
 
     public static implicit operator Val(bool b) => Of(b);
@@ -96,7 +131,14 @@ public readonly struct Val
 
     public object AsObj() => O;
 
-    public T As<T>() => O is T t ? t : default;
+    public T As<T>()
+    {
+        if (O is T t) return t;
+        // 直译产物对 out 形参的取用方式是 args[i].As<Action<Val>>()（取写回回调）。
+        // 现在 out 占位的载体是 OutSlot，这里把写回回调透出去，产物不用改这一句。
+        if (O is OutSlot s && typeof(T) == typeof(Action<Val>)) return (T)(object)s.Set;
+        return default;
+    }
 
     // ---- 运算：全部经 AsFloat/AsInt 归一，与 Kismet 的数值提升一致 ----
 

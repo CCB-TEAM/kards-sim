@@ -34,9 +34,9 @@ public static Val ExecuteUbergraph_card_unit_grumman_hellcat2(IHost H, Val self,
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_0049:
-        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
+        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeDefense_qqq"), __v => L["CallFunc_ChangeDefense_qqq"] = __v) });
     L_0088:
         goto __halt;
     L_008A:
@@ -62,7 +62,7 @@ public static Val GetBeforeAttackAttackBuff(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["asAttacker"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_amount = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["amount"] = Val.Nothing;
+        L["amount"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         if (!(H.GetMember(self, "isSuppressed")).AsBool()) goto L_002A;
     L_000E:
@@ -91,7 +91,7 @@ public static Val GetBeforeAttackDefenseBuff(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["asAttacker"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_amount = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["amount"] = Val.Nothing;
+        L["amount"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         if (!(H.GetMember(self, "isSuppressed")).AsBool()) goto L_002A;
     L_000E:

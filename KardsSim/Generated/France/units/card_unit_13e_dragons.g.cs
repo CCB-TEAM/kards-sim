@@ -27,13 +27,13 @@ public static Val BlockCardFromBeingPlayedFromHand(IHost H, Val self, Val[] args
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_blocked = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["blocked"] = Val.Nothing;
+        L["blocked"] = args.Length > 0 ? args[0].In : Val.Nothing;
         var __out_reason = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["reason"] = Val.Nothing;
+        L["reason"] = args.Length > 1 ? args[1].In : Val.Nothing;
         var __out_reasonParam1 = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["reasonParam1"] = Val.Nothing;
+        L["reasonParam1"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_reasonParam2 = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["reasonParam2"] = Val.Nothing;
+        L["reasonParam2"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         if (!(H.GetMember(self, "otherUnitPlayed")).AsBool()) goto L_0075;
     L_000E:
@@ -98,7 +98,7 @@ public static Val ExecuteUbergraph_card_unit_13e_dragons(IHost H, Val self, Val[
     L_0048:
         L["CallFunc_Not_PreBool_ReturnValue"] = H.Call("Not_PreBool", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "Temp_bool_True_if_break_was_hit_Variable") });
     L_0065:
-        _ = H.Call("GetCardsPlayedFromHandThisTurn", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetCardsPlayedFromHandThisTurn_CardIDsPlayedThisTurn"] = __v) });
+        _ = H.Call("GetCardsPlayedFromHandThisTurn", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetCardsPlayedFromHandThisTurn_CardIDsPlayedThisTurn"), __v => L["CallFunc_GetCardsPlayedFromHandThisTurn_CardIDsPlayedThisTurn"] = __v) });
     L_0092:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsPlayedFromHandThisTurn_CardIDsPlayedThisTurn") });
     L_00CD:
@@ -121,13 +121,13 @@ public static Val ExecuteUbergraph_card_unit_13e_dragons(IHost H, Val self, Val[
     L_013E:
         __ef.Push(564);
     L_0143:
-        _ = H.Call("GetCardsPlayedFromHandThisTurn", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetCardsPlayedFromHandThisTurn_CardIDsPlayedThisTurn"] = __v) });
+        _ = H.Call("GetCardsPlayedFromHandThisTurn", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetCardsPlayedFromHandThisTurn_CardIDsPlayedThisTurn"), __v => L["CallFunc_GetCardsPlayedFromHandThisTurn_CardIDsPlayedThisTurn"] = __v) });
     L_0170:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsPlayedFromHandThisTurn_CardIDsPlayedThisTurn"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsPlayedFromHandThisTurn_CardIDsPlayedThisTurn"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_01AB:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_GetCardFromID_card"), __v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_01E1:
-        _ = H.Call("IsSameSideUnit", new Val[] { GetLocal(L, "CallFunc_GetCardFromID_card"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
+        _ = H.Call("IsSameSideUnit", new Val[] { GetLocal(L, "CallFunc_GetCardFromID_card"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsSameSideUnit_isIt"), __v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
     L_0213:
         if (!(GetLocal(L, "CallFunc_IsSameSideUnit_isIt")).AsBool())
         {
@@ -166,7 +166,7 @@ public static Val ExecuteUbergraph_card_unit_13e_dragons(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_027F:
-        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedInHand_isIt_1"] = __v) });
+        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedInHand_isIt_1"), __v => L["CallFunc_IsLocatedInHand_isIt_1"] = __v) });
     L_0292:
         if (!(GetLocal(L, "CallFunc_IsLocatedInHand_isIt_1")).AsBool())
         {
@@ -189,7 +189,7 @@ public static Val ExecuteUbergraph_card_unit_13e_dragons(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_02AB:
-        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
+        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsSideActive_active"), __v => L["CallFunc_IsSideActive_active"] = __v) });
     L_02C7:
         if (!(GetLocal(L, "CallFunc_IsSideActive_active")).AsBool())
         {
@@ -202,7 +202,7 @@ public static Val ExecuteUbergraph_card_unit_13e_dragons(IHost H, Val self, Val[
             }
         }
     L_02D1:
-        _ = H.Call("IsSameSideUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSameSideUnit_isIt_1"] = __v) });
+        _ = H.Call("IsSameSideUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsSameSideUnit_isIt_1"), __v => L["CallFunc_IsSameSideUnit_isIt_1"] = __v) });
     L_0303:
         if (!(GetLocal(L, "CallFunc_IsSameSideUnit_isIt_1")).AsBool())
         {
@@ -225,7 +225,7 @@ public static Val ExecuteUbergraph_card_unit_13e_dragons(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_0319:
-        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
+        _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedInHand_isIt"), __v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
     L_032C:
         if (!(GetLocal(L, "CallFunc_IsLocatedInHand_isIt")).AsBool())
         {

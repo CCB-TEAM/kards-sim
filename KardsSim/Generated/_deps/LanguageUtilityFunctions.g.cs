@@ -28,7 +28,7 @@ public static Val Get_Full_Campaign_for_Language(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_Texture = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["Texture"] = Val.Nothing;
+        L["Texture"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["Temp_softobject_Variable"] = Val.Ref("EX_StringConst");
     L_0015:
@@ -81,7 +81,7 @@ public static Val GetAllLanguages(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_languages = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["languages"] = Val.Nothing;
+        L["languages"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L["langs"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(546);
@@ -147,7 +147,7 @@ public static Val GetCurrentLanguageCode(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_OutLanguageCode = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["OutLanguageCode"] = Val.Nothing;
+        L["OutLanguageCode"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("Load Language Settings From Save", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_Load_Language_Settings_From_Save_cultureString"] = __v), Val.Out(__v => L["CallFunc_Load_Language_Settings_From_Save_hasSettings"] = __v) });
     L_003F:
@@ -184,7 +184,7 @@ public static Val GetFullCampaignImageForLanguage(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_Texture = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["Texture"] = Val.Nothing;
+        L["Texture"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["Temp_softobject_Variable"] = Val.Ref("EX_StringConst");
     L_0015:
@@ -237,7 +237,7 @@ public static Val GetLanguageTexts(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_Languages = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["Languages"] = Val.Nothing;
+        L["Languages"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L["LanguageTexts"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1147);
@@ -349,7 +349,7 @@ public static Val GetLocalizedCampaignArtText(IHost H, Val self, Val[] args)
         L["campaignName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_texture = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["texture"] = Val.Nothing;
+        L["texture"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetCurrentCulture_ReturnValue"] = H.Call("GetCurrentCulture", new Val[] { self });
     L_001C:
@@ -555,7 +555,7 @@ public static Val GetMonthNameByNumber(IHost H, Val self, Val[] args)
         L["number"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_month = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["month"] = Val.Nothing;
+        L["month"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchInteger_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "number"), Val.Of(1)) != 0);
     L_0022:
@@ -671,7 +671,7 @@ public static Val getOfficerRankTitle(IHost H, Val self, Val[] args)
         L["rank"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_rankTitle = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["rankTitle"] = Val.Nothing;
+        L["rankTitle"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_Conv_IntToString_ReturnValue"] = H.Call("Conv_IntToString", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "rank") });
     L_0025:
@@ -700,7 +700,7 @@ public static Val GetSingleCampaignForLanguage(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_Texture = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["Texture"] = Val.Nothing;
+        L["Texture"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["Temp_softobject_Variable"] = Val.Ref("EX_StringConst");
     L_0015:

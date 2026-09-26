@@ -179,7 +179,7 @@ public static Val Get_Next_Tournament_Date_Time(IHost H, Val self, Val[] args)
         L["InMiniSitnGo"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_OutDateTime = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["OutDateTime"] = Val.Nothing;
+        L["OutDateTime"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(2481);
     L_0005:
@@ -356,13 +356,13 @@ public static Val Get_Tournament_Schedule(IHost H, Val self, Val[] args)
         L["InMiniSitNGo"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_OutDays = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["OutDays"] = Val.Nothing;
+        L["OutDays"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_OutHourStart = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["OutHourStart"] = Val.Nothing;
+        L["OutHourStart"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_OutHourEnd = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["OutHourEnd"] = Val.Nothing;
+        L["OutHourEnd"] = args.Length > 4 ? args[4].In : Val.Nothing;
         var __out_OutText = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["OutText"] = Val.Nothing;
+        L["OutText"] = args.Length > 5 ? args[5].In : Val.Nothing;
     L["LocalDays"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(4163);
@@ -648,7 +648,7 @@ public static Val Get_Tournament_State(IHost H, Val self, Val[] args)
         L["InMiniSitNGo"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_OutTournamentState = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["OutTournamentState"] = Val.Nothing;
+        L["OutTournamentState"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         __ef.Push(1420);
     L_0005:
@@ -788,7 +788,7 @@ public static Val GetScheduleEndDateTime(IHost H, Val self, Val[] args)
         L["InMini"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_OutText = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["OutText"] = Val.Nothing;
+        L["OutText"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_AsTime_DateTime_ReturnValue"] = H.Call("AsTime_DateTime", new Val[] { Val.Ref("KismetTextLibrary"), H.GetMember(GetLocal(L, "InMini"), "end_date"), Val.Of(0) });
     L_0030:

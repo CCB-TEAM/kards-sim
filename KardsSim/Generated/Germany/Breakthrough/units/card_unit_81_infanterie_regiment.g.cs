@@ -31,11 +31,11 @@ public static Val OnCardDealDamage_ModifyDamageDealt(IHost H, Val self, Val[] ar
         L["fromAttack"] = args.Length > 2 ? args[2] : Val.Nothing;
         L["fromFight"] = args.Length > 3 ? args[3] : Val.Nothing;
         var __out_newDamage = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["newDamage"] = Val.Nothing;
+        L["newDamage"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
         L["CallFunc_BooleanOR_ReturnValue"] = Val.Of((GetLocal(L, "fromAttack")).AsBool() || (GetLocal(L, "fromFight")).AsBool());
     L_0026:
-        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "toCard"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
+        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "toCard"), Val.Out(GetLocal(L, "CallFunc_IsLocation_isIt"), __v => L["CallFunc_IsLocation_isIt"] = __v) });
     L_004F:
         L["CallFunc_BooleanOR_ReturnValue_1"] = Val.Of((H.GetMember(GetLocal(L, "toCard"), "hasGuard")).AsBool() || (GetLocal(L, "CallFunc_IsLocation_isIt")).AsBool());
     L_008B:

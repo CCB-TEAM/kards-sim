@@ -34,9 +34,9 @@ public static Val ExecuteUbergraph_card_unit_27th_mg_battalion(IHost H, Val self
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_001D:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1"), __v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_0046:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_0082:
@@ -46,17 +46,17 @@ public static Val ExecuteUbergraph_card_unit_27th_mg_battalion(IHost H, Val self
     L_00CE:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_1")).AsBool()) goto L_0205;
     L_00DC:
-        _ = H.Call("WasLeftMostCardWhenPlayedFromHand", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_WasLeftMostCardWhenPlayedFromHand_WasLeftMost"] = __v) });
+        _ = H.Call("WasLeftMostCardWhenPlayedFromHand", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardPlayed"), Val.Out(GetLocal(L, "CallFunc_WasLeftMostCardWhenPlayedFromHand_WasLeftMost"), __v => L["CallFunc_WasLeftMostCardWhenPlayedFromHand_WasLeftMost"] = __v) });
     L_0112:
         if (!(GetLocal(L, "CallFunc_WasLeftMostCardWhenPlayedFromHand_WasLeftMost")).AsBool()) goto L_016C;
     L_0120:
         _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID") });
     L_016C:
-        _ = H.Call("WasRightMostCardWhenPlayedFromHand", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_WasRightMostCardWhenPlayedFromHand_WasRightMost"] = __v) });
+        _ = H.Call("WasRightMostCardWhenPlayedFromHand", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardPlayed"), Val.Out(GetLocal(L, "CallFunc_WasRightMostCardWhenPlayedFromHand_WasRightMost"), __v => L["CallFunc_WasRightMostCardWhenPlayedFromHand_WasRightMost"] = __v) });
     L_01A2:
         if (!(GetLocal(L, "CallFunc_WasRightMostCardWhenPlayedFromHand_WasRightMost")).AsBool()) goto L_0205;
     L_01B0:
-        _ = H.Call("GiveShock", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveShock_qqq"] = __v) });
+        _ = H.Call("GiveShock", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_GiveShock_qqq"), __v => L["CallFunc_GiveShock_qqq"] = __v) });
     L_0205:
         goto __halt;
     L_0207:

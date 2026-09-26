@@ -66,7 +66,7 @@ public static Val ExecuteUbergraph_card_unit_99th_kholm(IHost H, Val self, Val[]
             }
         }
     L_0090:
-        _ = H.Call("IsSideActive", new Val[] { self, Val.Of(1), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
+        _ = H.Call("IsSideActive", new Val[] { self, Val.Of(1), Val.Out(GetLocal(L, "CallFunc_IsSideActive_active"), __v => L["CallFunc_IsSideActive_active"] = __v) });
     L_00A5:
         if (!(GetLocal(L, "CallFunc_IsSideActive_active")).AsBool())
         {
@@ -81,7 +81,7 @@ public static Val ExecuteUbergraph_card_unit_99th_kholm(IHost H, Val self, Val[]
     L_00AF:
         L["CallFunc_Multiply_IntInt_ReturnValue"] = (H.GetMember(self, "timesPlayedLeft") * Val.Of(-1));
     L_00D9:
-        _ = H.Call("GiveKreditsBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(1), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveKreditsBySide_qqq"] = __v) });
+        _ = H.Call("GiveKreditsBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(1), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_GiveKreditsBySide_qqq"), __v => L["CallFunc_GiveKreditsBySide_qqq"] = __v) });
     L_011A:
         goto L_000F;
     L_011F:
@@ -98,7 +98,7 @@ public static Val ExecuteUbergraph_card_unit_99th_kholm(IHost H, Val self, Val[]
             }
         }
     L_014B:
-        _ = H.Call("IsSideActive", new Val[] { self, Val.Of(2), Val.Out(__v => L["CallFunc_IsSideActive_active_1"] = __v) });
+        _ = H.Call("IsSideActive", new Val[] { self, Val.Of(2), Val.Out(GetLocal(L, "CallFunc_IsSideActive_active_1"), __v => L["CallFunc_IsSideActive_active_1"] = __v) });
     L_0160:
         if (!(GetLocal(L, "CallFunc_IsSideActive_active_1")).AsBool())
         {
@@ -113,7 +113,7 @@ public static Val ExecuteUbergraph_card_unit_99th_kholm(IHost H, Val self, Val[]
     L_016A:
         L["CallFunc_Multiply_IntInt_ReturnValue_1"] = (H.GetMember(self, "timesPlayedRight") * Val.Of(-1));
     L_0194:
-        _ = H.Call("GiveKreditsBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(2), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue_1"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveKreditsBySide_qqq_1"] = __v) });
+        _ = H.Call("GiveKreditsBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(2), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue_1"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_GiveKreditsBySide_qqq_1"), __v => L["CallFunc_GiveKreditsBySide_qqq_1"] = __v) });
     L_01D5:
         H.SetMember(self, "timesPlayedRight", Val.Of(0));
     L_01EC:

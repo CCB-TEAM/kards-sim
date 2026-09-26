@@ -942,6 +942,20 @@ public sealed class EngineHost : Host
                 Val.TrySetOut(a[^1], a.Length > 2 ? a[2] : Val.Nothing);
                 return Val.Nothing;
             },
+
+            // void OnBeforeRetreat(bool& stopAction)
+            // 实参（含接收者）：a[0]=接收者(要被送回手牌的那张卡) a[1]=out stopAction
+            //
+            // 和上面那条同类：原生事件、C++ 侧有默认体，卡牌**可选**覆盖。
+            // 默认体是「不阻止」→ 写 false。一张卡都没覆盖它（FnIndex 里没有这个名字），
+            // 所以宿主必须给出默认体；返回 Nothing 会让调用方把 stopAction 读成空值。
+            // 这条路径以前跑不到（by-ref 缺陷让 ApplyMakeCardRetreat 提前返回），
+            // 修好之后才第一次出现在 Unhandled 里。
+            ["OnBeforeRetreat"] = (h, a) =>
+            {
+                Val.TrySetOut(a[^1], Val.False);
+                return Val.Nothing;
+            },
         };
 
     /// <summary>
@@ -1558,6 +1572,11 @@ public sealed class EngineHost : Host
             ["InitStaticGameplayTags"] = (h, a) => Val.Nothing,
             // void GetStaticCampaignName(FString cardName, FString& campaignName)：out 槽。
             ["GetStaticCampaignName"] = (h, a) => { Val.TrySetOut(a[^1], Val.Of("")); return Val.Of(""); },
+            // void SetStaticCampaignName(FString cardName, FString campaignName)
+            //   写的是「静态卡数据」上的战役归属，纯元数据；无头模拟不维护静态表，登记为 no-op。
+            //   缺了它 42 次调用会进 Unhandled —— 这些路径以前是死的（by-ref 缺陷让
+            //   调用方提前返回），修好之后才第一次跑到，所以必须在这里接住。
+            ["SetStaticCampaignName"] = (h, a) => Val.Nothing,
 
             // ---------- 枚举助手 / 平台判定 ----------
             // void GetEnumeratorValueFromIndex(UEnum* Enum, uint8 Index, uint8& ReturnValue)

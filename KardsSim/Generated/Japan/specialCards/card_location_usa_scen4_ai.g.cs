@@ -36,7 +36,7 @@ public static Val ExecuteUbergraph_card_location_usa_scen4_ai(IHost H, Val self,
     L_000A:
         L["Temp_text_Variable"] = Val.Of("The enemy is getting dangerously close to the base, you must drive them back.");
     L_0091:
-        _ = H.Call("ShowCampaignMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.True, Val.False, Val.Of(0f), Val.False });
+        _ = H.Call("ShowCampaignMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.True, Val.False, Val.Of(0f), Val.False });
     L_00C6:
         goto __halt;
     L_00C8:

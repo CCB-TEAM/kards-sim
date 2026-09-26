@@ -28,13 +28,13 @@ public static Val OnBeforeFullyRepaired(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["cardRepaired"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_stopAction = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["stopAction"] = Val.Nothing;
+        L["stopAction"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0013:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_0068;
     L_0021:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "cardRepaired"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "cardRepaired"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_004A:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool()) goto L_0068;
     L_0058:

@@ -34,17 +34,17 @@ public static Val ExecuteUbergraph_card_unit_10th_para_battalion(IHost H, Val se
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_010D;
     L_002B:
-        _ = H.Call("hasPlayedOrderThisTurn", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_hasPlayedOrderThisTurn_hasPlayedOrderThisTurn"] = __v) });
+        _ = H.Call("hasPlayedOrderThisTurn", new Val[] { self, H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_hasPlayedOrderThisTurn_hasPlayedOrderThisTurn"), __v => L["CallFunc_hasPlayedOrderThisTurn_hasPlayedOrderThisTurn"] = __v) });
     L_004B:
         if (!(GetLocal(L, "CallFunc_hasPlayedOrderThisTurn_hasPlayedOrderThisTurn")).AsBool()) goto L_010D;
     L_0059:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_0098:
-        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
+        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeDefense_qqq"), __v => L["CallFunc_ChangeDefense_qqq"] = __v) });
     L_00D7:
         _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "cardID") });
     L_010D:
@@ -72,13 +72,13 @@ public static Val hasPlayedOrderThisTurn(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["SideToCheck"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_hasPlayedOrderThisTurn = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["hasPlayedOrderThisTurn"] = Val.Nothing;
+        L["hasPlayedOrderThisTurn"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         __ef.Push(795);
     L_0005:
         L["localHasPlayedOrderThisTurn"] = Val.False;
     L_0010:
-        _ = H.Call("GetCardsPlayedThisTurn", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetCardsPlayedThisTurn_cards"] = __v) });
+        _ = H.Call("GetCardsPlayedThisTurn", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetCardsPlayedThisTurn_cards"), __v => L["CallFunc_GetCardsPlayedThisTurn_cards"] = __v) });
     L_003D:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsPlayedThisTurn_cards") });
     L_0078:
@@ -106,7 +106,7 @@ public static Val hasPlayedOrderThisTurn(IHost H, Val self, Val[] args)
     L_01AE:
         __ef.Push(721);
     L_01B3:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsPlayedThisTurn_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsPlayedThisTurn_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_01EE:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "side"), GetLocal(L, "SideToCheck")) == 0);
     L_022A:
@@ -121,9 +121,9 @@ public static Val hasPlayedOrderThisTurn(IHost H, Val self, Val[] args)
             }
         }
     L_0234:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsPlayedThisTurn_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsPlayedThisTurn_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_026F:
-        _ = H.Call("IsOrder", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
+        _ = H.Call("IsOrder", new Val[] { GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(GetLocal(L, "CallFunc_IsOrder_isIt"), __v => L["CallFunc_IsOrder_isIt"] = __v) });
     L_0298:
         if (!(GetLocal(L, "CallFunc_IsOrder_isIt")).AsBool())
         {
@@ -194,9 +194,9 @@ public static Val ShouldHighlightInHand(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_shouldHighlight = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["shouldHighlight"] = Val.Nothing;
+        L["shouldHighlight"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
-        _ = H.Call("hasPlayedOrderThisTurn", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_hasPlayedOrderThisTurn_hasPlayedOrderThisTurn"] = __v) });
+        _ = H.Call("hasPlayedOrderThisTurn", new Val[] { self, H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_hasPlayedOrderThisTurn_hasPlayedOrderThisTurn"), __v => L["CallFunc_hasPlayedOrderThisTurn_hasPlayedOrderThisTurn"] = __v) });
     L_0020:
         if (!(GetLocal(L, "CallFunc_hasPlayedOrderThisTurn_hasPlayedOrderThisTurn")).AsBool()) goto L_003E;
     L_002E:

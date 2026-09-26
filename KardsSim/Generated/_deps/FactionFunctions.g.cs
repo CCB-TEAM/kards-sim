@@ -29,7 +29,7 @@ public static Val Get_Faction_Icon_256_Air(IHost H, Val self, Val[] args)
         L["InFaction"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_OutSoftTexRef = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["OutSoftTexRef"] = Val.Nothing;
+        L["OutSoftTexRef"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"] = H.Call("GetEnumeratorUserFriendlyName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("EFactionEnum"), GetLocal(L, "InFaction") });
     L_002E:
@@ -71,7 +71,7 @@ public static Val GetFactionIcon_256(IHost H, Val self, Val[] args)
         L["InFaction"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_OutSoftTexRef = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["OutSoftTexRef"] = Val.Nothing;
+        L["OutSoftTexRef"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"] = H.Call("GetEnumeratorUserFriendlyName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("EFactionEnum"), GetLocal(L, "InFaction") });
     L_002E:
@@ -113,7 +113,7 @@ public static Val GetFactionIcon_256_Color(IHost H, Val self, Val[] args)
         L["InFaction"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_OutSoftTexRef = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["OutSoftTexRef"] = Val.Nothing;
+        L["OutSoftTexRef"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"] = H.Call("GetEnumeratorUserFriendlyName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("EFactionEnum"), GetLocal(L, "InFaction") });
     L_002E:
@@ -155,7 +155,7 @@ public static Val GetFactionIcon_512_ColorHover(IHost H, Val self, Val[] args)
         L["InFaction"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_OutSoftTexRef = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["OutSoftTexRef"] = Val.Nothing;
+        L["OutSoftTexRef"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"] = H.Call("GetEnumeratorUserFriendlyName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("EFactionEnum"), GetLocal(L, "InFaction") });
     L_002E:
@@ -196,7 +196,7 @@ public static Val GetFactionIconAsMaterial(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_material = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["material"] = Val.Nothing;
+        L["material"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         goto __halt;
     L_0002:
@@ -217,7 +217,7 @@ public static Val GetFactionIconForCard(IHost H, Val self, Val[] args)
         L["InCardObject"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_OutSoftTexture = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["OutSoftTexture"] = Val.Nothing;
+        L["OutSoftTexture"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetEngineSubsystem_ReturnValue"] = H.Call("GetEngineSubsystem", new Val[] { self, Val.Ref("ConfigSubsystem") });
     L_001D:
@@ -261,7 +261,7 @@ public static Val GetFactionPackText(IHost H, Val self, Val[] args)
         L["Pluralisable"] = args.Length > 2 ? args[2] : Val.Nothing;
         L["__WorldContext"] = args.Length > 3 ? args[3] : Val.Nothing;
         var __out_Text = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["Text"] = Val.Nothing;
+        L["Text"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
         L["Temp_text_Variable"] = Val.Of("");
     L_0014:
@@ -451,9 +451,9 @@ public static Val GetFontByFaction(IHost H, Val self, Val[] args)
         L["Faction"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_FactionFont = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["FactionFont"] = Val.Nothing;
+        L["FactionFont"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_CustomFontSize = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["CustomFontSize"] = Val.Nothing;
+        L["CustomFontSize"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "Faction"), Val.Of(4)) == 0);
     L_001F:

@@ -44,7 +44,7 @@ public static Val ExecuteUbergraph_card_location_german_scen4_ai(IHost H, Val se
     L_006B:
         L["Temp_text_Variable"] = Val.Of("Blast! We have lost our valuable intelligence unit to the enemy.");
     L_00E5:
-        _ = H.Call("ShowCampaignMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.True, Val.False, Val.Of(0f), Val.False });
+        _ = H.Call("ShowCampaignMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.True, Val.False, Val.Of(0f), Val.False });
     L_011A:
         goto __halt;
     L_011C:

@@ -29,7 +29,7 @@ public static Val GetCrateRewards(IHost H, Val self, Val[] args)
         L["crateTier"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_Array = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["Array"] = Val.Nothing;
+        L["Array"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchInteger_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "crateTier"), Val.Of(1)) != 0);
     L_0022:
@@ -389,11 +389,11 @@ public static Val GetCrateTierInfo(IHost H, Val self, Val[] args)
         L["tier"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_crateTier = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["crateTier"] = Val.Nothing;
+        L["crateTier"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_percentageTowardsNextCrate = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["percentageTowardsNextCrate"] = Val.Nothing;
+        L["percentageTowardsNextCrate"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_tierRewards = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["tierRewards"] = Val.Nothing;
+        L["tierRewards"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
         L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "tier"), Val.Of(0)) > 0);
     L_0022:
@@ -530,7 +530,7 @@ public static Val GetFinishedUnlockingFaction(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_NewParam = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["NewParam"] = Val.Nothing;
+        L["NewParam"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         __ef.Push(1137);
     L_0005:
@@ -641,7 +641,7 @@ public static Val GetMaxNationalLevel(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_NewParam = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["NewParam"] = Val.Nothing;
+        L["NewParam"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("IsChinaISBN", new Val[] { Val.Ref("PlatformUtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_IsChinaISBN_is_ISBN"] = __v) });
     L_0036:
@@ -671,7 +671,7 @@ public static Val HadBattlePassOnDate(IHost H, Val self, Val[] args)
         L["InDate"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_hasPass = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["hasPass"] = Val.Nothing;
+        L["hasPass"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetEquipmentBP", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetEquipmentBP_Equipment"] = __v) });
     L_0036:
@@ -696,7 +696,7 @@ public static Val HasBattlePass(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_hasPass = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["hasPass"] = Val.Nothing;
+        L["hasPass"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetEquipmentBP", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetEquipmentBP_Equipment"] = __v) });
     L_0036:
@@ -721,7 +721,7 @@ public static Val IsTutorialFinished(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_Finished = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["Finished"] = Val.Nothing;
+        L["Finished"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("IsTutorialFinishedForFaction", new Val[] { self, Val.Of(1), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_IsTutorialFinishedForFaction_IsFinished"] = __v) });
     L_0022:
@@ -749,7 +749,7 @@ public static Val IsTutorialFinishedForFaction(IHost H, Val self, Val[] args)
         L["Faction"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_IsFinished = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["IsFinished"] = Val.Nothing;
+        L["IsFinished"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("getNationalLevelForFaction", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "Faction"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_getNationalLevelForFaction_level"] = __v) });
     L_003F:
@@ -851,7 +851,7 @@ public static Val Player_Info_Add_New_Cards(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_newCards = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["newCards"] = Val.Nothing;
+        L["newCards"] = args.Length > 0 ? args[0].In : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
     L_0000:
         __ef.Push(1335);
@@ -1255,7 +1255,7 @@ public static Val PlayerInfoGetCurrentFactionUnlockingStatus(IHost H, Val self, 
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_UnlockingDone = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["UnlockingDone"] = Val.Nothing;
+        L["UnlockingDone"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetLogic", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetLogic_Logic"] = __v) });
     L_0036:
@@ -1282,7 +1282,7 @@ public static Val PlayerInfoGetDoubleXpEndDate(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_doubleXpEndDate = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["doubleXpEndDate"] = Val.Nothing;
+        L["doubleXpEndDate"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetPlayerInfo", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetPlayerInfo_Kards_Player_Info"] = __v) });
     L_0036:
@@ -1306,7 +1306,7 @@ public static Val PlayerInfoGetLastNationalLevelClaimed(IHost H, Val self, Val[]
         L["faction"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_lastClaimedLevel = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["lastClaimedLevel"] = Val.Nothing;
+        L["lastClaimedLevel"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetPlayerInfo", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetPlayerInfo_Kards_Player_Info"] = __v) });
     L_0036:
@@ -1369,7 +1369,7 @@ public static Val PlayerInfoGetPlayerName(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_playerName = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["playerName"] = Val.Nothing;
+        L["playerName"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetPlayerInfo", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetPlayerInfo_Kards_Player_Info"] = __v) });
     L_0036:
@@ -1392,7 +1392,7 @@ public static Val PlayerInfoGetTotalUnlockingCampaignsCompleted(IHost H, Val sel
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_OutCompletedCount = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["OutCompletedCount"] = Val.Nothing;
+        L["OutCompletedCount"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("getNationalLevelForFaction", new Val[] { Val.Ref("UtilityFunctions"), Val.Of(1), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_getNationalLevelForFaction_level_4"] = __v) });
     L_0038:
@@ -1474,7 +1474,7 @@ public static Val PlayerInfoIsCardNew(IHost H, Val self, Val[] args)
         L["cardName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_isNew = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["isNew"] = Val.Nothing;
+        L["isNew"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_Conv_NameToString_ReturnValue"] = H.Call("Conv_NameToString", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "cardName") });
     L_0025:
@@ -1820,7 +1820,7 @@ public static Val WasTutorialSkipped(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_wasSkipped = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["wasSkipped"] = Val.Nothing;
+        L["wasSkipped"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetPlayerInfo", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetPlayerInfo_Kards_Player_Info"] = __v) });
     L_0036:

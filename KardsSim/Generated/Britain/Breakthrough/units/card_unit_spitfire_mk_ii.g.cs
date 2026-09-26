@@ -38,29 +38,29 @@ public static Val ExecuteUbergraph_card_unit_spitfire_mk_ii(IHost H, Val self, V
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_0145;
     L_002B:
-        _ = H.Call("hasGuardAdjacentUnit", new Val[] { self, Val.Out(__v => L["CallFunc_hasGuardAdjacentUnit_hasGuardAdjacentUnit"] = __v) });
+        _ = H.Call("hasGuardAdjacentUnit", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_hasGuardAdjacentUnit_hasGuardAdjacentUnit"), __v => L["CallFunc_hasGuardAdjacentUnit_hasGuardAdjacentUnit"] = __v) });
     L_0042:
         if (!(GetLocal(L, "CallFunc_hasGuardAdjacentUnit_hasGuardAdjacentUnit")).AsBool()) goto L_007F;
     L_0050:
-        _ = H.Call("isBuffedByCard", new Val[] { self, H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
+        _ = H.Call("isBuffedByCard", new Val[] { self, H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed"), __v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
     L_006C:
         if (!(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed")).AsBool()) goto L_00ED;
     L_007A:
         goto L_0145;
     L_007F:
-        _ = H.Call("isBuffedByCard", new Val[] { self, H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed_1"] = __v) });
+        _ = H.Call("isBuffedByCard", new Val[] { self, H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed_1"), __v => L["CallFunc_isBuffedByCard_isBuffed_1"] = __v) });
     L_009B:
         if (!(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed_1")).AsBool()) goto L_0145;
     L_00A9:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq_1"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq_1"), __v => L["CallFunc_ChangeAttack_qqq_1"] = __v) });
     L_00E8:
         goto L_0145;
     L_00ED:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(2), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(2), Val.Of(0), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_012C:
         goto L_0145;
     L_0131:
@@ -103,13 +103,13 @@ public static Val hasGuardAdjacentUnit(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_hasGuardAdjacentUnit = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["hasGuardAdjacentUnit"] = Val.Nothing;
+        L["hasGuardAdjacentUnit"] = args.Length > 0 ? args[0].In : Val.Nothing;
     L_0000:
         __ef.Push(542);
     L_0005:
         L["tmpHasGuardUnitAdjacent"] = Val.False;
     L_0010:
-        _ = H.Call("GetAdjacentCards", new Val[] { H.GetMember(self, "cardFunction"), self, Val.False, Val.Out(__v => L["CallFunc_GetAdjacentCards_adjacentCards"] = __v) });
+        _ = H.Call("GetAdjacentCards", new Val[] { H.GetMember(self, "cardFunction"), self, Val.False, Val.Out(GetLocal(L, "CallFunc_GetAdjacentCards_adjacentCards"), __v => L["CallFunc_GetAdjacentCards_adjacentCards"] = __v) });
     L_003F:
         L["Temp_bool_True_if_break_was_hit_Variable"] = Val.False;
     L_004A:
@@ -131,7 +131,7 @@ public static Val hasGuardAdjacentUnit(IHost H, Val self, Val[] args)
     L_0145:
         __ef.Push(468);
     L_014A:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAdjacentCards_adjacentCards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAdjacentCards_adjacentCards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0185:
         if (!(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "hasGuard")).AsBool())
         {

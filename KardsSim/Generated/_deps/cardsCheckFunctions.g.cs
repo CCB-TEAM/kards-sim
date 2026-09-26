@@ -31,12 +31,12 @@ public static Val CanAttack(IHost H, Val self, Val[] args)
         L["attackerKredits"] = args.Length > 2 ? args[2] : Val.Nothing;
         L["currentTurn"] = args.Length > 3 ? args[3] : Val.Nothing;
         var __out_cardsInAttackedLocation = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["cardsInAttackedLocation"] = Val.Nothing;
+        L["cardsInAttackedLocation"] = args.Length > 4 ? args[4].In : Val.Nothing;
         L["__WorldContext"] = args.Length > 5 ? args[5] : Val.Nothing;
         var __out_canAttack = args.Length > 6 ? args[6].As<Action<Val>>() : null;
-        L["canAttack"] = Val.Nothing;
+        L["canAttack"] = args.Length > 6 ? args[6].In : Val.Nothing;
         var __out_failReason = args.Length > 7 ? args[7].As<Action<Val>>() : null;
-        L["failReason"] = Val.Nothing;
+        L["failReason"] = args.Length > 7 ? args[7].In : Val.Nothing;
         var __out_Reason_Param_1 = args.Length > 8 ? args[8].As<Action<Val>>() : null;
         L["Reason Param 1"] = Val.Nothing;
     L_0000:
@@ -970,13 +970,13 @@ public static Val CanOtherCardBeTargetted(IHost H, Val self, Val[] args)
         L["byPlayFromHand"] = args.Length > 2 ? args[2] : Val.Nothing;
         L["__WorldContext"] = args.Length > 3 ? args[3] : Val.Nothing;
         var __out_CanIt = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["CanIt"] = Val.Nothing;
+        L["CanIt"] = args.Length > 4 ? args[4].In : Val.Nothing;
         var __out_Reason = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["Reason"] = Val.Nothing;
+        L["Reason"] = args.Length > 5 ? args[5].In : Val.Nothing;
         var __out_ReasonParam1 = args.Length > 6 ? args[6].As<Action<Val>>() : null;
-        L["ReasonParam1"] = Val.Nothing;
+        L["ReasonParam1"] = args.Length > 6 ? args[6].In : Val.Nothing;
         var __out_ReasonParam2 = args.Length > 7 ? args[7].As<Action<Val>>() : null;
-        L["ReasonParam2"] = Val.Nothing;
+        L["ReasonParam2"] = args.Length > 7 ? args[7].In : Val.Nothing;
     L_0000:
         __ef.Push(710);
     L_0005:
@@ -1059,9 +1059,9 @@ public static Val CanSelectAsTarget(IHost H, Val self, Val[] args)
         L["byPlayFromHand"] = args.Length > 2 ? args[2] : Val.Nothing;
         L["__WorldContext"] = args.Length > 3 ? args[3] : Val.Nothing;
         var __out_can = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["can"] = Val.Nothing;
+        L["can"] = args.Length > 4 ? args[4].In : Val.Nothing;
         var __out_Reason = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["Reason"] = Val.Nothing;
+        L["Reason"] = args.Length > 5 ? args[5].In : Val.Nothing;
         var __out_Reason_Param_1 = args.Length > 6 ? args[6].As<Action<Val>>() : null;
         L["Reason Param 1"] = Val.Nothing;
         var __out_Reason_Param_2 = args.Length > 7 ? args[7].As<Action<Val>>() : null;
@@ -1228,7 +1228,7 @@ public static Val getActiveEffects(IHost H, Val self, Val[] args)
         L["card"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_effects = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["effects"] = Val.Nothing;
+        L["effects"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L["effectsOnCard"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(4227);

@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_unit_f4f_wildcat(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("SpawnNextToCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Name("card_unit_brewster_f2a"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_SpawnNextToCard_spawnedCardID"] = __v), Val.False, Val.False, Val.Of(0), Val.False });
+        _ = H.Call("SpawnNextToCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Name("card_unit_brewster_f2a"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_SpawnNextToCard_spawnedCardID"), __v => L["CallFunc_SpawnNextToCard_spawnedCardID"] = __v), Val.False, Val.False, Val.Of(0), Val.False });
     L_005B:
         goto __halt;
     L_005D:

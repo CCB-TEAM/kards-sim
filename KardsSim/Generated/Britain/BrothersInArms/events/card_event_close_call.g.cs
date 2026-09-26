@@ -34,11 +34,11 @@ public static Val ExecuteUbergraph_card_event_close_call(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
+        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, H.GetVar("K2Node_Event_cardPlayed"), Val.Out(GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt"), __v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
     L_0026:
         if (!(GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt")).AsBool()) goto L_01A8;
     L_0034:
-        _ = H.Call("IsOrder", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
+        _ = H.Call("IsOrder", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(GetLocal(L, "CallFunc_IsOrder_isIt"), __v => L["CallFunc_IsOrder_isIt"] = __v) });
     L_005D:
         if (!(GetLocal(L, "CallFunc_IsOrder_isIt")).AsBool()) goto L_01A8;
     L_006B:
@@ -46,7 +46,7 @@ public static Val ExecuteUbergraph_card_event_close_call(IHost H, Val self, Val[
     L_009E:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_01A8;
     L_00AC:
-        _ = H.Call("IsUnit", new Val[] { H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "currentTarget"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "currentTarget"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_00EB:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool()) goto L_01A8;
     L_00F9:
@@ -54,7 +54,7 @@ public static Val ExecuteUbergraph_card_event_close_call(IHost H, Val self, Val[
     L_014B:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_01A8;
     L_0159:
-        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
+        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GotchaTriggered_qqq"), __v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
     L_01A8:
         goto __halt;
     L_01AA:
@@ -80,9 +80,9 @@ public static Val OnBeforeOtherCardDeploymentTrigger(IHost H, Val self, Val[] ar
         var __ret = Val.Nothing;
         L["cardDeploying"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_cancelDeploymentEffect = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["cancelDeploymentEffect"] = Val.Nothing;
+        L["cancelDeploymentEffect"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
-        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, GetLocal(L, "cardDeploying"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
+        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, GetLocal(L, "cardDeploying"), Val.Out(GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt"), __v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
     L_001C:
         if (!(GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt")).AsBool()) goto L_018F;
     L_002A:
@@ -90,7 +90,7 @@ public static Val OnBeforeOtherCardDeploymentTrigger(IHost H, Val self, Val[] ar
     L_005D:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_018F;
     L_006B:
-        _ = H.Call("IsUnit", new Val[] { H.GetMember(GetLocal(L, "cardDeploying"), "currentTarget"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetMember(GetLocal(L, "cardDeploying"), "currentTarget"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_00AA:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetMember(GetLocal(L, "cardDeploying"), "currentTarget"), "side"), H.GetMember(self, "side")) == 0);
     L_00FC:
@@ -98,7 +98,7 @@ public static Val OnBeforeOtherCardDeploymentTrigger(IHost H, Val self, Val[] ar
     L_0122:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_018F;
     L_0130:
-        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(GetLocal(L, "cardDeploying"), "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
+        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(GetLocal(L, "cardDeploying"), "cardID"), Val.False, Val.False, Val.Out(GetLocal(L, "CallFunc_GotchaTriggered_qqq"), __v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
     L_017F:
         L["cancelDeploymentEffect"] = Val.True;
     L_018A:

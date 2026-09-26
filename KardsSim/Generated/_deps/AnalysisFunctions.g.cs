@@ -29,7 +29,7 @@ public static Val Get_Total_Number_Of_Widgets(IHost H, Val self, Val[] args)
         L["InAdditionalInfoString"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_OutNumberOfWidgets = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["OutNumberOfWidgets"] = Val.Nothing;
+        L["OutNumberOfWidgets"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetAllWidgetsOfClass_FoundWidgets"] = H.MakeArray(new Val[] {  });
     L_000B:
@@ -99,7 +99,7 @@ public static Val GetNumberOfWidgetsOfClass(IHost H, Val self, Val[] args)
         L["InWidgetClass"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_OutNumWidgets = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["OutNumWidgets"] = Val.Nothing;
+        L["OutNumWidgets"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetAllWidgetsOfClass_FoundWidgets"] = H.MakeArray(new Val[] {  });
     L_000B:

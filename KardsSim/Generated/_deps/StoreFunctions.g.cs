@@ -29,9 +29,9 @@ public static Val GetAltArtCardNameAndIndex(IHost H, Val self, Val[] args)
         L["Name"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_CardName = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["CardName"] = Val.Nothing;
+        L["CardName"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_Index = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["Index"] = Val.Nothing;
+        L["Index"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         L["CallFunc_Split_ReturnValue"] = H.Call("Split", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "Name"), Val.Of("alt_"), GetLocal(L, "CallFunc_Split_LeftS"), GetLocal(L, "CallFunc_Split_RightS"), Val.Of(1), Val.Of(0) });
     L_0039:
@@ -64,11 +64,11 @@ public static Val GetCardInfo(IHost H, Val self, Val[] args)
         L["sourceString"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_text = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["text"] = Val.Nothing;
+        L["text"] = args.Length > 2 ? args[2].In : Val.Nothing;
         var __out_icon = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["icon"] = Val.Nothing;
+        L["icon"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_bubbleString = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["bubbleString"] = Val.Nothing;
+        L["bubbleString"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
         L["CallFunc_Split_ReturnValue"] = H.Call("Split", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "sourceString"), Val.Of("card_"), GetLocal(L, "CallFunc_Split_LeftS"), GetLocal(L, "CallFunc_Split_RightS"), Val.Of(1), Val.Of(0) });
     L_003A:
@@ -210,7 +210,7 @@ public static Val GetCardValue(IHost H, Val self, Val[] args)
         L["CardName"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_Value = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["Value"] = Val.Nothing;
+        L["Value"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CardName") });
     L_0025:
@@ -261,7 +261,7 @@ public static Val GetCurrentExtended8DayOffer(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_Offer = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["Offer"] = Val.Nothing;
+        L["Offer"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetEngineSubsystem_ReturnValue"] = H.Call("GetEngineSubsystem", new Val[] { self, Val.Ref("ConfigSubsystem") });
     L_001D:
@@ -341,7 +341,7 @@ public static Val GetDeckTotalValue(IHost H, Val self, Val[] args)
         L["DeckCode"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_DeckTotalValue = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["DeckTotalValue"] = Val.Nothing;
+        L["DeckTotalValue"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(824);
     L_0005:
@@ -418,15 +418,15 @@ public static Val GetDisplayInfo(IHost H, Val self, Val[] args)
         L["storeItem"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_text = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["text"] = Val.Nothing;
+        L["text"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_icon = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["icon"] = Val.Nothing;
+        L["icon"] = args.Length > 4 ? args[4].In : Val.Nothing;
         var __out_hideQuantity = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["hideQuantity"] = Val.Nothing;
+        L["hideQuantity"] = args.Length > 5 ? args[5].In : Val.Nothing;
         var __out_helpBubbleString = args.Length > 6 ? args[6].As<Action<Val>>() : null;
-        L["helpBubbleString"] = Val.Nothing;
+        L["helpBubbleString"] = args.Length > 6 ? args[6].In : Val.Nothing;
         var __out_factionSpecific = args.Length > 7 ? args[7].As<Action<Val>>() : null;
-        L["factionSpecific"] = Val.Nothing;
+        L["factionSpecific"] = args.Length > 7 ? args[7].In : Val.Nothing;
     L_0000:
         __ef.Push(12734);
     L_0005:
@@ -1922,7 +1922,7 @@ public static Val GetOfferName(IHost H, Val self, Val[] args)
         L["Offer"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_OfferName = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["OfferName"] = Val.Nothing;
+        L["OfferName"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "Offer"), "GroupType"), Val.Of(3)) == 0);
     L_0035:
@@ -1961,13 +1961,13 @@ public static Val GetPackInfo(IHost H, Val self, Val[] args)
         L["storeItem"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_cardSet = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["cardSet"] = Val.Nothing;
+        L["cardSet"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_officerPack = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["officerPack"] = Val.Nothing;
+        L["officerPack"] = args.Length > 4 ? args[4].In : Val.Nothing;
         var __out_icon = args.Length > 5 ? args[5].As<Action<Val>>() : null;
-        L["icon"] = Val.Nothing;
+        L["icon"] = args.Length > 5 ? args[5].In : Val.Nothing;
         var __out_helpBubbleString = args.Length > 6 ? args[6].As<Action<Val>>() : null;
-        L["helpBubbleString"] = Val.Nothing;
+        L["helpBubbleString"] = args.Length > 6 ? args[6].In : Val.Nothing;
     L_0000:
         L["CallFunc_Split_ReturnValue"] = H.Call("Split", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "SourceString"), Val.Of("_"), GetLocal(L, "CallFunc_Split_LeftS"), GetLocal(L, "CallFunc_Split_RightS"), Val.Of(1), Val.Of(0) });
     L_0036:
@@ -2688,7 +2688,7 @@ public static Val GetStoreHelpHeader(IHost H, Val self, Val[] args)
         L["storeHelpString"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_title = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["title"] = Val.Nothing;
+        L["title"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "storeHelpString") });
     L_0025:
@@ -2716,7 +2716,7 @@ public static Val IsAltArtOffer(IHost H, Val self, Val[] args)
         L["StoreOffer"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_IsAltArt = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["IsAltArt"] = Val.Nothing;
+        L["IsAltArt"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetItems_Items"] = H.MakeArray(new Val[] {  });
     L_000B:
@@ -2758,7 +2758,7 @@ public static Val isBattlePassOffer(IHost H, Val self, Val[] args)
         L["storeOffer"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_hasBattlePassInOffer = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["hasBattlePassInOffer"] = Val.Nothing;
+        L["hasBattlePassInOffer"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(585);
     L_0005:
@@ -2837,7 +2837,7 @@ public static Val IsDeckOffer(IHost H, Val self, Val[] args)
         L["StoreOffer"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_isDeck = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["isDeck"] = Val.Nothing;
+        L["isDeck"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetItems_Items"] = H.MakeArray(new Val[] {  });
     L_000B:
@@ -2879,7 +2879,7 @@ public static Val IsEmoteOffer(IHost H, Val self, Val[] args)
         L["StoreOffer"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_IsEmote = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["IsEmote"] = Val.Nothing;
+        L["IsEmote"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetItems_Items_1"] = H.MakeArray(new Val[] {  });
     L_000B:
@@ -2921,7 +2921,7 @@ public static Val IsExtended8DayOffer(IHost H, Val self, Val[] args)
         L["Offer"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_Yes = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["Yes"] = Val.Nothing;
+        L["Yes"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetItems_Items_1"] = H.MakeArray(new Val[] {  });
     L_000B:
@@ -2973,7 +2973,7 @@ public static Val IsHQOffer(IHost H, Val self, Val[] args)
         L["StoreOffer"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_IsHQ = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["IsHQ"] = Val.Nothing;
+        L["IsHQ"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(435);
     L_0005:
@@ -3116,7 +3116,7 @@ public static Val ReloadCardWidgetByCardOffer(IHost H, Val self, Val[] args)
         L["CardWidget"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_CardName = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["CardName"] = Val.Nothing;
+        L["CardName"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetItems_Items"] = H.MakeArray(new Val[] {  });
     L_000B:

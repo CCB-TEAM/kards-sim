@@ -39,7 +39,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock6_tut(IHost H, Val
             default: goto __halt;
         }
     L_000F:
-        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
+        _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(GetLocal(L, "CallFunc_IsSideActive_active"), __v => L["CallFunc_IsSideActive_active"] = __v) });
     L_002B:
         if (!(GetLocal(L, "CallFunc_IsSideActive_active")).AsBool())
         {
@@ -58,7 +58,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock6_tut(IHost H, Val
     L_0065:
         L["Temp_text_Variable"] = Val.Of("The Soviets are putting us under pressure. Fortunately, our Italian friends will soon send us reinforcements.");
     L_010C:
-        _ = H.Call("ShowCampaignMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.True, Val.False, Val.Of(0f), Val.False });
+        _ = H.Call("ShowCampaignMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "Temp_text_Variable"), __v => L["Temp_text_Variable"] = __v), Val.True, Val.False, Val.Of(0f), Val.False });
     L_0141:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -74,7 +74,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock6_tut(IHost H, Val
     L_0172:
         L["Temp_text_Variable_3"] = Val.Of("We have drawn FIAT G.50, an Italian unit. A portion of your deck can consist of cards from an ally nation. Combining cards from two nations in a deck greatly expands your options, allowing you to select ally cards that supplement your strategy and shore up the weaknesses of your main nation.");
     L_02D0:
-        _ = H.Call("ShowCampaignMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable_3"] = __v), Val.True, Val.False, Val.Of(3f), Val.False });
+        _ = H.Call("ShowCampaignMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "Temp_text_Variable_3"), __v => L["Temp_text_Variable_3"] = __v), Val.True, Val.False, Val.Of(3f), Val.False });
     L_0305:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -84,7 +84,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock6_tut(IHost H, Val
             default: goto __halt;
         }
     L_0306:
-        _ = H.Call("GetTurnNumber", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetTurnNumber_turnNumber"] = __v) });
+        _ = H.Call("GetTurnNumber", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetTurnNumber_turnNumber"), __v => L["CallFunc_GetTurnNumber_turnNumber"] = __v) });
     L_0333:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetTurnNumber_turnNumber"), Val.Of(1)) > 0);
     L_0355:
@@ -99,9 +99,9 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock6_tut(IHost H, Val
             }
         }
     L_035F:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_0372:
-        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
+        _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.True, Val.False, Val.Out(GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), __v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
     L_03AA:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_03C1:
@@ -117,7 +117,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock6_tut(IHost H, Val
     L_0462:
         __ef.Push(1788);
     L_0467:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_04A2:
         L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "name"), Val.Name("card_unit_yak_9")) == 0);
     L_04E2:
@@ -132,7 +132,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock6_tut(IHost H, Val
             }
         }
     L_04EC:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0527:
         H.SetMember(self, "destructionID", H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID"));
     L_0558:
@@ -157,7 +157,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock6_tut(IHost H, Val
             }
         }
     L_0585:
-        _ = H.Call("CustomName2HasAttribute", new Val[] { self, Val.Of("destInf"), Val.Out(__v => L["CallFunc_CustomName2HasAttribute_doesIt"] = __v) });
+        _ = H.Call("CustomName2HasAttribute", new Val[] { self, Val.Of("destInf"), Val.Out(GetLocal(L, "CallFunc_CustomName2HasAttribute_doesIt"), __v => L["CallFunc_CustomName2HasAttribute_doesIt"] = __v) });
     L_05A1:
         if (!(GetLocal(L, "CallFunc_CustomName2HasAttribute_doesIt")).AsBool()) goto L_05B0;
     L_05AF:
@@ -171,7 +171,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock6_tut(IHost H, Val
     L_05B0:
         L["Temp_text_Variable_2"] = Val.Of("The enemy has just deployed a unit with <redbold>Destruction</>. The effect described on the unit triggers when the unit is destroyed.");
     L_0670:
-        _ = H.Call("ShowTutorialMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable_2"] = __v), Val.Of("rout"), H.GetMember(self, "destructionID"), Val.Of(2f), Val.Out(__v => L["CallFunc_ShowTutorialMessage_qqq"] = __v) });
+        _ = H.Call("ShowTutorialMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "Temp_text_Variable_2"), __v => L["Temp_text_Variable_2"] = __v), Val.Of("rout"), H.GetMember(self, "destructionID"), Val.Of(2f), Val.Out(GetLocal(L, "CallFunc_ShowTutorialMessage_qqq"), __v => L["CallFunc_ShowTutorialMessage_qqq"] = __v) });
     L_06BA:
         _ = H.Call("CustomName2Add", new Val[] { self, Val.Of("destInf") });
     L_06CD:
@@ -193,7 +193,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock6_tut(IHost H, Val
     L_0746:
         L["Temp_text_Variable_1"] = Val.Of("In a normal game of KARDS, the starting side starts with 4 cards in hand, the other side with 5 cards. The starting side does not draw in its first turn, the other side does draw.");
     L_0833:
-        _ = H.Call("ShowCampaignMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable_1"] = __v), Val.True, Val.False, Val.Of(0f), Val.True });
+        _ = H.Call("ShowCampaignMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "Temp_text_Variable_1"), __v => L["Temp_text_Variable_1"] = __v), Val.True, Val.False, Val.Of(0f), Val.True });
     L_0868:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

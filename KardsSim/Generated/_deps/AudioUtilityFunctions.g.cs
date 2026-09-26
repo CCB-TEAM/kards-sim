@@ -30,7 +30,7 @@ public static Val GetMusicForFaction(IHost H, Val self, Val[] args)
         L["InFaction"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_OutFactionMusic = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["OutFactionMusic"] = Val.Nothing;
+        L["OutFactionMusic"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L["LocalApprovedMusic"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(2891);
@@ -251,7 +251,7 @@ public static Val GetMusicManager(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_musicManager = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["musicManager"] = Val.Nothing;
+        L["musicManager"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetActorOfClass_ReturnValue"] = H.Call("GetActorOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_MusicManager") });
     L_0026:
@@ -275,7 +275,7 @@ public static Val GetRandomMusicFromFBattleMusic(IHost H, Val self, Val[] args)
         L["InFBattleMusic"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_OutSoundWave = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["OutSoundWave"] = Val.Nothing;
+        L["OutSoundWave"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(GetLocal(L, "InFBattleMusic"), "FactionMusic_31_4905A4A44780E08402AB148FEA5F9E25") });
     L_0044:

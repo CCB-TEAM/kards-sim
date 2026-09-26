@@ -107,7 +107,7 @@ public static Val Battle_Aspect_Size_Factor(IHost H, Val self, Val[] args)
         L["InMobileValue"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_OutFactor = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["OutFactor"] = Val.Nothing;
+        L["OutFactor"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["LocalOne"] = Val.Of(1);
     L_001B:
@@ -206,7 +206,7 @@ public static Val CanMoveCardToLocation(IHost H, Val self, Val[] args)
         L["Location"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_bResult = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["bResult"] = Val.Nothing;
+        L["bResult"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetPlayerControllerBP", new Val[] { Val.Ref("InputFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetPlayerControllerBP_outBPPlayerController"] = __v) });
     L_0036:
@@ -350,7 +350,7 @@ public static Val CardMoveReason(IHost H, Val self, Val[] args)
         L["ChangeReason"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_CardMoveReason = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["CardMoveReason"] = Val.Nothing;
+        L["CardMoveReason"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchString_CmpSuccess"] = H.Call("NotEqual_StriStri", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "ChangeReason"), Val.Of("Advance_playerMove") });
     L_0031:
@@ -800,7 +800,7 @@ public static Val changeTypeStringToEnum(IHost H, Val self, Val[] args)
         L["inputChangeValue"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_ChangeValue = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["ChangeValue"] = Val.Nothing;
+        L["ChangeValue"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         L["K2Node_SwitchString_CmpSuccess"] = H.Call("NotEqual_StriStri", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "inputChangeValue"), Val.Of("tempBuffGive") });
     L_002B:
@@ -1264,7 +1264,7 @@ public static Val Get_Battle_Sidebar_Settings(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_SettingsSidebar = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["SettingsSidebar"] = Val.Nothing;
+        L["SettingsSidebar"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetBoard", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetBoard_Board"] = __v) });
     L_0036:
@@ -1291,7 +1291,7 @@ public static Val GetTargetArrowOffset(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_Offset = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["Offset"] = Val.Nothing;
+        L["Offset"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         L["CallFunc_GetActorOfClass_ReturnValue"] = H.Call("GetActorOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_targetArrowRVX") });
     L_0026:
@@ -1326,7 +1326,7 @@ public static Val HandCardIsSelectingTarget(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_IsSelecting = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["IsSelecting"] = Val.Nothing;
+        L["IsSelecting"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         __ef.Push(439);
     L_0005:
@@ -1392,7 +1392,7 @@ public static Val IsCampaignMatch(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_IsCampaignMatch = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["IsCampaignMatch"] = Val.Nothing;
+        L["IsCampaignMatch"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetMatch", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetMatch_Match"] = __v) });
     L_0036:
@@ -1417,7 +1417,7 @@ public static Val IsCardPlayedFromBoard(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_bResult = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["bResult"] = Val.Nothing;
+        L["bResult"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetPlayerControllerBP", new Val[] { Val.Ref("InputFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetPlayerControllerBP_outBPPlayerController"] = __v) });
     L_0036:
@@ -1458,7 +1458,7 @@ public static Val IsCardPlayedFromHand(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_bResult = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["bResult"] = Val.Nothing;
+        L["bResult"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetPlayerControllerBP", new Val[] { Val.Ref("InputFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetPlayerControllerBP_outBPPlayerController"] = __v) });
     L_0036:
@@ -1499,7 +1499,7 @@ public static Val IsSelectHandTargetCorfirmed(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_IsConfirmed = args.Length > 1 ? args[1].As<Action<Val>>() : null;
-        L["IsConfirmed"] = Val.Nothing;
+        L["IsConfirmed"] = args.Length > 1 ? args[1].In : Val.Nothing;
     L_0000:
         _ = H.Call("GetLogic", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetLogic_Logic"] = __v) });
     L_0036:
@@ -1639,7 +1639,7 @@ public static Val RefreshSelectedCard(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_CardsAtLocation = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["CardsAtLocation"] = Val.Nothing;
+        L["CardsAtLocation"] = args.Length > 0 ? args[0].In : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
     L_0000:
         __ef.Push(1453);
@@ -1832,9 +1832,9 @@ public static Val SanitycheckCardbackFaction(IHost H, Val self, Val[] args)
         L["InSide"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_OutDidFailFactionTest = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["OutDidFailFactionTest"] = Val.Nothing;
+        L["OutDidFailFactionTest"] = args.Length > 3 ? args[3].In : Val.Nothing;
         var __out_OutFallback = args.Length > 4 ? args[4].As<Action<Val>>() : null;
-        L["OutFallback"] = Val.Nothing;
+        L["OutFallback"] = args.Length > 4 ? args[4].In : Val.Nothing;
     L_0000:
         __ef.Push(3828);
     L_0005:
@@ -2329,7 +2329,7 @@ public static Val toGameplayRestrictionsEnum(IHost H, Val self, Val[] args)
         L["restrictionString"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_type = args.Length > 2 ? args[2].As<Action<Val>>() : null;
-        L["type"] = Val.Nothing;
+        L["type"] = args.Length > 2 ? args[2].In : Val.Nothing;
     L_0000:
         __ef.Push(1351);
     L_0005:

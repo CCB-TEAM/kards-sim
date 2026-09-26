@@ -34,15 +34,15 @@ public static Val ExecuteUbergraph_card_event_orp_orzel(IHost H, Val self, Val[]
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("GetSeenCardsFromOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetSeenCardsFromOppositeSide_seenCards"] = __v) });
+        _ = H.Call("GetSeenCardsFromOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetSeenCardsFromOppositeSide_seenCards"), __v => L["CallFunc_GetSeenCardsFromOppositeSide_seenCards"] = __v) });
     L_0021:
-        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetSeenCardsFromOppositeSide_seenCards"] = __v), Val.False, Val.Out(__v => L["CallFunc_GetRandomCard_randomCard"] = __v) });
+        _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetSeenCardsFromOppositeSide_seenCards"), __v => L["CallFunc_GetSeenCardsFromOppositeSide_seenCards"] = __v), Val.False, Val.Out(GetLocal(L, "CallFunc_GetRandomCard_randomCard"), __v => L["CallFunc_GetRandomCard_randomCard"] = __v) });
     L_0058:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "CallFunc_GetRandomCard_randomCard") });
     L_0075:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_00D4;
     L_0083:
-        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetRandomCard_randomCard"), H.GetMember(self, "cardID"), Val.Of(2), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeKreditCost_qqq"] = __v) });
+        _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetRandomCard_randomCard"), H.GetMember(self, "cardID"), Val.Of(2), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeKreditCost_qqq"), __v => L["CallFunc_ChangeKreditCost_qqq"] = __v) });
     L_00CA:
         goto L_00D4;
     L_00CF:
@@ -71,12 +71,12 @@ public static Val GetSeenCardsFromOppositeSide(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         var __out_seenCards = args.Length > 0 ? args[0].As<Action<Val>>() : null;
-        L["seenCards"] = Val.Nothing;
-    L["localSeenCards"] = H.MakeArray(new Val[] { });
+        L["seenCards"] = args.Length > 0 ? args[0].In : Val.Nothing;
+        L["localSeenCards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(664);
     L_0005:
-        _ = H.Call("GetAllCards", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetAllCards_cards"] = __v) });
+        _ = H.Call("GetAllCards", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(GetLocal(L, "CallFunc_GetAllCards_cards"), __v => L["CallFunc_GetAllCards_cards"] = __v) });
     L_0032:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_0049:
@@ -92,11 +92,11 @@ public static Val GetSeenCardsFromOppositeSide(IHost H, Val self, Val[] args)
     L_00EA:
         __ef.Push(590);
     L_00EF:
-        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
+        _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(GetLocal(L, "CallFunc_Array_Get_Item"), __v => L["CallFunc_Array_Get_Item"] = __v) });
     L_012A:
         L["localCardToCheck"] = GetLocal(L, "CallFunc_Array_Get_Item");
     L_013D:
-        _ = H.Call("IsLocatedInHand", new Val[] { GetLocal(L, "localCardToCheck"), Val.Out(__v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
+        _ = H.Call("IsLocatedInHand", new Val[] { GetLocal(L, "localCardToCheck"), Val.Out(GetLocal(L, "CallFunc_IsLocatedInHand_isIt"), __v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
     L_0166:
         if (!(GetLocal(L, "CallFunc_IsLocatedInHand_isIt")).AsBool())
         {
@@ -109,7 +109,7 @@ public static Val GetSeenCardsFromOppositeSide(IHost H, Val self, Val[] args)
             }
         }
     L_0170:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_0183:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "localCardToCheck"), "side"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide")) == 0);
     L_01BF:

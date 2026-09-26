@@ -48,9 +48,9 @@ public static Val ExecuteUbergraph_card_unit_77th_guards(IHost H, Val self, Val[
     L_00C1:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue_3"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_00FD:
-        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0126:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0139:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_3")).AsBool());
     L_015F:
@@ -58,7 +58,7 @@ public static Val ExecuteUbergraph_card_unit_77th_guards(IHost H, Val self, Val[
     L_0185:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_1")).AsBool()) goto L_01F1;
     L_0193:
-        _ = H.Call("GiveRandomCombatKeyword", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveRandomCombatKeyword_keywordGiven"] = __v), Val.Out(__v => L["CallFunc_GiveRandomCombatKeyword_success"] = __v) });
+        _ = H.Call("GiveRandomCombatKeyword", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_GiveRandomCombatKeyword_keywordGiven"), __v => L["CallFunc_GiveRandomCombatKeyword_keywordGiven"] = __v), Val.Out(GetLocal(L, "CallFunc_GiveRandomCombatKeyword_success"), __v => L["CallFunc_GiveRandomCombatKeyword_success"] = __v) });
     L_01F1:
         goto __halt;
     L_01F3:

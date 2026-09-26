@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_unit_1st_grenadier_regiment(IHost H, Val
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("ShouldTriggerAbility", new Val[] { self, H.GetVar("K2Node_Event_cardDealingDamage"), H.GetVar("K2Node_Event_toCard"), H.GetVar("K2Node_Event_damage"), Val.Out(__v => L["CallFunc_ShouldTriggerAbility_should"] = __v) });
+        _ = H.Call("ShouldTriggerAbility", new Val[] { self, H.GetVar("K2Node_Event_cardDealingDamage"), H.GetVar("K2Node_Event_toCard"), H.GetVar("K2Node_Event_damage"), Val.Out(GetLocal(L, "CallFunc_ShouldTriggerAbility_should"), __v => L["CallFunc_ShouldTriggerAbility_should"] = __v) });
     L_003C:
         if (!(GetLocal(L, "CallFunc_ShouldTriggerAbility_should")).AsBool()) goto L_0078;
     L_004A:
@@ -101,9 +101,9 @@ public static Val ShouldTriggerAbility(IHost H, Val self, Val[] args)
         L["cardDamaged"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["damage"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_should = args.Length > 3 ? args[3].As<Action<Val>>() : null;
-        L["should"] = Val.Nothing;
+        L["should"] = args.Length > 3 ? args[3].In : Val.Nothing;
     L_0000:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0013:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_01E7;
     L_0021:
@@ -111,7 +111,7 @@ public static Val ShouldTriggerAbility(IHost H, Val self, Val[] args)
     L_0043:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue_1")).AsBool()) goto L_01E7;
     L_0051:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "affectedCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "affectedCard"), Val.Out(GetLocal(L, "CallFunc_IsUnit_isIt"), __v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_007A:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool()) goto L_01E7;
     L_0088:
@@ -119,15 +119,15 @@ public static Val ShouldTriggerAbility(IHost H, Val self, Val[] args)
     L_00C4:
         if (!(GetLocal(L, "CallFunc_NotEqual_IntInt_ReturnValue")).AsBool()) goto L_01E7;
     L_00D2:
-        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), __v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_00E5:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "affectedCard"), "side"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide")) == 0);
     L_0121:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_01E7;
     L_012F:
-        _ = H.Call("getTotalDefense", new Val[] { GetLocal(L, "affectedCard"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
+        _ = H.Call("getTotalDefense", new Val[] { GetLocal(L, "affectedCard"), Val.Out(GetLocal(L, "CallFunc_getTotalDefense_totalDefense"), __v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
     L_0158:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "affectedCard"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "affectedCard"), Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1"), __v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_0181:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalDefense_totalDefense"), Val.Of(0)) > 0);
     L_01A3:

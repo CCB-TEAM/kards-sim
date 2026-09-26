@@ -34,9 +34,9 @@ public static Val Apply_The_Buff(IHost H, Val self, Val[] args)
     L_0030:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_00CC;
     L_003E:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "tempCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "tempCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeAttack_qqq"), __v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_0085:
-        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "tempCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
+        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "tempCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(GetLocal(L, "CallFunc_ChangeDefense_qqq"), __v => L["CallFunc_ChangeDefense_qqq"] = __v) });
     L_00CC:
         goto __halt;
     L_00CE:
@@ -65,7 +65,7 @@ public static Val ExecuteUbergraph_card_unit_sturmovik_pol(IHost H, Val self, Va
     L_0019:
         goto L_0176;
     L_001E:
-        _ = H.Call("getTotalHeavyArmor", new Val[] { self, Val.Out(__v => L["CallFunc_getTotalHeavyArmor_totalHeavyArmor"] = __v) });
+        _ = H.Call("getTotalHeavyArmor", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_getTotalHeavyArmor_totalHeavyArmor"), __v => L["CallFunc_getTotalHeavyArmor_totalHeavyArmor"] = __v) });
     L_0031:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalHeavyArmor_totalHeavyArmor"), Val.Of(0)) > 0);
     L_0053:
@@ -75,9 +75,9 @@ public static Val ExecuteUbergraph_card_unit_sturmovik_pol(IHost H, Val self, Va
     L_0066:
         goto L_001E;
     L_006B:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_007E:
-        _ = H.Call("getTotalHeavyArmor", new Val[] { H.GetVar("K2Node_Event_survivor"), Val.Out(__v => L["CallFunc_getTotalHeavyArmor_totalHeavyArmor_1"] = __v) });
+        _ = H.Call("getTotalHeavyArmor", new Val[] { H.GetVar("K2Node_Event_survivor"), Val.Out(GetLocal(L, "CallFunc_getTotalHeavyArmor_totalHeavyArmor_1"), __v => L["CallFunc_getTotalHeavyArmor_totalHeavyArmor_1"] = __v) });
     L_00A7:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_survivor"), "side"), H.GetMember(self, "side")) == 0);
     L_00E3:

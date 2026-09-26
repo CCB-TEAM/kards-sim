@@ -41,9 +41,9 @@ public static Val ExecuteUbergraph_card_unit_wirbelwind(IHost H, Val self, Val[]
     L_003C:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_019B;
     L_004A:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetMember(self, "_cardPlayed"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetMember(self, "_cardPlayed"), Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0073:
-        _ = H.Call("IsAirUnit", new Val[] { H.GetMember(self, "_cardPlayed"), Val.Out(__v => L["CallFunc_IsAirUnit_isIt"] = __v) });
+        _ = H.Call("IsAirUnit", new Val[] { H.GetMember(self, "_cardPlayed"), Val.Out(GetLocal(L, "CallFunc_IsAirUnit_isIt"), __v => L["CallFunc_IsAirUnit_isIt"] = __v) });
     L_009C:
         L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetMember(self, "_cardPlayed"), "side"), H.GetMember(self, "side")) != 0);
     L_00D8:

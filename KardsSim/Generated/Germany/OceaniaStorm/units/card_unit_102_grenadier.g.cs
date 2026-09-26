@@ -36,23 +36,23 @@ public static Val ExecuteUbergraph_card_unit_102_grenadier(IHost H, Val self, Va
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt"), __v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_00C8;
     L_002B:
-        _ = H.Call("MakeVeteran", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(__v => L["CallFunc_MakeVeteran_qqq"] = __v) });
+        _ = H.Call("MakeVeteran", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Out(GetLocal(L, "CallFunc_MakeVeteran_qqq"), __v => L["CallFunc_MakeVeteran_qqq"] = __v) });
     L_0059:
         goto L_00C8;
     L_005E:
         goto L_000A;
     L_0063:
-        _ = H.Call("getHasShock", new Val[] { self, Val.Out(__v => L["CallFunc_getHasShock_doesIt"] = __v) });
+        _ = H.Call("getHasShock", new Val[] { self, Val.Out(GetLocal(L, "CallFunc_getHasShock_doesIt"), __v => L["CallFunc_getHasShock_doesIt"] = __v) });
     L_0076:
         if (!(GetLocal(L, "CallFunc_getHasShock_doesIt")).AsBool()) goto L_0089;
     L_0084:
         goto L_00C8;
     L_0089:
-        _ = H.Call("GiveShock", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveShock_qqq"] = __v) });
+        _ = H.Call("GiveShock", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "cardID"), Val.Out(GetLocal(L, "CallFunc_GiveShock_qqq"), __v => L["CallFunc_GiveShock_qqq"] = __v) });
     L_00C8:
         goto __halt;
     L_00CA:
