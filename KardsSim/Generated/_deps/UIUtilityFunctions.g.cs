@@ -1077,7 +1077,7 @@ public static Val GetGrayColor(IHost H, Val self, Val[] args)
     L_0064:
         L["Temp_object_Variable_1"] = Val.Ref("colorPresets");
     L_0077:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Switch(GetLocal(L, "Temp_byte_Variable"), new[] { ValueTuple.Create(Val.Of(0), GetLocal(L, "Temp_object_Variable_1")), ValueTuple.Create(Val.Of(1), GetLocal(L, "Temp_object_Variable")) }, GetLocal(L, "K2Node_Select_Default")), Val.Name("grey"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Switch(GetLocal(L, "Temp_byte_Variable"), new[] { ValueTuple.Create(Val.Of(0), GetLocal(L, "Temp_object_Variable_1")), ValueTuple.Create(Val.Of(1), GetLocal(L, "Temp_object_Variable")) }, GetLocal(L, "K2Node_Select_Default")), Val.Name("grey"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_00EE:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_0120;
     L_00FC:
@@ -1628,7 +1628,7 @@ public static Val GetWhiteColor(IHost H, Val self, Val[] args)
     L_0064:
         L["Temp_object_Variable_1"] = Val.Ref("colorPresets");
     L_0077:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Switch(GetLocal(L, "Temp_byte_Variable"), new[] { ValueTuple.Create(Val.Of(0), GetLocal(L, "Temp_object_Variable_1")), ValueTuple.Create(Val.Of(1), GetLocal(L, "Temp_object_Variable")) }, GetLocal(L, "K2Node_Select_Default")), Val.Name("white"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Switch(GetLocal(L, "Temp_byte_Variable"), new[] { ValueTuple.Create(Val.Of(0), GetLocal(L, "Temp_object_Variable_1")), ValueTuple.Create(Val.Of(1), GetLocal(L, "Temp_object_Variable")) }, GetLocal(L, "K2Node_Select_Default")), Val.Name("white"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_00EE:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_0120;
     L_00FC:
@@ -1818,7 +1818,7 @@ public static Val GetYellowColor(IHost H, Val self, Val[] args)
     L_0064:
         L["Temp_object_Variable_1"] = Val.Ref("colorPresets");
     L_0077:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Switch(GetLocal(L, "Temp_byte_Variable"), new[] { ValueTuple.Create(Val.Of(0), GetLocal(L, "Temp_object_Variable_1")), ValueTuple.Create(Val.Of(1), GetLocal(L, "Temp_object_Variable")) }, GetLocal(L, "K2Node_Select_Default")), Val.Name("yellow"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Switch(GetLocal(L, "Temp_byte_Variable"), new[] { ValueTuple.Create(Val.Of(0), GetLocal(L, "Temp_object_Variable_1")), ValueTuple.Create(Val.Of(1), GetLocal(L, "Temp_object_Variable")) }, GetLocal(L, "K2Node_Select_Default")), Val.Name("yellow"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_00EE:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_0120;
     L_00FC:

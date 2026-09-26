@@ -280,21 +280,44 @@ public class Host : IHost
                 }
 
             // ---------- Set ----------
-            case "Set_Add": SetOf(a[1])?.Add(a[2].AsInt()); return Hit(Val.Nothing);
-            case "Set_Clear": SetOf(a[1])?.Clear(); return Hit(Val.Nothing);
-            case "Set_Length": return Hit(Val.Of(SetOf(a[1])?.Count ?? 0));
-            case "Set_Contains": return Hit(Val.Of(SetOf(a[1])?.Contains(a[2].AsInt()) ?? false));
+            //
+            // 集合可能是两种载体，两边都要认：
+            //   1) HashSet<long> —— 真的 Set 变量（KObj 的 __set）
+            //   2) KArr         —— 集合**字面量**：转译器把 EX_SetConst 发射成 H.MakeArray
+            // 只认前者的话，`Set_Contains(MakeArray{5,6,7,8}, x)` 恒为 false ——
+            // 表现是「用集合字面量做白名单的守卫永远不通过」，静默失效。
+            // （SetRightLeftMostWhenPlayed 的 validNewLocations 就是这种。）
+            case "Set_Add":
+                {
+                    var x = a[2].AsInt();
+                    if (a[1].O is KArr ka) { if (!ka.Items.Any(i => i.AsInt() == x)) ka.Items.Add(Val.Of((int)x)); }
+                    else SetOf(a[1])?.Add(x);
+                    return Hit(Val.Nothing);
+                }
+            case "Set_Clear":
+                if (a[1].O is KArr kc) kc.Items.Clear(); else SetOf(a[1])?.Clear();
+                return Hit(Val.Nothing);
+            case "Set_Length":
+                return Hit(Val.Of(a[1].O is KArr kl ? kl.Count : SetOf(a[1])?.Count ?? 0));
+            case "Set_Contains":
+                {
+                    var x = a[2].AsInt();
+                    var has = a[1].O is KArr kq ? kq.Items.Any(i => i.AsInt() == x) : SetOf(a[1])?.Contains(x) ?? false;
+                    return Hit(Val.Of(has));
+                }
             case "Set_RemoveItems":
                 {
-                    var s = SetOf(a[1]);
-                    if (s is not null) foreach (var x in AsArr(a[2])?.Items ?? new List<Val>()) s.Remove(x.AsInt());
+                    var xs = (AsArr(a[2])?.Items ?? new List<Val>()).Select(v => v.AsInt()).ToHashSet();
+                    if (a[1].O is KArr kr) kr.Items.RemoveAll(i => xs.Contains(i.AsInt()));
+                    else { var s = SetOf(a[1]); if (s is not null) foreach (var x in xs) s.Remove(x); }
                     return Hit(Val.Nothing);
                 }
             case "Set_ToArray":
                 {
-                    var s = SetOf(a[1]);
-                    var outv = new KArr((s ?? new HashSet<long>()).Select(x => Val.Of((int)x)));
-                    Val.TrySetOut(a[2], Val.Ref(outv));
+                    var items = a[1].O is KArr kt
+                        ? kt.Items.ToList()
+                        : (SetOf(a[1]) ?? new HashSet<long>()).Select(x => Val.Of((int)x)).ToList();
+                    Val.TrySetOut(a[2], Val.Ref(new KArr(items)));
                     return Hit(Val.Nothing);
                 }
 
@@ -333,8 +356,23 @@ public class Host : IHost
             case "Max": return Hit(Val.Of(Math.Max(a[1].AsInt(), a[2].AsInt())));
             case "Not_PreBool": return Hit(Val.Of(!a[1].AsBool()));
             case "BooleanNOR": return Hit(Val.Of(!(a[1].AsBool() || a[2].AsBool())));
-            case "SelectInt": return Hit(a[1].AsBool() ? a[2] : a[3]);
-            case "SelectString": return Hit(a[1].AsBool() ? a[2] : a[3]);
+            // UE 的 Select 节点在字节码里的实参顺序是 **(A, B, 条件)**，不是 (条件, A, B)。
+            //
+            // 判据是全仓 14 处调用点，语义必须这样读才通：
+            //   SelectInt(3, 2, IsSideActive)              -> 活跃取 3，否则 2
+            //   SelectInt(0, heavyArmor, ignoreHeavyArmor) -> 忽略重甲取 0，否则取重甲
+            //   SelectString("", ",", cond)                -> cond 为真取空串
+            // 原来按 (条件, A, B) 实现，于是**每一次 select 都取错分支**，
+            // 而且不报错 —— 表现是数值莫名差一点、字符串莫名不对。
+            case "SelectInt":
+            case "SelectString":
+            case "SelectFloat":
+            case "SelectDouble":
+            case "SelectObject":
+            case "SelectClass":
+            case "SelectName":
+            case "SelectText":
+                return Hit(a.Length > 3 && a[3].AsBool() ? a[1] : a[2]);
             case "GetValidValue": return Hit(a[1]);
 
             // ---------- 类型转换 ----------
@@ -412,6 +450,31 @@ public class Host : IHost
             case "GetTimeSeconds": return Hit(Val.Of(0.0));
             case "GetObjectClass": return Hit(Val.Ref(new KObj("Class")));
             case "IsValidClass": return Hit(Val.True);
+
+            // ---------- 字面量构造（KismetSystemLibrary，返回值型） ----------
+            // 调用点是 `L[x] = H.Call("MakeLiteralByte", {库, Val.Of(3)})`：
+            // 值直接透传即可。以前没实现 → 返回 Nothing，
+            // 于是「出牌时是不是最左/最右」这类判定恒为假（SetRightLeftMostWhenPlayed 用它）。
+            case "MakeLiteralInt": case "MakeLiteralByte": case "MakeLiteralInt64":
+            case "MakeLiteralFloat": case "MakeLiteralDouble":
+            case "MakeLiteralBool": case "MakeLiteralString": case "MakeLiteralName":
+            case "MakeLiteralText":
+                return Hit(a.Length > 1 ? a[1] : Val.Nothing);
+
+            // ---------- GameplayTag ----------
+            // 完整语义要 GameplayTags 子系统；无头模拟里退化成「非空即有效」。
+            // 这是简化，不是等价实现 —— 但它只影响「加自定义 tag 前的那道门」。
+            case "IsGameplayTagValid":
+                return Hit(Val.Of(a.Length > 1 && !string.IsNullOrEmpty(a[1].AsStr())));
+
+            // ---------- 多播委托：无头模拟里全部 no-op ----------
+            // 转译器把这五个节点发射成 H.Call("__delegate*")，引擎侧一个都没实现过。
+            // 用到它们的是 UI / 匹配 / 联机 / bond 视觉（OnInitBoard、OnSocketNotify*、
+            // OnBondVisualsUpdated、DestroyedCountChanged 等），无头对局不需要。
+            // 这里显式登记为已实现，免得它们混在「未实现调用」里污染完备性指标。
+            case "__delegateAdd": case "__delegateRemove": case "__delegateClear":
+            case "__delegateBind": case "__delegateCall":
+                return Hit(Val.Nothing);
         }
 
         // Notify* / Show* / 纯 UI：无头模拟不需要，统一 no-op 而不是记为未实现。

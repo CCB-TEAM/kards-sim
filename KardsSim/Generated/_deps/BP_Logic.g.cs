@@ -1618,7 +1618,7 @@ public static Val CreateHelpBubbleEntryWidget_Ambush(IHost H, Val self, Val[] ar
         var __out_cardHelpWidget = args.Length > 0 ? args[0].As<Action<Val>>() : null;
         L["cardHelpWidget"] = Val.Nothing;
     L_0000:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_ambush"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_ambush"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0049:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_00BB;
     L_0057:
@@ -1644,7 +1644,7 @@ public static Val CreateHelpBubbleEntryWidget_Blitz(IHost H, Val self, Val[] arg
         var __out_cardHelpWidget = args.Length > 0 ? args[0].As<Action<Val>>() : null;
         L["cardHelpWidget"] = Val.Nothing;
     L_0000:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_blitz"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_blitz"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0049:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_00BB;
     L_0057:
@@ -1670,7 +1670,7 @@ public static Val CreateHelpBubbleEntryWidget_Deployment(IHost H, Val self, Val[
         var __out_cardHelpWidget = args.Length > 0 ? args[0].As<Action<Val>>() : null;
         L["cardHelpWidget"] = Val.Nothing;
     L_0000:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_deployment"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_deployment"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0049:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_00BB;
     L_0057:
@@ -1696,7 +1696,7 @@ public static Val CreateHelpBubbleEntryWidget_Guard(IHost H, Val self, Val[] arg
         var __out_cardHelpWidget = args.Length > 0 ? args[0].As<Action<Val>>() : null;
         L["cardHelpWidget"] = Val.Nothing;
     L_0000:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_guard"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_guard"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0049:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_00BB;
     L_0057:
@@ -1722,7 +1722,7 @@ public static Val CreateHelpBubbleEntryWidget_Smokescreen(IHost H, Val self, Val
         var __out_cardHelpWidget = args.Length > 0 ? args[0].As<Action<Val>>() : null;
         L["cardHelpWidget"] = Val.Nothing;
     L_0000:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_smokescreen"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_smokescreen"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0049:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_00BB;
     L_0057:
@@ -1876,7 +1876,7 @@ public static Val CreateHelpBubbleEntryWidget_Type(IHost H, Val self, Val[] args
     L_0681:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_Concat_StrStr_ReturnValue_1") });
     L_06A6:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_8"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_8") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_8"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_8"] = __v) });
     L_06EB:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_8")).AsBool())
         {
@@ -1913,7 +1913,7 @@ public static Val CreateHelpBubbleEntryWidget_Type(IHost H, Val self, Val[] args
     L_077D:
         goto L_0E53;
     L_0782:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_1"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_hq"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_1") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_1"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_hq"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_1"] = __v) });
     L_07CB:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_1")).AsBool())
         {
@@ -1942,7 +1942,7 @@ public static Val CreateHelpBubbleEntryWidget_Type(IHost H, Val self, Val[] args
             default: goto __halt;
         }
     L_081E:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_order"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_order"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0867:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool())
         {
@@ -1971,7 +1971,7 @@ public static Val CreateHelpBubbleEntryWidget_Type(IHost H, Val self, Val[] args
             default: goto __halt;
         }
     L_08BA:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_2"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_tank"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_2") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_2"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_tank"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_2"] = __v) });
     L_0903:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_2")).AsBool())
         {
@@ -2000,7 +2000,7 @@ public static Val CreateHelpBubbleEntryWidget_Type(IHost H, Val self, Val[] args
             default: goto __halt;
         }
     L_0956:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_3"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_fighter"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_3") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_3"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_fighter"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_3"] = __v) });
     L_099F:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_3")).AsBool())
         {
@@ -2029,7 +2029,7 @@ public static Val CreateHelpBubbleEntryWidget_Type(IHost H, Val self, Val[] args
             default: goto __halt;
         }
     L_09F2:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_7"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_bomber"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_7") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_7"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_bomber"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_7"] = __v) });
     L_0A3B:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_7")).AsBool())
         {
@@ -2058,7 +2058,7 @@ public static Val CreateHelpBubbleEntryWidget_Type(IHost H, Val self, Val[] args
             default: goto __halt;
         }
     L_0A8E:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_4"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_infantry"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_4") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_4"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_infantry"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_4"] = __v) });
     L_0AD7:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_4")).AsBool())
         {
@@ -2087,7 +2087,7 @@ public static Val CreateHelpBubbleEntryWidget_Type(IHost H, Val self, Val[] args
             default: goto __halt;
         }
     L_0B2A:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_5"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_artillery"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_5") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_5"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_artillery"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_5"] = __v) });
     L_0B73:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_5")).AsBool())
         {
@@ -2116,7 +2116,7 @@ public static Val CreateHelpBubbleEntryWidget_Type(IHost H, Val self, Val[] args
             default: goto __halt;
         }
     L_0BC6:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_6"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_counter"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_6") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_6"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("tutorialPopups"), Val.Name("tutorial_counter"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_6"] = __v) });
     L_0C0F:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_6")).AsBool())
         {
@@ -24215,7 +24215,7 @@ public static Val LoadAllStaticCards(IHost H, Val self, Val[] args)
     L_0C83:
         _ = H.Call("InitializeEncryption", new Val[] { GetLocal(L, "CallFunc_SpawnObject_ReturnValue") });
     L_0CA3:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("DT_CardImages"), H.GetMember(GetLocal(L, "CallFunc_SpawnObject_ReturnValue"), "name"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("DT_CardImages"), H.GetMember(GetLocal(L, "CallFunc_SpawnObject_ReturnValue"), "name"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0CFE:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_0D35;
     L_0D0C:

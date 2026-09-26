@@ -675,7 +675,7 @@ public static Val getOfficerRankTitle(IHost H, Val self, Val[] args)
     L_0025:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_Conv_IntToString_ReturnValue") });
     L_004A:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("OfficerRanks"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("OfficerRanks"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_008F:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_00C1;
     L_009D:

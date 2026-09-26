@@ -56,7 +56,7 @@ public static Val GetCardTextureReference(IHost H, Val self, Val[] args)
     L_01E6:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_02F2;
     L_01F4:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_1"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("AlternativeCardsDataTable"), H.GetMember(GetLocal(L, "Current Card Object"), "name"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_1") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_1"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("AlternativeCardsDataTable"), H.GetMember(GetLocal(L, "Current Card Object"), "name"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_1"] = __v) });
     L_024F:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_1")).AsBool()) goto L_02F2;
     L_025D:
@@ -96,7 +96,7 @@ public static Val GetCardTextureReference(IHost H, Val self, Val[] args)
     L_0532:
         goto L_0AEE;
     L_0537:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("DT_CardImages"), H.GetMember(GetLocal(L, "Current Card Object"), "name"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("DT_CardImages"), H.GetMember(GetLocal(L, "Current Card Object"), "name"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0592:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_06BF;
     L_05A0:

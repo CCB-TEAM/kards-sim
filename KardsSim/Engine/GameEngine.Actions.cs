@@ -16,14 +16,30 @@ public sealed partial class GameEngine
         var me = S.Current;
         var p = S.Player(me);
 
-        // 出牌
+        // 出牌。每个「目标 × 三选一分支」各产出一个动作 ——
+        // 「打谁」「选哪支」都必须是真实决策维度，而不是由引擎替 AI 猜。
         for (var i = 0; i < p.Hand.Count; i++)
         {
             var c = p.Hand[i];
             if (c.KreditCost > p.Kredits) continue;
             if (!HasRoomFor(c)) continue;
-            if (NeedsDeployTarget(c) && DeployTargets(c).Count == 0) continue;
-            res.Add(new GameAction { Type = ActionType.PlayCard, HandIndex = i, SourceId = c.InstanceId });
+
+            var choices = PlayChoiceCount(c);
+            var targets = NeedsPlayTarget(c) ? PlayTargetsFor(c) : new List<int>();
+            // 找不到合法目标时不带目标出牌，绝不因此把这张牌判成不能出 ——
+            // 候选集覆盖不到的目标类型（手牌 / 牌库 / HQ）还有很多。
+            if (targets.Count == 0) targets.Add(-1);
+
+            for (var ch = 0; ch < choices; ch++)
+                foreach (var t in targets)
+                    res.Add(new GameAction
+                    {
+                        Type = ActionType.PlayCard,
+                        HandIndex = i,
+                        SourceId = c.InstanceId,
+                        TargetId = t,
+                        ChoiceIndex = choices > 1 ? ch : -1,
+                    });
         }
 
         // 攻击
@@ -54,6 +70,56 @@ public sealed partial class GameEngine
         if (!c.IsUnit) return true;                       // order 不占格
         if (CanEnterFrontline(c.Owner) && FrontlineCount(c.Owner) < Rules.MaxCardsPerRow) return true;
         return SupportCount(c.Owner) < Rules.MaxCardsPerRow;
+    }
+
+    /// <summary>
+    /// 出这张牌时需要几个「三选一」分支可选（1 = 不需要选）。
+    /// 卡池里 48 张 choose-one 卡，每张 2 个分支（cards.json 的 chooseOneCards）。
+    /// </summary>
+    public int PlayChoiceCount(Card c)
+        => Host is null ? 1 : Math.Max(1, Bridge.EngineHost.ChooseOneCount(c));
+
+    /// <summary>
+    /// 出这张牌是否需要指定目标。
+    ///
+    /// <para>
+    /// 优先用客户端自己的信号：CDO 字段 <c>selectTargetOnPlayedFromHand</c>
+    /// （<b>401 张卡</b>带它），其次是卡上有没有 <c>CanPlayFromHand</c>。
+    /// 没有直译产物（<c>--legacy</c>）时退回旧的文本解析表。
+    /// </para>
+    /// </summary>
+    public bool NeedsPlayTarget(Card c)
+    {
+        if (Host is null) return NeedsDeployTarget(c);
+        if (Host.Obj(c).Get("selectTargetOnPlayedFromHand").AsBool()) return true;
+        return Host.HasCanPlayFromHand(c);
+    }
+
+    /// <summary>
+    /// 出这张牌时可以指定的目标（卡牌 instanceId）。
+    ///
+    /// <para>
+    /// 候选集 = 双方场上单位。判定逐个交给卡牌自己的 <c>CanPlayFromHand</c>，
+    /// 引擎不重写规则 —— 与攻击目标走 <c>cardsCheckFunctions.CanAttack</c> 同一原则。
+    /// </para>
+    ///
+    /// <para>
+    /// <b>已知边界</b>：候选不含手牌 / 牌库 / HQ。「弃对手一张手牌」这类需要
+    /// 非场上目标的卡，目前仍由卡牌逻辑自己兜底选，不在动作空间里。
+    /// </para>
+    /// </summary>
+    public List<int> PlayTargetsFor(Card c)
+    {
+        var res = new List<int>();
+        if (Host is null) { res.AddRange(DeployTargets(c)); return res; }
+
+        var me = c.Owner;
+        var foe = GameState.Foe(me);
+        foreach (var u in S.UnitsOnBoard(foe))
+            if (!u.Destroyed && Host.CanPlayFromHand(c, u, out _)) res.Add(u.InstanceId);
+        foreach (var u in S.UnitsOnBoard(me))
+            if (!u.Destroyed && Host.CanPlayFromHand(c, u, out _)) res.Add(u.InstanceId);
+        return res;
     }
 
     public bool CanAttack(Card u)
@@ -254,6 +320,9 @@ public sealed partial class GameEngine
     public bool Apply(GameAction a)
     {
         if (S.Done) return false;
+        // 每次动作重置效果调用预算：卡牌逻辑里存在「重试直到成功」的循环，
+        // 依赖的数据缺失时会死循环，预算把它变成一次可记账的中断而不是挂死。
+        Host?.ResetBudget();
         // 「正在处理一个动作」——客户端规则库用 IsActionProcess 区分
         // 「动作结算中」和「回合/布阵等非动作时刻」，两边的效果时序不同：
         // 例如 MakeVeteran 里 IsActionProcess 为真才**立刻**发 OnBecomingVeteran
@@ -289,6 +358,17 @@ public sealed partial class GameEngine
         return true;
     }
 
+    /// <summary>
+    /// 这张牌打出后会落在哪个**客户端位置枚举**上（5/6=支援线，7=前线，8=弃牌堆）。
+    /// 与 <see cref="Bridge.EngineHost.ClientLocation"/> 是同一套编号，两处必须一致。
+    /// </summary>
+    private int NewClientLocation(Card c)
+    {
+        if (c.IsOrder) return 8;
+        if (c.IsUnit && CanEnterFrontline(c.Owner) && FrontlineCount(c.Owner) < Rules.MaxCardsPerRow) return 7;
+        return c.Owner == Side.Left ? 5 : 6;
+    }
+
     private bool DoPlayCard(GameAction a)
     {
         var p = S.Player(S.Current);
@@ -296,10 +376,36 @@ public sealed partial class GameEngine
         var c = p.Hand[a.HandIndex];
         if (c.KreditCost > p.Kredits || !HasRoomFor(c)) return false;
 
+        // 需要目标的牌必须带一个合法目标：合法动作枚举与执行必须一致，
+        // 否则 AI 会拿到一个「枚举时合法、执行时失败」的动作。
+        // 候选集为空时不带目标出牌（见 LegalActions 的说明），不因此禁掉这张牌。
+        var needsTarget = NeedsPlayTarget(c);
+        var targets = needsTarget ? PlayTargetsFor(c) : new List<int>();
+        if (targets.Count > 0)
+        {
+            if (!targets.Contains(a.TargetId)) return false;
+        }
+        else a.TargetId = -1;
+
+        // 三选一：分支必须在效果体执行之前写进卡里 ——
+        // 卡牌逻辑是同步的，没有挂起/恢复机制，选择只能是出牌前的决策。
+        var choices = PlayChoiceCount(c);
+        if (choices > 1)
+        {
+            if (a.ChoiceIndex < 0 || a.ChoiceIndex >= choices) return false;
+            Host.SetChooseOne(c, a.ChoiceIndex);
+        }
+
+        // 通知蓝图这次落点（"最左/最右手牌"标记）—— 必须在牌离开手牌之前调，
+        // 那个函数的守卫是「牌当前还在自己手里」。
+        if (Host is not null) Host.NotifyCardLocationChanged(c, NewClientLocation(c));
+
         p.Hand.RemoveAt(a.HandIndex);
         p.Kredits -= c.KreditCost;
         p.KreditsSpentThisTurn += c.KreditCost;
         S.Log.Line($"  {S.Current} plays {c.Id} (-{c.KreditCost}K)");
+        if (a.TargetId > 0) S.Log.Line($"    target -> {a.TargetId}");
+        if (choices > 1) S.Log.Line($"    choose -> {a.ChoiceIndex}");
 
         c.ChosenTargetId = a.TargetId;
 
@@ -329,11 +435,25 @@ public sealed partial class GameEngine
             RunCardEffect(c, Trigger.OnDeploymentEffectTriggered);
             FireTrigger(Trigger.OnDeploymentEffectTriggered, c);
         }
-        RunCardEffect(c, Trigger.NotAvailable);   // OnPlayedFromHand 效果入口
 
-        // Intel 不在这里发：游戏自己的 CardPlayedFromHand（BP_CardFunctions）里已经有
-        //   if (cardPlayed.cipher > 0) SetCardsSeenByCipher(cipher, cardID)
-        // 再发一次会翻两倍张数。那条链路由 CardPlayedFromHand 走。
+        // 卡牌自己的效果入口 OnPlayedFromHand。
+        //
+        // 客户端这一步由 BP_CardFunctions.CardPlayedFromHand 触发；而引擎自己实现了
+        // 出牌流程（没有走蓝图那条链），所以必须显式补上。以前写的是
+        // RunCardEffect(c, Trigger.NotAvailable)，而 CardDispatch.Fire 对
+        // NotAvailable 直接 return false —— 于是 691 张 order 与 241 张部署单位的
+        // 效果全都不执行，且不报错。
+        if (Host is not null)
+        {
+            Host.PlayCardFromHand(c, a.TargetId);
+            // Intel 同理：客户端在 CardPlayedFromHand 里翻牌，那条链引擎不走，
+            // 所以引擎自己发一次（ApplyIntel 内部会去重：cipher<=0 直接返回）。
+            Host.ApplyIntel(c);
+        }
+        else
+        {
+            RunCardEffectLegacy(c, Trigger.NotAvailable);
+        }
         return true;
     }
 
@@ -396,13 +516,21 @@ public sealed partial class GameEngine
             return true;
         }
 
-        var (dmgToDef, dmgToAtk) = CalculateDamage(atk, def);
+        // 伤害优先用客户端自己的 CalculateDamageDealt（就在转译产物里）：
+        // 它带 Shock / 伏击 / 免疫 / 重甲 / 伤害修正触发（id=37），
+        // 而引擎手写的 CalculateDamage 这些都没有。拿不到客户端实现时才回退。
+        int dmgToDef, dmgToAtk;
+        bool defDies, atkDies;
+        if (Host is null
+            || !Host.TryComputeCombatDamage(atk, def, out dmgToDef, out dmgToAtk, out defDies, out atkDies))
+        {
+            (dmgToDef, dmgToAtk) = CalculateDamage(atk, def);
+            defDies = dmgToDef > 0 && dmgToDef >= def.TotalDefense;
+            atkDies = dmgToAtk > 0 && dmgToAtk >= atk.TotalDefense;
+        }
+
         S.Log.Line($"  {atk.Id} ({atk.TotalAttack}) attacks {def.Id} ({def.TotalDefense}) cost={dmgToAtk}");
         S.Log.Line($"    => {atk.Id} takes {dmgToAtk}, {def.Id} takes {dmgToDef}");
-
-        // 同时结算：先各自判定是否被摧毁，再统一处理
-        var defDies = dmgToDef > 0 && dmgToDef >= def.TotalDefense;
-        var atkDies = dmgToAtk > 0 && dmgToAtk >= atk.TotalDefense;
 
         if (dmgToDef > 0) def.Defense -= dmgToDef;
         if (dmgToAtk > 0) atk.Defense -= dmgToAtk;
@@ -483,11 +611,15 @@ public sealed class GameAction
     public int SourceId = -1;
     public int TargetId = -1;
     public int HandIndex = -1;
+    /// <summary>「三选一」的分支下标；-1 = 这张牌不需要选（或这个动作类型没有选择）。</summary>
+    public int ChoiceIndex = -1;
 
     public override string ToString() => Type switch
     {
         ActionType.EndTurn => "EndTurn",
-        ActionType.PlayCard => $"Play(hand={HandIndex})",
+        ActionType.PlayCard => $"Play(hand={HandIndex}"
+                               + (TargetId > 0 ? $",target={TargetId}" : "")
+                               + (ChoiceIndex >= 0 ? $",choose={ChoiceIndex}" : "") + ")",
         ActionType.Attack => $"Attack({SourceId}->{(TargetId == 0 ? "HQ" : TargetId.ToString())})",
         ActionType.MoveToFrontline => $"MoveFront({SourceId})",
         ActionType.MoveToSupport => $"MoveSupport({SourceId})",

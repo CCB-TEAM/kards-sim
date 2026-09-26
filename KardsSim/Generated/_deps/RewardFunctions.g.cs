@@ -305,7 +305,7 @@ public static Val GetNationalRewardTextAndWidgetOrTexture2D(IHost H, Val self, V
     L_0145:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetDataTableRowNames_OutRowNames"), GetLocal(L, "InLevel"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0180:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_1"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Switch(GetLocal(L, "Temp_bool_Variable_1"), new[] { ValueTuple.Create(Val.False, GetLocal(L, "Temp_object_Variable")), ValueTuple.Create(Val.True, GetLocal(L, "Temp_object_Variable_1")) }, GetLocal(L, "K2Node_Select_Default_1")), GetLocal(L, "CallFunc_Array_Get_Item"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_1") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_1"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Switch(GetLocal(L, "Temp_bool_Variable_1"), new[] { ValueTuple.Create(Val.False, GetLocal(L, "Temp_object_Variable")), ValueTuple.Create(Val.True, GetLocal(L, "Temp_object_Variable_1")) }, GetLocal(L, "K2Node_Select_Default_1")), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_1"] = __v) });
     L_01F1:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_1")).AsBool())
         {
@@ -508,7 +508,7 @@ public static Val GetNationalRewardTextAndWidgetOrTexture2D(IHost H, Val self, V
     L_0CE2:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "LocalDeckName") });
     L_0D07:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("premadeDecksInfo"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("premadeDecksInfo"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0D4C:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool())
         {
@@ -1008,7 +1008,7 @@ public static Val GetRewardDisplayInfo(IHost H, Val self, Val[] args)
     L_0657:
         L["CallFunc_Conv_StringToName_ReturnValue_3"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetInfo_Name_4") });
     L_067C:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_2"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("premadeDecksInfo"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_3"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_2") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_2"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("premadeDecksInfo"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_3"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_2"] = __v) });
     L_06C1:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_2")).AsBool())
         {
@@ -1191,7 +1191,7 @@ public static Val GetRewardDisplayInfo(IHost H, Val self, Val[] args)
     L_0E98:
         L["CallFunc_Conv_StringToName_ReturnValue_4"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetInfo_Name_5") });
     L_0EBD:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_3"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("emojiList"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_4"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_3") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_3"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("emojiList"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_4"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_3"] = __v) });
     L_0F02:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_3")).AsBool())
         {
@@ -1254,7 +1254,7 @@ public static Val GetRewardDisplayInfo(IHost H, Val self, Val[] args)
     L_1104:
         L["CallFunc_Conv_StringToName_ReturnValue_2"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetInfo_Name_3") });
     L_1129:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_1"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("campaigns"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_2"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_1") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_1"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("campaigns"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_2"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_1"] = __v) });
     L_116E:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_1")).AsBool())
         {
@@ -1357,7 +1357,7 @@ public static Val GetRewardDisplayInfo(IHost H, Val self, Val[] args)
     L_1665:
         L["CallFunc_Conv_StringToName_ReturnValue_1"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetInfo_Name_2") });
     L_168A:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("BoardItems2"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_1"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("BoardItems2"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_1"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_16CF:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool())
         {
@@ -1704,7 +1704,7 @@ public static Val GetRewardPackTextureAndBubbleString(IHost H, Val self, Val[] a
     L_0000:
         L["CallFunc_GetEnumeratorName_ReturnValue"] = H.Call("GetEnumeratorName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("ECardSetEnum"), GetLocal(L, "InSet") });
     L_002E:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("DT_PackTexturesAndStrings"), GetLocal(L, "CallFunc_GetEnumeratorName_ReturnValue"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("DT_PackTexturesAndStrings"), GetLocal(L, "CallFunc_GetEnumeratorName_ReturnValue"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0073:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_0114;
     L_0081:
@@ -3566,7 +3566,7 @@ public static Val PrepareNationalProgressReward(IHost H, Val self, Val[] args)
     L_4723:
         L["CallFunc_Conv_StringToName_ReturnValue_4"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_Map_Find_Value_4") });
     L_4748:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_2"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("emojiList"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_4"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_2") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_2"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("emojiList"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_4"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_2"] = __v) });
     L_478D:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_2")).AsBool()) goto L_488C;
     L_479B:
@@ -3644,7 +3644,7 @@ public static Val PrepareNationalProgressReward(IHost H, Val self, Val[] args)
     L_4CDC:
         L["CallFunc_Conv_StringToName_ReturnValue_1"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_Map_Find_Value_1") });
     L_4D01:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_1"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("premadeDecksInfo"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_1"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_1") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_1"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("premadeDecksInfo"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_1"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_1"] = __v) });
     L_4D46:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_1")).AsBool())
         {
@@ -3689,7 +3689,7 @@ public static Val PrepareNationalProgressReward(IHost H, Val self, Val[] args)
     L_4F68:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_Map_Find_Value") });
     L_4F8D:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("avatars"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("avatars"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_4FD2:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_50FE;
     L_4FE0:

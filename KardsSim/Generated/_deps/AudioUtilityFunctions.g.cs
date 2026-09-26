@@ -44,7 +44,7 @@ public static Val GetMusicForFaction(IHost H, Val self, Val[] args)
     L_0094:
         L["CallFunc_Conv_StringToName_ReturnValue_1"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue_2") });
     L_00B9:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_2"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), GetLocal(L, "InDT_BattleMusic"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_1"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_2") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_2"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), GetLocal(L, "InDT_BattleMusic"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_1"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_2"] = __v) });
     L_00FE:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_2")).AsBool()) goto L_059B;
     L_010C:
@@ -54,7 +54,7 @@ public static Val GetMusicForFaction(IHost H, Val self, Val[] args)
     L_0150:
         goto L_0B4B;
     L_0155:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), GetLocal(L, "InDT_BattleMusic"), Val.Name("Copyright"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), GetLocal(L, "InDT_BattleMusic"), Val.Name("Copyright"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_019E:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_0529;
     L_01AC:
@@ -64,7 +64,7 @@ public static Val GetMusicForFaction(IHost H, Val self, Val[] args)
     L_01FE:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue_1") });
     L_0223:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_1"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), GetLocal(L, "InDT_BattleMusic"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_1") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_1"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), GetLocal(L, "InDT_BattleMusic"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_1"] = __v) });
     L_0268:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_1")).AsBool())
         {

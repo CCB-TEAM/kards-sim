@@ -169,9 +169,51 @@ public sealed class EngineHost : Host
         k.Set("GameStateRef", Val.Ref(GameStateRef));
         k.Set("CardFunctionsNotifier", Val.Ref(Notifier));
         k.Set("defId", Val.Of(c.Id ?? ""));
+        SeedCdoFields(k, c.Def);
         _byId[c.InstanceId] = k;
         _byObj[k] = c;
         return k;
+    }
+
+    /// <summary>
+    /// 把 CDO 上的实例变量种子灌进镜像。
+    ///
+    /// <para>
+    /// 客户端把大量「卡牌自身的静态属性」直接初始化在 CDO 里，蓝图读的是实例变量
+    /// （<c>H.GetMember(card, "…")</c>）。不 seed 的话它们全是空值。实测影响面：
+    /// </para>
+    /// <list type="bullet">
+    /// <item><c>selectTargetOnPlayedFromHand</c> —— <b>401 张卡</b>用它表示
+    ///   「出牌时要指定目标」，是「需要目标」的权威信号；</item>
+    /// <item><c>customName1</c> / <c>customName</c> —— 62 张卡的数据驱动能力标记
+    ///   （如 <c>CanMoveAndAttackInTheSameTurn</c>）；</item>
+    /// <item>其余 bool / int / string 型 CDO 字段（阵营、名称、文案、费用修正等）。</item>
+    /// </list>
+    ///
+    /// <para>
+    /// 只灌标量：嵌套结构 / 数组在这里没有蓝图侧的读取者，灌进去也只是占内存。
+    /// 引擎权威的字段（attack/defense/location/关键字…）会在每次读成员时被
+    /// <see cref="RefreshMirror"/> 覆盖，所以重复灌不会有害。
+    /// </para>
+    /// </summary>
+    private static void SeedCdoFields(KObj k, CardDef def)
+    {
+        if (def?.Raw is null) return;
+        foreach (var kv in def.Raw)
+        {
+            switch (kv.Value.ValueKind)
+            {
+                case System.Text.Json.JsonValueKind.True: k.Set(kv.Key, Val.True); break;
+                case System.Text.Json.JsonValueKind.False: k.Set(kv.Key, Val.False); break;
+                case System.Text.Json.JsonValueKind.Number:
+                    if (kv.Value.TryGetInt32(out var n)) k.Set(kv.Key, Val.Of(n));
+                    break;
+                case System.Text.Json.JsonValueKind.String:
+                    var s = kv.Value.GetString();
+                    if (!string.IsNullOrEmpty(s)) k.Set(kv.Key, Val.Of(s));
+                    break;
+            }
+        }
     }
 
     public Card Card_(Val v)
@@ -238,9 +280,10 @@ public sealed class EngineHost : Host
         k.Set("operationCost", Val.Of(def.OperationCost));
         k.Set("heavyArmor", Val.Of(def.HeavyArmor));
         k.Set("range", Val.Of(def.Range));
-        k.Set("type", Val.Of((int)def.Type));
+        k.Set("type", Val.Of(ClientType(def.Type)));
         k.Set("rarity", Val.Of((int)def.Rarity));
         k.Set("customName", Val.Of(""));
+        SeedCdoFields(k, def);
         WriteKeywords(k, def.Keywords);
         _staticCache[def.Id] = k;
         return k;
@@ -264,7 +307,38 @@ public sealed class EngineHost : Host
         k.Set("hasVeteran", Val.Of(kw.HasFlag(Kw.Veteran)));
         k.Set("hasDeployment", Val.Of(kw.HasFlag(Kw.Deployment)));
         k.Set("hasHeavyArmor", Val.Of(kw.HasFlag(Kw.HeavyArmor)));
+        // Shock / Immune 也是 CDO 的 has* 字段，且直译产物里有直接读镜像的地方
+        // （`H.GetMember(card, "hasShock")`），漏写会让 Shock 判定恒假。
+        k.Set("hasShock", Val.Of(kw.HasFlag(Kw.Shock)));
+        k.Set("hasImmune", Val.Of(kw.HasFlag(Kw.Immune)));
+        k.Set("hasPincer", Val.Of(kw.HasFlag(Kw.Pincer)));
     }
+
+    /// <summary>
+    /// 镜像字段名 → 关键字位。用于把蓝图对 <c>has*</c> 的写入落到卡牌实体上。
+    ///
+    /// <para>
+    /// <b>为什么必须拦</b>：蓝图给单位加关键字是直接写镜像成员的
+    /// （<c>H.SetMember(card, "hasShock", true)</c>）。而 <see cref="RefreshMirror"/>
+    /// 每次读成员都会用实体关键字回填镜像 —— 只写镜像的话，下一次读就被覆盖掉，
+    /// 表现是「给了 Shock/Ambush，但一点效果都没有」，且不报错。
+    /// </para>
+    /// </summary>
+    private static readonly Dictionary<string, Kw> KeywordFields = new(StringComparer.Ordinal)
+    {
+        ["hasGuard"] = Kw.Guard,
+        ["hasBlitz"] = Kw.Blitz,
+        ["hasSmokescreen"] = Kw.Smokescreen,
+        ["hasAmbush"] = Kw.Ambush,
+        ["hasMobilize"] = Kw.Mobilize,
+        ["hasFury"] = Kw.Fury,
+        ["hasCovert"] = Kw.Covert,
+        ["hasDeployment"] = Kw.Deployment,
+        ["hasHeavyArmor"] = Kw.HeavyArmor,
+        ["hasShock"] = Kw.Shock,
+        ["hasImmune"] = Kw.Immune,
+        ["hasPincer"] = Kw.Pincer,
+    };
 
     /// <summary>
     /// 把引擎的位置翻译成客户端的 <c>ECardLocationEnum</c>。
@@ -302,6 +376,30 @@ public sealed class EngineHost : Host
     }
 
     /// <summary>
+    /// 把引擎的 <see cref="CardType"/> 翻译成客户端的 <c>ETypeEnum</c> 数值。
+    ///
+    /// <para>
+    /// 两套编号不一样，而直译产物里读镜像 <c>type</c> 的地方按客户端编号比较 ——
+    /// 例如规则库 <c>cardsCheckFunctions</c> 里写的是 <c>type == 4</c>（客户端 fighter），
+    /// 而我们的 <c>CardType.Bomber</c> 恰好也是 4。直接写 <c>(int)c.Type</c> 的话，
+    /// 「战斗机保护」这条规则会被套到轰炸机身上，且不报错。
+    /// </para>
+    /// </summary>
+    public static int ClientType(CardType t) => t switch
+    {
+        CardType.Location => 1,
+        CardType.Order => 2,
+        CardType.Tank => 3,
+        CardType.Fighter => 4,
+        CardType.Bomber => 5,
+        CardType.Infantry => 6,
+        CardType.Artillery => 7,
+        CardType.AntiAir => 8,
+        CardType.Gotcha => 11,
+        _ => 0,
+    };
+
+    /// <summary>
     /// 客户端规则库要读的字段里，有一部分引擎侧才是权威（位置、Guard 掩护状态、
     /// 本回合攻击次数…）。这里按需回填，避免镜像里的值过期。
     /// </summary>
@@ -321,14 +419,33 @@ public sealed class EngineHost : Host
         // 规则库把它当 0/false 用，判定就静默走偏（不是报错）。
         // 所以凡是规则库会读的，都要在这里按引擎权威值回填。
         k.Set("range", Val.Of(c.Range));
-        k.Set("type", Val.Of((int)c.Type));
+        k.Set("type", Val.Of(ClientType(c.Type)));
         k.Set("attack", Val.Of(c.Attack));
         k.Set("defense", Val.Of(c.Defense));
         k.Set("kredits", Val.Of(c.KreditCost));
         k.Set("heavyArmor", Val.Of(c.HeavyArmor));
         k.Set("enterPlayOnTurn", Val.Of(c.EnterPlayTurn));
         k.Set("side", Val.Of((int)c.Owner));
-        WriteKeywords(k, c.Def?.Keywords ?? Kw.None);
+        // 必须用 c.Keywords（实体当前值），不能用 c.Def.Keywords（卡面静态值）：
+        // 关键字会被效果动态增删（CampaignAddGuard / 给单位 Shock …），
+        // 用静态值回填会把刚加上的关键字冲掉。
+        WriteKeywords(k, c.Keywords);
+    }
+
+    /// <summary>
+    /// 把蓝图对 <c>has*</c> 关键字的写入落到卡牌实体的 <see cref="Card.Keywords"/> 上，
+    /// 其余成员仍走镜像。见 <see cref="KeywordFields"/> 的说明。
+    /// </summary>
+    public override void SetMember(Val obj, string property, Val v)
+    {
+        var o = Resolve(obj);
+        if (o is not null && KeywordFields.TryGetValue(property, out var kw) && _byObj.TryGetValue(o, out var c))
+        {
+            if (v.AsBool()) c.Keywords |= kw; else c.Keywords &= ~kw;
+            WriteKeywords(o, c.Keywords);
+            return;
+        }
+        base.SetMember(obj, property, v);
     }
 
     /// <summary>
@@ -341,6 +458,209 @@ public sealed class EngineHost : Host
         if (k.Has("attack")) c.Attack = (int)k.Get("attack").AsInt();
         if (k.Has("defense")) c.Defense = (int)k.Get("defense").AsInt();
         if (k.Has("kredits")) c.KreditCost = (int)k.Get("kredits").AsInt();
+    }
+
+    // ===================== 出牌管线 =====================
+
+    /// <summary>
+    /// 打出卡牌的效果入口：调卡牌自己的 <c>OnPlayedFromHand(targetCard)</c>。
+    ///
+    /// <para>
+    /// <b>为什么必须单独接一个入口</b>：卡牌效果的主入口叫 <c>OnPlayedFromHand</c>
+    /// （1638 张卡里 942 张有它），但它不是 <c>ERegisteredCardFunction</c> 的成员，
+    /// 所以按 Trigger 枚举名找函数的触发分发永远找不到它 —— 引擎原来把它写成
+    /// <c>RunCardEffect(c, Trigger.NotAvailable)</c>，而 <c>CardDispatch.Fire</c>
+    /// 对 <c>NotAvailable</c> 是直接 return false，于是这一步是空操作。
+    /// </para>
+    ///
+    /// <para>
+    /// 客户端走的是 <c>BP_CardFunctions.CardPlayedFromHand</c> → <c>OnPlayedFromHand</c>；
+    /// 无头模拟里出牌流程是引擎自己实现的，就必须自己补上这一步，
+    /// 否则所有 order（691 张）与部署效果（241 张）都不执行 —— 而且是静默的。
+    /// </para>
+    /// </summary>
+    public bool PlayCardFromHand(Card played, int targetCardId)
+    {
+        if (played?.Id is null) return false;
+        var fn = FnIndex.Find(played.Id, "OnPlayedFromHand");
+        if (fn is null) return false;
+
+        var target = targetCardId > 0 ? Engine.S.FindCard(targetCardId) : null;
+        SetCurrentTarget(played, target);
+        ResetBudget();
+        try
+        {
+            fn(this, Val.Ref(Obj(played)), new Val[] { target is null ? Val.Nothing : Val.Ref(Obj(target)) });
+            SyncBack(Obj(played));
+            return true;
+        }
+        catch (EffectBudgetException) { NoteBudgetTrip(); return true; }
+        finally { SetCurrentTarget(played, null); }
+    }
+
+    /// <summary>
+    /// 设置「本次出牌选中的目标」。客户端把选择存在卡上的 <c>currentTarget</c>，
+    /// 卡牌逻辑经 <c>GetTargetedCard</c> 读它 —— 出牌前必须写对，
+    /// 否则需要目标的卡会把目标读成空。
+    /// </summary>
+    public void SetCurrentTarget(Card c, Card target)
+    {
+        var k = Obj(c);
+        if (k is not null) k.Set("currentTarget", target is null ? Val.Nothing : Val.Ref(Obj(target)));
+    }
+
+    /// <summary>这张卡有没有自己的出牌合法性判定（有就说明它可能需要目标）。</summary>
+    public bool HasCanPlayFromHand(Card c) => c?.Id is not null && FnIndex.Find(c.Id, "CanPlayFromHand") is not null;
+
+    /// <summary>
+    /// 问卡牌自己「打向这个目标合不合法」（客户端 <c>CanPlayFromHand</c>）。
+    ///
+    /// <para>
+    /// 判定完全交给卡牌自己的实现（例如 ambush 要求目标是单位），引擎不重写一份 ——
+    /// 与攻击目标判定走 <c>cardsCheckFunctions.CanAttack</c> 是同一原则。
+    /// 卡上没有这个函数时返回 true（表示不需要目标）。
+    /// </para>
+    /// </summary>
+    public bool CanPlayFromHand(Card c, Card target, out string reason)
+    {
+        reason = null;
+        if (c?.Id is null) return false;
+        var fn = FnIndex.Find(c.Id, "CanPlayFromHand");
+        if (fn is null) return true;
+
+        var k = Obj(c);
+        var prev = k.Get("currentTarget");
+        SetCurrentTarget(c, target);
+        ResetBudget();
+        try
+        {
+            var can = false;
+            var why = Val.Nothing;
+            fn(this, Val.Ref(k), new Val[]
+            {
+                Val.Out(v => can = v.AsBool()),
+                Val.Out(v => why = v),
+                Val.Out(_ => { }), Val.Out(_ => { }), Val.Out(_ => { }),
+            });
+            reason = why.AsStr();
+            return can;
+        }
+        catch (EffectBudgetException) { NoteBudgetTrip(); return false; }
+        catch (Exception ex)
+        {
+            var key = $"CanPlayFromHand 抛异常: {ex.GetType().Name}";
+            Unhandled[key] = Unhandled.TryGetValue(key, out var n) ? n + 1 : 1;
+            return true;
+        }
+        finally { k.Set("currentTarget", prev); }
+    }
+
+    /// <summary>
+    /// 通知蓝图「这张牌即将从手牌移到 newLocation」。
+    ///
+    /// <para>
+    /// 客户端在 <c>CardLocationMoved</c> 的第一步调 <c>SetRightLeftMostWhenPlayed</c>，
+    /// 记下「打出时是不是最左/最右」，有 10 张卡依赖这个标记
+    /// （"Deployment: … if deployed from left-most in hand" 之类）。
+    /// 引擎自己实现了出牌流程，就得自己补这次通知。
+    /// </para>
+    ///
+    /// <para>
+    /// <b>必须在牌离开手牌之前调</b>：那个函数的第一道守卫是
+    /// <c>card.location == 3/4</c>（还在自己手里），移出手牌之后再调永远不成立。
+    /// </para>
+    /// </summary>
+    public void NotifyCardLocationChanged(Card c, int newLocation)
+    {
+        if (c?.Id is null) return;
+        var fn = FnIndex.Find("BP_CardFunctions", "SetRightLeftMostWhenPlayed");
+        if (fn is null) return;
+        try { fn(this, Val.Ref(CardFunctions), new Val[] { Val.Ref(Obj(c)), Val.Of(newLocation) }); }
+        catch (EffectBudgetException) { NoteBudgetTrip(); }
+        catch (Exception ex)
+        {
+            var key = $"SetRightLeftMostWhenPlayed 抛异常: {ex.GetType().Name}";
+            Unhandled[key] = Unhandled.TryGetValue(key, out var n) ? n + 1 : 1;
+        }
+    }
+
+    /// <summary>
+    /// 设置本次出牌的「三选一」分支。必须在效果体执行之前写 ——
+    /// 卡牌逻辑是同步的，没有挂起/恢复机制，所以选择只能是**出牌前**的决策。
+    /// </summary>
+    public void SetChooseOne(Card c, int branch)
+    {
+        var k = Obj(c);
+        if (k is not null) k.Set("ChooseOne", Val.Of(branch));
+    }
+
+    /// <summary>这张卡是不是「三选一」卡（卡池里 48 张，每张 2 个分支）。</summary>
+    public static int ChooseOneCount(Card c) => c?.Def?.ChooseOneCards?.Count ?? 0;
+
+    /// <summary>打出带 Intel 的卡时翻对手手牌并通知响应者。
+    ///
+    /// <para>
+    /// 客户端在 <c>CardPlayedFromHand</c> 里做这件事，而那条链路引擎不走
+    /// （<c>CardFunctionTriggers</c> 从没被填充过），所以引擎必须自己补一次。
+    /// 不做的话 Intel 卡与 <c>OnIntelTriggered</c> 响应者在对局里全是死的。
+    /// </para>
+    /// </summary>
+    public void ApplyIntel(Card played)
+    {
+        if (played is null || played.Cipher <= 0) return;
+        Intel(this, new Val[] { Val.Nothing, Val.Of(played.Cipher), Val.Of(played.InstanceId) });
+    }
+
+    /// <summary>
+    /// 用客户端自己的 <c>CalculateDamageDealt</c> 结算一次战斗伤害。
+    ///
+    /// <para>
+    /// 引擎原来手写了一份 <c>GameEngine.CalculateDamage</c>，但那份没有 Shock、
+    /// 伏击、免疫，也不走伤害修正触发（id=37）—— 而客户端公式就在转译产物里，
+    /// 直接调它才是忠实的。返回 false 表示拿不到客户端实现，调用方回退手写版本。
+    /// </para>
+    /// </summary>
+    public bool TryComputeCombatDamage(Card atk, Card def,
+        out int toDefender, out int toAttacker, out bool defenderDies, out bool attackerDies)
+    {
+        toDefender = toAttacker = 0; defenderDies = attackerDies = false;
+        if (atk is null || def is null) return false;
+        var fn = FnIndex.Find("BP_CardFunctions", "CalculateDamageDealt");
+        if (fn is null) return false;
+
+        try
+        {
+            toDefender = One(fn, atk, def, true, out defenderDies);
+            toAttacker = One(fn, def, atk, false, out attackerDies);
+            return true;
+        }
+        catch (EffectBudgetException) { NoteBudgetTrip(); return false; }
+        catch (Exception ex)
+        {
+            var key = $"CalculateDamageDealt 抛异常: {ex.GetType().Name}";
+            Unhandled[key] = Unhandled.TryGetValue(key, out var n) ? n + 1 : 1;
+            return false;
+        }
+
+        int One(Func<IHost, Val, Val[], Val> f, Card dealer, Card reciever, bool dealerIsAttacker, out bool dies)
+        {
+            var dmg = 0; var dead = false;
+            f(this, Val.Ref(CardFunctions), new Val[]
+            {
+                Val.Ref(Obj(dealer)),        // damageDealerCard
+                Val.Ref(Obj(reciever)),      // damageRecieverCard
+                Val.Of(dealerIsAttacker),    // damageDealerIsAttacker
+                Val.False,                   // ignoreAmbush
+                Val.False,                   // ignoreHeavyArmor
+                Val.True,                    // applyBeforeAttackBuffs（与 BP_Logic 的调用一致）
+                Val.Out(v => dmg = (int)v.AsInt()),
+                Val.Out(v => dead = v.AsBool()),
+                Val.Out(_ => { }),           // damageRecieverKilledBeforeAattack
+                Val.Out(_ => { }),           // wasShockAttack
+            });
+            dies = dead;
+            return dmg;
+        }
     }
 
     // ===================== 分派 =====================
@@ -366,6 +686,11 @@ public sealed class EngineHost : Host
     /// </summary>
     private Val? Handle(string f, Val[] a)
     {
+        // 单次动作的调用预算。卡牌逻辑里有「循环重试直到找到组合」这类循环，
+        // 一旦它依赖的数据（DataTable / 平台服务）在无头模拟里不存在，循环就永不退出 ——
+        // 整个自对弈会挂死。超预算时抛异常把控制流拉回入口点，由那里记账并继续。
+        if (++_calls > CallBudget) { BudgetTripped = true; throw new EffectBudgetException(f); }
+
         DispatchByClass[f] = DispatchByClass.TryGetValue(f, out var n) ? n + 1 : 1;
         CallTrace?.Invoke(f);
 
@@ -407,7 +732,23 @@ public sealed class EngineHost : Host
                 return null;   // 记为未处理，交给上层继续
             }
 
-            return Dispatch(f, a, recv, rest);
+            var r = Dispatch(f, a, recv, rest);
+
+            // 卡牌原生事件的默认体优先于「这张卡没实现」的判定：
+            // 没覆盖不等于没实现，默认体必须执行（见 CardEventDefaults）。
+            if (r is null && CardEventDefaults.TryGetValue(f, out var dflt)) return dflt(this, a);
+
+            // Dispatch 返回 null 表示没人接。但要区分两件完全不同的事：
+            //
+            //   (a) 这个名字压根不是任何蓝图函数 → 真的缺宿主实现，必须报出来；
+            //   (b) 名字是某个资产的函数，只是**这个接收者**（某张卡）没实现它
+            //       —— 蓝图里调用一个没实现的 BlueprintImplementableEvent 本来就是空操作。
+            //
+            // 不分的话 (b) 会淹没 (a)：例如 GainKreditSlot 会对场上每张卡调
+            // OnAfterExtraKreditSlotGain，而只有少数卡实现了它 —— 每张没实现的卡
+            // 都记一笔「未实现宿主调用」，smoke 因此常年刷红，真正的缺口反而看不见。
+            if (r is null && KnownAssetFunctions.Contains(f)) return Val.Nothing;
+            return r;
         }
         finally
         {
@@ -418,6 +759,66 @@ public sealed class EngineHost : Host
 
     /// <summary>同名调用的当前递归深度（转发壳防护用）。</summary>
     private readonly Dictionary<string, int> _depth = new(StringComparer.Ordinal);
+
+    /// <summary>
+    /// 单次效果调用的宿主调用预算（见 <see cref="Handle"/> 的说明）。
+    /// 典型动作在千次量级，20 万是很宽的界 —— 只有死循环会碰到它。
+    /// </summary>
+    public int CallBudget = 200_000;
+
+    private long _calls;
+
+    /// <summary>本次效果调用是否因超预算被中断。</summary>
+    public bool BudgetTripped { get; private set; }
+
+    /// <summary>进入一个顶层效果调用前重置预算。</summary>
+    public void ResetBudget() { _calls = 0; BudgetTripped = false; }
+
+    /// <summary>记一次「效果超预算被中断」。这类中断意味着有卡牌效果跑不完，必须留痕。</summary>
+    public void NoteBudgetTrip()
+    {
+        const string key = "(效果调用超预算, 已中断)";
+        Unhandled[key] = Unhandled.TryGetValue(key, out var n) ? n + 1 : 1;
+    }
+
+    /// <summary>
+    /// 所有直译资产定义过的函数名并集。
+    /// 用来区分「真的缺宿主实现」和「这个接收者没实现该事件」，见 <see cref="Handle"/>。
+    /// </summary>
+    private static readonly HashSet<string> KnownAssetFunctions = BuildKnownAssetFunctions();
+
+    private static HashSet<string> BuildKnownAssetFunctions()
+    {
+        var s = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var kv in FnIndex.Assets)
+            foreach (var n in kv.Value.Keys) s.Add(n);
+        return s;
+    }
+
+    /// <summary>
+    /// 「卡牌原生事件」的默认实现 —— 卡没有覆盖这个函数时该返回什么。
+    ///
+    /// <para>
+    /// 这类函数是 <c>BlueprintNativeEvent</c>：C++ 侧有默认函数体，蓝图**可选**覆盖。
+    /// 宿主在卡没覆盖时返回 <c>Nothing</c> 是错的 —— 那等于把默认体丢掉。
+    /// 最典型的是 <c>OnCardDealDamage_ModifyDamageDealt</c>：24 张卡覆盖了它，
+    /// 其余 1614 张没有；默认体是「不修改伤害」，返回 Nothing 会让伤害变成 0，
+    /// 于是**所有战斗都不掉血**。
+    /// </para>
+    /// </summary>
+    private static readonly Dictionary<string, Func<EngineHost, Val[], Val?>> CardEventDefaults =
+        new(StringComparer.Ordinal)
+        {
+            // void OnCardDealDamage_ModifyDamageDealt(UBaseCardObject* toCard, int32 damage,
+            //        bool fromAttack, bool fromFight, int32& newDamage)
+            // 实参（含接收者）：a[0]=接收者(这张卡) a[1]=toCard a[2]=damage
+            //                  a[3]=fromAttack a[4]=fromFight a[5]=out newDamage
+            ["OnCardDealDamage_ModifyDamageDealt"] = (h, a) =>
+            {
+                Val.TrySetOut(a[^1], a.Length > 2 ? a[2] : Val.Nothing);
+                return Val.Nothing;
+            },
+        };
 
     /// <summary>
     /// 规则库兜底：<c>cardsCheckFunctions</c> 是一组**全局静态**导出函数，
@@ -440,6 +841,24 @@ public sealed class EngineHost : Host
         // 全部静默失效。曾因此让 MakeVeteran 的 !IsVeteran 变成空值而整条老兵链断掉。
         if (rule is null) return null;
         return rule(this, Val.Ref(CardFunctions), rest);
+    }
+
+    /// <summary>
+    /// 调一张卡自己的资产函数，并在返回后把镜像写回实体。
+    ///
+    /// <para>
+    /// <b>为什么必须 SyncBack</b>：卡牌逻辑对 <c>attack</c>/<c>defense</c>/<c>kredits</c>
+    /// 是直接写镜像成员的，而 <see cref="RefreshMirror"/> 每次读成员都会用实体值回填镜像。
+    /// 调用点若不同步回实体，这次写入会在下一次读时被冲掉 ——
+    /// 经 <c>CardDispatch.Fire</c> 进来的触发有做同步，而蓝图侧直接
+    /// <c>H.Call("OnOtherCardXxx", …)</c> 进来的这条路径以前漏了。
+    /// </para>
+    /// </summary>
+    private Val RunCardFn(Func<IHost, Val, Val[], Val> fn, KObj card, Val recv, Val[] rest)
+    {
+        var r = fn(this, recv, rest);
+        SyncBack(card);
+        return r;
     }
 
     private Val? Dispatch(string f, Val[] a, Val recv, Val[] rest)
@@ -472,14 +891,14 @@ public sealed class EngineHost : Host
             if (f.StartsWith("ExecuteUbergraph_", StringComparison.Ordinal))
             {
                 var uber = FnIndex.Find(f["ExecuteUbergraph_".Length..], f);
-                if (uber is not null) return uber(this, recv, rest);
+                if (uber is not null) return RunCardFn(uber, co, recv, rest);
             }
 
             var assetId = _byObj.TryGetValue(co, out var card) ? card.Id : co.Get("defId").AsStr();
             if (!string.IsNullOrEmpty(assetId))
             {
                 var fn = FnIndex.Find(assetId, f);
-                if (fn is not null) return fn(this, recv, rest);
+                if (fn is not null) return RunCardFn(fn, co, recv, rest);
             }
             var shared = FnIndex.Find("BP_CardFunctions", f);
             if (shared is not null) return shared(this, Val.Ref(CardFunctions), rest);
@@ -636,6 +1055,10 @@ public sealed class EngineHost : Host
                 var t = h.Card_(a[0])?.Type;
                 return Out(a, t is CardType.Fighter or CardType.Bomber);
             },
+            // void IsAntiAir(bool& isIt) —— UHT 原生。客户端 ETypeEnum 里有 antiair，
+            // 但当前卡池 1906 张里没有任何一张是这个类型，所以实际恒为 false；
+            // 仍然按类型判，数据一变就自动生效。
+            ["IsAntiAir"] = (h, a) => Out(a, h.Card_(a[0])?.Type == CardType.AntiAir),
             ["IsGroundUnit"] = (h, a) =>
             {
                 var t = h.Card_(a[0])?.Type;
@@ -904,6 +1327,13 @@ public sealed class EngineHost : Host
             ["getHasBlitz"] = (h, a) => Out(a, HasKw(h.Card_(a[0]), Kw.Blitz)),
             ["getHasSmokescreen"] = (h, a) => Out(a, HasKw(h.Card_(a[0]), Kw.Smokescreen)),
             ["getHasAmbush"] = (h, a) => Out(a, HasKw(h.Card_(a[0]), Kw.Ambush)),
+            // Shock 在客户端是卡上的 hasShock 标志位（31 张卡带它，也会被效果动态赋予）。
+            // 它在 CalculateDamageDealt 里决定「命中后压制目标」，缺了整条 Shock 机制失效。
+            ["getHasShock"] = (h, a) => Out(a, HasKw(h.Card_(a[0]), Kw.Shock)),
+            // Immune：CDO 里没有静态标志位，只能被效果赋予，所以读实体关键字即可。
+            ["getHasImmune"] = (h, a) => Out(a, HasKw(h.Card_(a[0]), Kw.Immune)),
+            // Pincer（钳形）：卡上带 hasPincer 就算「有钳形效果」，15 张卡带它。
+            ["hasActivePincerEffect"] = (h, a) => Out(a, HasKw(h.Card_(a[0]), Kw.Pincer)),
             ["getHasMobilize"] = (h, a) => Out(a, HasKw(h.Card_(a[0]), Kw.Mobilize)),
 
             // ---------- 位置 / 状态查询 ----------
@@ -929,6 +1359,17 @@ public sealed class EngineHost : Host
             // ---------- 攻防的「解密」读法 ----------
             // 客户端把 attack/defense 加密存着防内存修改；无头模拟直接读明文。
             ["getAndDecryptDefense"] = (h, a) => Out(a, h.Card_(a[0]) is { } dc ? dc.Defense : Num(a[0], "defense")),
+            // setAndEncryptDefense(card, value, key1, key2, frameCount) —— 客户端把防御加密存，
+            // 无头模拟直接写明文。缺了它「把防御设为 N」这类效果会静默失效。
+            ["setAndEncryptDefense"] = (h, a) =>
+            {
+                if (h.Card_(a[0]) is { } c)
+                {
+                    c.Defense = Math.Max(0, (int)a[1].AsInt());
+                    c.MaxDefense = Math.Max(c.MaxDefense, c.Defense);
+                }
+                return Val.Nothing;
+            },
             ["getAndDecryptKreditBuff"] = (h, a) => Out(a, h.Card_(a[0])?.BuffCost ?? 0),
             ["setAndEncryptKreditBuff"] = (h, a) =>
             {
@@ -937,6 +1378,22 @@ public sealed class EngineHost : Host
                 return Val.Nothing;
             },
             ["getKreditTempBuffAmount"] = (h, a) => Out(a, h.Card_(a[0])?.BuffCost ?? 0),
+            // setAndEncryptKredit(card, value, key1, key2, frameCount) —— 客户端加密存，
+            // 无头模拟直接写明文。缺了它「把费用设为 N」这类效果会静默失效。
+            ["setAndEncryptKredit"] = (h, a) =>
+            {
+                if (h.Card_(a[0]) is { } c) c.KreditCost = Math.Max(0, (int)a[1].AsInt());
+                return Val.Nothing;
+            },
+            // OnAfterKreditCostChanged(cardToChangeRef, instigatorID) —— 费用变更后通知
+            // 响应者（触发点 id=45）。引擎侧对应的包装没人调用，所以在这里直接发。
+            ["OnAfterKreditCostChanged"] = (h, a) =>
+            {
+                h.Engine.Fire(Trigger.OnOtherCardKreditCostChanged, h.Card_(a[0]));
+                return Val.Nothing;
+            },
+            // IsChooseOneCard(card, out isIt) —— 是不是「三选一」卡（卡池里 48 张）。
+            ["IsChooseOneCard"] = (h, a) => Out(a, h.Card_(a[0])?.Def?.ChooseOneCards.Count > 0),
             ["getTotalKreditCost"] = (h, a) =>
                 Out(a, Math.Max(0, h.Card_(a[0])?.KreditCost ?? 0)),
             ["getCardsBuffedByThisCard"] = (h, a) =>
@@ -951,17 +1408,39 @@ public sealed class EngineHost : Host
 
             // ---------- 战役 / 加密 / 静态数据：无头模拟里是空实现 ----------
             ["InitializeEncryption"] = (h, a) => Val.Nothing,
-            ["GetEncryptionKey"] = (h, a) => Val.Of(0),
+            // void GetEncryptionKey(FString& OutKey)：调用点读 out 槽。
+            ["GetEncryptionKey"] = (h, a) => { Val.TrySetOut(a[^1], Val.Of("")); return Val.Of(""); },
             ["InitStaticGameplayTags"] = (h, a) => Val.Nothing,
-            ["GetStaticCampaignName"] = (h, a) => Val.Of(""),
+            // void GetStaticCampaignName(FString cardName, FString& campaignName)：out 槽。
+            ["GetStaticCampaignName"] = (h, a) => { Val.TrySetOut(a[^1], Val.Of("")); return Val.Of(""); },
+
+            // ---------- 枚举助手 / 平台判定 ----------
+            // void GetEnumeratorValueFromIndex(UEnum* Enum, uint8 Index, uint8& ReturnValue)
+            // 这里用到的两个枚举（ECombatKeyword / EGameplayRestrictions，见
+            // H:\kards\Source\*\.h）都是 0 起、无空洞的连续枚举，所以显示下标就是枚举值。
+            // 换到有空洞的枚举上要补表，不能继续当恒等。
+            ["GetEnumeratorValueFromIndex"] = (h, a) => a.Length > 2 ? a[2] : Val.Nothing,
+            // 无头模拟不是编辑器。
+            ["IsEditor"] = (h, a) => Val.False,
+            // void BranchOnProviderWithEditorTestSupport(bool& Branches, bool bTestSupport)
+            // 平台/编辑器测试分支：无头模拟走「否」。
+            ["BranchOnProviderWithEditorTestSupport"] = (h, a) => Out(a, false),
             ["SetObjectiveCounter"] = (h, a) => Val.Nothing,
             ["NotiferStarCounterChanged"] = (h, a) => Val.Nothing,
             ["OnCreateCard"] = (h, a) => Val.Nothing,
+            // bool GetDataTableRowFromName(DataTable*, FName RowName, FTableRowBase& OutRow)
+            //
+            // 无头模拟不加载 UDataTable，所以行内容由 Core.DataTables 提供。
+            // 这张表必须真的有内容：card_event_mass_deployment 的 GetRandomKreditCombo
+            // 是「随机取一个组合，取不到就重试」，返回空行会让那个循环永不退出。
+            // 只被 UI / 平台函数引用的表返回 false，那是正确行为。
             ["GetDataTableRowFromName"] = (h, a) =>
             {
-                // 数据表行：无头模拟不加载 DataTable，返回空结构而不是 null，
-                // 否则调用方解引用会炸。
-                return Val.Nothing;
+                var table = a.Length > 1 ? a[1].AsStr() : null;
+                var rowName = a.Length > 2 ? a[2].AsStr() : null;
+                var found = Core.DataTables.TryGetRow(table, rowName, out var row);
+                Val.TrySetOut(a[^1], found ? RowToObj(row) : Val.Nothing);
+                return Val.Of(found);
             },
 
             // ---------- 随机 / 时间 ----------
@@ -1000,7 +1479,20 @@ public sealed class EngineHost : Host
                 return Val.Nothing;
             },
             ["SpawnObject"] = (h, a) => Val.Nothing,   // 表现层 Actor，无头模拟忽略
-            ["GetStaticCard"] = (h, a) => Val.Nothing,
+            // void CopyData(UBaseCardObject* toCard) —— 把本卡数据拷到另一个卡对象。
+            // 唯一调用点是 ConstructAndCopyCard：先 SpawnObject 造一个**表现层 Actor**，
+            // 再 CopyData 把数据灌进去。无头模拟没有 Actor（SpawnObject 就是 no-op），
+            // 所以这里也显式登记为 no-op，免得它混进「未实现调用」里污染完备性指标。
+            ["CopyData"] = (h, a) => Val.Nothing,
+            // UBaseCardObject* GetStaticCard(FName cardName) —— 造一张「静态卡」对象：
+            // 只作数值与身份来源，不代表场上的实体。Develop 类效果靠它列出候选卡
+            //（例如 card_unit_hampshire_regiment 的 GetChooseSpawnCards 会连造 3 张）。
+            // 以前返回 Nothing，于是候选列表恒为空、Develop 永远选不出东西。
+            ["GetStaticCard"] = (h, a) =>
+            {
+                var def = Core.CardDb.Resolve(a.Length > 1 ? a[1].AsStr() : null);
+                return def is null ? Val.Nothing : Val.Ref(h.ObjStatic(def));
+            },
 
             // ---------- 自定义名后缀的增删 ----------
             ["CustomName1Add"] = (h, a) => { SuffixAdd(h, a, "customName1"); return Val.Nothing; },
@@ -1044,11 +1536,21 @@ public sealed class EngineHost : Host
                 return Val.Of(true);
             },
 
-            // ---------- 三选一：真实的决策点，交给可插拔的决策器 ----------
-            // 蓝图的 WhichChooseOne 返回 EnumChooseOneCardBeingPlayed（Card_0 / Card_1），
-            // 卡自己再按这个值分支。恒返回 0 是确定性的，但等于砍掉了一个动作维度 ——
-            // 训练时 AI 学不到「该选哪支」。所以留成钩子，由后端决定。
-            ["WhichChooseOne"] = (h, a) => Out(a, h.ChooseOne(a.Length > 0 ? h.Card_(a[0]) : null)),
+            // ---------- 三选一：真实的决策点 ----------
+            // 卡牌把选择存在自己的 ChooseOne 成员上（card_event_strategic_focus 就是这么
+            // 读的：Switch(GetMember(self,"ChooseOne"), [(0,IsGroundUnit),(1,IsAirUnit)])），
+            // 引擎在出牌前把它写进去，所以这里优先读成员。
+            // 成员没写时退回可插拔决策器（默认 0），保证不接 AI 时也确定可复现。
+            ["WhichChooseOne"] = (h, a) =>
+            {
+                var c = a.Length > 0 ? h.Card_(a[0]) : null;
+                if (c is not null)
+                {
+                    var v = h.Obj(c).Get("ChooseOne");
+                    if (v.K != VKind.Nothing) return Out(a, (int)v.AsInt());
+                }
+                return Out(a, h.ChooseOne(c));
+            },
 
             // ---------- 费用 / 老兵版本的读取 ----------
             ["getAndDecryptKredit"] = (h, a) => Out(a, h.Card_(a[0])?.KreditCost ?? 0),
@@ -1065,6 +1567,15 @@ public sealed class EngineHost : Host
                 // 静态卡：不属于任何一方，只是数值来源，用独立 instanceId 避免与场上实体混淆
                 var vk = h.ObjStatic(def);
                 Val.TrySetOut(a[^1], Val.Ref(vk));
+                return Val.Nothing;
+            },
+            // MakeCardVeteran(notifier, card) —— 名字直译就是「把这张卡变成老兵」。
+            // 客户端这里做的是通知/表现；引擎侧的权威位是 Card.Veteran
+            //（MakeVeteran 另有一处 JSON_SetBool(card,"veteran",true) 也会同步它）。
+            // 显式实现而不是留空，免得它一直挂在「未实现调用」里。
+            ["MakeCardVeteran"] = (h, a) =>
+            {
+                if (h.Card_(a.Length > 1 ? a[1] : a[0]) is { } c) c.Veteran = true;
                 return Val.Nothing;
             },
             ["GetEmptyText"] = (h, a) => Val.Ref(new KObj("Text")),
@@ -1177,6 +1688,16 @@ public sealed class EngineHost : Host
             ["getTotalOperationCost"] = (h, a) =>
                 Out(a, h.Card_(a[0]) is { } oc ? oc.KreditCost + oc.BuffCost : Num(a[0], "operationCost")),
 
+            // OnAfterOperationCostChanged(cardToChangeRef, instigatorID) —— 客户端在
+            // ChangeOperationCost 末尾调它，是「操作费用已变更」触发点(id=10)的分派入口。
+            // 引擎侧的包装 FireKreditCostChangedTriggers 是个没人调用的死函数，
+            // 所以这里直接把触发点发出去，否则 37 张注册了它的卡永远是白板。
+            ["OnAfterOperationCostChanged"] = (h, a) =>
+            {
+                h.Engine.Fire(Trigger.OnAfterOtherCardOperactionCostChanged, h.Card_(a[0]));
+                return Val.Nothing;
+            },
+
             // UHT: void getAttackTempBuffAmount(int32 instigatorID, int32& tempAmount)
             // 实参是 { 卡, instigatorID, out }。引擎只建模一个总加成，不分来源，
             // 所以不区分 instigatorID。这里同样必须写 out 槽而不是直接返回。
@@ -1214,6 +1735,19 @@ public sealed class EngineHost : Host
 
             ["ChangeDefense"] = (h, a) =>
             {
+                // HQ 是合成镜像对象，没有 Card 实体：ChangeDefense(hqCard, …) 必须路由回
+                // PlayerState.Hq，否则「HQ 防御 +N」这类效果静默变成空操作
+                // （card_event_aans 的「Your HQ gets +3 defense」就是）。
+                if (a[1].O is KObj hq && h.IsHqObj(hq))
+                {
+                    var hs = h.HqSideOf(hq);
+                    var hp = h.Engine.S.Player(hs);
+                    hp.Hq = Math.Max(0, hp.Hq + (int)a[3].AsInt());
+                    hq.Set("defense", Val.Of(hp.Hq));
+                    hq.Set("maxDefense", Val.Of(Rules.HqDefense));
+                    Val.TrySetOut(a[^1], Val.True);
+                    return Val.Nothing;
+                }
                 var c = h.Card_(a[1]);
                 if (c is not null)
                 {
@@ -1256,6 +1790,15 @@ public sealed class EngineHost : Host
 
             ["HealCard"] = (h, a) =>
             {
+                // 同 ChangeDefense：HQ 的治疗也要路由回 PlayerState.Hq。
+                if (a[1].O is KObj hq && h.IsHqObj(hq))
+                {
+                    var hs = h.HqSideOf(hq);
+                    var hp = h.Engine.S.Player(hs);
+                    hp.Hq = Math.Min(Rules.HqDefense, hp.Hq + (int)a[3].AsInt());
+                    hq.Set("defense", Val.Of(hp.Hq));
+                    return Val.Nothing;
+                }
                 var c = h.Card_(a[1]);
                 if (c is not null)
                 {
@@ -1336,7 +1879,14 @@ public sealed class EngineHost : Host
                 h.Engine.S.Player((Side)a[1].AsInt()).KreditSlots = (int)a[2].AsInt();
                 return Val.Nothing;
             },
-            ["getMaxPossibleKredits"] = (h, a) => Val.Of(Rules.MaxKredits),
+            ["getMaxPossibleKredits"] = (h, a) =>
+            {
+                // UHT 形态是 void getMaxPossibleKredits(int32& outputMax)：调用点读 out 槽。
+                // 原来写成 return，调用方拿到 Nothing → Clamp(x, 0, 0) = 0，
+                // 于是「获得一个克redit槽」这类效果会把槽位清成 0。
+                Val.TrySetOut(a[^1], Val.Of(Rules.MaxKredits));
+                return Val.Of(Rules.MaxKredits);
+            },
 
             // ---------- HQ ----------
             ["GetHqDefense"] = (h, a) => Val.Of(h.Engine.S.Player((Side)a[1].AsInt()).Hq),
@@ -1409,7 +1959,8 @@ public sealed class EngineHost : Host
             // ---------- 回合 ----------
             // UHT: void GetTurnNumber(int32& TurnNumber)（CardFunctionsStub）
         ["GetTurnNumber"] = (h, a) => Out(a, h.Engine.S.Turn),
-            ["GetFrontlineOwnerSide"] = (h, a) => Val.Of((int)h.Engine.S.FrontlineOwner),
+            ["GetFrontlineOwnerSide"] = (h, a) =>
+                Out(a, (int)h.Engine.S.FrontlineOwner),
             // UHT: void IsSideActive(ESideEnum SideToCheck, bool& Active)
         // 实参是 { self, side, out }，所以比较值在 a[1]。
         ["IsSideActive"] = (h, a) => Out(a, h.Engine.S.Current == (Side)a[1].AsInt()),
@@ -1487,6 +2038,30 @@ public sealed class EngineHost : Host
                 return Val.Nothing;
             },
             ["JsonHasTypedField"] = (h, a) => Out(a, false),
+            // JsonMakeInt / JsonMakeString(Value) -> JsonValue：值直接透传
+            //（模拟器里 JSON 值就是 KObj.Fields 里的一项，不需要真的装箱）。
+            ["JsonMakeInt"] = (h, a) => a.Length > 1 ? a[1] : Val.Nothing,
+            ["JsonMakeString"] = (h, a) => a.Length > 1 ? a[1] : Val.Nothing,
+            ["JsonMakeBool"] = (h, a) => a.Length > 1 ? a[1] : Val.Nothing,
+            ["JsonMakeFloat"] = (h, a) => a.Length > 1 ? a[1] : Val.Nothing,
+            // GetStaticText(cardName, out text) —— 静态卡面文案，从 cards.json 取。
+            ["GetStaticText"] = (h, a) =>
+            {
+                var txt = Core.CardDb.Resolve(a.Length > 1 ? a[1].AsStr() : null)?.Text ?? "";
+                Val.TrySetOut(a[^1], Val.Of(txt));
+                return Val.Of(txt);
+            },
+            // CanMoveAndAttackInTheSameTurn(card, out canIt) —— 能力标记由卡自己
+            // 用 CustomName1Add("CanMoveAndAttackInTheSameTurn") 写上/去掉
+            //（见 BP_CardFunctions 与 card_event_lightning_conquest_new 的调用点，
+            // token 字符串就是从这里取的，不是猜的）。CDO 里也可能直接初始化。
+            ["CanMoveAndAttackInTheSameTurn"] = (h, a) =>
+            {
+                var c = h.Card_(a[0]);
+                var has = c is not null && h.Obj(c).Get("customName1").AsStr()
+                              .Contains("CanMoveAndAttackInTheSameTurn", StringComparison.OrdinalIgnoreCase);
+                return Out(a, has);
+            },
             ["JsonMakeArray"] = (h, a) => Val.Ref(new KObj("JsonValue")),
             ["JsonMakeField"] = (h, a) => Val.Ref(new KObj("JsonValue")),
             ["JsonHasField"] = (h, a) => Val.False,
@@ -1516,6 +2091,30 @@ public sealed class EngineHost : Host
     /// <summary>卡牌定义上是否带某个关键字（与场上临时状态无关）。</summary>
     private static bool HasKw(Card c, Kw k) => c is not null && c.Has(k);
 
+    /// <summary>
+    /// DataTable 行 → 蓝图对象。值类型按形状映射：
+    /// <c>List&lt;int[]&gt;</c> 变成 <c>KArr&lt;Vec3&gt;</c>（对应 FVector 数组，蓝图会对它 BreakVector）。
+    /// </summary>
+    private static Val RowToObj(Dictionary<string, object> row)
+    {
+        var o = new KObj("DataTableRow");
+        foreach (var kv in row)
+        {
+            switch (kv.Value)
+            {
+                case List<int[]> vecs:
+                    o.Set(kv.Key, Val.Ref(new KArr(vecs.Select(v =>
+                        Val.Ref(new Vec3(v[0], v[1], v[2]))))));
+                    break;
+                case int i: o.Set(kv.Key, Val.Of(i)); break;
+                case string s: o.Set(kv.Key, Val.Of(s)); break;
+                case null: o.Set(kv.Key, Val.Nothing); break;
+                default: o.Set(kv.Key, Val.Ref(kv.Value)); break;
+            }
+        }
+        return Val.Ref(o);
+    }
+
     // ---------- Intel（情报）----------
 
     /// <summary>
@@ -1534,13 +2133,15 @@ public sealed class EngineHost : Host
     {
         var seen = (int)a[1].AsInt();
         var instigatorId = (int)a[2].AsInt();
-        if (seen <= 0) return Val.Nothing;
+        // 调用点形态是 void SetCardsSeenByCipher(int32 cipher, int32 instigatorID, ... , bool& qqq)，
+        // 末尾那个 out 槽必须回写，否则调用方读到空值（会当成「翻牌失败」）。
+        if (seen <= 0) { Val.TrySetOut(a[^1], Val.True); return Val.Nothing; }
 
         // 触发者是哪一方，就翻另一方的牌
         var src = h.Engine.S.FindCard(instigatorId);
         var viewer = src?.Owner ?? h.Engine.Perspective;
         var foeHand = h.Engine.S.Player(GameState.Foe(viewer)).Hand;
-        if (foeHand.Count == 0) return Val.Nothing;
+        if (foeHand.Count == 0) { Val.TrySetOut(a[^1], Val.True); return Val.Nothing; }
 
         var n = Math.Min(seen, foeHand.Count);
         // 洗一份下标再取前 n 个：直接洗牌会打乱对手手牌顺序（那是可见信息，不能动）
@@ -1550,6 +2151,7 @@ public sealed class EngineHost : Host
             h.Obj(foeHand[i]).Set("seenByCipher", Val.Of(true));
 
         h.Engine.FireIntelTriggers(src, n);
+        Val.TrySetOut(a[^1], Val.True);
         return Val.Nothing;
     }
 
@@ -1647,6 +2249,22 @@ public sealed class EngineHost : Host
         if (tag.Contains("Bomber", StringComparison.OrdinalIgnoreCase)) return c.Type == CardType.Bomber;
         return false;
     }
+}
+
+/// <summary>
+/// 单次效果调用超出宿主调用预算时抛出，用来把死循环的控制流拉回入口点。
+///
+/// <para>
+/// 卡牌逻辑里有「循环重试直到找到组合」这类循环（例如
+/// <c>card_event_mass_deployment</c> 的 <c>GetRandomKreditCombo</c>），
+/// 一旦它依赖的数据在无头模拟里不存在（DataTable 没有加载），循环就永不退出，
+/// 整个自对弈会挂死。入口点接住它、记一笔、继续下一局。
+/// </para>
+/// </summary>
+public sealed class EffectBudgetException : Exception
+{
+    public EffectBudgetException(string func)
+        : base($"效果调用超出预算，已在 {func} 处中断") { }
 }
 
 

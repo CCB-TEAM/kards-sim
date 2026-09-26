@@ -101,7 +101,17 @@ public static class CardDispatch
 
         var args = BuildArgs(host, t, payload, self);
 
-        fn(host, self, args);
+        host.ResetBudget();
+        try
+        {
+            fn(host, self, args);
+        }
+        catch (EffectBudgetException)
+        {
+            // 卡牌效果里存在依赖外部数据（DataTable 等）的循环，数据缺失时会死循环。
+            // 中断并记账，绝不让它把整个对局挂住。
+            host.NoteBudgetTrip();
+        }
         host.SyncBack(host.Obj(card));
         if (host.TraceFire) host.OnTriggerFired?.Invoke(t, card.Id);
         return true;
@@ -165,7 +175,12 @@ public static class CardDispatch
         args[0] = self;
         Array.Copy(extra, 0, args, 1, extra.Length);
 
-        fn(host, self, args);
+        host.ResetBudget();
+        try
+        {
+            fn(host, self, args);
+        }
+        catch (EffectBudgetException) { host.NoteBudgetTrip(); }
         host.SyncBack(host.Obj(card));
         if (host.TraceFire) host.OnTriggerFired?.Invoke(t, card.Id);
         return true;

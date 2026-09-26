@@ -17,8 +17,30 @@ public static class Encoder
     public const int Globals = 24;
 
     public const int StateSize = Rows * PerRow * CardFeatures + Globals;
-    /// <summary>动作空间：自家 5 手牌出牌 + 己方 10 个单位 × (11 目标 + 2 移动) + EndTurn。</summary>
-    public const int ActionSize = 5 + 10 * 13 + 1;
+
+    /// <summary>每张手牌的目标槽位数（见 <see cref="PlaySlot"/>）：
+    /// 0 = 不需要目标；1..5 敌方前线；6..10 敌方支援；11..15 己方前线；16..20 己方支援。</summary>
+    public const int PlayTargetSlots = 21;
+
+    /// <summary>「三选一」的分支槽位数（卡池里 choose-one 卡都是 2 个分支）。</summary>
+    public const int ChooseSlots = 2;
+
+    /// <summary>每张手牌占用的出牌槽位数 = 目标槽 × 分支槽。</summary>
+    public const int PlaySlotsPerCard = PlayTargetSlots * ChooseSlots;
+
+    /// <summary>出牌区大小：5 张手牌 × 42 个槽。</summary>
+    public const int PlayBlock = PerRow * PlaySlotsPerCard;
+
+    /// <summary>
+    /// 动作空间：出牌区（5×21 目标×2 分支）+ 己方 10 个单位 × (11 目标 + 2 移动) + EndTurn。
+    ///
+    /// <para>
+    /// 出牌从「一张牌一个下标」扩成「一张牌 × 一个目标 × 一个三选一分支」，
+    /// 这样「打谁」和「选哪支」都是模型能学的维度 —— 以前 TargetId 恒为 -1、
+    /// WhichChooseOne 恒为 0，需要目标或需要选择的牌等于没有决策权。
+    /// </para>
+    /// </summary>
+    public const int ActionSize = PlayBlock + 10 * 13 + 1;
 
     public static float[] Encode(GameEngine g)
     {
@@ -107,19 +129,29 @@ public static class Encoder
 
     /// <summary>
     /// 动作 → 下标。
-    ///   0..4     ：手牌 0..4 的出牌
-    ///   5..134   ：己方 10 个位置（前线 5 + 支援 5），每个 13 个动作
-    ///              （11 个攻击目标：0..9 是敌方单位槽，10 是 HQ；11 前移；12 后退）
-    ///   135      ：EndTurn
+    ///   0..209    ：出牌区。handIndex * 42 + 目标槽 * 2 + 三选一分支
+    ///               （目标槽见 <see cref="PlaySlot"/>，分支 0/1）
+    ///   210..339  ：己方 10 个位置（前线 5 + 支援 5），每个 13 个动作
+    ///               （11 个攻击目标：0..9 是敌方单位槽，10 是 HQ；11 前移；12 后退）
+    ///   340       ：EndTurn
     /// </summary>
     public static int Index(GameEngine g, GameAction a)
     {
         if (a.Type == ActionType.EndTurn) return ActionSize - 1;
-        if (a.Type == ActionType.PlayCard) return a.HandIndex is >= 0 and < PerRow ? a.HandIndex : -1;
+
+        if (a.Type == ActionType.PlayCard)
+        {
+            if (a.HandIndex is < 0 or >= PerRow) return -1;
+            var ps = PlaySlot(g, a.TargetId);
+            if (ps < 0) return -1;
+            var ch = a.ChoiceIndex < 0 ? 0 : a.ChoiceIndex;
+            if (ch >= ChooseSlots) return -1;
+            return a.HandIndex * PlaySlotsPerCard + ps * ChooseSlots + ch;
+        }
 
         var slot = SlotOf(g, a.SourceId);
         if (slot < 0) return -1;
-        var b = PerRow + slot * 13;
+        var b = PlayBlock + slot * 13;
         switch (a.Type)
         {
             case ActionType.MoveToFrontline: return b + 11;
@@ -127,6 +159,43 @@ public static class Encoder
             case ActionType.Attack:
                 var t = TargetSlot(g, a.TargetId);
                 return t < 0 ? -1 : b + t;
+        }
+        return -1;
+    }
+
+    /// <summary>
+    /// 出牌目标 → 槽位；-1 表示这个目标不在编码范围里。
+    /// 出牌目标与攻击目标分开编码：出牌可以是己方单位（增益类），攻击只能是敌方。
+    /// </summary>
+    private static int PlaySlot(GameEngine g, int targetId)
+    {
+        if (targetId < 0) return 0;               // 不需要目标
+        var me = g.S.Current;
+        var foe = GameState.Foe(me);
+
+        var n = 0;
+        foreach (var c in g.S.Frontline.Where(x => x.Owner == foe))
+        {
+            if (c.InstanceId == targetId) return 1 + n;
+            if (++n >= PerRow) break;
+        }
+        n = 0;
+        foreach (var c in g.S.Player(foe).Board)
+        {
+            if (c.InstanceId == targetId) return 6 + n;
+            if (++n >= PerRow) break;
+        }
+        n = 0;
+        foreach (var c in g.S.Frontline.Where(x => x.Owner == me))
+        {
+            if (c.InstanceId == targetId) return 11 + n;
+            if (++n >= PerRow) break;
+        }
+        n = 0;
+        foreach (var c in g.S.Player(me).Board)
+        {
+            if (c.InstanceId == targetId) return 16 + n;
+            if (++n >= PerRow) break;
         }
         return -1;
     }

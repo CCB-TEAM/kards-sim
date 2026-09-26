@@ -55,6 +55,7 @@ public static class NativeOutParams
         ["GetDeckCode|7"] = new[] { "", "", "", "", "out", "out", "out" },
         ["GetDeckInfoFromString|8"] = new[] { "", "", "out", "out", "out", "out", "out", "out" },
         ["GetDefaultFocusWidget|1"] = new[] { "out" },
+        ["GetDataTableRowFromName|3"] = new[] { "", "", "out" },
         ["GetDetails|2"] = new[] { "out", "out" },
         ["GetDetailsImage|2"] = new[] { "out", "out" },
         ["GetEncryptionKey|1"] = new[] { "out" },

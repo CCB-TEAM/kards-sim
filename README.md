@@ -189,13 +189,16 @@ Execute*Events  →  逐个调响应卡的事件函数
 
 ## 状态
 
-- 1670 个资产 / 6254 个函数，**0 空体**，1 处未支持节点（`BP_EntryPointActor`，非战斗逻辑）
-- 37 万行直译代码 **0 错误编译通过**
-- 自对弈 400 局：**0 异常 / 0 卡死 / 0 非法动作 / 0% 未实现调用**
+- 1671 个资产 / 6434 个函数，**0 空体**，1 处未支持节点（`BP_EntryPointActor`，非战斗逻辑）
+- 47.5 万行直译代码 **0 错误编译通过**
+- 自对弈 150 局：**0 异常 / 0 卡死 / 0 非法动作 / 0 未实现调用**
 - 全卡 1638 张强制演练：**0 异常 / 0 未实现调用**
 - 触发点覆盖 **61/61**（卡牌注册的触发点，引擎全部会发）
-- 宿主 API：卡牌逻辑可达的缺口 **0 个**（另外 341 个仅 UI / 平台可达，无头模拟不会走到）
-- 已知未做：`WhichChooseOne`（三选一）恒返回第 0 支，是确定性的但不是真实决策点
+- 宿主 API：卡牌逻辑可达的缺口 **0 个**（另外 424 个仅 UI / 平台可达，无头模拟不会走到）
+- 动作空间：出牌 = 手牌 × 目标 × 三选一分支，`stateSize=264`、`actionSize=341`
+- 已知未做：Develop / 选手牌这类「效果中途要选牌」的选择点 —— 客户端走的是
+  UI 往返（`NotifySelectCardToDrawPending` → `OnHandTargetSelected`），
+  要建模成两阶段决策，引擎的动作循环得改（见下）
 
 ---
 
@@ -239,11 +242,48 @@ dotnet run --project KardsTranspiler -c Release -- \
 
 ## 状态
 
-- 1670 个资产 / 6254 个函数，**0 空体**，1 处未支持节点（`BP_EntryPointActor` 的
+- 1671 个资产 / 6434 个函数，**0 空体**，1 处未支持节点（`BP_EntryPointActor` 的
   ubergraph，非战斗逻辑）
-- 36 万行直译代码 **0 错误编译通过**
-- 200 局自对弈：**0 异常 / 0 卡死 / 0 非法动作**，宿主未实现调用 1.39%（12 个函数）
+- 47.5 万行直译代码 **0 错误编译通过**
+- 自对弈 150 局：**0 异常 / 0 卡死 / 0 非法动作**，宿主未实现调用 **0%**
 - 单卡端到端验证（`panzer_iii_e` 进场加攻 / 离场撤销 / 三个入口等价）**12/12 通过**
+
+---
+
+## 出牌效果是怎么接上的（本轮补的关键一环）
+
+卡牌效果的主入口叫 `OnPlayedFromHand`（1638 张卡里 **942 张**有它），
+但它**不是** `ERegisteredCardFunction` 的成员，所以按 Trigger 枚举名找函数的触发分发
+永远找不到它。客户端走的是 `BP_CardFunctions.CardPlayedFromHand` → `OnPlayedFromHand`；
+无头模拟里出牌流程是引擎自己实现的，就必须自己补这一步。
+
+以前写的是 `RunCardEffect(c, Trigger.NotAvailable)`，而 `CardDispatch.Fire` 对
+`NotAvailable` 是直接 `return false` —— 于是 **691 张 order 与 241 张部署单位的效果
+全都不执行，且不报错**。现在由 `EngineHost.PlayCardFromHand` 显式调它。
+
+同理，Intel 原本指望 `CardPlayedFromHand` 里的 `SetCardsSeenByCipher` 来发，
+而那条链引擎不走，所以引擎现在自己发一次（`EngineHost.ApplyIntel`）。
+
+**另一条死路**：蓝图侧的触发登记表 `CardFunctionTriggers` / `AllCardsInBattle`
+从来没被填充过（实测恒为 0），所以 `FetchAllCardsWithEventTrigger` 那条路是死的 ——
+所有触发点实际只走引擎自己的 `FireTrigger` → `CardDispatch`。改动时不要指望蓝图那条路。
+
+---
+
+## 选择点：哪些已经是动作，哪些还不是
+
+| 选择 | 机制 | 现状 |
+|---|---|---|
+| 出牌目标 | 卡自己的 `CanPlayFromHand` + CDO 的 `selectTargetOnPlayedFromHand`（401 张） | **是动作**（`GameAction.TargetId`） |
+| 三选一 | 卡上的 `ChooseOne` 成员决定分支（48 张，各 2 支） | **是动作**（`GameAction.ChoiceIndex`） |
+| Develop / 选手牌 | UI 往返：`NotifySelectCardToDrawPending` 通知 → `OnHandTargetSelected` 回调 | **还不是** —— 需要两阶段决策 |
+
+前两类是**出牌前**就能定的（卡牌逻辑同步执行，没有挂起/恢复，所以选择只能前置）。
+第三类相反：效果跑到一半才需要选，客户端靠 UI 回调完成。要建模它得让
+`LegalActions` 在「有待决选择」时只返回选项，并在选定后回调 `OnHandTargetSelected`。
+
+`WhichChooseOne` 以前恒返回第 0 支（确定但不是决策点），现在读卡的 `ChooseOne` 成员，
+引擎在出牌前写入；没写时退回可插拔决策器，保证不接 AI 时仍可复现。
 
 ---
 

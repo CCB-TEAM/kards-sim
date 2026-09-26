@@ -10996,7 +10996,7 @@ public static Val CreateCardObject(IHost H, Val self, Val[] args)
     L_0800:
         _ = H.Call("InitializeEncryption", new Val[] { GetLocal(L, "CallFunc_SpawnObject_ReturnValue") });
     L_0820:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("DT_CardImages"), H.GetMember(GetLocal(L, "CallFunc_SpawnObject_ReturnValue"), "name"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("DT_CardImages"), H.GetMember(GetLocal(L, "CallFunc_SpawnObject_ReturnValue"), "name"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_087B:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_08B2;
     L_0889:

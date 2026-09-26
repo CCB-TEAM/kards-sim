@@ -1,5 +1,6 @@
 using KardsSim.Bridge;
 using KardsSim.Core;
+using KardsSim.Engine;
 using KardsSim.Kismet;
 
 namespace KardsSim;
@@ -26,6 +27,10 @@ public static class CardTests
         EventPayloadReachesEffect();
         VeteranUpgradeIsReachable();
         BlitzCanActOnSummonTurn();
+        DataTableRowsMatchExport();
+        ChooseOneIsAnActionDimension();
+        CdoFlagsAreSeeded();
+        GetStaticCardResolves();
 
         Console.WriteLine();
         Console.WriteLine($"通过 {_pass} / 失败 {_fail}");
@@ -265,6 +270,152 @@ public static class CardTests
             "AttackedThisTurn 被错误置位（说明豁免没生效）");
         Check($"无 Blitz 单位({plainDef.Id})当回合被标记已攻击", p.AttackedThisTurn,
             "非 Blitz 单位当回合竟然没被标记");
+    }
+
+    /// <summary>
+    /// DataTable：<c>kreditCombinationsUSUnits</c> 的行内容必须与导出资产一致。
+    ///
+    /// <para>
+    /// 这张表是「把 N 点克redit拆成 3 个正整数」的枚举，行内容由
+    /// <see cref="DataTables"/> 算出来而不是抄的。断言用的是导出资产的<b>行数</b>
+    /// （22 行逐一核对过：1,1,2,3,4,5,7,8,10,12,14,16,19,21,24,27,30,33,37,40,44,48）
+    /// 加上两行的完整内容 —— 一旦生成规则写错，行数就会对不上。
+    /// </para>
+    ///
+    /// <para>
+    /// 为什么值得测：<c>card_event_mass_deployment</c> 的 GetRandomKreditCombo 是
+    /// 「取不到就重试」，表为空会让那个循环永不退出、整个自对弈挂死。
+    /// </para>
+    /// </summary>
+    private static void DataTableRowsMatchExport()
+    {
+        int[] exported = { 1, 1, 2, 3, 4, 5, 7, 8, 10, 12, 14, 16, 19, 21, 24, 27, 30, 33, 37, 40, 44, 48 };
+        var bad = new List<string>();
+        for (var n = 3; n <= 24; n++)
+        {
+            if (!DataTables.TryGetRow("kreditCombinationsUSUnits", n.ToString(), out var row))
+            {
+                bad.Add($"{n}:查不到行");
+                continue;
+            }
+            var combos = (List<int[]>)row["combos"];
+            if (combos.Count != exported[n - 3]) bad.Add($"{n}:{combos.Count}!={exported[n - 3]}");
+            // 每个三元组必须 X+Y+Z==N 且 X>=Y>=Z>=1
+            foreach (var t in combos)
+                if (t[0] + t[1] + t[2] != n || t[0] < t[1] || t[1] < t[2] || t[2] < 1)
+                { bad.Add($"{n}:{t[0]}+{t[1]}+{t[2]}"); break; }
+        }
+        Check("DataTable kreditCombinationsUSUnits 行数与导出资产一致", bad.Count == 0, string.Join(",", bad.Take(5)));
+
+        DataTables.TryGetRow("kreditCombinationsUSUnits", "10", out var r10);
+        var c10 = string.Join("|", ((List<int[]>)r10["combos"]).Select(t => $"{t[0]}{t[1]}{t[2]}"));
+        Check("DataTable 第 10 行内容与导出资产一致",
+            c10 == "811|721|631|622|541|532|442|433", c10);
+
+        Check("DataTable 未收录的表返回「查不到」（UI 表不需要）",
+            !DataTables.TryGetRow("DT_CardImages", "1", out _), "不该查到");
+    }
+
+    /// <summary>
+    /// 三选一（choose-one）：卡池里 48 张，每张 2 个分支，
+    /// 分支由卡自己的 <c>ChooseOne</c> 成员决定。
+    ///
+    /// <para>
+    /// 断言的是「动作枚举真的给出了两个不同分支」+「两个分支能被执行」——
+    /// 以前 <c>WhichChooseOne</c> 恒返回 0，这个维度对 AI 完全不可见。
+    /// </para>
+    /// </summary>
+    private static void ChooseOneIsAnActionDimension()
+    {
+        var def = CardDb.All.FirstOrDefault(d => d.ChooseOneCards.Count == 2);
+        if (def is null) { Check("找得到 choose-one 卡", false, "卡池里没有"); return; }
+
+        var g = new Engine.GameEngine(31, null, null, false);
+        var h = new Bridge.EngineHost(g);
+        g.Host = h;
+        var c = PlaceInHand(g, Side.Left, def);
+        g.S.Current = Side.Left;
+        g.S.Left.Kredits = 99;
+
+        var plays = g.LegalActions().Where(a => a.Type == ActionType.PlayCard && a.SourceId == c.InstanceId).ToList();
+        var branches = plays.Select(a => a.ChoiceIndex).Distinct().OrderBy(x => x).ToList();
+        Check($"choose-one 卡({def.Id})产出 2 个分支动作", branches.SequenceEqual(new[] { 0, 1 }),
+            $"实际 {string.Join(",", branches)}，动作 {plays.Count} 个");
+
+        // 两个分支都必须能被执行
+        var applied = new List<int>();
+        foreach (var ch in new[] { 0, 1 })
+        {
+            var gg = new Engine.GameEngine(31, null, null, false);
+            var hh = new Bridge.EngineHost(gg);
+            gg.Host = hh;
+            var cc = PlaceInHand(gg, Side.Left, def);
+            gg.S.Current = Side.Left;
+            gg.S.Left.Kredits = 99;
+            var act = new GameAction { Type = ActionType.PlayCard, HandIndex = 0, SourceId = cc.InstanceId, TargetId = -1, ChoiceIndex = ch };
+            if (gg.Apply(act)) applied.Add(ch);
+        }
+        Check($"choose-one 卡({def.Id})两个分支都能执行", applied.Count == 2, $"实际 {string.Join(",", applied)}");
+
+        // WhichChooseOne 必须回读引擎写进 ChooseOne 成员的分支
+        var branchRead = -1;
+        var g2 = new Engine.GameEngine(31, null, null, false);
+        var h2 = new Bridge.EngineHost(g2);
+        g2.Host = h2;
+        var c2 = PlaceInHand(g2, Side.Left, def);
+        h2.SetChooseOne(c2, 1);
+        h2.Call("WhichChooseOne", new Val[] { Val.Ref(h2.Obj(c2)), Val.Out(v => branchRead = (int)v.AsInt()) });
+        Check($"WhichChooseOne 回读 ChooseOne 成员（{def.Id}）", branchRead == 1, $"读到 {branchRead}");
+    }
+
+    /// <summary>
+    /// CDO 种子：<c>selectTargetOnPlayedFromHand</c> 是 401 张卡「出牌要选目标」的权威信号，
+    /// 它只存在于 CDO 里，不 seed 的话镜像恒为 false。
+    /// </summary>
+    private static void CdoFlagsAreSeeded()
+    {
+        var def = CardDb.All.FirstOrDefault(d =>
+            d.Raw.TryGetValue("selectTargetOnPlayedFromHand", out var v)
+            && v.ValueKind == System.Text.Json.JsonValueKind.True);
+        if (def is null) { Check("找得到带 selectTargetOnPlayedFromHand 的卡", false, "没有"); return; }
+
+        var g = new Engine.GameEngine(11, null, null, false);
+        var h = new Bridge.EngineHost(g);
+        g.Host = h;
+        var c = g.S.NewCard(def, Side.Left);
+        Check($"CDO 标志位已 seed（{def.Id}.selectTargetOnPlayedFromHand）",
+            h.Obj(c).Get("selectTargetOnPlayedFromHand").AsBool(), "镜像里读不到");
+        Check($"带该标志的卡被判为「需要目标」（{def.Id}）", g.NeedsPlayTarget(c), "NeedsPlayTarget=false");
+
+        var panzer = CardDb.Get("card_unit_panzergrenadier");
+        if (panzer is not null)
+        {
+            var pc = g.S.NewCard(panzer, Side.Left);
+            h.Call("CanMoveAndAttackInTheSameTurn", new Val[] { Val.Ref(h.Obj(pc)), Val.Out(_ => { }) });
+            var can = false;
+            h.Call("CanMoveAndAttackInTheSameTurn", new Val[]
+                { Val.Ref(h.Obj(pc)), Val.Out(v => can = v.AsBool()) });
+            Check("customName1 已 seed（panzergrenadier 可移动后攻击）", can, "能力标记读不到");
+        }
+    }
+
+    /// <summary>
+    /// <c>GetStaticCard(name)</c> 必须给出真实的静态卡对象 ——
+    /// Develop 类效果靠它列出候选卡（如 hampshire_regiment 一次造 3 张）。
+    /// </summary>
+    private static void GetStaticCardResolves()
+    {
+        var g = new Engine.GameEngine(5, null, null, false);
+        var h = new Bridge.EngineHost(g);
+        g.Host = h;
+
+        // GetStaticCard 是**返回值型**（调用点是 L[x] = H.Call(...)），不是 out 型
+        var got = h.Call("GetStaticCard", new Val[] { Val.Ref(h.CardFunctions), Val.Name("card_event_desert_rats") });
+        var defId = got.K == VKind.Obj && got.O is KObj k ? k.Get("defId").AsStr() : null;
+        Check("GetStaticCard 给出真实静态卡对象", defId == "card_event_desert_rats", $"拿到 '{defId}'");
+
+        var miss = h.Call("GetStaticCard", new Val[] { Val.Ref(h.CardFunctions), Val.Name("card_does_not_exist_xyz") });
+        Check("GetStaticCard 对未知名字返回 none", miss.IsNothing, $"拿到 {miss}");
     }
 
     private static Card PlaceInHand(Engine.GameEngine g, Side s, CardDef def)

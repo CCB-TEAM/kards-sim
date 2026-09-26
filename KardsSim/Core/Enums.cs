@@ -16,7 +16,17 @@ public enum Loc
     Frontline = 7,
 }
 
-public enum CardType { Order = 0, Infantry = 1, Tank = 2, Fighter = 3, Bomber = 4, Artillery = 5, Location = 6, Gotcha = 7 }
+/// <summary>
+/// 卡牌类型。
+///
+/// <para>
+/// <b>注意：这套数值与客户端的 <c>ETypeEnum</c> 不是一回事</b>
+/// （客户端是 location=1, order=2, tank=3, fighter=4, bomber=5, infantry=6, artillery=7 …）。
+/// 直译产物里读镜像 <c>type</c> 的地方按客户端编号比较，所以写镜像时必须过
+/// <c>EngineHost.ClientType()</c> 换算，不能直接写这里的值。
+/// </para>
+/// </summary>
+public enum CardType { Order = 0, Infantry = 1, Tank = 2, Fighter = 3, Bomber = 4, Artillery = 5, Location = 6, Gotcha = 7, AntiAir = 8 }
 
 public enum Faction { Neutral, Germany, Soviet, Japan, Britain, USA, France, Italy, Poland, Finland, Anzac }
 
@@ -43,6 +53,12 @@ public enum Kw
     Forecast = 1 << 14,
     Scrying = 1 << 15,
     Salvage = 1 << 16,
+    /// <summary>Shock（休克）：命中时压制目标。CDO 字段 hasShock，31 张卡带它。</summary>
+    Shock = 1 << 17,
+    /// <summary>Immune（免疫）：不吃伤害。CDO 里没有静态标志位，只能被效果动态赋予。</summary>
+    Immune = 1 << 18,
+    /// <summary>Pincer（钳形）：与配对的单位一起触发额外效果。CDO 字段 hasPincer，15 张卡带它。</summary>
+    Pincer = 1 << 19,
 }
 
 /// <summary>玩家可用的动作种类。</summary>

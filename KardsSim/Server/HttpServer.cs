@@ -3,6 +3,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using KardsSim.Ai;
+using KardsSim.Bridge;
 using KardsSim.Core;
 using KardsSim.Engine;
 using Enc = KardsSim.Ai.Encoder;
@@ -35,6 +36,23 @@ public sealed class HttpServer
     }
 
     public HttpServer(string prefix) { _prefix = prefix; }
+
+    /// <summary>
+    /// 建一局并挂上直译产物宿主。
+    ///
+    /// <para>
+    /// <b>必须挂</b>：<see cref="GameEngine.Host"/> 为 null 时引擎会退回
+    /// <c>EffectPlanner</c>（读卡面文本猜效果）。HTTP 接口是给 AI 后端用的，
+    /// 不挂宿主就意味着「API 跑的那套规则」和 <c>--mode selfplay</c> 不是同一套，
+    /// 而且是最差的那一套。
+    /// </para>
+    /// </summary>
+    private static GameEngine NewEngine(int seed, string leftDeck, string rightDeck, bool log)
+    {
+        var g = new GameEngine(seed, leftDeck, rightDeck, log);
+        g.Host = new EngineHost(g);
+        return g;
+    }
 
     public int Port
     {
@@ -286,7 +304,7 @@ public sealed class HttpServer
             RightDeck = JStr(b, "rightDeck"),
             LogEnabled = log,
         };
-        s.Engine = new GameEngine(seed, s.LeftDeck, s.RightDeck, log);
+        s.Engine = NewEngine(seed, s.LeftDeck, s.RightDeck, log);
         _sessions[s.Id] = s;
         return Observation(s);
     }
@@ -295,7 +313,7 @@ public sealed class HttpServer
     {
         var b = Parse(body);
         s.Seed = JInt(b, "seed") ?? s.Seed;
-        s.Engine = new GameEngine(s.Seed, s.LeftDeck, s.RightDeck, s.LogEnabled);
+        s.Engine = NewEngine(s.Seed, s.LeftDeck, s.RightDeck, s.LogEnabled);
         s.Illegal = 0;
         return Observation(s);
     }
@@ -374,7 +392,7 @@ public sealed class HttpServer
         {
             try
             {
-                var g = new GameEngine(1000 + i, null, null, false);
+                var g = NewEngine(1000 + i, null, null, false);
                 var n = 0;
                 while (!g.IsDone && n < maxSteps)
                 {

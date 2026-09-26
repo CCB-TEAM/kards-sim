@@ -401,7 +401,7 @@ public static Val GetDeckName(IHost H, Val self, Val[] args)
     L_00F4:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_RightChop_ReturnValue") });
     L_0119:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("premadeDecksInfo"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("premadeDecksInfo"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_015E:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_01BE;
     L_016C:
@@ -1184,7 +1184,7 @@ public static Val TranslateNameForStarterDeck(IHost H, Val self, Val[] args)
     L_0164:
         goto L_03E4;
     L_0169:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_2"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("premadeDecksInfo"), Val.Name("deck_starter_usa"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_2") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_2"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("premadeDecksInfo"), Val.Name("deck_starter_usa"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_2"] = __v) });
     L_01B2:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_2")).AsBool()) goto L_03E4;
     L_01C0:
@@ -1192,7 +1192,7 @@ public static Val TranslateNameForStarterDeck(IHost H, Val self, Val[] args)
     L_01E4:
         goto L_03E4;
     L_01E9:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_1"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("premadeDecksInfo"), Val.Name("deck_starter_german"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_1") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_1"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("premadeDecksInfo"), Val.Name("deck_starter_german"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_1"] = __v) });
     L_0232:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_1")).AsBool()) goto L_03E4;
     L_0240:
@@ -1200,7 +1200,7 @@ public static Val TranslateNameForStarterDeck(IHost H, Val self, Val[] args)
     L_0264:
         goto L_03E4;
     L_0269:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("premadeDecksInfo"), Val.Name("deck_starter_britain"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("premadeDecksInfo"), Val.Name("deck_starter_britain"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_02B2:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_03E4;
     L_02C0:
@@ -1208,7 +1208,7 @@ public static Val TranslateNameForStarterDeck(IHost H, Val self, Val[] args)
     L_02E4:
         goto L_03E4;
     L_02E9:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_3"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("premadeDecksInfo"), Val.Name("deck_starter_soviet"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_3") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_3"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("premadeDecksInfo"), Val.Name("deck_starter_soviet"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_3"] = __v) });
     L_0332:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_3")).AsBool()) goto L_03E4;
     L_0340:
@@ -1216,7 +1216,7 @@ public static Val TranslateNameForStarterDeck(IHost H, Val self, Val[] args)
     L_0364:
         goto L_03E4;
     L_0369:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue_4"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("premadeDecksInfo"), Val.Name("deck_starter_japan"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow_4") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue_4"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("premadeDecksInfo"), Val.Name("deck_starter_japan"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow_4"] = __v) });
     L_03B2:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue_4")).AsBool()) goto L_03E4;
     L_03C0:

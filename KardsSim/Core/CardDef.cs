@@ -228,6 +228,9 @@ public static class CardDb
                 "forecast" => Kw.Forecast,
                 "scrying" => Kw.Scrying,
                 "salvage" => Kw.Salvage,
+                "shock" => Kw.Shock,
+                "immune" => Kw.Immune,
+                "pincer" => Kw.Pincer,
                 _ => Kw.None,
             };
         }
@@ -243,6 +246,7 @@ public static class CardDb
         "artillery" => CardType.Artillery,
         "location" => CardType.Location,
         "gotcha" => CardType.Gotcha,
+        "antiair" => CardType.AntiAir,
         _ => CardType.Order,
     };
 

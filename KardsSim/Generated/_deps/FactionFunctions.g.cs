@@ -35,7 +35,7 @@ public static Val Get_Faction_Icon_256_Air(IHost H, Val self, Val[] args)
     L_002E:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue") });
     L_0053:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("DT_FactionIconTextures"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("DT_FactionIconTextures"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0098:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_0193;
     L_00A6:
@@ -77,7 +77,7 @@ public static Val GetFactionIcon_256(IHost H, Val self, Val[] args)
     L_002E:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue") });
     L_0053:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("DT_FactionIconTextures"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("DT_FactionIconTextures"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0098:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_0193;
     L_00A6:
@@ -119,7 +119,7 @@ public static Val GetFactionIcon_256_Color(IHost H, Val self, Val[] args)
     L_002E:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue") });
     L_0053:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("DT_FactionIconTextures"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("DT_FactionIconTextures"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0098:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_0193;
     L_00A6:
@@ -161,7 +161,7 @@ public static Val GetFactionIcon_512_ColorHover(IHost H, Val self, Val[] args)
     L_002E:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue") });
     L_0053:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("DT_FactionIconTextures"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("DT_FactionIconTextures"), GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0098:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_0193;
     L_00A6:
@@ -491,7 +491,7 @@ public static Val GetFontByFaction(IHost H, Val self, Val[] args)
     L_01F0:
         L["CallFunc_MakeLiteralName_ReturnValue"] = H.Call("MakeLiteralName", new Val[] { Val.Ref("KismetSystemLibrary"), Val.Name("this_is_not_row_name") });
     L_0219:
-        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("campaigns"), Val.Switch(GetLocal(L, "Temp_byte_Variable"), new[] { ValueTuple.Create(Val.Of(0), GetLocal(L, "CallFunc_MakeLiteralName_ReturnValue")), ValueTuple.Create(Val.Of(1), GetLocal(L, "Temp_name_Variable_6")), ValueTuple.Create(Val.Of(2), GetLocal(L, "Temp_name_Variable_5")), ValueTuple.Create(Val.Of(3), GetLocal(L, "Temp_name_Variable_4")), ValueTuple.Create(Val.Of(4), GetLocal(L, "Temp_name_Variable_3")), ValueTuple.Create(Val.Of(5), GetLocal(L, "Temp_name_Variable_2")), ValueTuple.Create(Val.Of(6), GetLocal(L, "CallFunc_MakeLiteralName_ReturnValue")), ValueTuple.Create(Val.Of(7), GetLocal(L, "CallFunc_MakeLiteralName_ReturnValue")), ValueTuple.Create(Val.Of(8), GetLocal(L, "CallFunc_MakeLiteralName_ReturnValue")), ValueTuple.Create(Val.Of(9), GetLocal(L, "CallFunc_MakeLiteralName_ReturnValue")), ValueTuple.Create(Val.Of(10), GetLocal(L, "CallFunc_MakeLiteralName_ReturnValue")), ValueTuple.Create(Val.Of(11), GetLocal(L, "Temp_name_Variable_1")), ValueTuple.Create(Val.Of(12), GetLocal(L, "Temp_name_Variable")) }, GetLocal(L, "K2Node_Select_Default_1")), GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow") });
+        L["CallFunc_GetDataTableRowFromName_ReturnValue"] = H.Call("GetDataTableRowFromName", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("campaigns"), Val.Switch(GetLocal(L, "Temp_byte_Variable"), new[] { ValueTuple.Create(Val.Of(0), GetLocal(L, "CallFunc_MakeLiteralName_ReturnValue")), ValueTuple.Create(Val.Of(1), GetLocal(L, "Temp_name_Variable_6")), ValueTuple.Create(Val.Of(2), GetLocal(L, "Temp_name_Variable_5")), ValueTuple.Create(Val.Of(3), GetLocal(L, "Temp_name_Variable_4")), ValueTuple.Create(Val.Of(4), GetLocal(L, "Temp_name_Variable_3")), ValueTuple.Create(Val.Of(5), GetLocal(L, "Temp_name_Variable_2")), ValueTuple.Create(Val.Of(6), GetLocal(L, "CallFunc_MakeLiteralName_ReturnValue")), ValueTuple.Create(Val.Of(7), GetLocal(L, "CallFunc_MakeLiteralName_ReturnValue")), ValueTuple.Create(Val.Of(8), GetLocal(L, "CallFunc_MakeLiteralName_ReturnValue")), ValueTuple.Create(Val.Of(9), GetLocal(L, "CallFunc_MakeLiteralName_ReturnValue")), ValueTuple.Create(Val.Of(10), GetLocal(L, "CallFunc_MakeLiteralName_ReturnValue")), ValueTuple.Create(Val.Of(11), GetLocal(L, "Temp_name_Variable_1")), ValueTuple.Create(Val.Of(12), GetLocal(L, "Temp_name_Variable")) }, GetLocal(L, "K2Node_Select_Default_1")), Val.Out(__v => L["CallFunc_GetDataTableRowFromName_OutRow"] = __v) });
     L_0331:
         if (!(GetLocal(L, "CallFunc_GetDataTableRowFromName_ReturnValue")).AsBool()) goto L_00CD;
     L_033F:
