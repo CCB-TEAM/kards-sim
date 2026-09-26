@@ -36,6 +36,7 @@ public static class CardTests
         GotchaActivatesWhenPlayed();
         TwoPhaseChoiceIsAnActionDimension();
         AuraAppliesAndRetracts();
+        AuraFollowsTheUnitWhenItMoves();
 
         Console.WriteLine();
         Console.WriteLine($"通过 {_pass} / 失败 {_fail}");
@@ -700,6 +701,82 @@ public static class CardTests
         Check("没有未实现的宿主调用",
             h.Unhandled.Count == 0,
             string.Join(",", h.Unhandled.Keys.Take(5)));
+    }
+
+    /// <summary>
+    /// 光环要跟着单位换行：<b>真的移动</b>到前线时才发卡的 OnMoveToFrontline，
+    /// 而「从手牌部署到前线」不是移动，只发 OnEnterPlay。
+    ///
+    /// <para>
+    /// 两条路必须分开，否则同一件事会先后触发两个入口：光环卡的两个入口是
+    /// 「进入时加」与「移动后先全撤再按新位置重加」，先撤后加是幂等的，
+    /// 加完再进一次就变成双倍（flaming_matilda 实测 +2 变 +4）。
+    /// </para>
+    /// </summary>
+    private static void AuraFollowsTheUnitWhenItMoves()
+    {
+        var def = CardDb.Get("card_unit_flaming_matilda_anzac");
+        if (def is null) { Check("卡池里有 flaming_matilda（移动）", false, "找不到"); return; }
+        var sample = CardDb.All.FirstOrDefault(d =>
+            d.Type == CardType.Infantry && d.Attack > 0 && d.Defense > 0 && d.Id != def.Id);
+        if (sample is null) { Check("找得到做左邻的步兵样本（移动）", false, "卡池里没有"); return; }
+
+        var g = new Engine.GameEngine(131, null, null, false);
+        var h = new Bridge.EngineHost(g);
+        g.Host = h;
+        g.S.Current = Side.Left;
+        g.S.Left.Kredits = 99;
+
+        var left0 = PlaceInFrontline(g, Side.Left, sample);
+        var left1 = PlaceInFrontline(g, Side.Left, sample);
+        var base0 = left0.TotalAttack;
+        var base1 = left1.TotalAttack;
+
+        // matilda 先待在支援线（不触发任何入场事件），再走「移动」动作上前线。
+        var matilda = PlaceInSupport(g, Side.Left, def);
+        Check("支援线上的 matilda 还没加过攻（没有入场事件）",
+            left0.TotalAttack == base0 && left1.TotalAttack == base1,
+            $"{left0.TotalAttack}/{left1.TotalAttack}");
+
+        Check("matilda 可以移动到前线", g.CanMoveToFrontline(matilda), "CanMoveToFrontline=false");
+        var moved = g.Apply(new GameAction
+        {
+            Type = ActionType.MoveToFrontline, SourceId = matilda.InstanceId, TargetId = -1,
+        });
+        Check("移动动作被接受", moved, "Apply 返回 false");
+        Check("matilda 落到前线最右", matilda.OnFrontline && matilda.LocationNumber == 2,
+            $"onFrontline={matilda.OnFrontline} locationNumber={matilda.LocationNumber}");
+
+        // 关键：移动入口只发一次 —— 数值正好 +2，不是 +4。
+        Check("移动后左邻 1 只拿到一次 +2", left0.TotalAttack == base0 + 2,
+            $"{base0} -> {left0.TotalAttack}");
+        Check("移动后左邻 2 只拿到一次 +2", left1.TotalAttack == base1 + 2,
+            $"{base1} -> {left1.TotalAttack}");
+
+        // 再退回支援线：离开前线要撤掉（客户端的 OnMoveFromFrontline 也是「先全撤」那一支）。
+        // 每张牌每回合只能移动一次，这里直接把「已移动」标记清掉，模拟下一回合。
+        matilda.MovedThisTurn = false;
+        var back = g.Apply(new GameAction
+        {
+            Type = ActionType.MoveToSupport, SourceId = matilda.InstanceId, TargetId = -1,
+        });
+        Check("退回支援线的动作被接受", back, "Apply 返回 false");
+        Check("退回支援线后光环被撤销", left0.TotalAttack == base0 && left1.TotalAttack == base1,
+            $"{left0.TotalAttack}/{left1.TotalAttack}");
+        Check("移动/撤销全程没有未实现的宿主调用",
+            h.Unhandled.Count == 0, string.Join(",", h.Unhandled.Keys.Take(5)));
+    }
+
+    /// <summary>把一张牌直接放到支援线。</summary>
+    private static Card PlaceInSupport(Engine.GameEngine g, Side s, CardDef def)
+    {
+        var c = g.S.NewCard(def, s);
+        c.Loc = Loc.Board;
+        c.OnFrontline = false;
+        c.EnterPlayTurn = 0;
+        g.S.Player(s).Board.Add(c);
+        g.RefreshAllLocations();
+        return c;
     }
 
     /// <summary>把一张牌直接放到前线（编号由 <see cref="Engine.GameEngine.RefreshAllLocations"/> 重排）。</summary>

@@ -259,9 +259,9 @@ dotnet run --project KardsTranspiler -c Release -- \
   ubergraph，非战斗逻辑）
 - 47.5 万行直译代码 **0 错误编译通过**
 - 自对弈 150 局：**0 异常 / 0 卡死 / 0 非法动作**，宿主未实现调用 **0%**
-- 单卡机制验证（`--mode tests`）**67/67 通过**：Intel、事件载荷、老兵升级、Blitz、
+- 单卡机制验证（`--mode tests`）**76/76 通过**：Intel、事件载荷、老兵升级、Blitz、
   数据表、三选一、CDO 标志位、移动/攻击二选一、指挥点槽 24、反制指令、二段式抉择，
-  以及持续站场光环的加/撤（`card_unit_flaming_matilda_anzac`）
+  以及持续站场光环的加/撤与跟随移动（`card_unit_flaming_matilda_anzac`）
 
 ---
 
@@ -299,9 +299,18 @@ dotnet run --project KardsTranspiler -c Release -- \
 | 入口 | 调用点 | 时机要点 |
 |---|---|---|
 | `OnEnterPlay(card, method=1)` | `DoPlayCard` | 落在场上、`LocationNumber` 排完之后 |
-| `OnMoveToFrontline(card, forceMove, moveCost)` | `TryPlaceOnFrontline` | 同上 |
-| `OnMoveFromFrontline(card)` | `DoMove` 退到支援线 | 同上 |
+| `OnMoveToFrontline(card, forceMove, moveCost)` | `DoMove` 上前线（**不含从手牌部署**） | 先重排编号，再发事件 |
+| `OnMoveFromFrontline(card)` | `DoMove` 退到支援线 | 先重排编号，再发事件 |
 | `OnLeaveBoardOrOwner(card, goingTo, method)` | `DestroyCard` **最前面** | **必须在这张牌还站在场上时调** |
+
+**部署 ≠ 移动**。客户端 `OnMoveToFrontline` 的分派器
+（`ExecuteOnMoveToFrontlineCardEffects`）**只有一个调用点**，在
+`MoveUnitFromSupportToFrontLine` 里；部署（含 Ambush 直接落前线）走 `OnEnterPlay`。
+引擎的部署流程会把单位直接放到前线（没有客户端的「先落支援线再移动」两步），
+所以这里必须显式区分：`TryPlaceOnFrontline(c, isDeploy: true)` 不发移动事件。
+不区分的话同一件事会先后触发两个入口 —— 光环卡的两个入口是「进入时加」和
+「移动后先全撤再按新位置重加」，先撤后加是幂等的，加完再进一次就变成双倍
+（实测 flaming_matilda +2 变 +4）。
 
 最后一条是这一轮的关键：客户端的销毁流程第一步是
 `ExecuteOnBeforeLeaveBoardOrOwnerEvents`（先取旧位置，再 `CardLocationMoved`）。
@@ -332,9 +341,13 @@ dotnet run --project KardsTranspiler -c Release -- \
 最左为 0，与 `SetRightLeftMostWhenPlayed` 的判定一致）。自己再写一份迟早漂移，
 而且很容易漏掉「本卡在场上」那道守卫。
 
-回归哨兵是 `--mode tests` 里的 `AuraAppliesAndRetracts`（11 条断言）：
-左邻各 +2、右侧与自身不加、按来源记账、镜像一致、两个光环叠加为 +4、
-先走的那张只撤掉自己的 +2、两张都走之后回到基础值、没有未实现的宿主调用。
+回归哨兵是 `--mode tests` 里的两组断言共 19 条：
+
+- `AuraAppliesAndRetracts`（11 条）：左邻各 +2、右侧与自身不加、按来源记账、
+  镜像一致、两个光环叠加为 +4、先走的那张只撤掉自己的 +2、两张都走之后回到基础值、
+  没有未实现的宿主调用；
+- `AuraFollowsTheUnitWhenItMoves`（8 条）：支援线上的牌没有被入场事件加过攻、
+  真的移动到前线只加一次 +2（不是 +4）、退回支援线后撤销。
 
 ---
 

@@ -477,7 +477,8 @@ public sealed partial class GameEngine
             if (!c.Has(Kw.Blitz)) c.AttackedThisTurn = true;   // 非 Blitz 当回合不能打
 
             // 单位优先上前线；前线不可用时放支援线
-            if (TryPlaceOnFrontline(c)) { }
+            // （isDeploy：这不是「移动」，卡自己的移动事件不发，见 TryPlaceOnFrontline）
+            if (TryPlaceOnFrontline(c, isDeploy: true)) { }
             else { c.OnFrontline = false; p.Board.Add(c); }
             AfterBoardChange();
         }
@@ -518,7 +519,27 @@ public sealed partial class GameEngine
         return true;
     }
 
-    private bool TryPlaceOnFrontline(Card c)
+    /// <summary>
+    /// 把一张单位放到前线。
+    /// </summary>
+    /// <param name="isDeploy">
+    /// true = 这是<b>从手牌部署</b>到前线（DoPlayCard 的路径），不是移动。
+    ///
+    /// <para>
+    /// 为什么要区分：客户端的 <c>OnMoveToFrontline</c> 分派器
+    /// （<c>ExecuteOnMoveToFrontlineCardEffects</c>）**只有一个调用点**，
+    /// 在 <c>MoveUnitFromSupportToFrontLine</c> 里 —— 也就是「支援线 → 前线」这个
+    /// 移动动作。部署（含 Ambush 直接落前线）走的是 <c>OnEnterPlay</c>，不发移动事件。
+    /// </para>
+    ///
+    /// <para>
+    /// 引擎的部署流程会把单位直接放到前线（它没有客户端的「先落支援线再移动」两步），
+    /// 如果这里也发一次移动事件，同一件事就会先后触发两个入口。光环型卡的两个入口是
+    /// 「进入时加」「移动后先全撤再按新位置重加」—— 先撤后加是幂等的，但加完再进一次
+    /// 就变成双倍（flaming_matilda 实测 +2 变 +4）。
+    /// </para>
+    /// </param>
+    private bool TryPlaceOnFrontline(Card c, bool isDeploy = false)
     {
         if (!c.IsUnit) return false;
         if (!CanEnterFrontline(c.Owner)) return false;
@@ -532,7 +553,10 @@ public sealed partial class GameEngine
         // 只有归属真的变了才发归属变更：客户端也是在 UpdateFrontlineIfNeeded 里判断的，
         // 无脑发会让「前线归属改变」类卡牌反复触发。
         if (before != S.FrontlineOwner) Fire(Trigger.OnFrontlineOwnershipChange, c);
-        if (Host is not null) Host.InvokeOnMoveToFrontline(c);
+        // 编号先排好：事件体会按 locationNumber 找左右邻（光环 / 位置型卡），
+        // 编号还停在上一条行里的话读到的是错的位置。
+        RenumberRows();
+        if (!isDeploy && Host is not null) Host.InvokeOnMoveToFrontline(c);
         Fire(Trigger.OnOtherCardMoveToFrontline, c);
         FireLocationMovedTriggers(c);
         AfterBoardChange();
@@ -631,6 +655,8 @@ public sealed partial class GameEngine
             var hadOwner = S.FrontlineOwner;
             if (S.Frontline.Count == 0) S.FrontlineOwner = Side.None;
             S.Log.Line($"  {u.Id} retreats to support line");
+            // 同上：换到支援线之后先把编号排好，再问这张牌自己的离场事件。
+            RenumberRows();
             if (Host is not null) Host.InvokeOnMoveFromFrontline(u);
             FireMoveFromFrontlineTriggers(u);
             FireRetreatTriggers(u);

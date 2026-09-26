@@ -88,6 +88,23 @@ public sealed partial class GameEngine
     }
 
     /// <summary>
+    /// 只重排双方的 <c>locationNumber</c>，<b>不</b>跑客户端的掩护重算。
+    ///
+    /// <para>
+    /// 用在「卡自己的裸自事件之前」：事件体里会按 <c>locationNumber</c> 找左右邻
+    /// （光环 / 位置型卡靠 <c>GetCardsToTheLeft</c> / <c>GetAdjacentCards</c>），
+    /// 而刚换行的牌编号还停在上一条行里 —— 不先重排，事件读到的是错的行位置。
+    /// 掩护重算（<c>UpdateGuarded</c>，要调客户端蓝图、比较贵）仍由
+    /// <see cref="AfterBoardChange"/> 在动作收尾时统一做一次。
+    /// </para>
+    /// </summary>
+    internal void RenumberRows()
+    {
+        RefreshLocationNumbers(Side.Left);
+        RefreshLocationNumbers(Side.Right);
+    }
+
+    /// <summary>
     /// 位置类动作之后统一调一次。<b>每一个会改变场上占位的地方都必须调</b>，
     /// 漏一处就会出现「掩护状态和实际站位不一致」—— 这类错误不会崩，
     /// 只是规则偶尔判错，最难查。
