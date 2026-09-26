@@ -39,6 +39,17 @@ public sealed class EngineHost : Host
     /// <summary>统计：各来源的分派次数，便于看出瓶颈在哪。</summary>
     public readonly Dictionary<string, int> DispatchByClass = new(StringComparer.Ordinal);
 
+    /// <summary>
+    /// 三选一（WhichChooseOne）的决策器，返回 0 或 1。
+    ///
+    /// <para>
+    /// 这是蓝图里少数真正需要「选择」的地方：卡的逻辑按返回值分两支。
+    /// 默认取第 0 支，保证同一 seed 可复现；训练时由 AI 后端接管这个钩子，
+    /// 否则这个动作维度对模型就是不可见的。
+    /// </para>
+    /// </summary>
+    public Func<Card, int> ChooseOne = _ => 0;
+
     public EngineHost(GameEngine engine)
     {
         Engine = engine;
@@ -494,10 +505,11 @@ public sealed class EngineHost : Host
                 return Val.Of(true);
             },
 
-            // ---------- 训练里要做的选择：默认取第 0 支 ----------
-            // 三选一是玩家/AI 的真实决策点。现在恒返回 0 支（确定性的），
-            // 保证同一 seed 可复现；等动作空间把「选哪支」暴露出来再改这里。
-            ["WhichChooseOne"] = (h, a) => Out(a, 0),
+            // ---------- 三选一：真实的决策点，交给可插拔的决策器 ----------
+            // 蓝图的 WhichChooseOne 返回 EnumChooseOneCardBeingPlayed（Card_0 / Card_1），
+            // 卡自己再按这个值分支。恒返回 0 是确定性的，但等于砍掉了一个动作维度 ——
+            // 训练时 AI 学不到「该选哪支」。所以留成钩子，由后端决定。
+            ["WhichChooseOne"] = (h, a) => Out(a, h.ChooseOne(a.Length > 0 ? h.Card_(a[0]) : null)),
 
             // ---------- 费用 / 老兵版本的读取 ----------
             ["getAndDecryptKredit"] = (h, a) => Out(a, h.Card_(a[0])?.KreditCost ?? 0),
