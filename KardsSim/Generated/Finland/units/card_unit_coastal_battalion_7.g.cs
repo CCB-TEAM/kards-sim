@@ -36,9 +36,9 @@ public static Val ExecuteUbergraph_card_unit_coastal_battalion_7(IHost H, Val se
     L_000A:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_001D:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_0046:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_006F:
         _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
     L_008B:
@@ -52,7 +52,7 @@ public static Val ExecuteUbergraph_card_unit_coastal_battalion_7(IHost H, Val se
     L_010B:
         L["CallFunc_GetCombatKeywords_keywords"] = H.MakeArray(new Val[] {  });
     L_0116:
-        _ = H.Call("GetCombatKeywords", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_GetCombatKeywords_keywords"] = __v), Val.Out(__v => L["CallFunc_GetCombatKeywords_numberOfKeywords"] = __v) });
+        _ = H.Call("GetCombatKeywords", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_GetCombatKeywords_keywords"] = __v), Val.Out(__v => L["CallFunc_GetCombatKeywords_numberOfKeywords"] = __v) });
     L_0148:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetCombatKeywords_numberOfKeywords"), Val.Of(0)) > 0);
     L_016A:
@@ -60,15 +60,15 @@ public static Val ExecuteUbergraph_card_unit_coastal_battalion_7(IHost H, Val se
     L_0178:
         L["CallFunc_GetCombatKeywords_keywords"] = H.MakeArray(new Val[] {  });
     L_0183:
-        _ = H.Call("GetCombatKeywords", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_GetCombatKeywords_keywords"] = __v), Val.Out(__v => L["CallFunc_GetCombatKeywords_numberOfKeywords"] = __v) });
+        _ = H.Call("GetCombatKeywords", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_GetCombatKeywords_keywords"] = __v), Val.Out(__v => L["CallFunc_GetCombatKeywords_numberOfKeywords"] = __v) });
     L_01B5:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_cardPlayed"), H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_GetCombatKeywords_numberOfKeywords"), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardPlayed"), H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_GetCombatKeywords_numberOfKeywords"), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_0200:
         L["CallFunc_GetCombatKeywords_keywords"] = H.MakeArray(new Val[] {  });
     L_020B:
-        _ = H.Call("GetCombatKeywords", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_GetCombatKeywords_keywords"] = __v), Val.Out(__v => L["CallFunc_GetCombatKeywords_numberOfKeywords"] = __v) });
+        _ = H.Call("GetCombatKeywords", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_GetCombatKeywords_keywords"] = __v), Val.Out(__v => L["CallFunc_GetCombatKeywords_numberOfKeywords"] = __v) });
     L_023D:
-        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_cardPlayed"), H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_GetCombatKeywords_numberOfKeywords"), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
+        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardPlayed"), H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_GetCombatKeywords_numberOfKeywords"), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
     L_0288:
         goto __halt;
     L_028A:

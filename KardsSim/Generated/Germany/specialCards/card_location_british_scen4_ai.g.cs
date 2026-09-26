@@ -35,7 +35,7 @@ public static Val ExecuteUbergraph_card_location_british_scen4_ai(IHost H, Val s
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "name"), Val.Name("card_unit_tiger_i")) == 0);
+        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "name"), Val.Name("card_unit_tiger_i")) == 0);
     L_004A:
         if (!(GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue")).AsBool()) goto L_02AC;
     L_0058:
@@ -45,7 +45,7 @@ public static Val ExecuteUbergraph_card_location_british_scen4_ai(IHost H, Val s
     L_0115:
         goto L_02AC;
     L_011A:
-        if (!(GetLocal(L, "K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_012D;
+        if (!(H.GetVar("K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_012D;
     L_0128:
         goto L_02AC;
     L_012D:
@@ -57,7 +57,7 @@ public static Val ExecuteUbergraph_card_location_british_scen4_ai(IHost H, Val s
     L_01B5:
         if (!(GetLocal(L, "CallFunc_CustomName2HasAttribute_doesIt")).AsBool()) goto L_023A;
     L_01C3:
-        L["CallFunc_EqualEqual_NameName_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "name"), Val.Name("card_unit_tiger_i")) == 0);
+        L["CallFunc_EqualEqual_NameName_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "name"), Val.Name("card_unit_tiger_i")) == 0);
     L_0203:
         if (!(GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue_1")).AsBool()) goto L_02AC;
     L_0211:
@@ -65,7 +65,7 @@ public static Val ExecuteUbergraph_card_location_british_scen4_ai(IHost H, Val s
     L_0235:
         goto L_02AC;
     L_023A:
-        L["CallFunc_EqualEqual_NameName_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "name"), Val.Name("card_unit_tiger_i")) == 0);
+        L["CallFunc_EqualEqual_NameName_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "name"), Val.Name("card_unit_tiger_i")) == 0);
     L_027A:
         if (!(GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue_1")).AsBool()) goto L_02AC;
     L_0288:

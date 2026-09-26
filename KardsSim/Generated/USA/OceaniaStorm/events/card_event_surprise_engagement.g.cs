@@ -248,7 +248,7 @@ public static Val ExecuteUbergraph_card_event_surprise_engagement(IHost H, Val s
             default: goto __halt;
         }
     L_0739:
-        _ = H.Call("getHasGameplayTag", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), H.MakeArray(new Val[] { Val.Name("subtype.rain") }), Val.Out(__v => L["CallFunc_getHasGameplayTag_hasTag"] = __v) });
+        _ = H.Call("getHasGameplayTag", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), H.MakeArray(new Val[] { Val.Name("subtype.rain") }), Val.Out(__v => L["CallFunc_getHasGameplayTag_hasTag"] = __v) });
     L_077D:
         if (!(GetLocal(L, "CallFunc_getHasGameplayTag_hasTag")).AsBool())
         {

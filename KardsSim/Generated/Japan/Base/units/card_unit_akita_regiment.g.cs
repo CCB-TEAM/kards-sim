@@ -38,13 +38,13 @@ public static Val ExecuteUbergraph_card_unit_akita_regiment(IHost H, Val self, V
     L_001D:
         _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
     L_0055:
-        _ = H.Call("getTotalDefense", new Val[] { GetLocal(L, "K2Node_Event_killer"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
+        _ = H.Call("getTotalDefense", new Val[] { H.GetVar("K2Node_Event_killer"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
     L_007E:
         L["CallFunc_LessEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalDefense_totalDefense"), Val.Of(0)) <= 0);
     L_00A0:
         if (!(GetLocal(L, "CallFunc_LessEqual_IntInt_ReturnValue")).AsBool()) goto L_00EA;
     L_00AE:
-        L["CallFunc_Array_RemoveItem_ReturnValue"] = H.Call("Array_RemoveItem", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "K2Node_Event_killer") });
+        L["CallFunc_Array_RemoveItem_ReturnValue"] = H.Call("Array_RemoveItem", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), H.GetVar("K2Node_Event_killer") });
     L_00EA:
         _ = H.Call("GetRandomCard", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v), Val.False, Val.Out(__v => L["CallFunc_GetRandomCard_randomCard"] = __v) });
     L_0121:

@@ -102,7 +102,7 @@ public static Val ExecuteUbergraph_card_event_rout(IHost H, Val self, Val[] args
             default: goto __halt;
         }
     L_000A:
-        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID") });
+        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID") });
     L_0034:
         _ = H.Call("ConvertCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_MakeArray_Array"), H.GetMember(self, "cardID"), Val.Name("card_unit_routed_troops"), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ConvertCard_newCardIDs"] = __v) });
     L_0086:

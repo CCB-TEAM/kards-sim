@@ -34,15 +34,15 @@ public static Val ExecuteUbergraph_card_event_unexpected_resistance(IHost H, Val
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsPinned", new Val[] { GetLocal(L, "K2Node_Event_cardMoved"), Val.Out(__v => L["CallFunc_IsPinned_isPinned"] = __v) });
+        _ = H.Call("IsPinned", new Val[] { H.GetVar("K2Node_Event_cardMoved"), Val.Out(__v => L["CallFunc_IsPinned_isPinned"] = __v) });
     L_0033:
         L["CallFunc_Not_PreBool_ReturnValue"] = H.Call("Not_PreBool", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_IsPinned_isPinned") });
     L_0050:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardMoved"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardMoved"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0079:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "K2Node_Event_cardMoved"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_cardMoved"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_00A2:
-        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, GetLocal(L, "K2Node_Event_cardMoved"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
+        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, H.GetVar("K2Node_Event_cardMoved"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
     L_00BE:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt")).AsBool() && (GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool());
     L_00E4:
@@ -52,25 +52,25 @@ public static Val ExecuteUbergraph_card_event_unexpected_resistance(IHost H, Val
     L_0130:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_2")).AsBool()) goto L_02DC;
     L_013E:
-        _ = H.Call("getHasBlitz", new Val[] { GetLocal(L, "K2Node_Event_cardMoved"), Val.Out(__v => L["CallFunc_getHasBlitz_doesIt"] = __v) });
+        _ = H.Call("getHasBlitz", new Val[] { H.GetVar("K2Node_Event_cardMoved"), Val.Out(__v => L["CallFunc_getHasBlitz_doesIt"] = __v) });
     L_0167:
         if (!(GetLocal(L, "CallFunc_getHasBlitz_doesIt")).AsBool()) goto L_01F7;
     L_0175:
-        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(GetLocal(L, "K2Node_Event_cardMoved"), "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
+        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(H.GetVar("K2Node_Event_cardMoved"), "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
     L_01C4:
-        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_cardMoved"), self });
+        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardMoved"), self });
     L_01F2:
         goto L_02DC;
     L_01F7:
-        _ = H.Call("HasCustomAbility", new Val[] { GetLocal(L, "K2Node_Event_cardMoved"), Val.Of("cantBePinned"), Val.Out(__v => L["CallFunc_HasCustomAbility_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbility", new Val[] { H.GetVar("K2Node_Event_cardMoved"), Val.Of("cantBePinned"), Val.Out(__v => L["CallFunc_HasCustomAbility_doesIt"] = __v) });
     L_022E:
         if (!(GetLocal(L, "CallFunc_HasCustomAbility_doesIt")).AsBool()) goto L_0241;
     L_023C:
         goto L_02DC;
     L_0241:
-        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(GetLocal(L, "K2Node_Event_cardMoved"), "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq_1"] = __v) });
+        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(H.GetVar("K2Node_Event_cardMoved"), "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq_1"] = __v) });
     L_0290:
-        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_cardMoved"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardMoved"), "cardID"), H.GetMember(self, "cardID") });
     L_02DC:
         goto __halt;
     L_02DE:

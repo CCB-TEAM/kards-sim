@@ -43,15 +43,15 @@ public static Val ExecuteUbergraph_card_event_home_defense(IHost H, Val self, Va
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedInHand_isIt_3")).AsBool()) goto L_0650;
     L_002B:
-        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "K2Node_Event_cardDefenseSet"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
+        _ = H.Call("IsLocation", new Val[] { H.GetVar("K2Node_Event_cardDefenseSet"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
     L_0054:
         if (!(GetLocal(L, "CallFunc_IsLocation_isIt")).AsBool()) goto L_0650;
     L_0062:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(GetLocal(L, "K2Node_Event_cardDefenseSet"), "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(H.GetVar("K2Node_Event_cardDefenseSet"), "side")) == 0);
     L_009E:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_1")).AsBool()) goto L_0650;
     L_00AC:
-        _ = H.Call("getTotalDefense", new Val[] { GetLocal(L, "K2Node_Event_cardDefenseSet"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
+        _ = H.Call("getTotalDefense", new Val[] { H.GetVar("K2Node_Event_cardDefenseSet"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
     L_00D5:
         H.SetMember(self, "tmpHQ_Defense", GetLocal(L, "CallFunc_getTotalDefense_totalDefense"));
     L_00F0:
@@ -93,15 +93,15 @@ public static Val ExecuteUbergraph_card_event_home_defense(IHost H, Val self, Va
     L_02E8:
         if (!(GetLocal(L, "CallFunc_IsLocatedInHand_isIt_2")).AsBool()) goto L_0650;
     L_02F6:
-        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "K2Node_Event_cardGainingDefense"), Val.Out(__v => L["CallFunc_IsLocation_isIt_1"] = __v) });
+        _ = H.Call("IsLocation", new Val[] { H.GetVar("K2Node_Event_cardGainingDefense"), Val.Out(__v => L["CallFunc_IsLocation_isIt_1"] = __v) });
     L_031F:
         if (!(GetLocal(L, "CallFunc_IsLocation_isIt_1")).AsBool()) goto L_0650;
     L_032D:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(GetLocal(L, "K2Node_Event_cardGainingDefense"), "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(H.GetVar("K2Node_Event_cardGainingDefense"), "side")) == 0);
     L_0369:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_0650;
     L_0377:
-        _ = H.Call("getTotalDefense", new Val[] { GetLocal(L, "K2Node_Event_cardGainingDefense"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense_1"] = __v) });
+        _ = H.Call("getTotalDefense", new Val[] { H.GetVar("K2Node_Event_cardGainingDefense"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense_1"] = __v) });
     L_03A0:
         H.SetMember(self, "tmpHQ_Defense", GetLocal(L, "CallFunc_getTotalDefense_totalDefense_1"));
     L_03BB:
@@ -111,15 +111,15 @@ public static Val ExecuteUbergraph_card_event_home_defense(IHost H, Val self, Va
     L_03D3:
         if (!(GetLocal(L, "CallFunc_IsLocatedInHand_isIt_1")).AsBool()) goto L_0650;
     L_03E1:
-        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_IsLocation_isIt_2"] = __v) });
+        _ = H.Call("IsLocation", new Val[] { H.GetVar("K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_IsLocation_isIt_2"] = __v) });
     L_040A:
         if (!(GetLocal(L, "CallFunc_IsLocation_isIt_2")).AsBool()) goto L_0650;
     L_0418:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(GetLocal(L, "K2Node_Event_toCard"), "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(H.GetVar("K2Node_Event_toCard"), "side")) == 0);
     L_0454:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_2")).AsBool()) goto L_0650;
     L_0462:
-        _ = H.Call("getTotalDefense", new Val[] { GetLocal(L, "K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense_3"] = __v) });
+        _ = H.Call("getTotalDefense", new Val[] { H.GetVar("K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense_3"] = __v) });
     L_048B:
         H.SetMember(self, "tmpHQ_Defense", GetLocal(L, "CallFunc_getTotalDefense_totalDefense_3"));
     L_04A6:

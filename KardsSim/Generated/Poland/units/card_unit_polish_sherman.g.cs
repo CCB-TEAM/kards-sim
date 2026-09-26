@@ -126,9 +126,9 @@ public static Val ExecuteUbergraph_card_unit_polish_sherman(IHost H, Val self, V
             default: goto __halt;
         }
     L_0309:
-        _ = H.Call("IsExile", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed_1"), Val.Out(__v => L["CallFunc_IsExile_isIt"] = __v) });
+        _ = H.Call("IsExile", new Val[] { H.GetVar("K2Node_Event_cardPlayed_1"), Val.Out(__v => L["CallFunc_IsExile_isIt"] = __v) });
     L_0332:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed_1"), "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed_1"), "side")) == 0);
     L_036E:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_IsExile_isIt")).AsBool());
     L_0394:
@@ -254,7 +254,7 @@ public static Val ExecuteUbergraph_card_unit_polish_sherman(IHost H, Val self, V
             default: goto __halt;
         }
     L_06B7:
-        L["CallFunc_EqualEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_cardPlayed"), self) == 0);
+        L["CallFunc_EqualEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_cardPlayed"), self) == 0);
     L_06D5:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ObjectObject_ReturnValue")).AsBool())
         {

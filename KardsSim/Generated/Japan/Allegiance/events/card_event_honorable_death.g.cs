@@ -102,9 +102,9 @@ public static Val ExecuteUbergraph_card_event_honorable_death(IHost H, Val self,
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), self });
+        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), self });
     L_0038:
-        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "originalSide"), Val.Of(1), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
+        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "originalSide"), Val.Of(1), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
     L_0099:
         goto __halt;
     L_009B:

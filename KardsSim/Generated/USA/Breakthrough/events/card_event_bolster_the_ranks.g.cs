@@ -112,11 +112,11 @@ public static Val ExecuteUbergraph_card_event_bolster_the_ranks(IHost H, Val sel
     L_0154:
         goto L_019C;
     L_0159:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0176:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_019C;
     L_0184:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_0197:
         goto L_000A;
     L_019C:

@@ -209,7 +209,7 @@ public static Val ExecuteUbergraph_card_unit_392nd_rifles(IHost H, Val self, Val
             }
         }
     L_033E:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_0351:
         _ = H.Call("IsVeteran", new Val[] { self, Val.False, Val.Out(__v => L["CallFunc_IsVeteran_isIt_1"] = __v) });
     L_0365:
@@ -255,7 +255,7 @@ public static Val ExecuteUbergraph_card_unit_392nd_rifles(IHost H, Val self, Val
             default: goto __halt;
         }
     L_0498:
-        _ = H.Call("_onCardDefenseChanged", new Val[] { self, GetLocal(L, "K2Node_Event_toCard_1") });
+        _ = H.Call("_onCardDefenseChanged", new Val[] { self, H.GetVar("K2Node_Event_toCard_1") });
     L_04AF:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -364,7 +364,7 @@ public static Val ExecuteUbergraph_card_unit_392nd_rifles(IHost H, Val self, Val
     L_0863:
         goto L_052A;
     L_0868:
-        _ = H.Call("_onCardDefenseChanged", new Val[] { self, GetLocal(L, "K2Node_Event_cardGainingDefense") });
+        _ = H.Call("_onCardDefenseChanged", new Val[] { self, H.GetVar("K2Node_Event_cardGainingDefense") });
     L_087F:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -375,7 +375,7 @@ public static Val ExecuteUbergraph_card_unit_392nd_rifles(IHost H, Val self, Val
             default: goto __halt;
         }
     L_0880:
-        _ = H.Call("_onCardDefenseChanged", new Val[] { self, GetLocal(L, "K2Node_Event_cardRepaired") });
+        _ = H.Call("_onCardDefenseChanged", new Val[] { self, H.GetVar("K2Node_Event_cardRepaired") });
     L_0897:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -399,7 +399,7 @@ public static Val ExecuteUbergraph_card_unit_392nd_rifles(IHost H, Val self, Val
     L_08A8:
         goto L_0898;
     L_08AD:
-        _ = H.Call("_onCardDefenseChanged", new Val[] { self, GetLocal(L, "K2Node_Event_toCard") });
+        _ = H.Call("_onCardDefenseChanged", new Val[] { self, H.GetVar("K2Node_Event_toCard") });
     L_08C4:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -426,7 +426,7 @@ public static Val ExecuteUbergraph_card_unit_392nd_rifles(IHost H, Val self, Val
     L_08E2:
         _ = H.Call("JSON_GetIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardsBuffed"), Val.Out(__v => L["CallFunc_JSON_GetIntArray_values_2"] = __v), Val.Out(__v => L["CallFunc_JSON_GetIntArray_found_2"] = __v) });
     L_0926:
-        L["CallFunc_Array_Contains_ReturnValue"] = H.Call("Array_Contains", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_JSON_GetIntArray_values_2"), H.GetMember(GetLocal(L, "K2Node_Event_cardLeaving"), "cardID") });
+        L["CallFunc_Array_Contains_ReturnValue"] = H.Call("Array_Contains", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_JSON_GetIntArray_values_2"), H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "cardID") });
     L_0978:
         if (!(GetLocal(L, "CallFunc_Array_Contains_ReturnValue")).AsBool())
         {
@@ -440,15 +440,15 @@ public static Val ExecuteUbergraph_card_unit_392nd_rifles(IHost H, Val self, Val
             }
         }
     L_0982:
-        _ = H.Call("JSON_RemoveFromIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardsBuffed"), H.GetMember(GetLocal(L, "K2Node_Event_cardLeaving"), "cardID"), Val.Out(__v => L["CallFunc_JSON_RemoveFromIntArray_found"] = __v) });
+        _ = H.Call("JSON_RemoveFromIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardsBuffed"), H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "cardID"), Val.Out(__v => L["CallFunc_JSON_RemoveFromIntArray_found"] = __v) });
     L_09DC:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_0A0A:
-        _ = H.Call("getTotalDefense", new Val[] { GetLocal(L, "K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
+        _ = H.Call("getTotalDefense", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
     L_0A33:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalDefense_totalDefense"), Val.Of(0)) > 0);
     L_0A55:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_0A7E:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1")).AsBool() && (GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool());
     L_0AA4:
@@ -464,7 +464,7 @@ public static Val ExecuteUbergraph_card_unit_392nd_rifles(IHost H, Val self, Val
             }
         }
     L_0AAE:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_cardLeaving"), H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq_2"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardLeaving"), H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq_2"] = __v) });
     L_0AF5:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -510,7 +510,7 @@ public static Val ExecuteUbergraph_card_unit_392nd_rifles(IHost H, Val self, Val
             default: goto __halt;
         }
     L_0BD4:
-        _ = H.Call("_onCardDefenseChanged", new Val[] { self, GetLocal(L, "K2Node_Event_cardBecomingVeteran") });
+        _ = H.Call("_onCardDefenseChanged", new Val[] { self, H.GetVar("K2Node_Event_cardBecomingVeteran") });
     L_0BEB:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

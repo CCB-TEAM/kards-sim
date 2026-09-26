@@ -42,7 +42,7 @@ public static Val ExecuteUbergraph_card_unit_kawanishi_h8k(IHost H, Val self, Va
     L_005A:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_006D:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardDeveloped"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardDeveloped"), "side"), H.GetMember(self, "side")) == 0);
     L_00A9:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_00CF:
@@ -62,7 +62,7 @@ public static Val ExecuteUbergraph_card_unit_kawanishi_h8k(IHost H, Val self, Va
     L_01A9:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "enterPlayOnTurn"), Val.Of(0)) > 0);
     L_01CB:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), GetLocal(L, "K2Node_Event_turnnumber")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), H.GetVar("K2Node_Event_turnnumber")) == 0);
     L_01F1:
         L["CallFunc_BooleanAND_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool());
     L_0217:

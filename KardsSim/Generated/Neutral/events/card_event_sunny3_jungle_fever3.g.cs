@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_event_sunny3_jungle_fever3(IHost H, Val 
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_method"), Val.Of(5)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_method"), Val.Of(5)) == 0);
     L_0029:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_003C;
     L_0037:
@@ -50,7 +50,7 @@ public static Val ExecuteUbergraph_card_event_sunny3_jungle_fever3(IHost H, Val 
     L_00D7:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_02C2;
     L_00E5:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_00F8:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "tempCard") });
     L_0115:

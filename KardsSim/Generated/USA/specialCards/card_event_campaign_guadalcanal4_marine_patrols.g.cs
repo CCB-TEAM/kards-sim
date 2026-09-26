@@ -131,7 +131,7 @@ public static Val ExecuteUbergraph_card_event_campaign_guadalcanal4_marine_patro
             }
         }
     L_02E6:
-        L["CallFunc_NotEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) != 0);
+        L["CallFunc_NotEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) != 0);
     L_0322:
         if (!(GetLocal(L, "CallFunc_NotEqual_ByteByte_ReturnValue_1")).AsBool())
         {
@@ -144,7 +144,7 @@ public static Val ExecuteUbergraph_card_event_campaign_guadalcanal4_marine_patro
             }
         }
     L_032C:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0355:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool())
         {
@@ -157,7 +157,7 @@ public static Val ExecuteUbergraph_card_event_campaign_guadalcanal4_marine_patro
             }
         }
     L_035F:
-        _ = H.Call("ChangeOperationCost", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_cardPlayed"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.False, Val.False });
+        _ = H.Call("ChangeOperationCost", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardPlayed"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.False, Val.False });
     L_039F:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

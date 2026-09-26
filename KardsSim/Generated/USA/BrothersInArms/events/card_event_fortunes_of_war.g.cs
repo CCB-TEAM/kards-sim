@@ -118,7 +118,7 @@ public static Val ExecuteUbergraph_card_event_fortunes_of_war(IHost H, Val self,
             default: goto __halt;
         }
     L_000A:
-        H.SetMember(self, "targetCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "targetCard", H.GetVar("K2Node_Event_targetCard"));
     L_001D:
         _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_0030:

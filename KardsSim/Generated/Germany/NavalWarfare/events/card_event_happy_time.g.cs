@@ -121,7 +121,7 @@ public static Val ExecuteUbergraph_card_event_happy_time(IHost H, Val self, Val[
     L_0115:
         __ef.Push(794);
     L_011A:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0150:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_018B:
@@ -154,7 +154,7 @@ public static Val ExecuteUbergraph_card_event_happy_time(IHost H, Val self, Val[
     L_0288:
         _ = H.Call("ConvertCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardsToConvert"), H.GetMember(self, "cardID"), Val.Name("card_event_plan"), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ConvertCard_newCardIDs"] = __v) });
     L_02DA:
-        _ = H.Call("SetCardSeen", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_SetCardSeen_qqq"] = __v) });
+        _ = H.Call("SetCardSeen", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_SetCardSeen_qqq"] = __v) });
     L_0319:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -184,7 +184,7 @@ public static Val ExecuteUbergraph_card_event_happy_time(IHost H, Val self, Val[
     L_03B0:
         _ = H.Call("GetCardsInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Out(__v => L["CallFunc_GetCardsInHandBySide_cards"] = __v) });
     L_03E6:
-        L["CallFunc_Array_Add_ReturnValue_1"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "cardsToConvert"), GetLocal(L, "K2Node_Event_handTargetCardID") });
+        L["CallFunc_Array_Add_ReturnValue_1"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "cardsToConvert"), H.GetVar("K2Node_Event_handTargetCardID") });
     L_042A:
         goto L_000F;
     L_042F:

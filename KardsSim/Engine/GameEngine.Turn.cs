@@ -110,7 +110,7 @@ public sealed partial class GameEngine
     /// 对一张场上牌造成伤害。伤害 >= TotalDefense 即摧毁。
     /// 已与客户端 CalculateDamageDealt 的语义对齐。
     /// </summary>
-    public void DamageCard(Card c, int amount, bool lethal = false)
+    public void DamageCard(Card c, int amount, bool lethal = false, Card killer = null, bool inCombat = false)
     {
         if (c == null || c.Destroyed || amount <= 0 && !lethal) return;
         FireDamageModifyTriggers(c);      // 结算前让卡牌改伤害
@@ -118,15 +118,15 @@ public sealed partial class GameEngine
         S.Log.Line($"    {c.Id} takes {amount} -> {c.Defense}");
         FireDamageTakenTriggers(c);
         var dies = lethal && amount > 0 || c.TotalDefense <= 0;
-        if (dies) DestroyCard(c);
+        if (dies) DestroyCard(c, killer, inCombat);
     }
 
     /// <summary>摧毁一张牌：进弃牌堆，清空其占位并触发相关事件。</summary>
-    public void DestroyCard(Card c)
+    public void DestroyCard(Card c, Card killer = null, bool inCombat = false)
     {
         if (c == null || c.Destroyed) return;
         c.Destroyed = true;
-        FireBeforeDestroyTriggers(c);
+        FireBeforeDestroyTriggers(c, killer, inCombat);
 
         var p = S.Player(c.Owner);
         bool removed;
@@ -145,6 +145,7 @@ public sealed partial class GameEngine
             S.Log.Line($"    {c.Id} destroyed");
         }
         if (S.Frontline.Count == 0) S.FrontlineOwner = Side.None;
-        FireDestroyTriggers(c);   // OtherCardDestroyed + DestructionEffect + LeaveBoard(before/after)
+        FireDestroyTriggers(c, killer, inCombat);   // OtherCardDestroyed + DestructionEffect + LeaveBoard(before/after)
+        AfterBoardChange();       // 有人离场 → 掩护范围变了
     }
 }

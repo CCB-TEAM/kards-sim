@@ -46,7 +46,7 @@ public static Val ExecuteUbergraph_card_event_prinz_eugen(IHost H, Val self, Val
     L_0134:
         goto L_000A;
     L_0139:
-        H.SetMember(self, "Card Played", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "Card Played", H.GetVar("K2Node_Event_cardPlayed"));
     L_014C:
         _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetMember(self, "Card Played"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0175:

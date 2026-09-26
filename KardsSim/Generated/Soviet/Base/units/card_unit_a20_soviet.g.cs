@@ -172,11 +172,11 @@ public static Val ExecuteUbergraph_card_unit_a20_soviet(IHost H, Val self, Val[]
             }
         }
     L_0428:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0451:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "faction"), Val.Of(5)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "faction"), Val.Of(5)) == 0);
     L_0486:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_04C2:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_1")).AsBool() && (GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool());
     L_04E8:
@@ -224,11 +224,11 @@ public static Val ExecuteUbergraph_card_unit_a20_soviet(IHost H, Val self, Val[]
             }
         }
     L_0576:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc_IsUnit_isIt_2"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc_IsUnit_isIt_2"] = __v) });
     L_059F:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_4"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardLeaving"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_4"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "side"), H.GetMember(self, "side")) == 0);
     L_05DB:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_5"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardLeaving"), "faction"), Val.Of(5)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_5"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "faction"), Val.Of(5)) == 0);
     L_0610:
         L["CallFunc_BooleanAND_ReturnValue_4"] = Val.Of((GetLocal(L, "CallFunc_IsUnit_isIt_2")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_5")).AsBool());
     L_0636:

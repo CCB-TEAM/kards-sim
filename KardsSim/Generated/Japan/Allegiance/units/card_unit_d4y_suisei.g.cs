@@ -102,7 +102,7 @@ public static Val ExecuteUbergraph_card_unit_d4y_suisei(IHost H, Val self, Val[]
             default: goto __halt;
         }
     L_000F:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_002C:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool())
         {
@@ -115,9 +115,9 @@ public static Val ExecuteUbergraph_card_unit_d4y_suisei(IHost H, Val self, Val[]
             }
         }
     L_0036:
-        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
     L_0082:
-        _ = H.Call("GetAdjacentCards", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), Val.False, Val.Out(__v => L["CallFunc_GetAdjacentCards_adjacentCards"] = __v) });
+        _ = H.Call("GetAdjacentCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), Val.False, Val.Out(__v => L["CallFunc_GetAdjacentCards_adjacentCards"] = __v) });
     L_00B9:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_00D0:

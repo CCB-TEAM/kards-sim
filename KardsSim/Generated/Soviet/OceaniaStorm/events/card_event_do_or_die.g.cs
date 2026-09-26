@@ -46,9 +46,9 @@ public static Val ExecuteUbergraph_card_event_do_or_die(IHost H, Val self, Val[]
     L_00B7:
         if (!(GetLocal(L, "CallFunc_JSON_GetBool_found")).AsBool()) goto L_0281;
     L_00C5:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_00EE:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side")) == 0);
     L_012A:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool());
     L_0150:

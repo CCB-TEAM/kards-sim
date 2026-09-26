@@ -166,9 +166,9 @@ public static Val ExecuteUbergraph_card_event_urban_fighting(IHost H, Val self, 
     L_027A:
         goto L_0247;
     L_027F:
-        _ = H.Call("ChangeOperationCost", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Of(4), Val.Of(2), Val.False, Val.False, Val.False });
+        _ = H.Call("ChangeOperationCost", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Of(4), Val.Of(2), Val.False, Val.False, Val.False });
     L_02BF:
-        _ = H.Call("GetAdjacentCards", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), Val.False, Val.Out(__v => L["CallFunc_GetAdjacentCards_adjacentCards"] = __v) });
+        _ = H.Call("GetAdjacentCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), Val.False, Val.Out(__v => L["CallFunc_GetAdjacentCards_adjacentCards"] = __v) });
     L_02F6:
         goto L_0263;
     L_02FB:

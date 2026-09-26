@@ -245,7 +245,7 @@ public static Val ExecuteUbergraph_card_event_refit_bia(IHost H, Val self, Val[]
             default: goto __halt;
         }
     L_04CA:
-        _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
     L_0516:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

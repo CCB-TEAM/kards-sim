@@ -264,7 +264,7 @@ public static Val ExecuteUbergraph_card_unit_panzer_iv_g_cam1(IHost H, Val self,
     L_0415:
         goto L_03F9;
     L_041A:
-        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), self });
+        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), self });
     L_0448:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

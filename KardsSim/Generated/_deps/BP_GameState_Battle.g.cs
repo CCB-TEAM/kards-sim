@@ -1019,7 +1019,7 @@ public static Val FetchAllCardsWithEventTrigger(IHost H, Val self, Val[] args)
     L_009D:
         L["CallFunc_Set_ToArray_Result"] = H.MakeArray(new Val[] {  });
     L_00A8:
-        _ = H.Call("Set_ToArray", new Val[] { Val.Ref("BlueprintSetLibrary"), H.GetMember(GetLocal(L, "CallFunc_Map_Find_Value"), "ints_4_45225A814E5C13611C5A2C83E4E77015"), GetLocal(L, "CallFunc_Set_ToArray_Result") });
+        _ = H.Call("Set_ToArray", new Val[] { Val.Ref("BlueprintSetLibrary"), H.GetMember(GetLocal(L, "CallFunc_Map_Find_Value"), "ints_4_45225A814E5C13611C5A2C83E4E77015"), Val.Out(__v => L["CallFunc_Set_ToArray_Result"] = __v) });
     L_00E3:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_00FA:
@@ -1578,7 +1578,7 @@ public static Val GetAllCardInBattle(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_Map_Values_Values"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("Map_Values", new Val[] { Val.Ref("BlueprintMapLibrary"), H.GetMember(self, "AllCardsInBattle"), GetLocal(L, "CallFunc_Map_Values_Values") });
+        _ = H.Call("Map_Values", new Val[] { Val.Ref("BlueprintMapLibrary"), H.GetMember(self, "AllCardsInBattle"), Val.Out(__v => L["CallFunc_Map_Values_Values"] = __v) });
     L_003D:
         L["AllCardsInBattle"] = GetLocal(L, "CallFunc_Map_Values_Values");
     L_0058:
@@ -2357,7 +2357,7 @@ public static Val getStateAsJsonString(IHost H, Val self, Val[] args)
     L_0030:
         L["CallFunc_Set_ToArray_Result"] = H.MakeArray(new Val[] {  });
     L_003B:
-        _ = H.Call("Set_ToArray", new Val[] { Val.Ref("BlueprintSetLibrary"), H.GetMember(self, "FrontlineLimiters"), GetLocal(L, "CallFunc_Set_ToArray_Result") });
+        _ = H.Call("Set_ToArray", new Val[] { Val.Ref("BlueprintSetLibrary"), H.GetMember(self, "FrontlineLimiters"), Val.Out(__v => L["CallFunc_Set_ToArray_Result"] = __v) });
     L_006D:
         L["jsonString"] = Val.Of("\"frontline_limiters\": [");
     L_0098:

@@ -49,9 +49,9 @@ public static Val ExecuteUbergraph_card_unit_murase_battalion(IHost H, Val self,
     L_00CC:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_00DF:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_sideGaining"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_sideGaining"), H.GetMember(self, "side")) == 0);
     L_0105:
-        L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool() && (GetLocal(L, "K2Node_Event_isNegativeGain")).AsBool());
+        L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool() && (H.GetVar("K2Node_Event_isNegativeGain")).AsBool());
     L_012B:
         L["CallFunc_BooleanAND_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_0151:

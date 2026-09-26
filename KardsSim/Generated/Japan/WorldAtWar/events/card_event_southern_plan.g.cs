@@ -40,7 +40,7 @@ public static Val ExecuteUbergraph_card_event_southern_plan(IHost H, Val self, V
     L_0035:
         _ = H.Call("GainKreditSlot", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "side") });
     L_0063:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(self, "side"), Val.Of(1), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(self, "side"), Val.Of(1), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_0081:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_00A0:

@@ -94,7 +94,7 @@ public static Val ExecuteUbergraph_card_event_campaign_moscow1_retreat(IHost H, 
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("RemoveCardFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RemoveCardFromBoard_qqq"] = __v) });
+        _ = H.Call("RemoveCardFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RemoveCardFromBoard_qqq"] = __v) });
     L_005F:
         _ = H.Call("getUnpinnedEnemyUnits", new Val[] { self, Val.Out(__v => L["CallFunc_getUnpinnedEnemyUnits_unpinnedEnemyUnits"] = __v) });
     L_0076:

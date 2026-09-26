@@ -99,19 +99,19 @@ public static Val ExecuteUbergraph_card_event_new_doctrine(IHost H, Val self, Va
     L_002C:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_01A9;
     L_003A:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "K2Node_Event_card"), Val.Of("ignoreCantAttack_location"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_card"), Val.Of("ignoreCantAttack_location"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_0087:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt")).AsBool()) goto L_01A9;
     L_0095:
-        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("ignoreCantAttack_location"), H.GetMember(GetLocal(L, "K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
+        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("ignoreCantAttack_location"), H.GetMember(H.GetVar("K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
     L_0106:
         goto L_01A9;
     L_010B:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0128:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_01A9;
     L_0136:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("ignoreCantAttack_location"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("ignoreCantAttack_location"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_01A9:
         goto __halt;
     L_01AB:

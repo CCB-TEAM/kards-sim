@@ -102,7 +102,7 @@ public static Val ExecuteUbergraph_card_event_mother_russia(IHost H, Val self, V
     L_0265:
         goto L_01FD;
     L_026A:
-        if (!(GetLocal(L, "K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_0279;
+        if (!(H.GetVar("K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_0279;
     L_0278:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -112,11 +112,11 @@ public static Val ExecuteUbergraph_card_event_mother_russia(IHost H, Val self, V
             default: goto __halt;
         }
     L_0279:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "faction"), Val.Of(4)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "faction"), Val.Of(4)) == 0);
     L_02AE:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_02D7:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side")) == 0);
     L_0313:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_1")).AsBool() && (GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool());
     L_0339:
@@ -133,7 +133,7 @@ public static Val ExecuteUbergraph_card_event_mother_russia(IHost H, Val self, V
             }
         }
     L_0369:
-        _ = H.Call("JSON_AddToIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("destroyed"), H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "cardID"), Val.Out(__v => L["CallFunc_JSON_AddToIntArray_found"] = __v) });
+        _ = H.Call("JSON_AddToIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("destroyed"), H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "cardID"), Val.Out(__v => L["CallFunc_JSON_AddToIntArray_found"] = __v) });
     L_03C1:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_03EF:

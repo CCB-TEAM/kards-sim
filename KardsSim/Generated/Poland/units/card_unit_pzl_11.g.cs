@@ -288,15 +288,15 @@ public static Val ExecuteUbergraph_card_unit_pzl_11(IHost H, Val self, Val[] arg
     L_072F:
         goto L_061B;
     L_0734:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_resetCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_resetCardID"));
     L_074F:
         goto L_064E;
     L_0754:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_drawnCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_drawnCardID"));
     L_076F:
         goto L_064E;
     L_0774:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_spawnedCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_spawnedCardID"));
     L_078F:
         goto L_064E;
     L_0794:

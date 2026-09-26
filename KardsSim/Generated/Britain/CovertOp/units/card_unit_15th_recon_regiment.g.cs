@@ -101,7 +101,7 @@ public static Val ExecuteUbergraph_card_unit_15th_recon_regiment(IHost H, Val se
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_047A;
     L_002B:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "K2Node_Event_cardDealingDamage"), Val.Of("targetAbility"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_cardDealingDamage"), Val.Of("targetAbility"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_006C:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt")).AsBool()) goto L_047A;
     L_007A:
@@ -125,11 +125,11 @@ public static Val ExecuteUbergraph_card_unit_15th_recon_regiment(IHost H, Val se
     L_01F5:
         goto L_047A;
     L_01FA:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0217:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_047A;
     L_0225:
-        H.SetMember(self, "targetUnit", H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"));
+        H.SetMember(self, "targetUnit", H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"));
     L_0256:
         _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("targetUnit"), H.GetMember(self, "targetUnit"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_0299:

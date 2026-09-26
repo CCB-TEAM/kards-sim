@@ -36,7 +36,7 @@ public static Val ExecuteUbergraph_card_unit_pzl_7(IHost H, Val self, Val[] args
     L_000A:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_001D:
-        L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardMoved"), "side"), H.GetMember(self, "side")) != 0);
+        L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardMoved"), "side"), H.GetMember(self, "side")) != 0);
     L_0059:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_NotEqual_ByteByte_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_007F:
@@ -44,7 +44,7 @@ public static Val ExecuteUbergraph_card_unit_pzl_7(IHost H, Val self, Val[] args
     L_008D:
         L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { self });
     L_0099:
-        _ = H.Call("MakeCardRetreat", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_MakeArray_Array"), H.GetMember(GetLocal(L, "K2Node_Event_cardMoved"), "cardID") });
+        _ = H.Call("MakeCardRetreat", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_MakeArray_Array"), H.GetMember(H.GetVar("K2Node_Event_cardMoved"), "cardID") });
     L_00E5:
         goto __halt;
     L_00E7:

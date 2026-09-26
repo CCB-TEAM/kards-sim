@@ -209,7 +209,7 @@ public static Val ExecuteUbergraph_card_event_confusion(IHost H, Val self, Val[]
     L_0318:
         goto L_026F;
     L_031D:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
     L_0343:
         L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(self, "enterPlayOnTurn"), Val.Of(0)) > 0);
     L_0365:
@@ -223,13 +223,13 @@ public static Val ExecuteUbergraph_card_event_confusion(IHost H, Val self, Val[]
     L_03CC:
         goto L_04F6;
     L_03D1:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affected_card"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affected_card"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_042D:
-        L["CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"] = H.Call("GetEnumeratorUserFriendlyName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("ECardLocationEnum"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "location") });
+        L["CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"] = H.Call("GetEnumeratorUserFriendlyName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("ECardLocationEnum"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "location") });
     L_0471:
         _ = H.Call("JSON_SetString", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("original_location"), GetLocal(L, "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"), Val.Out(__v => L["CallFunc_JSON_SetString_found"] = __v) });
     L_04BB:
-        _ = H.Call("TakeControlOfEnemyUnit", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID") });
+        _ = H.Call("TakeControlOfEnemyUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID") });
     L_04F1:
         goto L_039E;
     L_04F6:

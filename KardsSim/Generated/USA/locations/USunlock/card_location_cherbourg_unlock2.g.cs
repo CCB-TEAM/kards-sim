@@ -260,7 +260,7 @@ public static Val ExecuteUbergraph_card_location_cherbourg_unlock2(IHost H, Val 
             }
         }
     L_0A17:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(3)) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(3)) == 0);
     L_0A39:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_0941;
     L_0A47:
@@ -270,7 +270,7 @@ public static Val ExecuteUbergraph_card_location_cherbourg_unlock2(IHost H, Val 
     L_0A92:
         goto L_09D5;
     L_0A97:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_drawnSide"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_drawnSide"), H.GetMember(self, "side")) == 0);
     L_0ABD:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool())
         {
@@ -284,7 +284,7 @@ public static Val ExecuteUbergraph_card_location_cherbourg_unlock2(IHost H, Val 
             }
         }
     L_0AC7:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0AFD:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "CallFunc_GetCardFromID_card") });
     L_0B1A:
@@ -300,13 +300,13 @@ public static Val ExecuteUbergraph_card_location_cherbourg_unlock2(IHost H, Val 
             }
         }
     L_0B24:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0B5A:
         L["CallFunc_EqualEqual_NameName_ReturnValue_3"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "name"), Val.Name("card_unit_a26_invader")) == 0);
     L_0B9A:
         if (!(GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue_3")).AsBool()) goto L_0D62;
     L_0BA8:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0BDE:
         L["Temp_text_Variable_4"] = Val.Of("You have drawn a <bold>Bomber</>. <bold>Bomber</> units can attack targets anywhere on the battlefield and get no damage in return from units they attack except from <bold>Fighters</>. <bold>Bomber</> deal no damage when defending.");
     L_0CFF:
@@ -321,7 +321,7 @@ public static Val ExecuteUbergraph_card_location_cherbourg_unlock2(IHost H, Val 
             default: goto __halt;
         }
     L_0D62:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0D98:
         L["CallFunc_EqualEqual_NameName_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "name"), Val.Name("card_event_gunship")) == 0);
     L_0DD8:

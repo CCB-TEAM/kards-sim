@@ -122,7 +122,7 @@ public static Val ExecuteUbergraph_card_event_chain_home(IHost H, Val self, Val[
     L_022A:
         goto L_0090;
     L_022F:
-        H.SetMember(self, "friendlyUnit", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "friendlyUnit", H.GetVar("K2Node_Event_targetCard"));
     L_0242:
         goto L_000A;
     L_0247:

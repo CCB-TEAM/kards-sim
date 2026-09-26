@@ -141,11 +141,11 @@ public static Val ExecuteUbergraph_card_unit_wolfhounds(IHost H, Val self, Val[]
     L_03E8:
         goto L_02C4;
     L_03ED:
-        _ = H.Call("IsInfantry", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsInfantry_isIt"] = __v) });
+        _ = H.Call("IsInfantry", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsInfantry_isIt"] = __v) });
     L_0416:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0429:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_0465:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_IsInfantry_isIt")).AsBool());
     L_048B:

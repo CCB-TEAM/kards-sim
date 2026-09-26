@@ -140,7 +140,7 @@ public static Val ExecuteUbergraph_card_unit_tupolev_tu_2(IHost H, Val self, Val
     L_046C:
         goto L_0439;
     L_0471:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardBecomingVeteran"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardBecomingVeteran"), "side"), H.GetMember(self, "side")) == 0);
     L_04AD:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_04C0:

@@ -147,7 +147,7 @@ public static Val ExecuteUbergraph_card_event_air_corps_ferrying(IHost H, Val se
     L_021C:
         goto L_01E9;
     L_0221:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_0234:
         _ = H.Call("GetKreditsBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetKreditsBySide_kredits"] = __v) });
     L_026A:

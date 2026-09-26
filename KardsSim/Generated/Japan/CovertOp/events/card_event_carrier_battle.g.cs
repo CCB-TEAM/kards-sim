@@ -105,7 +105,7 @@ public static Val ExecuteUbergraph_card_event_carrier_battle(IHost H, Val self, 
     L_007B:
         L["CallFunc_Add_IntInt_ReturnValue_2"] = (Val.Of(3) + H.GetMember(self, "level"));
     L_00A5:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_2"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_2"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_00F0:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

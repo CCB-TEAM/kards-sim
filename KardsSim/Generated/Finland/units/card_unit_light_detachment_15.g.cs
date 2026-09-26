@@ -36,9 +36,9 @@ public static Val ExecuteUbergraph_card_unit_light_detachment_15(IHost H, Val se
     L_000A:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_001D:
-        _ = H.Call("getAndDecryptAttack", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getAndDecryptAttack_decryptedAttack"] = __v) });
+        _ = H.Call("getAndDecryptAttack", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getAndDecryptAttack_decryptedAttack"] = __v) });
     L_0046:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_006F:
         _ = H.Call("getTotalAttack", new Val[] { self, Val.Out(__v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
     L_0082:

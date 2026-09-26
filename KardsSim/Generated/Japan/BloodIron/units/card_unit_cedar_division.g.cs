@@ -51,7 +51,7 @@ public static Val ExecuteUbergraph_card_unit_cedar_division(IHost H, Val self, V
     L_00B6:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1")).AsBool()) goto L_034C;
     L_00C4:
-        _ = H.Call("EnumCompareSide", new Val[] { self, GetLocal(L, "K2Node_Event_sideGaining"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetVar("K2Node_Event_sideGaining"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_00E9:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_0108:

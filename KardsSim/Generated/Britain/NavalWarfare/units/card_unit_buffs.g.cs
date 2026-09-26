@@ -38,13 +38,13 @@ public static Val ExecuteUbergraph_card_unit_buffs(IHost H, Val self, Val[] args
     L_0049:
         goto L_0182;
     L_004E:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "currentTarget") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "currentTarget") });
     L_0081:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_0182;
     L_008F:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "currentTarget"), "cardID"), H.GetMember(self, "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "currentTarget"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_00E1:
-        _ = H.Call("IsOrder", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
+        _ = H.Call("IsOrder", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
     L_010A:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsOrder_isIt")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool());
     L_0130:

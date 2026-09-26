@@ -96,11 +96,11 @@ public static Val ExecuteUbergraph_card_event_stealth_mission(IHost H, Val self,
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0027:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_0548;
     L_0035:
-        H.SetMember(self, "tmpCardID", H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"));
+        H.SetMember(self, "tmpCardID", H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"));
     L_0066:
         _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("passive"), H.GetMember(self, "tmpCardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_00B1:
@@ -152,11 +152,11 @@ public static Val ExecuteUbergraph_card_event_stealth_mission(IHost H, Val self,
     L_04C3:
         goto L_0548;
     L_04C8:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "K2Node_Event_cardLeaving"), Val.Of("passive"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), Val.Of("passive"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_0503:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt")).AsBool()) goto L_0548;
     L_0511:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_053A:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_0459;
     L_0548:

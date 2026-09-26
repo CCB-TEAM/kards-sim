@@ -151,15 +151,15 @@ public static Val ExecuteUbergraph_card_unit_tsu_regiment(IHost H, Val self, Val
     L_0406:
         goto L_01BB;
     L_040B:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0428:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_04AA;
     L_0436:
-        H.SetMember(self, "Target Card", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "Target Card", H.GetVar("K2Node_Event_targetCard"));
     L_0449:
         goto L_03AD;
     L_044E:
-        L["CallFunc_EqualEqual_StrStr_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_MoveReason"), Val.Of("Destroyed")) == 0);
+        L["CallFunc_EqualEqual_StrStr_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_MoveReason"), Val.Of("Destroyed")) == 0);
     L_0476:
         if (!(GetLocal(L, "CallFunc_EqualEqual_StrStr_ReturnValue")).AsBool()) goto L_0489;
     L_0484:

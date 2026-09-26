@@ -39,7 +39,7 @@ public static Val ExecuteUbergraph_card_event_special_assignment(IHost H, Val se
     L_0040:
         goto L_00C0;
     L_0045:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_007B:
         _ = H.Call("PlayCardDirectlyFromHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetCardFromID_card"), Val.False, H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_PlayCardDirectlyFromHand_qqq"] = __v), Val.Of(-1) });
     L_00C0:

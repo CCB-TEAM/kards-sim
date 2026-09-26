@@ -262,7 +262,7 @@ public static Val ExecuteUbergraph_card_unit_the_deuce(IHost H, Val self, Val[] 
     L_068B:
         goto L_05E2;
     L_0690:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_resetCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_resetCardID"));
     L_06AB:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_06BE:
@@ -284,11 +284,11 @@ public static Val ExecuteUbergraph_card_unit_the_deuce(IHost H, Val self, Val[] 
     L_0711:
         goto L_0262;
     L_0716:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_drawnCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_drawnCardID"));
     L_0731:
         goto L_06AB;
     L_0736:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_spawnedCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_spawnedCardID"));
     L_0751:
         goto L_06AB;
     L_0756:

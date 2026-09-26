@@ -275,21 +275,21 @@ public static Val ExecuteUbergraph_card_unit_big_red_one(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_04AB:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_resetCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_resetCardID"));
     L_04C6:
         goto L_03E3;
     L_04CB:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_drawnCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_drawnCardID"));
     L_04E6:
         goto L_03E3;
     L_04EB:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_spawnedCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_spawnedCardID"));
     L_0506:
         goto L_03E3;
     L_050B:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_2"] = __v) });
     L_051E:
-        _ = H.Call("_isBigRedOne", new Val[] { self, GetLocal(L, "K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc__isBigRedOne_isBigRedOne"] = __v) });
+        _ = H.Call("_isBigRedOne", new Val[] { self, H.GetVar("K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc__isBigRedOne_isBigRedOne"] = __v) });
     L_053E:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc__isBigRedOne_isBigRedOne")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_2")).AsBool());
     L_0564:
@@ -309,7 +309,7 @@ public static Val ExecuteUbergraph_card_unit_big_red_one(IHost H, Val self, Val[
     L_0573:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0586:
-        _ = H.Call("_isBigRedOne", new Val[] { self, GetLocal(L, "K2Node_Event_card"), Val.Out(__v => L["CallFunc__isBigRedOne_isBigRedOne_1"] = __v) });
+        _ = H.Call("_isBigRedOne", new Val[] { self, H.GetVar("K2Node_Event_card"), Val.Out(__v => L["CallFunc__isBigRedOne_isBigRedOne_1"] = __v) });
     L_05A6:
         L["CallFunc_BooleanAND_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc__isBigRedOne_isBigRedOne_1")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_05CC:

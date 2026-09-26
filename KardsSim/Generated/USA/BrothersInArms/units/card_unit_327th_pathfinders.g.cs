@@ -160,7 +160,7 @@ public static Val ExecuteUbergraph_card_unit_327th_pathfinders(IHost H, Val self
     L_0281:
         goto L_00D9;
     L_0286:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_02A3:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool())
         {
@@ -173,11 +173,11 @@ public static Val ExecuteUbergraph_card_unit_327th_pathfinders(IHost H, Val self
             }
         }
     L_02AD:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("targetedUnit"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("targetedUnit"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_0308:
-        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
+        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_0328:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_0373:
         _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("targetedUnit"), Val.Out(__v => L["CallFunc_JSON_Clear_found"] = __v) });
     L_03AF:
@@ -189,7 +189,7 @@ public static Val ExecuteUbergraph_card_unit_327th_pathfinders(IHost H, Val self
             default: goto __halt;
         }
     L_03B0:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_killer"), "cardID"), H.GetMember(self, "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_killer"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_03EC:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool())
         {
@@ -215,7 +215,7 @@ public static Val ExecuteUbergraph_card_unit_327th_pathfinders(IHost H, Val self
             }
         }
     L_0445:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value"), H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value"), H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "cardID")) == 0);
     L_0481:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_1")).AsBool())
         {

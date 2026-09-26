@@ -244,9 +244,9 @@ public static Val ExecuteUbergraph_card_event_ijn_akagi(IHost H, Val self, Val[]
     L_084A:
         goto L_01D0;
     L_084F:
-        L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(0)) > 0);
     L_0871:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
     L_0897:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue_1")).AsBool());
     L_08BD:

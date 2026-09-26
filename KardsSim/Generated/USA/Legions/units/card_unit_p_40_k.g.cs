@@ -34,19 +34,19 @@ public static Val ExecuteUbergraph_card_unit_p_40_k(IHost H, Val self, Val[] arg
             default: goto __halt;
         }
     L_000A:
-        if (!(GetLocal(L, "K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_001D;
+        if (!(H.GetVar("K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_001D;
     L_0018:
         goto L_0309;
     L_001D:
-        _ = H.Call("IsBomber", new Val[] { GetLocal(L, "K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsBomber_isIt"] = __v) });
+        _ = H.Call("IsBomber", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsBomber_isIt"] = __v) });
     L_0046:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side")) == 0);
     L_0082:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0095:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsBomber_isIt")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool());
     L_00BB:
-        L["CallFunc_BooleanOR_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool() || (GetLocal(L, "K2Node_Event_selfIsAlsoGettingDestroyed")).AsBool());
+        L["CallFunc_BooleanOR_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool() || (H.GetVar("K2Node_Event_selfIsAlsoGettingDestroyed")).AsBool());
     L_00E1:
         L["CallFunc_BooleanAND_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_BooleanOR_ReturnValue")).AsBool());
     L_0107:
@@ -60,13 +60,13 @@ public static Val ExecuteUbergraph_card_unit_p_40_k(IHost H, Val self, Val[] arg
     L_0189:
         H.SetMember(self, "Cards", GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"));
     L_01A4:
-        _ = H.Call("getTotalDefense", new Val[] { GetLocal(L, "K2Node_Event_killer"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
+        _ = H.Call("getTotalDefense", new Val[] { H.GetVar("K2Node_Event_killer"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
     L_01CD:
         L["CallFunc_LessEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalDefense_totalDefense"), Val.Of(0)) <= 0);
     L_01EF:
         if (!(GetLocal(L, "CallFunc_LessEqual_IntInt_ReturnValue")).AsBool()) goto L_0239;
     L_01FD:
-        L["CallFunc_Array_RemoveItem_ReturnValue"] = H.Call("Array_RemoveItem", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "Cards"), GetLocal(L, "K2Node_Event_killer") });
+        L["CallFunc_Array_RemoveItem_ReturnValue"] = H.Call("Array_RemoveItem", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "Cards"), H.GetVar("K2Node_Event_killer") });
     L_0239:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "Cards") });
     L_0274:

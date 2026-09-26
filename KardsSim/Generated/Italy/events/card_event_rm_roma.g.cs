@@ -111,7 +111,7 @@ public static Val ExecuteUbergraph_card_event_rm_roma(IHost H, Val self, Val[] a
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_deckSide"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_deckSide"), H.GetMember(self, "side")) == 0);
     L_0030:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_0567;
     L_003E:
@@ -147,9 +147,9 @@ public static Val ExecuteUbergraph_card_event_rm_roma(IHost H, Val self, Val[] a
     L_02AE:
         goto L_0567;
     L_02B3:
-        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
+        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_02D3:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_031E:
         goto L_019C;
     L_0323:
@@ -157,7 +157,7 @@ public static Val ExecuteUbergraph_card_event_rm_roma(IHost H, Val self, Val[] a
     L_0345:
         L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetMember(self, "enterPlayOnTurn") + Val.Of(2));
     L_036F:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber_1"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber_1"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue")) == 0);
     L_0395:
         L["CallFunc_BooleanAND_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue_3")).AsBool());
     L_03BB:
@@ -175,7 +175,7 @@ public static Val ExecuteUbergraph_card_event_rm_roma(IHost H, Val self, Val[] a
     L_047B:
         L["CallFunc_Add_IntInt_ReturnValue_1"] = (H.GetMember(self, "enterPlayOnTurn") + Val.Of(2));
     L_04A5:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_1")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_1")) == 0);
     L_04CB:
         L["CallFunc_BooleanAND_ReturnValue_2"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_1")).AsBool() && (GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue_5")).AsBool());
     L_04F1:

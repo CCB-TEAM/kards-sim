@@ -130,7 +130,7 @@ public static Val ExecuteUbergraph_card_unit_thunder_division(IHost H, Val self,
             }
         }
     L_026F:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_intelCard"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_intelCard"), "side"), H.GetMember(self, "side")) == 0);
     L_02AB:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool())
         {
@@ -151,7 +151,7 @@ public static Val ExecuteUbergraph_card_unit_thunder_division(IHost H, Val self,
     L_031B:
         goto L_0119;
     L_0320:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_intelCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_intelCard") });
     L_033D:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool())
         {

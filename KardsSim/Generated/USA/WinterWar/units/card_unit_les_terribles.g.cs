@@ -38,7 +38,7 @@ public static Val ExecuteUbergraph_card_unit_les_terribles(IHost H, Val self, Va
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_013C;
     L_002B:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_0066:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_0085:
@@ -46,7 +46,7 @@ public static Val ExecuteUbergraph_card_unit_les_terribles(IHost H, Val self, Va
     L_0093:
         goto L_013C;
     L_0098:
-        _ = H.Call("getTotalOperationCost", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getTotalOperationCost_totalOperationCost"] = __v) });
+        _ = H.Call("getTotalOperationCost", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getTotalOperationCost_totalOperationCost"] = __v) });
     L_00C1:
         L["CallFunc_GreaterEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalOperationCost_totalOperationCost"), Val.Of(3)) >= 0);
     L_00E3:

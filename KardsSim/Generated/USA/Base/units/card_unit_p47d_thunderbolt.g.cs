@@ -34,15 +34,15 @@ public static Val ExecuteUbergraph_card_unit_p47d_thunderbolt(IHost H, Val self,
             default: goto __halt;
         }
     L_000A:
-        if (!(GetLocal(L, "K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_001D;
+        if (!(H.GetVar("K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_001D;
     L_0018:
         goto L_0145;
     L_001D:
-        L["CallFunc_EqualEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_killer"), self) == 0);
+        L["CallFunc_EqualEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_killer"), self) == 0);
     L_003B:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0064:
-        L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side")) != 0);
+        L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side")) != 0);
     L_00A0:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool() && (GetLocal(L, "CallFunc_NotEqual_ByteByte_ReturnValue")).AsBool());
     L_00C6:

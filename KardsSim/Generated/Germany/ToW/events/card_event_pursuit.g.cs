@@ -216,7 +216,7 @@ public static Val ExecuteUbergraph_card_event_pursuit(IHost H, Val self, Val[] a
     L_0356:
         goto L_029D;
     L_035B:
-        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { GetLocal(L, "K2Node_Event_targetCard") });
+        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { H.GetVar("K2Node_Event_targetCard") });
     L_036F:
         _ = H.Call("MakeCardRetreat", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_MakeArray_Array"), H.GetMember(self, "cardID") });
     L_03A5:
@@ -228,9 +228,9 @@ public static Val ExecuteUbergraph_card_event_pursuit(IHost H, Val self, Val[] a
     L_040B:
         goto L_00D5;
     L_0410:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(0)) > 0);
     L_0432:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
     L_0458:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool());
     L_047E:

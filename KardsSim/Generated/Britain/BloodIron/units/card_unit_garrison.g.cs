@@ -35,7 +35,7 @@ public static Val ExecuteUbergraph_card_unit_garrison(IHost H, Val self, Val[] a
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_defenderCard"), "cardID"), H.GetMember(self, "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_defenderCard"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_0046:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_0059:

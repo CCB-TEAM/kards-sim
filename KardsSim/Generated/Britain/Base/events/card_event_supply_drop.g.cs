@@ -110,7 +110,7 @@ public static Val ExecuteUbergraph_card_event_supply_drop(IHost H, Val self, Val
     L_00C8:
         goto L_00E5;
     L_00CD:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_00E0:
         goto L_000A;
     L_00E5:

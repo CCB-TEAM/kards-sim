@@ -106,14 +106,19 @@ public class Host : IHost
 
     // ===================== 成员 =====================
 
-    public Val GetMember(Val obj, string property)
+    /// <summary>
+    /// 读成员。声明为 virtual 是为了让桥接层能把引擎侧的真实状态
+    /// 按客户端的字段形状暴露出来（例如 <c>location</c> / <c>isBeingGuarded</c>），
+    /// 否则客户端规则库读到的永远是空值。
+    /// </summary>
+    public virtual Val GetMember(Val obj, string property)
     {
         var o = Resolve(obj);
         if (o is null) return Val.Nothing;
         return o.Get(property);
     }
 
-    public void SetMember(Val obj, string property, Val v)
+    public virtual void SetMember(Val obj, string property, Val v)
     {
         var o = Resolve(obj);
         if (o is null) return;

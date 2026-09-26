@@ -132,7 +132,7 @@ public static Val ExecuteUbergraph_card_event_reckless_assault(IHost H, Val self
     L_037F:
         goto L_000F;
     L_0384:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "K2Node_Event_cardDealingDamage"), Val.Of("trigger"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_cardDealingDamage"), Val.Of("trigger"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_03BF:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt")).AsBool())
         {
@@ -145,7 +145,7 @@ public static Val ExecuteUbergraph_card_event_reckless_assault(IHost H, Val self
             }
         }
     L_03C9:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_toCard"), "cardID"), H.GetMember(self, "locationCardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_toCard"), "cardID"), H.GetMember(self, "locationCardID")) == 0);
     L_0405:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_0414;
     L_0413:
@@ -157,13 +157,13 @@ public static Val ExecuteUbergraph_card_event_reckless_assault(IHost H, Val self
             default: goto __halt;
         }
     L_0414:
-        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(GetLocal(L, "K2Node_Event_cardDealingDamage"), "side") });
+        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(H.GetVar("K2Node_Event_cardDealingDamage"), "side") });
     L_0469:
         H.SetMember(self, "locationCardID", GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID"));
     L_0484:
-        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(GetLocal(L, "K2Node_Event_cardDealingDamage"), "side") });
+        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(H.GetVar("K2Node_Event_cardDealingDamage"), "side") });
     L_04D9:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetLocationCardBySide_card"), GetLocal(L, "K2Node_Event_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetLocationCardBySide_card"), H.GetVar("K2Node_Event_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_0524:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

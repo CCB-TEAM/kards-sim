@@ -193,7 +193,7 @@ public static Val ExecuteUbergraph_card_unit_calliope(IHost H, Val self, Val[] a
     L_02EE:
         goto L_022C;
     L_02F3:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0310:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool())
         {
@@ -209,9 +209,9 @@ public static Val ExecuteUbergraph_card_unit_calliope(IHost H, Val self, Val[] a
     L_031A:
         _ = H.Call("Array_Clear", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "possibleTargets") });
     L_0343:
-        L["CallFunc_Array_Add_ReturnValue_1"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "possibleTargets"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_Array_Add_ReturnValue_1"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "possibleTargets"), H.GetVar("K2Node_Event_targetCard") });
     L_0387:
-        _ = H.Call("GetAdjacentCards", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), Val.False, Val.Out(__v => L["CallFunc_GetAdjacentCards_adjacentCards"] = __v) });
+        _ = H.Call("GetAdjacentCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), Val.False, Val.Out(__v => L["CallFunc_GetAdjacentCards_adjacentCards"] = __v) });
     L_03BE:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_03D5:

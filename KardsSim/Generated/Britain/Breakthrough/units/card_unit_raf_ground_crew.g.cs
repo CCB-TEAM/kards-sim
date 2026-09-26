@@ -261,7 +261,7 @@ public static Val ExecuteUbergraph_card_unit_raf_ground_crew(IHost H, Val self, 
             }
         }
     L_0487:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_049A:
         L["CallFunc_IsValid_ReturnValue_1"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "tempCard") });
     L_04B7:
@@ -322,15 +322,15 @@ public static Val ExecuteUbergraph_card_unit_raf_ground_crew(IHost H, Val self, 
             default: goto __halt;
         }
     L_0633:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_resetCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_resetCardID"));
     L_064E:
         goto L_03B0;
     L_0653:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_drawnCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_drawnCardID"));
     L_066E:
         goto L_03B0;
     L_0673:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_spawnedCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_spawnedCardID"));
     L_068E:
         goto L_03B0;
     L_0693:

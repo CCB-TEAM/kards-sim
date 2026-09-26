@@ -120,7 +120,7 @@ public static Val ExecuteUbergraph_card_unit_1st_airlanding_brigade(IHost H, Val
     L_000F:
         __ef.Push(134);
     L_0014:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0031:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool())
         {
@@ -133,7 +133,7 @@ public static Val ExecuteUbergraph_card_unit_1st_airlanding_brigade(IHost H, Val
             }
         }
     L_003B:
-        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { GetLocal(L, "K2Node_Event_targetCard") });
+        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { H.GetVar("K2Node_Event_targetCard") });
     L_004F:
         _ = H.Call("MakeCardRetreat", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_MakeArray_Array"), H.GetMember(self, "cardID") });
     L_0085:

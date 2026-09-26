@@ -416,7 +416,7 @@ public static Val ExecuteUbergraph_card_event_naval_bombardment_cam1(IHost H, Va
     L_0BE9:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_0C24:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "location"), Val.Of(7), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_0C58:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_0C77:
@@ -484,7 +484,7 @@ public static Val ExecuteUbergraph_card_event_naval_bombardment_cam1(IHost H, Va
     L_0E84:
         if (!(GetLocal(L, "CallFunc_HasCampaignUpgrade_doesIt_5")).AsBool()) goto L_0EED;
     L_0E92:
-        _ = H.Call("MoveCardToTopOfOwnersDeck", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Of(0), Val.Out(__v => L["CallFunc_MoveCardToTopOfOwnersDeck_qqq"] = __v) });
+        _ = H.Call("MoveCardToTopOfOwnersDeck", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Of(0), Val.Out(__v => L["CallFunc_MoveCardToTopOfOwnersDeck_qqq"] = __v) });
     L_0EEC:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -503,7 +503,7 @@ public static Val ExecuteUbergraph_card_event_naval_bombardment_cam1(IHost H, Va
     L_0F41:
         goto L_0DC8;
     L_0F46:
-        _ = H.Call("MoveUnitFromBoardToOwnersHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID") });
+        _ = H.Call("MoveUnitFromBoardToOwnersHand", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID") });
     L_0F7C:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

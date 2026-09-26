@@ -80,7 +80,7 @@ public static Val OnOtherCardDealDamageAddDamage(IHost H, Val self, Val[] args)
     L_0013:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_00BB;
     L_0021:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "cardDealingDamage"), "side"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "cardDealingDamage"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_005C:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_007B:

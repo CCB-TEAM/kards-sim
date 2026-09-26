@@ -41,11 +41,11 @@ public static Val ExecuteUbergraph_card_location_german_scen5_ai(IHost H, Val se
     L_0114:
         goto L_0245;
     L_0119:
-        if (!(GetLocal(L, "K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_012C;
+        if (!(H.GetVar("K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_012C;
     L_0127:
         goto L_0245;
     L_012C:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side")) == 0);
     L_0168:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_0245;
     L_0176:

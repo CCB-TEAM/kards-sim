@@ -96,7 +96,7 @@ public static Val ExecuteUbergraph_card_event_ambush(IHost H, Val self, Val[] ar
     L_000A:
         _ = H.Call("GetPlayFromHandDamage", new Val[] { self, self, Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_0022:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_006D:
         _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide_1"] = __v) });
     L_0080:

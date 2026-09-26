@@ -95,17 +95,17 @@ public static Val ExecuteUbergraph_card_event_united_we_stand(IHost H, Val self,
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
+        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_002A:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_0075:
         goto L_0128;
     L_007A:
-        if (!(GetLocal(L, "K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_008D;
+        if (!(H.GetVar("K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_008D;
     L_0088:
         goto L_0128;
     L_008D:
-        L["CallFunc_EqualEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_killer"), self) == 0);
+        L["CallFunc_EqualEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_killer"), self) == 0);
     L_00AB:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ObjectObject_ReturnValue")).AsBool()) goto L_0128;
     L_00B9:

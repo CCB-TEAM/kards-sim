@@ -106,7 +106,7 @@ public static Val ExecuteUbergraph_card_event_vystrel_course(IHost H, Val self, 
     L_000A:
         _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affectedcard"), Val.Out(__v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found"] = __v) });
     L_004F:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardReset"), "cardID"), GetLocal(L, "CallFunc_JSON_GetInt_value")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardReset"), "cardID"), GetLocal(L, "CallFunc_JSON_GetInt_value")) == 0);
     L_008B:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_JSON_GetInt_found")).AsBool());
     L_00B1:
@@ -116,11 +116,11 @@ public static Val ExecuteUbergraph_card_event_vystrel_course(IHost H, Val self, 
     L_00FB:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_0129:
-        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_cardReset"), Val.Of("countdown_timer"), Val.Out(__v => L["CallFunc_JSON_Clear_found_3"] = __v) });
+        _ = H.Call("JSON_Clear", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardReset"), Val.Of("countdown_timer"), Val.Out(__v => L["CallFunc_JSON_Clear_found_3"] = __v) });
     L_0170:
         if (!(GetLocal(L, "CallFunc_JSON_Clear_found_3")).AsBool()) goto L_0737;
     L_017E:
-        _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_cardReset"), "cardID"), Val.False });
+        _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardReset"), "cardID"), Val.False });
     L_01C2:
         goto L_0737;
     L_01C7:
@@ -172,13 +172,13 @@ public static Val ExecuteUbergraph_card_event_vystrel_course(IHost H, Val self, 
     L_05DC:
         goto L_0737;
     L_05E1:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affectedCard"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affectedCard"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_063C:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("trigger"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("trigger"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_069D:
-        _ = H.Call("SetCountdown", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), Val.Of(1), Val.Out(__v => L["CallFunc_SetCountdown_qqq"] = __v) });
+        _ = H.Call("SetCountdown", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), Val.Of(1), Val.Out(__v => L["CallFunc_SetCountdown_qqq"] = __v) });
     L_06EE:
-        _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), Val.False });
+        _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), Val.False });
     L_0732:
         goto L_01C7;
     L_0737:

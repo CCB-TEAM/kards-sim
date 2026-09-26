@@ -1043,7 +1043,7 @@ public static Val DestroyAllActorsOfClass(IHost H, Val self, Val[] args)
     L_0005:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_0010:
-        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), GetLocal(L, "actorClass"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
+        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), GetLocal(L, "actorClass"), Val.Out(__v => L["CallFunc_GetAllActorsOfClass_OutActors"] = __v) });
     L_0035:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_004C:
@@ -1828,7 +1828,7 @@ public static Val Get_Player_Library(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("CardLibrary"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
+        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("CardLibrary"), Val.Out(__v => L["CallFunc_GetAllActorsOfClass_OutActors"] = __v) });
     L_0030:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors"), Val.Of(0), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0067:
@@ -1911,7 +1911,7 @@ public static Val getAllCardsFromActiveSets(IHost H, Val self, Val[] args)
     L_0025:
         L["CallFunc_Map_Values_Values"] = H.MakeArray(new Val[] {  });
     L_0030:
-        _ = H.Call("Map_Values", new Val[] { Val.Ref("BlueprintMapLibrary"), H.GetMember(GetLocal(L, "CallFunc_GetLogic_Logic"), "StaticCards"), GetLocal(L, "CallFunc_Map_Values_Values") });
+        _ = H.Call("Map_Values", new Val[] { Val.Ref("BlueprintMapLibrary"), H.GetMember(GetLocal(L, "CallFunc_GetLogic_Logic"), "StaticCards"), Val.Out(__v => L["CallFunc_Map_Values_Values"] = __v) });
     L_0078:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_008F:
@@ -2242,7 +2242,7 @@ public static Val GetBPLevelParameters(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_LevelParameters"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
+        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_LevelParameters"), Val.Out(__v => L["CallFunc_GetAllActorsOfClass_OutActors"] = __v) });
     L_0030:
         L["CallFunc_Array_IsValidIndex_ReturnValue"] = H.Call("Array_IsValidIndex", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors"), Val.Of(0) });
     L_0068:
@@ -2332,7 +2332,7 @@ public static Val getCardbackDeckCodeIDMap(IHost H, Val self, Val[] args)
     L_002E:
         L["CallFunc_GetPrimaryAssetIdList_OutPrimaryAssetIdList"] = H.MakeArray(new Val[] {  });
     L_0039:
-        _ = H.Call("GetPrimaryAssetIdList", new Val[] { Val.Ref("KismetSystemLibrary"), H.MakeArray(new Val[] { Val.Name("Cardback") }), GetLocal(L, "CallFunc_GetPrimaryAssetIdList_OutPrimaryAssetIdList") });
+        _ = H.Call("GetPrimaryAssetIdList", new Val[] { Val.Ref("KismetSystemLibrary"), H.MakeArray(new Val[] { Val.Name("Cardback") }), Val.Out(__v => L["CallFunc_GetPrimaryAssetIdList_OutPrimaryAssetIdList"] = __v) });
     L_0067:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_007E:
@@ -2640,7 +2640,7 @@ public static Val GetCardFunctions(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_CardFunctions"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
+        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_CardFunctions"), Val.Out(__v => L["CallFunc_GetAllActorsOfClass_OutActors"] = __v) });
     L_0030:
         L["CallFunc_Array_IsValidIndex_ReturnValue"] = H.Call("Array_IsValidIndex", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors"), Val.Of(0) });
     L_0068:
@@ -2654,7 +2654,7 @@ public static Val GetCardFunctions(IHost H, Val self, Val[] args)
     L_00C5:
         _ = H.Call("GetLogic", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetLogic_Logic"] = __v) });
     L_00E5:
-        _ = H.Call("spawnCardFunctions", new Val[] { GetLocal(L, "CallFunc_GetLogic_Logic"), GetLocal(L, "CallFunc_spawnCardFunctions_OutCardFunctions") });
+        _ = H.Call("spawnCardFunctions", new Val[] { GetLocal(L, "CallFunc_GetLogic_Logic"), Val.Out(__v => L["CallFunc_spawnCardFunctions_OutCardFunctions"] = __v) });
     L_0112:
         L["cardFunctions"] = GetLocal(L, "CallFunc_spawnCardFunctions_OutCardFunctions");
     L_0125:
@@ -2785,7 +2785,7 @@ public static Val GetDailyMissions(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_DailyMissions"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
+        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_DailyMissions"), Val.Out(__v => L["CallFunc_GetAllActorsOfClass_OutActors"] = __v) });
     L_0030:
         L["CallFunc_Array_Length_ReturnValue_1"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
     L_006B:
@@ -2863,7 +2863,7 @@ public static Val GetDeckBP(IHost H, Val self, Val[] args)
     L_0005:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_0010:
-        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_Deck"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
+        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_Deck"), Val.Out(__v => L["CallFunc_GetAllActorsOfClass_OutActors"] = __v) });
     L_0035:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_004C:
@@ -2931,7 +2931,7 @@ public static Val GetDSession(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_KardsSession"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
+        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_KardsSession"), Val.Out(__v => L["CallFunc_GetAllActorsOfClass_OutActors"] = __v) });
     L_0030:
         L["CallFunc_Array_Length_ReturnValue_1"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
     L_006B:
@@ -3022,7 +3022,7 @@ public static Val GetEquipmentBP(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_Equipment"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
+        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_Equipment"), Val.Out(__v => L["CallFunc_GetAllActorsOfClass_OutActors"] = __v) });
     L_0030:
         L["CallFunc_Array_IsValidIndex_ReturnValue"] = H.Call("Array_IsValidIndex", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors"), Val.Of(0) });
     L_0068:
@@ -3380,7 +3380,7 @@ public static Val GetFactionName(IHost H, Val self, Val[] args)
     L_0005:
         L["CallFunc_GetDataTableRowNames_OutRowNames"] = H.MakeArray(new Val[] {  });
     L_0010:
-        _ = H.Call("GetDataTableRowNames", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("DT_FactionNames"), GetLocal(L, "CallFunc_GetDataTableRowNames_OutRowNames") });
+        _ = H.Call("GetDataTableRowNames", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("DT_FactionNames"), Val.Out(__v => L["CallFunc_GetDataTableRowNames_OutRowNames"] = __v) });
     L_002C:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_0043:
@@ -3411,7 +3411,7 @@ public static Val GetFactionName(IHost H, Val self, Val[] args)
             }
         }
     L_0173:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow"), "faction_2_E5B88F774DFEADA4C53B318D0E60D1DB"), GetLocal(L, "faction"), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetDataTableRowFromName_OutRow"), "faction_2_E5B88F774DFEADA4C53B318D0E60D1DB"), GetLocal(L, "faction"), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_01A1:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_01C0:
@@ -3493,7 +3493,7 @@ public static Val GetHistory(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_History"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
+        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_History"), Val.Out(__v => L["CallFunc_GetAllActorsOfClass_OutActors"] = __v) });
     L_0030:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors"), Val.Of(0), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0067:
@@ -3850,7 +3850,7 @@ public static Val GetMainBackgroundImage(IHost H, Val self, Val[] args)
         var __out_Brush = args.Length > 1 ? args[1].As<Action<Val>>() : null;
         L["Brush"] = Val.Nothing;
     L_0000:
-        _ = H.Call("BranchOnPlatformType", new Val[] { self, GetLocal(L, "CallFunc_BranchOnPlatformType_Branches") });
+        _ = H.Call("BranchOnPlatformType", new Val[] { self, Val.Out(__v => L["CallFunc_BranchOnPlatformType_Branches"] = __v) });
     L_0013:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_BranchOnPlatformType_Branches"), Val.Of(0)) != 0);
     L_0032:
@@ -3973,7 +3973,7 @@ public static Val GetMatchController(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_MatchData"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
+        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_MatchData"), Val.Out(__v => L["CallFunc_GetAllActorsOfClass_OutActors"] = __v) });
     L_0030:
         L["CallFunc_Array_IsValidIndex_ReturnValue"] = H.Call("Array_IsValidIndex", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors"), Val.Of(0) });
     L_0068:
@@ -4135,7 +4135,7 @@ public static Val GetOnlineMatch(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_OnlineMatch"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
+        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_OnlineMatch"), Val.Out(__v => L["CallFunc_GetAllActorsOfClass_OutActors"] = __v) });
     L_0030:
         L["CallFunc_Array_IsValidIndex_ReturnValue"] = H.Call("Array_IsValidIndex", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors"), Val.Of(0) });
     L_0068:
@@ -4171,7 +4171,7 @@ public static Val GetOrSpawnActorInPersistentLevel(IHost H, Val self, Val[] args
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), GetLocal(L, "ActorClass"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
+        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), GetLocal(L, "ActorClass"), Val.Out(__v => L["CallFunc_GetAllActorsOfClass_OutActors"] = __v) });
     L_0030:
         L["CallFunc_Array_IsValidIndex_ReturnValue"] = H.Call("Array_IsValidIndex", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors"), Val.Of(0) });
     L_0068:
@@ -4216,7 +4216,7 @@ public static Val GetPlatformEnum(IHost H, Val self, Val[] args)
         var __out_CurrentPlatform = args.Length > 1 ? args[1].As<Action<Val>>() : null;
         L["CurrentPlatform"] = Val.Nothing;
     L_0000:
-        _ = H.Call("BranchOnPlatformType", new Val[] { self, GetLocal(L, "CallFunc_BranchOnPlatformType_Branches") });
+        _ = H.Call("BranchOnPlatformType", new Val[] { self, Val.Out(__v => L["CallFunc_BranchOnPlatformType_Branches"] = __v) });
     L_0013:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_BranchOnPlatformType_Branches"), Val.Of(0)) != 0);
     L_0032:
@@ -5467,7 +5467,7 @@ public static Val GetTargetPointByTag(IHost H, Val self, Val[] args)
     L_0005:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_0010:
-        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("TargetPoint"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
+        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("TargetPoint"), Val.Out(__v => L["CallFunc_GetAllActorsOfClass_OutActors"] = __v) });
     L_0035:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_004C:
@@ -5757,7 +5757,7 @@ public static Val GetTutorialBP(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_BaseTutorial"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
+        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_BaseTutorial"), Val.Out(__v => L["CallFunc_GetAllActorsOfClass_OutActors"] = __v) });
     L_0030:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors"), Val.Of(0), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0067:
@@ -6200,7 +6200,7 @@ public static Val GetVisualController(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_VisualController"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
+        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_VisualController"), Val.Out(__v => L["CallFunc_GetAllActorsOfClass_OutActors"] = __v) });
     L_0030:
         L["CallFunc_Array_IsValidIndex_ReturnValue"] = H.Call("Array_IsValidIndex", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors"), Val.Of(0) });
     L_0068:
@@ -6886,7 +6886,7 @@ public static Val IsMouseOrFingerDown(IHost H, Val self, Val[] args)
     L_0022:
         L["CallFunc_IsInputKeyDown_ReturnValue"] = H.Call("IsInputKeyDown", new Val[] { GetLocal(L, "CallFunc_GetPlayerController_ReturnValue"), H.MakeArray(new Val[] { Val.Name("LeftMouseButton") }) });
     L_0067:
-        _ = H.Call("GetInputTouchState", new Val[] { GetLocal(L, "CallFunc_GetPlayerController_ReturnValue"), Val.Of(0), GetLocal(L, "CallFunc_GetInputTouchState_LocationX"), GetLocal(L, "CallFunc_GetInputTouchState_LocationY"), GetLocal(L, "CallFunc_GetInputTouchState_bIsCurrentlyPressed") });
+        _ = H.Call("GetInputTouchState", new Val[] { GetLocal(L, "CallFunc_GetPlayerController_ReturnValue"), Val.Of(0), Val.Out(__v => L["CallFunc_GetInputTouchState_LocationX"] = __v), Val.Out(__v => L["CallFunc_GetInputTouchState_LocationY"] = __v), Val.Out(__v => L["CallFunc_GetInputTouchState_bIsCurrentlyPressed"] = __v) });
     L_00A4:
         L["CallFunc_BooleanOR_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsInputKeyDown_ReturnValue")).AsBool() || (GetLocal(L, "CallFunc_GetInputTouchState_bIsCurrentlyPressed")).AsBool());
     L_00CA:
@@ -6915,7 +6915,7 @@ public static Val IsMouseOrFingerUp(IHost H, Val self, Val[] args)
     L_0022:
         L["CallFunc_IsInputKeyDown_ReturnValue"] = H.Call("IsInputKeyDown", new Val[] { GetLocal(L, "CallFunc_GetPlayerController_ReturnValue"), H.MakeArray(new Val[] { Val.Name("LeftMouseButton") }) });
     L_0067:
-        _ = H.Call("GetInputTouchState", new Val[] { GetLocal(L, "CallFunc_GetPlayerController_ReturnValue"), Val.Of(0), GetLocal(L, "CallFunc_GetInputTouchState_LocationX"), GetLocal(L, "CallFunc_GetInputTouchState_LocationY"), GetLocal(L, "CallFunc_GetInputTouchState_bIsCurrentlyPressed") });
+        _ = H.Call("GetInputTouchState", new Val[] { GetLocal(L, "CallFunc_GetPlayerController_ReturnValue"), Val.Of(0), Val.Out(__v => L["CallFunc_GetInputTouchState_LocationX"] = __v), Val.Out(__v => L["CallFunc_GetInputTouchState_LocationY"] = __v), Val.Out(__v => L["CallFunc_GetInputTouchState_bIsCurrentlyPressed"] = __v) });
     L_00A4:
         L["CallFunc_Not_PreBool_ReturnValue"] = H.Call("Not_PreBool", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_IsInputKeyDown_ReturnValue") });
     L_00C1:
@@ -6972,7 +6972,7 @@ public static Val IsTablet(IHost H, Val self, Val[] args)
     L_00DC:
         L["CallFunc_GetViewportSize_ReturnValue"] = H.Call("GetViewportSize", new Val[] { Val.Ref("WidgetLayoutLibrary"), GetLocal(L, "__WorldContext") });
     L_0117:
-        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetViewportSize_ReturnValue"), GetLocal(L, "CallFunc_BreakVector2D_X"), GetLocal(L, "CallFunc_BreakVector2D_Y") });
+        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetViewportSize_ReturnValue"), Val.Out(__v => L["CallFunc_BreakVector2D_X"] = __v), Val.Out(__v => L["CallFunc_BreakVector2D_Y"] = __v) });
     L_013C:
         L["CallFunc_EqualEqual_DoubleDouble_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_BreakVector2D_Y"), Val.Of(0)) == 0);
     L_0162:
@@ -6982,7 +6982,7 @@ public static Val IsTablet(IHost H, Val self, Val[] args)
     L_0175:
         L["CallFunc_GetViewportSize_ReturnValue"] = H.Call("GetViewportSize", new Val[] { Val.Ref("WidgetLayoutLibrary"), GetLocal(L, "__WorldContext") });
     L_01B0:
-        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetViewportSize_ReturnValue"), GetLocal(L, "CallFunc_BreakVector2D_X"), GetLocal(L, "CallFunc_BreakVector2D_Y") });
+        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetViewportSize_ReturnValue"), Val.Out(__v => L["CallFunc_BreakVector2D_X"] = __v), Val.Out(__v => L["CallFunc_BreakVector2D_Y"] = __v) });
     L_01D5:
         L["CallFunc_Less_DoubleDouble_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_BreakVector2D_X"), GetLocal(L, "CallFunc_BreakVector2D_Y")) < 0);
     L_01FB:
@@ -6990,7 +6990,7 @@ public static Val IsTablet(IHost H, Val self, Val[] args)
     L_0209:
         L["CallFunc_GetViewportSize_ReturnValue"] = H.Call("GetViewportSize", new Val[] { Val.Ref("WidgetLayoutLibrary"), GetLocal(L, "__WorldContext") });
     L_0244:
-        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetViewportSize_ReturnValue"), GetLocal(L, "CallFunc_BreakVector2D_X"), GetLocal(L, "CallFunc_BreakVector2D_Y") });
+        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetViewportSize_ReturnValue"), Val.Out(__v => L["CallFunc_BreakVector2D_X"] = __v), Val.Out(__v => L["CallFunc_BreakVector2D_Y"] = __v) });
     L_0269:
         L["CallFunc_Divide_DoubleDouble_ReturnValue_1"] = (GetLocal(L, "CallFunc_BreakVector2D_X") / GetLocal(L, "CallFunc_BreakVector2D_Y"));
     L_0297:
@@ -7008,7 +7008,7 @@ public static Val IsTablet(IHost H, Val self, Val[] args)
     L_0329:
         L["CallFunc_GetViewportSize_ReturnValue"] = H.Call("GetViewportSize", new Val[] { Val.Ref("WidgetLayoutLibrary"), GetLocal(L, "__WorldContext") });
     L_0364:
-        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetViewportSize_ReturnValue"), GetLocal(L, "CallFunc_BreakVector2D_X"), GetLocal(L, "CallFunc_BreakVector2D_Y") });
+        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetViewportSize_ReturnValue"), Val.Out(__v => L["CallFunc_BreakVector2D_X"] = __v), Val.Out(__v => L["CallFunc_BreakVector2D_Y"] = __v) });
     L_0389:
         L["CallFunc_Divide_DoubleDouble_ReturnValue"] = (GetLocal(L, "CallFunc_BreakVector2D_Y") / GetLocal(L, "CallFunc_BreakVector2D_X"));
     L_03B7:
@@ -7037,7 +7037,7 @@ public static Val IsTargetArrowActive(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_targetArrowRVX"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
+        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_targetArrowRVX"), Val.Out(__v => L["CallFunc_GetAllActorsOfClass_OutActors"] = __v) });
     L_0030:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
     L_006B:
@@ -7227,7 +7227,7 @@ public static Val IsValidPack(IHost H, Val self, Val[] args)
     L_0941:
         L["CallFunc_GetJSONArray_Value"] = H.MakeArray(new Val[] {  });
     L_094C:
-        _ = H.Call("GetJSONArray", new Val[] { GetLocal(L, "CallFunc_GetEngineSubsystem_ReturnValue"), Val.Of("presale_packs"), GetLocal(L, "CallFunc_GetJSONArray_KeyExists"), GetLocal(L, "CallFunc_GetJSONArray_Value") });
+        _ = H.Call("GetJSONArray", new Val[] { GetLocal(L, "CallFunc_GetEngineSubsystem_ReturnValue"), Val.Of("presale_packs"), Val.Out(__v => L["CallFunc_GetJSONArray_KeyExists"] = __v), Val.Out(__v => L["CallFunc_GetJSONArray_Value"] = __v) });
     L_098D:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetJSONArray_Value") });
     L_09C8:
@@ -7243,7 +7243,7 @@ public static Val IsValidPack(IHost H, Val self, Val[] args)
     L_0A39:
         L["CallFunc_GetJSONArray_Value"] = H.MakeArray(new Val[] {  });
     L_0A44:
-        _ = H.Call("GetJSONArray", new Val[] { GetLocal(L, "CallFunc_GetEngineSubsystem_ReturnValue"), Val.Of("presale_packs"), GetLocal(L, "CallFunc_GetJSONArray_KeyExists"), GetLocal(L, "CallFunc_GetJSONArray_Value") });
+        _ = H.Call("GetJSONArray", new Val[] { GetLocal(L, "CallFunc_GetEngineSubsystem_ReturnValue"), Val.Of("presale_packs"), Val.Out(__v => L["CallFunc_GetJSONArray_KeyExists"] = __v), Val.Out(__v => L["CallFunc_GetJSONArray_Value"] = __v) });
     L_0A85:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetJSONArray_Value"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0AC0:
@@ -7272,11 +7272,11 @@ public static Val IsValidPack(IHost H, Val self, Val[] args)
     L_0BAE:
         L["CallFunc_GetEngineSubsystem_ReturnValue"] = H.Call("GetEngineSubsystem", new Val[] { self, Val.Ref("ConfigSubsystem") });
     L_0BCB:
-        _ = H.Call("GetCultureStringForLanguage", new Val[] { self, GetLocal(L, "CallFunc_Get_Language_Enum_From_Culture_String_language"), GetLocal(L, "CallFunc_GetCultureStringForLanguage_cultureString") });
+        _ = H.Call("GetCultureStringForLanguage", new Val[] { self, GetLocal(L, "CallFunc_Get_Language_Enum_From_Culture_String_language"), Val.Out(__v => L["CallFunc_GetCultureStringForLanguage_cultureString"] = __v) });
     L_0BE7:
         L["CallFunc_GetJSONArray_Value"] = H.MakeArray(new Val[] {  });
     L_0BF2:
-        _ = H.Call("GetJSONArray", new Val[] { GetLocal(L, "CallFunc_GetEngineSubsystem_ReturnValue"), Val.Of("presale_packs"), GetLocal(L, "CallFunc_GetJSONArray_KeyExists"), GetLocal(L, "CallFunc_GetJSONArray_Value") });
+        _ = H.Call("GetJSONArray", new Val[] { GetLocal(L, "CallFunc_GetEngineSubsystem_ReturnValue"), Val.Of("presale_packs"), Val.Out(__v => L["CallFunc_GetJSONArray_KeyExists"] = __v), Val.Out(__v => L["CallFunc_GetJSONArray_Value"] = __v) });
     L_0C33:
         L["CallFunc_GetServerTime_ReturnValue"] = H.Call("GetServerTime", new Val[] { self });
     L_0C4F:
@@ -7369,9 +7369,9 @@ public static Val IsWidgetPressed(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_GetAbsoluteSize_ReturnValue"] = H.Call("GetAbsoluteSize", new Val[] { Val.Ref("SlateBlueprintLibrary"), GetLocal(L, "WidgetGeometry") });
     L_0025:
-        _ = H.Call("LocalToViewport", new Val[] { Val.Ref("SlateBlueprintLibrary"), GetLocal(L, "__WorldContext"), GetLocal(L, "WidgetGeometry"), H.MakeArray(new Val[] { Val.Of(0), Val.Of(0) }), GetLocal(L, "CallFunc_LocalToViewport_PixelPosition"), GetLocal(L, "CallFunc_LocalToViewport_ViewportPosition") });
+        _ = H.Call("LocalToViewport", new Val[] { Val.Ref("SlateBlueprintLibrary"), GetLocal(L, "__WorldContext"), GetLocal(L, "WidgetGeometry"), H.MakeArray(new Val[] { Val.Of(0), Val.Of(0) }), Val.Out(__v => L["CallFunc_LocalToViewport_PixelPosition"] = __v), Val.Out(__v => L["CallFunc_LocalToViewport_ViewportPosition"] = __v) });
     L_0073:
-        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetAbsoluteSize_ReturnValue"), GetLocal(L, "CallFunc_BreakVector2D_X"), GetLocal(L, "CallFunc_BreakVector2D_Y") });
+        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetAbsoluteSize_ReturnValue"), Val.Out(__v => L["CallFunc_BreakVector2D_X"] = __v), Val.Out(__v => L["CallFunc_BreakVector2D_Y"] = __v) });
     L_0098:
         L["CallFunc_GetPlayerController_ReturnValue"] = H.Call("GetPlayerController", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Of(0) });
     L_00BA:
@@ -7379,7 +7379,7 @@ public static Val IsWidgetPressed(IHost H, Val self, Val[] args)
     L_00FF:
         L["CallFunc_GetMousePosition_ReturnValue"] = H.Call("GetMousePosition", new Val[] { GetLocal(L, "CallFunc_GetPlayerController_ReturnValue"), GetLocal(L, "CallFunc_GetMousePosition_LocationX"), Val.Out(__v => L["CallFunc_GetMousePosition_LocationY"] = __v) });
     L_013B:
-        _ = H.Call("GetInputTouchState", new Val[] { GetLocal(L, "CallFunc_GetPlayerController_ReturnValue"), Val.Of(0), GetLocal(L, "CallFunc_GetInputTouchState_LocationX"), GetLocal(L, "CallFunc_GetInputTouchState_LocationY"), GetLocal(L, "CallFunc_GetInputTouchState_bIsCurrentlyPressed") });
+        _ = H.Call("GetInputTouchState", new Val[] { GetLocal(L, "CallFunc_GetPlayerController_ReturnValue"), Val.Of(0), Val.Out(__v => L["CallFunc_GetInputTouchState_LocationX"] = __v), Val.Out(__v => L["CallFunc_GetInputTouchState_LocationY"] = __v), Val.Out(__v => L["CallFunc_GetInputTouchState_bIsCurrentlyPressed"] = __v) });
     L_0178:
         L["CallFunc_MakeVector2D_X_ImplicitCast"] = GetLocal(L, "CallFunc_GetMousePosition_LocationX");
     L_0195:
@@ -7397,9 +7397,9 @@ public static Val IsWidgetPressed(IHost H, Val self, Val[] args)
     L_0276:
         L["CallFunc_Subtract_Vector2DVector2D_ReturnValue_1"] = H.Call("Subtract_Vector2DVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_MakeVector2D_ReturnValue_1"), GetLocal(L, "CallFunc_LocalToViewport_PixelPosition") });
     L_02A4:
-        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_Subtract_Vector2DVector2D_ReturnValue"), GetLocal(L, "CallFunc_BreakVector2D_X_1"), GetLocal(L, "CallFunc_BreakVector2D_Y_1") });
+        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_Subtract_Vector2DVector2D_ReturnValue"), Val.Out(__v => L["CallFunc_BreakVector2D_X_1"] = __v), Val.Out(__v => L["CallFunc_BreakVector2D_Y_1"] = __v) });
     L_02C9:
-        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_Subtract_Vector2DVector2D_ReturnValue_1"), GetLocal(L, "CallFunc_BreakVector2D_X_2"), GetLocal(L, "CallFunc_BreakVector2D_Y_2") });
+        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_Subtract_Vector2DVector2D_ReturnValue_1"), Val.Out(__v => L["CallFunc_BreakVector2D_X_2"] = __v), Val.Out(__v => L["CallFunc_BreakVector2D_Y_2"] = __v) });
     L_02EE:
         L["CallFunc_LessEqual_DoubleDouble_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_BreakVector2D_Y_1"), GetLocal(L, "CallFunc_BreakVector2D_Y")) <= 0);
     L_0314:
@@ -8165,7 +8165,7 @@ public static Val MapToJsonString(IHost H, Val self, Val[] args)
     L_0005:
         L["CallFunc_Map_Keys_Keys"] = H.MakeArray(new Val[] {  });
     L_0010:
-        _ = H.Call("Map_Keys", new Val[] { Val.Ref("BlueprintMapLibrary"), GetLocal(L, "stringToStringMap"), GetLocal(L, "CallFunc_Map_Keys_Keys") });
+        _ = H.Call("Map_Keys", new Val[] { Val.Ref("BlueprintMapLibrary"), GetLocal(L, "stringToStringMap"), Val.Out(__v => L["CallFunc_Map_Keys_Keys"] = __v) });
     L_0042:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_0059:
@@ -9257,7 +9257,7 @@ public static Val SetActorsHidden(IHost H, Val self, Val[] args)
     L_0005:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_0010:
-        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), GetLocal(L, "ActorClass"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
+        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), GetLocal(L, "ActorClass"), Val.Out(__v => L["CallFunc_GetAllActorsOfClass_OutActors"] = __v) });
     L_0035:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_004C:
@@ -9343,7 +9343,7 @@ public static Val shouldShowBalanceChanges(IHost H, Val self, Val[] args)
     L_0005:
         _ = H.Call("GetDailyMissions", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetDailyMissions_dailyMissions"] = __v) });
     L_0025:
-        _ = H.Call("IsRecruitMissionsActive", new Val[] { GetLocal(L, "CallFunc_GetDailyMissions_dailyMissions"), GetLocal(L, "CallFunc_IsRecruitMissionsActive_IsRecruitMission") });
+        _ = H.Call("IsRecruitMissionsActive", new Val[] { GetLocal(L, "CallFunc_GetDailyMissions_dailyMissions"), Val.Out(__v => L["CallFunc_IsRecruitMissionsActive_IsRecruitMission"] = __v) });
     L_0052:
         L["CallFunc_Not_PreBool_ReturnValue"] = H.Call("Not_PreBool", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_IsRecruitMissionsActive_IsRecruitMission") });
     L_006F:
@@ -9355,7 +9355,7 @@ public static Val shouldShowBalanceChanges(IHost H, Val self, Val[] args)
     L_00C3:
         L["CallFunc_GetDataTableRowNames_OutRowNames"] = H.MakeArray(new Val[] {  });
     L_00CE:
-        _ = H.Call("GetDataTableRowNames", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("BalancedCards"), GetLocal(L, "CallFunc_GetDataTableRowNames_OutRowNames") });
+        _ = H.Call("GetDataTableRowNames", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Ref("BalancedCards"), Val.Out(__v => L["CallFunc_GetDataTableRowNames_OutRowNames"] = __v) });
     L_00EA:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_0101:

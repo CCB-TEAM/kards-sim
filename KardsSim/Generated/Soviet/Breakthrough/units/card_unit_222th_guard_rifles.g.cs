@@ -118,11 +118,11 @@ public static Val ExecuteUbergraph_card_unit_222th_guard_rifles(IHost H, Val sel
     L_013B:
         goto L_000A;
     L_0140:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("trigger"), H.GetMember(GetLocal(L, "K2Node_Event_card_1"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("trigger"), H.GetMember(H.GetVar("K2Node_Event_card_1"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_01A1:
         goto L_0205;
     L_01A6:
-        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("trigger"), H.GetMember(GetLocal(L, "K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
+        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("trigger"), H.GetMember(H.GetVar("K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
     L_0205:
         goto __halt;
     L_0207:

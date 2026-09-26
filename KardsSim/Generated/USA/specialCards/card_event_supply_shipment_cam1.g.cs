@@ -41,7 +41,7 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
     L_0037:
         if (!(GetLocal(L, "CallFunc_GetTargetedCard_hasTarget")).AsBool()) goto L_00D8;
     L_0045:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "location"), Val.Of(7), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_0079:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_0098:
@@ -310,7 +310,7 @@ public static Val ExecuteUbergraph_card_event_supply_shipment_cam1(IHost H, Val 
     L_0821:
         goto L_01B5;
     L_0826:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_0839:
         _ = H.Call("HasCampaignUpgrade", new Val[] { self, Val.Of(5), Val.Out(__v => L["CallFunc_HasCampaignUpgrade_doesIt_4"] = __v) });
     L_0851:

@@ -36,7 +36,7 @@ public static Val ExecuteUbergraph_card_event_provence_landing(IHost H, Val self
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_0045:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_0064:
@@ -44,11 +44,11 @@ public static Val ExecuteUbergraph_card_event_provence_landing(IHost H, Val self
     L_0072:
         goto L_0242;
     L_0077:
-        _ = H.Call("getTotalDefense", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
+        _ = H.Call("getTotalDefense", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
     L_00A0:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalDefense_totalDefense"), Val.Of(0)) > 0);
     L_00C2:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_00EB:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool() && (H.GetMember(self, "inEffect")).AsBool());
     L_0111:
@@ -70,7 +70,7 @@ public static Val ExecuteUbergraph_card_event_provence_landing(IHost H, Val self
     L_01DE:
         goto L_0242;
     L_01E3:
-        _ = H.Call("MoveUnitFromSupportToFrontLine", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_cardPlayed"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_MoveUnitFromSupportToFrontLine_qqq"] = __v) });
+        _ = H.Call("MoveUnitFromSupportToFrontLine", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardPlayed"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_MoveUnitFromSupportToFrontLine_qqq"] = __v) });
     L_0222:
         goto L_0242;
     L_0227:

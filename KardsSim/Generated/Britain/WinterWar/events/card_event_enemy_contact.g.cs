@@ -94,7 +94,7 @@ public static Val ExecuteUbergraph_card_event_enemy_contact(IHost H, Val self, V
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
     L_0056:
         _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
     L_00A1:

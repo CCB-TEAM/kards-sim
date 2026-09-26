@@ -196,7 +196,7 @@ public static Val ExecuteUbergraph_card_unit_t_34_cam1(IHost H, Val self, Val[] 
             default: goto __halt;
         }
     L_041C:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
     L_0442:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "enterPlayOnTurn"), Val.Of(0)) > 0);
     L_0464:

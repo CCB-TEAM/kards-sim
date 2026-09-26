@@ -57,7 +57,7 @@ public static Val ExecuteUbergraph_card_unit_342_fusiliers(IHost H, Val self, Va
             }
         }
     L_0089:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(H.GetMember(self, "tempCard"), "location"), Val.Of(7), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(H.GetMember(self, "tempCard"), "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_00BD:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_00DC:

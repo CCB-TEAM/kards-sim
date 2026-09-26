@@ -45,7 +45,7 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
     L_006E:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool()) goto L_010F;
     L_007C:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "faction"), Val.Of(3), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "faction"), Val.Of(3), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_00B0:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_00CF:
@@ -111,9 +111,9 @@ public static Val ExecuteUbergraph_card_event_outmaneuver(IHost H, Val self, Val
             default: goto __halt;
         }
     L_000F:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(0)) > 0);
     L_0031:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
     L_0057:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool());
     L_007D:
@@ -172,7 +172,7 @@ public static Val ExecuteUbergraph_card_event_outmaneuver(IHost H, Val self, Val
             default: goto __halt;
         }
     L_0202:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_0215:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "tempCard") });
     L_0232:

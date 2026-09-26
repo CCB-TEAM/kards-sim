@@ -40,11 +40,11 @@ public static Val ExecuteUbergraph_card_unit_cromwell_mk_iv(IHost H, Val self, V
     L_002B:
         _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_003E:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardBeingPinned"), "side"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardBeingPinned"), "side"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide")) == 0);
     L_007A:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_00DD;
     L_0088:
-        _ = H.Call("SuppressUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_cardBeingPinned"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_SuppressUnit_qqq"] = __v) });
+        _ = H.Call("SuppressUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardBeingPinned"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_SuppressUnit_qqq"] = __v) });
     L_00DD:
         goto __halt;
     L_00DF:

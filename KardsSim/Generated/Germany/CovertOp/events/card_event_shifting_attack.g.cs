@@ -98,7 +98,7 @@ public static Val ExecuteUbergraph_card_event_shifting_attack(IHost H, Val self,
     L_000A:
         L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(self, "enterPlayOnTurn"), Val.Of(0)) > 0);
     L_002C:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetMember(self, "enterPlayOnTurn"), GetLocal(L, "K2Node_Event_turnnumber")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetMember(self, "enterPlayOnTurn"), H.GetVar("K2Node_Event_turnnumber")) == 0);
     L_0052:
         L["CallFunc_BooleanAND_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue_1")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_2")).AsBool());
     L_0078:
@@ -138,11 +138,11 @@ public static Val ExecuteUbergraph_card_event_shifting_attack(IHost H, Val self,
     L_02FD:
         if (!(GetLocal(L, "CallFunc_JSON_GetInt_found")).AsBool()) goto L_051E;
     L_030B:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value"), H.GetMember(GetLocal(L, "K2Node_Event_cardReset"), "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value"), H.GetMember(H.GetVar("K2Node_Event_cardReset"), "cardID")) == 0);
     L_0347:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_1")).AsBool()) goto L_051E;
     L_0355:
-        H.SetMember(self, "affectedCard", GetLocal(L, "K2Node_Event_cardReset"));
+        H.SetMember(self, "affectedCard", H.GetVar("K2Node_Event_cardReset"));
     L_0368:
         _ = H.Call("IsLocatedInHand", new Val[] { H.GetMember(self, "affectedCard"), Val.Out(__v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
     L_0391:
@@ -164,7 +164,7 @@ public static Val ExecuteUbergraph_card_event_shifting_attack(IHost H, Val self,
     L_0501:
         goto L_051E;
     L_0506:
-        H.SetMember(self, "affectedCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "affectedCard", H.GetVar("K2Node_Event_targetCard"));
     L_0519:
         goto L_0442;
     L_051E:

@@ -94,11 +94,11 @@ public static Val ExecuteUbergraph_card_unit_74_panzergrenadier(IHost H, Val sel
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0027:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_00E9;
     L_0035:
-        _ = H.Call("MoveUnitFromBoardToOwnersHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID") });
+        _ = H.Call("MoveUnitFromBoardToOwnersHand", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID") });
     L_006B:
         _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_00AA:

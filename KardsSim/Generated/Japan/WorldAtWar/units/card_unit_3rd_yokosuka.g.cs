@@ -160,7 +160,7 @@ public static Val get_adjacent_japan_units_count(IHost H, Val self, Val[] args)
     L_015F:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAdjacentCards_adjacentCards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_019A:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "faction"), Val.Of(3), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "faction"), Val.Of(3), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_01CE:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_01ED:

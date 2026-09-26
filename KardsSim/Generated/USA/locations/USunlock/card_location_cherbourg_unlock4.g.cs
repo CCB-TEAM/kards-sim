@@ -53,7 +53,7 @@ public static Val ExecuteUbergraph_card_location_cherbourg_unlock4(IHost H, Val 
             }
         }
     L_0035:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(3)) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(3)) == 0);
     L_0057:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_1")).AsBool()) goto L_0152;
     L_0065:
@@ -194,7 +194,7 @@ public static Val ExecuteUbergraph_card_location_cherbourg_unlock4(IHost H, Val 
     L_076F:
         goto L_041A;
     L_0774:
-        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "name"), Val.Name("card_unit_5th_brigade")) == 0);
+        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "name"), Val.Name("card_unit_5th_brigade")) == 0);
     L_07B4:
         if (!(GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue")).AsBool())
         {
@@ -221,7 +221,7 @@ public static Val ExecuteUbergraph_card_location_cherbourg_unlock4(IHost H, Val 
     L_07E9:
         L["Temp_text_Variable_1"] = Val.Of("Units with <bold>Guard</> protect adjacent units and HQs. <bold>Guarded</> targets can’t be attacked directly by enemy units except by <bold>Bombers</> and <bold>Artillery</>.");
     L_0982:
-        _ = H.Call("ShowTutorialMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable_1"] = __v), Val.Of("guard"), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID"), Val.Of(1f), Val.Out(__v => L["CallFunc_ShowTutorialMessage_qqq"] = __v) });
+        _ = H.Call("ShowTutorialMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable_1"] = __v), Val.Of("guard"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), Val.Of(1f), Val.Out(__v => L["CallFunc_ShowTutorialMessage_qqq"] = __v) });
     L_09E3:
         _ = H.Call("CustomName2Add", new Val[] { self, Val.Of("brigade") });
     L_09F6:

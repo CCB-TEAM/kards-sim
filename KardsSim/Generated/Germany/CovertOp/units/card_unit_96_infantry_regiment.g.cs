@@ -38,11 +38,11 @@ public static Val ExecuteUbergraph_card_unit_96_infantry_regiment(IHost H, Val s
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_00DC;
     L_002B:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_0067:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_00DC;
     L_0075:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_009E:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool()) goto L_00DC;
     L_00AC:

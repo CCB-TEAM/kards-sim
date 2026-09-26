@@ -34,19 +34,19 @@ public static Val ExecuteUbergraph_card_unit_vildebeest(IHost H, Val self, Val[]
             default: goto __halt;
         }
     L_000A:
-        if (!(GetLocal(L, "K2Node_Event_isCombatDamage")).AsBool()) goto L_0202;
+        if (!(H.GetVar("K2Node_Event_isCombatDamage")).AsBool()) goto L_0202;
     L_0018:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_002B:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_0202;
     L_0039:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_damage"), Val.Of(1)) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_damage"), Val.Of(1)) == 0);
     L_005B:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0084:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardDealingDamage"), Val.Out(__v => L["CallFunc_IsUnit_isIt_1"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardDealingDamage"), Val.Out(__v => L["CallFunc_IsUnit_isIt_1"] = __v) });
     L_00AD:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardDealingDamage"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardDealingDamage"), "side"), H.GetMember(self, "side")) == 0);
     L_00E9:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool());
     L_010F:

@@ -209,7 +209,7 @@ public static Val ExecuteUbergraph_card_event_committed_crew(IHost H, Val self, 
     L_0354:
         goto L_000F;
     L_0359:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
     L_037F:
         L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(self, "enterPlayOnTurn"), Val.Of(0)) > 0);
     L_03A1:
@@ -245,7 +245,7 @@ public static Val ExecuteUbergraph_card_event_committed_crew(IHost H, Val self, 
             }
         }
     L_042F:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_0442:
         _ = H.Call("GetTurnNumber", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetTurnNumber_turnNumber_1"] = __v) });
     L_046F:
@@ -377,15 +377,15 @@ public static Val ExecuteUbergraph_card_event_committed_crew(IHost H, Val self, 
             default: goto __halt;
         }
     L_06FD:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_resetCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_resetCardID"));
     L_0718:
         goto L_05F5;
     L_071D:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_drawnCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_drawnCardID"));
     L_0738:
         goto L_05F5;
     L_073D:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_spawnedCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_spawnedCardID"));
     L_0758:
         goto L_05F5;
     L_075D:

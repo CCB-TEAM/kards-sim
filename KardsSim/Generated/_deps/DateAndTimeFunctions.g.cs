@@ -31,7 +31,7 @@ public static Val Get_Hours_and_Minutes_from_Timespan(IHost H, Val self, Val[] a
         var __out_OutHoursAndMinutesString = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["OutHoursAndMinutesString"] = Val.Nothing;
     L_0000:
-        _ = H.Call("BreakTimespan2", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "InTimespan"), GetLocal(L, "CallFunc_BreakTimespan2_Days"), GetLocal(L, "CallFunc_BreakTimespan2_Hours"), GetLocal(L, "CallFunc_BreakTimespan2_Minutes"), GetLocal(L, "CallFunc_BreakTimespan2_Seconds"), GetLocal(L, "CallFunc_BreakTimespan2_FractionNano") });
+        _ = H.Call("BreakTimespan2", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "InTimespan"), Val.Out(__v => L["CallFunc_BreakTimespan2_Days"] = __v), Val.Out(__v => L["CallFunc_BreakTimespan2_Hours"] = __v), Val.Out(__v => L["CallFunc_BreakTimespan2_Minutes"] = __v), Val.Out(__v => L["CallFunc_BreakTimespan2_Seconds"] = __v), Val.Out(__v => L["CallFunc_BreakTimespan2_FractionNano"] = __v) });
     L_0040:
         L["CallFunc_Conv_IntToText_ReturnValue"] = H.Call("Conv_IntToText", new Val[] { Val.Ref("KismetTextLibrary"), GetLocal(L, "CallFunc_BreakTimespan2_Minutes"), Val.False, Val.False, Val.Of(2), Val.Of(2) });
     L_0071:

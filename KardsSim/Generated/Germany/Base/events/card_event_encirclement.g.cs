@@ -51,7 +51,7 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
     L_00D0:
         if (!(GetLocal(L, "CallFunc_LessEqual_IntInt_ReturnValue")).AsBool()) goto L_01DD;
     L_00DE:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "location"), Val.Of(7), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_0112:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_0131:
@@ -136,7 +136,7 @@ public static Val ExecuteUbergraph_card_event_encirclement(IHost H, Val self, Va
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "side"), Val.True, H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "name"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.True, Val.Of(-1), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "salvageFaction"), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "side"), Val.True, H.GetMember(H.GetVar("K2Node_Event_targetCard"), "name"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.True, Val.Of(-1), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "salvageFaction"), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
     L_00AF:
         _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_SpawnCardonBattlefield_spawnedCardID"), H.GetMember(self, "cardID") });
     L_00E5:

@@ -38,15 +38,15 @@ public static Val ExecuteUbergraph_card_unit_hotchkiss_35(IHost H, Val self, Val
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_0169;
     L_002B:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0054:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_0090:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool());
     L_00B6:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_0169;
     L_00C4:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "faction"), Val.Of(6), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "faction"), Val.Of(6), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_00F8:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(1)) != 0);
     L_0117:

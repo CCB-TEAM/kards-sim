@@ -175,7 +175,7 @@ public static Val ExecuteUbergraph_card_event_yamato(IHost H, Val self, Val[] ar
     L_04EF:
         goto L_048F;
     L_04F4:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "K2Node_Event_cardDestroyed"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_0533:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt")).AsBool())
         {
@@ -188,11 +188,11 @@ public static Val ExecuteUbergraph_card_event_yamato(IHost H, Val self, Val[] ar
             }
         }
     L_053D:
-        _ = H.Call("GetOppositeSide", new Val[] { GetLocal(L, "K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_0566:
         _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide") });
     L_05A5:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetLocationCardBySide_card"), Val.Of(2), H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetLocationCardBySide_card"), Val.Of(2), H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_0602:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

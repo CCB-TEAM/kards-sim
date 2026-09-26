@@ -178,7 +178,7 @@ public static Val ExecuteUbergraph_card_unit_67th_baranovichi(IHost H, Val self,
             }
         }
     L_03A2:
-        H.SetMember(self, "TempCard", GetLocal(L, "K2Node_Event_cardPlayed_1"));
+        H.SetMember(self, "TempCard", H.GetVar("K2Node_Event_cardPlayed_1"));
     L_03B5:
         _ = H.Call("GiveAlpineToLightInfantry", new Val[] { self });
     L_03C3:
@@ -205,7 +205,7 @@ public static Val ExecuteUbergraph_card_unit_67th_baranovichi(IHost H, Val self,
             }
         }
     L_03E1:
-        H.SetMember(self, "TempCard", GetLocal(L, "K2Node_Event_cardLeaving"));
+        H.SetMember(self, "TempCard", H.GetVar("K2Node_Event_cardLeaving"));
     L_03F4:
         _ = H.Call("isBuffedByCard", new Val[] { H.GetMember(self, "TempCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
     L_0426:
@@ -232,7 +232,7 @@ public static Val ExecuteUbergraph_card_unit_67th_baranovichi(IHost H, Val self,
             default: goto __halt;
         }
     L_0487:
-        H.SetMember(self, "TempCardID", GetLocal(L, "K2Node_Event_spawnedCardID"));
+        H.SetMember(self, "TempCardID", H.GetVar("K2Node_Event_spawnedCardID"));
     L_04A2:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_4"] = __v) });
     L_04B5:
@@ -263,7 +263,7 @@ public static Val ExecuteUbergraph_card_unit_67th_baranovichi(IHost H, Val self,
             default: goto __halt;
         }
     L_0517:
-        H.SetMember(self, "TempCardID", GetLocal(L, "K2Node_Event_drawnCardID"));
+        H.SetMember(self, "TempCardID", H.GetVar("K2Node_Event_drawnCardID"));
     L_0532:
         goto L_04A2;
     L_0537:
@@ -281,7 +281,7 @@ public static Val ExecuteUbergraph_card_unit_67th_baranovichi(IHost H, Val self,
             }
         }
     L_0554:
-        H.SetMember(self, "TempCard", GetLocal(L, "K2Node_Event_cardReset"));
+        H.SetMember(self, "TempCard", H.GetVar("K2Node_Event_cardReset"));
     L_0567:
         goto L_0508;
     L_056C:
@@ -299,7 +299,7 @@ public static Val ExecuteUbergraph_card_unit_67th_baranovichi(IHost H, Val self,
             }
         }
     L_0589:
-        H.SetMember(self, "TempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "TempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_059C:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetMember(self, "TempCard"), "side"), H.GetMember(self, "side")) == 0);
     L_05D8:

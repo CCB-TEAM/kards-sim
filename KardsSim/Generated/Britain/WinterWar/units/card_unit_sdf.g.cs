@@ -446,7 +446,7 @@ public static Val ExecuteUbergraph_card_unit_sdf(IHost H, Val self, Val[] args)
             }
         }
     L_0609:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardPlayed_1"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardPlayed_1"));
     L_061C:
         goto L_050F;
     L_0621:
@@ -488,7 +488,7 @@ public static Val ExecuteUbergraph_card_unit_sdf(IHost H, Val self, Val[] args)
             }
         }
     L_06A9:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardLeaving"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardLeaving"));
     L_06BC:
         goto L_050F;
     L_06C1:
@@ -507,7 +507,7 @@ public static Val ExecuteUbergraph_card_unit_sdf(IHost H, Val self, Val[] args)
             }
         }
     L_06DE:
-        L["CallFunc_NotEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(self, GetLocal(L, "K2Node_Event_cardPlayed")) != 0);
+        L["CallFunc_NotEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(self, H.GetVar("K2Node_Event_cardPlayed")) != 0);
     L_06FC:
         if (!(GetLocal(L, "CallFunc_NotEqual_ObjectObject_ReturnValue")).AsBool())
         {
@@ -522,7 +522,7 @@ public static Val ExecuteUbergraph_card_unit_sdf(IHost H, Val self, Val[] args)
             }
         }
     L_0706:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardPlayed"));
     L_0719:
         goto L_050F;
     L_071E:

@@ -202,7 +202,7 @@ public static Val ExecuteUbergraph_card_unit_kv_1s(IHost H, Val self, Val[] args
     L_0604:
         goto L_000F;
     L_0609:
-        _ = H.Call("IsOrder", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed_1"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
+        _ = H.Call("IsOrder", new Val[] { H.GetVar("K2Node_Event_cardPlayed_1"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
     L_0632:
         if (!(GetLocal(L, "CallFunc_IsOrder_isIt")).AsBool())
         {
@@ -220,7 +220,7 @@ public static Val ExecuteUbergraph_card_unit_kv_1s(IHost H, Val self, Val[] args
     L_0641:
         goto L_000F;
     L_0646:
-        _ = H.Call("isBuffedByCard", new Val[] { GetLocal(L, "K2Node_Event_cardLeaving"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
+        _ = H.Call("isBuffedByCard", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
     L_0678:
         if (!(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed")).AsBool())
         {
@@ -234,7 +234,7 @@ public static Val ExecuteUbergraph_card_unit_kv_1s(IHost H, Val self, Val[] args
             }
         }
     L_0682:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_cardLeaving"), H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardLeaving"), H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_06C9:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

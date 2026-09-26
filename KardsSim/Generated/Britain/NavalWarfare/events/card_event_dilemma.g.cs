@@ -94,7 +94,7 @@ public static Val ExecuteUbergraph_card_event_dilemma(IHost H, Val self, Val[] a
             default: goto __halt;
         }
     L_000A:
-        H.SetMember(self, "Target Card", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "Target Card", H.GetVar("K2Node_Event_targetCard"));
     L_001D:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "Target Card") });
     L_003A:

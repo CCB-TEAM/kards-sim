@@ -57,7 +57,7 @@ public static Val ExecuteUbergraph_card_location_cherbourg_unlock3(IHost H, Val 
             }
         }
     L_0035:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(2)) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(2)) == 0);
     L_0057:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_0159;
     L_0065:
@@ -298,7 +298,7 @@ public static Val ExecuteUbergraph_card_location_cherbourg_unlock3(IHost H, Val 
     L_0AB4:
         goto L_042A;
     L_0AB9:
-        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "name"), Val.Name("card_unit_m16_halftrack")) == 0);
+        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "name"), Val.Name("card_unit_m16_halftrack")) == 0);
     L_0AF9:
         if (!(GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue")).AsBool())
         {
@@ -315,7 +315,7 @@ public static Val ExecuteUbergraph_card_location_cherbourg_unlock3(IHost H, Val 
     L_0B03:
         L["Temp_text_Variable_4"] = Val.Of("When units <bold>Retreat</>, they move backwards. From the frontline units  <bold>Retreat</> to the support line and from the support line, they  <bold>Retreat</> to hand.");
     L_0BE8:
-        _ = H.Call("ShowTutorialMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable_4"] = __v), Val.Of("retreat"), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID"), Val.Of(1f), Val.Out(__v => L["CallFunc_ShowTutorialMessage_qqq"] = __v) });
+        _ = H.Call("ShowTutorialMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable_4"] = __v), Val.Of("retreat"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), Val.Of(1f), Val.Out(__v => L["CallFunc_ShowTutorialMessage_qqq"] = __v) });
     L_0C4B:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -357,11 +357,11 @@ public static Val ExecuteUbergraph_card_location_cherbourg_unlock3(IHost H, Val 
     L_0CB9:
         L["Temp_text_Variable"] = Val.Of("The enemy just hit you with a <bold>Countermeasure</>. <bold>Countermeasures</> that are activated on your turn are hidden from the enemy. They are then automatically played from your hand on the next enemy turn if the conditions described on the card are met.");
     L_0DF7:
-        _ = H.Call("ShowTutorialMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.Of("counter"), H.GetMember(GetLocal(L, "K2Node_Event_killer"), "cardID"), Val.Of(2f), Val.Out(__v => L["CallFunc_ShowTutorialMessage_qqq_1"] = __v) });
+        _ = H.Call("ShowTutorialMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.Of("counter"), H.GetMember(H.GetVar("K2Node_Event_killer"), "cardID"), Val.Of(2f), Val.Out(__v => L["CallFunc_ShowTutorialMessage_qqq_1"] = __v) });
     L_0E5A:
         goto L_0C4C;
     L_0E5F:
-        if (!(GetLocal(L, "K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_0E6E;
+        if (!(H.GetVar("K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_0E6E;
     L_0E6D:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -373,7 +373,7 @@ public static Val ExecuteUbergraph_card_location_cherbourg_unlock3(IHost H, Val 
             default: goto __halt;
         }
     L_0E6E:
-        L["CallFunc_EqualEqual_NameName_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_killer"), "name"), Val.Name("card_event_careless_talk")) == 0);
+        L["CallFunc_EqualEqual_NameName_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_killer"), "name"), Val.Name("card_event_careless_talk")) == 0);
     L_0EAE:
         if (!(GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue_1")).AsBool())
         {

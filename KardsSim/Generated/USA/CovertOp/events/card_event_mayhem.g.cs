@@ -285,7 +285,7 @@ public static Val ExecuteUbergraph_card_event_mayhem(IHost H, Val self, Val[] ar
     L_00FB:
         _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_JSON_GetInt_value"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0131:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card_1"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card_1"] = __v) });
     L_0167:
         _ = H.Call("PlayCardDirectlyFromHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetCardFromID_card_1"), GetLocal(L, "CallFunc_JSON_GetBool_value"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_PlayCardDirectlyFromHand_qqq"] = __v), H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "locationNumber") });
     L_01CE:
@@ -303,9 +303,9 @@ public static Val ExecuteUbergraph_card_event_mayhem(IHost H, Val self, Val[] ar
     L_0248:
         _ = H.Call("selectTargetFromHand", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_selectTargetFromHand_qqq"] = __v) });
     L_027E:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("targetedUnit"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("targetedUnit"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_02D9:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "location"), Val.Of(7), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_targetCard"), "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_030D:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_032C:

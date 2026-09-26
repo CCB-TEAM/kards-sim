@@ -119,7 +119,7 @@ public static Val ExecuteUbergraph_card_unit_79th_infantry_regiment(IHost H, Val
     L_02FF:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0312:
-        _ = H.Call("getHasGameplayTag", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), H.MakeArray(new Val[] { Val.Name("subtype.sunny") }), Val.Out(__v => L["CallFunc_getHasGameplayTag_hasTag"] = __v) });
+        _ = H.Call("getHasGameplayTag", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), H.MakeArray(new Val[] { Val.Name("subtype.sunny") }), Val.Out(__v => L["CallFunc_getHasGameplayTag_hasTag"] = __v) });
     L_0356:
         _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
     L_0372:

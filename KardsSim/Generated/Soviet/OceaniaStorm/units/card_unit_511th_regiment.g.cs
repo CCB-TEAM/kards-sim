@@ -160,7 +160,7 @@ public static Val ExecuteUbergraph_card_unit_511th_regiment(IHost H, Val self, V
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("checkAndUpdateBuffOnCard", new Val[] { self, GetLocal(L, "K2Node_Event_cardGainingDefense") });
+        _ = H.Call("checkAndUpdateBuffOnCard", new Val[] { self, H.GetVar("K2Node_Event_cardGainingDefense") });
     L_0021:
         goto L_021C;
     L_0026:
@@ -170,7 +170,7 @@ public static Val ExecuteUbergraph_card_unit_511th_regiment(IHost H, Val self, V
     L_003A:
         goto L_0026;
     L_003F:
-        _ = H.Call("checkAndUpdateBuffOnCard", new Val[] { self, GetLocal(L, "K2Node_Event_cardRepaired") });
+        _ = H.Call("checkAndUpdateBuffOnCard", new Val[] { self, H.GetVar("K2Node_Event_cardRepaired") });
     L_0056:
         goto L_021C;
     L_005B:
@@ -180,25 +180,25 @@ public static Val ExecuteUbergraph_card_unit_511th_regiment(IHost H, Val self, V
     L_0074:
         L["CallFunc_Not_PreBool_ReturnValue"] = H.Call("Not_PreBool", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_IsVeteran_isIt") });
     L_0091:
-        L["CallFunc_EqualEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(self, GetLocal(L, "K2Node_Event_toCard")) == 0);
+        L["CallFunc_EqualEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(self, H.GetVar("K2Node_Event_toCard")) == 0);
     L_00AF:
         L["CallFunc_BooleanAND_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_Not_PreBool_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ObjectObject_ReturnValue")).AsBool());
     L_00D5:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_1")).AsBool()) goto L_017D;
     L_00E3:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_damage"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_damage"), Val.Of(0)) > 0);
     L_0105:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_021C;
     L_0113:
-        _ = H.Call("HasCustomAbility", new Val[] { GetLocal(L, "K2Node_Event_cardDealingDamage"), Val.Of("lethal"), Val.Out(__v => L["CallFunc_HasCustomAbility_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbility", new Val[] { H.GetVar("K2Node_Event_cardDealingDamage"), Val.Of("lethal"), Val.Out(__v => L["CallFunc_HasCustomAbility_doesIt"] = __v) });
     L_0144:
-        L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "K2Node_Event_isCombatDamage")).AsBool() && (GetLocal(L, "CallFunc_HasCustomAbility_doesIt")).AsBool());
+        L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((H.GetVar("K2Node_Event_isCombatDamage")).AsBool() && (GetLocal(L, "CallFunc_HasCustomAbility_doesIt")).AsBool());
     L_016A:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_0199;
     L_0178:
         goto L_021C;
     L_017D:
-        _ = H.Call("checkAndUpdateBuffOnCard", new Val[] { self, GetLocal(L, "K2Node_Event_toCard") });
+        _ = H.Call("checkAndUpdateBuffOnCard", new Val[] { self, H.GetVar("K2Node_Event_toCard") });
     L_0194:
         goto L_021C;
     L_0199:
@@ -206,7 +206,7 @@ public static Val ExecuteUbergraph_card_unit_511th_regiment(IHost H, Val self, V
     L_01C7:
         goto L_021C;
     L_01CC:
-        _ = H.Call("checkAndUpdateBuffOnCard", new Val[] { self, GetLocal(L, "K2Node_Event_cardDefenseSet") });
+        _ = H.Call("checkAndUpdateBuffOnCard", new Val[] { self, H.GetVar("K2Node_Event_cardDefenseSet") });
     L_01E3:
         goto L_021C;
     L_01E8:
@@ -218,7 +218,7 @@ public static Val ExecuteUbergraph_card_unit_511th_regiment(IHost H, Val self, V
     L_0200:
         goto L_01E8;
     L_0205:
-        _ = H.Call("checkAndUpdateBuffOnCard", new Val[] { self, GetLocal(L, "K2Node_Event_cardPlayed") });
+        _ = H.Call("checkAndUpdateBuffOnCard", new Val[] { self, H.GetVar("K2Node_Event_cardPlayed") });
     L_021C:
         goto __halt;
     L_021E:

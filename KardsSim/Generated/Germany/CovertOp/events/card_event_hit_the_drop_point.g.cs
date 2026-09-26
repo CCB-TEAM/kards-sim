@@ -129,7 +129,7 @@ public static Val ExecuteUbergraph_card_event_hit_the_drop_point(IHost H, Val se
             default: goto __halt;
         }
     L_000A:
-        H.SetMember(self, "cardBeingPlayed", GetLocal(L, "K2Node_Event_cardPlayed_1"));
+        H.SetMember(self, "cardBeingPlayed", H.GetVar("K2Node_Event_cardPlayed_1"));
     L_001D:
         _ = H.Call("ShouldGotchaTrigger", new Val[] { self, H.GetMember(self, "cardBeingPlayed"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
     L_0039:
@@ -159,7 +159,7 @@ public static Val ExecuteUbergraph_card_event_hit_the_drop_point(IHost H, Val se
     L_0219:
         goto L_0236;
     L_021E:
-        H.SetMember(self, "cardBeingPlayed", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "cardBeingPlayed", H.GetVar("K2Node_Event_cardPlayed"));
     L_0231:
         goto L_001D;
     L_0236:

@@ -289,7 +289,7 @@ public static Val ExecuteUbergraph_card_unit_48e_regiment_cam1(IHost H, Val self
     L_04A8:
         goto L_0412;
     L_04AD:
-        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
     L_04F9:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

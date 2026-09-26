@@ -36,7 +36,7 @@ public static Val ExecuteUbergraph_card_unit_676th_regiment(IHost H, Val self, V
     L_000A:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_001D:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_damage"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_damage"), Val.Of(0)) > 0);
     L_003F:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_0065:

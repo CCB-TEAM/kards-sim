@@ -56,7 +56,7 @@ public static Val ExecuteUbergraph_card_unit_60th_cavalry_regiment(IHost H, Val 
             }
         }
     L_002C:
-        _ = H.Call("IsOrder", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
+        _ = H.Call("IsOrder", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
     L_0055:
         if (!(GetLocal(L, "CallFunc_IsOrder_isIt")).AsBool())
         {
@@ -70,7 +70,7 @@ public static Val ExecuteUbergraph_card_unit_60th_cavalry_regiment(IHost H, Val 
             }
         }
     L_005F:
-        H.SetMember(self, "sideToRestrict", H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"));
+        H.SetMember(self, "sideToRestrict", H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"));
     L_0090:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(H.GetMember(self, "sideToRestrict"), Val.Of(1)) != 0);
     L_00AF:

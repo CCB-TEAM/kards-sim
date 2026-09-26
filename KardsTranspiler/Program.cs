@@ -145,6 +145,8 @@ public static class Program
         var arityMismatch = new HashSet<string>(StringComparer.Ordinal);
         /** 资产名 → 该资产里有字节码的函数名（用于生成全局索引） */
         var assetFns = new Dictionary<string, List<string>>(StringComparer.Ordinal);
+        /** 事件名 → 有序形参名列表（用于让 CardDispatch 按签名传载荷） */
+        var eventParams = new Dictionary<string, List<string>>(StringComparer.Ordinal);
         var assetCount = 0; var failAssets = 0;
 
         foreach (var f in files)
@@ -154,7 +156,7 @@ public static class Program
             {
                 var asset = new UAsset(f, EngineVersion.VER_UE5_6, usmap, CustomSerializationFlags.None);
                 var funcNames = new List<string>();
-                var code = TranspileAsset(asset, stem, uht, bpSig, ref totalFn, ref okFn, ref emptyFn, allUnsupported, unknownArity, arityMismatch, funcNames);
+                var code = TranspileAsset(asset, stem, uht, bpSig, ref totalFn, ref okFn, ref emptyFn, allUnsupported, unknownArity, arityMismatch, funcNames, eventParams);
                 if (code is null) continue;
                 // 输出子目录沿用资产在输入树里的相对路径，保持阵营/系列的分层结构。
                 // 依赖资产（--sigdeps）不在 input 树下，相对路径会算出 "..\sig_src\..."
@@ -212,6 +214,30 @@ public static class Program
         idx.AppendLine("    /// <summary>取某资产里的某函数；找不到返回 null（绝不静默当成空操作）。</summary>");
         idx.AppendLine("    public static Func<IHost, Val, Val[], Val> Find(string asset, string fn)");
         idx.AppendLine("        => Assets.TryGetValue(asset, out var m) && m.TryGetValue(fn, out var f) ? f : null;");
+        idx.AppendLine();
+        idx.AppendLine("    /// <summary>");
+        idx.AppendLine("    /// 事件名 → 有序形参名表（不含返回值）。");
+        idx.AppendLine("    ///");
+        idx.AppendLine("    /// <para>");
+        idx.AppendLine("    /// CardDispatch 靠它按<b>名字</b>填载荷，而不是固定传两个参数。");
+        idx.AppendLine("    /// 固定传参会让第 3 个参数起恒为 Nothing，而直译产物里");
+        idx.AppendLine("    /// <c>if (!xxx) return;</c> 这类前置守卫会因此短路，效果静默消失 ——");
+        idx.AppendLine("    /// 不报错、不进 Unhandled，自对弈的「未实现调用 0%」也看不出来。");
+        idx.AppendLine("    /// </para>");
+        idx.AppendLine("    /// </summary>");
+        idx.AppendLine("    public static readonly Dictionary<string, string[]> EventParams");
+        idx.AppendLine("        = new(StringComparer.Ordinal)");
+        idx.AppendLine("    {");
+        foreach (var kv in eventParams.OrderBy(x => x.Key, StringComparer.Ordinal))
+        {
+            var names = string.Join(", ", kv.Value.Select(v => $"\"{v}\""));
+            idx.AppendLine($"        [\"{kv.Key}\"] = new[] {{ {names} }},");
+        }
+        idx.AppendLine("    };");
+        idx.AppendLine();
+        idx.AppendLine("    /// <summary>某个事件名对应的形参名列表；未知事件返回空。</summary>");
+        idx.AppendLine("    public static string[] ParamsOf(string fn)");
+        idx.AppendLine("        => EventParams.TryGetValue(fn, out var p) ? p : Array.Empty<string>();");
         idx.AppendLine("}");
         File.WriteAllText(Path.Combine(outDir, "_index.g.cs"), idx.ToString());
         Console.WriteLine($"全局索引 -> {Path.Combine(outDir, "_index.g.cs")}（{assetFns.Count} 个资产）");
@@ -243,9 +269,82 @@ public static class Program
         return s;
     }
 
+    /// <summary>
+    /// 取一个函数的有序形参名（跳过返回值）。
+    ///
+    /// <para>
+    /// 这是事件载荷能不能正确传递的关键：<c>CardDispatch</c> 以前固定传
+    /// <c>{self, 相关卡}</c>，于是第 3 个参数起永远是 <c>Nothing</c>，
+    /// 而直译产物里大量 <c>if (!xxx) return;</c> 前置守卫会因此短路，
+    /// 效果静默消失。<see cref="Emitter.EmitParamBindings"/> 用的是同一份
+    /// <c>LoadedProperties</c>，两边必须一致。
+    /// </para>
+    /// </summary>
+    private static List<string> ParamNames(FunctionExport fn)
+    {
+        var res = new List<string>();
+        if (fn.LoadedProperties is null) return res;
+        foreach (var p in fn.LoadedProperties)
+        {
+            var flags = p.PropertyFlags;
+            if (!flags.HasFlag(EPropertyFlags.CPF_Parm)) continue;
+            if (flags.HasFlag(EPropertyFlags.CPF_ReturnParm)) continue;
+            res.Add(p.Name.ToString());
+        }
+        return res;
+    }
+
+    /// <summary>
+    /// 扫出本资产所有「持久帧」槽位名（<c>EX_LetValueOnPersistentFrame</c> 的写入目标）。
+    ///
+    /// <para>
+    /// 这些名字是跨函数共享的存储：事件桩写、ubergraph 读。
+    /// 读取侧必须发射成 <c>H.GetVar</c> 才能拿到值 ——
+    /// 否则读的是函数局部字典，恒为空，带参事件的效果会静默走空分支。
+    /// </para>
+    /// </summary>
+    private static HashSet<string> CollectPersistentFrameSlots(IEnumerable<FunctionExport> fns)
+    {
+        var slots = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var fn in fns)
+        {
+            if (fn.ScriptBytecode is null) continue;
+            foreach (var e in fn.ScriptBytecode) WalkPersistent(e, slots);
+        }
+        return slots;
+    }
+
+    private static void WalkPersistent(KismetExpression e, HashSet<string> slots)
+    {
+        if (e is null) return;
+        if (e is EX_LetValueOnPersistentFrame lv)
+        {
+            var name = PropName(lv.DestinationProperty);
+            if (!string.IsNullOrEmpty(name)) slots.Add(name);
+        }
+        // 与 FindUberCall 用同一套反射遍历：AST 各节点的子表达式字段类型不统一，
+        // 没有统一的 children API。
+        foreach (var f in e.GetType().GetFields())
+        {
+            if (f.FieldType == typeof(KismetExpression) && f.GetValue(e) is KismetExpression sub)
+                WalkPersistent(sub, slots);
+            else if (f.FieldType == typeof(KismetExpression[]) && f.GetValue(e) is KismetExpression[] arr)
+                foreach (var x in arr) WalkPersistent(x, slots);
+        }
+    }
+
+    /// <summary>把 KismetPropertyPointer 取成名字，与 Emitter.PropPath 保持同一套解析。</summary>
+    private static string PropName(KismetPropertyPointer kp)
+    {
+        if (kp is null) return null;
+        if (kp.New?.Path is { Length: > 0 } path)
+            return string.Join(".", path.Select(p => p.ToString()));
+        return null;
+    }
+
     private static string TranspileAsset(UAsset asset, string stem, UhtParams uht, BlueprintSignatures bpSig,
         ref int totalFn, ref int okFn, ref int emptyFn, List<string> unsupported, HashSet<string> unknownArity, HashSet<string> arityMismatch,
-        List<string> funcNames)
+        List<string> funcNames, Dictionary<string, List<string>> eventParams)
     {
         var funcs = asset.Exports.OfType<FunctionExport>().ToList();
         var withCode = funcs.Where(f => f.ScriptBytecode is { Length: > 0 }).ToList();
@@ -264,6 +363,11 @@ public static class Program
                 var n = FindUberCall(fn, uberIdx);
                 if (n is not null) calls.Add((n.Value, fn.ObjectName.ToString()));
             }
+
+        // 持久帧槽位必须**先全资产扫一遍再发射**：写入侧在事件桩、读取侧在
+        // ubergraph，是同一个资产里的不同函数。逐函数发射时看不到写入，
+        // 就会把读取发射成普通局部变量 —— 而那是另一块存储，恒为空。
+        var persistentSlots = CollectPersistentFrameSlots(withCode);
 
         var sb = new StringBuilder();
         sb.AppendLine("// <auto-generated>");
@@ -292,7 +396,7 @@ public static class Program
         foreach (var fn in withCode)
         {
             var name = fn.ObjectName.ToString();
-            var em = new Emitter(asset, name, uht, bpSig);
+            var em = new Emitter(asset, name, uht, bpSig, persistentSlots);
             string body;
             try
             {
@@ -321,6 +425,13 @@ public static class Program
         foreach (var fn in withCode)
         {
             var name = fn.ObjectName.ToString();
+            // 事件形参表：同名事件在所有卡里签名一致（都由同一个 ERegisteredCardFunction 定义），
+            // 取第一个见到的即可。CardDispatch 靠它知道「第 3 个参数是 destroyedInCombat」。
+            if (!eventParams.ContainsKey(name))
+            {
+                var ps = ParamNames(fn);
+                if (ps.Count > 0) eventParams[name] = ps;
+            }
             sb.AppendLine($"        [\"{name}\"] = {San(name)},");
         }
         sb.AppendLine("    };");

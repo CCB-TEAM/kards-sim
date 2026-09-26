@@ -58,7 +58,7 @@ public static Val ExecuteUbergraph_card_unit_type_3_chi_nu(IHost H, Val self, Va
     L_017E:
         goto L_01BC;
     L_0183:
-        L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_oldLocation"), GetLocal(L, "K2Node_Event_newLocation")) != 0);
+        L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_oldLocation"), H.GetVar("K2Node_Event_newLocation")) != 0);
     L_01A9:
         if (!(GetLocal(L, "CallFunc_NotEqual_ByteByte_ReturnValue")).AsBool()) goto L_01BC;
     L_01B7:

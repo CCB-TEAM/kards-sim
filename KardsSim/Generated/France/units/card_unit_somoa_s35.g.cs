@@ -174,7 +174,7 @@ public static Val ExecuteUbergraph_card_unit_somoa_s35(IHost H, Val self, Val[] 
     L_0504:
         goto L_04D1;
     L_0509:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_051C:
         if (!(H.GetMember(self, "addedFromHand")).AsBool()) goto L_0536;
     L_052A:
@@ -270,7 +270,7 @@ public static Val ExecuteUbergraph_card_unit_somoa_s35(IHost H, Val self, Val[] 
             default: goto __halt;
         }
     L_0647:
-        L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_method"), Val.Of(2)) != 0);
+        L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_method"), Val.Of(2)) != 0);
     L_0666:
         if (!(GetLocal(L, "K2Node_SwitchEnum_CmpSuccess")).AsBool()) goto L_0675;
     L_0674:

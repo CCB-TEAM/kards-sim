@@ -478,7 +478,7 @@ public static Val ExecuteUbergraph_card_location_cherbourg_usa_base_unlock7(IHos
             }
         }
     L_0F2B:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber_1"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber_1"), Val.Of(0)) > 0);
     L_0F4D:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool())
         {
@@ -516,7 +516,7 @@ public static Val ExecuteUbergraph_card_location_cherbourg_usa_base_unlock7(IHos
     L_0F82:
         goto L_0D52;
     L_0F87:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_drawnSide"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_drawnSide"), H.GetMember(self, "side")) == 0);
     L_0FAD:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool())
         {
@@ -533,7 +533,7 @@ public static Val ExecuteUbergraph_card_location_cherbourg_usa_base_unlock7(IHos
             }
         }
     L_0FB7:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0FED:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "CallFunc_GetCardFromID_card") });
     L_100A:
@@ -552,7 +552,7 @@ public static Val ExecuteUbergraph_card_location_cherbourg_usa_base_unlock7(IHos
             }
         }
     L_1014:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_104A:
         L["CallFunc_EqualEqual_NameName_ReturnValue_3"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "name"), Val.Name("card_event_death_from_above")) == 0);
     L_108A:

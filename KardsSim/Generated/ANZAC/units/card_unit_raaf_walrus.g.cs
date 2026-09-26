@@ -612,7 +612,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_102B:
         goto L_0D45;
     L_1030:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardPlayed_1"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardPlayed_1"));
     L_1043:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_1056:
@@ -683,7 +683,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
             }
         }
     L_110D:
-        _ = H.Call("isBuffedByCard", new Val[] { GetLocal(L, "K2Node_Event_cardLeaving"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
+        _ = H.Call("isBuffedByCard", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
     L_113F:
         if (!(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed")).AsBool())
         {
@@ -702,7 +702,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
             }
         }
     L_1149:
-        _ = H.Call("ChangeOperationCost", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_cardLeaving"), H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.True, Val.False, Val.False });
+        _ = H.Call("ChangeOperationCost", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardLeaving"), H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.True, Val.False, Val.False });
     L_1189:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -718,7 +718,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_118A:
-        L["CallFunc_NotEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_cardPlayed"), self) != 0);
+        L["CallFunc_NotEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_cardPlayed"), self) != 0);
     L_11A8:
         if (!(GetLocal(L, "CallFunc_NotEqual_ObjectObject_ReturnValue")).AsBool())
         {
@@ -737,7 +737,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
             }
         }
     L_11B2:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardPlayed"));
     L_11C5:
         goto L_1043;
     L_11CA:
@@ -769,7 +769,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_129B:
         goto L_1268;
     L_12A0:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardMoved_1"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardMoved_1"));
     L_12B3:
         _ = H.Call("isBuffedByCard", new Val[] { H.GetMember(self, "_tmp_card"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed_3"] = __v) });
     L_12E5:
@@ -812,7 +812,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_1351:
         goto L_0F6E;
     L_1356:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardMoved"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardMoved"));
     L_1369:
         _ = H.Call("isBuffedByCard", new Val[] { H.GetMember(self, "_tmp_card"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed_2"] = __v) });
     L_139B:
@@ -861,7 +861,7 @@ public static Val ExecuteUbergraph_card_unit_raaf_walrus(IHost H, Val self, Val[
     L_1416:
         L["CallFunc_Add_IntInt_ReturnValue_7"] = (H.GetMember(self, "enterPlayOnTurn") + Val.Of(2));
     L_1440:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_7"), GetLocal(L, "K2Node_Event_turnnumber")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_7"), H.GetVar("K2Node_Event_turnnumber")) == 0);
     L_1466:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "enterPlayOnTurn"), Val.Of(0)) > 0);
     L_1488:

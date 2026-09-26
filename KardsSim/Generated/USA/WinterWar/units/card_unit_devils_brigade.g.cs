@@ -96,23 +96,23 @@ public static Val ExecuteUbergraph_card_unit_devils_brigade(IHost H, Val self, V
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0027:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_014E;
     L_0035:
-        _ = H.Call("HasCustomAbility", new Val[] { GetLocal(L, "K2Node_Event_targetCard"), Val.Of("alpine"), Val.Out(__v => L["CallFunc_HasCustomAbility_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbility", new Val[] { H.GetVar("K2Node_Event_targetCard"), Val.Of("alpine"), Val.Out(__v => L["CallFunc_HasCustomAbility_doesIt"] = __v) });
     L_0066:
-        L["CallFunc_BooleanOR_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_HasCustomAbility_doesIt")).AsBool() || (H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "hasAlpine")).AsBool());
+        L["CallFunc_BooleanOR_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_HasCustomAbility_doesIt")).AsBool() || (H.GetMember(H.GetVar("K2Node_Event_targetCard"), "hasAlpine")).AsBool());
     L_00A2:
         if (!(GetLocal(L, "CallFunc_BooleanOR_ReturnValue")).AsBool()) goto L_00E3;
     L_00B0:
-        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), self });
+        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), self });
     L_00DE:
         goto L_014E;
     L_00E3:
-        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
+        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_0103:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_014E:
         goto __halt;
     L_0150:

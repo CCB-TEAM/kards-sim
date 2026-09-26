@@ -324,7 +324,7 @@ public static Val ExecuteUbergraph_card_unit_henschel_hs_126(IHost H, Val self, 
     L_0640:
         goto L_019E;
     L_0645:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_0658:
         goto L_0559;
     L_065D:

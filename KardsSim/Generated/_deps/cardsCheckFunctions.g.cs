@@ -1121,7 +1121,7 @@ public static Val CanSelectAsTarget(IHost H, Val self, Val[] args)
     L_0324:
         _ = H.Call("GetLogic", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetLogic_Logic"] = __v) });
     L_035A:
-        _ = H.Call("getKreditBySide", new Val[] { H.GetMember(GetLocal(L, "CallFunc_GetLogic_Logic"), "GameStateRef"), H.GetMember(GetLocal(L, "Targeting"), "side"), GetLocal(L, "CallFunc_getKreditBySide_outputKredit") });
+        _ = H.Call("getKreditBySide", new Val[] { H.GetMember(GetLocal(L, "CallFunc_GetLogic_Logic"), "GameStateRef"), H.GetMember(GetLocal(L, "Targeting"), "side"), Val.Out(__v => L["CallFunc_getKreditBySide_outputKredit"] = __v) });
     L_03B8:
         _ = H.Call("getTotalOperationCost", new Val[] { GetLocal(L, "Targeting"), Val.Out(__v => L["CallFunc_getTotalOperationCost_totalOperationCost"] = __v) });
     L_03E1:

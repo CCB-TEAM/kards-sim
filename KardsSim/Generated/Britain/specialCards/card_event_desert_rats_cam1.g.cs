@@ -324,11 +324,11 @@ public static Val ExecuteUbergraph_card_event_desert_rats_cam1(IHost H, Val self
     L_085F:
         goto L_082C;
     L_0864:
-        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
     L_08B0:
-        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
+        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_08D0:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_091B:
         _ = H.Call("HasCampaignUpgrade", new Val[] { self, Val.Of(5), Val.Out(__v => L["CallFunc_HasCampaignUpgrade_doesIt_2"] = __v) });
     L_0933:

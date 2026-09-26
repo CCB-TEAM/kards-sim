@@ -130,13 +130,13 @@ public static Val ExecuteUbergraph_card_event_final_push(IHost H, Val self, Val[
     L_026E:
         goto L_03A8;
     L_0273:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_0286:
         goto L_0179;
     L_028B:
         _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("target"), Val.Out(__v => L["CallFunc_JSON_GetInt_value_1"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found_1"] = __v) });
     L_02CA:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value_1"), H.GetMember(GetLocal(L, "K2Node_Event_cardLeaving"), "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value_1"), H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "cardID")) == 0);
     L_0306:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_JSON_GetInt_found_1")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool());
     L_032C:

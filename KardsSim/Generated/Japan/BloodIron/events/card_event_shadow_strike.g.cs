@@ -107,7 +107,7 @@ public static Val ExecuteUbergraph_card_event_shadow_strike(IHost H, Val self, V
     L_00CA:
         _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_JSON_GetInt_value"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0100:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "location"), Val.Of(7), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_0134:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_0153:
@@ -147,9 +147,9 @@ public static Val ExecuteUbergraph_card_event_shadow_strike(IHost H, Val self, V
     L_0378:
         goto L_0432;
     L_037D:
-        _ = H.Call("GiveShock", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveShock_qqq"] = __v) });
+        _ = H.Call("GiveShock", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveShock_qqq"] = __v) });
     L_03D2:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affectedCard"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affectedCard"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_042D:
         goto L_034A;
     L_0432:

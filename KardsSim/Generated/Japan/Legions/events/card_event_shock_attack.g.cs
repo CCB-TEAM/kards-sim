@@ -66,7 +66,7 @@ public static Val ExecuteUbergraph_card_event_shock_attack(IHost H, Val self, Va
     L_024B:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_0271;
     L_0259:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_card"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_card"));
     L_026C:
         goto L_000A;
     L_0271:

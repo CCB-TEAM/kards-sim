@@ -119,7 +119,7 @@ public static Val ExecuteUbergraph_card_event_campaign_alamein1_through_the_wire
             }
         }
     L_0089:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(H.GetMember(self, "tempCard"), "faction"), Val.Of(7), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(H.GetMember(self, "tempCard"), "faction"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_00BD:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_00DC:
@@ -176,7 +176,7 @@ public static Val ExecuteUbergraph_card_event_campaign_alamein1_through_the_wire
     L_027D:
         goto L_024A;
     L_0282:
-        _ = H.Call("RemoveGuard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), Val.Of(0), Val.False, Val.False });
+        _ = H.Call("RemoveGuard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), Val.Of(0), Val.False, Val.False });
     L_02CC:
         _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
     L_0304:

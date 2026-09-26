@@ -102,7 +102,7 @@ public static Val ExecuteUbergraph_card_unit_2nd_infantry_regiment(IHost H, Val 
     L_0014:
         L["CallFunc_GetCombatKeywords_keywords"] = H.MakeArray(new Val[] {  });
     L_001F:
-        _ = H.Call("GetCombatKeywords", new Val[] { GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetCombatKeywords_keywords"] = __v), Val.Out(__v => L["CallFunc_GetCombatKeywords_numberOfKeywords"] = __v) });
+        _ = H.Call("GetCombatKeywords", new Val[] { H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetCombatKeywords_keywords"] = __v), Val.Out(__v => L["CallFunc_GetCombatKeywords_numberOfKeywords"] = __v) });
     L_0051:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCombatKeywords_keywords"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_008C:
@@ -148,7 +148,7 @@ public static Val ExecuteUbergraph_card_unit_2nd_infantry_regiment(IHost H, Val 
     L_020D:
         L["CallFunc_GetCombatKeywords_keywords"] = H.MakeArray(new Val[] {  });
     L_0218:
-        _ = H.Call("GetCombatKeywords", new Val[] { GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetCombatKeywords_keywords"] = __v), Val.Out(__v => L["CallFunc_GetCombatKeywords_numberOfKeywords"] = __v) });
+        _ = H.Call("GetCombatKeywords", new Val[] { H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetCombatKeywords_keywords"] = __v), Val.Out(__v => L["CallFunc_GetCombatKeywords_numberOfKeywords"] = __v) });
     L_024A:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCombatKeywords_keywords") });
     L_0285:
@@ -243,7 +243,7 @@ public static Val ExecuteUbergraph_card_unit_2nd_infantry_regiment(IHost H, Val 
             default: goto __halt;
         }
     L_0475:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(self, "location"), Val.Of(7), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(self, "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_0493:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(1)) != 0);
     L_04B2:

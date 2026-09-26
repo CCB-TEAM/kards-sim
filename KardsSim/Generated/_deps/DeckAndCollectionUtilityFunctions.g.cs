@@ -138,17 +138,17 @@ public static Val Change_HQCard(IHost H, Val self, Val[] args)
     L_0165:
         L["CallFunc_Map_Values_Values"] = H.MakeArray(new Val[] {  });
     L_0170:
-        _ = H.Call("Map_Values", new Val[] { Val.Ref("BlueprintMapLibrary"), H.GetMember(GetLocal(L, "CallFunc_GetActorOfClass_ReturnValue"), "myCurrentDeck"), GetLocal(L, "CallFunc_Map_Values_Values") });
+        _ = H.Call("Map_Values", new Val[] { Val.Ref("BlueprintMapLibrary"), H.GetMember(GetLocal(L, "CallFunc_GetActorOfClass_ReturnValue"), "myCurrentDeck"), Val.Out(__v => L["CallFunc_Map_Values_Values"] = __v) });
     L_01B8:
         _ = H.Call("GetBPLevelParameters", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetBPLevelParameters_LevelParameters"] = __v) });
     L_01EE:
         _ = H.Call("getCardbackDeckCodeIDMap", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_getCardbackDeckCodeIDMap_cardbackToDeckCodeID"] = __v) });
     L_0224:
-        _ = H.Call("GetDeckCode", new Val[] { GetLocal(L, "CallFunc_GetActorOfClass_ReturnValue"), GetLocal(L, "CallFunc_Map_Values_Values"), H.GetMember(H.GetMember(GetLocal(L, "CallFunc_GetBPLevelParameters_LevelParameters"), "DeckParameters"), "deckHeader_9_832C05614D9D7E1A9A07E2AF18DCF352"), GetLocal(L, "CallFunc_getCardbackDeckCodeIDMap_cardbackToDeckCodeID"), Val.True, GetLocal(L, "CallFunc_GetDeckCode_DeckCode"), GetLocal(L, "CallFunc_GetDeckCode_HQ"), GetLocal(L, "CallFunc_GetDeckCode_CardBack") });
+        _ = H.Call("GetDeckCode", new Val[] { GetLocal(L, "CallFunc_GetActorOfClass_ReturnValue"), GetLocal(L, "CallFunc_Map_Values_Values"), H.GetMember(H.GetMember(GetLocal(L, "CallFunc_GetBPLevelParameters_LevelParameters"), "DeckParameters"), "deckHeader_9_832C05614D9D7E1A9A07E2AF18DCF352"), GetLocal(L, "CallFunc_getCardbackDeckCodeIDMap_cardbackToDeckCodeID"), Val.True, Val.Out(__v => L["CallFunc_GetDeckCode_DeckCode"] = __v), Val.Out(__v => L["CallFunc_GetDeckCode_HQ"] = __v), Val.Out(__v => L["CallFunc_GetDeckCode_CardBack"] = __v) });
     L_029A:
         _ = H.Call("GetLogic", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetLogic_Logic"] = __v) });
     L_02D0:
-        _ = H.Call("GetDecks", new Val[] { GetLocal(L, "CallFunc_GetLogic_Logic"), Val.False, GetLocal(L, "CallFunc_GetDecks_decks") });
+        _ = H.Call("GetDecks", new Val[] { GetLocal(L, "CallFunc_GetLogic_Logic"), Val.False, Val.Out(__v => L["CallFunc_GetDecks_decks"] = __v) });
     L_02FE:
         _ = H.Call("GetBPLevelParameters", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetBPLevelParameters_LevelParameters"] = __v) });
     L_0334:
@@ -438,7 +438,7 @@ public static Val GetHQCard(IHost H, Val self, Val[] args)
     L_002B:
         L["CallFunc_Map_Keys_Keys"] = H.MakeArray(new Val[] {  });
     L_0036:
-        _ = H.Call("Map_Keys", new Val[] { Val.Ref("BlueprintMapLibrary"), H.GetMember(GetLocal(L, "CallFunc_GetActorOfClass_ReturnValue"), "myCurrentDeck"), GetLocal(L, "CallFunc_Map_Keys_Keys") });
+        _ = H.Call("Map_Keys", new Val[] { Val.Ref("BlueprintMapLibrary"), H.GetMember(GetLocal(L, "CallFunc_GetActorOfClass_ReturnValue"), "myCurrentDeck"), Val.Out(__v => L["CallFunc_Map_Keys_Keys"] = __v) });
     L_007E:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_0095:
@@ -611,7 +611,7 @@ public static Val hasImportCodeInClipboard(IHost H, Val self, Val[] args)
     L_0005:
         __ef.Push(635);
     L_000A:
-        _ = H.Call("getStringFromClipboard", new Val[] { self, GetLocal(L, "CallFunc_getStringFromClipboard_clipBoardContent") });
+        _ = H.Call("getStringFromClipboard", new Val[] { self, Val.Out(__v => L["CallFunc_getStringFromClipboard_clipBoardContent"] = __v) });
     L_001D:
         L["clipboardString"] = GetLocal(L, "CallFunc_getStringFromClipboard_clipBoardContent");
     L_0038:
@@ -730,7 +730,7 @@ public static Val IsBrothersInArmsActive(IHost H, Val self, Val[] args)
     L_0153:
         L["CallFunc_DateTimeFromString_ReturnValue"] = H.Call("DateTimeFromString", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetString_Value"), GetLocal(L, "CallFunc_DateTimeFromString_Result") });
     L_0179:
-        _ = H.Call("BreakDateTime", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_DateTimeFromString_Result"), GetLocal(L, "CallFunc_BreakDateTime_Year"), GetLocal(L, "CallFunc_BreakDateTime_Month"), GetLocal(L, "CallFunc_BreakDateTime_Day"), GetLocal(L, "CallFunc_BreakDateTime_Hour"), GetLocal(L, "CallFunc_BreakDateTime_Minute"), GetLocal(L, "CallFunc_BreakDateTime_Second"), GetLocal(L, "CallFunc_BreakDateTime_Millisecond") });
+        _ = H.Call("BreakDateTime", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_DateTimeFromString_Result"), Val.Out(__v => L["CallFunc_BreakDateTime_Year"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Month"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Day"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Hour"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Minute"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Second"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Millisecond"] = __v) });
     L_01CB:
         L["CallFunc_Add_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_BreakDateTime_Day") + Val.Switch(GetLocal(L, "Temp_bool_Variable"), new[] { ValueTuple.Create(Val.False, GetLocal(L, "Temp_int_Variable_1")), ValueTuple.Create(Val.True, GetLocal(L, "Temp_int_Variable")) }, GetLocal(L, "K2Node_Select_Default")));
     L_0225:
@@ -1043,7 +1043,7 @@ public static Val RemoveHQCard(IHost H, Val self, Val[] args)
     L_006F:
         L["CallFunc_Map_Keys_Keys"] = H.MakeArray(new Val[] {  });
     L_007A:
-        _ = H.Call("Map_Keys", new Val[] { Val.Ref("BlueprintMapLibrary"), GetLocal(L, "CurrentDeck"), GetLocal(L, "CallFunc_Map_Keys_Keys") });
+        _ = H.Call("Map_Keys", new Val[] { Val.Ref("BlueprintMapLibrary"), GetLocal(L, "CurrentDeck"), Val.Out(__v => L["CallFunc_Map_Keys_Keys"] = __v) });
     L_00AC:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_00C3:
@@ -1131,7 +1131,7 @@ public static Val SaveCardBack(IHost H, Val self, Val[] args)
     L_00B9:
         _ = H.Call("GetLogic", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetLogic_Logic"] = __v) });
     L_00EF:
-        _ = H.Call("GetDecks", new Val[] { GetLocal(L, "CallFunc_GetLogic_Logic"), Val.False, GetLocal(L, "CallFunc_GetDecks_decks") });
+        _ = H.Call("GetDecks", new Val[] { GetLocal(L, "CallFunc_GetLogic_Logic"), Val.False, Val.Out(__v => L["CallFunc_GetDecks_decks"] = __v) });
     L_011D:
         _ = H.Call("GetBPLevelParameters", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetBPLevelParameters_LevelParameters"] = __v) });
     L_0153:

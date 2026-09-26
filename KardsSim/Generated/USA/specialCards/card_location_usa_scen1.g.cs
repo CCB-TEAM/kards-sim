@@ -360,7 +360,7 @@ public static Val ExecuteUbergraph_card_location_usa_scen1(IHost H, Val self, Va
             default: goto __halt;
         }
     L_08B8:
-        if (!(GetLocal(L, "K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_08C7;
+        if (!(H.GetVar("K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_08C7;
     L_08C6:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -375,7 +375,7 @@ public static Val ExecuteUbergraph_card_location_usa_scen1(IHost H, Val self, Va
     L_08C7:
         _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide_4"] = __v) });
     L_08DA:
-        _ = H.Call("IsSameSideUnit", new Val[] { GetLocal(L, "K2Node_Event_cardDestroyed"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_4"), Val.Out(__v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
+        _ = H.Call("IsSameSideUnit", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_4"), Val.Out(__v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
     L_090C:
         if (!(GetLocal(L, "CallFunc_IsSameSideUnit_isIt")).AsBool())
         {
@@ -618,7 +618,7 @@ public static Val ExecuteUbergraph_card_location_usa_scen1(IHost H, Val self, Va
     L_145E:
         _ = H.Call("getTotalDefense", new Val[] { self, Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense_1"] = __v) });
     L_1471:
-        L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_getTotalDefense_totalDefense_1") - GetLocal(L, "K2Node_Event_damage"));
+        L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_getTotalDefense_totalDefense_1") - H.GetVar("K2Node_Event_damage"));
     L_149F:
         L["CallFunc_GreaterEqual_IntInt_ReturnValue_4"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue"), Val.Of(7)) >= 0);
     L_14C1:

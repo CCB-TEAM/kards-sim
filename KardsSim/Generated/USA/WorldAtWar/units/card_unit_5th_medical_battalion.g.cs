@@ -375,7 +375,7 @@ public static Val ExecuteUbergraph_card_unit_5th_medical_battalion(IHost H, Val 
             }
         }
     L_06AA:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardPlayed_1"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardPlayed_1"));
     L_06BD:
         goto L_0168;
     L_06C2:
@@ -413,7 +413,7 @@ public static Val ExecuteUbergraph_card_unit_5th_medical_battalion(IHost H, Val 
             }
         }
     L_072E:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardLeaving"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardLeaving"));
     L_0741:
         L["CallFunc_IsValid_ReturnValue_3"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "_tmp_card") });
     L_075E:
@@ -461,7 +461,7 @@ public static Val ExecuteUbergraph_card_unit_5th_medical_battalion(IHost H, Val 
             }
         }
     L_079E:
-        L["CallFunc_NotEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(self, GetLocal(L, "K2Node_Event_cardPlayed")) != 0);
+        L["CallFunc_NotEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(self, H.GetVar("K2Node_Event_cardPlayed")) != 0);
     L_07BC:
         if (!(GetLocal(L, "CallFunc_NotEqual_ObjectObject_ReturnValue")).AsBool())
         {
@@ -476,7 +476,7 @@ public static Val ExecuteUbergraph_card_unit_5th_medical_battalion(IHost H, Val 
             }
         }
     L_07C6:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardPlayed"));
     L_07D9:
         goto L_0168;
     L_07DE:

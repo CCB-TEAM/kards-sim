@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_unit_1st_cavalry_troop(IHost H, Val self
             default: goto __halt;
         }
     L_000A:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_001D:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "tempCard") });
     L_003A:

@@ -114,7 +114,7 @@ public static Val ExecuteUbergraph_card_event_sea_embargo(IHost H, Val self, Val
     L_0137:
         goto L_000A;
     L_013C:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_014F:
         goto L_007E;
     L_0154:
@@ -169,7 +169,7 @@ public static Val GetChooseSpawnCards(IHost H, Val self, Val[] args)
     L_012F:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_016A:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "faction"), Val.Of(2), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "faction"), Val.Of(2), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_019E:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_01BD:

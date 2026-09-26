@@ -69,7 +69,7 @@ public static Val ExecuteUbergraph_card_unit_38th_guards_rifles(IHost H, Val sel
     L_024D:
         L["Temp_byte_Variable_1"] = Val.Of(0);
     L_0261:
-        L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_turnnumber") - H.GetMember(self, "enterPlayOnTurn"));
+        L["CallFunc_Subtract_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_turnnumber") - H.GetMember(self, "enterPlayOnTurn"));
     L_028F:
         L["CallFunc_Divide_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue") / Val.Of(2));
     L_02B9:

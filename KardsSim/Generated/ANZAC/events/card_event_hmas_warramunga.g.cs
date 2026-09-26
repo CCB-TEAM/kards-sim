@@ -39,11 +39,11 @@ public static Val ExecuteUbergraph_card_event_hmas_warramunga(IHost H, Val self,
     L_0040:
         goto L_0215;
     L_0045:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
     L_0067:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_0215;
     L_0075:
-        H.SetMember(self, "Hand Target Card ID", GetLocal(L, "K2Node_Event_handTargetCardID"));
+        H.SetMember(self, "Hand Target Card ID", H.GetVar("K2Node_Event_handTargetCardID"));
     L_0090:
         _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "Hand Target Card ID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_00C6:
@@ -51,7 +51,7 @@ public static Val ExecuteUbergraph_card_event_hmas_warramunga(IHost H, Val self,
     L_00FC:
         _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "Hand Target Card ID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0132:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "faction"), Val.Of(10), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "faction"), Val.Of(10), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_0166:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_0185:

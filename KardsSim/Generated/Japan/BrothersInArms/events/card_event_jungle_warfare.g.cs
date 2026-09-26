@@ -206,7 +206,7 @@ public static Val ExecuteUbergraph_card_event_jungle_warfare(IHost H, Val self, 
     L_047D:
         goto L_003D;
     L_0482:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_049F:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool())
         {
@@ -219,11 +219,11 @@ public static Val ExecuteUbergraph_card_event_jungle_warfare(IHost H, Val self, 
             }
         }
     L_04A9:
-        H.SetMember(self, "tmpCardID", H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"));
+        H.SetMember(self, "tmpCardID", H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"));
     L_04DA:
         _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("destruction"), H.GetMember(self, "tmpCardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_0529:
-        _ = H.Call("TriggerDestruction", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_TriggerDestruction_qqq"] = __v) });
+        _ = H.Call("TriggerDestruction", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_TriggerDestruction_qqq"] = __v) });
     L_056A:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -233,7 +233,7 @@ public static Val ExecuteUbergraph_card_event_jungle_warfare(IHost H, Val self, 
             default: goto __halt;
         }
     L_056B:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "K2Node_Event_cardDestroyed"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_05AA:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt")).AsBool())
         {
@@ -246,9 +246,9 @@ public static Val ExecuteUbergraph_card_event_jungle_warfare(IHost H, Val self, 
             }
         }
     L_05B4:
-        H.SetMember(self, "cardDestroyed", GetLocal(L, "K2Node_Event_cardDestroyed"));
+        H.SetMember(self, "cardDestroyed", H.GetVar("K2Node_Event_cardDestroyed"));
     L_05C7:
-        H.SetMember(self, "Killer", GetLocal(L, "K2Node_Event_killer"));
+        H.SetMember(self, "Killer", H.GetVar("K2Node_Event_killer"));
     L_05DA:
         _ = H.Call("Array_Clear", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "PossibleCards") });
     L_0603:

@@ -258,11 +258,11 @@ public static Val ExecuteUbergraph_card_event_ural_factories(IHost H, Val self, 
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0027:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_0178;
     L_0035:
-        H.SetMember(self, "currentTarget", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "currentTarget", H.GetVar("K2Node_Event_targetCard"));
     L_0048:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetMember(self, "currentTarget"), "location"), Val.Of(7)) == 0);
     L_007D:

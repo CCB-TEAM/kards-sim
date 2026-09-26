@@ -205,7 +205,7 @@ public static Val ExecuteUbergraph_card_unit_the_silent_seventh(IHost H, Val sel
             default: goto __halt;
         }
     L_000F:
-        _ = H.Call("IsLocatedInDeck", new Val[] { GetLocal(L, "K2Node_Event_cardReset"), Val.Out(__v => L["CallFunc_IsLocatedInDeck_isIt"] = __v) });
+        _ = H.Call("IsLocatedInDeck", new Val[] { H.GetVar("K2Node_Event_cardReset"), Val.Out(__v => L["CallFunc_IsLocatedInDeck_isIt"] = __v) });
     L_0038:
         if (!(GetLocal(L, "CallFunc_IsLocatedInDeck_isIt")).AsBool())
         {
@@ -218,7 +218,7 @@ public static Val ExecuteUbergraph_card_unit_the_silent_seventh(IHost H, Val sel
             }
         }
     L_0042:
-        H.SetMember(self, "tmpCard", GetLocal(L, "K2Node_Event_cardReset"));
+        H.SetMember(self, "tmpCard", H.GetVar("K2Node_Event_cardReset"));
     L_0055:
         _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardAffected"), Val.Out(__v => L["CallFunc_JSON_GetInt_value_3"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found_3"] = __v) });
     L_009A:
@@ -249,7 +249,7 @@ public static Val ExecuteUbergraph_card_unit_the_silent_seventh(IHost H, Val sel
             default: goto __halt;
         }
     L_0159:
-        H.SetMember(self, "_cardPlayedFromHand", GetLocal(L, "K2Node_Event_cardPlayed_1"));
+        H.SetMember(self, "_cardPlayedFromHand", H.GetVar("K2Node_Event_cardPlayed_1"));
     L_016C:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_017F:
@@ -429,7 +429,7 @@ public static Val ExecuteUbergraph_card_unit_the_silent_seventh(IHost H, Val sel
     L_071C:
         goto L_0523;
     L_0721:
-        H.SetMember(self, "_cardPlayedFromHand", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "_cardPlayedFromHand", H.GetVar("K2Node_Event_cardPlayed"));
     L_0734:
         goto L_016C;
     L_0739:
@@ -437,7 +437,7 @@ public static Val ExecuteUbergraph_card_unit_the_silent_seventh(IHost H, Val sel
     L_073E:
         _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardAffected"), Val.Out(__v => L["CallFunc_JSON_GetInt_value_1"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found_1"] = __v) });
     L_0783:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value_1"), GetLocal(L, "K2Node_Event_cardChangingCost")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value_1"), H.GetVar("K2Node_Event_cardChangingCost")) == 0);
     L_07A9:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool())
         {
@@ -507,7 +507,7 @@ public static Val ExecuteUbergraph_card_unit_the_silent_seventh(IHost H, Val sel
             default: goto __halt;
         }
     L_0B2B:
-        H.SetMember(self, "tmpCard", GetLocal(L, "K2Node_Event_discardedCard"));
+        H.SetMember(self, "tmpCard", H.GetVar("K2Node_Event_discardedCard"));
     L_0B3E:
         goto L_0055;
     L_0B43:

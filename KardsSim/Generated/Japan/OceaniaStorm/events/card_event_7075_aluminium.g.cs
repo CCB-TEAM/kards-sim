@@ -93,7 +93,7 @@ public static Val ExecuteUbergraph_card_event_7075_aluminium(IHost H, Val self, 
             }
         }
     L_01FB:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "K2Node_Event_cardDestroyed"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_023A:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt")).AsBool())
         {
@@ -106,7 +106,7 @@ public static Val ExecuteUbergraph_card_event_7075_aluminium(IHost H, Val self, 
             }
         }
     L_0244:
-        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "side"), Val.Name("card_unit_zero"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable_1"] = __v), Val.Of(0), Val.Out(__v => L["CallFunc_SpawnCardInHandBySide_spawnedCardID_1"] = __v) });
+        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side"), Val.Name("card_unit_zero"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable_1"] = __v), Val.Of(0), Val.Out(__v => L["CallFunc_SpawnCardInHandBySide_spawnedCardID_1"] = __v) });
     L_02B6:
         _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_SpawnCardInHandBySide_spawnedCardID_1"), Val.Out(__v => L["CallFunc_GetCardFromID_card_1"] = __v) });
     L_02EC:

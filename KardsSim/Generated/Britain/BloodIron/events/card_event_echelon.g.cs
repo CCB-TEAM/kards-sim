@@ -44,7 +44,7 @@ public static Val ExecuteUbergraph_card_event_echelon(IHost H, Val self, Val[] a
     L_0014:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(self, "side"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(self, "side"), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_008A:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_00A9:
@@ -225,9 +225,9 @@ public static Val ExecuteUbergraph_card_event_echelon(IHost H, Val self, Val[] a
             }
         }
     L_05B7:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_defenderCard"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_defenderCard"), "side"), H.GetMember(self, "side")) == 0);
     L_05F3:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_defenderCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt_1"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_defenderCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt_1"] = __v) });
     L_061C:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsUnit_isIt_1")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool());
     L_0642:
@@ -243,7 +243,7 @@ public static Val ExecuteUbergraph_card_event_echelon(IHost H, Val self, Val[] a
             }
         }
     L_064C:
-        H.SetMember(self, "defUnitID", H.GetMember(GetLocal(L, "K2Node_Event_defenderCard"), "cardID"));
+        H.SetMember(self, "defUnitID", H.GetMember(H.GetVar("K2Node_Event_defenderCard"), "cardID"));
     L_067D:
         _ = H.Call("GetAllCardsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllCardsOnBoard_cards_1"] = __v) });
     L_06AB:

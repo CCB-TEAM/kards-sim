@@ -38,7 +38,7 @@ public static Val ExecuteUbergraph_card_unit_beaufighter_vi_f(IHost H, Val self,
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_022D;
     L_002B:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_003E:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "tempCard") });
     L_005B:
@@ -56,7 +56,7 @@ public static Val ExecuteUbergraph_card_unit_beaufighter_vi_f(IHost H, Val self,
     L_012B:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_022D;
     L_0139:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(H.GetMember(self, "tempCard"), "faction"), Val.Of(2), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(H.GetMember(self, "tempCard"), "faction"), Val.Of(2), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_016D:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_018C:

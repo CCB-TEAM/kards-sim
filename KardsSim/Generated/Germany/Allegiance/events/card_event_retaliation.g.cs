@@ -34,17 +34,17 @@ public static Val ExecuteUbergraph_card_event_retaliation(IHost H, Val self, Val
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_damage"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_damage"), Val.Of(0)) > 0);
     L_002C:
-        _ = H.Call("getTotalDefense", new Val[] { GetLocal(L, "K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
+        _ = H.Call("getTotalDefense", new Val[] { H.GetVar("K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
     L_0055:
         L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalDefense_totalDefense"), Val.Of(0)) > 0);
     L_0077:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_toCard"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_toCard"), "side"), H.GetMember(self, "side")) == 0);
     L_00B3:
-        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
+        _ = H.Call("IsLocation", new Val[] { H.GetVar("K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
     L_00DC:
-        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, GetLocal(L, "K2Node_Event_cardDealingDamage"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
+        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, H.GetVar("K2Node_Event_cardDealingDamage"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
     L_00F8:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt")).AsBool() && (GetLocal(L, "CallFunc_IsLocation_isIt")).AsBool());
     L_011E:
@@ -56,13 +56,13 @@ public static Val ExecuteUbergraph_card_event_retaliation(IHost H, Val self, Val
     L_0190:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_3")).AsBool()) goto L_028A;
     L_019E:
-        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(GetLocal(L, "K2Node_Event_cardDealingDamage"), "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
+        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(H.GetVar("K2Node_Event_cardDealingDamage"), "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
     L_01ED:
         _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_0200:
         _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide") });
     L_023F:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetLocationCardBySide_card"), GetLocal(L, "K2Node_Event_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetLocationCardBySide_card"), H.GetVar("K2Node_Event_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_028A:
         goto __halt;
     L_028C:

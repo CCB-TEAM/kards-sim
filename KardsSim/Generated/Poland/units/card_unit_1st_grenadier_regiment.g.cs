@@ -34,11 +34,11 @@ public static Val ExecuteUbergraph_card_unit_1st_grenadier_regiment(IHost H, Val
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("ShouldTriggerAbility", new Val[] { self, GetLocal(L, "K2Node_Event_cardDealingDamage"), GetLocal(L, "K2Node_Event_toCard"), GetLocal(L, "K2Node_Event_damage"), Val.Out(__v => L["CallFunc_ShouldTriggerAbility_should"] = __v) });
+        _ = H.Call("ShouldTriggerAbility", new Val[] { self, H.GetVar("K2Node_Event_cardDealingDamage"), H.GetVar("K2Node_Event_toCard"), H.GetVar("K2Node_Event_damage"), Val.Out(__v => L["CallFunc_ShouldTriggerAbility_should"] = __v) });
     L_003C:
         if (!(GetLocal(L, "CallFunc_ShouldTriggerAbility_should")).AsBool()) goto L_0078;
     L_004A:
-        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_cardDealingDamage"), self });
+        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardDealingDamage"), self });
     L_0078:
         goto __halt;
     L_007A:

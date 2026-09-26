@@ -40,11 +40,11 @@ public static Val ExecuteUbergraph_card_unit_3rd_kure_snlf(IHost H, Val self, Va
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_01F4;
     L_002B:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_instigatorCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_instigatorCard") });
     L_0048:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_01F4;
     L_0056:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_instigatorCard"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_instigatorCard"), "side"), H.GetMember(self, "side")) == 0);
     L_0092:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_01F4;
     L_00A0:
@@ -68,7 +68,7 @@ public static Val ExecuteUbergraph_card_unit_3rd_kure_snlf(IHost H, Val self, Va
     L_019D:
         goto L_01F4;
     L_01A2:
-        _ = H.Call("EnumCompareSide", new Val[] { self, GetLocal(L, "K2Node_Event_deckSide"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetVar("K2Node_Event_deckSide"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_01C7:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_01E6:

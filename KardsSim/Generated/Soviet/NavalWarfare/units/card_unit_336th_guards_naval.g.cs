@@ -39,9 +39,9 @@ public static Val ExecuteUbergraph_card_unit_336th_guards_naval(IHost H, Val sel
     L_0040:
         goto L_0149;
     L_0045:
-        _ = H.Call("SetCardSeen", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_SetCardSeen_qqq"] = __v) });
+        _ = H.Call("SetCardSeen", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_SetCardSeen_qqq"] = __v) });
     L_0084:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_00BA:
         _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "name"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "salvageFaction"), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardOnBattlefield_spawnedCardID"] = __v) });
     L_0149:

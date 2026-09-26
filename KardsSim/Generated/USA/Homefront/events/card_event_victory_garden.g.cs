@@ -202,9 +202,9 @@ public static Val ExecuteUbergraph_card_event_victory_garden(IHost H, Val self, 
     L_0678:
         goto L_038B;
     L_067D:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "unitOnTop"), H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "unitOnTop"), H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_06DA:
-        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "unitOnTop"), H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
+        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "unitOnTop"), H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
     L_0737:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -231,7 +231,7 @@ public static Val ExecuteUbergraph_card_event_victory_garden(IHost H, Val self, 
     L_07BF:
         goto L_000F;
     L_07C4:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "K2Node_Event_cardDestroyed"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_0803:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt")).AsBool())
         {

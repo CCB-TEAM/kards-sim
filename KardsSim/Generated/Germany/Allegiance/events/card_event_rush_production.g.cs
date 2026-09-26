@@ -56,7 +56,7 @@ public static Val ExecuteUbergraph_card_event_rush_production(IHost H, Val self,
     L_011D:
         if (!(GetLocal(L, "CallFunc_JSON_GetBool_value")).AsBool()) goto L_0397;
     L_012B:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, Val.Of(1), H.GetMember(H.GetMember(self, "tempCard"), "faction"), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, Val.Of(1), H.GetMember(H.GetMember(self, "tempCard"), "faction"), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_015F:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_017E:
@@ -88,7 +88,7 @@ public static Val ExecuteUbergraph_card_event_rush_production(IHost H, Val self,
     L_0375:
         goto L_0397;
     L_037A:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_038D:
         goto L_00AF;
     L_0392:

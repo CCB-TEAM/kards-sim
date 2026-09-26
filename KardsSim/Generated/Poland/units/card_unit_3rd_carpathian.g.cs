@@ -94,7 +94,7 @@ public static Val ExecuteUbergraph_card_unit_3rd_carpathian(IHost H, Val self, V
             default: goto __halt;
         }
     L_000A:
-        H.SetMember(self, "tmpCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tmpCard", H.GetVar("K2Node_Event_targetCard"));
     L_001D:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "tmpCard") });
     L_003A:

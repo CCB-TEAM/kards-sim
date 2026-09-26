@@ -102,7 +102,7 @@ public static Val ExecuteUbergraph_card_event_dagger_has_struck(IHost H, Val sel
     L_0014:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
-        L["CallFunc_NotEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID")) != 0);
+        L["CallFunc_NotEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "cardID"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID")) != 0);
     L_00A1:
         if (!(GetLocal(L, "CallFunc_NotEqual_IntInt_ReturnValue")).AsBool())
         {
@@ -115,7 +115,7 @@ public static Val ExecuteUbergraph_card_event_dagger_has_struck(IHost H, Val sel
             }
         }
     L_00AB:
-        _ = H.Call("getTotalAttack", new Val[] { GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
+        _ = H.Call("getTotalAttack", new Val[] { H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
     L_00D4:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_010F:
@@ -174,7 +174,7 @@ public static Val ExecuteUbergraph_card_event_dagger_has_struck(IHost H, Val sel
             default: goto __halt;
         }
     L_02A5:
-        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), self });
+        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), self });
     L_02D3:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -192,7 +192,7 @@ public static Val ExecuteUbergraph_card_event_dagger_has_struck(IHost H, Val sel
     L_030D:
         goto L_01C4;
     L_0312:
-        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
     L_035E:
         _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
     L_038C:

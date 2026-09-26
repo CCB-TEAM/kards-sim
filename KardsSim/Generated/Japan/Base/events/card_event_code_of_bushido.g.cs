@@ -301,11 +301,11 @@ public static Val ExecuteUbergraph_card_event_code_of_bushido(IHost H, Val self,
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
     L_002C:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_0223;
     L_003A:
-        _ = H.Call("DiscardCardFromHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_DiscardCardFromHand_success"] = __v) });
+        _ = H.Call("DiscardCardFromHand", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_DiscardCardFromHand_success"] = __v) });
     L_007B:
         _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("targetID"), Val.Out(__v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found"] = __v) });
     L_00BC:
@@ -323,11 +323,11 @@ public static Val ExecuteUbergraph_card_event_code_of_bushido(IHost H, Val self,
     L_0166:
         _ = H.Call("selectTargetFromHand", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_selectTargetFromHand_qqq"] = __v) });
     L_019C:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_01B9:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_0223;
     L_01C7:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("targetID"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("targetID"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_021E:
         goto L_0133;
     L_0223:

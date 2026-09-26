@@ -34,9 +34,9 @@ public static Val ExecuteUbergraph_card_unit_sb2c_helldiver(IHost H, Val self, V
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_Not_PreBool_ReturnValue"] = H.Call("Not_PreBool", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "K2Node_Event_isNegativeGain") });
+        L["CallFunc_Not_PreBool_ReturnValue"] = H.Call("Not_PreBool", new Val[] { Val.Ref("KismetMathLibrary"), H.GetVar("K2Node_Event_isNegativeGain") });
     L_0027:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_sideGaining"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_sideGaining"), H.GetMember(self, "side")) == 0);
     L_004D:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0060:

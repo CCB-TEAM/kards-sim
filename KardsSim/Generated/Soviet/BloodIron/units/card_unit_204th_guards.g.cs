@@ -34,15 +34,15 @@ public static Val ExecuteUbergraph_card_unit_204th_guards(IHost H, Val self, Val
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "K2Node_Event_killer"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_killer"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0033:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_killer"), "cardID"), H.GetMember(self, "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_killer"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_006F:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0098:
         _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_00AB:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "side"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide")) == 0);
     L_00E7:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool());
     L_010D:
@@ -50,7 +50,7 @@ public static Val ExecuteUbergraph_card_unit_204th_guards(IHost H, Val self, Val
     L_0133:
         L["CallFunc_BooleanAND_ReturnValue_2"] = Val.Of((GetLocal(L, "CallFunc_BooleanAND_ReturnValue_1")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_0159:
-        L["CallFunc_BooleanAND_ReturnValue_3"] = Val.Of((GetLocal(L, "CallFunc_BooleanAND_ReturnValue_2")).AsBool() && (GetLocal(L, "K2Node_Event_destroyedInCombat")).AsBool());
+        L["CallFunc_BooleanAND_ReturnValue_3"] = Val.Of((GetLocal(L, "CallFunc_BooleanAND_ReturnValue_2")).AsBool() && (H.GetVar("K2Node_Event_destroyedInCombat")).AsBool());
     L_017F:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_3")).AsBool()) goto L_01CC;
     L_018D:

@@ -92,7 +92,7 @@ public static Val ExecuteUbergraph_card_unit_the_123s(IHost H, Val self, Val[] a
     L_0444:
         goto L_0500;
     L_0449:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_resetCardID"), H.GetMember(self, "convertedCardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_resetCardID"), H.GetMember(self, "convertedCardID")) == 0);
     L_046F:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_0500;
     L_047D:
@@ -100,11 +100,11 @@ public static Val ExecuteUbergraph_card_unit_the_123s(IHost H, Val self, Val[] a
     L_0494:
         goto L_0500;
     L_0499:
-        H.SetMember(self, "otherCardPlayed", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "otherCardPlayed", H.GetVar("K2Node_Event_cardPlayed"));
     L_04AC:
         goto L_000A;
     L_04B1:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_card"), "cardID"), H.GetMember(self, "convertedCardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_card"), "cardID"), H.GetMember(self, "convertedCardID")) == 0);
     L_04ED:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_1")).AsBool()) goto L_0500;
     L_04FB:

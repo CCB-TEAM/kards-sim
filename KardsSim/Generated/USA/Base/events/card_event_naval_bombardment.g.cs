@@ -125,7 +125,7 @@ public static Val ExecuteUbergraph_card_event_naval_bombardment(IHost H, Val sel
     L_017A:
         goto L_01C4;
     L_017F:
-        _ = H.Call("MoveUnitFromBoardToOwnersHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID") });
+        _ = H.Call("MoveUnitFromBoardToOwnersHand", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID") });
     L_01B5:
         goto L_01C4;
     L_01BA:

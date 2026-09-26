@@ -160,9 +160,9 @@ public static Val ExecuteUbergraph_card_unit_266th_guards_rifles(IHost H, Val se
             }
         }
     L_0380:
-        _ = H.Call("getHasVeteranUpgrade", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getHasVeteranUpgrade_doesIt"] = __v) });
+        _ = H.Call("getHasVeteranUpgrade", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getHasVeteranUpgrade_doesIt"] = __v) });
     L_03A9:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_03D2:
         L["CallFunc_BooleanAND_ReturnValue_2"] = Val.Of((GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool() && (GetLocal(L, "CallFunc_getHasVeteranUpgrade_doesIt")).AsBool());
     L_03F8:
@@ -177,7 +177,7 @@ public static Val ExecuteUbergraph_card_unit_266th_guards_rifles(IHost H, Val se
             }
         }
     L_0402:
-        _ = H.Call("MakeVeteran", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_MakeVeteran_qqq_1"] = __v) });
+        _ = H.Call("MakeVeteran", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_MakeVeteran_qqq_1"] = __v) });
     L_0438:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

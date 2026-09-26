@@ -41,7 +41,7 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
     L_0037:
         if (!(GetLocal(L, "CallFunc_GetTargetedCard_hasTarget")).AsBool()) goto L_00D8;
     L_0045:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "faction"), Val.Of(2), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "faction"), Val.Of(2), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_0079:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_0098:
@@ -106,7 +106,7 @@ public static Val ExecuteUbergraph_card_event_kangaroo_transport(IHost H, Val se
             default: goto __halt;
         }
     L_000A:
-        H.SetMember(self, "tmpCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tmpCard", H.GetVar("K2Node_Event_targetCard"));
     L_001D:
         _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetMember(self, "tmpCard"), "cardID"), H.GetMember(self, "cardID") });
     L_0069:

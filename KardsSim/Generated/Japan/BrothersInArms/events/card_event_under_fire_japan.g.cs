@@ -219,7 +219,7 @@ public static Val ExecuteUbergraph_card_event_under_fire_japan(IHost H, Val self
     L_04A8:
         _ = H.Call("Array_Clear", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "_cardsToDamage") });
     L_04D1:
-        H.SetMember(self, "Target Card", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "Target Card", H.GetVar("K2Node_Event_targetCard"));
     L_04E4:
         L["CallFunc_Array_Add_ReturnValue_1"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "_cardsToDamage"), H.GetMember(H.GetMember(self, "Target Card"), "cardID") });
     L_053E:

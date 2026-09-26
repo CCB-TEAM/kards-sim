@@ -94,9 +94,9 @@ public static Val ExecuteUbergraph_card_event_desert_push(IHost H, Val self, Val
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("FullyHealCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_FullyHealCard_HealedAmount"] = __v) });
+        _ = H.Call("FullyHealCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_FullyHealCard_HealedAmount"] = __v) });
     L_0049:
-        _ = H.Call("RemovePin", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_RemovePin_qqq"] = __v) });
+        _ = H.Call("RemovePin", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_RemovePin_qqq"] = __v) });
     L_007F:
         goto __halt;
     L_0081:

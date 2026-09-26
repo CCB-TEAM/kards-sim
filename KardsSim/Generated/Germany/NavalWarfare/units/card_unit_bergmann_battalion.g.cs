@@ -40,9 +40,9 @@ public static Val ExecuteUbergraph_card_unit_bergmann_battalion(IHost H, Val sel
     L_0015:
         goto L_0156;
     L_001A:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_instigatorID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_instigatorID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0050:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "side"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_008B:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_00AA:

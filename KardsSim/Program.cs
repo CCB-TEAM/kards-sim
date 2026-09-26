@@ -40,7 +40,10 @@ public static class Program
             "triggerhits" => TriggerRuntimeAudit.Run(args),
             "smoke" => SmokeAll.Run(args),
             "apicheck" => ApiAudit.Run(args),
+            "rules" => RulesAudit.Run(args),
             "tests" => CardTests.Run(args),
+        "repro1" => ReproIssue1.Run(args),
+        "paramaudit" => ParamAudit.Run(args),
             // 未知 mode 必须报错而不是回落到 Serve：写错一个字母就会静默起一个 HTTP 服务，
             // 看起来「跑起来了」，实际什么都没测。
             _ => UnknownMode(mode),
@@ -50,7 +53,7 @@ public static class Program
     private static int UnknownMode(string mode)
     {
         Console.Error.WriteLine($"未知 --mode: {mode}");
-        Console.Error.WriteLine("可用: selfplay | dump | coverage | fuzz | triggers | triggerhits | smoke | apicheck | serve");
+        Console.Error.WriteLine("可用: selfplay | dump | coverage | fuzz | triggers | triggerhits | smoke | apicheck | rules | tests | serve");
         return 2;
     }
 

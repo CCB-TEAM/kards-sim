@@ -250,7 +250,7 @@ public static Val ExecuteUbergraph_card_unit_l4_grasshopper(IHost H, Val self, V
             }
         }
     L_03DE:
-        H.SetMember(self, "tmpCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tmpCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_03F1:
         _ = H.Call("getHasGameplayTag", new Val[] { H.GetMember(self, "tmpCard"), H.MakeArray(new Val[] { Val.Name("subtype.sherman") }), Val.Out(__v => L["CallFunc_getHasGameplayTag_hasTag"] = __v) });
     L_0435:
@@ -291,7 +291,7 @@ public static Val ExecuteUbergraph_card_unit_l4_grasshopper(IHost H, Val self, V
             default: goto __halt;
         }
     L_04D2:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_resetCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_resetCardID"));
     L_04ED:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_0500:
@@ -313,11 +313,11 @@ public static Val ExecuteUbergraph_card_unit_l4_grasshopper(IHost H, Val self, V
     L_0553:
         goto L_001E;
     L_0558:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_drawnCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_drawnCardID"));
     L_0573:
         goto L_04ED;
     L_0578:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_spawnedCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_spawnedCardID"));
     L_0593:
         goto L_04ED;
     L_0598:

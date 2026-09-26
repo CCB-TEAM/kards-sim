@@ -115,7 +115,7 @@ public static Val ExecuteUbergraph_card_event_greater_purpose(IHost H, Val self,
     L_0303:
         goto L_000F;
     L_0308:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "K2Node_Event_cardDestroyed"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_0347:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt")).AsBool())
         {
@@ -128,7 +128,7 @@ public static Val ExecuteUbergraph_card_event_greater_purpose(IHost H, Val self,
             }
         }
     L_0351:
-        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "side"), Val.Of(1), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
+        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side"), Val.Of(1), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
     L_03B2:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

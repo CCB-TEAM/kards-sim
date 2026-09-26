@@ -59,7 +59,7 @@ public static Val ExecuteUbergraph_card_event_retribution9(IHost H, Val self, Va
     L_0082:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCardsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_00BD:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "side"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_00F8:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(1)) != 0);
     L_0117:
@@ -119,7 +119,7 @@ public static Val ExecuteUbergraph_card_event_retribution9(IHost H, Val self, Va
     L_02A9:
         goto L_0276;
     L_02AE:
-        if (!(GetLocal(L, "K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_02BD;
+        if (!(H.GetVar("K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_02BD;
     L_02BC:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -130,11 +130,11 @@ public static Val ExecuteUbergraph_card_event_retribution9(IHost H, Val self, Va
             default: goto __halt;
         }
     L_02BD:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_02E6:
-        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, GetLocal(L, "K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
+        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, H.GetVar("K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
     L_0302:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side")) == 0);
     L_033E:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool());
     L_0364:
@@ -178,7 +178,7 @@ public static Val ExecuteUbergraph_card_event_retribution9(IHost H, Val self, Va
     L_046A:
         H.SetMember(self, "cardAffected", GetLocal(L, "CallFunc_GetRandomCard_randomCard"));
     L_047D:
-        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(GetLocal(L, "K2Node_Event_killer"), "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
+        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(H.GetVar("K2Node_Event_killer"), "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
     L_04CC:
         _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardAffected"), self });
     L_04FA:

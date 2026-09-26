@@ -54,7 +54,7 @@ public static Val ExecuteUbergraph_card_event_campaign_guadalcanal2_naval_patrol
             }
         }
     L_0034:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_spawnedCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_spawnedCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_006A:
         H.SetMember(self, "tmpCard", GetLocal(L, "CallFunc_GetCardFromID_card"));
     L_007D:
@@ -207,9 +207,9 @@ public static Val ExecuteUbergraph_card_event_campaign_guadalcanal2_naval_patrol
             default: goto __halt;
         }
     L_05CC:
-        H.SetMember(self, "tmpCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tmpCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_05DF:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_method"), Val.Of(3)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_method"), Val.Of(3)) == 0);
     L_05FE:
         _ = H.Call("CustomName2HasAttribute", new Val[] { self, Val.Of("played"), Val.Out(__v => L["CallFunc_CustomName2HasAttribute_doesIt_1"] = __v) });
     L_0619:
@@ -261,7 +261,7 @@ public static Val ExecuteUbergraph_card_event_campaign_guadalcanal2_naval_patrol
             default: goto __halt;
         }
     L_07C4:
-        H.SetMember(self, "tmpCard", GetLocal(L, "K2Node_Event_cardLeaving"));
+        H.SetMember(self, "tmpCard", H.GetVar("K2Node_Event_cardLeaving"));
     L_07D7:
         goto L_047B;
     L_07DC:

@@ -95,11 +95,11 @@ public static Val ExecuteUbergraph_card_unit_57mm_m1943(IHost H, Val self, Val[]
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_card_1"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_card_1"), "cardID"), H.GetMember(self, "cardID") });
     L_0056:
         goto L_00B1;
     L_005B:
-        _ = H.Call("RemoveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_card"), "cardID"), Val.Out(__v => L["CallFunc_RemoveBlitz_qqq"] = __v), H.GetMember(self, "cardID"), Val.False });
+        _ = H.Call("RemoveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_card"), "cardID"), Val.Out(__v => L["CallFunc_RemoveBlitz_qqq"] = __v), H.GetMember(self, "cardID"), Val.False });
     L_00B1:
         goto __halt;
     L_00B3:

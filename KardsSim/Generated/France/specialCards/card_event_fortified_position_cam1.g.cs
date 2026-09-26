@@ -341,9 +341,9 @@ public static Val ExecuteUbergraph_card_event_fortified_position_cam1(IHost H, V
             }
         }
     L_08E8:
-        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
+        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_0908:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_0953:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -441,15 +441,15 @@ public static Val ExecuteUbergraph_card_event_fortified_position_cam1(IHost H, V
     L_0D30:
         goto L_0C1B;
     L_0D35:
-        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
     L_0D81:
         _ = H.Call("HasCampaignUpgrade", new Val[] { self, Val.Of(2), Val.Out(__v => L["CallFunc_HasCampaignUpgrade_doesIt_6"] = __v) });
     L_0D99:
         L["CallFunc_SelectInt_ReturnValue"] = H.Call("SelectInt", new Val[] { Val.Ref("KismetMathLibrary"), Val.Of(4), Val.Of(2), GetLocal(L, "CallFunc_HasCampaignUpgrade_doesIt_6") });
     L_0DC8:
-        _ = H.Call("ChangeOperationCost", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_SelectInt_ReturnValue"), Val.Of(1), Val.False, Val.False, Val.False });
+        _ = H.Call("ChangeOperationCost", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_SelectInt_ReturnValue"), Val.Of(1), Val.False, Val.False, Val.False });
     L_0E0C:
-        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
+        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_0E2C:
         H.SetMember(self, "_targetDamage", GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"));
     L_0E47:

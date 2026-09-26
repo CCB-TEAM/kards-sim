@@ -53,7 +53,7 @@ public static Val ExecuteUbergraph_card_unit_252nd_RIFLES(IHost H, Val self, Val
     L_00AD:
         _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(self, "side") });
     L_00EC:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_toCard"), "cardID"), GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_toCard"), "cardID"), GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID")) == 0);
     L_0128:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_02BD;
     L_0136:

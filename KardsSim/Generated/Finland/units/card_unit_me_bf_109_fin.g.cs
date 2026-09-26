@@ -86,7 +86,7 @@ public static Val ExecuteUbergraph_card_unit_me_bf_109_fin(IHost H, Val self, Va
     L_025B:
         goto L_0026;
     L_0260:
-        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "K2Node_Event_defenderCard"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
+        _ = H.Call("IsLocation", new Val[] { H.GetVar("K2Node_Event_defenderCard"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
     L_0289:
         if (!(GetLocal(L, "CallFunc_IsLocation_isIt")).AsBool())
         {
@@ -166,7 +166,7 @@ public static Val ExecuteUbergraph_card_unit_me_bf_109_fin(IHost H, Val self, Va
     L_04BF:
         goto L_000F;
     L_04C4:
-        _ = H.Call("updateCustomJsonIfNeeded", new Val[] { self, GetLocal(L, "K2Node_Event_resetCardID") });
+        _ = H.Call("updateCustomJsonIfNeeded", new Val[] { self, H.GetVar("K2Node_Event_resetCardID") });
     L_04DB:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

@@ -95,15 +95,15 @@ public static Val ExecuteUbergraph_card_unit_tupolev_sb_2(IHost H, Val self, Val
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("AddKreditsTax", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_card"), Val.Of(-2), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_AddKreditsTax_qqq"] = __v) });
+        _ = H.Call("AddKreditsTax", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_card"), Val.Of(-2), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_AddKreditsTax_qqq"] = __v) });
     L_004E:
-        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("passive"), H.GetMember(GetLocal(L, "K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
+        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("passive"), H.GetMember(H.GetVar("K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
     L_00AD:
         goto L_0157;
     L_00B2:
-        _ = H.Call("AddKreditsTax", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_card_1"), Val.Of(2), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_AddKreditsTax_qqq_1"] = __v) });
+        _ = H.Call("AddKreditsTax", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_card_1"), Val.Of(2), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_AddKreditsTax_qqq_1"] = __v) });
     L_00F6:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("passive"), H.GetMember(GetLocal(L, "K2Node_Event_card_1"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("passive"), H.GetMember(H.GetVar("K2Node_Event_card_1"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_0157:
         goto __halt;
     L_0159:

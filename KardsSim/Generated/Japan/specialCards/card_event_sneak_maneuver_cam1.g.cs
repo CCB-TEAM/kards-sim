@@ -402,7 +402,7 @@ public static Val ExecuteUbergraph_card_event_sneak_maneuver_cam1(IHost H, Val s
     L_0AE6:
         goto L_0AB3;
     L_0AEB:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_0AFE:
         goto L_08AD;
     L_0B03:

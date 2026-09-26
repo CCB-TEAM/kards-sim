@@ -273,11 +273,11 @@ public static Val ExecuteUbergraph_card_unit_a6m3_zeke(IHost H, Val self, Val[] 
     L_06FC:
         goto L_0275;
     L_0701:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_drawnCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_drawnCardID"));
     L_071C:
         goto L_0696;
     L_0721:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_spawnedCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_spawnedCardID"));
     L_073C:
         goto L_0696;
     L_0741:

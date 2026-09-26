@@ -98,19 +98,19 @@ public static Val ExecuteUbergraph_card_event_first_to_fight(IHost H, Val self, 
     L_000A:
         goto L_01E3;
     L_000F:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "K2Node_Event_survivor"), Val.Of("trigger"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_survivor"), Val.Of("trigger"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_004A:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt")).AsBool()) goto L_01E3;
     L_0058:
-        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(GetLocal(L, "K2Node_Event_survivor"), "side") });
+        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(H.GetVar("K2Node_Event_survivor"), "side") });
     L_00AD:
         L["CallFunc_Add_IntInt_ReturnValue"] = (Val.Of(1) + H.GetMember(GetLocal(L, "CallFunc_GetLocationCardBySide_card"), "locationNumber"));
     L_00ED:
-        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_survivor"), "side"), Val.False, Val.Name("card_unit_legion_pol"), H.GetMember(GetLocal(L, "K2Node_Event_survivor"), "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_survivor"), "side"), Val.False, Val.Name("card_unit_legion_pol"), H.GetMember(H.GetVar("K2Node_Event_survivor"), "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
     L_017D:
         goto L_01E3;
     L_0182:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("trigger"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("trigger"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_01E3:
         goto __halt;
     L_01E5:

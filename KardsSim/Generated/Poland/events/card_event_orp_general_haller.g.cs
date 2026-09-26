@@ -141,7 +141,7 @@ public static Val ExecuteUbergraph_card_event_orp_general_haller(IHost H, Val se
     L_01E7:
         goto L_000F;
     L_01EC:
-        L["CallFunc_Array_Add_ReturnValue"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "cardsToConvert"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID") });
+        L["CallFunc_Array_Add_ReturnValue"] = H.Call("Array_Add", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "cardsToConvert"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID") });
     L_0246:
         _ = H.Call("ConvertCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardsToConvert"), H.GetMember(self, "cardID"), Val.Name("card_unit_routed_troops"), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ConvertCard_newCardIDs"] = __v) });
     L_0298:
@@ -163,7 +163,7 @@ public static Val ExecuteUbergraph_card_event_orp_general_haller(IHost H, Val se
     L_02D1:
         _ = H.Call("Array_Clear", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "cardsToConvert") });
     L_02FA:
-        _ = H.Call("GetAdjacentCards", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), Val.False, Val.Out(__v => L["CallFunc_GetAdjacentCards_adjacentCards"] = __v) });
+        _ = H.Call("GetAdjacentCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), Val.False, Val.Out(__v => L["CallFunc_GetAdjacentCards_adjacentCards"] = __v) });
     L_0331:
         goto L_02B5;
     L_0336:

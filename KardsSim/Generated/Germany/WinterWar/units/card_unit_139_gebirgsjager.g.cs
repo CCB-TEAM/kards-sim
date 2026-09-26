@@ -38,15 +38,15 @@ public static Val ExecuteUbergraph_card_unit_139_gebirgsjager(IHost H, Val self,
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_01AE;
     L_002B:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0054:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool()) goto L_01AE;
     L_0062:
-        _ = H.Call("getHasAlpine", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getHasAlpine_doesIt"] = __v) });
+        _ = H.Call("getHasAlpine", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getHasAlpine_doesIt"] = __v) });
     L_008B:
         if (!(GetLocal(L, "CallFunc_getHasAlpine_doesIt")).AsBool()) goto L_01AE;
     L_0099:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_00D5:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_1")).AsBool()) goto L_01AE;
     L_00E3:
@@ -58,7 +58,7 @@ public static Val ExecuteUbergraph_card_unit_139_gebirgsjager(IHost H, Val self,
     L_017C:
         goto L_01AE;
     L_0181:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_method"), Val.Of(5)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_method"), Val.Of(5)) == 0);
     L_01A0:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_000A;
     L_01AE:

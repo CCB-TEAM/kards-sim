@@ -318,9 +318,9 @@ public static Val ExecuteUbergraph_card_event_exposed(IHost H, Val self, Val[] a
     L_06E0:
         goto L_03A7;
     L_06E5:
-        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
+        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_0705:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_0750:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -373,13 +373,13 @@ public static Val ExecuteUbergraph_card_event_exposed(IHost H, Val self, Val[] a
     L_0813:
         L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getKreditTempBuffAmount_tempAmount"), Val.Of(0)) == 0);
     L_0835:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_085E:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0887:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "faction"), Val.Of(5)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "faction"), Val.Of(5)) == 0);
     L_08BC:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_08F8:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_1")).AsBool());
     L_091E:
@@ -449,7 +449,7 @@ public static Val ExecuteUbergraph_card_event_exposed(IHost H, Val self, Val[] a
             }
         }
     L_0A5F:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc_IsUnit_isIt_3"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc_IsUnit_isIt_3"] = __v) });
     L_0A88:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt_3")).AsBool())
         {
@@ -463,7 +463,7 @@ public static Val ExecuteUbergraph_card_event_exposed(IHost H, Val self, Val[] a
             }
         }
     L_0A92:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_6"] = Val.Of(Val.Cmp(Val.Of(5), H.GetMember(GetLocal(L, "K2Node_Event_cardLeaving"), "faction")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_6"] = Val.Of(Val.Cmp(Val.Of(5), H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "faction")) == 0);
     L_0AC7:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_6")).AsBool())
         {

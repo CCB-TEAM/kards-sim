@@ -277,7 +277,7 @@ public static Val ExecuteUbergraph_card_unit_marines_cam1(IHost H, Val self, Val
     L_049D:
         goto L_0481;
     L_04A2:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_04B5:
         goto L_03AF;
     L_04BA:

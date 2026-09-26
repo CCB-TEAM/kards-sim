@@ -50,15 +50,15 @@ public static Val ExecuteUbergraph_card_event_imperial_decree(IHost H, Val self,
     L_012F:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_1")).AsBool()) goto L_0249;
     L_013D:
-        _ = H.Call("IsOrder", new Val[] { GetLocal(L, "K2Node_Event_cardDealingDamage"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
+        _ = H.Call("IsOrder", new Val[] { H.GetVar("K2Node_Event_cardDealingDamage"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
     L_0166:
         if (!(GetLocal(L, "CallFunc_IsOrder_isIt")).AsBool()) goto L_0249;
     L_0174:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardDealingDamage"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardDealingDamage"), "side"), H.GetMember(self, "side")) == 0);
     L_01B0:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_0249;
     L_01BE:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affectedCardID"), H.GetMember(GetLocal(L, "K2Node_Event_cardDealingDamage"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affectedCardID"), H.GetMember(H.GetVar("K2Node_Event_cardDealingDamage"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_021B:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_0249:

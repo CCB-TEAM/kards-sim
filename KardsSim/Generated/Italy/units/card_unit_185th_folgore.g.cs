@@ -38,15 +38,15 @@ public static Val ExecuteUbergraph_card_unit_185th_folgore(IHost H, Val self, Va
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_0102;
     L_002B:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_0067:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_0102;
     L_0075:
-        _ = H.Call("getHasAlpine", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getHasAlpine_doesIt"] = __v) });
+        _ = H.Call("getHasAlpine", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getHasAlpine_doesIt"] = __v) });
     L_009E:
         if (!(GetLocal(L, "CallFunc_getHasAlpine_doesIt")).AsBool()) goto L_0102;
     L_00AC:
-        _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID") });
     L_00F8:
         goto L_0102;
     L_00FD:

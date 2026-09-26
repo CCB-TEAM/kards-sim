@@ -293,7 +293,7 @@ public static Val GetNationalRewardTextAndWidgetOrTexture2D(IHost H, Val self, V
     L_0083:
         L["CallFunc_GetDataTableRowNames_OutRowNames"] = H.MakeArray(new Val[] {  });
     L_008E:
-        _ = H.Call("GetDataTableRowNames", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Switch(GetLocal(L, "Temp_bool_Variable_1"), new[] { ValueTuple.Create(Val.False, GetLocal(L, "Temp_object_Variable")), ValueTuple.Create(Val.True, GetLocal(L, "Temp_object_Variable_1")) }, GetLocal(L, "K2Node_Select_Default_1")), GetLocal(L, "CallFunc_GetDataTableRowNames_OutRowNames") });
+        _ = H.Call("GetDataTableRowNames", new Val[] { Val.Ref("DataTableFunctionLibrary"), Val.Switch(GetLocal(L, "Temp_bool_Variable_1"), new[] { ValueTuple.Create(Val.False, GetLocal(L, "Temp_object_Variable")), ValueTuple.Create(Val.True, GetLocal(L, "Temp_object_Variable_1")) }, GetLocal(L, "K2Node_Select_Default_1")), Val.Out(__v => L["CallFunc_GetDataTableRowNames_OutRowNames"] = __v) });
     L_00D6:
         _ = H.Call("IsChinaISBN", new Val[] { Val.Ref("PlatformUtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_IsChinaISBN_is_ISBN"] = __v) });
     L_010C:
@@ -459,7 +459,7 @@ public static Val GetNationalRewardTextAndWidgetOrTexture2D(IHost H, Val self, V
     L_0AF3:
         L["LocalOutWidget"] = GetLocal(L, "CallFunc_Create_ReturnValue");
     L_0B06:
-        _ = H.Call("GetStaticRarity", new Val[] { self, Val.Name("None"), GetLocal(L, "CallFunc_GetStaticRarity_rarity") });
+        _ = H.Call("GetStaticRarity", new Val[] { self, Val.Name("None"), Val.Out(__v => L["CallFunc_GetStaticRarity_rarity"] = __v) });
     L_0B26:
         _ = H.Call("GetRarityDisplayName", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "CallFunc_GetStaticRarity_rarity"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetRarityDisplayName_displayName"] = __v) });
     L_0B65:
@@ -725,7 +725,7 @@ public static Val GetRewardCardDetailsByName(IHost H, Val self, Val[] args)
     L_023F:
         L["CallFunc_Conv_StringToName_ReturnValue_1"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CardName") });
     L_0264:
-        _ = H.Call("GetStaticImage", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_1"), GetLocal(L, "CallFunc_GetStaticImage_image") });
+        _ = H.Call("GetStaticImage", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_1"), Val.Out(__v => L["CallFunc_GetStaticImage_image"] = __v) });
     L_0280:
         L["K2Node_DynamicCast_AsTexture_2D"] = GetLocal(L, "CallFunc_GetStaticImage_image");
     L_02A4:
@@ -746,7 +746,7 @@ public static Val GetRewardCardDetailsByName(IHost H, Val self, Val[] args)
     L_02CB:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CardName") });
     L_02F0:
-        _ = H.Call("GetStaticTitle", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), GetLocal(L, "CallFunc_GetStaticTitle_title") });
+        _ = H.Call("GetStaticTitle", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(__v => L["CallFunc_GetStaticTitle_title"] = __v) });
     L_030C:
         L["text"] = GetLocal(L, "CallFunc_GetStaticTitle_title");
     L_0327:
@@ -782,7 +782,7 @@ public static Val GetRewardCardDetailsByRarity(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "sourceString") });
     L_0025:
-        _ = H.Call("GetStaticRarity", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), GetLocal(L, "CallFunc_GetStaticRarity_rarity") });
+        _ = H.Call("GetStaticRarity", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(__v => L["CallFunc_GetStaticRarity_rarity"] = __v) });
     L_0041:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetStaticRarity_rarity"), Val.Of(0)) != 0);
     L_0060:
@@ -970,7 +970,7 @@ public static Val GetRewardDisplayInfo(IHost H, Val self, Val[] args)
     L_0426:
         goto L_174C;
     L_042B:
-        _ = H.Call("GetCardInfo", new Val[] { self, GetLocal(L, "Item"), GetLocal(L, "CallFunc_GetCardInfo_Name"), GetLocal(L, "CallFunc_GetCardInfo_bIsGold"), GetLocal(L, "CallFunc_GetCardInfo_bIsValid") });
+        _ = H.Call("GetCardInfo", new Val[] { self, GetLocal(L, "Item"), Val.Out(__v => L["CallFunc_GetCardInfo_Name"] = __v), Val.Out(__v => L["CallFunc_GetCardInfo_bIsGold"] = __v), Val.Out(__v => L["CallFunc_GetCardInfo_bIsValid"] = __v) });
     L_0459:
         _ = H.Call("GetRewardCardDetailsByName", new Val[] { self, GetLocal(L, "CallFunc_GetCardInfo_Name"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetRewardCardDetailsByName_text"] = __v), Val.Out(__v => L["CallFunc_GetRewardCardDetailsByName_icon"] = __v), Val.Out(__v => L["CallFunc_GetRewardCardDetailsByName_bubbleString"] = __v) });
     L_0494:
@@ -986,7 +986,7 @@ public static Val GetRewardDisplayInfo(IHost H, Val self, Val[] args)
     L_04FC:
         goto L_174C;
     L_0501:
-        _ = H.Call("GetRandomCardInfo", new Val[] { self, GetLocal(L, "Item"), GetLocal(L, "CallFunc_GetRandomCardInfo_bIsGold"), GetLocal(L, "CallFunc_GetRandomCardInfo_bUnowned"), GetLocal(L, "CallFunc_GetRandomCardInfo_CardSet"), GetLocal(L, "CallFunc_GetRandomCardInfo_bHasRarityRestriction"), GetLocal(L, "CallFunc_GetRandomCardInfo_Rarity"), GetLocal(L, "CallFunc_GetRandomCardInfo_bHasFactionRestriction"), GetLocal(L, "CallFunc_GetRandomCardInfo_Faction"), GetLocal(L, "CallFunc_GetRandomCardInfo_bIsValid") });
+        _ = H.Call("GetRandomCardInfo", new Val[] { self, GetLocal(L, "Item"), Val.Out(__v => L["CallFunc_GetRandomCardInfo_bIsGold"] = __v), Val.Out(__v => L["CallFunc_GetRandomCardInfo_bUnowned"] = __v), Val.Out(__v => L["CallFunc_GetRandomCardInfo_CardSet"] = __v), Val.Out(__v => L["CallFunc_GetRandomCardInfo_bHasRarityRestriction"] = __v), Val.Out(__v => L["CallFunc_GetRandomCardInfo_Rarity"] = __v), Val.Out(__v => L["CallFunc_GetRandomCardInfo_bHasFactionRestriction"] = __v), Val.Out(__v => L["CallFunc_GetRandomCardInfo_Faction"] = __v), Val.Out(__v => L["CallFunc_GetRandomCardInfo_bIsValid"] = __v) });
     L_055C:
         L["CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"] = H.Call("GetEnumeratorUserFriendlyName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("ERarityEnum"), GetLocal(L, "CallFunc_GetRandomCardInfo_Rarity") });
     L_058A:
@@ -1004,7 +1004,7 @@ public static Val GetRewardDisplayInfo(IHost H, Val self, Val[] args)
     L_062D:
         goto L_174C;
     L_0632:
-        _ = H.Call("GetInfo", new Val[] { self, GetLocal(L, "Item"), GetLocal(L, "CallFunc_GetInfo_Name_4"), GetLocal(L, "CallFunc_GetInfo_bIsValid_4") });
+        _ = H.Call("GetInfo", new Val[] { self, GetLocal(L, "Item"), Val.Out(__v => L["CallFunc_GetInfo_Name_4"] = __v), Val.Out(__v => L["CallFunc_GetInfo_bIsValid_4"] = __v) });
     L_0657:
         L["CallFunc_Conv_StringToName_ReturnValue_3"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetInfo_Name_4") });
     L_067C:
@@ -1053,7 +1053,7 @@ public static Val GetRewardDisplayInfo(IHost H, Val self, Val[] args)
     L_0879:
         L["CallFunc_GetPrimaryAssetIdList_OutPrimaryAssetIdList"] = H.MakeArray(new Val[] {  });
     L_0884:
-        _ = H.Call("GetPrimaryAssetIdList", new Val[] { Val.Ref("KismetSystemLibrary"), H.MakeArray(new Val[] { Val.Name("Cardback") }), GetLocal(L, "CallFunc_GetPrimaryAssetIdList_OutPrimaryAssetIdList") });
+        _ = H.Call("GetPrimaryAssetIdList", new Val[] { Val.Ref("KismetSystemLibrary"), H.MakeArray(new Val[] { Val.Name("Cardback") }), Val.Out(__v => L["CallFunc_GetPrimaryAssetIdList_OutPrimaryAssetIdList"] = __v) });
     L_08B2:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_08C9:
@@ -1114,7 +1114,7 @@ public static Val GetRewardDisplayInfo(IHost H, Val self, Val[] args)
             }
         }
     L_0A8D:
-        _ = H.Call("GetInfo", new Val[] { self, GetLocal(L, "Item"), GetLocal(L, "CallFunc_GetInfo_Name_1"), GetLocal(L, "CallFunc_GetInfo_bIsValid_1") });
+        _ = H.Call("GetInfo", new Val[] { self, GetLocal(L, "Item"), Val.Out(__v => L["CallFunc_GetInfo_Name_1"] = __v), Val.Out(__v => L["CallFunc_GetInfo_bIsValid_1"] = __v) });
     L_0AB2:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetInfo_Name_1") });
     L_0AD7:
@@ -1169,11 +1169,11 @@ public static Val GetRewardDisplayInfo(IHost H, Val self, Val[] args)
     L_0D78:
         goto L_08E0;
     L_0D7D:
-        _ = H.Call("GetInfo", new Val[] { self, GetLocal(L, "Item"), GetLocal(L, "CallFunc_GetInfo_Name"), GetLocal(L, "CallFunc_GetInfo_bIsValid") });
+        _ = H.Call("GetInfo", new Val[] { self, GetLocal(L, "Item"), Val.Out(__v => L["CallFunc_GetInfo_Name"] = __v), Val.Out(__v => L["CallFunc_GetInfo_bIsValid"] = __v) });
     L_0DA2:
         _ = H.Call("GetAltArtCardNameAndIndex", new Val[] { Val.Ref("StoreFunctions"), GetLocal(L, "CallFunc_GetInfo_Name"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetAltArtCardNameAndIndex_CardName"] = __v), Val.Out(__v => L["CallFunc_GetAltArtCardNameAndIndex_Index"] = __v) });
     L_0DEA:
-        _ = H.Call("GetStaticTitle", new Val[] { self, GetLocal(L, "CallFunc_GetAltArtCardNameAndIndex_CardName"), GetLocal(L, "CallFunc_GetStaticTitle_title") });
+        _ = H.Call("GetStaticTitle", new Val[] { self, GetLocal(L, "CallFunc_GetAltArtCardNameAndIndex_CardName"), Val.Out(__v => L["CallFunc_GetStaticTitle_title"] = __v) });
     L_0E06:
         L["text"] = GetLocal(L, "CallFunc_GetStaticTitle_title");
     L_0E21:
@@ -1187,7 +1187,7 @@ public static Val GetRewardDisplayInfo(IHost H, Val self, Val[] args)
     L_0E6E:
         goto L_174C;
     L_0E73:
-        _ = H.Call("GetInfo", new Val[] { self, GetLocal(L, "Item"), GetLocal(L, "CallFunc_GetInfo_Name_5"), GetLocal(L, "CallFunc_GetInfo_bIsValid_5") });
+        _ = H.Call("GetInfo", new Val[] { self, GetLocal(L, "Item"), Val.Out(__v => L["CallFunc_GetInfo_Name_5"] = __v), Val.Out(__v => L["CallFunc_GetInfo_bIsValid_5"] = __v) });
     L_0E98:
         L["CallFunc_Conv_StringToName_ReturnValue_4"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetInfo_Name_5") });
     L_0EBD:
@@ -1250,7 +1250,7 @@ public static Val GetRewardDisplayInfo(IHost H, Val self, Val[] args)
     L_10DA:
         goto L_174C;
     L_10DF:
-        _ = H.Call("GetInfo", new Val[] { self, GetLocal(L, "Item"), GetLocal(L, "CallFunc_GetInfo_Name_3"), GetLocal(L, "CallFunc_GetInfo_bIsValid_3") });
+        _ = H.Call("GetInfo", new Val[] { self, GetLocal(L, "Item"), Val.Out(__v => L["CallFunc_GetInfo_Name_3"] = __v), Val.Out(__v => L["CallFunc_GetInfo_bIsValid_3"] = __v) });
     L_1104:
         L["CallFunc_Conv_StringToName_ReturnValue_2"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetInfo_Name_3") });
     L_1129:
@@ -1353,7 +1353,7 @@ public static Val GetRewardDisplayInfo(IHost H, Val self, Val[] args)
     L_163B:
         goto L_174C;
     L_1640:
-        _ = H.Call("GetInfo", new Val[] { self, GetLocal(L, "Item"), GetLocal(L, "CallFunc_GetInfo_Name_2"), GetLocal(L, "CallFunc_GetInfo_bIsValid_2") });
+        _ = H.Call("GetInfo", new Val[] { self, GetLocal(L, "Item"), Val.Out(__v => L["CallFunc_GetInfo_Name_2"] = __v), Val.Out(__v => L["CallFunc_GetInfo_bIsValid_2"] = __v) });
     L_1665:
         L["CallFunc_Conv_StringToName_ReturnValue_1"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetInfo_Name_2") });
     L_168A:
@@ -1412,11 +1412,11 @@ public static Val GetRewardPackInfo(IHost H, Val self, Val[] args)
     L_0000:
         L["texture"] = Val.Ref("pack_base");
     L_0013:
-        _ = H.Call("GetCardPackInfo", new Val[] { self, GetLocal(L, "Item"), GetLocal(L, "CallFunc_GetCardPackInfo_CardSet_3"), GetLocal(L, "CallFunc_GetCardPackInfo_bIsOfficerPack_3"), GetLocal(L, "CallFunc_GetCardPackInfo_GuaranteedElites_3"), GetLocal(L, "CallFunc_GetCardPackInfo_bHasFactionRestriction_3"), GetLocal(L, "CallFunc_GetCardPackInfo_Faction_3"), GetLocal(L, "CallFunc_GetCardPackInfo_GuaranteedGold_3"), GetLocal(L, "CallFunc_GetCardPackInfo_bIsValid_3") });
+        _ = H.Call("GetCardPackInfo", new Val[] { self, GetLocal(L, "Item"), Val.Out(__v => L["CallFunc_GetCardPackInfo_CardSet_3"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bIsOfficerPack_3"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_GuaranteedElites_3"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bHasFactionRestriction_3"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_Faction_3"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_GuaranteedGold_3"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bIsValid_3"] = __v) });
     L_0065:
         if (!(GetLocal(L, "CallFunc_GetCardPackInfo_bHasFactionRestriction_3")).AsBool()) goto L_086E;
     L_0073:
-        _ = H.Call("GetCardPackInfo", new Val[] { self, GetLocal(L, "Item"), GetLocal(L, "CallFunc_GetCardPackInfo_CardSet_2"), GetLocal(L, "CallFunc_GetCardPackInfo_bIsOfficerPack_2"), GetLocal(L, "CallFunc_GetCardPackInfo_GuaranteedElites_2"), GetLocal(L, "CallFunc_GetCardPackInfo_bHasFactionRestriction_2"), GetLocal(L, "CallFunc_GetCardPackInfo_Faction_2"), GetLocal(L, "CallFunc_GetCardPackInfo_GuaranteedGold_2"), GetLocal(L, "CallFunc_GetCardPackInfo_bIsValid_2") });
+        _ = H.Call("GetCardPackInfo", new Val[] { self, GetLocal(L, "Item"), Val.Out(__v => L["CallFunc_GetCardPackInfo_CardSet_2"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bIsOfficerPack_2"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_GuaranteedElites_2"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bHasFactionRestriction_2"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_Faction_2"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_GuaranteedGold_2"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bIsValid_2"] = __v) });
     L_00C5:
         L["isOfficerPack"] = GetLocal(L, "CallFunc_GetCardPackInfo_bIsOfficerPack_2");
     L_00D8:
@@ -1490,7 +1490,7 @@ public static Val GetRewardPackInfo(IHost H, Val self, Val[] args)
     L_03F5:
         H.SetMember(GetLocal(L, "K2Node_MakeStruct_FormatArgumentData_1"), "ArgumentValueGender", Val.Of(0));
     L_0412:
-        _ = H.Call("GetCardPackInfo", new Val[] { self, GetLocal(L, "Item"), GetLocal(L, "CallFunc_GetCardPackInfo_CardSet"), GetLocal(L, "CallFunc_GetCardPackInfo_bIsOfficerPack"), GetLocal(L, "CallFunc_GetCardPackInfo_GuaranteedElites"), GetLocal(L, "CallFunc_GetCardPackInfo_bHasFactionRestriction"), GetLocal(L, "CallFunc_GetCardPackInfo_Faction"), GetLocal(L, "CallFunc_GetCardPackInfo_GuaranteedGold"), GetLocal(L, "CallFunc_GetCardPackInfo_bIsValid") });
+        _ = H.Call("GetCardPackInfo", new Val[] { self, GetLocal(L, "Item"), Val.Out(__v => L["CallFunc_GetCardPackInfo_CardSet"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bIsOfficerPack"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_GuaranteedElites"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bHasFactionRestriction"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_Faction"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_GuaranteedGold"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bIsValid"] = __v) });
     L_0464:
         L["Temp_byte_Variable_3"] = GetLocal(L, "CallFunc_GetCardPackInfo_Faction");
     L_047F:
@@ -1526,7 +1526,7 @@ public static Val GetRewardPackInfo(IHost H, Val self, Val[] args)
     L_0869:
         goto L_1346;
     L_086E:
-        _ = H.Call("GetCardPackInfo", new Val[] { self, GetLocal(L, "Item"), GetLocal(L, "CallFunc_GetCardPackInfo_CardSet_4"), GetLocal(L, "CallFunc_GetCardPackInfo_bIsOfficerPack_4"), GetLocal(L, "CallFunc_GetCardPackInfo_GuaranteedElites_4"), GetLocal(L, "CallFunc_GetCardPackInfo_bHasFactionRestriction_4"), GetLocal(L, "CallFunc_GetCardPackInfo_Faction_4"), GetLocal(L, "CallFunc_GetCardPackInfo_GuaranteedGold_4"), GetLocal(L, "CallFunc_GetCardPackInfo_bIsValid_4") });
+        _ = H.Call("GetCardPackInfo", new Val[] { self, GetLocal(L, "Item"), Val.Out(__v => L["CallFunc_GetCardPackInfo_CardSet_4"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bIsOfficerPack_4"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_GuaranteedElites_4"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bHasFactionRestriction_4"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_Faction_4"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_GuaranteedGold_4"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bIsValid_4"] = __v) });
     L_08C0:
         L["isOfficerPack"] = GetLocal(L, "CallFunc_GetCardPackInfo_bIsOfficerPack_4");
     L_08D3:
@@ -1548,7 +1548,7 @@ public static Val GetRewardPackInfo(IHost H, Val self, Val[] args)
     L_09E5:
         L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { GetLocal(L, "K2Node_MakeStruct_FormatArgumentData") });
     L_09F9:
-        _ = H.Call("GetCardPackInfo", new Val[] { self, GetLocal(L, "Item"), GetLocal(L, "CallFunc_GetCardPackInfo_CardSet_4"), GetLocal(L, "CallFunc_GetCardPackInfo_bIsOfficerPack_4"), GetLocal(L, "CallFunc_GetCardPackInfo_GuaranteedElites_4"), GetLocal(L, "CallFunc_GetCardPackInfo_bHasFactionRestriction_4"), GetLocal(L, "CallFunc_GetCardPackInfo_Faction_4"), GetLocal(L, "CallFunc_GetCardPackInfo_GuaranteedGold_4"), GetLocal(L, "CallFunc_GetCardPackInfo_bIsValid_4") });
+        _ = H.Call("GetCardPackInfo", new Val[] { self, GetLocal(L, "Item"), Val.Out(__v => L["CallFunc_GetCardPackInfo_CardSet_4"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bIsOfficerPack_4"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_GuaranteedElites_4"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bHasFactionRestriction_4"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_Faction_4"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_GuaranteedGold_4"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bIsValid_4"] = __v) });
     L_0A4B:
         _ = H.Call("Get Pack Text", new Val[] { Val.Ref("UIUtilityFunctions"), GetLocal(L, "CallFunc_GetCardPackInfo_CardSet_4"), GetLocal(L, "CallFunc_GetCardPackInfo_bIsOfficerPack_4"), Val.True, Val.False, Val.False, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_Get_Pack_Text_Text"] = __v) });
     L_0A96:
@@ -1556,7 +1556,7 @@ public static Val GetRewardPackInfo(IHost H, Val self, Val[] args)
     L_0AC4:
         L["setName"] = GetLocal(L, "CallFunc_Format_ReturnValue_2");
     L_0ADF:
-        _ = H.Call("GetCardPackInfo", new Val[] { self, GetLocal(L, "Item"), GetLocal(L, "CallFunc_GetCardPackInfo_CardSet_4"), GetLocal(L, "CallFunc_GetCardPackInfo_bIsOfficerPack_4"), GetLocal(L, "CallFunc_GetCardPackInfo_GuaranteedElites_4"), GetLocal(L, "CallFunc_GetCardPackInfo_bHasFactionRestriction_4"), GetLocal(L, "CallFunc_GetCardPackInfo_Faction_4"), GetLocal(L, "CallFunc_GetCardPackInfo_GuaranteedGold_4"), GetLocal(L, "CallFunc_GetCardPackInfo_bIsValid_4") });
+        _ = H.Call("GetCardPackInfo", new Val[] { self, GetLocal(L, "Item"), Val.Out(__v => L["CallFunc_GetCardPackInfo_CardSet_4"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bIsOfficerPack_4"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_GuaranteedElites_4"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bHasFactionRestriction_4"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_Faction_4"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_GuaranteedGold_4"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bIsValid_4"] = __v) });
     L_0B31:
         _ = H.Call("GetRewardPackTextureAndBubbleString", new Val[] { self, GetLocal(L, "CallFunc_GetCardPackInfo_CardSet_4"), GetLocal(L, "CallFunc_GetCardPackInfo_bIsOfficerPack_4"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetRewardPackTextureAndBubbleString_OutTexture"] = __v), Val.Out(__v => L["CallFunc_GetRewardPackTextureAndBubbleString_OutBubbleString"] = __v) });
     L_0B6C:
@@ -1642,7 +1642,7 @@ public static Val GetRewardPackInfo(IHost H, Val self, Val[] args)
     L_0EE2:
         H.SetMember(GetLocal(L, "K2Node_MakeStruct_FormatArgumentData_2"), "ArgumentValueGender", Val.Of(0));
     L_0EFF:
-        _ = H.Call("GetCardPackInfo", new Val[] { self, GetLocal(L, "Item"), GetLocal(L, "CallFunc_GetCardPackInfo_CardSet_1"), GetLocal(L, "CallFunc_GetCardPackInfo_bIsOfficerPack_1"), GetLocal(L, "CallFunc_GetCardPackInfo_GuaranteedElites_1"), GetLocal(L, "CallFunc_GetCardPackInfo_bHasFactionRestriction_1"), GetLocal(L, "CallFunc_GetCardPackInfo_Faction_1"), GetLocal(L, "CallFunc_GetCardPackInfo_GuaranteedGold_1"), GetLocal(L, "CallFunc_GetCardPackInfo_bIsValid_1") });
+        _ = H.Call("GetCardPackInfo", new Val[] { self, GetLocal(L, "Item"), Val.Out(__v => L["CallFunc_GetCardPackInfo_CardSet_1"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bIsOfficerPack_1"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_GuaranteedElites_1"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bHasFactionRestriction_1"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_Faction_1"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_GuaranteedGold_1"] = __v), Val.Out(__v => L["CallFunc_GetCardPackInfo_bIsValid_1"] = __v) });
     L_0F51:
         L["Temp_byte_Variable_1"] = GetLocal(L, "CallFunc_GetCardPackInfo_Faction_1");
     L_0F6C:
@@ -1749,7 +1749,7 @@ public static Val GetRewardStaticCardName(IHost H, Val self, Val[] args)
     L_0050:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "StaticCardName") });
     L_0075:
-        _ = H.Call("GetStaticTitle", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), GetLocal(L, "CallFunc_GetStaticTitle_title") });
+        _ = H.Call("GetStaticTitle", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(__v => L["CallFunc_GetStaticTitle_title"] = __v) });
     L_0091:
         L["text"] = GetLocal(L, "CallFunc_GetStaticTitle_title");
     L_00AC:
@@ -1777,7 +1777,7 @@ public static Val GetRewardStaticCardName(IHost H, Val self, Val[] args)
     L_024B:
         L["CallFunc_Conv_StringToName_ReturnValue_1"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_Split_LeftS_1") });
     L_0270:
-        _ = H.Call("GetStaticTitle", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_1"), GetLocal(L, "CallFunc_GetStaticTitle_title_1") });
+        _ = H.Call("GetStaticTitle", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_1"), Val.Out(__v => L["CallFunc_GetStaticTitle_title_1"] = __v) });
     L_028C:
         L["text"] = GetLocal(L, "CallFunc_GetStaticTitle_title_1");
     L_02A7:
@@ -3078,7 +3078,7 @@ public static Val PrepareNationalProgressReward(IHost H, Val self, Val[] args)
     L_1FED:
         L["CallFunc_Conv_StringToName_ReturnValue_2"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), Val.Switch(GetLocal(L, "Temp_bool_Variable"), new[] { ValueTuple.Create(Val.False, GetLocal(L, "CallFunc_Map_Find_Value_3")), ValueTuple.Create(Val.True, GetLocal(L, "CallFunc_Split_LeftS")) }, GetLocal(L, "K2Node_Select_Default_1")) });
     L_203E:
-        _ = H.Call("GetStaticRarity", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_2"), GetLocal(L, "CallFunc_GetStaticRarity_rarity") });
+        _ = H.Call("GetStaticRarity", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_2"), Val.Out(__v => L["CallFunc_GetStaticRarity_rarity"] = __v) });
     L_205A:
         _ = H.Call("GetRarityDisplayName", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "CallFunc_GetStaticRarity_rarity"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetRarityDisplayName_displayName"] = __v) });
     L_2099:

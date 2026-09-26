@@ -35,7 +35,7 @@ public static Val ExecuteUbergraph_card_unit_wirbelwind(IHost H, Val self, Val[]
             default: goto __halt;
         }
     L_000A:
-        H.SetMember(self, "_cardPlayed", GetLocal(L, "K2Node_Event_cardPlayed_1"));
+        H.SetMember(self, "_cardPlayed", H.GetVar("K2Node_Event_cardPlayed_1"));
     L_001D:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "location"), Val.Of(7)) == 0);
     L_003C:
@@ -57,7 +57,7 @@ public static Val ExecuteUbergraph_card_unit_wirbelwind(IHost H, Val self, Val[]
     L_017E:
         goto L_019B;
     L_0183:
-        H.SetMember(self, "_cardPlayed", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "_cardPlayed", H.GetVar("K2Node_Event_cardPlayed"));
     L_0196:
         goto L_001D;
     L_019B:

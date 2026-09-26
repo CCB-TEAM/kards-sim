@@ -97,19 +97,19 @@ public static Val ExecuteUbergraph_card_event_firewall(IHost H, Val self, Val[] 
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "K2Node_Event_card"), Val.Of("passive"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_card"), Val.Of("passive"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_0045:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt")).AsBool()) goto L_01F0;
     L_0053:
-        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("passive"), H.GetMember(GetLocal(L, "K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq_1"] = __v) });
+        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("passive"), H.GetMember(H.GetVar("K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq_1"] = __v) });
     L_00B2:
-        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("cantAttack:location"), H.GetMember(GetLocal(L, "K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
+        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("cantAttack:location"), H.GetMember(H.GetVar("K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
     L_011D:
         goto L_01F0;
     L_0122:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("passive"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("passive"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_0183:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("cantAttack:location"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq_1"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("cantAttack:location"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq_1"] = __v) });
     L_01F0:
         goto __halt;
     L_01F2:

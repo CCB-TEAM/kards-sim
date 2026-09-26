@@ -35,11 +35,11 @@ public static Val ExecuteUbergraph_card_unit_the_american_guard(IHost H, Val sel
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
     L_002C:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_018C;
     L_003A:
-        H.SetMember(self, "cardNameToConvertInto", GetLocal(L, "K2Node_Event_handTargetCardID"));
+        H.SetMember(self, "cardNameToConvertInto", H.GetVar("K2Node_Event_handTargetCardID"));
     L_0055:
         _ = H.Call("GetDeckByside", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_GetDeckByside_deckCardIDs"] = __v) });
     L_008B:

@@ -351,7 +351,7 @@ public static Val GetDeckTotalValue(IHost H, Val self, Val[] args)
     L_0042:
         L["CallFunc_GetDeckInfoFromString_cards"] = H.MakeArray(new Val[] {  });
     L_004D:
-        _ = H.Call("GetDeckInfoFromString", new Val[] { GetLocal(L, "CallFunc_GetActorOfClass_ReturnValue"), Val.False, GetLocal(L, "DeckCode"), GetLocal(L, "CallFunc_GetDeckInfoFromString_mainFaction"), GetLocal(L, "CallFunc_GetDeckInfoFromString_allyFaction"), GetLocal(L, "CallFunc_GetDeckInfoFromString_cards"), GetLocal(L, "CallFunc_GetDeckInfoFromString_deckCodeOut"), GetLocal(L, "CallFunc_GetDeckInfoFromString_success"), GetLocal(L, "CallFunc_GetDeckInfoFromString_reason") });
+        _ = H.Call("GetDeckInfoFromString", new Val[] { GetLocal(L, "CallFunc_GetActorOfClass_ReturnValue"), Val.False, GetLocal(L, "DeckCode"), Val.Out(__v => L["CallFunc_GetDeckInfoFromString_mainFaction"] = __v), Val.Out(__v => L["CallFunc_GetDeckInfoFromString_allyFaction"] = __v), Val.Out(__v => L["CallFunc_GetDeckInfoFromString_cards"] = __v), Val.Out(__v => L["CallFunc_GetDeckInfoFromString_deckCodeOut"] = __v), Val.Out(__v => L["CallFunc_GetDeckInfoFromString_success"] = __v), Val.Out(__v => L["CallFunc_GetDeckInfoFromString_reason"] = __v) });
     L_00AD:
         if (!(GetLocal(L, "CallFunc_GetDeckInfoFromString_success")).AsBool()) goto L_0266;
     L_00BB:
@@ -616,7 +616,7 @@ public static Val GetDisplayInfo(IHost H, Val self, Val[] args)
     L_03DF:
         L["CallFunc_GetPrimaryAssetIdList_OutPrimaryAssetIdList"] = H.MakeArray(new Val[] {  });
     L_03EA:
-        _ = H.Call("GetPrimaryAssetIdList", new Val[] { Val.Ref("KismetSystemLibrary"), H.MakeArray(new Val[] { Val.Name("Cardback") }), GetLocal(L, "CallFunc_GetPrimaryAssetIdList_OutPrimaryAssetIdList") });
+        _ = H.Call("GetPrimaryAssetIdList", new Val[] { Val.Ref("KismetSystemLibrary"), H.MakeArray(new Val[] { Val.Name("Cardback") }), Val.Out(__v => L["CallFunc_GetPrimaryAssetIdList_OutPrimaryAssetIdList"] = __v) });
     L_0418:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_042F:
@@ -1413,7 +1413,7 @@ public static Val GetDisplayInfo(IHost H, Val self, Val[] args)
     L_2509:
         L["CallFunc_Conv_StringToName_ReturnValue_2"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_Split_RightS") });
     L_252E:
-        _ = H.Call("GetStaticTitle", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_2"), GetLocal(L, "CallFunc_GetStaticTitle_title_1") });
+        _ = H.Call("GetStaticTitle", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_2"), Val.Out(__v => L["CallFunc_GetStaticTitle_title_1"] = __v) });
     L_254A:
         L["text"] = GetLocal(L, "CallFunc_GetStaticTitle_title_1");
     L_2565:
@@ -1495,7 +1495,7 @@ public static Val GetDisplayInfo(IHost H, Val self, Val[] args)
     L_2744:
         L["CallFunc_Conv_StringToName_ReturnValue_1"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_Split_LeftS_1") });
     L_2769:
-        _ = H.Call("GetStaticTitle", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_1"), GetLocal(L, "CallFunc_GetStaticTitle_title") });
+        _ = H.Call("GetStaticTitle", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_1"), Val.Out(__v => L["CallFunc_GetStaticTitle_title"] = __v) });
     L_2785:
         L["text"] = GetLocal(L, "CallFunc_GetStaticTitle_title");
     L_27A0:
@@ -1548,7 +1548,7 @@ public static Val GetDisplayInfo(IHost H, Val self, Val[] args)
     L_28E6:
         L["CallFunc_Conv_StringToName_ReturnValue_4"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_Split_RightS_2") });
     L_290B:
-        _ = H.Call("GetStaticTitle", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_4"), GetLocal(L, "CallFunc_GetStaticTitle_title_3") });
+        _ = H.Call("GetStaticTitle", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_4"), Val.Out(__v => L["CallFunc_GetStaticTitle_title_3"] = __v) });
     L_2927:
         L["text"] = GetLocal(L, "CallFunc_GetStaticTitle_title_3");
     L_2942:
@@ -1630,7 +1630,7 @@ public static Val GetDisplayInfo(IHost H, Val self, Val[] args)
     L_2B1F:
         L["CallFunc_Conv_StringToName_ReturnValue_3"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_Split_LeftS_3") });
     L_2B44:
-        _ = H.Call("GetStaticTitle", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_3"), GetLocal(L, "CallFunc_GetStaticTitle_title_2") });
+        _ = H.Call("GetStaticTitle", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_3"), Val.Out(__v => L["CallFunc_GetStaticTitle_title_2"] = __v) });
     L_2B60:
         L["text"] = GetLocal(L, "CallFunc_GetStaticTitle_title_2");
     L_2B7B:
@@ -1928,17 +1928,17 @@ public static Val GetOfferName(IHost H, Val self, Val[] args)
     L_0035:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_00D6;
     L_0043:
-        _ = H.Call("GetDetails", new Val[] { GetLocal(L, "Offer"), GetLocal(L, "CallFunc_GetDetails_OfferId"), GetLocal(L, "CallFunc_GetDetails_OfferName") });
+        _ = H.Call("GetDetails", new Val[] { GetLocal(L, "Offer"), Val.Out(__v => L["CallFunc_GetDetails_OfferId"] = __v), Val.Out(__v => L["CallFunc_GetDetails_OfferName"] = __v) });
     L_0075:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetDetails_OfferName") });
     L_009A:
-        _ = H.Call("GetStaticTitle", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), GetLocal(L, "CallFunc_GetStaticTitle_title") });
+        _ = H.Call("GetStaticTitle", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(__v => L["CallFunc_GetStaticTitle_title"] = __v) });
     L_00B6:
         L["OfferName"] = GetLocal(L, "CallFunc_GetStaticTitle_title");
     L_00D1:
         goto L_0123;
     L_00D6:
-        _ = H.Call("GetText", new Val[] { GetLocal(L, "Offer"), GetLocal(L, "CallFunc_GetText_Title"), GetLocal(L, "CallFunc_GetText_Description") });
+        _ = H.Call("GetText", new Val[] { GetLocal(L, "Offer"), Val.Out(__v => L["CallFunc_GetText_Title"] = __v), Val.Out(__v => L["CallFunc_GetText_Description"] = __v) });
     L_0108:
         L["OfferName"] = GetLocal(L, "CallFunc_GetText_Title");
     L_0123:
@@ -2720,7 +2720,7 @@ public static Val IsAltArtOffer(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_GetItems_Items"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("GetItems", new Val[] { GetLocal(L, "StoreOffer"), GetLocal(L, "CallFunc_GetItems_Items") });
+        _ = H.Call("GetItems", new Val[] { GetLocal(L, "StoreOffer"), Val.Out(__v => L["CallFunc_GetItems_Items"] = __v) });
     L_0034:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetItems_Items") });
     L_006F:
@@ -2732,7 +2732,7 @@ public static Val IsAltArtOffer(IHost H, Val self, Val[] args)
     L_00D4:
         L["CallFunc_GetItems_Items_1"] = H.MakeArray(new Val[] {  });
     L_00DF:
-        _ = H.Call("GetItems", new Val[] { GetLocal(L, "StoreOffer"), GetLocal(L, "CallFunc_GetItems_Items_1") });
+        _ = H.Call("GetItems", new Val[] { GetLocal(L, "StoreOffer"), Val.Out(__v => L["CallFunc_GetItems_Items_1"] = __v) });
     L_0108:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.ArrayGet(GetLocal(L, "CallFunc_GetItems_Items_1"), (int)(Val.Of(0)).AsInt()), "Type"), Val.Of(6)) == 0);
     L_0136:
@@ -2776,7 +2776,7 @@ public static Val isBattlePassOffer(IHost H, Val self, Val[] args)
     L_0086:
         L["CallFunc_GetItems_Items"] = H.MakeArray(new Val[] {  });
     L_0091:
-        _ = H.Call("GetItems", new Val[] { GetLocal(L, "storeOffer"), GetLocal(L, "CallFunc_GetItems_Items") });
+        _ = H.Call("GetItems", new Val[] { GetLocal(L, "storeOffer"), Val.Out(__v => L["CallFunc_GetItems_Items"] = __v) });
     L_00BA:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetItems_Items") });
     L_00F5:
@@ -2790,7 +2790,7 @@ public static Val isBattlePassOffer(IHost H, Val self, Val[] args)
     L_0149:
         L["CallFunc_GetItems_Items"] = H.MakeArray(new Val[] {  });
     L_0154:
-        _ = H.Call("GetItems", new Val[] { GetLocal(L, "storeOffer"), GetLocal(L, "CallFunc_GetItems_Items") });
+        _ = H.Call("GetItems", new Val[] { GetLocal(L, "storeOffer"), Val.Out(__v => L["CallFunc_GetItems_Items"] = __v) });
     L_017D:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetItems_Items"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_01B8:
@@ -2841,7 +2841,7 @@ public static Val IsDeckOffer(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_GetItems_Items"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("GetItems", new Val[] { GetLocal(L, "StoreOffer"), GetLocal(L, "CallFunc_GetItems_Items") });
+        _ = H.Call("GetItems", new Val[] { GetLocal(L, "StoreOffer"), Val.Out(__v => L["CallFunc_GetItems_Items"] = __v) });
     L_0034:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetItems_Items") });
     L_006F:
@@ -2853,7 +2853,7 @@ public static Val IsDeckOffer(IHost H, Val self, Val[] args)
     L_00D4:
         L["CallFunc_GetItems_Items_1"] = H.MakeArray(new Val[] {  });
     L_00DF:
-        _ = H.Call("GetItems", new Val[] { GetLocal(L, "StoreOffer"), GetLocal(L, "CallFunc_GetItems_Items_1") });
+        _ = H.Call("GetItems", new Val[] { GetLocal(L, "StoreOffer"), Val.Out(__v => L["CallFunc_GetItems_Items_1"] = __v) });
     L_0108:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.ArrayGet(GetLocal(L, "CallFunc_GetItems_Items_1"), (int)(Val.Of(0)).AsInt()), "Type"), Val.Of(4)) == 0);
     L_0136:
@@ -2883,7 +2883,7 @@ public static Val IsEmoteOffer(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_GetItems_Items_1"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("GetItems", new Val[] { GetLocal(L, "StoreOffer"), GetLocal(L, "CallFunc_GetItems_Items_1") });
+        _ = H.Call("GetItems", new Val[] { GetLocal(L, "StoreOffer"), Val.Out(__v => L["CallFunc_GetItems_Items_1"] = __v) });
     L_0034:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetItems_Items_1") });
     L_006F:
@@ -2893,7 +2893,7 @@ public static Val IsEmoteOffer(IHost H, Val self, Val[] args)
     L_009F:
         L["CallFunc_GetItems_Items"] = H.MakeArray(new Val[] {  });
     L_00AA:
-        _ = H.Call("GetItems", new Val[] { GetLocal(L, "StoreOffer"), GetLocal(L, "CallFunc_GetItems_Items") });
+        _ = H.Call("GetItems", new Val[] { GetLocal(L, "StoreOffer"), Val.Out(__v => L["CallFunc_GetItems_Items"] = __v) });
     L_00D3:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "StoreOffer"), "GroupType"), Val.Of(2)) == 0);
     L_0108:
@@ -2925,7 +2925,7 @@ public static Val IsExtended8DayOffer(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_GetItems_Items_1"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("GetItems", new Val[] { GetLocal(L, "Offer"), GetLocal(L, "CallFunc_GetItems_Items_1") });
+        _ = H.Call("GetItems", new Val[] { GetLocal(L, "Offer"), Val.Out(__v => L["CallFunc_GetItems_Items_1"] = __v) });
     L_0034:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetItems_Items_1") });
     L_006F:
@@ -2935,17 +2935,17 @@ public static Val IsExtended8DayOffer(IHost H, Val self, Val[] args)
     L_009F:
         L["CallFunc_GetItems_Items"] = H.MakeArray(new Val[] {  });
     L_00AA:
-        _ = H.Call("GetItems", new Val[] { GetLocal(L, "Offer"), GetLocal(L, "CallFunc_GetItems_Items") });
+        _ = H.Call("GetItems", new Val[] { GetLocal(L, "Offer"), Val.Out(__v => L["CallFunc_GetItems_Items"] = __v) });
     L_00D3:
-        _ = H.Call("GetInfo", new Val[] { self, H.ArrayGet(GetLocal(L, "CallFunc_GetItems_Items"), (int)(Val.Of(0)).AsInt()), GetLocal(L, "CallFunc_GetInfo_Name"), GetLocal(L, "CallFunc_GetInfo_bIsValid") });
+        _ = H.Call("GetInfo", new Val[] { self, H.ArrayGet(GetLocal(L, "CallFunc_GetItems_Items"), (int)(Val.Of(0)).AsInt()), Val.Out(__v => L["CallFunc_GetInfo_Name"] = __v), Val.Out(__v => L["CallFunc_GetInfo_bIsValid"] = __v) });
     L_00FE:
         if (!(GetLocal(L, "CallFunc_GetInfo_bIsValid")).AsBool()) goto L_01BE;
     L_010C:
         L["CallFunc_GetItems_Items"] = H.MakeArray(new Val[] {  });
     L_0117:
-        _ = H.Call("GetItems", new Val[] { GetLocal(L, "Offer"), GetLocal(L, "CallFunc_GetItems_Items") });
+        _ = H.Call("GetItems", new Val[] { GetLocal(L, "Offer"), Val.Out(__v => L["CallFunc_GetItems_Items"] = __v) });
     L_0140:
-        _ = H.Call("GetInfo", new Val[] { self, H.ArrayGet(GetLocal(L, "CallFunc_GetItems_Items"), (int)(Val.Of(0)).AsInt()), GetLocal(L, "CallFunc_GetInfo_Name"), GetLocal(L, "CallFunc_GetInfo_bIsValid") });
+        _ = H.Call("GetInfo", new Val[] { self, H.ArrayGet(GetLocal(L, "CallFunc_GetItems_Items"), (int)(Val.Of(0)).AsInt()), Val.Out(__v => L["CallFunc_GetInfo_Name"] = __v), Val.Out(__v => L["CallFunc_GetInfo_bIsValid"] = __v) });
     L_016B:
         L["CallFunc_EqualEqual_StriStri_ReturnValue"] = H.Call("EqualEqual_StriStri", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetInfo_Name"), Val.Of("token_extended_8_day_rewards") });
     L_01A6:
@@ -2994,9 +2994,9 @@ public static Val IsHQOffer(IHost H, Val self, Val[] args)
     L_0049:
         L["CallFunc_GetItems_Items"] = H.MakeArray(new Val[] {  });
     L_0054:
-        _ = H.Call("GetItems", new Val[] { GetLocal(L, "StoreOffer"), GetLocal(L, "CallFunc_GetItems_Items") });
+        _ = H.Call("GetItems", new Val[] { GetLocal(L, "StoreOffer"), Val.Out(__v => L["CallFunc_GetItems_Items"] = __v) });
     L_007D:
-        _ = H.Call("GetCardInfo", new Val[] { self, H.ArrayGet(GetLocal(L, "CallFunc_GetItems_Items"), (int)(Val.Of(0)).AsInt()), GetLocal(L, "CallFunc_GetCardInfo_Name"), GetLocal(L, "CallFunc_GetCardInfo_bIsGold"), GetLocal(L, "CallFunc_GetCardInfo_bIsValid") });
+        _ = H.Call("GetCardInfo", new Val[] { self, H.ArrayGet(GetLocal(L, "CallFunc_GetItems_Items"), (int)(Val.Of(0)).AsInt()), Val.Out(__v => L["CallFunc_GetCardInfo_Name"] = __v), Val.Out(__v => L["CallFunc_GetCardInfo_bIsGold"] = __v), Val.Out(__v => L["CallFunc_GetCardInfo_bIsValid"] = __v) });
     L_00B1:
         if (!(GetLocal(L, "CallFunc_GetCardInfo_bIsValid")).AsBool())
         {
@@ -3011,9 +3011,9 @@ public static Val IsHQOffer(IHost H, Val self, Val[] args)
     L_00BB:
         L["CallFunc_GetItems_Items"] = H.MakeArray(new Val[] {  });
     L_00C6:
-        _ = H.Call("GetItems", new Val[] { GetLocal(L, "StoreOffer"), GetLocal(L, "CallFunc_GetItems_Items") });
+        _ = H.Call("GetItems", new Val[] { GetLocal(L, "StoreOffer"), Val.Out(__v => L["CallFunc_GetItems_Items"] = __v) });
     L_00EF:
-        _ = H.Call("GetCardInfo", new Val[] { self, H.ArrayGet(GetLocal(L, "CallFunc_GetItems_Items"), (int)(Val.Of(0)).AsInt()), GetLocal(L, "CallFunc_GetCardInfo_Name"), GetLocal(L, "CallFunc_GetCardInfo_bIsGold"), GetLocal(L, "CallFunc_GetCardInfo_bIsValid") });
+        _ = H.Call("GetCardInfo", new Val[] { self, H.ArrayGet(GetLocal(L, "CallFunc_GetItems_Items"), (int)(Val.Of(0)).AsInt()), Val.Out(__v => L["CallFunc_GetCardInfo_Name"] = __v), Val.Out(__v => L["CallFunc_GetCardInfo_bIsGold"] = __v), Val.Out(__v => L["CallFunc_GetCardInfo_bIsValid"] = __v) });
     L_0123:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetCardInfo_Name") });
     L_0148:
@@ -3090,9 +3090,9 @@ public static Val ReloadCardWidgetByAltArtOffer(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_GetItems_Items"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("GetItems", new Val[] { GetLocal(L, "Offer"), GetLocal(L, "CallFunc_GetItems_Items") });
+        _ = H.Call("GetItems", new Val[] { GetLocal(L, "Offer"), Val.Out(__v => L["CallFunc_GetItems_Items"] = __v) });
     L_0034:
-        _ = H.Call("GetInfo", new Val[] { self, H.ArrayGet(GetLocal(L, "CallFunc_GetItems_Items"), (int)(Val.Of(0)).AsInt()), GetLocal(L, "CallFunc_GetInfo_Name"), GetLocal(L, "CallFunc_GetInfo_bIsValid") });
+        _ = H.Call("GetInfo", new Val[] { self, H.ArrayGet(GetLocal(L, "CallFunc_GetItems_Items"), (int)(Val.Of(0)).AsInt()), Val.Out(__v => L["CallFunc_GetInfo_Name"] = __v), Val.Out(__v => L["CallFunc_GetInfo_bIsValid"] = __v) });
     L_005F:
         _ = H.Call("GetAltArtCardNameAndIndex", new Val[] { self, GetLocal(L, "CallFunc_GetInfo_Name"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetAltArtCardNameAndIndex_CardName"] = __v), Val.Out(__v => L["CallFunc_GetAltArtCardNameAndIndex_Index"] = __v) });
     L_0091:
@@ -3120,9 +3120,9 @@ public static Val ReloadCardWidgetByCardOffer(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_GetItems_Items"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("GetItems", new Val[] { GetLocal(L, "Offer"), GetLocal(L, "CallFunc_GetItems_Items") });
+        _ = H.Call("GetItems", new Val[] { GetLocal(L, "Offer"), Val.Out(__v => L["CallFunc_GetItems_Items"] = __v) });
     L_0034:
-        _ = H.Call("GetCardInfo", new Val[] { self, H.ArrayGet(GetLocal(L, "CallFunc_GetItems_Items"), (int)(Val.Of(0)).AsInt()), GetLocal(L, "CallFunc_GetCardInfo_Name"), GetLocal(L, "CallFunc_GetCardInfo_bIsGold"), GetLocal(L, "CallFunc_GetCardInfo_bIsValid") });
+        _ = H.Call("GetCardInfo", new Val[] { self, H.ArrayGet(GetLocal(L, "CallFunc_GetItems_Items"), (int)(Val.Of(0)).AsInt()), Val.Out(__v => L["CallFunc_GetCardInfo_Name"] = __v), Val.Out(__v => L["CallFunc_GetCardInfo_bIsGold"] = __v), Val.Out(__v => L["CallFunc_GetCardInfo_bIsValid"] = __v) });
     L_0068:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetCardInfo_Name") });
     L_008D:
@@ -3130,9 +3130,9 @@ public static Val ReloadCardWidgetByCardOffer(IHost H, Val self, Val[] args)
     L_00C5:
         L["CallFunc_GetItems_Items"] = H.MakeArray(new Val[] {  });
     L_00D0:
-        _ = H.Call("GetItems", new Val[] { GetLocal(L, "Offer"), GetLocal(L, "CallFunc_GetItems_Items") });
+        _ = H.Call("GetItems", new Val[] { GetLocal(L, "Offer"), Val.Out(__v => L["CallFunc_GetItems_Items"] = __v) });
     L_00F9:
-        _ = H.Call("GetCardInfo", new Val[] { self, H.ArrayGet(GetLocal(L, "CallFunc_GetItems_Items"), (int)(Val.Of(0)).AsInt()), GetLocal(L, "CallFunc_GetCardInfo_Name"), GetLocal(L, "CallFunc_GetCardInfo_bIsGold"), GetLocal(L, "CallFunc_GetCardInfo_bIsValid") });
+        _ = H.Call("GetCardInfo", new Val[] { self, H.ArrayGet(GetLocal(L, "CallFunc_GetItems_Items"), (int)(Val.Of(0)).AsInt()), Val.Out(__v => L["CallFunc_GetCardInfo_Name"] = __v), Val.Out(__v => L["CallFunc_GetCardInfo_bIsGold"] = __v), Val.Out(__v => L["CallFunc_GetCardInfo_bIsValid"] = __v) });
     L_012D:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetCardInfo_Name") });
     L_0152:
@@ -3185,11 +3185,11 @@ public static Val SetDetailsImage(IHost H, Val self, Val[] args)
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_00DA;
     L_002B:
-        _ = H.Call("GetDetailsImage", new Val[] { GetLocal(L, "Offer"), GetLocal(L, "CallFunc_GetDetailsImage_URL"), GetLocal(L, "CallFunc_GetDetailsImage_bIsValid") });
+        _ = H.Call("GetDetailsImage", new Val[] { GetLocal(L, "Offer"), Val.Out(__v => L["CallFunc_GetDetailsImage_URL"] = __v), Val.Out(__v => L["CallFunc_GetDetailsImage_bIsValid"] = __v) });
     L_005D:
         if (!(GetLocal(L, "CallFunc_GetDetailsImage_bIsValid")).AsBool()) goto L_0131;
     L_006B:
-        _ = H.Call("GetDetailsImage", new Val[] { GetLocal(L, "Offer"), GetLocal(L, "CallFunc_GetDetailsImage_URL"), GetLocal(L, "CallFunc_GetDetailsImage_bIsValid") });
+        _ = H.Call("GetDetailsImage", new Val[] { GetLocal(L, "Offer"), Val.Out(__v => L["CallFunc_GetDetailsImage_URL"] = __v), Val.Out(__v => L["CallFunc_GetDetailsImage_bIsValid"] = __v) });
     L_009D:
         _ = H.Call("SetImageURL", new Val[] { GetLocal(L, "DownloadedImage"), GetLocal(L, "CallFunc_GetDetailsImage_URL"), Val.Name("Store"), Val.Of("") });
     L_00D5:
@@ -3217,9 +3217,9 @@ public static Val SetEmoteOfferText(IHost H, Val self, Val[] args)
     L_0000:
         L["CallFunc_GetItems_Items"] = H.MakeArray(new Val[] {  });
     L_000B:
-        _ = H.Call("GetItems", new Val[] { GetLocal(L, "StoreOffer"), GetLocal(L, "CallFunc_GetItems_Items") });
+        _ = H.Call("GetItems", new Val[] { GetLocal(L, "StoreOffer"), Val.Out(__v => L["CallFunc_GetItems_Items"] = __v) });
     L_0034:
-        _ = H.Call("GetInfo", new Val[] { self, H.ArrayGet(GetLocal(L, "CallFunc_GetItems_Items"), (int)(Val.Of(0)).AsInt()), GetLocal(L, "CallFunc_GetInfo_Name"), GetLocal(L, "CallFunc_GetInfo_bIsValid") });
+        _ = H.Call("GetInfo", new Val[] { self, H.ArrayGet(GetLocal(L, "CallFunc_GetItems_Items"), (int)(Val.Of(0)).AsInt()), Val.Out(__v => L["CallFunc_GetInfo_Name"] = __v), Val.Out(__v => L["CallFunc_GetInfo_bIsValid"] = __v) });
     L_005F:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_GetInfo_Name") });
     L_0084:
@@ -3275,11 +3275,11 @@ public static Val SetThumbnailImage(IHost H, Val self, Val[] args)
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_00DA;
     L_002B:
-        _ = H.Call("GetThumbnailImage", new Val[] { GetLocal(L, "Offer"), GetLocal(L, "CallFunc_GetThumbnailImage_URL"), GetLocal(L, "CallFunc_GetThumbnailImage_bIsValid") });
+        _ = H.Call("GetThumbnailImage", new Val[] { GetLocal(L, "Offer"), Val.Out(__v => L["CallFunc_GetThumbnailImage_URL"] = __v), Val.Out(__v => L["CallFunc_GetThumbnailImage_bIsValid"] = __v) });
     L_005D:
         if (!(GetLocal(L, "CallFunc_GetThumbnailImage_bIsValid")).AsBool()) goto L_0131;
     L_006B:
-        _ = H.Call("GetThumbnailImage", new Val[] { GetLocal(L, "Offer"), GetLocal(L, "CallFunc_GetThumbnailImage_URL"), GetLocal(L, "CallFunc_GetThumbnailImage_bIsValid") });
+        _ = H.Call("GetThumbnailImage", new Val[] { GetLocal(L, "Offer"), Val.Out(__v => L["CallFunc_GetThumbnailImage_URL"] = __v), Val.Out(__v => L["CallFunc_GetThumbnailImage_bIsValid"] = __v) });
     L_009D:
         _ = H.Call("SetImageURL", new Val[] { GetLocal(L, "DownloadedImage"), GetLocal(L, "CallFunc_GetThumbnailImage_URL"), Val.Name("Store"), Val.Of("") });
     L_00D5:

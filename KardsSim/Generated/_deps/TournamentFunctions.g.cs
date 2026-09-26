@@ -239,7 +239,7 @@ public static Val Get_Next_Tournament_Date_Time(IHost H, Val self, Val[] args)
     L_03EC:
         _ = H.Call("Get Server UTC", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_Get_Server_UTC_serverUTC_1"] = __v) });
     L_0422:
-        _ = H.Call("BreakDateTime", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_Get_Server_UTC_serverUTC_1"), GetLocal(L, "CallFunc_BreakDateTime_Year"), GetLocal(L, "CallFunc_BreakDateTime_Month"), GetLocal(L, "CallFunc_BreakDateTime_Day"), GetLocal(L, "CallFunc_BreakDateTime_Hour"), GetLocal(L, "CallFunc_BreakDateTime_Minute"), GetLocal(L, "CallFunc_BreakDateTime_Second"), GetLocal(L, "CallFunc_BreakDateTime_Millisecond") });
+        _ = H.Call("BreakDateTime", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_Get_Server_UTC_serverUTC_1"), Val.Out(__v => L["CallFunc_BreakDateTime_Year"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Month"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Day"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Hour"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Minute"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Second"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Millisecond"] = __v) });
     L_0474:
         L["CallFunc_MakeDateTime_ReturnValue"] = H.Call("MakeDateTime", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_BreakDateTime_Year"), GetLocal(L, "CallFunc_BreakDateTime_Month"), GetLocal(L, "CallFunc_BreakDateTime_Day"), GetLocal(L, "endHour"), Val.Of(0), Val.Of(0), Val.Of(0) });
     L_04C3:
@@ -263,7 +263,7 @@ public static Val Get_Next_Tournament_Date_Time(IHost H, Val self, Val[] args)
     L_057E:
         L["CallFunc_AddTimespanToDateTime_ReturnValue"] = H.Call("AddTimespanToDateTime", new Val[] { self, GetLocal(L, "CallFunc_Get_Server_UTC_serverUTC_2"), GetLocal(L, "CallFunc_MakeTimespan_ReturnValue") });
     L_05AC:
-        _ = H.Call("BreakDateTime", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_AddTimespanToDateTime_ReturnValue"), GetLocal(L, "CallFunc_BreakDateTime_Year_1"), GetLocal(L, "CallFunc_BreakDateTime_Month_1"), GetLocal(L, "CallFunc_BreakDateTime_Day_1"), GetLocal(L, "CallFunc_BreakDateTime_Hour_1"), GetLocal(L, "CallFunc_BreakDateTime_Minute_1"), GetLocal(L, "CallFunc_BreakDateTime_Second_1"), GetLocal(L, "CallFunc_BreakDateTime_Millisecond_1") });
+        _ = H.Call("BreakDateTime", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_AddTimespanToDateTime_ReturnValue"), Val.Out(__v => L["CallFunc_BreakDateTime_Year_1"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Month_1"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Day_1"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Hour_1"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Minute_1"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Second_1"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Millisecond_1"] = __v) });
     L_05FE:
         L["CallFunc_MakeDateTime_ReturnValue_1"] = H.Call("MakeDateTime", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_BreakDateTime_Year_1"), GetLocal(L, "CallFunc_BreakDateTime_Month_1"), GetLocal(L, "CallFunc_BreakDateTime_Day_1"), GetLocal(L, "startHour"), Val.Of(0), Val.Of(0), Val.Of(0) });
     L_064D:
@@ -741,7 +741,7 @@ public static Val Get_Tournament_State(IHost H, Val self, Val[] args)
     L_0381:
         _ = H.Call("Get Server UTC", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_Get_Server_UTC_serverUTC_2"] = __v) });
     L_03B7:
-        _ = H.Call("BreakDateTime", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_Get_Server_UTC_serverUTC_2"), GetLocal(L, "CallFunc_BreakDateTime_Year"), GetLocal(L, "CallFunc_BreakDateTime_Month"), GetLocal(L, "CallFunc_BreakDateTime_Day"), GetLocal(L, "CallFunc_BreakDateTime_Hour"), GetLocal(L, "CallFunc_BreakDateTime_Minute"), GetLocal(L, "CallFunc_BreakDateTime_Second"), GetLocal(L, "CallFunc_BreakDateTime_Millisecond") });
+        _ = H.Call("BreakDateTime", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_Get_Server_UTC_serverUTC_2"), Val.Out(__v => L["CallFunc_BreakDateTime_Year"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Month"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Day"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Hour"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Minute"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Second"] = __v), Val.Out(__v => L["CallFunc_BreakDateTime_Millisecond"] = __v) });
     L_0409:
         _ = H.Call("Get Tournament Schedule", new Val[] { self, GetLocal(L, "InMiniSitNGo"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_Get_Tournament_Schedule_OutDays"] = __v), Val.Out(__v => L["CallFunc_Get_Tournament_Schedule_OutHourStart"] = __v), Val.Out(__v => L["CallFunc_Get_Tournament_Schedule_OutHourEnd"] = __v), Val.Out(__v => L["CallFunc_Get_Tournament_Schedule_OutText"] = __v) });
     L_044D:

@@ -77,9 +77,9 @@ public static Val ExecuteUbergraph_card_unit_sturmovik_pol(IHost H, Val self, Va
     L_006B:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_007E:
-        _ = H.Call("getTotalHeavyArmor", new Val[] { GetLocal(L, "K2Node_Event_survivor"), Val.Out(__v => L["CallFunc_getTotalHeavyArmor_totalHeavyArmor_1"] = __v) });
+        _ = H.Call("getTotalHeavyArmor", new Val[] { H.GetVar("K2Node_Event_survivor"), Val.Out(__v => L["CallFunc_getTotalHeavyArmor_totalHeavyArmor_1"] = __v) });
     L_00A7:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_survivor"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_survivor"), "side"), H.GetMember(self, "side")) == 0);
     L_00E3:
         L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalHeavyArmor_totalHeavyArmor_1"), Val.Of(0)) > 0);
     L_0105:
@@ -89,7 +89,7 @@ public static Val ExecuteUbergraph_card_unit_sturmovik_pol(IHost H, Val self, Va
     L_0151:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_1")).AsBool()) goto L_0176;
     L_015F:
-        _ = H.Call("Apply The Buff", new Val[] { self, GetLocal(L, "K2Node_Event_survivor") });
+        _ = H.Call("Apply The Buff", new Val[] { self, H.GetVar("K2Node_Event_survivor") });
     L_0176:
         goto __halt;
     L_0178:

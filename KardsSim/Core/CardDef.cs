@@ -39,6 +39,44 @@ public sealed class CardDef
 
     public bool Has(Kw k) => (Keywords & k) != 0;
 
+    /// <summary>
+    /// 老兵版本的卡 id（没有则 null）。
+    ///
+    /// <para>
+    /// 判定依据是 <c>spawnCardName</c> 里以 <c>_vet</c> 结尾、且卡库里真实存在的项。
+    /// 注意这个字段是<b>分号分隔的多值</b>（还会列天气卡之类），不是老兵专用 ——
+    /// 直接当成单个老兵名会错（236 张有值，只有 41 张是真老兵升级）。
+    /// </para>
+    ///
+    /// <para>
+    /// 这个属性是 <c>getHasVeteranUpgrade</c> 的正确语义：<b>「能否升级成老兵」</b>，
+    /// 而不是「已经是老兵」。混淆两者会让 <c>MakeVeteran</c> 的守卫
+    /// <c>!IsVeteran &amp;&amp; getHasVeteranUpgrade</c> 恒为假，老兵机制整条失效。
+    /// </para>
+    /// </summary>
+    public string VeteranUpgradeId { get; private set; }
+
+    /// <summary>是否有可用的老兵升级。</summary>
+    public bool HasVeteranUpgrade => VeteranUpgradeId is not null;
+
+    /// <summary>在卡库加载完成后解析老兵版本（需要全局 id 表，所以不能在解析单卡时做）。</summary>
+    public void ResolveVeteranUpgrade()
+    {
+        VeteranUpgradeId = null;
+        foreach (var n in SpawnCardNames)
+        {
+            // 排除自指：有 4 张 _vet 卡的 spawnCardName 写的是它自己
+            // （card_unit_hurricane_mk_ii_c_trop_vet 等），
+            // 不排除的话它们会被当成「还能再升一次」，全池计数从 41 变 45。
+            if (string.Equals(n, Id, StringComparison.Ordinal)) continue;
+            if (n.EndsWith("_vet", StringComparison.Ordinal) && CardDb.Get(n) is not null)
+            {
+                VeteranUpgradeId = n;
+                return;
+            }
+        }
+    }
+
     /// <summary>单位才能攻击/被攻击；location 与 order 不能。</summary>
     public bool IsUnit => Type is CardType.Infantry or CardType.Tank or CardType.Fighter
                               or CardType.Bomber or CardType.Artillery or CardType.Gotcha;
@@ -90,6 +128,8 @@ public static class CardDb
             ById[d.Id] = d;
             if (!string.IsNullOrWhiteSpace(d.Name)) ByTitle[d.Name] = d;
         }
+        // 老兵版本要在全表建好之后才能解析（要查目标 id 是否真实存在）
+        foreach (var d in All) d.ResolveVeteranUpgrade();
     }
 
     private static CardDef Parse(JsonElement e)

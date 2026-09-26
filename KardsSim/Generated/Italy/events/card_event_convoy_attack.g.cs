@@ -92,7 +92,7 @@ public static Val ExecuteUbergraph_card_event_convoy_attack(IHost H, Val self, V
     L_000A:
         _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), Val.Of(2), Val.Out(__v => L["CallFunc_RandomIntFromRangeWithStream_randomResult"] = __v) });
     L_0041:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_008C:
         goto __halt;
     L_008E:

@@ -94,7 +94,7 @@ public static Val ExecuteUbergraph_card_event_grounded(IHost H, Val self, Val[] 
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("MoveCardToTopOfOwnersDeck", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Of(0), Val.Out(__v => L["CallFunc_MoveCardToTopOfOwnersDeck_qqq"] = __v) });
+        _ = H.Call("MoveCardToTopOfOwnersDeck", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Of(0), Val.Out(__v => L["CallFunc_MoveCardToTopOfOwnersDeck_qqq"] = __v) });
     L_0064:
         goto __halt;
     L_0066:

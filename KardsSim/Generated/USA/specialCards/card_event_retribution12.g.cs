@@ -135,7 +135,7 @@ public static Val ExecuteUbergraph_card_event_retribution12(IHost H, Val self, V
     L_0153:
         goto L_000F;
     L_0158:
-        _ = H.Call("getTotalAttack", new Val[] { GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
+        _ = H.Call("getTotalAttack", new Val[] { H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
     L_0181:
         H.SetMember(self, "Total Attack", GetLocal(L, "CallFunc_getTotalAttack_totalAttack"));
     L_019C:

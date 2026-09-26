@@ -517,7 +517,7 @@ public static Val ExecuteUbergraph_card_event_desert_push_cam1(IHost H, Val self
     L_0F6F:
         goto L_0BCC;
     L_0F74:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_0F87:
         goto L_000F;
     L_0F8C:

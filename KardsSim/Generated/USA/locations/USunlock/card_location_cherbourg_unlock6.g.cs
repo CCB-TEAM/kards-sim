@@ -53,7 +53,7 @@ public static Val ExecuteUbergraph_card_location_cherbourg_unlock6(IHost H, Val 
             }
         }
     L_0035:
-        L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(1)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(1)) > 0);
     L_0057:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue_1")).AsBool())
         {
@@ -196,11 +196,11 @@ public static Val ExecuteUbergraph_card_location_cherbourg_unlock6(IHost H, Val 
     L_05C4:
         L["Temp_text_Variable_1"] = Val.Of("The enemy just hit you with a <bold>Countermeasure</>. <bold>Countermeasures</> that are activated on your turn are hidden from the enemy. They are then automatically played from your hand on the next enemy turn if the conditions described on the card are met.");
     L_0702:
-        _ = H.Call("ShowTutorialMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable_1"] = __v), Val.Of("counter"), H.GetMember(GetLocal(L, "K2Node_Event_killer"), "cardID"), Val.Of(2f), Val.Out(__v => L["CallFunc_ShowTutorialMessage_qqq_1"] = __v) });
+        _ = H.Call("ShowTutorialMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable_1"] = __v), Val.Of("counter"), H.GetMember(H.GetVar("K2Node_Event_killer"), "cardID"), Val.Of(2f), Val.Out(__v => L["CallFunc_ShowTutorialMessage_qqq_1"] = __v) });
     L_0765:
         goto L_0557;
     L_076A:
-        if (!(GetLocal(L, "K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_0779;
+        if (!(H.GetVar("K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_0779;
     L_0778:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -210,7 +210,7 @@ public static Val ExecuteUbergraph_card_location_cherbourg_unlock6(IHost H, Val 
             default: goto __halt;
         }
     L_0779:
-        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_killer"), "name"), Val.Name("card_event_careless_talk")) == 0);
+        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_killer"), "name"), Val.Name("card_event_careless_talk")) == 0);
     L_07B9:
         if (!(GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue")).AsBool())
         {

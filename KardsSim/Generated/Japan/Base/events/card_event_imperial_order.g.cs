@@ -108,7 +108,7 @@ public static Val ExecuteUbergraph_card_event_imperial_order(IHost H, Val self, 
     L_0102:
         goto L_011F;
     L_0107:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_011A:
         goto L_000A;
     L_011F:

@@ -54,7 +54,7 @@ public static Val ExecuteUbergraph_card_unit_infantry_regiment_61(IHost H, Val s
     L_016A:
         goto L_0187;
     L_016F:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_0182:
         goto L_000A;
     L_0187:

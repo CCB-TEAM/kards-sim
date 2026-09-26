@@ -568,7 +568,7 @@ public static Val ExecuteUbergraph_card_location_alexandria_unlock7(IHost H, Val
             }
         }
     L_0F59:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber_1"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber_1"), Val.Of(0)) > 0);
     L_0F7B:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool())
         {

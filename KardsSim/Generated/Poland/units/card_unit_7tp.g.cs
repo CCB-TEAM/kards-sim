@@ -42,7 +42,7 @@ public static Val ExecuteUbergraph_card_unit_7tp(IHost H, Val self, Val[] args)
     L_005D:
         goto L_03C1;
     L_0062:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_survivor"), "side"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_survivor"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_009D:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_00BC:
@@ -50,7 +50,7 @@ public static Val ExecuteUbergraph_card_unit_7tp(IHost H, Val self, Val[] args)
     L_00CA:
         goto L_03C1;
     L_00CF:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_survivor"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_survivor"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_00F8:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool()) goto L_03C1;
     L_0106:

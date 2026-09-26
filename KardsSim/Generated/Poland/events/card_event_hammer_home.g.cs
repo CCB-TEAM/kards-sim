@@ -127,7 +127,7 @@ public static Val ExecuteUbergraph_card_event_hammer_home(IHost H, Val self, Val
             }
         }
     L_0036:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(H.GetMember(self, "tempCard"), "location"), Val.Of(7), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(H.GetMember(self, "tempCard"), "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_006A:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_0089:
@@ -211,7 +211,7 @@ public static Val ExecuteUbergraph_card_event_hammer_home(IHost H, Val self, Val
             default: goto __halt;
         }
     L_03FB:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_040E:
         goto L_000F;
     L_0413:

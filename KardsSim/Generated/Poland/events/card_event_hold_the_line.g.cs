@@ -107,7 +107,7 @@ public static Val ExecuteUbergraph_card_event_hold_the_line(IHost H, Val self, V
     L_0359:
         _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_036C:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardMoved"), "side"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardMoved"), "side"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide")) == 0);
     L_03A8:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_1")).AsBool())
         {
@@ -120,9 +120,9 @@ public static Val ExecuteUbergraph_card_event_hold_the_line(IHost H, Val self, V
             }
         }
     L_03B2:
-        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, GetLocal(L, "K2Node_Event_cardMoved"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
+        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, H.GetVar("K2Node_Event_cardMoved"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
     L_03CE:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "K2Node_Event_cardMoved"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_cardMoved"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_03F7:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_041D:
@@ -137,7 +137,7 @@ public static Val ExecuteUbergraph_card_event_hold_the_line(IHost H, Val self, V
             }
         }
     L_0427:
-        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(GetLocal(L, "K2Node_Event_cardMoved"), "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
+        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(H.GetVar("K2Node_Event_cardMoved"), "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
     L_0476:
         _ = H.Call("GetAllCardsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllCardsOnBoard_cards"] = __v) });
     L_04A4:

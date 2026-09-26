@@ -355,9 +355,9 @@ public static Val ExecuteUbergraph_card_event_bloody_sickle_cam1(IHost H, Val se
     L_0A06:
         goto L_09D3;
     L_0A0B:
-        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
+        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_0A2B:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_0A76:
         _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
     L_0AC1:
@@ -435,7 +435,7 @@ public static Val ExecuteUbergraph_card_event_bloody_sickle_cam1(IHost H, Val se
     L_0D76:
         goto L_09EF;
     L_0D7B:
-        if (!(GetLocal(L, "K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_0D8A;
+        if (!(H.GetVar("K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_0D8A;
     L_0D89:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -447,7 +447,7 @@ public static Val ExecuteUbergraph_card_event_bloody_sickle_cam1(IHost H, Val se
     L_0D8A:
         _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
     L_0DA6:
-        L["CallFunc_EqualEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_killer"), self) == 0);
+        L["CallFunc_EqualEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_killer"), self) == 0);
     L_0DC4:
         _ = H.Call("HasCampaignUpgrade", new Val[] { self, Val.Of(5), Val.Out(__v => L["CallFunc_HasCampaignUpgrade_doesIt_9"] = __v) });
     L_0DDC:

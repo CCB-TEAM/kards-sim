@@ -35,7 +35,7 @@ public static Val ExecuteUbergraph_card_location_german_scen2_ai(IHost H, Val se
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_Add_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_damage") + H.GetMember(self, "dmgCount"));
+        L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_damage") + H.GetMember(self, "dmgCount"));
     L_0038:
         L["CallFunc_GreaterEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), Val.Of(8)) >= 0);
     L_005A:
@@ -57,7 +57,7 @@ public static Val ExecuteUbergraph_card_location_german_scen2_ai(IHost H, Val se
     L_01AE:
         goto L_064C;
     L_01B3:
-        L["CallFunc_Add_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_damage") + H.GetMember(self, "dmgCount"));
+        L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_damage") + H.GetMember(self, "dmgCount"));
     L_01E1:
         H.SetMember(self, "dmgCount", GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"));
     L_01FC:

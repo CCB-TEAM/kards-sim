@@ -50,13 +50,13 @@ public static Val ExecuteUbergraph_card_unit_12th_guards_mechanised(IHost H, Val
     L_00A5:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_01C7;
     L_00B3:
-        _ = H.Call("IsTank", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsTank_isIt"] = __v) });
+        _ = H.Call("IsTank", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsTank_isIt"] = __v) });
     L_00DC:
-        _ = H.Call("getAndDecryptAttack", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getAndDecryptAttack_decryptedAttack"] = __v) });
+        _ = H.Call("getAndDecryptAttack", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getAndDecryptAttack_decryptedAttack"] = __v) });
     L_0105:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getAndDecryptAttack_decryptedAttack"), Val.Of(3)) > 0);
     L_0127:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_0163:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsTank_isIt")).AsBool() && (GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool());
     L_0189:

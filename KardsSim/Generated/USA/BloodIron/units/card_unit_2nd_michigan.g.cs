@@ -40,11 +40,11 @@ public static Val ExecuteUbergraph_card_unit_2nd_michigan(IHost H, Val self, Val
     L_0018:
         goto L_01C0;
     L_001D:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_kreditsSpent_1"), Val.Of(2)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_kreditsSpent_1"), Val.Of(2)) > 0);
     L_003F:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0052:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(GetLocal(L, "K2Node_Event_cardOperated"), "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(H.GetVar("K2Node_Event_cardOperated"), "side")) == 0);
     L_008E:
         _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
     L_00AA:
@@ -66,7 +66,7 @@ public static Val ExecuteUbergraph_card_unit_2nd_michigan(IHost H, Val self, Val
     L_0186:
         goto L_013D;
     L_018B:
-        L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_kreditsSpent"), Val.Of(2)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_kreditsSpent"), Val.Of(2)) > 0);
     L_01AD:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue_1")).AsBool()) goto L_01C0;
     L_01BB:

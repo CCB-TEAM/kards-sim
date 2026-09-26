@@ -309,11 +309,11 @@ public static Val ExecuteUbergraph_card_event_overwhelming_force(IHost H, Val se
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
     L_002C:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_0379;
     L_003A:
-        _ = H.Call("DiscardCardFromHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_DiscardCardFromHand_success"] = __v) });
+        _ = H.Call("DiscardCardFromHand", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_DiscardCardFromHand_success"] = __v) });
     L_007B:
         _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("targetID"), Val.Out(__v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found"] = __v) });
     L_00BC:
@@ -325,13 +325,13 @@ public static Val ExecuteUbergraph_card_event_overwhelming_force(IHost H, Val se
     L_0122:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_0379;
     L_0130:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0166:
         _ = H.Call("getAndDecryptAttack", new Val[] { GetLocal(L, "CallFunc_GetCardFromID_card"), Val.Out(__v => L["CallFunc_getAndDecryptAttack_decryptedAttack"] = __v) });
     L_018F:
         _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_getAndDecryptAttack_decryptedAttack"), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_01DA:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0210:
         _ = H.Call("getTotalDefense", new Val[] { GetLocal(L, "CallFunc_GetCardFromID_card"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
     L_0239:
@@ -345,11 +345,11 @@ public static Val ExecuteUbergraph_card_event_overwhelming_force(IHost H, Val se
     L_02BC:
         _ = H.Call("selectTargetFromHand", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_selectTargetFromHand_qqq"] = __v) });
     L_02F2:
-        L["CallFunc_IsValid_ReturnValue_1"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue_1"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_030F:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue_1")).AsBool()) goto L_0379;
     L_031D:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("targetID"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("targetID"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_0374:
         goto L_0289;
     L_0379:

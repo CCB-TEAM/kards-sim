@@ -116,11 +116,11 @@ public static Val ExecuteUbergraph_card_unit_fokker_finland(IHost H, Val self, V
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0027:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_008A;
     L_0035:
-        _ = H.Call("SuppressUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_SuppressUnit_qqq"] = __v) });
+        _ = H.Call("SuppressUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_SuppressUnit_qqq"] = __v) });
     L_008A:
         goto __halt;
     L_008C:

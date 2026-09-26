@@ -39,7 +39,7 @@ public static Val ExecuteUbergraph_card_unit_kingfisher_us(IHost H, Val self, Va
     L_001D:
         _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide") });
     L_005C:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_defenderCard"), "cardID"), GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_defenderCard"), "cardID"), GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID")) == 0);
     L_0098:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_0266;
     L_00A6:

@@ -130,7 +130,7 @@ public static Val ExecuteUbergraph_card_event_radar_alert(IHost H, Val self, Val
             default: goto __halt;
         }
     L_031B:
-        H.SetMember(self, "cardPlayed", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "cardPlayed", H.GetVar("K2Node_Event_cardPlayed"));
     L_032E:
         _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0357:
@@ -219,7 +219,7 @@ public static Val GetRandomBritishAir(IHost H, Val self, Val[] args)
     L_012F:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllActiveStaticCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_016A:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "faction"), Val.Of(2), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "faction"), Val.Of(2), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_019E:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_01BD:

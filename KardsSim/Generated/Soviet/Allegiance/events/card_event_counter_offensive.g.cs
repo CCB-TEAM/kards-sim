@@ -199,7 +199,7 @@ public static Val ExecuteUbergraph_card_event_counter_offensive(IHost H, Val sel
     L_033E:
         goto L_000F;
     L_0343:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_0356:
         goto L_0317;
     L_035B:

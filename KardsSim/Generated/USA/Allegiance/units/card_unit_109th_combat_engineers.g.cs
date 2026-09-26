@@ -36,13 +36,13 @@ public static Val ExecuteUbergraph_card_unit_109th_combat_engineers(IHost H, Val
     L_000A:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_001D:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardMoved"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardMoved"), "side"), H.GetMember(self, "side")) == 0);
     L_0059:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_007F:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_00D4;
     L_008D:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_cardMoved"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardMoved"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_00D4:
         goto __halt;
     L_00D6:

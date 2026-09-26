@@ -76,7 +76,7 @@ public static Val ExecuteUbergraph_card_event_hasty_reinforcements(IHost H, Val 
     L_0294:
         goto L_0438;
     L_0299:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_method"), Val.Of(5)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_method"), Val.Of(5)) == 0);
     L_02B8:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_02CB;
     L_02C6:
@@ -92,7 +92,7 @@ public static Val ExecuteUbergraph_card_event_hasty_reinforcements(IHost H, Val 
     L_0366:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_0438;
     L_0374:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_0387:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "tempCard") });
     L_03A4:

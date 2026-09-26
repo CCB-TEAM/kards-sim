@@ -250,7 +250,7 @@ public static Val ExecuteUbergraph_card_event_hidden_plans(IHost H, Val self, Va
             default: goto __halt;
         }
     L_0529:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_053C:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "tempCard") });
     L_0559:

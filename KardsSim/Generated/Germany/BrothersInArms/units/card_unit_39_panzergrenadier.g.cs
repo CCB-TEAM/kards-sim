@@ -100,9 +100,9 @@ public static Val ExecuteUbergraph_card_unit_39_panzergrenadier(IHost H, Val sel
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_0317;
     L_002B:
-        H.SetMember(self, "oldLocation", GetLocal(L, "K2Node_Event_oldLocation"));
+        H.SetMember(self, "oldLocation", H.GetVar("K2Node_Event_oldLocation"));
     L_0046:
-        H.SetMember(self, "newLocation", GetLocal(L, "K2Node_Event_newLocation"));
+        H.SetMember(self, "newLocation", H.GetVar("K2Node_Event_newLocation"));
     L_0061:
         L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "oldLocation"), Val.Of(7)) == 0);
     L_0080:
@@ -136,11 +136,11 @@ public static Val ExecuteUbergraph_card_unit_39_panzergrenadier(IHost H, Val sel
     L_01FD:
         goto L_0317;
     L_0202:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_021F:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_0317;
     L_022D:
-        _ = H.Call("ForceCardChangeLocation", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), H.GetMember(self, "location"), H.GetMember(self, "locationNumber"), Val.Out(__v => L["CallFunc_ForceCardChangeLocation_moved"] = __v), Val.Out(__v => L["CallFunc_ForceCardChangeLocation_oldLocation"] = __v), Val.Out(__v => L["CallFunc_ForceCardChangeLocation_oldLocationNumber"] = __v) });
+        _ = H.Call("ForceCardChangeLocation", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), H.GetMember(self, "location"), H.GetMember(self, "locationNumber"), Val.Out(__v => L["CallFunc_ForceCardChangeLocation_moved"] = __v), Val.Out(__v => L["CallFunc_ForceCardChangeLocation_oldLocation"] = __v), Val.Out(__v => L["CallFunc_ForceCardChangeLocation_oldLocationNumber"] = __v) });
     L_02A6:
         if (!(GetLocal(L, "CallFunc_ForceCardChangeLocation_moved")).AsBool()) goto L_0317;
     L_02B4:

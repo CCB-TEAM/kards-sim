@@ -110,7 +110,7 @@ public static Val ExecuteUbergraph_card_event_exiled_forces(IHost H, Val self, V
     L_0103:
         if (!(GetLocal(L, "CallFunc_JSON_GetInt_found")).AsBool()) goto L_0554;
     L_0111:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value"), GetLocal(L, "K2Node_Event_resetCardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value"), H.GetVar("K2Node_Event_resetCardID")) == 0);
     L_0137:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_0554;
     L_0145:
@@ -132,7 +132,7 @@ public static Val ExecuteUbergraph_card_event_exiled_forces(IHost H, Val self, V
     L_027D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_03BA;
     L_028B:
-        L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_turnnumber") - H.GetMember(self, "enterPlayOnTurn"));
+        L["CallFunc_Subtract_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_turnnumber") - H.GetMember(self, "enterPlayOnTurn"));
     L_02B9:
         L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue"), Val.Of(3)) == 0);
     L_02DB:
@@ -164,7 +164,7 @@ public static Val ExecuteUbergraph_card_event_exiled_forces(IHost H, Val self, V
     L_049B:
         goto L_01B2;
     L_04A0:
-        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "name"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "salvageFaction"), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardOnBattlefield_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(H.GetVar("K2Node_Event_targetCard"), "name"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "salvageFaction"), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardOnBattlefield_spawnedCardID"] = __v) });
     L_052F:
         H.SetMember(self, "tmpCard", GetLocal(L, "CallFunc_SpawnCardOnBattlefield_spawnedCardID"));
     L_054A:

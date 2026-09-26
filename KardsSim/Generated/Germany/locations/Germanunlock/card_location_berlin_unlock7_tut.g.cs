@@ -55,7 +55,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock7_tut(IHost H, Val
             }
         }
     L_0035:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(3)) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(3)) == 0);
     L_0057:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_2")).AsBool()) goto L_00D5;
     L_0065:
@@ -72,7 +72,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock7_tut(IHost H, Val
             default: goto __halt;
         }
     L_00D5:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(7)) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(7)) == 0);
     L_00F7:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_1")).AsBool())
         {
@@ -287,7 +287,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock7_tut(IHost H, Val
             default: goto __halt;
         }
     L_0A13:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber_1"), Val.Of(3)) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber_1"), Val.Of(3)) == 0);
     L_0A35:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_07BD;
     L_0A43:

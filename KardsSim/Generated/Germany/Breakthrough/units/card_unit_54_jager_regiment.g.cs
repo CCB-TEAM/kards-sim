@@ -95,19 +95,19 @@ public static Val ExecuteUbergraph_card_unit_54_jager_regiment(IHost H, Val self
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_card_1") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_card_1") });
     L_0027:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_00E5;
     L_0035:
-        _ = H.Call("ChangeOperationCost", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_card_1"), H.GetMember(self, "cardID"), Val.Of(-1), Val.Of(0), Val.True, Val.False, Val.False });
+        _ = H.Call("ChangeOperationCost", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_card_1"), H.GetMember(self, "cardID"), Val.Of(-1), Val.Of(0), Val.True, Val.False, Val.False });
     L_0075:
         goto L_00E5;
     L_007A:
-        L["CallFunc_IsValid_ReturnValue_1"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_card") });
+        L["CallFunc_IsValid_ReturnValue_1"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_card") });
     L_0097:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue_1")).AsBool()) goto L_00E5;
     L_00A5:
-        _ = H.Call("ChangeOperationCost", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_card"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(4), Val.True, Val.False, Val.False });
+        _ = H.Call("ChangeOperationCost", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_card"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(4), Val.True, Val.False, Val.False });
     L_00E5:
         goto __halt;
     L_00E7:

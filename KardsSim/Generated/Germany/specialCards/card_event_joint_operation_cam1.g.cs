@@ -51,7 +51,7 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
     L_00BA:
         if (!(GetLocal(L, "CallFunc_HasCampaignUpgrade_doesIt")).AsBool()) goto L_01BF;
     L_00C8:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "location"), Val.Of(7), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_00FC:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_011B:
@@ -338,7 +338,7 @@ public static Val ExecuteUbergraph_card_event_joint_operation_cam1(IHost H, Val 
     L_09CD:
         _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
     L_0A18:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0A41:
         _ = H.Call("HasCampaignUpgrade", new Val[] { self, Val.Of(1), Val.Out(__v => L["CallFunc_HasCampaignUpgrade_doesIt_5"] = __v) });
     L_0A59:
@@ -346,11 +346,11 @@ public static Val ExecuteUbergraph_card_event_joint_operation_cam1(IHost H, Val 
     L_0A7F:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_0AD9;
     L_0A8D:
-        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
     L_0AD9:
-        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
+        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_0AF9:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_0B44:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

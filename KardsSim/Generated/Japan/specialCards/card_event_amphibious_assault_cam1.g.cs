@@ -488,7 +488,7 @@ public static Val ExecuteUbergraph_card_event_amphibious_assault_cam1(IHost H, V
     L_08C2:
         goto L_088F;
     L_08C7:
-        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), self });
+        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), self });
     L_08F5:
         _ = H.Call("HasCampaignUpgrade", new Val[] { self, Val.Of(2), Val.Out(__v => L["CallFunc_HasCampaignUpgrade_doesIt_4"] = __v) });
     L_090D:

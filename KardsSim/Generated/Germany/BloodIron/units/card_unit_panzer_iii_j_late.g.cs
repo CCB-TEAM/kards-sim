@@ -39,13 +39,13 @@ public static Val ExecuteUbergraph_card_unit_panzer_iii_j_late(IHost H, Val self
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_0444;
     L_002B:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_damage"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_damage"), Val.Of(0)) > 0);
     L_004D:
-        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
+        _ = H.Call("IsLocation", new Val[] { H.GetVar("K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
     L_0076:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsLocation_isIt")).AsBool() && (GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool());
     L_009C:
-        L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_toCard"), "side"), H.GetMember(self, "side")) != 0);
+        L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_toCard"), "side"), H.GetMember(self, "side")) != 0);
     L_00D8:
         L["CallFunc_BooleanAND_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_NotEqual_ByteByte_ReturnValue")).AsBool());
     L_00FE:
@@ -55,13 +55,13 @@ public static Val ExecuteUbergraph_card_unit_panzer_iii_j_late(IHost H, Val self
     L_0151:
         L["CallFunc_SelectInt_ReturnValue"] = H.Call("SelectInt", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_JSON_GetInt_value"), Val.Of(0), GetLocal(L, "CallFunc_JSON_GetInt_found") });
     L_0184:
-        L["CallFunc_Add_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_damage") + GetLocal(L, "CallFunc_SelectInt_ReturnValue"));
+        L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_damage") + GetLocal(L, "CallFunc_SelectInt_ReturnValue"));
     L_01B2:
         _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("total_damage"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), Val.Out(__v => L["CallFunc_JSON_SetInt_found_1"] = __v) });
     L_01F7:
         L["CallFunc_SelectInt_ReturnValue"] = H.Call("SelectInt", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_JSON_GetInt_value"), Val.Of(0), GetLocal(L, "CallFunc_JSON_GetInt_found") });
     L_022A:
-        L["CallFunc_Add_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_damage") + GetLocal(L, "CallFunc_SelectInt_ReturnValue"));
+        L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_damage") + GetLocal(L, "CallFunc_SelectInt_ReturnValue"));
     L_0258:
         L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), Val.Of(3)) > 0);
     L_027A:
@@ -73,7 +73,7 @@ public static Val ExecuteUbergraph_card_unit_panzer_iii_j_late(IHost H, Val self
     L_02BB:
         L["CallFunc_SelectInt_ReturnValue"] = H.Call("SelectInt", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_JSON_GetInt_value"), Val.Of(0), GetLocal(L, "CallFunc_JSON_GetInt_found") });
     L_02EE:
-        L["CallFunc_Add_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_damage") + GetLocal(L, "CallFunc_SelectInt_ReturnValue"));
+        L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_damage") + GetLocal(L, "CallFunc_SelectInt_ReturnValue"));
     L_031C:
         L["CallFunc_Conv_IntToText_ReturnValue"] = H.Call("Conv_IntToText", new Val[] { Val.Ref("KismetTextLibrary"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), Val.False, Val.True, Val.Of(1), Val.Of(324) });
     L_034D:

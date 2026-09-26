@@ -38,7 +38,7 @@ public static Val ExecuteUbergraph_card_unit_sherman_firefly_pl(IHost H, Val sel
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_0190;
     L_002B:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_defenderCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_defenderCard"));
     L_003E:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "tempCard") });
     L_005B:

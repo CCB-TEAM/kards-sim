@@ -202,7 +202,7 @@ public static Val ExecuteUbergraph_card_unit_13e_dragons(IHost H, Val self, Val[
             }
         }
     L_02D1:
-        _ = H.Call("IsSameSideUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSameSideUnit_isIt_1"] = __v) });
+        _ = H.Call("IsSameSideUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSameSideUnit_isIt_1"] = __v) });
     L_0303:
         if (!(GetLocal(L, "CallFunc_IsSameSideUnit_isIt_1")).AsBool())
         {

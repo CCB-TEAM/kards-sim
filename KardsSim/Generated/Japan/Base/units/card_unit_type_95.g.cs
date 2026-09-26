@@ -38,11 +38,11 @@ public static Val ExecuteUbergraph_card_unit_type_95(IHost H, Val self, Val[] ar
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_0108;
     L_002B:
-        _ = H.Call("IsOrder", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
+        _ = H.Call("IsOrder", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
     L_0054:
         if (!(GetLocal(L, "CallFunc_IsOrder_isIt")).AsBool()) goto L_0108;
     L_0062:
-        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side") });
+        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side") });
     L_00B7:
         _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetLocationCardBySide_card"), Val.Of(1), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_00FE:

@@ -63,7 +63,7 @@ public static Val ExecuteUbergraph_card_unit_ilyushin_10(IHost H, Val self, Val[
             }
         }
     L_0065:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_00A0:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_00BF:
@@ -79,7 +79,7 @@ public static Val ExecuteUbergraph_card_unit_ilyushin_10(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_00CE:
-        H.SetMember(self, "lastDestroyedCard", GetLocal(L, "K2Node_Event_cardDestroyed"));
+        H.SetMember(self, "lastDestroyedCard", H.GetVar("K2Node_Event_cardDestroyed"));
     L_00E1:
         _ = H.Call("IsGroundUnit", new Val[] { H.GetMember(self, "lastDestroyedCard"), Val.Out(__v => L["CallFunc_IsGroundUnit_isIt_1"] = __v) });
     L_010A:

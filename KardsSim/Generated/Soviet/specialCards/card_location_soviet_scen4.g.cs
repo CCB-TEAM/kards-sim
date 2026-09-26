@@ -277,7 +277,7 @@ public static Val ExecuteUbergraph_card_location_soviet_scen4(IHost H, Val self,
     L_03B1:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_03EC:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "location"), Val.Of(7), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches_1") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches_1"] = __v) });
     L_0420:
         L["K2Node_SwitchEnum_CmpSuccess_2"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches_1"), Val.Of(0)) != 0);
     L_043F:
@@ -654,7 +654,7 @@ public static Val ExecuteUbergraph_card_location_soviet_scen4(IHost H, Val self,
     L_12E4:
         goto L_0C58;
     L_12E9:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_12FC:
         goto L_009B;
     L_1301:
@@ -707,7 +707,7 @@ public static Val ExecuteUbergraph_card_location_soviet_scen4(IHost H, Val self,
             default: goto __halt;
         }
     L_14AA:
-        if (!(GetLocal(L, "K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_14B9;
+        if (!(H.GetVar("K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_14B9;
     L_14B8:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -723,7 +723,7 @@ public static Val ExecuteUbergraph_card_location_soviet_scen4(IHost H, Val self,
             default: goto __halt;
         }
     L_14B9:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, GetLocal(L, "K2Node_Event_destroyedLocation"), Val.Of(7), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetVar("K2Node_Event_destroyedLocation"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_14D7:
         L["K2Node_SwitchEnum_CmpSuccess_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_14F6:
@@ -745,7 +745,7 @@ public static Val ExecuteUbergraph_card_location_soviet_scen4(IHost H, Val self,
     L_1505:
         _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide_8"] = __v) });
     L_1518:
-        _ = H.Call("IsSameSideUnit", new Val[] { GetLocal(L, "K2Node_Event_cardDestroyed"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_8"), Val.Out(__v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
+        _ = H.Call("IsSameSideUnit", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_8"), Val.Out(__v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
     L_154A:
         if (!(GetLocal(L, "CallFunc_IsSameSideUnit_isIt")).AsBool())
         {
@@ -895,7 +895,7 @@ public static Val ExecuteUbergraph_card_location_soviet_scen4(IHost H, Val self,
     L_1B4F:
         goto L_1283;
     L_1B54:
-        L["CallFunc_GreaterEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber_1"), Val.Of(11)) >= 0);
+        L["CallFunc_GreaterEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber_1"), Val.Of(11)) >= 0);
     L_1B76:
         if (!(GetLocal(L, "CallFunc_GreaterEqual_IntInt_ReturnValue")).AsBool())
         {
@@ -952,13 +952,13 @@ public static Val ExecuteUbergraph_card_location_soviet_scen4(IHost H, Val self,
     L_1BF7:
         L["Temp_byte_Variable_1"] = Val.Of(2);
     L_1C0B:
-        L["CallFunc_Add_IntInt_ReturnValue_1"] = (GetLocal(L, "K2Node_Event_turnnumber_1") + Val.Of(1));
+        L["CallFunc_Add_IntInt_ReturnValue_1"] = (H.GetVar("K2Node_Event_turnnumber_1") + Val.Of(1));
     L_1C35:
         L["CallFunc_Divide_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_1") / Val.Of(2));
     L_1C5F:
         L["CallFunc_Conv_IntToInt64_ReturnValue"] = H.Call("Conv_IntToInt64", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_Divide_IntInt_ReturnValue") });
     L_1C84:
-        L["CallFunc_LessEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber_1"), Val.Of(15)) <= 0);
+        L["CallFunc_LessEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber_1"), Val.Of(15)) <= 0);
     L_1CA6:
         H.SetMember(GetLocal(L, "K2Node_MakeStruct_FormatArgumentData"), "ArgumentName", Val.Of("turn"));
     L_1CC7:

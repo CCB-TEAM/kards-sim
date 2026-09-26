@@ -104,11 +104,11 @@ public static Val ExecuteUbergraph_card_unit_model_25(IHost H, Val self, Val[] a
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0027:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_0070;
     L_0035:
-        _ = H.Call("AddAttackUntilEndOfTurn", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Of(2) });
+        _ = H.Call("AddAttackUntilEndOfTurn", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Of(2) });
     L_0070:
         goto __halt;
     L_0072:

@@ -44,7 +44,7 @@ public static Val ExecuteUbergraph_card_event_ancestral_call(IHost H, Val self, 
     L_0014:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "location"), Val.Of(7), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_0083:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_00A2:
@@ -129,7 +129,7 @@ public static Val ExecuteUbergraph_card_event_ancestral_call(IHost H, Val self, 
     L_0291:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_02CC:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "location"), Val.Of(7), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches_1") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_1"), "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches_1"] = __v) });
     L_0300:
         L["K2Node_SwitchEnum_CmpSuccess_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches_1"), Val.Of(0)) != 0);
     L_031F:

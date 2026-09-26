@@ -162,7 +162,7 @@ public static Val Is_Client_Version_OK(IHost H, Val self, Val[] args)
     L_0022:
         L["CallFunc_GetJSONArray_Value"] = H.MakeArray(new Val[] {  });
     L_002D:
-        _ = H.Call("GetJSONArray", new Val[] { GetLocal(L, "CallFunc_GetEngineSubsystem_ReturnValue"), Val.Of("versions"), GetLocal(L, "CallFunc_GetJSONArray_KeyExists"), GetLocal(L, "CallFunc_GetJSONArray_Value") });
+        _ = H.Call("GetJSONArray", new Val[] { GetLocal(L, "CallFunc_GetEngineSubsystem_ReturnValue"), Val.Of("versions"), Val.Out(__v => L["CallFunc_GetJSONArray_KeyExists"] = __v), Val.Out(__v => L["CallFunc_GetJSONArray_Value"] = __v) });
     L_0069:
         if (!(GetLocal(L, "CallFunc_GetJSONArray_KeyExists")).AsBool()) goto L_087C;
     L_0077:
@@ -174,7 +174,7 @@ public static Val Is_Client_Version_OK(IHost H, Val self, Val[] args)
     L_00C2:
         L["CallFunc_GetJSONArray_Value"] = H.MakeArray(new Val[] {  });
     L_00CD:
-        _ = H.Call("GetJSONArray", new Val[] { GetLocal(L, "CallFunc_GetEngineSubsystem_ReturnValue"), Val.Of("versions"), GetLocal(L, "CallFunc_GetJSONArray_KeyExists"), GetLocal(L, "CallFunc_GetJSONArray_Value") });
+        _ = H.Call("GetJSONArray", new Val[] { GetLocal(L, "CallFunc_GetEngineSubsystem_ReturnValue"), Val.Of("versions"), Val.Out(__v => L["CallFunc_GetJSONArray_KeyExists"] = __v), Val.Out(__v => L["CallFunc_GetJSONArray_Value"] = __v) });
     L_0109:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetJSONArray_Value") });
     L_0144:
@@ -208,7 +208,7 @@ public static Val Is_Client_Version_OK(IHost H, Val self, Val[] args)
     L_02F9:
         L["CallFunc_GetJSONArray_Value"] = H.MakeArray(new Val[] {  });
     L_0304:
-        _ = H.Call("GetJSONArray", new Val[] { GetLocal(L, "CallFunc_GetEngineSubsystem_ReturnValue"), Val.Of("versions"), GetLocal(L, "CallFunc_GetJSONArray_KeyExists"), GetLocal(L, "CallFunc_GetJSONArray_Value") });
+        _ = H.Call("GetJSONArray", new Val[] { GetLocal(L, "CallFunc_GetEngineSubsystem_ReturnValue"), Val.Of("versions"), Val.Out(__v => L["CallFunc_GetJSONArray_KeyExists"] = __v), Val.Out(__v => L["CallFunc_GetJSONArray_Value"] = __v) });
     L_0340:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetJSONArray_Value"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_037B:
@@ -242,7 +242,7 @@ public static Val Is_Client_Version_OK(IHost H, Val self, Val[] args)
     L_05AC:
         L["CallFunc_GetJSONArray_Value"] = H.MakeArray(new Val[] {  });
     L_05B7:
-        _ = H.Call("GetJSONArray", new Val[] { GetLocal(L, "CallFunc_GetEngineSubsystem_ReturnValue"), Val.Of("versions"), GetLocal(L, "CallFunc_GetJSONArray_KeyExists"), GetLocal(L, "CallFunc_GetJSONArray_Value") });
+        _ = H.Call("GetJSONArray", new Val[] { GetLocal(L, "CallFunc_GetEngineSubsystem_ReturnValue"), Val.Of("versions"), Val.Out(__v => L["CallFunc_GetJSONArray_KeyExists"] = __v), Val.Out(__v => L["CallFunc_GetJSONArray_Value"] = __v) });
     L_05F3:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetJSONArray_Value"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_062E:
@@ -250,13 +250,13 @@ public static Val Is_Client_Version_OK(IHost H, Val self, Val[] args)
     L_0653:
         L["LocalVersionStringFromServer"] = GetLocal(L, "CallFunc_Conv_JsonValueToString_ReturnValue");
     L_066E:
-        _ = H.Call("GetProjectVersion", new Val[] { self, GetLocal(L, "CallFunc_GetProjectVersion_projectVersion_2") });
+        _ = H.Call("GetProjectVersion", new Val[] { self, Val.Out(__v => L["CallFunc_GetProjectVersion_projectVersion_2"] = __v) });
     L_0681:
         L["CallFunc_GetEngineSubsystem_ReturnValue"] = H.Call("GetEngineSubsystem", new Val[] { self, Val.Ref("ConfigSubsystem") });
     L_069E:
         L["CallFunc_GetJSONArray_Value"] = H.MakeArray(new Val[] {  });
     L_06A9:
-        _ = H.Call("GetJSONArray", new Val[] { GetLocal(L, "CallFunc_GetEngineSubsystem_ReturnValue"), Val.Of("versions"), GetLocal(L, "CallFunc_GetJSONArray_KeyExists"), GetLocal(L, "CallFunc_GetJSONArray_Value") });
+        _ = H.Call("GetJSONArray", new Val[] { GetLocal(L, "CallFunc_GetEngineSubsystem_ReturnValue"), Val.Of("versions"), Val.Out(__v => L["CallFunc_GetJSONArray_KeyExists"] = __v), Val.Out(__v => L["CallFunc_GetJSONArray_Value"] = __v) });
     L_06E5:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetJSONArray_Value"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0720:
@@ -292,7 +292,7 @@ public static Val Is_Client_Version_OK(IHost H, Val self, Val[] args)
     L_08D6:
         L["Temp_byte_Variable"] = GetLocal(L, "CallFunc_GetPlatformEnum_CurrentPlatform");
     L_08F1:
-        _ = H.Call("GetProjectVersion", new Val[] { self, GetLocal(L, "CallFunc_GetProjectVersion_projectVersion_1") });
+        _ = H.Call("GetProjectVersion", new Val[] { self, Val.Out(__v => L["CallFunc_GetProjectVersion_projectVersion_1"] = __v) });
     L_0904:
         L["CallFunc_Conv_StringToText_ReturnValue_1"] = H.Call("Conv_StringToText", new Val[] { Val.Ref("KismetTextLibrary"), GetLocal(L, "CallFunc_GetProjectVersion_projectVersion_1") });
     L_0929:
@@ -367,7 +367,7 @@ public static Val Is_Client_Version_OK(IHost H, Val self, Val[] args)
     L_0E5F:
         L["LocalServerVersion"] = GetLocal(L, "K2Node_MakeStruct_IntVector");
     L_0E7A:
-        _ = H.Call("GetProjectVersion", new Val[] { self, GetLocal(L, "CallFunc_GetProjectVersion_projectVersion") });
+        _ = H.Call("GetProjectVersion", new Val[] { self, Val.Out(__v => L["CallFunc_GetProjectVersion_projectVersion"] = __v) });
     L_0E8D:
         _ = H.Call("GetProjectSemanticVersion", new Val[] { self, GetLocal(L, "CallFunc_GetProjectVersion_projectVersion"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetProjectSemanticVersion_FullString_1"] = __v), Val.Out(__v => L["CallFunc_GetProjectSemanticVersion_Major_1"] = __v), Val.Out(__v => L["CallFunc_GetProjectSemanticVersion_Minor_1"] = __v), Val.Out(__v => L["CallFunc_GetProjectSemanticVersion_Patch_1"] = __v) });
     L_0ED1:

@@ -34,11 +34,11 @@ public static Val ExecuteUbergraph_card_location_german_scen4_ai(IHost H, Val se
             default: goto __halt;
         }
     L_000A:
-        if (!(GetLocal(L, "K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_001D;
+        if (!(H.GetVar("K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_001D;
     L_0018:
         goto L_011A;
     L_001D:
-        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "name"), Val.Name("card_unit_158_nachschub")) == 0);
+        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "name"), Val.Name("card_unit_158_nachschub")) == 0);
     L_005D:
         if (!(GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue")).AsBool()) goto L_011A;
     L_006B:

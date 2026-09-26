@@ -40,7 +40,7 @@ public static Val ExecuteUbergraph_card_unit_kv_1_1941(IHost H, Val self, Val[] 
     L_002B:
         _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide_1"] = __v) });
     L_003E:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_drawnSide"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_1")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_drawnSide"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_1")) == 0);
     L_0064:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_010B;
     L_0072:

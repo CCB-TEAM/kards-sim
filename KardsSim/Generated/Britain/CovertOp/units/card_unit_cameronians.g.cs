@@ -42,15 +42,15 @@ public static Val ExecuteUbergraph_card_unit_cameronians(IHost H, Val self, Val[
     L_006D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_014A;
     L_007B:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_00B7:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_014A;
     L_00C5:
-        _ = H.Call("IsOrder", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
+        _ = H.Call("IsOrder", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
     L_00EE:
         if (!(GetLocal(L, "CallFunc_IsOrder_isIt")).AsBool()) goto L_014A;
     L_00FC:
-        _ = H.Call("isSecondOrderThisTurn", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), Val.Out(__v => L["CallFunc_isSecondOrderThisTurn_isSecondOrder"] = __v) });
+        _ = H.Call("isSecondOrderThisTurn", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), Val.Out(__v => L["CallFunc_isSecondOrderThisTurn_isSecondOrder"] = __v) });
     L_0132:
         if (!(GetLocal(L, "CallFunc_isSecondOrderThisTurn_isSecondOrder")).AsBool()) goto L_014A;
     L_0140:

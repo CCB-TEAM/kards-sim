@@ -49,9 +49,9 @@ public static Val ExecuteUbergraph_card_unit_grumman_goose(IHost H, Val self, Va
     L_00B1:
         goto L_0267;
     L_00B6:
-        H.SetMember(self, "Defender Card", GetLocal(L, "K2Node_Event_defenderCard_1"));
+        H.SetMember(self, "Defender Card", H.GetVar("K2Node_Event_defenderCard_1"));
     L_00C9:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_attackerCard"), "side"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_attackerCard"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_0104:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_0123:
@@ -77,7 +77,7 @@ public static Val ExecuteUbergraph_card_unit_grumman_goose(IHost H, Val self, Va
     L_024A:
         goto L_020C;
     L_024F:
-        H.SetMember(self, "Defender Card", GetLocal(L, "K2Node_Event_defenderCard"));
+        H.SetMember(self, "Defender Card", H.GetVar("K2Node_Event_defenderCard"));
     L_0262:
         goto L_0136;
     L_0267:

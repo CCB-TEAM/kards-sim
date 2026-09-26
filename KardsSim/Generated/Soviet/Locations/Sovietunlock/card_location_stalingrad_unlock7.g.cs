@@ -198,7 +198,7 @@ public static Val ExecuteUbergraph_card_location_stalingrad_unlock7(IHost H, Val
     L_0344:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_037F:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "faction"), Val.Of(4), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "faction"), Val.Of(4), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_03B3:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_03D2:
@@ -654,7 +654,7 @@ public static Val ExecuteUbergraph_card_location_stalingrad_unlock7(IHost H, Val
             }
         }
     L_10B0:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber_1"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber_1"), Val.Of(0)) > 0);
     L_10D2:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool())
         {

@@ -34,17 +34,17 @@ public static Val ExecuteUbergraph_card_event_hms_spectre(IHost H, Val self, Val
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsOrder", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
+        _ = H.Call("IsOrder", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
     L_0033:
-        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
+        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
     L_004F:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt")).AsBool() && (GetLocal(L, "CallFunc_IsOrder_isIt")).AsBool());
     L_0075:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_014E;
     L_0083:
-        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID"), Val.True, Val.True, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
+        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), Val.True, Val.True, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
     L_00D2:
-        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID") });
+        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID") });
     L_00FC:
         _ = H.Call("ConvertCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_MakeArray_Array"), H.GetMember(self, "cardID"), Val.Name("card_event_plan"), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ConvertCard_newCardIDs"] = __v) });
     L_014E:

@@ -39,11 +39,11 @@ public static Val ExecuteUbergraph_card_event_women_at_work(IHost H, Val self, V
     L_0040:
         goto L_01D8;
     L_0045:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
     L_0067:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_01D8;
     L_0075:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_00AB:
         _ = H.Call("getTotalOperationCost", new Val[] { GetLocal(L, "CallFunc_GetCardFromID_card"), Val.Out(__v => L["CallFunc_getTotalOperationCost_totalOperationCost"] = __v) });
     L_00D4:
@@ -51,7 +51,7 @@ public static Val ExecuteUbergraph_card_event_women_at_work(IHost H, Val self, V
     L_00F6:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue_1")).AsBool()) goto L_01D8;
     L_0104:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_013A:
         _ = H.Call("getTotalOperationCost", new Val[] { GetLocal(L, "CallFunc_GetCardFromID_card"), Val.Out(__v => L["CallFunc_getTotalOperationCost_totalOperationCost"] = __v) });
     L_0163:
@@ -89,7 +89,7 @@ public static Val IsValidHandTarget(IHost H, Val self, Val[] args)
         var __out_reason = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["reason"] = Val.Nothing;
     L_0000:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "targetedCard"), "faction"), Val.Of(5), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "targetedCard"), "faction"), Val.Of(5), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_0034:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_0053:

@@ -93,7 +93,7 @@ public static Val ExecuteUbergraph_card_unit_158th_bushmasters(IHost H, Val self
     L_0196:
         goto L_014A;
     L_019B:
-        H.SetMember(self, "level", GetLocal(L, "K2Node_Event_amount_1"));
+        H.SetMember(self, "level", H.GetVar("K2Node_Event_amount_1"));
     L_01B6:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "level"), Val.Of(0)) > 0);
     L_01D8:
@@ -110,7 +110,7 @@ public static Val ExecuteUbergraph_card_unit_158th_bushmasters(IHost H, Val self
     L_01E2:
         goto L_017F;
     L_01E7:
-        H.SetMember(self, "level", GetLocal(L, "K2Node_Event_amount"));
+        H.SetMember(self, "level", H.GetVar("K2Node_Event_amount"));
     L_0202:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0215:

@@ -156,9 +156,9 @@ public static Val ExecuteUbergraph_card_unit_1er_marins_commandos(IHost H, Val s
             }
         }
     L_03A9:
-        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "K2Node_Event_cardGainingDefense"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
+        _ = H.Call("IsLocation", new Val[] { H.GetVar("K2Node_Event_cardGainingDefense"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
     L_03D2:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardGainingDefense"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardGainingDefense"), "side"), H.GetMember(self, "side")) == 0);
     L_040E:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsLocation_isIt")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool());
     L_0434:

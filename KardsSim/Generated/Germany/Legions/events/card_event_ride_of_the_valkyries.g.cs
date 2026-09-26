@@ -68,11 +68,11 @@ public static Val ExecuteUbergraph_card_event_ride_of_the_valkyries(IHost H, Val
     L_0257:
         _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("turn_damage"), Val.Out(__v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found"] = __v) });
     L_029B:
-        L["CallFunc_Add_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_damage") + GetLocal(L, "CallFunc_JSON_GetInt_value"));
+        L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_damage") + GetLocal(L, "CallFunc_JSON_GetInt_value"));
     L_02C9:
         _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("turn_damage"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), Val.Out(__v => L["CallFunc_JSON_SetInt_found_1"] = __v) });
     L_030D:
-        L["CallFunc_Add_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_damage") + GetLocal(L, "CallFunc_JSON_GetInt_value"));
+        L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_damage") + GetLocal(L, "CallFunc_JSON_GetInt_value"));
     L_033B:
         L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), Val.Of(2)) > 0);
     L_035D:
@@ -86,13 +86,13 @@ public static Val ExecuteUbergraph_card_event_ride_of_the_valkyries(IHost H, Val
     L_0417:
         goto L_0559;
     L_041C:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_damage"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_damage"), Val.Of(0)) > 0);
     L_043E:
-        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
+        _ = H.Call("IsLocation", new Val[] { H.GetVar("K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
     L_0467:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsLocation_isIt")).AsBool() && (GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool());
     L_048D:
-        L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_toCard"), "side"), H.GetMember(self, "side")) != 0);
+        L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_toCard"), "side"), H.GetMember(self, "side")) != 0);
     L_04C9:
         L["CallFunc_BooleanAND_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_NotEqual_ByteByte_ReturnValue")).AsBool());
     L_04EF:

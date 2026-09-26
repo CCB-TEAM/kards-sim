@@ -151,7 +151,7 @@ public static Val ExecuteUbergraph_card_event_spearhead(IHost H, Val self, Val[]
     L_01ED:
         __ef.Push(641);
     L_01F2:
-        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), self });
+        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), self });
     L_0220:
         L["CallFunc_Add_IntInt_ReturnValue_2"] = (H.GetMember(self, "count") + Val.Of(1));
     L_024A:
@@ -241,7 +241,7 @@ public static Val ExecuteUbergraph_card_event_spearhead(IHost H, Val self, Val[]
     L_050D:
         goto L_0026;
     L_0512:
-        _ = H.Call("GetAdjacentCards", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), Val.False, Val.Out(__v => L["CallFunc_GetAdjacentCards_adjacentCards"] = __v) });
+        _ = H.Call("GetAdjacentCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), Val.False, Val.Out(__v => L["CallFunc_GetAdjacentCards_adjacentCards"] = __v) });
     L_0549:
         L["Temp_int_Loop_Counter_Variable_1"] = Val.Of(0);
     L_0560:

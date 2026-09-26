@@ -75,7 +75,7 @@ public static Val ExecuteUbergraph_card_unit_2_marine_division(IHost H, Val self
     L_0132:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_0224;
     L_0140:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_017B:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_019A:
@@ -83,7 +83,7 @@ public static Val ExecuteUbergraph_card_unit_2_marine_division(IHost H, Val self
     L_01A8:
         goto L_0224;
     L_01AD:
-        _ = H.Call("getHasGameplayTag", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), H.MakeArray(new Val[] { Val.Name("subtype.navy") }), Val.Out(__v => L["CallFunc_GetHasGameplayTag_hasTag"] = __v) });
+        _ = H.Call("getHasGameplayTag", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), H.MakeArray(new Val[] { Val.Name("subtype.navy") }), Val.Out(__v => L["CallFunc_GetHasGameplayTag_hasTag"] = __v) });
     L_01F1:
         if (!(GetLocal(L, "CallFunc_GetHasGameplayTag_hasTag")).AsBool()) goto L_0224;
     L_01FF:

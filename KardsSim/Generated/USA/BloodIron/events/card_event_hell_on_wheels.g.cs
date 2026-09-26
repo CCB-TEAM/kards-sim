@@ -130,9 +130,9 @@ public static Val ExecuteUbergraph_card_event_hell_on_wheels(IHost H, Val self, 
     L_013B:
         goto L_0228;
     L_0140:
-        _ = H.Call("ShouldSpawnFrontline", new Val[] { self, GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_ShouldSpawnFrontline_should"] = __v) });
+        _ = H.Call("ShouldSpawnFrontline", new Val[] { self, H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_ShouldSpawnFrontline_should"] = __v) });
     L_0160:
-        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_ShouldSpawnFrontline_should"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "name"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), Val.Of(0), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_ShouldSpawnFrontline_should"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "name"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), Val.Of(0), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
     L_01DA:
         _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_SpawnCardonBattlefield_spawnedCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0210:

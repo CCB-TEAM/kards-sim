@@ -63,13 +63,13 @@ public static Val ExecuteUbergraph_card_unit_144th_infantry_regiment(IHost H, Va
     L_022B:
         goto L_045E;
     L_0230:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_026C:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_045E;
     L_027A:
         goto L_000A;
     L_027F:
-        _ = H.Call("EnumCompareSide", new Val[] { self, GetLocal(L, "K2Node_Event_sideGaining"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetVar("K2Node_Event_sideGaining"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_02A4:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_02C3:
@@ -77,7 +77,7 @@ public static Val ExecuteUbergraph_card_unit_144th_infantry_regiment(IHost H, Va
     L_02D1:
         goto L_045E;
     L_02D6:
-        if (!(GetLocal(L, "K2Node_Event_isNegativeGain")).AsBool()) goto L_045E;
+        if (!(H.GetVar("K2Node_Event_isNegativeGain")).AsBool()) goto L_045E;
     L_02E4:
         _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("slots_lost"), Val.Out(__v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found"] = __v) });
     L_0327:

@@ -102,9 +102,9 @@ public static Val ExecuteUbergraph_card_event_aid_to_the_front(IHost H, Val self
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Of(2), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Of(2), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_0051:
-        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Of(2), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
+        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Of(2), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq"] = __v) });
     L_0098:
         goto __halt;
     L_009A:

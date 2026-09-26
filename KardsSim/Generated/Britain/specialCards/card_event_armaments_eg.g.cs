@@ -102,7 +102,7 @@ public static Val ExecuteUbergraph_card_event_armaments_eg(IHost H, Val self, Va
     L_0080:
         _ = H.Call("GetPlayFromHandDamage", new Val[] { self, self, Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_0098:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_00E3:
         goto L_02A4;
     L_00E8:

@@ -90,11 +90,11 @@ public static Val ExecuteUbergraph_card_unit_wolves_of_tuscany(IHost H, Val self
             default: goto __halt;
         }
     L_001E:
-        H.SetMember(self, "oldLocation", GetLocal(L, "K2Node_Event_oldLocation"));
+        H.SetMember(self, "oldLocation", H.GetVar("K2Node_Event_oldLocation"));
     L_0039:
-        H.SetMember(self, "newLocation", GetLocal(L, "K2Node_Event_newLocation"));
+        H.SetMember(self, "newLocation", H.GetVar("K2Node_Event_newLocation"));
     L_0054:
-        if (!(GetLocal(L, "K2Node_Event_ChangeOwner")).AsBool()) goto L_01FA;
+        if (!(H.GetVar("K2Node_Event_ChangeOwner")).AsBool()) goto L_01FA;
     L_0062:
         _ = H.Call("RemoveBuff", new Val[] { self });
     L_0070:
@@ -221,7 +221,7 @@ public static Val ExecuteUbergraph_card_unit_wolves_of_tuscany(IHost H, Val self
             }
         }
     L_0364:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardPlayed_1"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardPlayed_1"));
     L_0377:
         L["CallFunc_IsValid_ReturnValue_1"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "_tmp_card") });
     L_0394:
@@ -246,7 +246,7 @@ public static Val ExecuteUbergraph_card_unit_wolves_of_tuscany(IHost H, Val self
             default: goto __halt;
         }
     L_03AD:
-        L["CallFunc_NotEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_cardPlayed"), self) != 0);
+        L["CallFunc_NotEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_cardPlayed"), self) != 0);
     L_03CB:
         if (!(GetLocal(L, "CallFunc_NotEqual_ObjectObject_ReturnValue")).AsBool())
         {
@@ -259,7 +259,7 @@ public static Val ExecuteUbergraph_card_unit_wolves_of_tuscany(IHost H, Val self
             }
         }
     L_03D5:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardPlayed"));
     L_03E8:
         goto L_0377;
     L_03ED:

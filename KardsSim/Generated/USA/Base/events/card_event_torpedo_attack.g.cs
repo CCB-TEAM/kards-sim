@@ -49,7 +49,7 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
     L_0098:
         H.SetMember(self, "targetOverride", GetLocal(L, "CallFunc_GetTargetedCard_card"));
     L_00AB:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "location"), Val.Of(7), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_00DF:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_00FE:
@@ -122,7 +122,7 @@ public static Val ExecuteUbergraph_card_event_torpedo_attack(IHost H, Val self, 
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), self });
+        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), self });
     L_0038:
         goto __halt;
     L_003A:

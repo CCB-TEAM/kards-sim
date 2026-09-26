@@ -467,13 +467,13 @@ public static Val ExecuteUbergraph_card_location_german_scen1(IHost H, Val self,
     L_0F56:
         L["Temp_text_Variable_6"] = Val.Of("");
     L_0F6A:
-        L["CallFunc_Add_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_turnnumber") + Val.Of(1));
+        L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_turnnumber") + Val.Of(1));
     L_0F94:
         L["CallFunc_Divide_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_Add_IntInt_ReturnValue") / Val.Of(2));
     L_0FBE:
         L["CallFunc_Conv_IntToInt64_ReturnValue"] = H.Call("Conv_IntToInt64", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_Divide_IntInt_ReturnValue") });
     L_0FE3:
-        L["CallFunc_LessEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(15)) <= 0);
+        L["CallFunc_LessEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(15)) <= 0);
     L_1005:
         H.SetMember(GetLocal(L, "K2Node_MakeStruct_FormatArgumentData"), "ArgumentName", Val.Of("turn"));
     L_1026:
@@ -526,7 +526,7 @@ public static Val ExecuteUbergraph_card_location_german_scen1(IHost H, Val self,
             }
         }
     L_125F:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(1)) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(1)) == 0);
     L_1281:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_1")).AsBool()) goto L_0E9E;
     L_128F:
@@ -534,7 +534,7 @@ public static Val ExecuteUbergraph_card_location_german_scen1(IHost H, Val self,
     L_12D3:
         goto L_0E9E;
     L_12D8:
-        L["CallFunc_LessEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(8)) <= 0);
+        L["CallFunc_LessEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(8)) <= 0);
     L_12FA:
         if (!(GetLocal(L, "CallFunc_LessEqual_IntInt_ReturnValue_1")).AsBool()) goto L_1518;
     L_1308:
@@ -553,7 +553,7 @@ public static Val ExecuteUbergraph_card_location_german_scen1(IHost H, Val self,
             default: goto __halt;
         }
     L_1344:
-        L["CallFunc_Add_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_turnnumber") + Val.Of(1));
+        L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_turnnumber") + Val.Of(1));
     L_136E:
         L["CallFunc_Divide_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_Add_IntInt_ReturnValue") / Val.Of(2));
     L_1398:
@@ -605,7 +605,7 @@ public static Val ExecuteUbergraph_card_location_german_scen1(IHost H, Val self,
             default: goto __halt;
         }
     L_1554:
-        L["CallFunc_Add_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_turnnumber") + Val.Of(1));
+        L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_turnnumber") + Val.Of(1));
     L_157E:
         L["CallFunc_Divide_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_Add_IntInt_ReturnValue") / Val.Of(2));
     L_15A8:

@@ -132,11 +132,11 @@ public static Val ExecuteUbergraph_card_event_emergency_measures(IHost H, Val se
     L_0040:
         goto L_0116;
     L_0045:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
     L_0067:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_0116;
     L_0075:
-        _ = H.Call("DiscardCardFromHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_DiscardCardFromHand_success"] = __v) });
+        _ = H.Call("DiscardCardFromHand", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_DiscardCardFromHand_success"] = __v) });
     L_00B6:
         _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, Val.Name("card_unit_raf_ground_crew"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), Val.Of(0), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
     L_0116:

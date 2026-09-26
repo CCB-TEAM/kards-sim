@@ -184,7 +184,7 @@ public static Val ExecuteUbergraph_card_unit_5_panzergrenadier(IHost H, Val self
     L_0328:
         goto L_02F5;
     L_032D:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("trigger"), H.GetMember(GetLocal(L, "K2Node_Event_card_1"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("trigger"), H.GetMember(H.GetVar("K2Node_Event_card_1"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_038E:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -194,7 +194,7 @@ public static Val ExecuteUbergraph_card_unit_5_panzergrenadier(IHost H, Val self
             default: goto __halt;
         }
     L_038F:
-        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("trigger"), H.GetMember(GetLocal(L, "K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
+        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("trigger"), H.GetMember(H.GetVar("K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
     L_03EE:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -236,7 +236,7 @@ public static Val ExecuteUbergraph_card_unit_5_panzergrenadier(IHost H, Val self
     L_04A9:
         goto L_0311;
     L_04AE:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "K2Node_Event_survivor"), Val.Of("trigger"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt_1"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_survivor"), Val.Of("trigger"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt_1"] = __v) });
     L_04E9:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt_1")).AsBool())
         {
@@ -249,7 +249,7 @@ public static Val ExecuteUbergraph_card_unit_5_panzergrenadier(IHost H, Val self
             }
         }
     L_04F3:
-        H.SetMember(self, "survivor", GetLocal(L, "K2Node_Event_survivor"));
+        H.SetMember(self, "survivor", H.GetVar("K2Node_Event_survivor"));
     L_0506:
         goto L_0429;
     L_050B:

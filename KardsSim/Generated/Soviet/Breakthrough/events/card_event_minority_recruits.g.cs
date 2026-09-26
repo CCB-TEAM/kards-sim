@@ -140,7 +140,7 @@ public static Val ExecuteUbergraph_card_event_minority_recruits(IHost H, Val sel
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("TakeControlOfEnemyUnit", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID") });
+        _ = H.Call("TakeControlOfEnemyUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID") });
     L_0040:
         goto __halt;
     L_0042:

@@ -39,13 +39,13 @@ public static Val ExecuteUbergraph_card_event_lysander_pl(IHost H, Val self, Val
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_01BB;
     L_002B:
-        _ = H.Call("IsGotcha", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed_1"), Val.Out(__v => L["CallFunc_IsGotcha_isIt"] = __v) });
+        _ = H.Call("IsGotcha", new Val[] { H.GetVar("K2Node_Event_cardPlayed_1"), Val.Out(__v => L["CallFunc_IsGotcha_isIt"] = __v) });
     L_0054:
-        L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed_1"), "side"), H.GetMember(self, "side")) != 0);
+        L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed_1"), "side"), H.GetMember(self, "side")) != 0);
     L_0090:
         L["CallFunc_Not_PreBool_ReturnValue"] = H.Call("Not_PreBool", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_IsGotcha_isIt") });
     L_00AD:
-        L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed_1"), "cardSeen")).AsBool() && (GetLocal(L, "CallFunc_NotEqual_ByteByte_ReturnValue")).AsBool());
+        L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((H.GetMember(H.GetVar("K2Node_Event_cardPlayed_1"), "cardSeen")).AsBool() && (GetLocal(L, "CallFunc_NotEqual_ByteByte_ReturnValue")).AsBool());
     L_00E9:
         L["CallFunc_BooleanAND_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_Not_PreBool_ReturnValue")).AsBool());
     L_010F:

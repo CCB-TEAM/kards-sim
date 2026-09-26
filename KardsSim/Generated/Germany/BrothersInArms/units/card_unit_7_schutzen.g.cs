@@ -35,17 +35,17 @@ public static Val ExecuteUbergraph_card_unit_7_schutzen(IHost H, Val self, Val[]
             default: goto __halt;
         }
     L_000A:
-        if (!(GetLocal(L, "K2Node_Event_selfIsAlsoGettingDestroyed")).AsBool()) goto L_001D;
+        if (!(H.GetVar("K2Node_Event_selfIsAlsoGettingDestroyed")).AsBool()) goto L_001D;
     L_0018:
         goto L_01F9;
     L_001D:
-        if (!(GetLocal(L, "K2Node_Event_destroyedInCombat")).AsBool()) goto L_01F9;
+        if (!(H.GetVar("K2Node_Event_destroyedInCombat")).AsBool()) goto L_01F9;
     L_002B:
         _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
     L_0047:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0070:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_killer"), "cardID"), H.GetMember(self, "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_killer"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_00AC:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool());
     L_00D2:

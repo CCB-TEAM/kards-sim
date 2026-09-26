@@ -35,15 +35,15 @@ public static Val ExecuteUbergraph_card_unit_t19_howitzer(IHost H, Val self, Val
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_defenderCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_defenderCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0033:
-        L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool() && (H.GetMember(GetLocal(L, "K2Node_Event_defenderCard"), "hasGuard")).AsBool());
+        L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool() && (H.GetMember(H.GetVar("K2Node_Event_defenderCard"), "hasGuard")).AsBool());
     L_006F:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_031C;
     L_007D:
-        _ = H.Call("RemoveGuard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_defenderCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.True });
+        _ = H.Call("RemoveGuard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_defenderCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.True });
     L_00CB:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardAffected"), H.GetMember(GetLocal(L, "K2Node_Event_defenderCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardAffected"), H.GetMember(H.GetVar("K2Node_Event_defenderCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_0126:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_0154:

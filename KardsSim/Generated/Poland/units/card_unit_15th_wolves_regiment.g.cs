@@ -94,7 +94,7 @@ public static Val ExecuteUbergraph_card_unit_15th_wolves_regiment(IHost H, Val s
             default: goto __halt;
         }
     L_000A:
-        H.SetMember(self, "tmpCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tmpCard", H.GetVar("K2Node_Event_targetCard"));
     L_001D:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "tmpCard") });
     L_003A:
@@ -104,7 +104,7 @@ public static Val ExecuteUbergraph_card_unit_15th_wolves_regiment(IHost H, Val s
     L_0072:
         _ = H.Call("ConvertCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_MakeArray_Array"), H.GetMember(self, "cardID"), Val.Name("card_unit_routed_troops"), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ConvertCard_newCardIDs"] = __v) });
     L_00C4:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetMember(self, "tmpCard"), "side"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetMember(self, "tmpCard"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_00FF:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_011E:

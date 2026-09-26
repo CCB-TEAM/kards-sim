@@ -64,17 +64,17 @@ public static Val ExecuteUbergraph_card_event_eagle_day(IHost H, Val self, Val[]
     L_01FD:
         goto L_035C;
     L_0202:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
     L_0224:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_035C;
     L_0232:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0268:
         _ = H.Call("PlayCardDirectlyFromHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetCardFromID_card"), Val.False, H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_PlayCardDirectlyFromHand_qqq"] = __v), Val.Of(-1) });
     L_02AD:
-        _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), H.GetMember(self, "cardID") });
     L_02E3:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("dashUnit"), GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("dashUnit"), H.GetVar("K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_0324:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_0352:

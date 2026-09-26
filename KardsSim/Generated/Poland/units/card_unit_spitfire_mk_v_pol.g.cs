@@ -112,7 +112,7 @@ public static Val ExecuteUbergraph_card_unit_spitfire_mk_v_pol(IHost H, Val self
     L_010F:
         goto L_012C;
     L_0114:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_0127:
         goto L_000A;
     L_012C:

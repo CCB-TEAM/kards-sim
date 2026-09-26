@@ -49,7 +49,7 @@ public static Val ExecuteUbergraph_card_event_one_roof(IHost H, Val self, Val[] 
     L_00FF:
         goto L_0455;
     L_0104:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_0140:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_0455;
     L_014E:
@@ -65,7 +65,7 @@ public static Val ExecuteUbergraph_card_event_one_roof(IHost H, Val self, Val[] 
     L_0267:
         goto L_0455;
     L_026C:
-        _ = H.Call("EnumCompareSide", new Val[] { self, GetLocal(L, "K2Node_Event_sideGaining"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetVar("K2Node_Event_sideGaining"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_0291:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_02B0:
@@ -73,7 +73,7 @@ public static Val ExecuteUbergraph_card_event_one_roof(IHost H, Val self, Val[] 
     L_02BE:
         goto L_0455;
     L_02C3:
-        if (!(GetLocal(L, "K2Node_Event_isNegativeGain")).AsBool()) goto L_0455;
+        if (!(H.GetVar("K2Node_Event_isNegativeGain")).AsBool()) goto L_0455;
     L_02D1:
         _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("slots_lost"), Val.Out(__v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found"] = __v) });
     L_0314:

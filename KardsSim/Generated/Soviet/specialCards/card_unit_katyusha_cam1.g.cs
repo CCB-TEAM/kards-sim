@@ -172,7 +172,7 @@ public static Val ExecuteUbergraph_card_unit_katyusha_cam1(IHost H, Val self, Va
     L_03D5:
         goto L_03A2;
     L_03DA:
-        _ = H.Call("getTotalDefense", new Val[] { GetLocal(L, "K2Node_Event_defenderCard"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
+        _ = H.Call("getTotalDefense", new Val[] { H.GetVar("K2Node_Event_defenderCard"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
     L_0403:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalDefense_totalDefense"), Val.Of(0)) > 0);
     L_0425:
@@ -193,7 +193,7 @@ public static Val ExecuteUbergraph_card_unit_katyusha_cam1(IHost H, Val self, Va
     L_0476:
         _ = H.Call("RandomIntFromRangeWithStream", new Val[] { H.GetMember(self, "cardFunction"), Val.Of(0), GetLocal(L, "CallFunc_SelectInt_ReturnValue"), Val.Out(__v => L["CallFunc_RandomIntFromRangeWithStream_randomResult"] = __v) });
     L_04B1:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_defenderCard"), GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_defenderCard"), GetLocal(L, "CallFunc_RandomIntFromRangeWithStream_randomResult"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_04FC:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

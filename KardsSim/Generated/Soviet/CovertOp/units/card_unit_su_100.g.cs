@@ -76,7 +76,7 @@ public static Val ExecuteUbergraph_card_unit_su_100(IHost H, Val self, Val[] arg
     L_022D:
         goto L_000A;
     L_0232:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_toCard"), "cardID"), H.GetMember(self, "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_toCard"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_026E:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_02F1;
     L_027C:

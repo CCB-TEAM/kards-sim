@@ -103,13 +103,13 @@ public static Val ExecuteUbergraph_card_unit_me_bf_109_brothers(IHost H, Val sel
     L_0050:
         if (!(GetLocal(L, "CallFunc_JSON_GetInt_found_1")).AsBool()) goto L_0944;
     L_005E:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value_1"), H.GetMember(GetLocal(L, "K2Node_Event_cardLeaving"), "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value_1"), H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "cardID")) == 0);
     L_009A:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_0944;
     L_00A8:
-        H.SetMember(self, "affected_CardID", H.GetMember(GetLocal(L, "K2Node_Event_cardLeaving"), "cardID"));
+        H.SetMember(self, "affected_CardID", H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "cardID"));
     L_00D9:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(Val.Of(8), H.GetMember(GetLocal(L, "K2Node_Event_cardLeaving"), "location")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(Val.Of(8), H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "location")) == 0);
     L_010E:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_020E;
     L_011C:
@@ -155,7 +155,7 @@ public static Val ExecuteUbergraph_card_unit_me_bf_109_brothers(IHost H, Val sel
     L_04D5:
         goto L_0346;
     L_04DA:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_goingToLocation"), Val.Of(8)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_goingToLocation"), Val.Of(8)) == 0);
     L_04F9:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_1")).AsBool()) goto L_048C;
     L_0507:
@@ -165,23 +165,23 @@ public static Val ExecuteUbergraph_card_unit_me_bf_109_brothers(IHost H, Val sel
     L_053A:
         goto L_0944;
     L_053F:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("passive"), H.GetMember(GetLocal(L, "K2Node_Event_card_2"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("passive"), H.GetMember(H.GetVar("K2Node_Event_card_2"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_05A0:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affected_card"), H.GetMember(GetLocal(L, "K2Node_Event_card_2"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found_1"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affected_card"), H.GetMember(H.GetVar("K2Node_Event_card_2"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found_1"] = __v) });
     L_05FC:
         _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("ownPincer"), Val.Of(0), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_063A:
         goto L_050C;
     L_063F:
-        if (!(GetLocal(L, "K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_0652;
+        if (!(H.GetVar("K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_0652;
     L_064D:
         goto L_0944;
     L_0652:
-        if (!(GetLocal(L, "K2Node_Event_destroyedInCombat")).AsBool()) goto L_0944;
+        if (!(H.GetVar("K2Node_Event_destroyedInCombat")).AsBool()) goto L_0944;
     L_0660:
-        H.SetMember(self, "Card Destroyed", GetLocal(L, "K2Node_Event_cardDestroyed"));
+        H.SetMember(self, "Card Destroyed", H.GetVar("K2Node_Event_cardDestroyed"));
     L_0673:
-        H.SetMember(self, "Killer", GetLocal(L, "K2Node_Event_killer"));
+        H.SetMember(self, "Killer", H.GetVar("K2Node_Event_killer"));
     L_0686:
         L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetMember(H.GetMember(self, "Killer"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_06C2:
@@ -207,7 +207,7 @@ public static Val ExecuteUbergraph_card_unit_me_bf_109_brothers(IHost H, Val sel
     L_0807:
         goto L_0720;
     L_080C:
-        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("passive"), H.GetMember(GetLocal(L, "K2Node_Event_card_1"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq_4"] = __v) });
+        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("passive"), H.GetMember(H.GetVar("K2Node_Event_card_1"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq_4"] = __v) });
     L_086B:
         goto L_0944;
     L_0870:
@@ -215,11 +215,11 @@ public static Val ExecuteUbergraph_card_unit_me_bf_109_brothers(IHost H, Val sel
     L_08B6:
         if (!(GetLocal(L, "CallFunc_JSON_GetInt_found_3")).AsBool()) goto L_0944;
     L_08C4:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value_3"), H.GetMember(GetLocal(L, "K2Node_Event_card"), "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value_3"), H.GetMember(H.GetVar("K2Node_Event_card"), "cardID")) == 0);
     L_0900:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_1")).AsBool()) goto L_0944;
     L_090E:
-        H.SetMember(self, "affected_CardID", H.GetMember(GetLocal(L, "K2Node_Event_card"), "cardID"));
+        H.SetMember(self, "affected_CardID", H.GetMember(H.GetVar("K2Node_Event_card"), "cardID"));
     L_093F:
         goto L_020E;
     L_0944:

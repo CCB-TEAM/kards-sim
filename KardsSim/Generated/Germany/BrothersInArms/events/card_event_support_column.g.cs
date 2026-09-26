@@ -231,9 +231,9 @@ public static Val ExecuteUbergraph_card_event_support_column(IHost H, Val self, 
     L_00CE:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_00FC:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("passive"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("passive"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_015D:
-        _ = H.Call("updateBuffs", new Val[] { self, GetLocal(L, "K2Node_Event_targetCard") });
+        _ = H.Call("updateBuffs", new Val[] { self, H.GetVar("K2Node_Event_targetCard") });
     L_0174:
         goto L_03B9;
     L_0179:
@@ -241,7 +241,7 @@ public static Val ExecuteUbergraph_card_event_support_column(IHost H, Val self, 
     L_019B:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue_2")).AsBool()) goto L_03B9;
     L_01A9:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardReset"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardReset"));
     L_01BC:
         _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("targetCard"), Val.Out(__v => L["CallFunc_JSON_GetInt_value_1"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found_1"] = __v) });
     L_01FF:
@@ -259,7 +259,7 @@ public static Val ExecuteUbergraph_card_event_support_column(IHost H, Val self, 
     L_0299:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_03B9;
     L_02A7:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardMoved"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardMoved"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_02D0:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool()) goto L_03B9;
     L_02DE:
@@ -269,17 +269,17 @@ public static Val ExecuteUbergraph_card_event_support_column(IHost H, Val self, 
     L_0305:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue_1")).AsBool()) goto L_03B9;
     L_0313:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_card"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_card"));
     L_0326:
         goto L_01BC;
     L_032B:
         goto L_0277;
     L_0330:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_034D:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_03B9;
     L_035B:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("targetCard"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("targetCard"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_03B4:
         goto L_00CE;
     L_03B9:

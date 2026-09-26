@@ -184,7 +184,7 @@ public static Val ExecuteUbergraph_card_event_field_recon(IHost H, Val self, Val
     L_02EE:
         goto L_02BB;
     L_02F3:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_0306:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "tempCard") });
     L_0323:

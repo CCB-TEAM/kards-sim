@@ -407,7 +407,7 @@ public static Val ExecuteUbergraph_card_unit_zero_a6m2_21(IHost H, Val self, Val
             default: goto __halt;
         }
     L_000A:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed_1"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed_1"));
     L_001D:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_0030:
@@ -487,7 +487,7 @@ public static Val ExecuteUbergraph_card_unit_zero_a6m2_21(IHost H, Val self, Val
     L_03F3:
         goto L_0561;
     L_03F8:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_resetCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_resetCardID"));
     L_0413:
         _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tempCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0449:
@@ -511,15 +511,15 @@ public static Val ExecuteUbergraph_card_unit_zero_a6m2_21(IHost H, Val self, Val
     L_0504:
         goto L_0561;
     L_0509:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_051C:
         goto L_001D;
     L_0521:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_drawnCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_drawnCardID"));
     L_053C:
         goto L_0413;
     L_0541:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_spawnedCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_spawnedCardID"));
     L_055C:
         goto L_0413;
     L_0561:

@@ -206,7 +206,7 @@ public static Val CheckIfNameIsValid(IHost H, Val self, Val[] args)
     L_0132:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCharacterArrayFromString_ReturnValue"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_016D:
-        _ = H.Call("IsCharacterInNameValid", new Val[] { self, GetLocal(L, "CallFunc_Array_Get_Item"), GetLocal(L, "CallFunc_IsCharacterInNameValid_valid") });
+        _ = H.Call("IsCharacterInNameValid", new Val[] { self, GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_IsCharacterInNameValid_valid"] = __v) });
     L_0189:
         if (!(GetLocal(L, "CallFunc_IsCharacterInNameValid_valid")).AsBool()) goto L_035D;
     L_0197:

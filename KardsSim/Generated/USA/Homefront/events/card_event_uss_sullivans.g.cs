@@ -177,9 +177,9 @@ public static Val ExecuteUbergraph_card_event_uss_sullivans(IHost H, Val self, V
     L_040F:
         goto L_0048;
     L_0414:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq_1"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq_1"] = __v) });
     L_045B:
-        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq_1"] = __v) });
+        _ = H.Call("ChangeDefense", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeDefense_qqq_1"] = __v) });
     L_04A2:
         goto L_000F;
     L_04A7:

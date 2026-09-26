@@ -42,7 +42,7 @@ public static Val ExecuteUbergraph_card_event_prolonged_siege(IHost H, Val self,
             default: goto __halt;
         }
     L_000F:
-        _ = H.Call("updateCustomJsonIfNeeded", new Val[] { self, GetLocal(L, "K2Node_Event_resetCardID") });
+        _ = H.Call("updateCustomJsonIfNeeded", new Val[] { self, H.GetVar("K2Node_Event_resetCardID") });
     L_0026:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

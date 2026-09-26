@@ -213,7 +213,7 @@ public static Val ExecuteUbergraph_card_event_sneak_attack(IHost H, Val self, Va
     L_04E1:
         goto L_0291;
     L_04E6:
-        H.SetMember(self, "Target Card", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "Target Card", H.GetVar("K2Node_Event_targetCard"));
     L_04F9:
         H.SetMember(self, "exiledCard", H.GetMember(H.GetMember(self, "Target Card"), "name"));
     L_052A:

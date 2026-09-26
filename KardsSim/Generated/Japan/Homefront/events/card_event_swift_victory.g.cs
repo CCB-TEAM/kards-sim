@@ -170,7 +170,7 @@ public static Val ExecuteUbergraph_card_event_swift_victory(IHost H, Val self, V
     L_034F:
         goto L_031C;
     L_0354:
-        H.SetMember(self, "Target Card", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "Target Card", H.GetVar("K2Node_Event_targetCard"));
     L_0367:
         _ = H.Call("GetPlayFromHandDamage", new Val[] { self, H.GetMember(self, "Target Card"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_0387:

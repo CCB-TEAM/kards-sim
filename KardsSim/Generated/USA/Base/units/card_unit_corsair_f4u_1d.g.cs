@@ -132,7 +132,7 @@ public static Val ExecuteUbergraph_card_unit_corsair_f4u_1d(IHost H, Val self, V
     L_0464:
         goto L_0094;
     L_0469:
-        H.SetMember(self, "destroyer", GetLocal(L, "K2Node_Event_killer"));
+        H.SetMember(self, "destroyer", H.GetVar("K2Node_Event_killer"));
     L_047C:
         goto L_000F;
     L_0481:

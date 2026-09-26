@@ -549,7 +549,7 @@ public static Val ExecuteUbergraph_card_location_usa_scen3(IHost H, Val self, Va
             }
         }
     L_126F:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(1)) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(1)) == 0);
     L_1291:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_2")).AsBool()) goto L_0B87;
     L_129F:
@@ -576,7 +576,7 @@ public static Val ExecuteUbergraph_card_location_usa_scen3(IHost H, Val self, Va
     L_131F:
         if (!(GetLocal(L, "CallFunc_LessEqual_IntInt_ReturnValue_3")).AsBool()) goto L_1501;
     L_132D:
-        L["CallFunc_Add_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_turnnumber") + Val.Of(1));
+        L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_turnnumber") + Val.Of(1));
     L_1357:
         L["CallFunc_Divide_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_Add_IntInt_ReturnValue") / Val.Of(2));
     L_1381:
@@ -630,9 +630,9 @@ public static Val ExecuteUbergraph_card_location_usa_scen3(IHost H, Val self, Va
     L_154A:
         L["Temp_byte_Variable_1"] = Val.Of(2);
     L_155E:
-        L["CallFunc_Add_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_turnnumber") + Val.Of(1));
+        L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_turnnumber") + Val.Of(1));
     L_1588:
-        L["CallFunc_LessEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(15)) <= 0);
+        L["CallFunc_LessEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(15)) <= 0);
     L_15AA:
         L["CallFunc_Divide_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_Add_IntInt_ReturnValue") / Val.Of(2));
     L_15D4:
@@ -775,9 +775,9 @@ public static Val ExecuteUbergraph_card_location_usa_scen3(IHost H, Val self, Va
             }
         }
     L_1C4E:
-        L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_newLocation"), Val.Of(7)) != 0);
+        L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_newLocation"), Val.Of(7)) != 0);
     L_1C6D:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_oldLocation"), Val.Of(7)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_oldLocation"), Val.Of(7)) == 0);
     L_1C8C:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_1")).AsBool() && (GetLocal(L, "CallFunc_NotEqual_ByteByte_ReturnValue")).AsBool());
     L_1CB2:

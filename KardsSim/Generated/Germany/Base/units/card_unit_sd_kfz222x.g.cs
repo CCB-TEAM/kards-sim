@@ -464,7 +464,7 @@ public static Val ExecuteUbergraph_card_unit_sd_kfz222x(IHost H, Val self, Val[]
     L_0C98:
         goto L_0ABA;
     L_0C9D:
-        H.SetMember(self, "Card Being Revealed", GetLocal(L, "K2Node_Event_cardBeingRevealed"));
+        H.SetMember(self, "Card Being Revealed", H.GetVar("K2Node_Event_cardBeingRevealed"));
     L_0CB0:
         goto L_0AD6;
     L_0CB5:

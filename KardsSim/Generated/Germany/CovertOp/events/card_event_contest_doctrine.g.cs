@@ -67,7 +67,7 @@ public static Val ExecuteUbergraph_card_event_contest_doctrine(IHost H, Val self
     L_02AE:
         goto L_02CB;
     L_02B3:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_02C6:
         goto L_000A;
     L_02CB:

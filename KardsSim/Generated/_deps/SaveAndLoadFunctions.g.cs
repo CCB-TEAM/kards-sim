@@ -234,7 +234,7 @@ public static Val Delete_All_Save_Slots(IHost H, Val self, Val[] args)
     L_0005:
         L["CallFunc_SaveGameObject_GetAllSaveSlotFileNames_FileNames"] = H.MakeArray(new Val[] {  });
     L_0010:
-        _ = H.Call("SaveGameObject_GetAllSaveSlotFileNames", new Val[] { self, GetLocal(L, "CallFunc_SaveGameObject_GetAllSaveSlotFileNames_FileNames") });
+        _ = H.Call("SaveGameObject_GetAllSaveSlotFileNames", new Val[] { self, Val.Out(__v => L["CallFunc_SaveGameObject_GetAllSaveSlotFileNames_FileNames"] = __v) });
     L_0023:
         L["SaveSlotName"] = GetLocal(L, "CallFunc_SaveGameObject_GetAllSaveSlotFileNames_FileNames");
     L_003E:

@@ -94,7 +94,7 @@ public static Val ExecuteUbergraph_card_event_naval_support(IHost H, Val self, V
             default: goto __halt;
         }
     L_000A:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_001D:
         _ = H.Call("getAndDecryptAttack", new Val[] { H.GetMember(self, "tempCard"), Val.Out(__v => L["CallFunc_getAndDecryptAttack_decryptedAttack"] = __v) });
     L_0046:

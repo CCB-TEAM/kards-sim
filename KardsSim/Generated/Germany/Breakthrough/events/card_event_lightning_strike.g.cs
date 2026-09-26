@@ -50,11 +50,11 @@ public static Val ExecuteUbergraph_card_event_lightning_strike(IHost H, Val self
     L_0103:
         _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide_1"] = __v) });
     L_0116:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_drawnSide"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_1")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_drawnSide"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_1")) == 0);
     L_013C:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_0158;
     L_014A:
-        if (!(GetLocal(L, "K2Node_Event_StartOfTurnDraw")).AsBool()) goto L_000A;
+        if (!(H.GetVar("K2Node_Event_StartOfTurnDraw")).AsBool()) goto L_000A;
     L_0158:
         goto __halt;
     L_015A:

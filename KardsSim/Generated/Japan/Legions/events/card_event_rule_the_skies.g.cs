@@ -142,13 +142,13 @@ public static Val ExecuteUbergraph_card_event_rule_the_skies(IHost H, Val self, 
             default: goto __halt;
         }
     L_0465:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_damage"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_damage"), Val.Of(0)) > 0);
     L_0487:
-        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
+        _ = H.Call("IsLocation", new Val[] { H.GetVar("K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
     L_04B0:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsLocation_isIt")).AsBool() && (GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool());
     L_04D6:
-        L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_toCard"), "side"), H.GetMember(self, "side")) != 0);
+        L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_toCard"), "side"), H.GetMember(self, "side")) != 0);
     L_0512:
         L["CallFunc_BooleanAND_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_NotEqual_ByteByte_ReturnValue")).AsBool());
     L_0538:
@@ -190,11 +190,11 @@ public static Val ExecuteUbergraph_card_event_rule_the_skies(IHost H, Val self, 
     L_05DC:
         _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("turn_damage"), Val.Out(__v => L["CallFunc_JSON_GetInt_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found"] = __v) });
     L_0620:
-        L["CallFunc_Add_IntInt_ReturnValue_1"] = (GetLocal(L, "K2Node_Event_damage") + GetLocal(L, "CallFunc_JSON_GetInt_value"));
+        L["CallFunc_Add_IntInt_ReturnValue_1"] = (H.GetVar("K2Node_Event_damage") + GetLocal(L, "CallFunc_JSON_GetInt_value"));
     L_064E:
         _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("turn_damage"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_1"), Val.Out(__v => L["CallFunc_JSON_SetInt_found_1"] = __v) });
     L_0692:
-        L["CallFunc_Add_IntInt_ReturnValue_1"] = (GetLocal(L, "K2Node_Event_damage") + GetLocal(L, "CallFunc_JSON_GetInt_value"));
+        L["CallFunc_Add_IntInt_ReturnValue_1"] = (H.GetVar("K2Node_Event_damage") + GetLocal(L, "CallFunc_JSON_GetInt_value"));
     L_06C0:
         L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_1"), Val.Of(2)) > 0);
     L_06E2:

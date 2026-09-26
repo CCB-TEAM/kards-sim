@@ -41,7 +41,7 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
     L_0037:
         if (!(GetLocal(L, "CallFunc_GetTargetedCard_hasTarget")).AsBool()) goto L_00D8;
     L_0045:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "faction"), Val.Of(4), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "faction"), Val.Of(4), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_0079:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_0098:
@@ -110,9 +110,9 @@ public static Val ExecuteUbergraph_card_event_out_with_the_old(IHost H, Val self
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("TriggerDestruction", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_TriggerDestruction_qqq"] = __v) });
+        _ = H.Call("TriggerDestruction", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_TriggerDestruction_qqq"] = __v) });
     L_004B:
-        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID") });
+        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID") });
     L_0075:
         _ = H.Call("ConvertCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_MakeArray_Array"), H.GetMember(self, "cardID"), Val.Name("card_unit_yak_9"), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ConvertCard_newCardIDs"] = __v) });
     L_00C7:

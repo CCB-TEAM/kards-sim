@@ -101,7 +101,7 @@ public static Val ExecuteUbergraph_card_event_glide_bombing(IHost H, Val self, V
     L_0034:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "enterPlayOnTurn"), Val.Of(0)) > 0);
     L_0056:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue")) == 0);
     L_007C:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool());
     L_00A2:
@@ -141,7 +141,7 @@ public static Val ExecuteUbergraph_card_event_glide_bombing(IHost H, Val self, V
     L_02E4:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_1")).AsBool()) goto L_05C3;
     L_02F2:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardDestroyed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardDestroyed"));
     L_0305:
         _ = H.Call("isBuffedByCard", new Val[] { H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
     L_0337:
@@ -151,7 +151,7 @@ public static Val ExecuteUbergraph_card_event_glide_bombing(IHost H, Val self, V
     L_0390:
         goto L_05C3;
     L_0395:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_03A8:
         _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetMember(self, "tempCard"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_03D1:
@@ -177,7 +177,7 @@ public static Val ExecuteUbergraph_card_event_glide_bombing(IHost H, Val self, V
     L_055D:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue_3")).AsBool()) goto L_05C3;
     L_056B:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_card"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_card"));
     L_057E:
         _ = H.Call("isBuffedByCard", new Val[] { H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed_1"] = __v) });
     L_05B0:

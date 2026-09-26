@@ -37,9 +37,9 @@ public static Val ExecuteUbergraph_card_event_yank_the_army_weekly(IHost H, Val 
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardDeveloped"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardDeveloped"), "side"), H.GetMember(self, "side")) == 0);
     L_0046:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_instigatorID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_instigatorID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_007C:
         L["CallFunc_NotEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "name"), H.GetMember(self, "name")) != 0);
     L_00B8:
@@ -85,13 +85,13 @@ public static Val ExecuteUbergraph_card_event_yank_the_army_weekly(IHost H, Val 
     L_037C:
         goto L_021C;
     L_0381:
-        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "name"), H.GetMember(self, "name")) == 0);
+        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "name"), H.GetMember(self, "name")) == 0);
     L_03BD:
-        L["CallFunc_NotEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_cardPlayed"), self) != 0);
+        L["CallFunc_NotEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_cardPlayed"), self) != 0);
     L_03DB:
         L["CallFunc_BooleanAND_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_NotEqual_ObjectObject_ReturnValue")).AsBool());
     L_0401:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_043D:
         L["CallFunc_BooleanAND_ReturnValue_2"] = Val.Of((GetLocal(L, "CallFunc_BooleanAND_ReturnValue_1")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_1")).AsBool());
     L_0463:
@@ -101,9 +101,9 @@ public static Val ExecuteUbergraph_card_event_yank_the_army_weekly(IHost H, Val 
     L_04B6:
         if (!(GetLocal(L, "CallFunc_JSON_GetBool_value_2")).AsBool()) goto L_054D;
     L_04C4:
-        _ = H.Call("JSON_SetBool", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_cardPlayed"), Val.Of("hasDeveloped"), Val.True, Val.Out(__v => L["CallFunc_JSON_SetBool_found_2"] = __v) });
+        _ = H.Call("JSON_SetBool", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardPlayed"), Val.Of("hasDeveloped"), Val.True, Val.Out(__v => L["CallFunc_JSON_SetBool_found_2"] = __v) });
     L_0509:
-        _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID"), Val.False });
+        _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), Val.False });
     L_054D:
         goto __halt;
     L_054F:

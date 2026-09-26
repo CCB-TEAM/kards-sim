@@ -96,9 +96,9 @@ public static Val ExecuteUbergraph_card_event_fortified_position(IHost H, Val se
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
     L_0056:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, Val.Of(7), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "location"), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, Val.Of(7), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "location"), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_008A:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_00A9:
@@ -106,7 +106,7 @@ public static Val ExecuteUbergraph_card_event_fortified_position(IHost H, Val se
     L_00B7:
         goto L_0106;
     L_00BC:
-        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { GetLocal(L, "K2Node_Event_targetCard") });
+        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { H.GetVar("K2Node_Event_targetCard") });
     L_00D0:
         _ = H.Call("MakeCardRetreat", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_MakeArray_Array"), H.GetMember(self, "cardID") });
     L_0106:

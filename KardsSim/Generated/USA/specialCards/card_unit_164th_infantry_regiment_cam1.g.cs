@@ -222,7 +222,7 @@ public static Val ExecuteUbergraph_card_unit_164th_infantry_regiment_cam1(IHost 
     L_05C9:
         goto L_0510;
     L_05CE:
-        H.SetMember(self, "Killer", GetLocal(L, "K2Node_Event_killer"));
+        H.SetMember(self, "Killer", H.GetVar("K2Node_Event_killer"));
     L_05E1:
         _ = H.Call("Array_Clear", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "Cards") });
     L_060A:

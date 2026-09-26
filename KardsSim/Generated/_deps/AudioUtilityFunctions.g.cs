@@ -163,7 +163,7 @@ public static Val GetMusicForFaction(IHost H, Val self, Val[] args)
     L_0663:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_0A30;
     L_0671:
-        _ = H.Call("Array_Random", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "LocalApprovedMusic"), GetLocal(L, "CallFunc_Array_Random_OutItem"), GetLocal(L, "CallFunc_Array_Random_OutIndex") });
+        _ = H.Call("Array_Random", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "LocalApprovedMusic"), Val.Out(__v => L["CallFunc_Array_Random_OutItem"] = __v), Val.Out(__v => L["CallFunc_Array_Random_OutIndex"] = __v) });
     L_06AC:
         L["SelectedApprovedMusic"] = GetLocal(L, "CallFunc_Array_Random_OutItem");
     L_06C7:
@@ -282,7 +282,7 @@ public static Val GetRandomMusicFromFBattleMusic(IHost H, Val self, Val[] args)
     L_0066:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_0451;
     L_0074:
-        _ = H.Call("Array_Random", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(GetLocal(L, "InFBattleMusic"), "FactionMusic_31_4905A4A44780E08402AB148FEA5F9E25"), GetLocal(L, "CallFunc_Array_Random_OutItem"), GetLocal(L, "CallFunc_Array_Random_OutIndex") });
+        _ = H.Call("Array_Random", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(GetLocal(L, "InFBattleMusic"), "FactionMusic_31_4905A4A44780E08402AB148FEA5F9E25"), Val.Out(__v => L["CallFunc_Array_Random_OutItem"] = __v), Val.Out(__v => L["CallFunc_Array_Random_OutIndex"] = __v) });
     L_00B8:
         L["LocalSelectedMusic"] = GetLocal(L, "CallFunc_Array_Random_OutItem");
     L_00D3:
@@ -379,7 +379,7 @@ public static Val InitializeAudioSystem(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
     L_0000:
-        _ = H.Call("LoadAudioSettings", new Val[] { self, GetLocal(L, "CallFunc_LoadAudioSettings_MasterVolume"), GetLocal(L, "CallFunc_LoadAudioSettings_MusicVolume"), GetLocal(L, "CallFunc_LoadAudioSettings_EffectVolume"), GetLocal(L, "CallFunc_LoadAudioSettings_SaveFileValid") });
+        _ = H.Call("LoadAudioSettings", new Val[] { self, Val.Out(__v => L["CallFunc_LoadAudioSettings_MasterVolume"] = __v), Val.Out(__v => L["CallFunc_LoadAudioSettings_MusicVolume"] = __v), Val.Out(__v => L["CallFunc_LoadAudioSettings_EffectVolume"] = __v), Val.Out(__v => L["CallFunc_LoadAudioSettings_SaveFileValid"] = __v) });
     L_002E:
         L["CallFunc_Set_Master_Volume_Volume_ImplicitCast"] = GetLocal(L, "CallFunc_LoadAudioSettings_MasterVolume");
     L_004B:

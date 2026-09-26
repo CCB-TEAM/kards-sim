@@ -208,9 +208,9 @@ public static Val ExecuteUbergraph_card_unit_t19_howitzer_cam1(IHost H, Val self
             default: goto __halt;
         }
     L_04A7:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_defenderCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_defenderCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_04D0:
-        L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool() && (H.GetMember(GetLocal(L, "K2Node_Event_defenderCard"), "hasGuard")).AsBool());
+        L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool() && (H.GetMember(H.GetVar("K2Node_Event_defenderCard"), "hasGuard")).AsBool());
     L_050C:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool())
         {
@@ -223,7 +223,7 @@ public static Val ExecuteUbergraph_card_unit_t19_howitzer_cam1(IHost H, Val self
             }
         }
     L_0516:
-        _ = H.Call("RemoveGuard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_defenderCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.True });
+        _ = H.Call("RemoveGuard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_defenderCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.True });
     L_0564:
         _ = H.Call("HasCampaignUpgrade", new Val[] { self, Val.Of(6), Val.Out(__v => L["CallFunc_HasCampaignUpgrade_doesIt_1"] = __v) });
     L_057C:
@@ -237,7 +237,7 @@ public static Val ExecuteUbergraph_card_unit_t19_howitzer_cam1(IHost H, Val self
             default: goto __halt;
         }
     L_058B:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardAffected"), H.GetMember(GetLocal(L, "K2Node_Event_defenderCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardAffected"), H.GetMember(H.GetVar("K2Node_Event_defenderCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_05E6:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_0614:

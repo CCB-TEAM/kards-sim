@@ -193,7 +193,7 @@ public static Val ExecuteUbergraph_card_unit_panzer_iv_h(IHost H, Val self, Val[
     L_028C:
         goto L_00B7;
     L_0291:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_02AE:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool())
         {
@@ -207,9 +207,9 @@ public static Val ExecuteUbergraph_card_unit_panzer_iv_h(IHost H, Val self, Val[
             }
         }
     L_02B8:
-        _ = H.Call("MakeCardsFight", new Val[] { H.GetMember(self, "cardFunction"), self, GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_MakeCardsFight_qqq"] = __v) });
+        _ = H.Call("MakeCardsFight", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_MakeCardsFight_qqq"] = __v) });
     L_02F8:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0321:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_0330;
     L_032F:
@@ -251,7 +251,7 @@ public static Val ExecuteUbergraph_card_unit_panzer_iv_h(IHost H, Val self, Val[
             }
         }
     L_03B6:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_03C9:
         goto L_0195;
     L_03CE:
@@ -301,7 +301,7 @@ public static Val ExecuteUbergraph_card_unit_panzer_iv_h(IHost H, Val self, Val[
             }
         }
     L_04F8:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardChanged"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardChanged"));
     L_050B:
         goto L_0195;
     L_0510:
@@ -323,7 +323,7 @@ public static Val ExecuteUbergraph_card_unit_panzer_iv_h(IHost H, Val self, Val[
             }
         }
     L_0567:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardBecomingVeteran"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardBecomingVeteran"));
     L_057A:
         goto L_0195;
     L_057F:

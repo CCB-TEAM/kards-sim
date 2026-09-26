@@ -34,11 +34,11 @@ public static Val ExecuteUbergraph_card_unit_77th_guards(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_method"), Val.Of(1)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_method"), Val.Of(1)) == 0);
     L_0029:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_method"), Val.Of(2)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_method"), Val.Of(2)) == 0);
     L_0048:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_method"), Val.Of(3)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_method"), Val.Of(3)) == 0);
     L_0067:
         L["CallFunc_BooleanOR_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool() || (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_1")).AsBool());
     L_008D:
@@ -46,9 +46,9 @@ public static Val ExecuteUbergraph_card_unit_77th_guards(IHost H, Val self, Val[
     L_00B3:
         if (!(GetLocal(L, "CallFunc_BooleanOR_ReturnValue_1")).AsBool()) goto L_01F1;
     L_00C1:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_3"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_3"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_00FD:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0126:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0139:
@@ -58,7 +58,7 @@ public static Val ExecuteUbergraph_card_unit_77th_guards(IHost H, Val self, Val[
     L_0185:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_1")).AsBool()) goto L_01F1;
     L_0193:
-        _ = H.Call("GiveRandomCombatKeyword", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveRandomCombatKeyword_keywordGiven"] = __v), Val.Out(__v => L["CallFunc_GiveRandomCombatKeyword_success"] = __v) });
+        _ = H.Call("GiveRandomCombatKeyword", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveRandomCombatKeyword_keywordGiven"] = __v), Val.Out(__v => L["CallFunc_GiveRandomCombatKeyword_success"] = __v) });
     L_01F1:
         goto __halt;
     L_01F3:

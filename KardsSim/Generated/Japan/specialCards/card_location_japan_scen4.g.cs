@@ -563,7 +563,7 @@ public static Val ExecuteUbergraph_card_location_japan_scen4(IHost H, Val self, 
             }
         }
     L_149F:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(1)) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(1)) == 0);
     L_14C1:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_1")).AsBool()) goto L_1521;
     L_14CF:
@@ -573,9 +573,9 @@ public static Val ExecuteUbergraph_card_location_japan_scen4(IHost H, Val self, 
     L_151C:
         goto L_025D;
     L_1521:
-        L["CallFunc_LessEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(9)) <= 0);
+        L["CallFunc_LessEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(9)) <= 0);
     L_1543:
-        L["CallFunc_GreaterEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(3)) >= 0);
+        L["CallFunc_GreaterEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(3)) >= 0);
     L_1565:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_GreaterEqual_IntInt_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_LessEqual_IntInt_ReturnValue_1")).AsBool());
     L_158B:
@@ -602,7 +602,7 @@ public static Val ExecuteUbergraph_card_location_japan_scen4(IHost H, Val self, 
     L_15F9:
         L["Temp_byte_Variable_1"] = Val.Of(2);
     L_160D:
-        L["CallFunc_Add_IntInt_ReturnValue_1"] = (GetLocal(L, "K2Node_Event_turnnumber") + Val.Of(1));
+        L["CallFunc_Add_IntInt_ReturnValue_1"] = (H.GetVar("K2Node_Event_turnnumber") + Val.Of(1));
     L_1637:
         L["CallFunc_Divide_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_1") / Val.Of(2));
     L_1661:
@@ -624,7 +624,7 @@ public static Val ExecuteUbergraph_card_location_japan_scen4(IHost H, Val self, 
     L_1766:
         L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { GetLocal(L, "K2Node_MakeStruct_FormatArgumentData") });
     L_177A:
-        L["CallFunc_LessEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(11)) <= 0);
+        L["CallFunc_LessEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(11)) <= 0);
     L_179C:
         L["CallFunc_Format_ReturnValue"] = H.Call("Format", new Val[] { Val.Ref("KismetTextLibrary"), Val.Of(" ({turn})"), GetLocal(L, "K2Node_MakeArray_Array") });
     L_17CE:

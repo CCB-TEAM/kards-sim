@@ -49,7 +49,7 @@ public static Val ExecuteUbergraph_card_unit_pby_catalina(IHost H, Val self, Val
     L_00EE:
         goto L_0141;
     L_00F3:
-        _ = H.Call("MoveCardToTopOfOwnersDeck", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), H.GetMember(self, "cardID"), Val.Of(0), Val.Out(__v => L["CallFunc_MoveCardToTopOfOwnersDeck_qqq"] = __v) });
+        _ = H.Call("MoveCardToTopOfOwnersDeck", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), H.GetMember(self, "cardID"), Val.Of(0), Val.Out(__v => L["CallFunc_MoveCardToTopOfOwnersDeck_qqq"] = __v) });
     L_0137:
         goto L_0141;
     L_013C:

@@ -59,7 +59,7 @@ public static Val ExecuteUbergraph_card_location_cherbourg_unlock7(IHost H, Val 
             }
         }
     L_0035:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber_1"), Val.Of(8)) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber_1"), Val.Of(8)) == 0);
     L_0057:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_1")).AsBool())
         {
@@ -421,7 +421,7 @@ public static Val ExecuteUbergraph_card_location_cherbourg_unlock7(IHost H, Val 
             }
         }
     L_0D02:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(2)) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(2)) == 0);
     L_0D24:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_2")).AsBool()) goto L_0C1E;
     L_0D32:

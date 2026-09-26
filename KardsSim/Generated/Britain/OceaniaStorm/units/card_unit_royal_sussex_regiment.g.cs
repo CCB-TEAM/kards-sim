@@ -36,25 +36,25 @@ public static Val ExecuteUbergraph_card_unit_royal_sussex_regiment(IHost H, Val 
     L_000A:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_001D:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_0059:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_007F:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_01E9;
     L_008D:
-        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "name"), Val.Name("card_event_plan")) == 0);
+        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "name"), Val.Name("card_event_plan")) == 0);
     L_00CD:
         if (!(GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue")).AsBool()) goto L_0141;
     L_00DB:
-        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckBySide_cardsIDs"] = __v), Val.Of(0.4f) });
+        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "side"), Val.Of(1), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckBySide_cardsIDs"] = __v), Val.Of(0.4f) });
     L_013C:
         goto L_01E9;
     L_0141:
-        L["CallFunc_EqualEqual_NameName_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "name"), Val.Name("card_event_production")) == 0);
+        L["CallFunc_EqualEqual_NameName_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "name"), Val.Name("card_event_production")) == 0);
     L_0181:
         if (!(GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue_1")).AsBool()) goto L_01E9;
     L_018F:
-        _ = H.Call("GiveKreditsBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Of(1), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID"), Val.Out(__v => L["CallFunc_GiveKreditsBySide_qqq"] = __v) });
+        _ = H.Call("GiveKreditsBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Of(1), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), Val.Out(__v => L["CallFunc_GiveKreditsBySide_qqq"] = __v) });
     L_01E9:
         goto __halt;
     L_01EB:

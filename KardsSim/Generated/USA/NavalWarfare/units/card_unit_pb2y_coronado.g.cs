@@ -197,7 +197,7 @@ public static Val ExecuteUbergraph_card_unit_pb2y_coronado(IHost H, Val self, Va
     L_05F0:
         goto L_04EF;
     L_05F5:
-        L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_method_2"), Val.Of(1)) != 0);
+        L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_method_2"), Val.Of(1)) != 0);
     L_0614:
         if (!(GetLocal(L, "CallFunc_NotEqual_ByteByte_ReturnValue")).AsBool())
         {
@@ -211,7 +211,7 @@ public static Val ExecuteUbergraph_card_unit_pb2y_coronado(IHost H, Val self, Va
             }
         }
     L_061E:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardPlayed_1"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardPlayed_1"));
     L_0631:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0644:
@@ -280,7 +280,7 @@ public static Val ExecuteUbergraph_card_unit_pb2y_coronado(IHost H, Val self, Va
             }
         }
     L_07E1:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_goingToLocation"), Val.Of(8)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_goingToLocation"), Val.Of(8)) == 0);
     L_0800:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_080F;
     L_080E:
@@ -293,7 +293,7 @@ public static Val ExecuteUbergraph_card_unit_pb2y_coronado(IHost H, Val self, Va
             default: goto __halt;
         }
     L_080F:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardLeaving"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardLeaving"));
     L_0822:
         _ = H.Call("getTotalDefense", new Val[] { H.GetMember(self, "_tmp_card"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
     L_084B:
@@ -334,7 +334,7 @@ public static Val ExecuteUbergraph_card_unit_pb2y_coronado(IHost H, Val self, Va
             default: goto __halt;
         }
     L_09BF:
-        L["CallFunc_NotEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_cardPlayed"), self) != 0);
+        L["CallFunc_NotEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_cardPlayed"), self) != 0);
     L_09DD:
         if (!(GetLocal(L, "CallFunc_NotEqual_ObjectObject_ReturnValue")).AsBool())
         {
@@ -348,7 +348,7 @@ public static Val ExecuteUbergraph_card_unit_pb2y_coronado(IHost H, Val self, Va
             }
         }
     L_09E7:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardPlayed"));
     L_09FA:
         goto L_0631;
     L_09FF:

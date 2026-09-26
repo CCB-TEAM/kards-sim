@@ -103,7 +103,7 @@ public static Val ExecuteUbergraph_card_event_sloped_armor(IHost H, Val self, Va
     L_0085:
         _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_SpawnCardOnBattlefield_spawnedCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_00BB:
-        _ = H.Call("MakeCardsFight", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetCardFromID_card"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_MakeCardsFight_qqq"] = __v) });
+        _ = H.Call("MakeCardsFight", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetCardFromID_card"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_MakeCardsFight_qqq"] = __v) });
     L_0103:
         goto L_01EB;
     L_0108:

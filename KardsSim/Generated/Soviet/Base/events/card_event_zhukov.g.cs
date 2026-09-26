@@ -62,7 +62,7 @@ public static Val ExecuteUbergraph_card_event_zhukov(IHost H, Val self, Val[] ar
     L_00E4:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllCards_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_011F:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, Val.Of(4), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "faction"), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, Val.Of(4), H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "faction"), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_0153:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_0172:
@@ -241,7 +241,7 @@ public static Val ExecuteUbergraph_card_event_zhukov(IHost H, Val self, Val[] ar
             }
         }
     L_07C0:
-        _ = H.Call("isBuffedByCard", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
+        _ = H.Call("isBuffedByCard", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
     L_07F2:
         if (!(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed")).AsBool())
         {
@@ -254,7 +254,7 @@ public static Val ExecuteUbergraph_card_event_zhukov(IHost H, Val self, Val[] ar
             }
         }
     L_07FC:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_080F:
         goto L_0601;
     L_0814:

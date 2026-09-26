@@ -110,11 +110,11 @@ public static Val ExecuteUbergraph_card_event_ijn_shirakumo(IHost H, Val self, V
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsPinned", new Val[] { GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_IsPinned_isPinned"] = __v) });
+        _ = H.Call("IsPinned", new Val[] { H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_IsPinned_isPinned"] = __v) });
     L_0033:
         if (!(GetLocal(L, "CallFunc_IsPinned_isPinned")).AsBool()) goto L_0121;
     L_0041:
-        _ = H.Call("RemoveCardFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RemoveCardFromBoard_qqq"] = __v) });
+        _ = H.Call("RemoveCardFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RemoveCardFromBoard_qqq"] = __v) });
     L_0096:
         _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(self, "side") });
     L_00D5:
@@ -122,7 +122,7 @@ public static Val ExecuteUbergraph_card_event_ijn_shirakumo(IHost H, Val self, V
     L_011C:
         goto L_0172;
     L_0121:
-        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
     L_016D:
         goto L_0096;
     L_0172:

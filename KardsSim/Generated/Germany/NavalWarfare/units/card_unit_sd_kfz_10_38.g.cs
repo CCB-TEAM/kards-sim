@@ -36,9 +36,9 @@ public static Val ExecuteUbergraph_card_unit_sd_kfz_10_38(IHost H, Val self, Val
     L_000A:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_001D:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_changedAmount"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_changedAmount"), Val.Of(0)) > 0);
     L_003F:
-        L["CallFunc_NotEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_instigatorID"), H.GetMember(self, "cardID")) != 0);
+        L["CallFunc_NotEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_instigatorID"), H.GetMember(self, "cardID")) != 0);
     L_0065:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_NotEqual_IntInt_ReturnValue")).AsBool());
     L_008B:

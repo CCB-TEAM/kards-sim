@@ -65,7 +65,7 @@ public static Val ExecuteUbergraph_card_unit_panzer_iii_f(IHost H, Val self, Val
     L_0082:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsOnBoardBySide_cards_1"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item_2"] = __v) });
     L_00BD:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_2"), "faction"), Val.Of(1), GetLocal(L, "CallFunc_EnumCompareFaction_Branches_1") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item_2"), "faction"), Val.Of(1), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches_1"] = __v) });
     L_00F1:
         L["K2Node_SwitchEnum_CmpSuccess_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches_1"), Val.Of(0)) != 0);
     L_0110:
@@ -300,7 +300,7 @@ public static Val ExecuteUbergraph_card_unit_panzer_iii_f(IHost H, Val self, Val
     L_091C:
         goto L_03AF;
     L_0921:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "faction"), Val.Of(1), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "faction"), Val.Of(1), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_0955:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_0974:
@@ -316,11 +316,11 @@ public static Val ExecuteUbergraph_card_unit_panzer_iii_f(IHost H, Val self, Val
             default: goto __halt;
         }
     L_0983:
-        _ = H.Call("IsTank", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsTank_isIt"] = __v) });
+        _ = H.Call("IsTank", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsTank_isIt"] = __v) });
     L_09AC:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_09BF:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_09FB:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsTank_isIt")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool());
     L_0A21:
@@ -339,9 +339,9 @@ public static Val ExecuteUbergraph_card_unit_panzer_iii_f(IHost H, Val self, Val
             }
         }
     L_0A51:
-        _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID") });
     L_0A9D:
-        _ = H.Call("JSON_AddToIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affected_cards"), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID"), Val.Out(__v => L["CallFunc_JSON_AddToIntArray_found"] = __v) });
+        _ = H.Call("JSON_AddToIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affected_cards"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), Val.Out(__v => L["CallFunc_JSON_AddToIntArray_found"] = __v) });
     L_0AFA:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_0B28:
@@ -435,7 +435,7 @@ public static Val ExecuteUbergraph_card_unit_panzer_iii_f(IHost H, Val self, Val
             }
         }
     L_0CEA:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardChanging"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardChanging"));
     L_0CFD:
         _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetMember(self, "tempCard"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_3"] = __v) });
     L_0D26:

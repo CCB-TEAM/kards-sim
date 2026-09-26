@@ -206,7 +206,7 @@ public static Val ExecuteUbergraph_card_event_sally(IHost H, Val self, Val[] arg
     L_024E:
         goto L_026B;
     L_0253:
-        H.SetMember(self, "tmpCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tmpCard", H.GetVar("K2Node_Event_targetCard"));
     L_0266:
         goto L_000A;
     L_026B:

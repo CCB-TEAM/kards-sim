@@ -104,7 +104,7 @@ public static Val ExecuteUbergraph_card_unit_16th_infantry_brigade(IHost H, Val 
     L_02A2:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_02B5:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_02F1:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_0317:
@@ -119,9 +119,9 @@ public static Val ExecuteUbergraph_card_unit_16th_infantry_brigade(IHost H, Val 
             }
         }
     L_0321:
-        _ = H.Call("getHasGameplayTag", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), H.MakeArray(new Val[] { Val.Name("subtype.storm") }), Val.Out(__v => L["CallFunc_getHasGameplayTag_hasTag"] = __v) });
+        _ = H.Call("getHasGameplayTag", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), H.MakeArray(new Val[] { Val.Name("subtype.storm") }), Val.Out(__v => L["CallFunc_getHasGameplayTag_hasTag"] = __v) });
     L_0365:
-        _ = H.Call("getHasGameplayTag", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), H.MakeArray(new Val[] { Val.Name("subtype.rain") }), Val.Out(__v => L["CallFunc_getHasGameplayTag_hasTag_1"] = __v) });
+        _ = H.Call("getHasGameplayTag", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), H.MakeArray(new Val[] { Val.Name("subtype.rain") }), Val.Out(__v => L["CallFunc_getHasGameplayTag_hasTag_1"] = __v) });
     L_03A9:
         L["CallFunc_BooleanOR_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_getHasGameplayTag_hasTag_1")).AsBool() || (GetLocal(L, "CallFunc_getHasGameplayTag_hasTag")).AsBool());
     L_03CF:

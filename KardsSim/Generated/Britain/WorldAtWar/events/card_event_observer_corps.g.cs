@@ -39,11 +39,11 @@ public static Val ExecuteUbergraph_card_event_observer_corps(IHost H, Val self, 
     L_0040:
         goto L_00F2;
     L_0045:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
     L_0067:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_00F2;
     L_0075:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_00AB:
         _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetCardFromID_card"), H.GetMember(self, "cardID"), Val.Of(-2), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeKreditCost_qqq"] = __v) });
     L_00F2:

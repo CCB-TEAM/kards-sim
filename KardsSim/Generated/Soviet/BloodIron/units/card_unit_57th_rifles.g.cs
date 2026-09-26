@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_unit_57th_rifles(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_method"), Val.Of(5)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_method"), Val.Of(5)) == 0);
     L_0029:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_003C;
     L_0037:
@@ -44,7 +44,7 @@ public static Val ExecuteUbergraph_card_unit_57th_rifles(IHost H, Val self, Val[
     L_004F:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_02B8;
     L_005D:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_0070:
         _ = H.Call("getTotalDefense", new Val[] { H.GetMember(self, "tempCard"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
     L_0099:

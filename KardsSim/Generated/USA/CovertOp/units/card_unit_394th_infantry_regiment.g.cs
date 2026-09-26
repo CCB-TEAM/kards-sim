@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_unit_394th_infantry_regiment(IHost H, Va
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(self, "location"), Val.Of(7), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(self, "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_0028:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_0047:

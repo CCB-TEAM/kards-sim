@@ -96,7 +96,7 @@ public static Val ExecuteUbergraph_card_event_out_of_the_mist(IHost H, Val self,
             default: goto __halt;
         }
     L_000A:
-        H.SetMember(self, "Target Card", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "Target Card", H.GetVar("K2Node_Event_targetCard"));
     L_001D:
         _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("salvageOn"), H.GetMember(H.GetMember(self, "Target Card"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_0075:
@@ -120,11 +120,11 @@ public static Val ExecuteUbergraph_card_event_out_of_the_mist(IHost H, Val self,
     L_01CF:
         if (!(GetLocal(L, "CallFunc_JSON_GetInt_found")).AsBool()) goto L_0290;
     L_01DD:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value"), H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value"), H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "cardID")) == 0);
     L_0219:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_0290;
     L_0227:
-        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "cardID") });
+        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "cardID") });
     L_0251:
         _ = H.Call("SalvageMultipleUnits", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_MakeArray_Array"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_SalvageMultipleUnits_qqq"] = __v) });
     L_0290:

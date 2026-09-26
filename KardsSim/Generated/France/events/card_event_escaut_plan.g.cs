@@ -41,7 +41,7 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
     L_0037:
         if (!(GetLocal(L, "CallFunc_GetTargetedCard_hasTarget")).AsBool()) goto L_00D8;
     L_0045:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "location"), Val.Of(5), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches_1") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "location"), Val.Of(5), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches_1"] = __v) });
     L_0079:
         L["K2Node_SwitchEnum_CmpSuccess_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches_1"), Val.Of(0)) != 0);
     L_0098:
@@ -141,7 +141,7 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
     L_04DC:
         goto L_022B;
     L_04E1:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "location"), Val.Of(6), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "location"), Val.Of(6), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_0515:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_0534:
@@ -286,7 +286,7 @@ public static Val ExecuteUbergraph_card_event_escaut_plan(IHost H, Val self, Val
     L_0233:
         goto L_0027;
     L_0238:
-        H.SetMember(self, "affectedCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "affectedCard", H.GetVar("K2Node_Event_targetCard"));
     L_024B:
         _ = H.Call("MoveUnitFromSupportToFrontLine", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "affectedCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_MoveUnitFromSupportToFrontLine_qqq"] = __v) });
     L_028A:

@@ -103,7 +103,7 @@ public static Val ExecuteUbergraph_card_event_sabotage(IHost H, Val self, Val[] 
     L_000F:
         __ef.Push(383);
     L_0014:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_004A:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsInHandBySide_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0085:
@@ -152,7 +152,7 @@ public static Val ExecuteUbergraph_card_event_sabotage(IHost H, Val self, Val[] 
     L_0291:
         goto L_000F;
     L_0296:
-        _ = H.Call("SetCardSeen", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_SetCardSeen_qqq"] = __v) });
+        _ = H.Call("SetCardSeen", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_SetCardSeen_qqq"] = __v) });
     L_02D5:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

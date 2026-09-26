@@ -248,7 +248,7 @@ public static Val ExecuteUbergraph_card_event_claim_the_skies(IHost H, Val self,
             default: goto __halt;
         }
     L_0419:
-        _ = H.Call("MakeCardsFight", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "myUnit"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_MakeCardsFight_qqq"] = __v) });
+        _ = H.Call("MakeCardsFight", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "myUnit"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_MakeCardsFight_qqq"] = __v) });
     L_0461:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

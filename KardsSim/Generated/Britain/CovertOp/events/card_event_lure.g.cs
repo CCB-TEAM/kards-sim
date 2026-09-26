@@ -34,15 +34,15 @@ public static Val ExecuteUbergraph_card_event_lure(IHost H, Val self, Val[] args
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
+        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
     L_0026:
         if (!(GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt")).AsBool()) goto L_00C7;
     L_0034:
-        _ = H.Call("isSecondOrderThisTurn", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), Val.Out(__v => L["CallFunc_isSecondOrderThisTurn_isSecondOrder"] = __v) });
+        _ = H.Call("isSecondOrderThisTurn", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), Val.Out(__v => L["CallFunc_isSecondOrderThisTurn_isSecondOrder"] = __v) });
     L_006A:
         if (!(GetLocal(L, "CallFunc_isSecondOrderThisTurn_isSecondOrder")).AsBool()) goto L_00C7;
     L_0078:
-        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
+        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
     L_00C7:
         goto __halt;
     L_00C9:

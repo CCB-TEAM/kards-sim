@@ -40,7 +40,7 @@ public static Val ExecuteUbergraph_card_unit_type_96_25mm_aa_gun(IHost H, Val se
     L_0055:
         goto L_01FC;
     L_005A:
-        H.SetMember(self, "cardEnterPlay", GetLocal(L, "K2Node_Event_cardPlayed_1"));
+        H.SetMember(self, "cardEnterPlay", H.GetVar("K2Node_Event_cardPlayed_1"));
     L_006D:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0080:
@@ -64,7 +64,7 @@ public static Val ExecuteUbergraph_card_unit_type_96_25mm_aa_gun(IHost H, Val se
     L_01DF:
         goto L_01FC;
     L_01E4:
-        H.SetMember(self, "cardEnterPlay", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "cardEnterPlay", H.GetVar("K2Node_Event_cardPlayed"));
     L_01F7:
         goto L_006D;
     L_01FC:

@@ -94,11 +94,11 @@ public static Val ExecuteUbergraph_card_event_forged_in_fire(IHost H, Val self, 
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("GiveRandomCombatKeyword", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveRandomCombatKeyword_keywordGiven"] = __v), Val.Out(__v => L["CallFunc_GiveRandomCombatKeyword_success"] = __v) });
+        _ = H.Call("GiveRandomCombatKeyword", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveRandomCombatKeyword_keywordGiven"] = __v), Val.Out(__v => L["CallFunc_GiveRandomCombatKeyword_success"] = __v) });
     L_0068:
         L["CallFunc_GetCombatKeywords_keywords"] = H.MakeArray(new Val[] {  });
     L_0073:
-        _ = H.Call("GetCombatKeywords", new Val[] { GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetCombatKeywords_keywords"] = __v), Val.Out(__v => L["CallFunc_GetCombatKeywords_numberOfKeywords"] = __v) });
+        _ = H.Call("GetCombatKeywords", new Val[] { H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetCombatKeywords_keywords"] = __v), Val.Out(__v => L["CallFunc_GetCombatKeywords_numberOfKeywords"] = __v) });
     L_00A5:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetCombatKeywords_numberOfKeywords"), Val.Of(1)) > 0);
     L_00C7:

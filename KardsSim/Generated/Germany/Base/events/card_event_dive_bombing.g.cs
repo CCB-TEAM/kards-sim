@@ -97,7 +97,7 @@ public static Val ExecuteUbergraph_card_event_dive_bombing(IHost H, Val self, Va
             default: goto __halt;
         }
     L_000A:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_001D:
         L["CallFunc_IsValid_ReturnValue_1"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "tempCard") });
     L_003A:
@@ -139,7 +139,7 @@ public static Val ExecuteUbergraph_card_event_dive_bombing(IHost H, Val self, Va
     L_0294:
         L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetMember(self, "enterPlayOnTurn") + Val.Of(2));
     L_02BE:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue")) == 0);
     L_02E4:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "enterPlayOnTurn"), Val.Of(0)) > 0);
     L_0306:

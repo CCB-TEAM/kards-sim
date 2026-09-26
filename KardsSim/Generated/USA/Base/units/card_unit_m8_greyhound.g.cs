@@ -43,11 +43,11 @@ public static Val ExecuteUbergraph_card_unit_m8_greyhound(IHost H, Val self, Val
             default: goto __halt;
         }
     L_000F:
-        H.SetMember(self, "oldLocation", GetLocal(L, "K2Node_Event_oldLocation_1"));
+        H.SetMember(self, "oldLocation", H.GetVar("K2Node_Event_oldLocation_1"));
     L_002A:
-        H.SetMember(self, "newLocation", GetLocal(L, "K2Node_Event_newLocation_1"));
+        H.SetMember(self, "newLocation", H.GetVar("K2Node_Event_newLocation_1"));
     L_0045:
-        H.SetMember(self, "changeOwner", GetLocal(L, "K2Node_Event_ChangeOwner_1"));
+        H.SetMember(self, "changeOwner", H.GetVar("K2Node_Event_ChangeOwner_1"));
     L_0058:
         __ef.Push(1051);
     L_005D:
@@ -315,11 +315,11 @@ public static Val ExecuteUbergraph_card_unit_m8_greyhound(IHost H, Val self, Val
             }
         }
     L_0740:
-        H.SetMember(self, "cardMoved", GetLocal(L, "K2Node_Event_cardMoved"));
+        H.SetMember(self, "cardMoved", H.GetVar("K2Node_Event_cardMoved"));
     L_0753:
-        H.SetMember(self, "oldLocation", GetLocal(L, "K2Node_Event_oldLocation"));
+        H.SetMember(self, "oldLocation", H.GetVar("K2Node_Event_oldLocation"));
     L_076E:
-        H.SetMember(self, "newLocation", GetLocal(L, "K2Node_Event_newLocation"));
+        H.SetMember(self, "newLocation", H.GetVar("K2Node_Event_newLocation"));
     L_0789:
         _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "cardMoved"), Val.Out(__v => L["CallFunc_IsUnit_isIt_1"] = __v) });
     L_07B2:
@@ -462,7 +462,7 @@ public static Val ExecuteUbergraph_card_unit_m8_greyhound(IHost H, Val self, Val
     L_0A6D:
         goto L_013D;
     L_0A72:
-        H.SetMember(self, "cardMoved", GetLocal(L, "K2Node_Event_cardBeingRevealed"));
+        H.SetMember(self, "cardMoved", H.GetVar("K2Node_Event_cardBeingRevealed"));
     L_0A85:
         goto L_05C1;
     L_0A8A:

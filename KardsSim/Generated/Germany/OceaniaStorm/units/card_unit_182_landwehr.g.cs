@@ -118,15 +118,15 @@ public static Val ExecuteUbergraph_card_unit_182_landwehr(IHost H, Val self, Val
     L_03DB:
         goto L_02DC;
     L_03E0:
-        H.SetMember(self, "opCost", GetLocal(L, "K2Node_Event_kreditsSpent_1"));
+        H.SetMember(self, "opCost", H.GetVar("K2Node_Event_kreditsSpent_1"));
     L_03FB:
         goto L_001D;
     L_0400:
-        H.SetMember(self, "opCost", GetLocal(L, "K2Node_Event_kreditsSpent"));
+        H.SetMember(self, "opCost", H.GetVar("K2Node_Event_kreditsSpent"));
     L_041B:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_042E:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardOperated"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardOperated"), "side"), H.GetMember(self, "side")) == 0);
     L_046A:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_0490:

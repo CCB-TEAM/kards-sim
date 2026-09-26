@@ -110,7 +110,7 @@ public static Val ExecuteUbergraph_card_unit_162nd_regiment(IHost H, Val self, V
     L_02B6:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_02C9:
-        _ = H.Call("getHasGameplayTag", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), H.MakeArray(new Val[] { Val.Name("subtype.rain") }), Val.Out(__v => L["CallFunc_getHasGameplayTag_hasTag"] = __v) });
+        _ = H.Call("getHasGameplayTag", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), H.MakeArray(new Val[] { Val.Name("subtype.rain") }), Val.Out(__v => L["CallFunc_getHasGameplayTag_hasTag"] = __v) });
     L_030D:
         L["CallFunc_BooleanAND_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_getHasGameplayTag_hasTag")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_0333:

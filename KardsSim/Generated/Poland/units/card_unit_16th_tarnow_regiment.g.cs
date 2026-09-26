@@ -44,11 +44,11 @@ public static Val ExecuteUbergraph_card_unit_16th_tarnow_regiment(IHost H, Val s
     L_005F:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_1")).AsBool()) goto L_0409;
     L_006D:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cipher"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cipher"), Val.Of(0)) > 0);
     L_00A5:
-        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "name"), Val.Name("card_event_cruiser_scouts")) == 0);
+        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "name"), Val.Name("card_event_cruiser_scouts")) == 0);
     L_00E5:
-        L["CallFunc_EqualEqual_NameName_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "name"), Val.Name("card_event_stretch_the_line")) == 0);
+        L["CallFunc_EqualEqual_NameName_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "name"), Val.Name("card_event_stretch_the_line")) == 0);
     L_0125:
         L["CallFunc_BooleanOR_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue_1")).AsBool() || (GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue")).AsBool());
     L_014B:
@@ -68,17 +68,17 @@ public static Val ExecuteUbergraph_card_unit_16th_tarnow_regiment(IHost H, Val s
     L_02B2:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_02C5:
-        _ = H.Call("IsGotcha", new Val[] { GetLocal(L, "K2Node_Event_intelCard"), Val.Out(__v => L["CallFunc_IsGotcha_isIt"] = __v) });
+        _ = H.Call("IsGotcha", new Val[] { H.GetVar("K2Node_Event_intelCard"), Val.Out(__v => L["CallFunc_IsGotcha_isIt"] = __v) });
     L_02EE:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool() && (GetLocal(L, "CallFunc_IsGotcha_isIt")).AsBool());
     L_0314:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_0409;
     L_0322:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_intelCard"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_intelCard"), "side"), H.GetMember(self, "side")) == 0);
     L_035E:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_0409;
     L_036C:
-        L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_intelValue"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_intelValue"), Val.Of(0)) > 0);
     L_038E:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue_1")).AsBool()) goto L_0409;
     L_039C:

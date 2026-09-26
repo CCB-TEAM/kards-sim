@@ -53,7 +53,7 @@ public static Val ExecuteUbergraph_card_unit_yokosuka_e14y(IHost H, Val self, Va
     L_0158:
         L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetMember(self, "enterPlayOnTurn") + Val.Of(2));
     L_0182:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), GetLocal(L, "K2Node_Event_turnnumber")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), H.GetVar("K2Node_Event_turnnumber")) == 0);
     L_01A8:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "enterPlayOnTurn"), Val.Of(0)) > 0);
     L_01CA:

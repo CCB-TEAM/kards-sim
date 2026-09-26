@@ -260,15 +260,15 @@ public static Val ExecuteUbergraph_card_unit_3rd_canadian_division(IHost H, Val 
     L_06DF:
         goto L_000F;
     L_06E4:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_drawnCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_drawnCardID"));
     L_06FF:
         goto L_0679;
     L_0704:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_spawnedCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_spawnedCardID"));
     L_071F:
         goto L_0679;
     L_0724:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_resetCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_resetCardID"));
     L_073F:
         goto L_0679;
     L_0744:

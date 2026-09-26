@@ -250,7 +250,7 @@ public static Val ExecuteUbergraph_card_unit_lublin_r_xiii(IHost H, Val self, Va
     L_04E6:
         goto L_01BF;
     L_04EB:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0508:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool())
         {
@@ -264,7 +264,7 @@ public static Val ExecuteUbergraph_card_unit_lublin_r_xiii(IHost H, Val self, Va
             }
         }
     L_0512:
-        _ = H.Call("RevealCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RevealCard_qqq"] = __v) });
+        _ = H.Call("RevealCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RevealCard_qqq"] = __v) });
     L_0567:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -342,15 +342,15 @@ public static Val ExecuteUbergraph_card_unit_lublin_r_xiii(IHost H, Val self, Va
     L_06FA:
         goto L_05CC;
     L_06FF:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_resetCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_resetCardID"));
     L_071A:
         goto L_0694;
     L_071F:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_drawnCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_drawnCardID"));
     L_073A:
         goto L_0694;
     L_073F:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_spawnedCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_spawnedCardID"));
     L_075A:
         goto L_0694;
     L_075F:

@@ -41,7 +41,7 @@ public static Val ExecuteUbergraph_card_event_mobile_defense(IHost H, Val self, 
     L_003A:
         L["CallFunc_Add_IntInt_ReturnValue_2"] = (H.GetMember(self, "enterPlayOnTurn") + Val.Of(2));
     L_0064:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_2")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_2")) == 0);
     L_008A:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_029B;
     L_0098:

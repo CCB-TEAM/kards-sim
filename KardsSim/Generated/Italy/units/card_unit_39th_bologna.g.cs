@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_unit_39th_bologna(IHost H, Val self, Val
             default: goto __halt;
         }
     L_000A:
-        if (!(GetLocal(L, "K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_001D;
+        if (!(H.GetVar("K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_001D;
     L_0018:
         goto L_00C7;
     L_001D:
@@ -42,7 +42,7 @@ public static Val ExecuteUbergraph_card_unit_39th_bologna(IHost H, Val self, Val
     L_0030:
         if (!(GetLocal(L, "CallFunc_IsLocatedInHand_isIt")).AsBool()) goto L_00C7;
     L_003E:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side")) == 0);
     L_007A:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_00C7;
     L_0088:

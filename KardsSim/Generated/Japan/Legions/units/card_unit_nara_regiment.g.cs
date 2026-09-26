@@ -207,7 +207,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_055B:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0584:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool())
         {
@@ -221,7 +221,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_058E:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_05B7:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool())
         {
@@ -235,7 +235,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_05C1:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side")) == 0);
     L_05FD:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool())
         {
@@ -249,7 +249,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_0607:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("ignoreCantAttack_location"), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("ignoreCantAttack_location"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_067A:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -280,7 +280,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_06E2:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_3"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_3"] = __v) });
     L_070B:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_3")).AsBool())
         {
@@ -294,7 +294,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_0715:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "K2Node_Event_cardLeaving"), Val.Of("ignoreCantAttack_location"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), Val.Of("ignoreCantAttack_location"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_0762:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt")).AsBool())
         {
@@ -308,7 +308,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_076C:
-        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("ignoreCantAttack_location"), H.GetMember(GetLocal(L, "K2Node_Event_cardLeaving"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq_1"] = __v) });
+        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("ignoreCantAttack_location"), H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq_1"] = __v) });
     L_07DD:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -333,7 +333,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_07FB:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "K2Node_Event_card"), Val.Of("ignoreCantAttack_location"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt_2"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_card"), Val.Of("ignoreCantAttack_location"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt_2"] = __v) });
     L_0848:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt_2")).AsBool())
         {
@@ -347,7 +347,7 @@ public static Val ExecuteUbergraph_card_unit_nara_regiment(IHost H, Val self, Va
             }
         }
     L_0852:
-        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("ignoreCantAttack_location"), H.GetMember(GetLocal(L, "K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq_2"] = __v) });
+        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("ignoreCantAttack_location"), H.GetMember(H.GetVar("K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq_2"] = __v) });
     L_08C3:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

@@ -191,7 +191,7 @@ public static Val ExecuteUbergraph_card_unit_220th_rifles(IHost H, Val self, Val
     L_051E:
         goto L_04BD;
     L_0523:
-        L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_defenseGained_1"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_defenseGained_1"), Val.Of(0)) > 0);
     L_0545:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue_1")).AsBool())
         {
@@ -206,7 +206,7 @@ public static Val ExecuteUbergraph_card_unit_220th_rifles(IHost H, Val self, Val
     L_054F:
         goto L_0507;
     L_0554:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardGainingDefense"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardGainingDefense"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_057D:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_2"] = __v) });
     L_0590:
@@ -227,9 +227,9 @@ public static Val ExecuteUbergraph_card_unit_220th_rifles(IHost H, Val self, Val
     L_05C5:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_05D8:
-        L["CallFunc_Greater_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_damage"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_damage"), Val.Of(0)) > 0);
     L_05FA:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt_1"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt_1"] = __v) });
     L_0623:
         L["CallFunc_BooleanAND_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_IsUnit_isIt_1")).AsBool() && (GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue_2")).AsBool());
     L_0649:
@@ -252,7 +252,7 @@ public static Val ExecuteUbergraph_card_unit_220th_rifles(IHost H, Val self, Val
     L_0683:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_0696:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc_IsUnit_isIt_2"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc_IsUnit_isIt_2"] = __v) });
     L_06BF:
         L["CallFunc_BooleanAND_ReturnValue_3"] = Val.Of((GetLocal(L, "CallFunc_IsUnit_isIt_2")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1")).AsBool());
     L_06E5:
@@ -275,7 +275,7 @@ public static Val ExecuteUbergraph_card_unit_220th_rifles(IHost H, Val self, Val
     L_06FE:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_3"] = __v) });
     L_0711:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardDefenseSet"), Val.Out(__v => L["CallFunc_IsUnit_isIt_3"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardDefenseSet"), Val.Out(__v => L["CallFunc_IsUnit_isIt_3"] = __v) });
     L_073A:
         L["CallFunc_BooleanAND_ReturnValue_4"] = Val.Of((GetLocal(L, "CallFunc_IsUnit_isIt_3")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_3")).AsBool());
     L_0760:
@@ -294,7 +294,7 @@ public static Val ExecuteUbergraph_card_unit_220th_rifles(IHost H, Val self, Val
     L_076F:
         goto L_0507;
     L_0774:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardRepaired"), Val.Out(__v => L["CallFunc_IsUnit_isIt_4"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardRepaired"), Val.Out(__v => L["CallFunc_IsUnit_isIt_4"] = __v) });
     L_079D:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_4"] = __v) });
     L_07B0:

@@ -47,7 +47,7 @@ public static Val ExecuteUbergraph_card_event_front_and_homeland(IHost H, Val se
     L_0085:
         _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_00BB:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "faction"), Val.Of(1), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "faction"), Val.Of(1), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_00EF:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_010E:
@@ -151,9 +151,9 @@ public static Val ExecuteUbergraph_card_event_front_and_homeland(IHost H, Val se
             }
         }
     L_04D9:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(7)) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(7)) == 0);
     L_04FB:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(8)) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(8)) == 0);
     L_051D:
         L["CallFunc_BooleanOR_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_1")).AsBool() || (GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_2")).AsBool());
     L_0543:

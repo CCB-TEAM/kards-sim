@@ -26,6 +26,10 @@ public sealed partial class GameEngine
     /// </summary>
     internal void Fire(Trigger t, Card subject = null) => FireTrigger(t, subject);
 
+    /// <summary>带具名载荷的触发（参数多的事件走这个）。</summary>
+    internal void Fire(Trigger t, Card subject, Func<Bridge.TriggerPayload, Bridge.TriggerPayload> fill)
+        => FireTrigger(t, subject, fill);
+
     // ===================== 回合 =====================
 
     /// <summary>配合 BeginTurn：回合开始的完整触发序列。</summary>
@@ -89,11 +93,25 @@ public sealed partial class GameEngine
 
     // ===================== 摧毁 =====================
 
-    internal void FireBeforeDestroyTriggers(Card c) => Fire(Trigger.OnBeforeOtherCardDestroyed, c);
+    internal void FireBeforeDestroyTriggers(Card c, Card killer = null, bool inCombat = false)
+        => Fire(Trigger.OnBeforeOtherCardDestroyed, c, p => p
+            .SetCard("killer", killer, Host)
+            .SetBool("destroyedInCombat", inCombat));
 
-    internal void FireDestroyTriggers(Card c)
+    internal void FireDestroyTriggers(Card c, Card killer = null, bool inCombat = false)
     {
-        Fire(Trigger.OnOtherCardDestroyed, c);
+        // 载荷必须带上 killer / destroyedInCombat：直译产物里
+        //   if (!destroyedInCombat) return;
+        //   if (killer.cardID != self.cardID) return;
+        // 这类前置守卫会读它们，缺了整段效果静默跳过（不报错、不进 Unhandled）。
+        var location = Host is null ? 0 : Bridge.EngineHost.ClientLocation(c);
+        Fire(Trigger.OnOtherCardDestroyed, c, p => p
+            .SetCard("killer", killer, Host)
+            .SetBool("TriggerNotDestroyed", false)
+            .SetInt("destroyedLocation", location)
+            .SetBool("selfIsAlsoGettingDestroyed", false)
+            .SetBool("destroyedInCombat", inCombat));
+
         Fire(Trigger.OnDestructionEffectTriggered, c);
         // 离场：客户端 before/after 两个触发点各有一个分派器
         Fire(Trigger.OnOtherCardLeaveBoardOrOwner, c);

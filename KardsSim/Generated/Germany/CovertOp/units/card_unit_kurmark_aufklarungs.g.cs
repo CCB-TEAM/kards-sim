@@ -111,7 +111,7 @@ public static Val ExecuteUbergraph_card_unit_kurmark_aufklarungs(IHost H, Val se
             default: goto __halt;
         }
     L_03F6:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
     L_0418:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool())
         {
@@ -124,13 +124,13 @@ public static Val ExecuteUbergraph_card_unit_kurmark_aufklarungs(IHost H, Val se
             }
         }
     L_0422:
-        _ = H.Call("JSON_AddToIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("suppressionException"), GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_JSON_AddToIntArray_found"] = __v) });
+        _ = H.Call("JSON_AddToIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("suppressionException"), H.GetVar("K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_JSON_AddToIntArray_found"] = __v) });
     L_046F:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_04A5:
         _ = H.Call("JSON_SetBool", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetCardFromID_card"), Val.Of("is_kurmark_target"), Val.True, Val.Out(__v => L["CallFunc_JSON_SetBool_found"] = __v) });
     L_04EF:
-        _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), Val.False });
+        _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), Val.False });
     L_051D:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_054B:

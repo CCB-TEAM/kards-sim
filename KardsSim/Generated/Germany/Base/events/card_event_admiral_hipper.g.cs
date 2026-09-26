@@ -99,7 +99,7 @@ public static Val ExecuteUbergraph_card_event_admiral_hipper(IHost H, Val self, 
     L_002C:
         L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetMember(self, "enterPlayOnTurn") + Val.Of(1));
     L_0056:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), GetLocal(L, "K2Node_Event_turnnumber")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), H.GetVar("K2Node_Event_turnnumber")) == 0);
     L_007C:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool());
     L_00A2:
@@ -109,7 +109,7 @@ public static Val ExecuteUbergraph_card_event_admiral_hipper(IHost H, Val self, 
     L_00E8:
         goto L_01C3;
     L_00ED:
-        _ = H.Call("MoveUnitFromBoardToOwnersHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID") });
+        _ = H.Call("MoveUnitFromBoardToOwnersHand", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID") });
     L_0123:
         _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_0136:

@@ -128,7 +128,7 @@ public static Val ExecuteUbergraph_card_event_romanian_bridgehead(IHost H, Val s
     L_02A2:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_0313;
     L_02B0:
-        L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_turnnumber") - H.GetMember(self, "enterPlayOnTurn"));
+        L["CallFunc_Subtract_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_turnnumber") - H.GetMember(self, "enterPlayOnTurn"));
     L_02DE:
         L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue"), Val.Of(2)) == 0);
     L_0300:
@@ -150,7 +150,7 @@ public static Val ExecuteUbergraph_card_event_romanian_bridgehead(IHost H, Val s
     L_0416:
         if (!(GetLocal(L, "CallFunc_JSON_GetInt_found_1")).AsBool()) goto L_05D6;
     L_0424:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value_1"), GetLocal(L, "K2Node_Event_resetCardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value_1"), H.GetVar("K2Node_Event_resetCardID")) == 0);
     L_044A:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_05D6;
     L_0458:
@@ -166,7 +166,7 @@ public static Val ExecuteUbergraph_card_event_romanian_bridgehead(IHost H, Val s
     L_0554:
         goto L_0381;
     L_0559:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_056C:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "tempCard") });
     L_0589:

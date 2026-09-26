@@ -47,11 +47,11 @@ public static Val ExecuteUbergraph_card_unit_3_panzergrenadier(IHost H, Val self
     L_00A0:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_02B7;
     L_00AE:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_attackerCard"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_attackerCard"), "side"), H.GetMember(self, "side")) == 0);
     L_00EA:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_02B7;
     L_00F8:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_attackerCard"), "faction"), Val.Of(1), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_attackerCard"), "faction"), Val.Of(1), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_012C:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_014B:
@@ -69,11 +69,11 @@ public static Val ExecuteUbergraph_card_unit_3_panzergrenadier(IHost H, Val self
     L_01F4:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1")).AsBool()) goto L_02B7;
     L_0202:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardMoved"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardMoved"), "side"), H.GetMember(self, "side")) == 0);
     L_023E:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_1")).AsBool()) goto L_02B7;
     L_024C:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_cardMoved"), "faction"), Val.Of(1), GetLocal(L, "CallFunc_EnumCompareFaction_Branches_1") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_cardMoved"), "faction"), Val.Of(1), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches_1"] = __v) });
     L_0280:
         L["K2Node_SwitchEnum_CmpSuccess_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches_1"), Val.Of(0)) != 0);
     L_029F:

@@ -36,7 +36,7 @@ public static Val ExecuteUbergraph_card_unit_sissiosasto_5d(IHost H, Val self, V
             default: goto __halt;
         }
     L_000A:
-        H.SetMember(self, "Card Played", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "Card Played", H.GetVar("K2Node_Event_cardPlayed"));
     L_001D:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0030:
@@ -46,7 +46,7 @@ public static Val ExecuteUbergraph_card_unit_sissiosasto_5d(IHost H, Val self, V
     L_007F:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_1")).AsBool()) goto L_0362;
     L_008D:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetMember(self, "Card Played"), "side"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches_1") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetMember(self, "Card Played"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches_1"] = __v) });
     L_00C8:
         L["K2Node_SwitchEnum_CmpSuccess_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches_1"), Val.Of(1)) != 0);
     L_00E7:
@@ -60,11 +60,11 @@ public static Val ExecuteUbergraph_card_unit_sissiosasto_5d(IHost H, Val self, V
     L_0178:
         goto L_0362;
     L_017D:
-        H.SetMember(self, "Card Played", GetLocal(L, "K2Node_Event_cardPlayed_1"));
+        H.SetMember(self, "Card Played", H.GetVar("K2Node_Event_cardPlayed_1"));
     L_0190:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_method"), Val.Of(4)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_method"), Val.Of(4)) == 0);
     L_01AF:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(Val.Of(5), GetLocal(L, "K2Node_Event_method")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(Val.Of(5), H.GetVar("K2Node_Event_method")) == 0);
     L_01CE:
         L["CallFunc_BooleanOR_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_1")).AsBool() || (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool());
     L_01F4:
@@ -72,7 +72,7 @@ public static Val ExecuteUbergraph_card_unit_sissiosasto_5d(IHost H, Val self, V
     L_0202:
         goto L_0362;
     L_0207:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0230:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_1"] = __v) });
     L_0243:
@@ -80,7 +80,7 @@ public static Val ExecuteUbergraph_card_unit_sissiosasto_5d(IHost H, Val self, V
     L_0269:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_0362;
     L_0277:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_02B2:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(1)) != 0);
     L_02D1:

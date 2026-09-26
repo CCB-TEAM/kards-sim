@@ -94,11 +94,11 @@ public static Val ExecuteUbergraph_card_event_long_lance(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("getTotalAttack", new Val[] { GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
+        _ = H.Call("getTotalAttack", new Val[] { H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
     L_0033:
         H.SetMember(self, "attValue", GetLocal(L, "CallFunc_getTotalAttack_totalAttack"));
     L_004E:
-        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), self });
+        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), self });
     L_007C:
         L["CallFunc_LessEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "attValue"), Val.Of(3)) <= 0);
     L_009E:

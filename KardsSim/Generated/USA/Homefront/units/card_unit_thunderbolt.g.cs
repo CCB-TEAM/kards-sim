@@ -41,7 +41,7 @@ public static Val ExecuteUbergraph_card_unit_thunderbolt(IHost H, Val self, Val[
     L_008B:
         goto L_00D4;
     L_0090:
-        _ = H.Call("MoveCardToTopOfOwnersDeck", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), H.GetMember(self, "cardID"), Val.Of(0), Val.Out(__v => L["CallFunc_MoveCardToTopOfOwnersDeck_qqq"] = __v) });
+        _ = H.Call("MoveCardToTopOfOwnersDeck", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), H.GetMember(self, "cardID"), Val.Of(0), Val.Out(__v => L["CallFunc_MoveCardToTopOfOwnersDeck_qqq"] = __v) });
     L_00D4:
         goto __halt;
     L_00D6:

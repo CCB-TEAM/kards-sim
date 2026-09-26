@@ -117,7 +117,7 @@ public static Val ExecuteUbergraph_card_unit_40_royal_marine(IHost H, Val self, 
     L_0159:
         goto L_0176;
     L_015E:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_0171:
         goto L_00EE;
     L_0176:

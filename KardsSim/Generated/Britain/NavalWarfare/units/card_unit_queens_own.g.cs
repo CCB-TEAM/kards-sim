@@ -94,11 +94,11 @@ public static Val ExecuteUbergraph_card_unit_queens_own(IHost H, Val self, Val[]
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0027:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_008F;
     L_0035:
-        _ = H.Call("MoveCardToTopOfOwnersDeck", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Of(0), Val.Out(__v => L["CallFunc_MoveCardToTopOfOwnersDeck_qqq"] = __v) });
+        _ = H.Call("MoveCardToTopOfOwnersDeck", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Of(0), Val.Out(__v => L["CallFunc_MoveCardToTopOfOwnersDeck_qqq"] = __v) });
     L_008F:
         goto __halt;
     L_0091:

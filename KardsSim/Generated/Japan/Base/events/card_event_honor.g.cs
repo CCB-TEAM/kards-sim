@@ -99,7 +99,7 @@ public static Val ExecuteUbergraph_card_event_honor(IHost H, Val self, Val[] arg
             default: goto __halt;
         }
     L_000A:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_001D:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "tempCard") });
     L_003A:
@@ -141,7 +141,7 @@ public static Val ExecuteUbergraph_card_event_honor(IHost H, Val self, Val[] arg
     L_0338:
         goto L_0488;
     L_033D:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardLeaving"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardLeaving"));
     L_0350:
         _ = H.Call("JSON_GetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("targetCard"), Val.Out(__v => L["CallFunc_JSON_GetInt_value_1"] = __v), Val.Out(__v => L["CallFunc_JSON_GetInt_found_1"] = __v) });
     L_0393:
@@ -159,7 +159,7 @@ public static Val ExecuteUbergraph_card_event_honor(IHost H, Val self, Val[] arg
     L_0470:
         goto L_0162;
     L_0475:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_card"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_card"));
     L_0488:
         goto __halt;
     L_048A:

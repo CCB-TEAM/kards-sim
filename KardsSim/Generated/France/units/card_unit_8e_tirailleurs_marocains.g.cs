@@ -38,7 +38,7 @@ public static Val ExecuteUbergraph_card_unit_8e_tirailleurs_marocains(IHost H, V
     L_001D:
         _ = H.Call("IsSideActive", new Val[] { self, H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSideActive_active"] = __v) });
     L_0039:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0062:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool() && (GetLocal(L, "CallFunc_IsSideActive_active")).AsBool());
     L_0088:
@@ -46,7 +46,7 @@ public static Val ExecuteUbergraph_card_unit_8e_tirailleurs_marocains(IHost H, V
     L_00AE:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_1")).AsBool()) goto L_016F;
     L_00BC:
-        _ = H.Call("getTotalOperationCost", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getTotalOperationCost_totalOperationCost"] = __v) });
+        _ = H.Call("getTotalOperationCost", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getTotalOperationCost_totalOperationCost"] = __v) });
     L_00E5:
         _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(self, "side") });
     L_0124:

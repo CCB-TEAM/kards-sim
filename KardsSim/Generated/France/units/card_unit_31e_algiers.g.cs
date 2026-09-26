@@ -495,7 +495,7 @@ public static Val ExecuteUbergraph_card_unit_31e_algiers(IHost H, Val self, Val[
     L_0CBA:
         goto L_0232;
     L_0CBF:
-        H.SetMember(self, "Card Being Revealed", GetLocal(L, "K2Node_Event_cardBeingRevealed"));
+        H.SetMember(self, "Card Being Revealed", H.GetVar("K2Node_Event_cardBeingRevealed"));
     L_0CD2:
         goto L_0AFA;
     L_0CD7:

@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_unit_m3a3_honey_desert(IHost H, Val self
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), GetLocal(L, "K2Node_Event_drawnSide")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetVar("K2Node_Event_drawnSide")) == 0);
     L_0030:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_00E5;
     L_003E:

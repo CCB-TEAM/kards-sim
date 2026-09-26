@@ -191,7 +191,7 @@ public static Val ExecuteUbergraph_card_event_orders_from_above(IHost H, Val sel
             }
         }
     L_02CF:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetMember(self, "tempCard"), "side"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetMember(self, "tempCard"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_030A:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_0329:
@@ -227,7 +227,7 @@ public static Val ExecuteUbergraph_card_event_orders_from_above(IHost H, Val sel
     L_0416:
         goto L_000F;
     L_041B:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_042E:
         goto L_02A8;
     L_0433:

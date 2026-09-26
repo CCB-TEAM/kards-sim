@@ -18,6 +18,34 @@ public sealed partial class GameEngine
     public EngineHost Host { get; set; }
 
     /// <summary>
+    /// 带具名载荷的触发。调用方只写「这个触发点我知道哪些参数」，
+    /// 填槽位由生成好的形参表负责 —— 见 <see cref="Bridge.TriggerPayload"/>。
+    /// </summary>
+    public void FireTrigger(Trigger t, Card subject, Func<Bridge.TriggerPayload, Bridge.TriggerPayload> fill)
+    {
+        if (S.Done) return;
+        var payload = Bridge.TriggerPayload.Of(subject);
+        fill?.Invoke(payload);
+
+        foreach (var c in TriggerOrder())
+        {
+            if (c.Destroyed) continue;
+            if (Host is not null)
+            {
+                if (!Bridge.CardDispatch.Has(c, t)) continue;
+                Bridge.CardDispatch.Fire(Host, c, t, payload);
+                TriggerFireCount++;
+                if (S.Done) return;
+                continue;
+            }
+            if (c.Def?.Triggers == null || !c.Def.Triggers.Contains(t)) continue;
+            RunCardEffectLegacy(c, t);
+            TriggerFireCount++;
+            if (S.Done) return;
+        }
+    }
+
+    /// <summary>
     /// 触发所有注册了该触发点的牌。
     ///
     /// 触发源 = 双方场上（与手牌）所有 CDO 里用了这个 trigger 的牌。

@@ -100,7 +100,7 @@ public static Val ExecuteUbergraph_card_event_old_hares(IHost H, Val self, Val[]
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("AddAttackUntilEndOfTurn", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Of(5) });
+        _ = H.Call("AddAttackUntilEndOfTurn", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Of(5) });
     L_0045:
         goto __halt;
     L_0047:

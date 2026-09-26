@@ -53,13 +53,13 @@ public static Val ExecuteUbergraph_card_unit_infantry_regiment_25(IHost H, Val s
     L_00FF:
         L["CallFunc_GetCombatKeywords_keywords_1"] = H.MakeArray(new Val[] {  });
     L_010A:
-        _ = H.Call("GetCombatKeywords", new Val[] { GetLocal(L, "K2Node_Event_cardAttacking"), Val.Out(__v => L["CallFunc_GetCombatKeywords_keywords_1"] = __v), Val.Out(__v => L["CallFunc_GetCombatKeywords_numberOfKeywords_1"] = __v) });
+        _ = H.Call("GetCombatKeywords", new Val[] { H.GetVar("K2Node_Event_cardAttacking"), Val.Out(__v => L["CallFunc_GetCombatKeywords_keywords_1"] = __v), Val.Out(__v => L["CallFunc_GetCombatKeywords_numberOfKeywords_1"] = __v) });
     L_013C:
         L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetCombatKeywords_numberOfKeywords_1"), Val.Of(1)) > 0);
     L_015E:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardAttacking"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardAttacking"), "side"), H.GetMember(self, "side")) == 0);
     L_019A:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardAttacking"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardAttacking"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_01C3:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool());
     L_01E9:

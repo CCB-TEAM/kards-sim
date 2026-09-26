@@ -36,9 +36,9 @@ public static Val ExecuteUbergraph_card_unit_73e_regiment_infanterie(IHost H, Va
     L_000A:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_001D:
-        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "K2Node_Event_cardGainingDefense"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
+        _ = H.Call("IsLocation", new Val[] { H.GetVar("K2Node_Event_cardGainingDefense"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
     L_0046:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(GetLocal(L, "K2Node_Event_cardGainingDefense"), "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetMember(H.GetVar("K2Node_Event_cardGainingDefense"), "side")) == 0);
     L_0082:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_IsLocation_isIt")).AsBool());
     L_00A8:

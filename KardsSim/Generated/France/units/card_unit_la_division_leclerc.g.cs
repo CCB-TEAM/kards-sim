@@ -57,11 +57,11 @@ public static Val ExecuteUbergraph_card_unit_la_division_leclerc(IHost H, Val se
     L_00DC:
         goto L_000A;
     L_00E1:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_instigatorCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_instigatorCard") });
     L_00FE:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_01B2;
     L_010C:
-        _ = H.Call("EnumCompareSide", new Val[] { self, GetLocal(L, "K2Node_Event_deckSide"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetVar("K2Node_Event_deckSide"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_0131:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_0150:
@@ -69,7 +69,7 @@ public static Val ExecuteUbergraph_card_unit_la_division_leclerc(IHost H, Val se
     L_015E:
         goto L_01B2;
     L_0163:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_instigatorCard"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_instigatorCard"), "side"), H.GetMember(self, "side")) == 0);
     L_019F:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_01B2;
     L_01AD:

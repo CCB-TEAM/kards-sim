@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_event_careless_talk(IHost H, Val self, V
             default: goto __halt;
         }
     L_000A:
-        H.SetMember(self, "cardBeingPlayed", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "cardBeingPlayed", H.GetVar("K2Node_Event_cardPlayed"));
     L_001D:
         _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetMember(self, "cardBeingPlayed"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0046:

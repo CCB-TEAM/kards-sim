@@ -43,7 +43,7 @@ public static Val ExecuteUbergraph_card_unit_110e_regiment_motorize(IHost H, Val
     L_0014:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "side"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches_1") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches_1"] = __v) });
     L_008A:
         L["K2Node_SwitchEnum_CmpSuccess_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches_1"), Val.Of(0)) != 0);
     L_00A9:
@@ -110,7 +110,7 @@ public static Val ExecuteUbergraph_card_unit_110e_regiment_motorize(IHost H, Val
             default: goto __halt;
         }
     L_0313:
-        _ = H.Call("EnumCompareSide", new Val[] { self, GetLocal(L, "K2Node_Event_deckSide"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetVar("K2Node_Event_deckSide"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_0338:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_0357:
@@ -124,7 +124,7 @@ public static Val ExecuteUbergraph_card_unit_110e_regiment_motorize(IHost H, Val
             default: goto __halt;
         }
     L_0366:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_instigatorCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_instigatorCard") });
     L_0383:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool())
         {
@@ -137,7 +137,7 @@ public static Val ExecuteUbergraph_card_unit_110e_regiment_motorize(IHost H, Val
             }
         }
     L_038D:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_instigatorCard"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_instigatorCard"), "side"), H.GetMember(self, "side")) == 0);
     L_03C9:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool())
         {

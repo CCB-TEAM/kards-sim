@@ -111,9 +111,9 @@ public static Val ExecuteUbergraph_card_unit_tropic_lightning(IHost H, Val self,
     L_036C:
         goto L_0339;
     L_0371:
-        L["CallFunc_Not_PreBool_ReturnValue"] = H.Call("Not_PreBool", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "K2Node_Event_isNegativeGain") });
+        L["CallFunc_Not_PreBool_ReturnValue"] = H.Call("Not_PreBool", new Val[] { Val.Ref("KismetMathLibrary"), H.GetVar("K2Node_Event_isNegativeGain") });
     L_038E:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_sideGaining"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_sideGaining"), H.GetMember(self, "side")) == 0);
     L_03B4:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_03C7:

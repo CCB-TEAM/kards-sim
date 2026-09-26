@@ -538,7 +538,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock5_tut(IHost H, Val
             }
         }
     L_1081:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(2)) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(2)) == 0);
     L_10A3:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_0DA1;
     L_10B1:

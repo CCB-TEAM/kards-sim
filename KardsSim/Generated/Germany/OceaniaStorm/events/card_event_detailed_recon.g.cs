@@ -46,11 +46,11 @@ public static Val ExecuteUbergraph_card_event_detailed_recon(IHost H, Val self, 
     L_00DD:
         goto L_0199;
     L_00E2:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardOperated"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardOperated"), "side"), H.GetMember(self, "side")) == 0);
     L_011E:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_0199;
     L_012C:
-        L["CallFunc_Multiply_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_kreditsSpent") * Val.Of(-1));
+        L["CallFunc_Multiply_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_kreditsSpent") * Val.Of(-1));
     L_0156:
         _ = H.Call("ChangeKreditCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeKreditCost_qqq_1"] = __v) });
     L_0199:

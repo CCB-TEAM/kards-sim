@@ -105,7 +105,7 @@ public static Val ExecuteUbergraph_card_event_long_range_desert_group(IHost H, V
     L_0343:
         goto L_006B;
     L_0348:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_damage"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_damage"), Val.Of(0)) > 0);
     L_036A:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool())
         {
@@ -118,7 +118,7 @@ public static Val ExecuteUbergraph_card_event_long_range_desert_group(IHost H, V
             }
         }
     L_0374:
-        L["CallFunc_BooleanOR_ReturnValue"] = Val.Of((GetLocal(L, "K2Node_Event_isCombatDamage")).AsBool() || (GetLocal(L, "K2Node_Event_isRedirected")).AsBool());
+        L["CallFunc_BooleanOR_ReturnValue"] = Val.Of((H.GetVar("K2Node_Event_isCombatDamage")).AsBool() || (H.GetVar("K2Node_Event_isRedirected")).AsBool());
     L_039A:
         if (!(GetLocal(L, "CallFunc_BooleanOR_ReturnValue")).AsBool()) goto L_03A9;
     L_03A8:
@@ -130,11 +130,11 @@ public static Val ExecuteUbergraph_card_event_long_range_desert_group(IHost H, V
             default: goto __halt;
         }
     L_03A9:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_03D2:
-        _ = H.Call("getTotalDefense", new Val[] { GetLocal(L, "K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
+        _ = H.Call("getTotalDefense", new Val[] { H.GetVar("K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
     L_03FB:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0424:
         L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getTotalDefense_totalDefense"), Val.Of(0)) > 0);
     L_0446:
@@ -153,7 +153,7 @@ public static Val ExecuteUbergraph_card_event_long_range_desert_group(IHost H, V
             }
         }
     L_049C:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "K2Node_Event_cardDealingDamage"), Val.Of("passive"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_cardDealingDamage"), Val.Of("passive"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_04D7:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt")).AsBool())
         {
@@ -166,7 +166,7 @@ public static Val ExecuteUbergraph_card_event_long_range_desert_group(IHost H, V
             }
         }
     L_04E1:
-        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_toCard"), GetLocal(L, "K2Node_Event_cardDealingDamage") });
+        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_toCard"), H.GetVar("K2Node_Event_cardDealingDamage") });
     L_0517:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())

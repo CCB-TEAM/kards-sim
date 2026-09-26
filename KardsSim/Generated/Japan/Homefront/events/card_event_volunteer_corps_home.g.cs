@@ -119,21 +119,21 @@ public static Val ExecuteUbergraph_card_event_volunteer_corps_home(IHost H, Val 
     L_0265:
         goto L_0454;
     L_026A:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0287:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_0454;
     L_0295:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_02BE:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_0454;
     L_02CC:
-        _ = H.Call("RemoveCardFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RemoveCardFromBoard_qqq"] = __v) });
+        _ = H.Call("RemoveCardFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RemoveCardFromBoard_qqq"] = __v) });
     L_0321:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardID"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("cardID"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_0376:
-        if (!(H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "isSalvaged")).AsBool()) goto L_0426;
+        if (!(H.GetMember(H.GetVar("K2Node_Event_targetCard"), "isSalvaged")).AsBool()) goto L_0426;
     L_039A:
-        L["CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"] = H.Call("GetEnumeratorUserFriendlyName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("EFactionEnum"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "salvageFaction") });
+        L["CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"] = H.Call("GetEnumeratorUserFriendlyName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("EFactionEnum"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "salvageFaction") });
     L_03DE:
         _ = H.Call("JSON_SetString", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("salvage_faction"), GetLocal(L, "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"), Val.Out(__v => L["CallFunc_JSON_SetString_found"] = __v) });
     L_0426:

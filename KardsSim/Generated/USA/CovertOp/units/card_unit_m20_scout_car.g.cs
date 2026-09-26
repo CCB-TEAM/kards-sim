@@ -140,7 +140,7 @@ public static Val ExecuteUbergraph_card_unit_m20_scout_car(IHost H, Val self, Va
     L_02D3:
         goto L_04E3;
     L_02D8:
-        L["CallFunc_EqualEqual_StrStr_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_MoveReason"), Val.Of("Destroyed")) == 0);
+        L["CallFunc_EqualEqual_StrStr_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_MoveReason"), Val.Of("Destroyed")) == 0);
     L_0300:
         if (!(GetLocal(L, "CallFunc_EqualEqual_StrStr_ReturnValue")).AsBool()) goto L_0313;
     L_030E:
@@ -164,7 +164,7 @@ public static Val ExecuteUbergraph_card_unit_m20_scout_car(IHost H, Val self, Va
     L_03D7:
         goto L_020C;
     L_03DC:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_03EF:
         L["CallFunc_IsValid_ReturnValue_2"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "tempCard") });
     L_040C:
@@ -176,7 +176,7 @@ public static Val ExecuteUbergraph_card_unit_m20_scout_car(IHost H, Val self, Va
     L_0486:
         goto L_0339;
     L_048B:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardReset"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardReset"));
     L_049E:
         _ = H.Call("isBuffedByCard", new Val[] { H.GetMember(self, "tempCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
     L_04D0:

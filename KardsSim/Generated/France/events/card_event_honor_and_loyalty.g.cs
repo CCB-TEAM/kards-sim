@@ -94,13 +94,13 @@ public static Val ExecuteUbergraph_card_event_honor_and_loyalty(IHost H, Val sel
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0027:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_010A;
     L_0035:
-        _ = H.Call("StealCardFromBoardToDeck", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "originalSide"), Val.Out(__v => L["CallFunc_StealCardFromBoardToDeck_qqq"] = __v) });
+        _ = H.Call("StealCardFromBoardToDeck", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "originalSide"), Val.Out(__v => L["CallFunc_StealCardFromBoardToDeck_qqq"] = __v) });
     L_00A9:
-        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "originalSide"), Val.Of(2), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
+        _ = H.Call("DrawCardsFromDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "originalSide"), Val.Of(2), Val.False, Val.False, Val.Out(__v => L["CallFunc_DrawCardsFromDeckbySide_cardsIDs"] = __v), Val.Of(0.4f) });
     L_010A:
         goto __halt;
     L_010C:

@@ -102,7 +102,7 @@ public static Val ExecuteUbergraph_card_event_storm2_thunderstorm2(IHost H, Val 
     L_0014:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
-        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "name"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "name")) == 0);
+        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "name"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "name")) == 0);
     L_00A1:
         if (!(GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue")).AsBool())
         {

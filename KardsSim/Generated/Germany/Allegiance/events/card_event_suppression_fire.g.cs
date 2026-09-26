@@ -190,7 +190,7 @@ public static Val ExecuteUbergraph_card_event_suppression_fire(IHost H, Val self
     L_023F:
         goto L_00DE;
     L_0244:
-        _ = H.Call("SuppressUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_SuppressUnit_qqq"] = __v) });
+        _ = H.Call("SuppressUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_SuppressUnit_qqq"] = __v) });
     L_0299:
         _ = H.Call("GetCardsOnBoardBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GetCardsOnBoardBySide_cards"] = __v) });
     L_02D1:

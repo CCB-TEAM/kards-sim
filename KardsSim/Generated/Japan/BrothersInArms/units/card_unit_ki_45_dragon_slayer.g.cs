@@ -276,7 +276,7 @@ public static Val ExecuteUbergraph_card_unit_ki_45_dragon_slayer(IHost H, Val se
             default: goto __halt;
         }
     L_0804:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_method_1"), Val.Of(1)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_method_1"), Val.Of(1)) == 0);
     L_0823:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool())
         {
@@ -309,7 +309,7 @@ public static Val ExecuteUbergraph_card_unit_ki_45_dragon_slayer(IHost H, Val se
     L_08CD:
         goto L_06EA;
     L_08D2:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_090E:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool())
         {

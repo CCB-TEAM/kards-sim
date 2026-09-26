@@ -98,17 +98,17 @@ public static Val ExecuteUbergraph_card_event_attrition(IHost H, Val self, Val[]
     L_000A:
         _ = H.Call("GetPlayFromHandDamage", new Val[] { self, self, Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_0022:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_006D:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0096:
-        _ = H.Call("IsVeteran", new Val[] { GetLocal(L, "K2Node_Event_targetCard"), Val.False, Val.Out(__v => L["CallFunc_IsVeteran_isIt"] = __v) });
+        _ = H.Call("IsVeteran", new Val[] { H.GetVar("K2Node_Event_targetCard"), Val.False, Val.Out(__v => L["CallFunc_IsVeteran_isIt"] = __v) });
     L_00C0:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool() && (GetLocal(L, "CallFunc_IsVeteran_isIt")).AsBool());
     L_00E6:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_013E;
     L_00F4:
-        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { GetLocal(L, "K2Node_Event_targetCard") });
+        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { H.GetVar("K2Node_Event_targetCard") });
     L_0108:
         _ = H.Call("MakeCardRetreat", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_MakeArray_Array"), H.GetMember(self, "cardID") });
     L_013E:

@@ -118,7 +118,7 @@ public static Val ExecuteUbergraph_card_event_shock_tactics(IHost H, Val self, V
     L_0077:
         goto L_0311;
     L_007C:
-        _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
     L_00C8:
         _ = H.Call("Get_X_AndMoreAttackCardsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_Get_X_AndMoreAttackCardsOnBoard_cardsIDs"] = __v), Val.Of(4), Val.False });
     L_0104:
@@ -128,11 +128,11 @@ public static Val ExecuteUbergraph_card_event_shock_tactics(IHost H, Val self, V
     L_0161:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_0311;
     L_016F:
-        _ = H.Call("GiveShock", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveShock_qqq_1"] = __v) });
+        _ = H.Call("GiveShock", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveShock_qqq_1"] = __v) });
     L_01C4:
         goto L_0311;
     L_01C9:
-        _ = H.Call("GiveShock", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveShock_qqq"] = __v) });
+        _ = H.Call("GiveShock", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveShock_qqq"] = __v) });
     L_021E:
         _ = H.Call("Get_X_AndMoreAttackCardsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_Get_X_AndMoreAttackCardsOnBoard_cardsIDs_1"] = __v), Val.Of(4), Val.False });
     L_025A:
@@ -142,7 +142,7 @@ public static Val ExecuteUbergraph_card_event_shock_tactics(IHost H, Val self, V
     L_02B7:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue_1")).AsBool()) goto L_0311;
     L_02C5:
-        _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
     L_0311:
         goto __halt;
     L_0313:

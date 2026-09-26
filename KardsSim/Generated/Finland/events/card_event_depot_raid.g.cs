@@ -96,9 +96,9 @@ public static Val ExecuteUbergraph_card_event_depot_raid(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("MoveUnitFromBoardToOwnersHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID") });
+        _ = H.Call("MoveUnitFromBoardToOwnersHand", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID") });
     L_0040:
-        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "name"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable"] = __v), H.GetMember(self, "faction"), Val.Out(__v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "name"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable"] = __v), H.GetMember(self, "faction"), Val.Out(__v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID"] = __v) });
     L_00B5:
         goto __halt;
     L_00B7:

@@ -481,7 +481,7 @@ public static Val ExecuteUbergraph_card_location_soviet_scen5(IHost H, Val self,
     L_0AC5:
         __ef.Push(3105);
     L_0ACA:
-        L["CallFunc_GreaterEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(3)) >= 0);
+        L["CallFunc_GreaterEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(3)) >= 0);
     L_0AEC:
         if (!(GetLocal(L, "CallFunc_GreaterEqual_IntInt_ReturnValue")).AsBool())
         {
@@ -534,9 +534,9 @@ public static Val ExecuteUbergraph_card_location_soviet_scen5(IHost H, Val self,
     L_0C35:
         L["Temp_byte_Variable_1"] = Val.Of(2);
     L_0C49:
-        L["CallFunc_Add_IntInt_ReturnValue_1"] = (GetLocal(L, "K2Node_Event_turnnumber") + Val.Of(1));
+        L["CallFunc_Add_IntInt_ReturnValue_1"] = (H.GetVar("K2Node_Event_turnnumber") + Val.Of(1));
     L_0C73:
-        L["CallFunc_LessEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(15)) <= 0);
+        L["CallFunc_LessEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(15)) <= 0);
     L_0C95:
         L["CallFunc_Divide_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_1") / Val.Of(2));
     L_0CBF:
@@ -662,7 +662,7 @@ public static Val ExecuteUbergraph_card_location_soviet_scen5(IHost H, Val self,
     L_133B:
         _ = H.Call("getTotalDefense", new Val[] { self, Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense_1"] = __v) });
     L_134E:
-        L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_getTotalDefense_totalDefense_1") - GetLocal(L, "K2Node_Event_damage"));
+        L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_getTotalDefense_totalDefense_1") - H.GetVar("K2Node_Event_damage"));
     L_137C:
         L["CallFunc_Less_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue"), Val.Of(16)) < 0);
     L_139E:

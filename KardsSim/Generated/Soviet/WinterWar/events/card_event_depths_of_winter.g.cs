@@ -135,7 +135,7 @@ public static Val ExecuteUbergraph_card_event_depths_of_winter(IHost H, Val self
     L_01ED:
         __ef.Push(619);
     L_01F2:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(self, "side"), Val.Of(1), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(self, "side"), Val.Of(1), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_0210:
         L["K2Node_SwitchEnum_CmpSuccess_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_022F:
@@ -155,7 +155,7 @@ public static Val ExecuteUbergraph_card_event_depths_of_winter(IHost H, Val self
             default: goto __halt;
         }
     L_026B:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(self, "side"), Val.Of(1), GetLocal(L, "CallFunc_EnumCompareSide_Branches_1") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(self, "side"), Val.Of(1), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches_1"] = __v) });
     L_0289:
         L["K2Node_SwitchEnum_CmpSuccess_2"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches_1"), Val.Of(0)) != 0);
     L_02A8:

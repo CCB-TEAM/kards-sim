@@ -171,7 +171,7 @@ public static Val ExecuteUbergraph_card_unit_french_75(IHost H, Val self, Val[] 
     L_04C4:
         goto L_0491;
     L_04C9:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_04DC:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_04EF:

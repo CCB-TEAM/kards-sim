@@ -265,11 +265,11 @@ public static Val ExecuteUbergraph_card_unit_aichi_d3a(IHost H, Val self, Val[] 
     L_0791:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_07A4:
-        _ = H.Call("IsLocatedOnBoard", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_2"] = __v) });
+        _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_2"] = __v) });
     L_07CD:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_07F6:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_0832:
         L["CallFunc_BooleanAND_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_0858:
@@ -289,13 +289,13 @@ public static Val ExecuteUbergraph_card_unit_aichi_d3a(IHost H, Val self, Val[] 
             }
         }
     L_08AE:
-        L["CallFunc_EqualEqual_NameName_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "name"), Val.Name("card_unit_aichi_d3a")) == 0);
+        L["CallFunc_EqualEqual_NameName_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "name"), Val.Name("card_unit_aichi_d3a")) == 0);
     L_08EE:
-        L["CallFunc_EqualEqual_NameName_ReturnValue_3"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "name"), Val.Name("card_unit_sonia")) == 0);
+        L["CallFunc_EqualEqual_NameName_ReturnValue_3"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "name"), Val.Name("card_unit_sonia")) == 0);
     L_092E:
         L["CallFunc_BooleanOR_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue_2")).AsBool() || (GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue_3")).AsBool());
     L_0954:
-        L["CallFunc_NotEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID")) != 0);
+        L["CallFunc_NotEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), H.GetMember(self, "cardID")) != 0);
     L_0990:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_NotEqual_IntInt_ReturnValue_1")).AsBool() && (GetLocal(L, "CallFunc_BooleanOR_ReturnValue_1")).AsBool());
     L_09B6:
@@ -313,7 +313,7 @@ public static Val ExecuteUbergraph_card_unit_aichi_d3a(IHost H, Val self, Val[] 
     L_09C0:
         _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(2), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq_1"] = __v) });
     L_09FF:
-        L["CallFunc_Conv_IntToString_ReturnValue_1"] = H.Call("Conv_IntToString", new Val[] { Val.Ref("KismetStringLibrary"), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID") });
+        L["CallFunc_Conv_IntToString_ReturnValue_1"] = H.Call("Conv_IntToString", new Val[] { Val.Ref("KismetStringLibrary"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID") });
     L_0A3A:
         _ = H.Call("CustomName2Add", new Val[] { self, GetLocal(L, "CallFunc_Conv_IntToString_ReturnValue_1") });
     L_0A4D:
@@ -333,7 +333,7 @@ public static Val ExecuteUbergraph_card_unit_aichi_d3a(IHost H, Val self, Val[] 
             }
         }
     L_0A6F:
-        L["CallFunc_Conv_IntToString_ReturnValue_2"] = H.Call("Conv_IntToString", new Val[] { Val.Ref("KismetStringLibrary"), H.GetMember(GetLocal(L, "K2Node_Event_cardLeaving"), "cardID") });
+        L["CallFunc_Conv_IntToString_ReturnValue_2"] = H.Call("Conv_IntToString", new Val[] { Val.Ref("KismetStringLibrary"), H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "cardID") });
     L_0AAA:
         _ = H.Call("CustomName2HasAttribute", new Val[] { self, GetLocal(L, "CallFunc_Conv_IntToString_ReturnValue_2"), Val.Out(__v => L["CallFunc_CustomName2HasAttribute_doesIt"] = __v) });
     L_0AC6:
@@ -349,7 +349,7 @@ public static Val ExecuteUbergraph_card_unit_aichi_d3a(IHost H, Val self, Val[] 
             }
         }
     L_0AD0:
-        L["CallFunc_Conv_IntToString_ReturnValue_2"] = H.Call("Conv_IntToString", new Val[] { Val.Ref("KismetStringLibrary"), H.GetMember(GetLocal(L, "K2Node_Event_cardLeaving"), "cardID") });
+        L["CallFunc_Conv_IntToString_ReturnValue_2"] = H.Call("Conv_IntToString", new Val[] { Val.Ref("KismetStringLibrary"), H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "cardID") });
     L_0B0B:
         _ = H.Call("CustomName2Remove", new Val[] { self, GetLocal(L, "CallFunc_Conv_IntToString_ReturnValue_2") });
     L_0B1E:

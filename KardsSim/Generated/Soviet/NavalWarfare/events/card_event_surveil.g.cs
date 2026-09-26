@@ -236,11 +236,11 @@ public static Val ExecuteUbergraph_card_event_surveil(IHost H, Val self, Val[] a
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
     L_002C:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_0145;
     L_003A:
-        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { GetLocal(L, "K2Node_Event_handTargetCardID") });
+        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { H.GetVar("K2Node_Event_handTargetCardID") });
     L_004E:
         _ = H.Call("ConvertCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_MakeArray_Array"), H.GetMember(self, "cardID"), Val.Name("None"), H.GetMember(self, "unitTargeted"), Val.False, Val.Out(__v => L["CallFunc_ConvertCard_newCardIDs"] = __v) });
     L_00A4:
@@ -250,11 +250,11 @@ public static Val ExecuteUbergraph_card_event_surveil(IHost H, Val self, Val[] a
     L_00DF:
         goto L_0145;
     L_00E4:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0101:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_0145;
     L_010F:
-        H.SetMember(self, "unitTargeted", H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"));
+        H.SetMember(self, "unitTargeted", H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"));
     L_0140:
         goto L_00A9;
     L_0145:

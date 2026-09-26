@@ -80,7 +80,7 @@ public static Val ExecuteUbergraph_card_event_for_the_emperor(IHost H, Val self,
             }
         }
     L_0126:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(H.GetMember(self, "tempCard"), "faction"), Val.Of(3), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(H.GetMember(self, "tempCard"), "faction"), Val.Of(3), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_015A:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_0179:
@@ -199,7 +199,7 @@ public static Val ExecuteUbergraph_card_event_for_the_emperor(IHost H, Val self,
     L_04C9:
         goto L_000F;
     L_04CE:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
     L_04F4:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "enterPlayOnTurn"), Val.Of(0)) > 0);
     L_0516:

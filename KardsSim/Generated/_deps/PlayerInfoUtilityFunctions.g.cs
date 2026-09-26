@@ -73,7 +73,7 @@ public static Val GetCrateRewards(IHost H, Val self, Val[] args)
     L_020E:
         L["CallFunc_Format_ReturnValue"] = H.Call("Format", new Val[] { Val.Ref("KismetTextLibrary"), Val.Of("Crate {tier}"), GetLocal(L, "K2Node_MakeArray_Array") });
     L_0267:
-        _ = H.Call("CreateQuantityItem", new Val[] { self, Val.Of(10), Val.Of(30), GetLocal(L, "CallFunc_CreateQuantityItem_Item_4") });
+        _ = H.Call("CreateQuantityItem", new Val[] { self, Val.Of(10), Val.Of(30), Val.Out(__v => L["CallFunc_CreateQuantityItem_Item_4"] = __v) });
     L_0281:
         H.SetMember(GetLocal(L, "K2Node_MakeStruct_RewardVariables_17"), "Item", GetLocal(L, "CallFunc_CreateQuantityItem_Item_4"));
     L_02A5:
@@ -129,7 +129,7 @@ public static Val GetCrateRewards(IHost H, Val self, Val[] args)
     L_05E6:
         H.SetMember(GetLocal(L, "K2Node_MakeStruct_RewardVariables_7"), "Variant", Val.Of(-1));
     L_0606:
-        _ = H.Call("CreateQuantityItem", new Val[] { self, Val.Of(10), Val.Of(80), GetLocal(L, "CallFunc_CreateQuantityItem_Item_3") });
+        _ = H.Call("CreateQuantityItem", new Val[] { self, Val.Of(10), Val.Of(80), Val.Out(__v => L["CallFunc_CreateQuantityItem_Item_3"] = __v) });
     L_0620:
         H.SetMember(GetLocal(L, "K2Node_MakeStruct_RewardVariables_15"), "Item", GetLocal(L, "CallFunc_CreateQuantityItem_Item_3"));
     L_0644:
@@ -195,7 +195,7 @@ public static Val GetCrateRewards(IHost H, Val self, Val[] args)
     L_0A35:
         H.SetMember(GetLocal(L, "K2Node_MakeStruct_RewardVariables_6"), "Variant", Val.Of(-1));
     L_0A55:
-        _ = H.Call("CreateQuantityItem", new Val[] { self, Val.Of(10), Val.Of(150), GetLocal(L, "CallFunc_CreateQuantityItem_Item_2") });
+        _ = H.Call("CreateQuantityItem", new Val[] { self, Val.Of(10), Val.Of(150), Val.Out(__v => L["CallFunc_CreateQuantityItem_Item_2"] = __v) });
     L_0A6F:
         H.SetMember(GetLocal(L, "K2Node_MakeStruct_RewardVariables_13"), "Item", GetLocal(L, "CallFunc_CreateQuantityItem_Item_2"));
     L_0A93:
@@ -271,7 +271,7 @@ public static Val GetCrateRewards(IHost H, Val self, Val[] args)
     L_0F2D:
         H.SetMember(GetLocal(L, "K2Node_MakeStruct_RewardVariables_4"), "Variant", Val.Of(-1));
     L_0F4D:
-        _ = H.Call("CreateQuantityItem", new Val[] { self, Val.Of(10), Val.Of(250), GetLocal(L, "CallFunc_CreateQuantityItem_Item_1") });
+        _ = H.Call("CreateQuantityItem", new Val[] { self, Val.Of(10), Val.Of(250), Val.Out(__v => L["CallFunc_CreateQuantityItem_Item_1"] = __v) });
     L_0F67:
         H.SetMember(GetLocal(L, "K2Node_MakeStruct_RewardVariables_11"), "Item", GetLocal(L, "CallFunc_CreateQuantityItem_Item_1"));
     L_0F8B:
@@ -339,7 +339,7 @@ public static Val GetCrateRewards(IHost H, Val self, Val[] args)
     L_13AE:
         _ = H.Call("CreateCard", new Val[] { self, GetLocal(L, "CallFunc_CreateCard_Item_3"), Val.Name("card_wildcard_limited"), Val.False, Val.Of(1) });
     L_13D4:
-        _ = H.Call("CreateQuantityItem", new Val[] { self, Val.Of(10), Val.Of(350), GetLocal(L, "CallFunc_CreateQuantityItem_Item") });
+        _ = H.Call("CreateQuantityItem", new Val[] { self, Val.Of(10), Val.Of(350), Val.Out(__v => L["CallFunc_CreateQuantityItem_Item"] = __v) });
     L_13EE:
         H.SetMember(GetLocal(L, "K2Node_MakeStruct_RewardVariables_8"), "Item", GetLocal(L, "CallFunc_CreateCard_Item_3"));
     L_1412:
@@ -675,7 +675,7 @@ public static Val HadBattlePassOnDate(IHost H, Val self, Val[] args)
     L_0000:
         _ = H.Call("GetEquipmentBP", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetEquipmentBP_Equipment"] = __v) });
     L_0036:
-        _ = H.Call("HadBattlePassOnDate", new Val[] { GetLocal(L, "CallFunc_GetEquipmentBP_Equipment"), GetLocal(L, "InDate"), GetLocal(L, "CallFunc_HadBattlePassOnDate_hasPass") });
+        _ = H.Call("HadBattlePassOnDate", new Val[] { GetLocal(L, "CallFunc_GetEquipmentBP_Equipment"), GetLocal(L, "InDate"), Val.Out(__v => L["CallFunc_HadBattlePassOnDate_hasPass"] = __v) });
     L_006C:
         L["hasPass"] = GetLocal(L, "CallFunc_HadBattlePassOnDate_hasPass");
     L_007F:
@@ -700,7 +700,7 @@ public static Val HasBattlePass(IHost H, Val self, Val[] args)
     L_0000:
         _ = H.Call("GetEquipmentBP", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetEquipmentBP_Equipment"] = __v) });
     L_0036:
-        _ = H.Call("GetBattlePass", new Val[] { GetLocal(L, "CallFunc_GetEquipmentBP_Equipment"), GetLocal(L, "CallFunc_GetBattlePass_hasPass") });
+        _ = H.Call("GetBattlePass", new Val[] { GetLocal(L, "CallFunc_GetEquipmentBP_Equipment"), Val.Out(__v => L["CallFunc_GetBattlePass_hasPass"] = __v) });
     L_0063:
         L["hasPass"] = GetLocal(L, "CallFunc_GetBattlePass_hasPass");
     L_0076:

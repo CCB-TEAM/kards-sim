@@ -255,7 +255,7 @@ public static Val ExecuteUbergraph_card_unit_hummel(IHost H, Val self, Val[] arg
             }
         }
     L_021C:
-        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { GetLocal(L, "K2Node_Event_targetCard") });
+        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { H.GetVar("K2Node_Event_targetCard") });
     L_0230:
         _ = H.Call("MakeCardRetreat", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_MakeArray_Array"), H.GetMember(self, "cardID") });
     L_0266:
@@ -275,7 +275,7 @@ public static Val ExecuteUbergraph_card_unit_hummel(IHost H, Val self, Val[] arg
     L_029A:
         goto L_0267;
     L_029F:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_02BC:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool())
         {

@@ -172,7 +172,7 @@ public static Val ExecuteUbergraph_card_event_special_reinforcements(IHost H, Va
             }
         }
     L_0580:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_05BB:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_05DA:
@@ -187,7 +187,7 @@ public static Val ExecuteUbergraph_card_event_special_reinforcements(IHost H, Va
             default: goto __halt;
         }
     L_05E9:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0612:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool())
         {
@@ -201,9 +201,9 @@ public static Val ExecuteUbergraph_card_event_special_reinforcements(IHost H, Va
             }
         }
     L_061C:
-        L["CallFunc_Conv_NameToString_ReturnValue"] = H.Call("Conv_NameToString", new Val[] { Val.Ref("KismetStringLibrary"), H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "name") });
+        L["CallFunc_Conv_NameToString_ReturnValue"] = H.Call("Conv_NameToString", new Val[] { Val.Ref("KismetStringLibrary"), H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "name") });
     L_0657:
-        L["CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"] = H.Call("GetEnumeratorUserFriendlyName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("EFactionEnum"), H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "salvageFaction") });
+        L["CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"] = H.Call("GetEnumeratorUserFriendlyName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("EFactionEnum"), H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "salvageFaction") });
     L_069B:
         L["CallFunc_Concat_StrStr_ReturnValue"] = H.Call("Concat_StrStr", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_Conv_NameToString_ReturnValue"), Val.Of(";") });
     L_06C3:
@@ -234,7 +234,7 @@ public static Val ExecuteUbergraph_card_event_special_reinforcements(IHost H, Va
     L_07FB:
         goto L_02BD;
     L_0800:
-        L["CallFunc_EqualEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_cardPlayed"), self) == 0);
+        L["CallFunc_EqualEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_cardPlayed"), self) == 0);
     L_081E:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ObjectObject_ReturnValue")).AsBool())
         {

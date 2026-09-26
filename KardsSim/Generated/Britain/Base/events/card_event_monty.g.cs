@@ -168,7 +168,7 @@ public static Val ExecuteUbergraph_card_event_monty(IHost H, Val self, Val[] arg
     L_029E:
         goto L_0026;
     L_02A3:
-        H.SetMember(self, "Target Card", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "Target Card", H.GetVar("K2Node_Event_targetCard"));
     L_02B6:
         _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetMember(self, "Target Card"), "cardID"), H.GetMember(self, "cardID") });
     L_0302:

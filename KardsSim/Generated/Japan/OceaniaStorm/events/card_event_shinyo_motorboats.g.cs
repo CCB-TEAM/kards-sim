@@ -113,17 +113,17 @@ public static Val ExecuteUbergraph_card_event_shinyo_motorboats(IHost H, Val sel
     L_0102:
         _ = H.Call("LoseKreditSlot", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side") });
     L_012F:
-        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
+        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_014F:
         L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage") - Val.Of(1));
     L_0179:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_01C4:
         goto L_021A;
     L_01C9:
-        if (!(GetLocal(L, "K2Node_Event_isNegativeGain")).AsBool()) goto L_021A;
+        if (!(H.GetVar("K2Node_Event_isNegativeGain")).AsBool()) goto L_021A;
     L_01D7:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_sideGaining"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_sideGaining"), H.GetMember(self, "side")) == 0);
     L_01FD:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_021A;
     L_020B:

@@ -113,7 +113,7 @@ public static Val ExecuteUbergraph_card_unit_35th_infantry_regiment(IHost H, Val
             }
         }
     L_023D:
-        _ = H.Call("getMoveReason", new Val[] { self, GetLocal(L, "K2Node_Event_MoveReason"), Val.Out(__v => L["CallFunc_getMoveReason_moveReason"] = __v) });
+        _ = H.Call("getMoveReason", new Val[] { self, H.GetVar("K2Node_Event_MoveReason"), Val.Out(__v => L["CallFunc_getMoveReason_moveReason"] = __v) });
     L_025D:
         L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { Val.Of(0), Val.Of(1) });
     L_026C:
@@ -130,7 +130,7 @@ public static Val ExecuteUbergraph_card_unit_35th_infantry_regiment(IHost H, Val
             }
         }
     L_02B2:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardMoved"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardMoved"), "side"), H.GetMember(self, "side")) == 0);
     L_02EE:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_02FD;
     L_02FC:

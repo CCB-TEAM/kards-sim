@@ -40,7 +40,7 @@ public static Val ExecuteUbergraph_card_event_sunny2_heatwave3(IHost H, Val self
     L_005D:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_01D9;
     L_006B:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0094:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool()) goto L_01D9;
     L_00A2:
@@ -54,9 +54,9 @@ public static Val ExecuteUbergraph_card_event_sunny2_heatwave3(IHost H, Val self
     L_0141:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_01D9;
     L_014F:
-        _ = H.Call("getTotalAttack", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
+        _ = H.Call("getTotalAttack", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
     L_0178:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetRandomCard_randomCard"), GetLocal(L, "CallFunc_getTotalAttack_totalAttack"), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetRandomCard_randomCard"), GetLocal(L, "CallFunc_getTotalAttack_totalAttack"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_01D9:
         goto __halt;
     L_01DB:

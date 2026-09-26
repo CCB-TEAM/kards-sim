@@ -149,7 +149,7 @@ public static Val ExecuteUbergraph_card_unit_1st_florida(IHost H, Val self, Val[
     L_04B9:
         goto L_0486;
     L_04BE:
-        H.SetMember(self, "destroyer", GetLocal(L, "K2Node_Event_killer"));
+        H.SetMember(self, "destroyer", H.GetVar("K2Node_Event_killer"));
     L_04D1:
         _ = H.Call("getTotalAttack", new Val[] { self, Val.Out(__v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
     L_04E4:

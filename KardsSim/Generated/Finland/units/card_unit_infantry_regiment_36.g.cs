@@ -174,7 +174,7 @@ public static Val ExecuteUbergraph_card_unit_infantry_regiment_36(IHost H, Val s
             }
         }
     L_04F1:
-        L["CallFunc_Array_Contains_ReturnValue"] = H.Call("Array_Contains", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_JSON_GetIntArray_values"), GetLocal(L, "K2Node_Event_resetCardID") });
+        L["CallFunc_Array_Contains_ReturnValue"] = H.Call("Array_Contains", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_JSON_GetIntArray_values"), H.GetVar("K2Node_Event_resetCardID") });
     L_052D:
         if (!(GetLocal(L, "CallFunc_Array_Contains_ReturnValue")).AsBool())
         {
@@ -187,7 +187,7 @@ public static Val ExecuteUbergraph_card_unit_infantry_regiment_36(IHost H, Val s
             }
         }
     L_0537:
-        _ = H.Call("JSON_RemoveFromIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("suppressionException"), GetLocal(L, "K2Node_Event_resetCardID"), Val.Out(__v => L["CallFunc_JSON_RemoveFromIntArray_found"] = __v) });
+        _ = H.Call("JSON_RemoveFromIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("suppressionException"), H.GetVar("K2Node_Event_resetCardID"), Val.Out(__v => L["CallFunc_JSON_RemoveFromIntArray_found"] = __v) });
     L_0584:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_05B2:

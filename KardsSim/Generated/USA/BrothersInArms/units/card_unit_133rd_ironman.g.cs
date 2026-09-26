@@ -89,7 +89,7 @@ public static Val ExecuteUbergraph_card_unit_133rd_ironman(IHost H, Val self, Va
     L_0427:
         if (!(GetLocal(L, "CallFunc_JSON_GetInt_found_1")).AsBool()) goto L_072A;
     L_0435:
-        L["CallFunc_Subtract_IntInt_ReturnValue_2"] = (GetLocal(L, "K2Node_Event_turnnumber") - GetLocal(L, "CallFunc_JSON_GetInt_value_1"));
+        L["CallFunc_Subtract_IntInt_ReturnValue_2"] = (H.GetVar("K2Node_Event_turnnumber") - GetLocal(L, "CallFunc_JSON_GetInt_value_1"));
     L_0463:
         L["CallFunc_Divide_IntInt_ReturnValue_1"] = (GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue_2") / Val.Of(2));
     L_048D:
@@ -129,9 +129,9 @@ public static Val ExecuteUbergraph_card_unit_133rd_ironman(IHost H, Val self, Va
     L_067A:
         _ = H.Call("IsUnrevealedCovertCard", new Val[] { self, Val.Out(__v => L["CallFunc_IsUnrevealedCovertCard_isIt"] = __v) });
     L_068D:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_newLocation"), Val.Of(7)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_newLocation"), Val.Of(7)) == 0);
     L_06AC:
-        L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_oldLocation"), Val.Of(7)) != 0);
+        L["CallFunc_NotEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_oldLocation"), Val.Of(7)) != 0);
     L_06CB:
         L["CallFunc_BooleanAND_ReturnValue_2"] = Val.Of((GetLocal(L, "CallFunc_NotEqual_ByteByte_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool());
     L_06F1:

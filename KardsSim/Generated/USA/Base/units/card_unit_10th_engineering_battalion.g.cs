@@ -402,7 +402,7 @@ public static Val ExecuteUbergraph_card_unit_10th_engineering_battalion(IHost H,
     L_0C44:
         L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { Val.Of(5), Val.Of(6), Val.Of(7) });
     L_0C55:
-        L["CallFunc_Array_Contains_ReturnValue_2"] = H.Call("Array_Contains", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "K2Node_MakeArray_Array"), GetLocal(L, "K2Node_Event_oldLocation_1") });
+        L["CallFunc_Array_Contains_ReturnValue_2"] = H.Call("Array_Contains", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "K2Node_MakeArray_Array"), H.GetVar("K2Node_Event_oldLocation_1") });
     L_0C91:
         if (!(GetLocal(L, "CallFunc_Array_Contains_ReturnValue_2")).AsBool())
         {
@@ -459,7 +459,7 @@ public static Val ExecuteUbergraph_card_unit_10th_engineering_battalion(IHost H,
     L_0D17:
         goto L_0C9B;
     L_0D1C:
-        H.SetMember(self, "Card Being Revealed", GetLocal(L, "K2Node_Event_cardBeingRevealed"));
+        H.SetMember(self, "Card Being Revealed", H.GetVar("K2Node_Event_cardBeingRevealed"));
     L_0D2F:
         goto L_0B3E;
     L_0D34:

@@ -111,11 +111,11 @@ public static Val ExecuteUbergraph_card_unit_irish_guards(IHost H, Val self, Val
     L_00F3:
         goto L_0128;
     L_00F8:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_card_1"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_card_1"));
     L_010B:
         goto L_000A;
     L_0110:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_card"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_card"));
     L_0123:
         goto L_0081;
     L_0128:

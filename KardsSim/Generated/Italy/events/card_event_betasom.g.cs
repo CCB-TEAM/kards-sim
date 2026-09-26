@@ -37,7 +37,7 @@ public static Val ExecuteUbergraph_card_event_betasom(IHost H, Val self, Val[] a
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_deckSide"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_deckSide"), H.GetMember(self, "side")) == 0);
     L_0030:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_0534;
     L_003E:
@@ -77,7 +77,7 @@ public static Val ExecuteUbergraph_card_event_betasom(IHost H, Val self, Val[] a
     L_02D5:
         L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetMember(self, "enterPlayOnTurn") + Val.Of(2));
     L_02FF:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber_1"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber_1"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue")) == 0);
     L_0325:
         L["CallFunc_BooleanAND_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue_2")).AsBool());
     L_034B:
@@ -99,7 +99,7 @@ public static Val ExecuteUbergraph_card_event_betasom(IHost H, Val self, Val[] a
     L_0448:
         L["CallFunc_Add_IntInt_ReturnValue_1"] = (H.GetMember(self, "enterPlayOnTurn") + Val.Of(2));
     L_0472:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_1")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_1")) == 0);
     L_0498:
         L["CallFunc_BooleanAND_ReturnValue_2"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_1")).AsBool() && (GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue_5")).AsBool());
     L_04BE:

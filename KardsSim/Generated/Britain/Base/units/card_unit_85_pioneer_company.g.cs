@@ -288,7 +288,7 @@ public static Val ExecuteUbergraph_card_unit_85_pioneer_company(IHost H, Val sel
     L_02A5:
         goto L_000A;
     L_02AA:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_02BD:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_2"] = __v) });
     L_02D0:
@@ -338,11 +338,11 @@ public static Val ExecuteUbergraph_card_unit_85_pioneer_company(IHost H, Val sel
     L_052D:
         goto L_0572;
     L_0532:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_drawnCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_drawnCardID"));
     L_054D:
         goto L_023B;
     L_0552:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_spawnedCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_spawnedCardID"));
     L_056D:
         goto L_023B;
     L_0572:

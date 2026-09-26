@@ -118,7 +118,7 @@ public static Val ExecuteUbergraph_card_event_costly_victory(IHost H, Val self, 
     L_00D7:
         L["Temp_int_Variable"] = GetLocal(L, "CallFunc_Add_IntInt_ReturnValue");
     L_00F2:
-        _ = H.Call("getTotalAttack", new Val[] { GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
+        _ = H.Call("getTotalAttack", new Val[] { H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_getTotalAttack_totalAttack"] = __v) });
     L_011B:
         L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_getTotalAttack_totalAttack") - Val.Of(1));
     L_0145:
@@ -128,7 +128,7 @@ public static Val ExecuteUbergraph_card_event_costly_victory(IHost H, Val self, 
     L_0179:
         goto L_000F;
     L_017E:
-        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), self });
+        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), self });
     L_01AC:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -142,7 +142,7 @@ public static Val ExecuteUbergraph_card_event_costly_victory(IHost H, Val self, 
     L_01C4:
         goto L_00F2;
     L_01C9:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_01E6:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool())
         {

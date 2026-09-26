@@ -47,7 +47,7 @@ public static Val ExecuteUbergraph_card_unit_456th_rifle_regiment(IHost H, Val s
     L_0086:
         _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(self, "side") });
     L_00C5:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID"), H.GetMember(GetLocal(L, "K2Node_Event_toCard"), "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID"), H.GetMember(H.GetVar("K2Node_Event_toCard"), "cardID")) == 0);
     L_0101:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_01C8;
     L_010F:

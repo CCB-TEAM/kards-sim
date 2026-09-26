@@ -74,7 +74,7 @@ public static Val GetFPSFromSave(IHost H, Val self, Val[] args)
             default: goto __halt;
         }
     L_01AB:
-        _ = H.Call("BranchOnPlatformType", new Val[] { self, GetLocal(L, "CallFunc_BranchOnPlatformType_Branches") });
+        _ = H.Call("BranchOnPlatformType", new Val[] { self, Val.Out(__v => L["CallFunc_BranchOnPlatformType_Branches"] = __v) });
     L_01BE:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_BranchOnPlatformType_Branches"), Val.Of(0)) != 0);
     L_01DD:
@@ -191,7 +191,7 @@ public static Val IsStreamerMode(IHost H, Val self, Val[] args)
         var __out_OutIsStreamerMode = args.Length > 1 ? args[1].As<Action<Val>>() : null;
         L["OutIsStreamerMode"] = Val.Nothing;
     L_0000:
-        _ = H.Call("LoadOtherSettings", new Val[] { self, GetLocal(L, "CallFunc_LoadOtherSettings_IsStreamerMode"), GetLocal(L, "CallFunc_LoadOtherSettings_SaveFileValid") });
+        _ = H.Call("LoadOtherSettings", new Val[] { self, Val.Out(__v => L["CallFunc_LoadOtherSettings_IsStreamerMode"] = __v), Val.Out(__v => L["CallFunc_LoadOtherSettings_SaveFileValid"] = __v) });
     L_001C:
         if (!(GetLocal(L, "CallFunc_LoadOtherSettings_SaveFileValid")).AsBool()) goto L_0042;
     L_002A:

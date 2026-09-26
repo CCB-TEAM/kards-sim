@@ -101,7 +101,7 @@ public static Val ExecuteUbergraph_card_unit_panzer_iii_l(IHost H, Val self, Val
             }
         }
     L_002C:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardChanging"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardChanging"));
     L_003F:
         L["CallFunc_IsValid_ReturnValue_1"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "_tmp_card") });
     L_005C:
@@ -344,7 +344,7 @@ public static Val ExecuteUbergraph_card_unit_panzer_iii_l(IHost H, Val self, Val
             }
         }
     L_0521:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardPlayed"));
     L_0534:
         L["CallFunc_IsValid_ReturnValue_4"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "_tmp_card") });
     L_0551:
@@ -387,7 +387,7 @@ public static Val ExecuteUbergraph_card_unit_panzer_iii_l(IHost H, Val self, Val
             }
         }
     L_058C:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardLeaving"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardLeaving"));
     L_059F:
         goto L_00BB;
     L_05A4:

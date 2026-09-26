@@ -165,7 +165,7 @@ public static Val ExecuteUbergraph_card_unit_7th_scottish_borderers(IHost H, Val
     L_0178:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "intelValue"), Val.Of(0)) > 0);
     L_019A:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_intelCard"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_intelCard"), "side"), H.GetMember(self, "side")) == 0);
     L_01D6:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool());
     L_01FC:
@@ -181,7 +181,7 @@ public static Val ExecuteUbergraph_card_unit_7th_scottish_borderers(IHost H, Val
     L_02B7:
         goto L_0363;
     L_02BC:
-        H.SetMember(self, "intelValue", GetLocal(L, "K2Node_Event_intelValue"));
+        H.SetMember(self, "intelValue", H.GetVar("K2Node_Event_intelValue"));
     L_02D7:
         goto L_014E;
     L_02DC:

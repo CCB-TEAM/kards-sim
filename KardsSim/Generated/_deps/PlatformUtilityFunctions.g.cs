@@ -494,7 +494,7 @@ public static Val Is_Tablet_TODO_Replace_Old_Version(IHost H, Val self, Val[] ar
     L_00D7:
         L["CallFunc_GetViewportSize_ReturnValue"] = H.Call("GetViewportSize", new Val[] { Val.Ref("WidgetLayoutLibrary"), GetLocal(L, "__WorldContext") });
     L_0112:
-        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetViewportSize_ReturnValue"), GetLocal(L, "CallFunc_BreakVector2D_X"), GetLocal(L, "CallFunc_BreakVector2D_Y") });
+        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetViewportSize_ReturnValue"), Val.Out(__v => L["CallFunc_BreakVector2D_X"] = __v), Val.Out(__v => L["CallFunc_BreakVector2D_Y"] = __v) });
     L_0137:
         L["CallFunc_EqualEqual_DoubleDouble_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_BreakVector2D_Y"), Val.Of(0)) == 0);
     L_015D:
@@ -504,7 +504,7 @@ public static Val Is_Tablet_TODO_Replace_Old_Version(IHost H, Val self, Val[] ar
     L_0170:
         L["CallFunc_GetViewportSize_ReturnValue"] = H.Call("GetViewportSize", new Val[] { Val.Ref("WidgetLayoutLibrary"), GetLocal(L, "__WorldContext") });
     L_01AB:
-        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetViewportSize_ReturnValue"), GetLocal(L, "CallFunc_BreakVector2D_X"), GetLocal(L, "CallFunc_BreakVector2D_Y") });
+        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetViewportSize_ReturnValue"), Val.Out(__v => L["CallFunc_BreakVector2D_X"] = __v), Val.Out(__v => L["CallFunc_BreakVector2D_Y"] = __v) });
     L_01D0:
         L["CallFunc_Less_DoubleDouble_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_BreakVector2D_X"), GetLocal(L, "CallFunc_BreakVector2D_Y")) < 0);
     L_01F6:
@@ -512,7 +512,7 @@ public static Val Is_Tablet_TODO_Replace_Old_Version(IHost H, Val self, Val[] ar
     L_0204:
         L["CallFunc_GetViewportSize_ReturnValue"] = H.Call("GetViewportSize", new Val[] { Val.Ref("WidgetLayoutLibrary"), GetLocal(L, "__WorldContext") });
     L_023F:
-        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetViewportSize_ReturnValue"), GetLocal(L, "CallFunc_BreakVector2D_X"), GetLocal(L, "CallFunc_BreakVector2D_Y") });
+        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetViewportSize_ReturnValue"), Val.Out(__v => L["CallFunc_BreakVector2D_X"] = __v), Val.Out(__v => L["CallFunc_BreakVector2D_Y"] = __v) });
     L_0264:
         L["CallFunc_Divide_DoubleDouble_ReturnValue"] = (GetLocal(L, "CallFunc_BreakVector2D_X") / GetLocal(L, "CallFunc_BreakVector2D_Y"));
     L_0292:
@@ -530,7 +530,7 @@ public static Val Is_Tablet_TODO_Replace_Old_Version(IHost H, Val self, Val[] ar
     L_0324:
         L["CallFunc_GetViewportSize_ReturnValue"] = H.Call("GetViewportSize", new Val[] { Val.Ref("WidgetLayoutLibrary"), GetLocal(L, "__WorldContext") });
     L_035F:
-        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetViewportSize_ReturnValue"), GetLocal(L, "CallFunc_BreakVector2D_X"), GetLocal(L, "CallFunc_BreakVector2D_Y") });
+        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetViewportSize_ReturnValue"), Val.Out(__v => L["CallFunc_BreakVector2D_X"] = __v), Val.Out(__v => L["CallFunc_BreakVector2D_Y"] = __v) });
     L_0384:
         L["CallFunc_Divide_DoubleDouble_ReturnValue_1"] = (GetLocal(L, "CallFunc_BreakVector2D_Y") / GetLocal(L, "CallFunc_BreakVector2D_X"));
     L_03B2:
@@ -749,7 +749,7 @@ public static Val UpdatePurchaseLimits(IHost H, Val self, Val[] args)
     L_000A:
         _ = H.Call("GetDSession", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetDSession_dSession"] = __v) });
     L_0040:
-        _ = H.Call("GetPackAmountsInOffer", new Val[] { GetLocal(L, "PurchasedOffer"), GetLocal(L, "CallFunc_GetPackAmountsInOffer_basicPacksAmount"), GetLocal(L, "CallFunc_GetPackAmountsInOffer_officerPacksAmount") });
+        _ = H.Call("GetPackAmountsInOffer", new Val[] { GetLocal(L, "PurchasedOffer"), Val.Out(__v => L["CallFunc_GetPackAmountsInOffer_basicPacksAmount"] = __v), Val.Out(__v => L["CallFunc_GetPackAmountsInOffer_officerPacksAmount"] = __v) });
     L_0072:
         _ = H.Call("UpdateISBNPacksPurchased", new Val[] { GetLocal(L, "CallFunc_GetDSession_dSession"), GetLocal(L, "CallFunc_GetPackAmountsInOffer_basicPacksAmount"), GetLocal(L, "CallFunc_GetPackAmountsInOffer_officerPacksAmount") });
     L_00A4:

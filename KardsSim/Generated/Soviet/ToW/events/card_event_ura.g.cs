@@ -258,7 +258,7 @@ public static Val ExecuteUbergraph_card_event_ura(IHost H, Val self, Val[] args)
             }
         }
     L_0681:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
     L_06A7:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool())
         {
@@ -294,7 +294,7 @@ public static Val ExecuteUbergraph_card_event_ura(IHost H, Val self, Val[] args)
             }
         }
     L_071B:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_card"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_card"));
     L_072E:
         goto L_000F;
     L_0733:

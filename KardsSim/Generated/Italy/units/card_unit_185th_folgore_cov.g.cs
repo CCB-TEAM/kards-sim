@@ -37,7 +37,7 @@ public static Val ExecuteUbergraph_card_unit_185th_folgore_cov(IHost H, Val self
     L_000A:
         _ = H.Call("GetStartingSide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetStartingSide_side"] = __v) });
     L_0037:
-        _ = H.Call("EnumCompareSide", new Val[] { self, GetLocal(L, "CallFunc_GetStartingSide_side"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, GetLocal(L, "CallFunc_GetStartingSide_side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_005C:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_007B:

@@ -205,7 +205,7 @@ public static Val ExecuteUbergraph_card_event_harass(IHost H, Val self, Val[] ar
     L_0353:
         goto L_0048;
     L_0358:
-        H.SetMember(self, "targetCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "targetCard", H.GetVar("K2Node_Event_targetCard"));
     L_036B:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "targetCard") });
     L_0388:

@@ -261,7 +261,7 @@ public static Val ExecuteUbergraph_card_event_patton(IHost H, Val self, Val[] ar
             }
         }
     L_060D:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_0620:
         _ = H.Call("IsSameSideUnit", new Val[] { H.GetMember(self, "tempCard"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
     L_0652:
@@ -321,7 +321,7 @@ public static Val ExecuteUbergraph_card_event_patton(IHost H, Val self, Val[] ar
             default: goto __halt;
         }
     L_0715:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_resetCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_resetCardID"));
     L_0730:
         L["CallFunc_isPattonPlayedThisTurn_ReturnValue"] = H.Call("isPattonPlayedThisTurn", new Val[] { self });
     L_0748:
@@ -359,11 +359,11 @@ public static Val ExecuteUbergraph_card_event_patton(IHost H, Val self, Val[] ar
     L_07C2:
         goto L_0706;
     L_07C7:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_drawnCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_drawnCardID"));
     L_07E2:
         goto L_0730;
     L_07E7:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_spawnedCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_spawnedCardID"));
     L_0802:
         goto L_0730;
     L_0807:

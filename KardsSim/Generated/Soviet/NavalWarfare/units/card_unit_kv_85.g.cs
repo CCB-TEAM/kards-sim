@@ -202,7 +202,7 @@ public static Val ExecuteUbergraph_card_unit_kv_85(IHost H, Val self, Val[] args
     L_07D1:
         goto L_06F8;
     L_07D6:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_handTargetCardID"), Val.Of(0)) > 0);
     L_07F8:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool())
         {
@@ -228,7 +228,7 @@ public static Val ExecuteUbergraph_card_unit_kv_85(IHost H, Val self, Val[] args
             }
         }
     L_0858:
-        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { GetLocal(L, "K2Node_Event_handTargetCardID") });
+        L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { H.GetVar("K2Node_Event_handTargetCardID") });
     L_086C:
         _ = H.Call("ConvertCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_MakeArray_Array"), H.GetMember(self, "cardID"), Val.Name("None"), GetLocal(L, "CallFunc_JSON_GetInt_value"), Val.False, Val.Out(__v => L["CallFunc_ConvertCard_newCardIDs"] = __v) });
     L_08C2:
@@ -261,7 +261,7 @@ public static Val ExecuteUbergraph_card_unit_kv_85(IHost H, Val self, Val[] args
             }
         }
     L_098F:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side")) == 0);
     L_09CB:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_1")).AsBool())
         {
@@ -274,9 +274,9 @@ public static Val ExecuteUbergraph_card_unit_kv_85(IHost H, Val self, Val[] args
             }
         }
     L_09D5:
-        L["CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"] = H.Call("GetEnumeratorUserFriendlyName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("EFactionEnum"), H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "salvageFaction") });
+        L["CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"] = H.Call("GetEnumeratorUserFriendlyName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("EFactionEnum"), H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "salvageFaction") });
     L_0A19:
-        L["CallFunc_Conv_NameToString_ReturnValue"] = H.Call("Conv_NameToString", new Val[] { Val.Ref("KismetStringLibrary"), H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "name") });
+        L["CallFunc_Conv_NameToString_ReturnValue"] = H.Call("Conv_NameToString", new Val[] { Val.Ref("KismetStringLibrary"), H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "name") });
     L_0A54:
         L["CallFunc_Concat_StrStr_ReturnValue"] = H.Call("Concat_StrStr", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_Conv_NameToString_ReturnValue"), Val.Of(";") });
     L_0A7C:
@@ -284,7 +284,7 @@ public static Val ExecuteUbergraph_card_unit_kv_85(IHost H, Val self, Val[] args
     L_0AAA:
         _ = H.Call("JSON_SetString", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("spawn_card_name"), GetLocal(L, "CallFunc_Concat_StrStr_ReturnValue_1"), Val.Out(__v => L["CallFunc_JSON_SetString_found"] = __v) });
     L_0AF2:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("lastDestroyedCardID"), H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("lastDestroyedCardID"), H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_0B54:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_0B82:

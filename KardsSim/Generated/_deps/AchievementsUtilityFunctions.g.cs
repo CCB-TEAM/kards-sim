@@ -227,7 +227,7 @@ public static Val AddToCardSetAchievement(IHost H, Val self, Val[] args)
     L_0005:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "cardName") });
     L_002A:
-        _ = H.Call("GetStaticCardSet", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), GetLocal(L, "CallFunc_GetStaticCardSet_cardSet") });
+        _ = H.Call("GetStaticCardSet", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(__v => L["CallFunc_GetStaticCardSet_cardSet"] = __v) });
     L_0046:
         L["Temp_byte_Variable"] = GetLocal(L, "CallFunc_GetStaticCardSet_cardSet");
     L_0061:
@@ -294,7 +294,7 @@ public static Val AddToCardSetAchievement(IHost H, Val self, Val[] args)
     L_047A:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "cardName") });
     L_049F:
-        _ = H.Call("GetStaticCardSet", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), GetLocal(L, "CallFunc_GetStaticCardSet_cardSet") });
+        _ = H.Call("GetStaticCardSet", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(__v => L["CallFunc_GetStaticCardSet_cardSet"] = __v) });
     L_04BB:
         L["Temp_byte_Variable"] = GetLocal(L, "CallFunc_GetStaticCardSet_cardSet");
     L_04D6:
@@ -375,7 +375,7 @@ public static Val AddToCardSetAchievement(IHost H, Val self, Val[] args)
     L_09AD:
         L["CallFunc_Conv_StringToName_ReturnValue_1"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "cardName") });
     L_09D2:
-        _ = H.Call("GetStaticRarity", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_1"), GetLocal(L, "CallFunc_GetStaticRarity_rarity") });
+        _ = H.Call("GetStaticRarity", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue_1"), Val.Out(__v => L["CallFunc_GetStaticRarity_rarity"] = __v) });
     L_09EE:
         L["CallFunc_Map_Find_ReturnValue"] = H.Call("Map_Find", new Val[] { Val.Ref("BlueprintMapLibrary"), H.GetMember(GetLocal(L, "cardLibrary"), "myCards"), GetLocal(L, "cardName"), GetLocal(L, "CallFunc_Map_Find_Value") });
     L_0A49:
@@ -414,7 +414,7 @@ public static Val AddToCardSetAchievement(IHost H, Val self, Val[] args)
     L_0C46:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "cardName") });
     L_0C6B:
-        _ = H.Call("GetStaticCardSet", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), GetLocal(L, "CallFunc_GetStaticCardSet_cardSet") });
+        _ = H.Call("GetStaticCardSet", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(__v => L["CallFunc_GetStaticCardSet_cardSet"] = __v) });
     L_0C87:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetStaticCardSet_cardSet"), Val.Of(1)) != 0);
     L_0CA6:
@@ -482,7 +482,7 @@ public static Val AddToCardSetAchievement(IHost H, Val self, Val[] args)
     L_0EA9:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "cardName") });
     L_0ECE:
-        _ = H.Call("GetStaticCardSet", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), GetLocal(L, "CallFunc_GetStaticCardSet_cardSet") });
+        _ = H.Call("GetStaticCardSet", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(__v => L["CallFunc_GetStaticCardSet_cardSet"] = __v) });
     L_0EEA:
         L["Temp_byte_Variable"] = GetLocal(L, "CallFunc_GetStaticCardSet_cardSet");
     L_0F05:
@@ -550,7 +550,7 @@ public static Val AddToCardSetAchievement(IHost H, Val self, Val[] args)
     L_132B:
         L["CallFunc_Conv_StringToName_ReturnValue"] = H.Call("Conv_StringToName", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "cardName") });
     L_1350:
-        _ = H.Call("GetStaticCardSet", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), GetLocal(L, "CallFunc_GetStaticCardSet_cardSet") });
+        _ = H.Call("GetStaticCardSet", new Val[] { self, GetLocal(L, "CallFunc_Conv_StringToName_ReturnValue"), Val.Out(__v => L["CallFunc_GetStaticCardSet_cardSet"] = __v) });
     L_136C:
         L["Temp_byte_Variable"] = GetLocal(L, "CallFunc_GetStaticCardSet_cardSet");
     L_1387:

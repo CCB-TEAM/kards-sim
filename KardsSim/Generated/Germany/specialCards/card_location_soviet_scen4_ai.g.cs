@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_location_soviet_scen4_ai(IHost H, Val se
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsAirUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsAirUnit_isIt"] = __v) });
+        _ = H.Call("IsAirUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsAirUnit_isIt"] = __v) });
     L_0033:
         if (!(GetLocal(L, "CallFunc_IsAirUnit_isIt")).AsBool()) goto L_00F4;
     L_0041:

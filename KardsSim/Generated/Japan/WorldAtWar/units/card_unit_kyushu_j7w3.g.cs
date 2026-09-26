@@ -102,7 +102,7 @@ public static Val ExecuteUbergraph_card_unit_kyushu_j7w3(IHost H, Val self, Val[
     L_02BB:
         goto L_000A;
     L_02C0:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_toCard"), "cardID"), H.GetMember(self, "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_toCard"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_02FC:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_0384;
     L_030A:

@@ -138,7 +138,7 @@ public static Val ExecuteUbergraph_card_unit_t_34_85_1944(IHost H, Val self, Val
     L_0370:
         goto L_000F;
     L_0375:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed_1"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed_1"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_039E:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool())
         {

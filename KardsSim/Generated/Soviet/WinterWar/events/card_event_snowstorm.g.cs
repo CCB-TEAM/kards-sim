@@ -239,7 +239,7 @@ public static Val ExecuteUbergraph_card_event_snowstorm(IHost H, Val self, Val[]
             }
         }
     L_063F:
-        H.SetMember(self, "tmpCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tmpCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_0652:
         _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetMember(self, "tmpCard"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_067B:
@@ -273,7 +273,7 @@ public static Val ExecuteUbergraph_card_event_snowstorm(IHost H, Val self, Val[]
     L_06B6:
         L["CallFunc_Add_IntInt_ReturnValue_2"] = (H.GetMember(self, "enterPlayOnTurn") + Val.Of(2));
     L_06E0:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_2")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_2")) == 0);
     L_0706:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_2")).AsBool())
         {

@@ -34,27 +34,27 @@ public static Val ExecuteUbergraph_card_event_close_call(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
+        _ = H.Call("ShouldGotchaTrigger", new Val[] { self, H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
     L_0026:
         if (!(GetLocal(L, "CallFunc_ShouldGotchaTrigger_shouldIt")).AsBool()) goto L_01A8;
     L_0034:
-        _ = H.Call("IsOrder", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
+        _ = H.Call("IsOrder", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsOrder_isIt"] = __v) });
     L_005D:
         if (!(GetLocal(L, "CallFunc_IsOrder_isIt")).AsBool()) goto L_01A8;
     L_006B:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "currentTarget") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "currentTarget") });
     L_009E:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_01A8;
     L_00AC:
-        _ = H.Call("IsUnit", new Val[] { H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "currentTarget"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "currentTarget"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_00EB:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool()) goto L_01A8;
     L_00F9:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "currentTarget"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "currentTarget"), "side"), H.GetMember(self, "side")) == 0);
     L_014B:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_01A8;
     L_0159:
-        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
+        _ = H.Call("GotchaTriggered", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), Val.True, Val.False, Val.Out(__v => L["CallFunc_GotchaTriggered_qqq"] = __v) });
     L_01A8:
         goto __halt;
     L_01AA:

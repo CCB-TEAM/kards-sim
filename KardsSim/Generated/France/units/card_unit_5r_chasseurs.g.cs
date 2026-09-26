@@ -94,11 +94,11 @@ public static Val ExecuteUbergraph_card_unit_5r_chasseurs(IHost H, Val self, Val
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0027:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_00DA;
     L_0035:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "location"), Val.Of(7), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_targetCard"), "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_0069:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(1)) != 0);
     L_0088:
@@ -106,7 +106,7 @@ public static Val ExecuteUbergraph_card_unit_5r_chasseurs(IHost H, Val self, Val
     L_0096:
         goto L_00DA;
     L_009B:
-        _ = H.Call("MoveUnitFromSupportToFrontLine", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_MoveUnitFromSupportToFrontLine_qqq"] = __v) });
+        _ = H.Call("MoveUnitFromSupportToFrontLine", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_MoveUnitFromSupportToFrontLine_qqq"] = __v) });
     L_00DA:
         goto __halt;
     L_00DC:

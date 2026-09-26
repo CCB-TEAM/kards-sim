@@ -94,11 +94,11 @@ public static Val ExecuteUbergraph_card_unit_sherwood_foresters(IHost H, Val sel
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0027:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_00D2;
     L_0035:
-        _ = H.Call("SpawnCardInDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "originalSide"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "name"), H.GetMember(self, "cardID"), Val.Of(1), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "salvageFaction"), Val.False, Val.False, Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardInDeckBySide_spawnedCardIDs"] = __v) });
+        _ = H.Call("SpawnCardInDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "originalSide"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "name"), H.GetMember(self, "cardID"), Val.Of(1), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "salvageFaction"), Val.False, Val.False, Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardInDeckBySide_spawnedCardIDs"] = __v) });
     L_00D2:
         goto __halt;
     L_00D4:

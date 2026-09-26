@@ -134,7 +134,7 @@ public static Val ExecuteUbergraph_card_event_sortie(IHost H, Val self, Val[] ar
     L_0077:
         goto L_0132;
     L_007C:
-        _ = H.Call("GiveMobilize", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveMobilize_qqq"] = __v) });
+        _ = H.Call("GiveMobilize", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveMobilize_qqq"] = __v) });
     L_00D1:
         goto L_0132;
     L_00D6:

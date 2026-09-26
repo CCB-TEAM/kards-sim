@@ -108,7 +108,7 @@ public static Val ExecuteUbergraph_card_unit_kings_own_scottish(IHost H, Val sel
     L_00F0:
         goto L_049E;
     L_00F5:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_goingToLocation"), Val.Of(8)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_goingToLocation"), Val.Of(8)) == 0);
     L_0114:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_000A;
     L_0122:
@@ -118,13 +118,13 @@ public static Val ExecuteUbergraph_card_unit_kings_own_scottish(IHost H, Val sel
     L_016D:
         if (!(GetLocal(L, "CallFunc_JSON_GetInt_found_1")).AsBool()) goto L_049E;
     L_017B:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value_1"), H.GetMember(GetLocal(L, "K2Node_Event_cardLeaving"), "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value_1"), H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "cardID")) == 0);
     L_01B7:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_049E;
     L_01C5:
-        H.SetMember(self, "affected_CardID", H.GetMember(GetLocal(L, "K2Node_Event_cardLeaving"), "cardID"));
+        H.SetMember(self, "affected_CardID", H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "cardID"));
     L_01F6:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(Val.Of(8), H.GetMember(GetLocal(L, "K2Node_Event_cardLeaving"), "location")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(Val.Of(8), H.GetMember(H.GetVar("K2Node_Event_cardLeaving"), "location")) == 0);
     L_022B:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_1")).AsBool()) goto L_0287;
     L_0239:
@@ -140,9 +140,9 @@ public static Val ExecuteUbergraph_card_unit_kings_own_scottish(IHost H, Val sel
     L_0303:
         goto L_049E;
     L_0308:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("trigger"), H.GetMember(GetLocal(L, "K2Node_Event_card_1"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("trigger"), H.GetMember(H.GetVar("K2Node_Event_card_1"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_0369:
-        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affected_card"), H.GetMember(GetLocal(L, "K2Node_Event_card_1"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
+        _ = H.Call("JSON_SetInt", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("affected_card"), H.GetMember(H.GetVar("K2Node_Event_card_1"), "cardID"), Val.Out(__v => L["CallFunc_JSON_SetInt_found"] = __v) });
     L_03C5:
         goto L_02D5;
     L_03CA:
@@ -150,11 +150,11 @@ public static Val ExecuteUbergraph_card_unit_kings_own_scottish(IHost H, Val sel
     L_0410:
         if (!(GetLocal(L, "CallFunc_JSON_GetInt_found_2")).AsBool()) goto L_049E;
     L_041E:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value_2"), H.GetMember(GetLocal(L, "K2Node_Event_card"), "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value_2"), H.GetMember(H.GetVar("K2Node_Event_card"), "cardID")) == 0);
     L_045A:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_1")).AsBool()) goto L_049E;
     L_0468:
-        H.SetMember(self, "affected_CardID", H.GetMember(GetLocal(L, "K2Node_Event_card"), "cardID"));
+        H.SetMember(self, "affected_CardID", H.GetMember(H.GetVar("K2Node_Event_card"), "cardID"));
     L_0499:
         goto L_0287;
     L_049E:

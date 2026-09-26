@@ -35,13 +35,13 @@ public static Val ExecuteUbergraph_card_unit_matsue_regiment(IHost H, Val self, 
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0040:
         _ = H.Call("getTotalKreditCost", new Val[] { GetLocal(L, "CallFunc_GetCardFromID_card"), Val.Out(__v => L["CallFunc_getTotalKreditCost_totalKreditCost"] = __v) });
     L_0069:
         _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_getTotalKreditCost_totalKreditCost"), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_00AC:
-        _ = H.Call("DiscardCardFromHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_handTargetCardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_DiscardCardFromHand_success"] = __v) });
+        _ = H.Call("DiscardCardFromHand", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_handTargetCardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.Out(__v => L["CallFunc_DiscardCardFromHand_success"] = __v) });
     L_00ED:
         goto L_0132;
     L_00F2:

@@ -45,7 +45,7 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
     L_0077:
         if (!(GetLocal(L, "CallFunc_IsSameSideUnit_isIt")).AsBool()) goto L_0118;
     L_0085:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "faction"), Val.Of(5), GetLocal(L, "CallFunc_EnumCompareFaction_Branches_1") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "faction"), Val.Of(5), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches_1"] = __v) });
     L_00B9:
         L["K2Node_SwitchEnum_CmpSuccess_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches_1"), Val.Of(0)) != 0);
     L_00D8:
@@ -81,7 +81,7 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
     L_01E9:
         goto L_027C;
     L_01EE:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "faction"), Val.Of(2), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "faction"), Val.Of(2), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_0222:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_0241:
@@ -127,7 +127,7 @@ public static Val ExecuteUbergraph_card_event_persian_corridor(IHost H, Val self
     L_0014:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "side"), H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "side"), H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side")) == 0);
     L_00A1:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool() && (H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "hasDestruction")).AsBool());
     L_00DD:
@@ -144,7 +144,7 @@ public static Val ExecuteUbergraph_card_event_persian_corridor(IHost H, Val self
     L_00E7:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0122:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "faction"), Val.Of(4), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "faction"), Val.Of(4), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_0156:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_0175:
@@ -197,7 +197,7 @@ public static Val ExecuteUbergraph_card_event_persian_corridor(IHost H, Val self
     L_02E8:
         goto L_01C9;
     L_02ED:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_030A:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool())
         {
@@ -210,7 +210,7 @@ public static Val ExecuteUbergraph_card_event_persian_corridor(IHost H, Val self
             }
         }
     L_0314:
-        H.SetMember(self, "tmpCardID", H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"));
+        H.SetMember(self, "tmpCardID", H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"));
     L_0345:
         _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("destruction"), H.GetMember(self, "tmpCardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_0394:
@@ -222,7 +222,7 @@ public static Val ExecuteUbergraph_card_event_persian_corridor(IHost H, Val self
             default: goto __halt;
         }
     L_0395:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "K2Node_Event_cardDestroyed"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_03D4:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt")).AsBool())
         {

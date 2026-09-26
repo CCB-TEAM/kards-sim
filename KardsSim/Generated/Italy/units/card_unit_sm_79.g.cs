@@ -100,17 +100,17 @@ public static Val ExecuteUbergraph_card_unit_sm_79(IHost H, Val self, Val[] args
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_targetCard"), "side"), H.GetMember(self, "side")) == 0);
     L_0046:
-        L["CallFunc_Not_PreBool_ReturnValue"] = H.Call("Not_PreBool", new Val[] { Val.Ref("KismetMathLibrary"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "selectTargetOnPlayedFromHand") });
+        L["CallFunc_Not_PreBool_ReturnValue"] = H.Call("Not_PreBool", new Val[] { Val.Ref("KismetMathLibrary"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "selectTargetOnPlayedFromHand") });
     L_0079:
-        L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "hasDeployment")).AsBool() && (GetLocal(L, "CallFunc_Not_PreBool_ReturnValue")).AsBool());
+        L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((H.GetMember(H.GetVar("K2Node_Event_targetCard"), "hasDeployment")).AsBool() && (GetLocal(L, "CallFunc_Not_PreBool_ReturnValue")).AsBool());
     L_00B5:
         L["CallFunc_BooleanAND_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool());
     L_00DB:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue_1")).AsBool()) goto L_0128;
     L_00E9:
-        _ = H.Call("TriggerDeployment", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_TriggerDeployment_qqq"] = __v) });
+        _ = H.Call("TriggerDeployment", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_TriggerDeployment_qqq"] = __v) });
     L_0128:
         goto __halt;
     L_012A:

@@ -87,7 +87,7 @@ public static Val ExecuteUbergraph_card_unit_p1y_ginga(IHost H, Val self, Val[] 
     L_0212:
         goto L_01DF;
     L_0217:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_discarderID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_discarderID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_024D:
         L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "name"), Val.Name("card_unit_sendai_regiment")) == 0);
     L_028D:

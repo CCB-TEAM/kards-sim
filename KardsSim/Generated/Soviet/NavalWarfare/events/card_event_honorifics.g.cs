@@ -179,7 +179,7 @@ public static Val ExecuteUbergraph_card_event_honorifics(IHost H, Val self, Val[
     L_02F0:
         goto L_02BD;
     L_02F5:
-        H.SetMember(self, "tmpCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tmpCard", H.GetVar("K2Node_Event_targetCard"));
     L_0308:
         _ = H.Call("JSON_GetString", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("spawn_card_name"), Val.Out(__v => L["CallFunc_JSON_GetString_value"] = __v), Val.Out(__v => L["CallFunc_JSON_GetString_found"] = __v) });
     L_0350:
@@ -229,7 +229,7 @@ public static Val ExecuteUbergraph_card_event_honorifics(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_054E:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_0589:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_05A8:
@@ -244,7 +244,7 @@ public static Val ExecuteUbergraph_card_event_honorifics(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_05B7:
-        H.SetMember(self, "lastDestroyedCard", GetLocal(L, "K2Node_Event_cardDestroyed"));
+        H.SetMember(self, "lastDestroyedCard", H.GetVar("K2Node_Event_cardDestroyed"));
     L_05CA:
         _ = H.Call("IsLocatedInHand", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedInHand_isIt"] = __v) });
     L_05DD:

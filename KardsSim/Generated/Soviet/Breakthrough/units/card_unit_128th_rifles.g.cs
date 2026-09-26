@@ -95,11 +95,11 @@ public static Val ExecuteUbergraph_card_unit_128th_rifles(IHost H, Val self, Val
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("GiveAmbush", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_card_1"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("GiveAmbush", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_card_1"), "cardID"), H.GetMember(self, "cardID") });
     L_0056:
         goto L_00A9;
     L_005B:
-        _ = H.Call("RemoveAmbush", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False });
+        _ = H.Call("RemoveAmbush", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False });
     L_00A9:
         goto __halt;
     L_00AB:

@@ -47,7 +47,7 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
     L_008A:
         if (!(GetLocal(L, "CallFunc_IsSameSideUnit_isIt")).AsBool()) goto L_0196;
     L_0098:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "location"), Val.Of(7), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_00CC:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_00EB:
@@ -120,9 +120,9 @@ public static Val ExecuteUbergraph_card_event_gunboat_raid(IHost H, Val self, Va
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
+        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_002A:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_0075:
         _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.Name("card_event_gunboat_hit"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.Of(0), Val.Out(__v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID"] = __v) });
     L_00D1:

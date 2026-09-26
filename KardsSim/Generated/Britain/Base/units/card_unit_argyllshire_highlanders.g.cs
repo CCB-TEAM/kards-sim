@@ -38,9 +38,9 @@ public static Val ExecuteUbergraph_card_unit_argyllshire_highlanders(IHost H, Va
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_0161;
     L_002B:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_0067:
-        L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "hasGuard")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_1")).AsBool());
+        L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "hasGuard")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_1")).AsBool());
     L_00A3:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_0161;
     L_00B1:
@@ -50,7 +50,7 @@ public static Val ExecuteUbergraph_card_unit_argyllshire_highlanders(IHost H, Va
     L_012F:
         goto L_0161;
     L_0134:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_method"), Val.Of(5)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_method"), Val.Of(5)) == 0);
     L_0153:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_000A;
     L_0161:

@@ -178,7 +178,7 @@ public static Val ExecuteUbergraph_card_event_hms_formidable(IHost H, Val self, 
     L_029D:
         goto L_000F;
     L_02A2:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_02B5:
         _ = H.Call("getAndDecryptAttack", new Val[] { H.GetMember(self, "tempCard"), Val.Out(__v => L["CallFunc_getAndDecryptAttack_decryptedAttack"] = __v) });
     L_02DE:

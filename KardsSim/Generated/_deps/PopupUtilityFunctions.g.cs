@@ -61,7 +61,7 @@ public static Val AddPopup(IHost H, Val self, Val[] args)
     L_0000:
         _ = H.Call("GetPopupManager", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetPopupManager_OutPopupManager"] = __v) });
     L_0020:
-        _ = H.Call("PopupOpen", new Val[] { GetLocal(L, "CallFunc_GetPopupManager_OutPopupManager"), GetLocal(L, "InUserWidget"), GetLocal(L, "location"), Val.False, GetLocal(L, "CallFunc_PopupOpen_OutWidget") });
+        _ = H.Call("PopupOpen", new Val[] { GetLocal(L, "CallFunc_GetPopupManager_OutPopupManager"), GetLocal(L, "InUserWidget"), GetLocal(L, "location"), Val.False, Val.Out(__v => L["CallFunc_PopupOpen_OutWidget"] = __v) });
     L_0060:
         L["OutUserWidget"] = GetLocal(L, "CallFunc_PopupOpen_OutWidget");
     L_0073:
@@ -114,7 +114,7 @@ public static Val AddPopupToMenuLayer(IHost H, Val self, Val[] args)
     L_0020:
         H.SetMember(GetLocal(L, "CallFunc_GetPopupManager_OutPopupManager"), "IsPopupMenu", Val.True);
     L_0041:
-        _ = H.Call("PopupOpen", new Val[] { GetLocal(L, "CallFunc_GetPopupManager_OutPopupManager"), GetLocal(L, "InUserWidget"), H.MakeArray(new Val[] { Val.Of(0), Val.Of(0) }), Val.False, GetLocal(L, "CallFunc_PopupOpen_OutWidget") });
+        _ = H.Call("PopupOpen", new Val[] { GetLocal(L, "CallFunc_GetPopupManager_OutPopupManager"), GetLocal(L, "InUserWidget"), H.MakeArray(new Val[] { Val.Of(0), Val.Of(0) }), Val.False, Val.Out(__v => L["CallFunc_PopupOpen_OutWidget"] = __v) });
     L_0098:
         L["OutUserWidget"] = GetLocal(L, "CallFunc_PopupOpen_OutWidget");
     L_00AB:
@@ -163,7 +163,7 @@ public static Val CreateMenuPopup(IHost H, Val self, Val[] args)
     L_0020:
         H.SetMember(GetLocal(L, "CallFunc_GetPopupManager_OutPopupManager"), "IsPopupMenu", Val.True);
     L_0041:
-        _ = H.Call("PopupCreate", new Val[] { GetLocal(L, "CallFunc_GetPopupManager_OutPopupManager"), GetLocal(L, "InUserWidgetClassRef"), GetLocal(L, "CallFunc_PopupCreate_OutWidget") });
+        _ = H.Call("PopupCreate", new Val[] { GetLocal(L, "CallFunc_GetPopupManager_OutPopupManager"), GetLocal(L, "InUserWidgetClassRef"), Val.Out(__v => L["CallFunc_PopupCreate_OutWidget"] = __v) });
     L_0077:
         L["OutUserWidget"] = GetLocal(L, "CallFunc_PopupCreate_OutWidget");
     L_008A:
@@ -189,7 +189,7 @@ public static Val CreatePopup(IHost H, Val self, Val[] args)
     L_0000:
         _ = H.Call("GetPopupManager", new Val[] { self, GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetPopupManager_OutPopupManager"] = __v) });
     L_0020:
-        _ = H.Call("PopupCreate", new Val[] { GetLocal(L, "CallFunc_GetPopupManager_OutPopupManager"), GetLocal(L, "InUserWidgetClassRef"), GetLocal(L, "CallFunc_PopupCreate_OutWidget") });
+        _ = H.Call("PopupCreate", new Val[] { GetLocal(L, "CallFunc_GetPopupManager_OutPopupManager"), GetLocal(L, "InUserWidgetClassRef"), Val.Out(__v => L["CallFunc_PopupCreate_OutWidget"] = __v) });
     L_0056:
         L["OutUserWidget"] = GetLocal(L, "CallFunc_PopupCreate_OutWidget");
     L_0069:

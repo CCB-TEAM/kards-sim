@@ -173,7 +173,7 @@ public static Val ExecuteUbergraph_card_unit_103rd_cavalry_recon(IHost H, Val se
     L_0415:
         L["Temp_byte_Variable_1"] = Val.Of(1);
     L_0429:
-        L["CallFunc_Subtract_IntInt_ReturnValue_1"] = (GetLocal(L, "K2Node_Event_turnnumber") - H.GetMember(self, "enterPlayOnTurn"));
+        L["CallFunc_Subtract_IntInt_ReturnValue_1"] = (H.GetVar("K2Node_Event_turnnumber") - H.GetMember(self, "enterPlayOnTurn"));
     L_0457:
         L["CallFunc_Divide_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue_1") / Val.Of(2));
     L_0481:

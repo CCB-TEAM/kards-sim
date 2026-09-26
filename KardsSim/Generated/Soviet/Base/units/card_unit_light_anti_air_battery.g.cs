@@ -140,7 +140,7 @@ public static Val ExecuteUbergraph_card_unit_light_anti_air_battery(IHost H, Val
             }
         }
     L_02C7:
-        H.SetMember(self, "tmpCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tmpCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_02DA:
         _ = H.Call("IsAirUnit", new Val[] { H.GetMember(self, "tmpCard"), Val.Out(__v => L["CallFunc_IsAirUnit_isIt"] = __v) });
     L_0303:
@@ -296,11 +296,11 @@ public static Val ExecuteUbergraph_card_unit_light_anti_air_battery(IHost H, Val
             }
         }
     L_0715:
-        H.SetMember(self, "tmpCard", GetLocal(L, "K2Node_Event_cardLeaving"));
+        H.SetMember(self, "tmpCard", H.GetVar("K2Node_Event_cardLeaving"));
     L_0728:
         L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { Val.Of(5), Val.Of(6), Val.Of(7) });
     L_0739:
-        L["CallFunc_Array_Contains_ReturnValue"] = H.Call("Array_Contains", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "K2Node_MakeArray_Array"), GetLocal(L, "K2Node_Event_goingToLocation") });
+        L["CallFunc_Array_Contains_ReturnValue"] = H.Call("Array_Contains", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "K2Node_MakeArray_Array"), H.GetVar("K2Node_Event_goingToLocation") });
     L_0775:
         _ = H.Call("IsAirUnit", new Val[] { H.GetMember(self, "tmpCard"), Val.Out(__v => L["CallFunc_IsAirUnit_isIt_4"] = __v) });
     L_079E:
@@ -361,7 +361,7 @@ public static Val ExecuteUbergraph_card_unit_light_anti_air_battery(IHost H, Val
             }
         }
     L_08CA:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_cardToChange"), H.GetMember(self, "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_cardToChange"), H.GetMember(self, "cardID")) == 0);
     L_08F0:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_08FF;
     L_08FE:
@@ -374,7 +374,7 @@ public static Val ExecuteUbergraph_card_unit_light_anti_air_battery(IHost H, Val
             default: goto __halt;
         }
     L_08FF:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_cardToChange"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardToChange"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0935:
         H.SetMember(self, "tmpCard", GetLocal(L, "CallFunc_GetCardFromID_card"));
     L_0948:

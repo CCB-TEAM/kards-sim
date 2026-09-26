@@ -200,9 +200,9 @@ public static Val ExecuteUbergraph_card_event_turning_point(IHost H, Val self, V
     L_06AA:
         goto L_0395;
     L_06AF:
-        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(0)) > 0);
+        L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(0)) > 0);
     L_06D1:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
     L_06F7:
         L["CallFunc_BooleanAND_ReturnValue_2"] = Val.Of((GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool());
     L_071D:
@@ -236,7 +236,7 @@ public static Val ExecuteUbergraph_card_event_turning_point(IHost H, Val self, V
             }
         }
     L_0785:
-        H.SetMember(self, "tmpCard", GetLocal(L, "K2Node_Event_card"));
+        H.SetMember(self, "tmpCard", H.GetVar("K2Node_Event_card"));
     L_0798:
         _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetMember(self, "tmpCard"), Val.Of("excess"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_07D2:
@@ -283,7 +283,7 @@ public static Val ExecuteUbergraph_card_event_turning_point(IHost H, Val self, V
             }
         }
     L_08E0:
-        H.SetMember(self, "tmpCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tmpCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_08F3:
         _ = H.Call("IsLocatedOnBoard", new Val[] { H.GetMember(self, "tmpCard"), Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt_2"] = __v) });
     L_091C:

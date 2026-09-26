@@ -574,7 +574,7 @@ public static Val ExecuteUbergraph_card_unit_flaming_matilda_anzac(IHost H, Val 
     L_105D:
         goto L_0DFA;
     L_1062:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardPlayed_1"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardPlayed_1"));
     L_1075:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_1088:
@@ -622,7 +622,7 @@ public static Val ExecuteUbergraph_card_unit_flaming_matilda_anzac(IHost H, Val 
             }
         }
     L_10E7:
-        _ = H.Call("isBuffedByCard", new Val[] { GetLocal(L, "K2Node_Event_cardLeaving"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
+        _ = H.Call("isBuffedByCard", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
     L_1119:
         if (!(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed")).AsBool())
         {
@@ -641,7 +641,7 @@ public static Val ExecuteUbergraph_card_unit_flaming_matilda_anzac(IHost H, Val 
             }
         }
     L_1123:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_cardLeaving"), H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq_1"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardLeaving"), H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq_1"] = __v) });
     L_116A:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -659,7 +659,7 @@ public static Val ExecuteUbergraph_card_unit_flaming_matilda_anzac(IHost H, Val 
     L_116B:
         goto L_10CA;
     L_1170:
-        L["CallFunc_NotEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_cardPlayed"), self) != 0);
+        L["CallFunc_NotEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_cardPlayed"), self) != 0);
     L_118E:
         if (!(GetLocal(L, "CallFunc_NotEqual_ObjectObject_ReturnValue")).AsBool())
         {
@@ -678,7 +678,7 @@ public static Val ExecuteUbergraph_card_unit_flaming_matilda_anzac(IHost H, Val 
             }
         }
     L_1198:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardPlayed"));
     L_11AB:
         goto L_1075;
     L_11B0:
@@ -688,7 +688,7 @@ public static Val ExecuteUbergraph_card_unit_flaming_matilda_anzac(IHost H, Val 
     L_11E3:
         goto L_11B0;
     L_11E8:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardMoved_1"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardMoved_1"));
     L_11FB:
         _ = H.Call("isBuffedByCard", new Val[] { H.GetMember(self, "_tmp_card"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed_3"] = __v) });
     L_122D:
@@ -731,7 +731,7 @@ public static Val ExecuteUbergraph_card_unit_flaming_matilda_anzac(IHost H, Val 
     L_12A0:
         goto L_102A;
     L_12A5:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardMoved"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardMoved"));
     L_12B8:
         _ = H.Call("isBuffedByCard", new Val[] { H.GetMember(self, "_tmp_card"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed_2"] = __v) });
     L_12EA:

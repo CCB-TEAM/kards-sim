@@ -38,7 +38,7 @@ public static Val ExecuteUbergraph_card_unit_panzer_ii_c(IHost H, Val self, Val[
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt_1")).AsBool()) goto L_017A;
     L_002B:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardBecomingVeteran"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardBecomingVeteran"));
     L_003E:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "tempCard") });
     L_005B:

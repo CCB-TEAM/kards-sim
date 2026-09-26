@@ -34,19 +34,19 @@ public static Val ExecuteUbergraph_card_unit_ju_88_g6(IHost H, Val self, Val[] a
             default: goto __halt;
         }
     L_000A:
-        if (!(GetLocal(L, "K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_001D;
+        if (!(H.GetVar("K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_001D;
     L_0018:
         goto L_0129;
     L_001D:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_killer"), "cardID"), H.GetMember(self, "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_killer"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_0059:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_0129;
     L_0067:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0090:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool()) goto L_0129;
     L_009E:
-        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "name"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable"] = __v), H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "salvageFaction"), Val.Out(__v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "name"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable"] = __v), H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "salvageFaction"), Val.Out(__v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID"] = __v) });
     L_0129:
         goto __halt;
     L_012B:

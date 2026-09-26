@@ -834,7 +834,7 @@ public static Val ExecuteUbergraph_card_location_soviet_scen1(IHost H, Val self,
             default: goto __halt;
         }
     L_1FA2:
-        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "name"), Val.Name("card_event_campaign_moscow1_retreat")) == 0);
+        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "name"), Val.Name("card_event_campaign_moscow1_retreat")) == 0);
     L_1FE2:
         if (!(GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue")).AsBool())
         {
@@ -907,7 +907,7 @@ public static Val ExecuteUbergraph_card_location_soviet_scen1(IHost H, Val self,
     L_20A3:
         L["Temp_byte_Variable_3"] = Val.Of(0);
     L_20B7:
-        L["CallFunc_Add_IntInt_ReturnValue_3"] = (GetLocal(L, "K2Node_Event_turnnumber_1") + Val.Of(1));
+        L["CallFunc_Add_IntInt_ReturnValue_3"] = (H.GetVar("K2Node_Event_turnnumber_1") + Val.Of(1));
     L_20E1:
         L["CallFunc_Divide_IntInt_ReturnValue_1"] = (GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_3") / Val.Of(2));
     L_210B:
@@ -931,7 +931,7 @@ public static Val ExecuteUbergraph_card_location_soviet_scen1(IHost H, Val self,
     L_2224:
         L["CallFunc_Format_ReturnValue_1"] = H.Call("Format", new Val[] { Val.Ref("KismetTextLibrary"), Val.Of(" ({turn})"), GetLocal(L, "K2Node_MakeArray_Array_1") });
     L_2256:
-        L["CallFunc_GreaterEqual_IntInt_ReturnValue_4"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber_1"), Val.Of(21)) >= 0);
+        L["CallFunc_GreaterEqual_IntInt_ReturnValue_4"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber_1"), Val.Of(21)) >= 0);
     L_2278:
         L["Temp_bool_Variable_1"] = GetLocal(L, "CallFunc_GreaterEqual_IntInt_ReturnValue_4");
     L_228B:
@@ -975,7 +975,7 @@ public static Val ExecuteUbergraph_card_location_soviet_scen1(IHost H, Val self,
     L_2335:
         L["Temp_byte_Variable_1"] = Val.Of(2);
     L_2349:
-        L["CallFunc_Add_IntInt_ReturnValue_2"] = (GetLocal(L, "K2Node_Event_turnnumber_1") + Val.Of(1));
+        L["CallFunc_Add_IntInt_ReturnValue_2"] = (H.GetVar("K2Node_Event_turnnumber_1") + Val.Of(1));
     L_2373:
         L["CallFunc_Divide_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_2") / Val.Of(2));
     L_239D:
@@ -999,7 +999,7 @@ public static Val ExecuteUbergraph_card_location_soviet_scen1(IHost H, Val self,
     L_24B6:
         L["CallFunc_Format_ReturnValue"] = H.Call("Format", new Val[] { Val.Ref("KismetTextLibrary"), Val.Of(" ({turn})"), GetLocal(L, "K2Node_MakeArray_Array") });
     L_24E8:
-        L["CallFunc_LessEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber_1"), Val.Of(8)) <= 0);
+        L["CallFunc_LessEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber_1"), Val.Of(8)) <= 0);
     L_250A:
         L["Temp_bool_Variable"] = GetLocal(L, "CallFunc_LessEqual_IntInt_ReturnValue");
     L_251D:
@@ -1044,7 +1044,7 @@ public static Val ExecuteUbergraph_card_location_soviet_scen1(IHost H, Val self,
     L_25B0:
         _ = H.Call("getTotalDefense", new Val[] { self, Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense_3"] = __v) });
     L_25C3:
-        L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_getTotalDefense_totalDefense_3") - GetLocal(L, "K2Node_Event_damage"));
+        L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_getTotalDefense_totalDefense_3") - H.GetVar("K2Node_Event_damage"));
     L_25F1:
         L["CallFunc_GreaterEqual_IntInt_ReturnValue_6"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue"), Val.Of(7)) >= 0);
     L_2613:

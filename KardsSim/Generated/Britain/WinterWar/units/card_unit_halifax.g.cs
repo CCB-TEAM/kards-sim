@@ -51,7 +51,7 @@ public static Val ExecuteUbergraph_card_unit_halifax(IHost H, Val self, Val[] ar
     L_0115:
         goto L_032E;
     L_011A:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_0155:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_0174:
@@ -59,7 +59,7 @@ public static Val ExecuteUbergraph_card_unit_halifax(IHost H, Val self, Val[] ar
     L_0182:
         goto L_032E;
     L_0187:
-        _ = H.Call("IsBomber", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsBomber_isIt"] = __v) });
+        _ = H.Call("IsBomber", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsBomber_isIt"] = __v) });
     L_01B0:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_01C3:
@@ -77,9 +77,9 @@ public static Val ExecuteUbergraph_card_unit_halifax(IHost H, Val self, Val[] ar
     L_0296:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue_1")).AsBool()) goto L_032E;
     L_02A4:
-        _ = H.Call("getTotalAttack", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getTotalAttack_totalAttack_1"] = __v) });
+        _ = H.Call("getTotalAttack", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getTotalAttack_totalAttack_1"] = __v) });
     L_02CD:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetRandomCard_randomCard_1"), GetLocal(L, "CallFunc_getTotalAttack_totalAttack_1"), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetRandomCard_randomCard_1"), GetLocal(L, "CallFunc_getTotalAttack_totalAttack_1"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_032E:
         goto __halt;
     L_0330:

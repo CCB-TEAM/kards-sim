@@ -308,15 +308,15 @@ public static Val ExecuteUbergraph_card_unit_93rd_messina(IHost H, Val self, Val
     L_08F8:
         goto L_0670;
     L_08FD:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_resetCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_resetCardID"));
     L_0918:
         goto L_06A3;
     L_091D:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_drawnCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_drawnCardID"));
     L_0938:
         goto L_06A3;
     L_093D:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_spawnedCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_spawnedCardID"));
     L_0958:
         goto L_06A3;
     L_095D:

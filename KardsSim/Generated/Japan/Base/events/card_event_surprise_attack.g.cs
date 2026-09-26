@@ -112,15 +112,15 @@ public static Val ExecuteUbergraph_card_event_surprise_attack(IHost H, Val self,
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsPinned", new Val[] { GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_IsPinned_isPinned"] = __v) });
+        _ = H.Call("IsPinned", new Val[] { H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_IsPinned_isPinned"] = __v) });
     L_0033:
         if (!(GetLocal(L, "CallFunc_IsPinned_isPinned")).AsBool()) goto L_0074;
     L_0041:
-        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), self });
+        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), self });
     L_006F:
         goto L_00C0;
     L_0074:
-        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("PinUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
     L_00C0:
         goto __halt;
     L_00C2:

@@ -48,9 +48,9 @@ public static Val ExecuteUbergraph_card_unit_5th_regiment(IHost H, Val self, Val
     L_00AD:
         goto L_01AB;
     L_00B2:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), GetLocal(L, "K2Node_Event_sideGaining")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "side"), H.GetVar("K2Node_Event_sideGaining")) == 0);
     L_00D8:
-        L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool() && (GetLocal(L, "K2Node_Event_isNegativeGain")).AsBool());
+        L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool() && (H.GetVar("K2Node_Event_isNegativeGain")).AsBool());
     L_00FE:
         if (!(GetLocal(L, "CallFunc_BooleanAND_ReturnValue")).AsBool()) goto L_01AB;
     L_010C:

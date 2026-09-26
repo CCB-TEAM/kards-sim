@@ -144,7 +144,7 @@ public static Val ExecuteUbergraph_card_event_at_all_cost(IHost H, Val self, Val
     L_01F6:
         goto L_01C3;
     L_01FB:
-        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), self });
+        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), self });
     L_0229:
         _ = H.Call("GetAllCardsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllCardsOnBoard_cards"] = __v) });
     L_0257:

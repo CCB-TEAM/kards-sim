@@ -79,7 +79,7 @@ public static Val ExecuteUbergraph_card_unit_58th_infantry_regiment(IHost H, Val
     L_01B8:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_021A;
     L_01C6:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardChanging"), "cardID"), H.GetMember(self, "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardChanging"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_0202:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_021A;
     L_0210:

@@ -47,7 +47,7 @@ public static Val ExecuteUbergraph_card_unit_6th_brigade_nz(IHost H, Val self, V
     L_008C:
         _ = H.Call("IsVeteran", new Val[] { self, Val.False, Val.Out(__v => L["CallFunc_IsVeteran_isIt"] = __v) });
     L_00A0:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardBecomingVeteran"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardBecomingVeteran"), "side"), H.GetMember(self, "side")) == 0);
     L_00DC:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_0102:

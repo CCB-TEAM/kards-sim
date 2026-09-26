@@ -94,13 +94,13 @@ public static Val ExecuteUbergraph_card_event_motti_tactic(IHost H, Val self, Va
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0027:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_00EE;
     L_0035:
-        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), self });
+        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), self });
     L_0063:
-        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "name"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable"] = __v), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "salvageFaction"), Val.Out(__v => L["CallFunc_SpawnCardInHandBySide_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "name"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable"] = __v), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "salvageFaction"), Val.Out(__v => L["CallFunc_SpawnCardInHandBySide_spawnedCardID"] = __v) });
     L_00EE:
         goto __halt;
     L_00F0:

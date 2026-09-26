@@ -65,7 +65,7 @@ public static Val ExecuteUbergraph_card_location_british_scen3(IHost H, Val self
     L_002B:
         if (!(GetLocal(L, "CallFunc_IsSideActive_active")).AsBool()) goto L_011E;
     L_0039:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(8)) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(8)) == 0);
     L_005B:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_2")).AsBool()) goto L_018F;
     L_0069:
@@ -93,7 +93,7 @@ public static Val ExecuteUbergraph_card_location_british_scen3(IHost H, Val self
             default: goto __halt;
         }
     L_011E:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(1)) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(1)) == 0);
     L_0140:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_1")).AsBool())
         {
@@ -499,9 +499,9 @@ public static Val ExecuteUbergraph_card_location_british_scen3(IHost H, Val self
     L_15D9:
         L["Temp_byte_Variable_1"] = Val.Of(2);
     L_15ED:
-        L["CallFunc_Add_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_turnnumber") + Val.Of(1));
+        L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_turnnumber") + Val.Of(1));
     L_1617:
-        L["CallFunc_LessEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(20)) <= 0);
+        L["CallFunc_LessEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(20)) <= 0);
     L_1639:
         L["CallFunc_Divide_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_Add_IntInt_ReturnValue") / Val.Of(2));
     L_1663:

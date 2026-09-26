@@ -94,19 +94,19 @@ public static Val ExecuteUbergraph_card_event_pummel(IHost H, Val self, Val[] ar
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0027:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_0111;
     L_0035:
-        _ = H.Call("SuppressUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_SuppressUnit_qqq"] = __v) });
+        _ = H.Call("SuppressUnit", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_SuppressUnit_qqq"] = __v) });
     L_008A:
-        _ = H.Call("getAndDecryptKredit", new Val[] { GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_getAndDecryptKredit_decryptedKredit"] = __v) });
+        _ = H.Call("getAndDecryptKredit", new Val[] { H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_getAndDecryptKredit_decryptedKredit"] = __v) });
     L_00B3:
         L["CallFunc_LessEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_getAndDecryptKredit_decryptedKredit"), Val.Of(3)) <= 0);
     L_00D5:
         if (!(GetLocal(L, "CallFunc_LessEqual_IntInt_ReturnValue")).AsBool()) goto L_0111;
     L_00E3:
-        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), self });
+        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), self });
     L_0111:
         goto __halt;
     L_0113:

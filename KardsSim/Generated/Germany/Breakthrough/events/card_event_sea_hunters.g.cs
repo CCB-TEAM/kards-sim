@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_event_sea_hunters(IHost H, Val self, Val
             default: goto __halt;
         }
     L_000A:
-        H.SetMember(self, "Card Played", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "Card Played", H.GetVar("K2Node_Event_cardPlayed"));
     L_001D:
         _ = H.Call("ShouldGotchaTrigger", new Val[] { self, H.GetMember(self, "Card Played"), Val.Out(__v => L["CallFunc_ShouldGotchaTrigger_shouldIt"] = __v) });
     L_0039:

@@ -40,7 +40,7 @@ public static Val ExecuteUbergraph_card_unit_173rd_guard_rifles(IHost H, Val sel
     L_002B:
         _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID"] = __v), H.GetMember(self, "side") });
     L_006A:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_toCard"), "cardID"), GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_toCard"), "cardID"), GetLocal(L, "CallFunc_GetLocationCardBySide_locationCardID")) == 0);
     L_00A6:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_00FD;
     L_00B4:

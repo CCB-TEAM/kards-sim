@@ -152,7 +152,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock3_tut(IHost H, Val
             default: goto __halt;
         }
     L_05D2:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0608:
         L["Temp_text_Variable_3"] = Val.Of("You have drawn a <bold>Fighter</>. <bold>Fighters</> are air units that can attack any target on the battlefield and prevent enemy <bold>Bombers</> from attacking other targets in the same front.");
     L_0705:
@@ -178,7 +178,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock3_tut(IHost H, Val
     L_0811:
         goto L_0461;
     L_0816:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_drawnSide"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_drawnSide"), H.GetMember(self, "side")) == 0);
     L_083C:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool())
         {
@@ -191,7 +191,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock3_tut(IHost H, Val
             }
         }
     L_0846:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_087C:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "CallFunc_GetCardFromID_card") });
     L_0899:
@@ -206,7 +206,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock3_tut(IHost H, Val
             }
         }
     L_08A3:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_08D9:
         L["CallFunc_EqualEqual_NameName_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "name"), Val.Name("card_unit_italian_cavalry")) == 0);
     L_0919:
@@ -214,7 +214,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock3_tut(IHost H, Val
     L_0927:
         L["Temp_text_Variable_1"] = Val.Of("You have drawn a unit with <bold>Blitz</>. Units with <bold>Blitz</> can move and/or attack on the same turn they enter the battlefield.  ");
     L_09EB:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0A21:
         _ = H.Call("ShowTutorialMessage", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["Temp_text_Variable_1"] = __v), Val.Of("blitz"), H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "cardID"), Val.Of(2.5f), Val.Out(__v => L["CallFunc_ShowTutorialMessage_qqq_1"] = __v) });
     L_0A82:
@@ -226,7 +226,7 @@ public static Val ExecuteUbergraph_card_location_berlin_unlock3_tut(IHost H, Val
             default: goto __halt;
         }
     L_0A83:
-        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
+        _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_drawnCardID"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_0AB9:
         L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "name"), Val.Name("card_unit_me_bf_109_g")) == 0);
     L_0AF9:

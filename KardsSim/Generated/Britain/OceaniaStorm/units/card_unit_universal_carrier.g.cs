@@ -289,15 +289,15 @@ public static Val ExecuteUbergraph_card_unit_universal_carrier(IHost H, Val self
     L_0774:
         goto L_0533;
     L_0779:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_resetCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_resetCardID"));
     L_0794:
         goto L_0566;
     L_0799:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_drawnCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_drawnCardID"));
     L_07B4:
         goto L_0566;
     L_07B9:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_spawnedCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_spawnedCardID"));
     L_07D4:
         goto L_0566;
     L_07D9:
@@ -315,9 +315,9 @@ public static Val ExecuteUbergraph_card_unit_universal_carrier(IHost H, Val self
             }
         }
     L_07F6:
-        L["CallFunc_EqualEqual_NameName_ReturnValue_3"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "name"), Val.Name("card_event_plan")) == 0);
+        L["CallFunc_EqualEqual_NameName_ReturnValue_3"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "name"), Val.Name("card_event_plan")) == 0);
     L_0836:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_3"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_3"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_0872:
         L["CallFunc_BooleanAND_ReturnValue_4"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_3")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue_3")).AsBool());
     L_0898:

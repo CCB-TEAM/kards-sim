@@ -499,7 +499,7 @@ public static Val ExecuteUbergraph_card_event_combined_arms_cam1(IHost H, Val se
     L_1099:
         goto L_07DC;
     L_109E:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_10B1:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "tempCard") });
     L_10CE:

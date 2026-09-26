@@ -145,7 +145,7 @@ public static Val ExecuteUbergraph_card_event_for_precision_bombing(IHost H, Val
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsBomber", new Val[] { GetLocal(L, "K2Node_Event_cardChanged"), Val.Out(__v => L["CallFunc_IsBomber_isIt"] = __v) });
+        _ = H.Call("IsBomber", new Val[] { H.GetVar("K2Node_Event_cardChanged"), Val.Out(__v => L["CallFunc_IsBomber_isIt"] = __v) });
     L_0033:
         if (!(GetLocal(L, "CallFunc_IsBomber_isIt")).AsBool()) goto L_010E;
     L_0041:
@@ -153,17 +153,17 @@ public static Val ExecuteUbergraph_card_event_for_precision_bombing(IHost H, Val
     L_004F:
         goto L_010E;
     L_0054:
-        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), self });
+        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), self });
     L_0082:
         goto L_010E;
     L_0087:
-        _ = H.Call("IsBomber", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsBomber_isIt_1"] = __v) });
+        _ = H.Call("IsBomber", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsBomber_isIt_1"] = __v) });
     L_00B0:
         if (!(GetLocal(L, "CallFunc_IsBomber_isIt_1")).AsBool()) goto L_010E;
     L_00BE:
         goto L_0041;
     L_00C3:
-        _ = H.Call("IsBomber", new Val[] { GetLocal(L, "K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc_IsBomber_isIt_2"] = __v) });
+        _ = H.Call("IsBomber", new Val[] { H.GetVar("K2Node_Event_cardLeaving"), Val.Out(__v => L["CallFunc_IsBomber_isIt_2"] = __v) });
     L_00EC:
         if (!(GetLocal(L, "CallFunc_IsBomber_isIt_2")).AsBool()) goto L_010E;
     L_00FA:

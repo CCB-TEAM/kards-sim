@@ -82,7 +82,7 @@ public static Val ExecuteUbergraph_card_unit_75mm_field_artillery(IHost H, Val s
     L_0195:
         goto L_00DC;
     L_019A:
-        _ = H.Call("GetAdjacentCards", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_defenderCard_1"), Val.False, Val.Out(__v => L["CallFunc_GetAdjacentCards_adjacentCards"] = __v) });
+        _ = H.Call("GetAdjacentCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_defenderCard_1"), Val.False, Val.Out(__v => L["CallFunc_GetAdjacentCards_adjacentCards"] = __v) });
     L_01D1:
         H.SetMember(self, "adjacentCards", GetLocal(L, "CallFunc_GetAdjacentCards_adjacentCards"));
     L_01EC:

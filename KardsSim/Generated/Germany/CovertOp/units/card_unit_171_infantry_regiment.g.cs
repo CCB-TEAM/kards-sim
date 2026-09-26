@@ -175,7 +175,7 @@ public static Val ExecuteUbergraph_card_unit_171_infantry_regiment(IHost H, Val 
     L_03B7:
         goto L_000F;
     L_03BC:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed_1"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed_1"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_03E5:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool())
         {

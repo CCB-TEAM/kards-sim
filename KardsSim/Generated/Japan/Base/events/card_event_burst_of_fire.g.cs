@@ -173,11 +173,11 @@ public static Val ExecuteUbergraph_card_event_burst_of_fire(IHost H, Val self, V
     L_0239:
         goto L_0206;
     L_023E:
-        H.SetMember(self, "affectedCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "affectedCard", H.GetVar("K2Node_Event_targetCard"));
     L_0251:
         goto L_0157;
     L_0256:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
     L_027C:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "enterPlayOnTurn"), Val.Of(0)) > 0);
     L_029E:

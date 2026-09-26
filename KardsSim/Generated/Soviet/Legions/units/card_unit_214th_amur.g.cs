@@ -261,11 +261,11 @@ public static Val ExecuteUbergraph_card_unit_214th_amur(IHost H, Val self, Val[]
             }
         }
     L_03D4:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardLeaving"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardLeaving"));
     L_03E7:
         L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { Val.Of(5), Val.Of(6), Val.Of(7) });
     L_03F8:
-        L["CallFunc_Array_Contains_ReturnValue"] = H.Call("Array_Contains", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "K2Node_MakeArray_Array"), GetLocal(L, "K2Node_Event_goingToLocation_1") });
+        L["CallFunc_Array_Contains_ReturnValue"] = H.Call("Array_Contains", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "K2Node_MakeArray_Array"), H.GetVar("K2Node_Event_goingToLocation_1") });
     L_0434:
         if (!(GetLocal(L, "CallFunc_Array_Contains_ReturnValue")).AsBool())
         {
@@ -295,7 +295,7 @@ public static Val ExecuteUbergraph_card_unit_214th_amur(IHost H, Val self, Val[]
             }
         }
     L_0460:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_0473:
         goto L_031A;
     L_0478:

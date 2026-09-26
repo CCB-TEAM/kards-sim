@@ -117,7 +117,7 @@ public static Val ExecuteUbergraph_card_unit_37mm_m1_aa_gun(IHost H, Val self, V
     L_0321:
         goto L_004F;
     L_0326:
-        H.SetMember(self, "defenderCard", GetLocal(L, "K2Node_Event_defenderCard"));
+        H.SetMember(self, "defenderCard", H.GetVar("K2Node_Event_defenderCard"));
     L_0339:
         _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "defenderCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0362:

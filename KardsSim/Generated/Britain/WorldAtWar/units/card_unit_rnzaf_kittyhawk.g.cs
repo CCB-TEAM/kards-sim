@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_unit_rnzaf_kittyhawk(IHost H, Val self, 
             default: goto __halt;
         }
     L_000A:
-        H.SetMember(self, "Card Played", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "Card Played", H.GetVar("K2Node_Event_cardPlayed"));
     L_001D:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0030:

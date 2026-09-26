@@ -39,7 +39,7 @@ public static Val ExecuteUbergraph_card_event_stubborn_defense(IHost H, Val self
     L_004E:
         if (!(GetLocal(L, "CallFunc_JSON_GetInt_found")).AsBool()) goto L_021A;
     L_005C:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value"), H.GetMember(GetLocal(L, "K2Node_Event_survivor"), "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value"), H.GetMember(H.GetVar("K2Node_Event_survivor"), "cardID")) == 0);
     L_0098:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_021A;
     L_00A6:

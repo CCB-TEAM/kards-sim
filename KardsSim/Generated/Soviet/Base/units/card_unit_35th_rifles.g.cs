@@ -60,7 +60,7 @@ public static Val ExecuteUbergraph_card_unit_35th_rifles(IHost H, Val self, Val[
     L_014A:
         goto L_03A1;
     L_014F:
-        if (!(GetLocal(L, "K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_0162;
+        if (!(H.GetVar("K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_0162;
     L_015D:
         goto L_03A1;
     L_0162:
@@ -70,7 +70,7 @@ public static Val ExecuteUbergraph_card_unit_35th_rifles(IHost H, Val self, Val[
     L_01BE:
         goto L_0066;
     L_01C3:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side"), H.GetMember(self, "side")) == 0);
     L_01FF:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_03A1;
     L_020D:

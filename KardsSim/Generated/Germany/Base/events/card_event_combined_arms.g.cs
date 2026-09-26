@@ -112,7 +112,7 @@ public static Val ExecuteUbergraph_card_event_combined_arms(IHost H, Val self, V
     L_0132:
         goto L_014F;
     L_0137:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_014A:
         goto L_000A;
     L_014F:

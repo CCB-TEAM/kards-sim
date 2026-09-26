@@ -94,9 +94,9 @@ public static Val ExecuteUbergraph_card_event_breakout(IHost H, Val self, Val[] 
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("GiveFury", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("GiveFury", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
     L_0056:
-        _ = H.Call("GiveShock", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveShock_qqq"] = __v) });
+        _ = H.Call("GiveShock", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveShock_qqq"] = __v) });
     L_00AB:
         goto __halt;
     L_00AD:

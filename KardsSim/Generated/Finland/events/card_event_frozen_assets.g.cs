@@ -94,7 +94,7 @@ public static Val ExecuteUbergraph_card_event_frozen_assets(IHost H, Val self, V
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "location"), Val.Of(7), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_targetCard"), "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_003E:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_005D:
@@ -108,7 +108,7 @@ public static Val ExecuteUbergraph_card_event_frozen_assets(IHost H, Val self, V
     L_009D:
         H.SetMember(self, "spawninfront", Val.True);
     L_00A8:
-        L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "locationNumber") + Val.Of(1));
+        L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetMember(H.GetVar("K2Node_Event_targetCard"), "locationNumber") + Val.Of(1));
     L_00E8:
         _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), H.GetMember(self, "spawninfront"), Val.Name("card_unit_sissi"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardonBattlefield_spawnedCardID"] = __v) });
     L_0154:

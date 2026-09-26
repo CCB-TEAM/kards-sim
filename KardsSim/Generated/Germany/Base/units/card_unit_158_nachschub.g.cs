@@ -63,9 +63,9 @@ public static Val ExecuteUbergraph_card_unit_158_nachschub(IHost H, Val self, Va
     L_0176:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0189:
-        L["CallFunc_BooleanOR_ReturnValue"] = Val.Of((GetLocal(L, "K2Node_Event_selfIsAlsoGettingDestroyed")).AsBool() || (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
+        L["CallFunc_BooleanOR_ReturnValue"] = Val.Of((H.GetVar("K2Node_Event_selfIsAlsoGettingDestroyed")).AsBool() || (GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool());
     L_01AF:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_killer"), "cardID"), H.GetMember(self, "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_killer"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_01EB:
         L["CallFunc_BooleanOR_ReturnValue_1"] = Val.Of((GetLocal(L, "CallFunc_BooleanOR_ReturnValue")).AsBool() || (GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool());
     L_0211:
@@ -75,7 +75,7 @@ public static Val ExecuteUbergraph_card_unit_158_nachschub(IHost H, Val self, Va
     L_023B:
         _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_024E:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "side"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "side"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide")) == 0);
     L_028A:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_IsSideActive_active")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool());
     L_02B0:
@@ -85,7 +85,7 @@ public static Val ExecuteUbergraph_card_unit_158_nachschub(IHost H, Val self, Va
     L_0302:
         goto L_00B0;
     L_0307:
-        if (!(GetLocal(L, "K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_011F;
+        if (!(H.GetVar("K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_011F;
     L_0315:
         goto L_0324;
     L_031A:

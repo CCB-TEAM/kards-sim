@@ -39,7 +39,7 @@ public static Val ExecuteUbergraph_card_unit_seabees(IHost H, Val self, Val[] ar
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_01C2;
     L_002B:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardRepaired"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardRepaired"));
     L_003E:
         _ = H.Call("IsUnit", new Val[] { H.GetMember(self, "tempCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0067:

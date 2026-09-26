@@ -435,13 +435,13 @@ public static Val ExecuteUbergraph_card_event_unity_is_strength_cam1(IHost H, Va
     L_0F0A:
         goto L_060D;
     L_0F0F:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_0F22:
         _ = H.Call("HasCampaignUpgrade", new Val[] { self, Val.Of(1), Val.Out(__v => L["CallFunc_HasCampaignUpgrade_doesIt_6"] = __v) });
     L_0F3A:
         if (!(GetLocal(L, "CallFunc_HasCampaignUpgrade_doesIt_6")).AsBool()) goto L_101F;
     L_0F48:
-        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "location"), Val.Of(7), GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches") });
+        _ = H.Call("EnumCompareCardLocation", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_targetCard"), "location"), Val.Of(7), Val.Out(__v => L["CallFunc_EnumCompareCardLocation_Branches"] = __v) });
     L_0F7C:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareCardLocation_Branches"), Val.Of(0)) != 0);
     L_0F9B:
@@ -460,19 +460,19 @@ public static Val ExecuteUbergraph_card_event_unity_is_strength_cam1(IHost H, Va
             default: goto __halt;
         }
     L_0FD7:
-        _ = H.Call("GiveSmokescreen", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), Val.Of(0) });
+        _ = H.Call("GiveSmokescreen", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), Val.Of(0) });
     L_101F:
         _ = H.Call("HasCampaignUpgrade", new Val[] { self, Val.Of(2), Val.Out(__v => L["CallFunc_HasCampaignUpgrade_doesIt_7"] = __v) });
     L_1037:
         if (!(GetLocal(L, "CallFunc_HasCampaignUpgrade_doesIt_7")).AsBool()) goto L_1091;
     L_1045:
-        _ = H.Call("GiveGuard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("GiveGuard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
     L_1091:
         _ = H.Call("HasCampaignUpgrade", new Val[] { self, Val.Of(5), Val.Out(__v => L["CallFunc_HasCampaignUpgrade_doesIt_8"] = __v) });
     L_10A9:
         if (!(GetLocal(L, "CallFunc_HasCampaignUpgrade_doesIt_8")).AsBool()) goto L_10FF;
     L_10B7:
-        _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), Val.Of(0) });
+        _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), Val.Of(0) });
     L_10FF:
         _ = H.Call("Array_Clear", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "infantryUnits") });
     L_1128:

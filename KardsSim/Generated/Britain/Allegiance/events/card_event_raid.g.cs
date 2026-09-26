@@ -253,7 +253,7 @@ public static Val ExecuteUbergraph_card_event_raid(IHost H, Val self, Val[] args
     L_06F7:
         L["CallFunc_Add_IntInt_ReturnValue_1"] = (H.GetMember(self, "enterPlayOnTurn") + Val.Of(1));
     L_0721:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_1"), GetLocal(L, "K2Node_Event_turnnumber_1")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_1"), H.GetVar("K2Node_Event_turnnumber_1")) == 0);
     L_0747:
         L["CallFunc_BooleanAND_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool());
     L_076D:
@@ -303,7 +303,7 @@ public static Val ExecuteUbergraph_card_event_raid(IHost H, Val self, Val[] args
     L_08BB:
         L["CallFunc_Add_IntInt_ReturnValue_3"] = (H.GetMember(self, "enterPlayOnTurn") + Val.Of(1));
     L_08E5:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_3"), GetLocal(L, "K2Node_Event_turnnumber")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_3"), H.GetVar("K2Node_Event_turnnumber")) == 0);
     L_090B:
         L["CallFunc_BooleanAND_ReturnValue_3"] = Val.Of((GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue_2")).AsBool() && (GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_2")).AsBool());
     L_0931:
@@ -323,11 +323,11 @@ public static Val ExecuteUbergraph_card_event_raid(IHost H, Val self, Val[] args
     L_0968:
         goto L_0659;
     L_096D:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_resetCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_resetCardID"));
     L_0988:
         goto L_077C;
     L_098D:
-        if (!(GetLocal(L, "K2Node_Event_StartOfTurnDraw")).AsBool()) goto L_099C;
+        if (!(H.GetVar("K2Node_Event_StartOfTurnDraw")).AsBool()) goto L_099C;
     L_099B:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -338,11 +338,11 @@ public static Val ExecuteUbergraph_card_event_raid(IHost H, Val self, Val[] args
             default: goto __halt;
         }
     L_099C:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_drawnCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_drawnCardID"));
     L_09B7:
         goto L_077C;
     L_09BC:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_spawnedCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_spawnedCardID"));
     L_09D7:
         goto L_077C;
     L_09DC:

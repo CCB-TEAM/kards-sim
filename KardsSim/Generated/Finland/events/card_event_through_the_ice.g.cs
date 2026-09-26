@@ -145,7 +145,7 @@ public static Val ExecuteUbergraph_card_event_through_the_ice(IHost H, Val self,
             default: goto __halt;
         }
     L_0284:
-        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
+        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_02A4:
         _ = H.Call("DamageMultipleCards", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardsToDamage"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_DamageMultipleCards_cardsDestroyed"] = __v) });
     L_02EC:
@@ -167,7 +167,7 @@ public static Val ExecuteUbergraph_card_event_through_the_ice(IHost H, Val self,
     L_034E:
         goto L_000F;
     L_0353:
-        L["CallFunc_Conv_NameToString_ReturnValue"] = H.Call("Conv_NameToString", new Val[] { Val.Ref("KismetStringLibrary"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "name") });
+        L["CallFunc_Conv_NameToString_ReturnValue"] = H.Call("Conv_NameToString", new Val[] { Val.Ref("KismetStringLibrary"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "name") });
     L_038E:
         H.SetMember(self, "targetName", GetLocal(L, "CallFunc_Conv_NameToString_ReturnValue"));
     L_03A9:

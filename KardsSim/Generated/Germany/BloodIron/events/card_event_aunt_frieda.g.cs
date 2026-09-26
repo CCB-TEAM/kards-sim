@@ -110,7 +110,7 @@ public static Val ExecuteUbergraph_card_event_aunt_frieda(IHost H, Val self, Val
     L_011F:
         goto L_013C;
     L_0124:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_0137:
         goto L_000A;
     L_013C:

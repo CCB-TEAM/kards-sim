@@ -36,7 +36,7 @@ public static Val OnOtherCardDealDamageAddDamage(IHost H, Val self, Val[] args)
         var __out_reRunAtEnd = args.Length > 6 ? args[6].As<Action<Val>>() : null;
         L["reRunAtEnd"] = Val.Nothing;
     L_0000:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "toCard"), "side"), H.GetMember(self, "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "toCard"), "side"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_003B:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_005A:

@@ -36,7 +36,7 @@ public static Val ExecuteUbergraph_card_unit_caproni_ca_133(IHost H, Val self, V
             default: goto __halt;
         }
     L_000A:
-        H.SetMember(self, "CardPlayed", GetLocal(L, "K2Node_Event_cardSpawned"));
+        H.SetMember(self, "CardPlayed", H.GetVar("K2Node_Event_cardSpawned"));
     L_001D:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0030:
@@ -56,9 +56,9 @@ public static Val ExecuteUbergraph_card_unit_caproni_ca_133(IHost H, Val self, V
     L_015D:
         goto L_0209;
     L_0162:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_method"), Val.Of(4)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_method"), Val.Of(4)) == 0);
     L_0181:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_method"), Val.Of(5)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_method"), Val.Of(5)) == 0);
     L_01A0:
         L["CallFunc_BooleanOR_ReturnValue"] = Val.Of((GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_1")).AsBool() || (GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool());
     L_01C6:
@@ -66,11 +66,11 @@ public static Val ExecuteUbergraph_card_unit_caproni_ca_133(IHost H, Val self, V
     L_01D4:
         goto L_0209;
     L_01D9:
-        H.SetMember(self, "CardPlayed", GetLocal(L, "K2Node_Event_cardPlayed_1"));
+        H.SetMember(self, "CardPlayed", H.GetVar("K2Node_Event_cardPlayed_1"));
     L_01EC:
         goto L_001D;
     L_01F1:
-        H.SetMember(self, "CardPlayed", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "CardPlayed", H.GetVar("K2Node_Event_cardPlayed"));
     L_0204:
         goto L_001D;
     L_0209:

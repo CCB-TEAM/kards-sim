@@ -167,7 +167,7 @@ public static Val ExecuteUbergraph_card_event_unity_is_strength(IHost H, Val sel
     L_0281:
         goto L_024E;
     L_0286:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_0299:
         L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "tempCard") });
     L_02B6:

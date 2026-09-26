@@ -44,7 +44,7 @@ public static Val ExecuteUbergraph_card_unit_winter_regiment(IHost H, Val self, 
     L_0084:
         goto L_00C2;
     L_0089:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_instigatorID"), H.GetMember(self, "cardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_instigatorID"), H.GetMember(self, "cardID")) == 0);
     L_00AF:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_00C2;
     L_00BD:

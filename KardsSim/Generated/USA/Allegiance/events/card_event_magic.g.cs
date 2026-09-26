@@ -118,15 +118,15 @@ public static Val ExecuteUbergraph_card_event_magic(IHost H, Val self, Val[] arg
     L_0077:
         goto L_01AA;
     L_007C:
-        _ = H.Call("FullyHealCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_FullyHealCard_HealedAmount"] = __v) });
+        _ = H.Call("FullyHealCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_FullyHealCard_HealedAmount"] = __v) });
     L_00BB:
         goto L_01AA;
     L_00C0:
-        _ = H.Call("RemoveGuard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.True });
+        _ = H.Call("RemoveGuard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.True });
     L_010E:
-        _ = H.Call("RemoveSmokescreen", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.True, Val.False });
+        _ = H.Call("RemoveSmokescreen", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.True, Val.False });
     L_015C:
-        _ = H.Call("RemoveAmbush", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.True });
+        _ = H.Call("RemoveAmbush", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.True });
     L_01AA:
         goto __halt;
     L_01AC:

@@ -597,7 +597,7 @@ public static Val ExecuteUbergraph_card_location_british_scen2(IHost H, Val self
             default: goto __halt;
         }
     L_108F:
-        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "name"), Val.Name("card_event_fortification")) == 0);
+        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "name"), Val.Name("card_event_fortification")) == 0);
     L_10CF:
         if (!(GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue")).AsBool())
         {
@@ -889,7 +889,7 @@ public static Val ExecuteUbergraph_card_location_british_scen2(IHost H, Val self
             }
         }
     L_16C6:
-        L["CallFunc_GreaterEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(10)) >= 0);
+        L["CallFunc_GreaterEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(10)) >= 0);
     L_16E8:
         if (!(GetLocal(L, "CallFunc_GreaterEqual_IntInt_ReturnValue_1")).AsBool())
         {
@@ -991,7 +991,7 @@ public static Val ExecuteUbergraph_card_location_british_scen2(IHost H, Val self
     L_1A52:
         _ = H.Call("getTotalDefense", new Val[] { self, Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense_1"] = __v) });
     L_1A65:
-        L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_getTotalDefense_totalDefense_1") - GetLocal(L, "K2Node_Event_damage"));
+        L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_getTotalDefense_totalDefense_1") - H.GetVar("K2Node_Event_damage"));
     L_1A93:
         L["CallFunc_GreaterEqual_IntInt_ReturnValue_5"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue"), Val.Of(15)) >= 0);
     L_1AB5:

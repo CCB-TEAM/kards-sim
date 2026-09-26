@@ -276,7 +276,7 @@ public static Val ExecuteUbergraph_card_location_japan_scen5(IHost H, Val self, 
             default: goto __halt;
         }
     L_099B:
-        _ = H.Call("IsSameSideUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
+        _ = H.Call("IsSameSideUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
     L_09CD:
         if (!(GetLocal(L, "CallFunc_IsSameSideUnit_isIt")).AsBool())
         {
@@ -292,7 +292,7 @@ public static Val ExecuteUbergraph_card_location_japan_scen5(IHost H, Val self, 
             }
         }
     L_09D7:
-        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "name"), Val.Name("card_unit_61st_infantry_regiment")) == 0);
+        L["CallFunc_EqualEqual_NameName_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "name"), Val.Name("card_unit_61st_infantry_regiment")) == 0);
     L_0A17:
         if (!(GetLocal(L, "CallFunc_EqualEqual_NameName_ReturnValue")).AsBool()) goto L_0A26;
     L_0A25:
@@ -322,7 +322,7 @@ public static Val ExecuteUbergraph_card_location_japan_scen5(IHost H, Val self, 
             default: goto __halt;
         }
     L_0A6B:
-        _ = H.Call("getAndDecryptAttack", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getAndDecryptAttack_decryptedAttack"] = __v) });
+        _ = H.Call("getAndDecryptAttack", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_getAndDecryptAttack_decryptedAttack"] = __v) });
     L_0A94:
         L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_getAndDecryptAttack_decryptedAttack") - Val.Of(1));
     L_0ABE:
@@ -334,7 +334,7 @@ public static Val ExecuteUbergraph_card_location_japan_scen5(IHost H, Val self, 
     L_0B36:
         _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card_1"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID_1"] = __v), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_5") });
     L_0B75:
-        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_cardPlayed"), H.GetMember(GetLocal(L, "CallFunc_GetLocationCardBySide_card_1"), "cardID"), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue"), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
+        _ = H.Call("ChangeAttack", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_cardPlayed"), H.GetMember(GetLocal(L, "CallFunc_GetLocationCardBySide_card_1"), "cardID"), GetLocal(L, "CallFunc_Multiply_IntInt_ReturnValue"), Val.Of(1), Val.False, Val.Out(__v => L["CallFunc_ChangeAttack_qqq"] = __v) });
     L_0BD6:
         L["Temp_text_Variable_3"] = Val.Of("Crossing to the island beaches is a dangerous voyage, under heavy enemy fire.");
     L_0C5D:
@@ -515,17 +515,17 @@ public static Val ExecuteUbergraph_card_location_japan_scen5(IHost H, Val self, 
             }
         }
     L_12E0:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber_1"), Val.Of(1)) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber_1"), Val.Of(1)) == 0);
     L_1302:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_2")).AsBool()) goto L_06EA;
     L_1310:
         goto L_127D;
     L_1315:
-        L["CallFunc_LessEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber_1"), Val.Of(7)) <= 0);
+        L["CallFunc_LessEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber_1"), Val.Of(7)) <= 0);
     L_1337:
         if (!(GetLocal(L, "CallFunc_LessEqual_IntInt_ReturnValue_2")).AsBool()) goto L_1579;
     L_1345:
-        L["CallFunc_Add_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_turnnumber_1") + Val.Of(1));
+        L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_turnnumber_1") + Val.Of(1));
     L_136F:
         L["CallFunc_Divide_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_Add_IntInt_ReturnValue") / Val.Of(2));
     L_1399:
@@ -612,7 +612,7 @@ public static Val ExecuteUbergraph_card_location_japan_scen5(IHost H, Val self, 
     L_15F3:
         L["Temp_byte_Variable_1"] = Val.Of(2);
     L_1607:
-        L["CallFunc_Add_IntInt_ReturnValue_1"] = (GetLocal(L, "K2Node_Event_turnnumber_1") + Val.Of(1));
+        L["CallFunc_Add_IntInt_ReturnValue_1"] = (H.GetVar("K2Node_Event_turnnumber_1") + Val.Of(1));
     L_1631:
         L["CallFunc_Divide_IntInt_ReturnValue_1"] = (GetLocal(L, "CallFunc_Add_IntInt_ReturnValue_1") / Val.Of(2));
     L_165B:
@@ -636,7 +636,7 @@ public static Val ExecuteUbergraph_card_location_japan_scen5(IHost H, Val self, 
     L_1774:
         L["CallFunc_Format_ReturnValue_1"] = H.Call("Format", new Val[] { Val.Ref("KismetTextLibrary"), Val.Of(" ({turn})"), GetLocal(L, "K2Node_MakeArray_Array_1") });
     L_17A6:
-        L["CallFunc_LessEqual_IntInt_ReturnValue_3"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber_1"), Val.Of(17)) <= 0);
+        L["CallFunc_LessEqual_IntInt_ReturnValue_3"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber_1"), Val.Of(17)) <= 0);
     L_17C8:
         L["Temp_bool_Variable"] = GetLocal(L, "CallFunc_LessEqual_IntInt_ReturnValue_3");
     L_17DB:

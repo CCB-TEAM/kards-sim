@@ -87,7 +87,7 @@ public static Val ExecuteUbergraph_card_unit_matilda_mk_iv(IHost H, Val self, Va
     L_021F:
         goto L_01EC;
     L_0224:
-        if (!(GetLocal(L, "K2Node_Event_wasShockAttack")).AsBool())
+        if (!(H.GetVar("K2Node_Event_wasShockAttack")).AsBool())
         {
             if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
             switch (__ef.Pop())

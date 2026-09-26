@@ -42,17 +42,17 @@ public static Val ExecuteUbergraph_card_unit_jade_division(IHost H, Val self, Va
     L_0058:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_01F5;
     L_0066:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side"), H.GetMember(self, "side")) == 0);
     L_00A2:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_01F5;
     L_00B0:
-        _ = H.Call("IsGotcha", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsGotcha_isIt"] = __v) });
+        _ = H.Call("IsGotcha", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsGotcha_isIt"] = __v) });
     L_00D9:
         if (!(GetLocal(L, "CallFunc_IsGotcha_isIt")).AsBool()) goto L_00EC;
     L_00E7:
         goto L_01F5;
     L_00EC:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "faction"), Val.Of(3)) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "faction"), Val.Of(3)) == 0);
     L_0121:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue_1")).AsBool()) goto L_01F5;
     L_012F:

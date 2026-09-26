@@ -106,21 +106,21 @@ public static Val ExecuteUbergraph_card_unit_kyoto_regiment(IHost H, Val self, V
     L_001D:
         if (!(GetLocal(L, "CallFunc_IsLocatedOnBoard_isIt")).AsBool()) goto L_063A;
     L_002B:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0048:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_063A;
     L_0056:
-        _ = H.Call("RemoveCardFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RemoveCardFromBoard_qqq"] = __v) });
+        _ = H.Call("RemoveCardFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RemoveCardFromBoard_qqq"] = __v) });
     L_00AB:
-        L["CallFunc_GetEnumeratorUserFriendlyName_ReturnValue_1"] = H.Call("GetEnumeratorUserFriendlyName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("ESideEnum"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "side") });
+        L["CallFunc_GetEnumeratorUserFriendlyName_ReturnValue_1"] = H.Call("GetEnumeratorUserFriendlyName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("ESideEnum"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "side") });
     L_00EF:
         _ = H.Call("JSON_SetString", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("side_removed"), GetLocal(L, "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue_1"), Val.Out(__v => L["CallFunc_JSON_SetString_found_1"] = __v) });
     L_0134:
-        L["CallFunc_Conv_NameToString_ReturnValue"] = H.Call("Conv_NameToString", new Val[] { Val.Ref("KismetStringLibrary"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "name") });
+        L["CallFunc_Conv_NameToString_ReturnValue"] = H.Call("Conv_NameToString", new Val[] { Val.Ref("KismetStringLibrary"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "name") });
     L_016F:
         L["CallFunc_Concat_StrStr_ReturnValue"] = H.Call("Concat_StrStr", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_Conv_NameToString_ReturnValue"), Val.Of(";") });
     L_0197:
-        L["CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"] = H.Call("GetEnumeratorUserFriendlyName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("EFactionEnum"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "salvageFaction") });
+        L["CallFunc_GetEnumeratorUserFriendlyName_ReturnValue"] = H.Call("GetEnumeratorUserFriendlyName", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("EFactionEnum"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "salvageFaction") });
     L_01DB:
         L["CallFunc_Concat_StrStr_ReturnValue_1"] = H.Call("Concat_StrStr", new Val[] { Val.Ref("KismetStringLibrary"), GetLocal(L, "CallFunc_Concat_StrStr_ReturnValue"), GetLocal(L, "CallFunc_GetEnumeratorUserFriendlyName_ReturnValue") });
     L_0209:
@@ -190,7 +190,7 @@ public static Val ExecuteUbergraph_card_unit_kyoto_regiment(IHost H, Val self, V
     L_061A:
         goto L_02B6;
     L_061F:
-        H.SetMember(self, "leavePlayMethod", GetLocal(L, "K2Node_Event_leavePlayMethod"));
+        H.SetMember(self, "leavePlayMethod", H.GetVar("K2Node_Event_leavePlayMethod"));
     L_063A:
         goto __halt;
     L_063C:

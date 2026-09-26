@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_unit_dingo_armored_car(IHost H, Val self
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("IsLocation", new Val[] { GetLocal(L, "K2Node_Event_defenderCard"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
+        _ = H.Call("IsLocation", new Val[] { H.GetVar("K2Node_Event_defenderCard"), Val.Out(__v => L["CallFunc_IsLocation_isIt"] = __v) });
     L_0033:
         _ = H.Call("IsLocatedOnBoard", new Val[] { self, Val.Out(__v => L["CallFunc_IsLocatedOnBoard_isIt"] = __v) });
     L_0046:

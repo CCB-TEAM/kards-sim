@@ -31,7 +31,7 @@ public static Val Get_GoldEmblem(IHost H, Val self, Val[] args)
         var __out_NewParam1 = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["NewParam1"] = Val.Nothing;
     L_0000:
-        _ = H.Call("GetStaticFaction", new Val[] { self, GetLocal(L, "CardName"), GetLocal(L, "CallFunc_GetStaticFaction_faction") });
+        _ = H.Call("GetStaticFaction", new Val[] { self, GetLocal(L, "CardName"), Val.Out(__v => L["CallFunc_GetStaticFaction_faction"] = __v) });
     L_001C:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetStaticFaction_faction"), Val.Of(1)) != 0);
     L_003B:
@@ -133,7 +133,7 @@ public static Val GetCardFactionPrimaryColor(IHost H, Val self, Val[] args)
         var __out_factionColor = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["factionColor"] = Val.Nothing;
     L_0000:
-        _ = H.Call("GetStaticFaction", new Val[] { self, GetLocal(L, "cardName"), GetLocal(L, "CallFunc_GetStaticFaction_faction") });
+        _ = H.Call("GetStaticFaction", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticFaction_faction"] = __v) });
     L_001C:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetStaticFaction_faction"), Val.Of(0)) != 0);
     L_003B:
@@ -219,7 +219,7 @@ public static Val GetCardTypeIconAsTexture(IHost H, Val self, Val[] args)
         var __out_texture = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["texture"] = Val.Nothing;
     L_0000:
-        _ = H.Call("GetStaticType", new Val[] { self, GetLocal(L, "cardName"), GetLocal(L, "CallFunc_GetStaticType_type") });
+        _ = H.Call("GetStaticType", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticType_type"] = __v) });
     L_001C:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetStaticType_type"), Val.Of(0)) != 0);
     L_003B:
@@ -333,7 +333,7 @@ public static Val GetExileFactionIconAsTexture(IHost H, Val self, Val[] args)
         var __out_Texture = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["Texture"] = Val.Nothing;
     L_0000:
-        _ = H.Call("GetStaticExileFaction", new Val[] { self, GetLocal(L, "cardName"), GetLocal(L, "CallFunc_GetStaticExileFaction_exileFaction") });
+        _ = H.Call("GetStaticExileFaction", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticExileFaction_exileFaction"] = __v) });
     L_001C:
         _ = H.Call("GetFactionIcon_256_Color", new Val[] { Val.Ref("FactionFunctions"), GetLocal(L, "CallFunc_GetStaticExileFaction_exileFaction"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetFactionIcon_256_Color_OutSoftTexRef"] = __v) });
     L_005B:
@@ -365,7 +365,7 @@ public static Val GetFactionIconAsMaterial(IHost H, Val self, Val[] args)
         var __out_material = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["material"] = Val.Nothing;
     L_0000:
-        _ = H.Call("GetStaticType", new Val[] { self, GetLocal(L, "cardName"), GetLocal(L, "CallFunc_GetStaticType_type") });
+        _ = H.Call("GetStaticType", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticType_type"] = __v) });
     L_001C:
         L["K2Node_SwitchEnum_CmpSuccess_2"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetStaticType_type"), Val.Of(0)) != 0);
     L_003B:
@@ -421,7 +421,7 @@ public static Val GetFactionIconAsMaterial(IHost H, Val self, Val[] args)
     L_0250:
         goto L_05B6;
     L_0255:
-        _ = H.Call("GetStaticFaction", new Val[] { self, GetLocal(L, "cardName"), GetLocal(L, "CallFunc_GetStaticFaction_faction") });
+        _ = H.Call("GetStaticFaction", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticFaction_faction"] = __v) });
     L_0271:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetStaticFaction_faction"), Val.Of(0)) != 0);
     L_0290:
@@ -457,7 +457,7 @@ public static Val GetFactionIconAsMaterial(IHost H, Val self, Val[] args)
     L_03AF:
         goto L_05B6;
     L_03B4:
-        _ = H.Call("GetStaticFaction", new Val[] { self, GetLocal(L, "cardName"), GetLocal(L, "CallFunc_GetStaticFaction_faction_1") });
+        _ = H.Call("GetStaticFaction", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticFaction_faction_1"] = __v) });
     L_03D0:
         L["K2Node_SwitchEnum_CmpSuccess_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetStaticFaction_faction_1"), Val.Of(0)) != 0);
     L_03EF:
@@ -539,9 +539,9 @@ public static Val GetFactionIconAsTexture(IHost H, Val self, Val[] args)
         var __out_OutSoftTexture2 = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["OutSoftTexture2"] = Val.Nothing;
     L_0000:
-        _ = H.Call("GetStaticType", new Val[] { self, GetLocal(L, "cardName"), GetLocal(L, "CallFunc_GetStaticType_type") });
+        _ = H.Call("GetStaticType", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticType_type"] = __v) });
     L_001C:
-        _ = H.Call("EnumCompareType", new Val[] { self, GetLocal(L, "CallFunc_GetStaticType_type"), Val.Of(12), GetLocal(L, "CallFunc_EnumCompareType_Branches") });
+        _ = H.Call("EnumCompareType", new Val[] { self, GetLocal(L, "CallFunc_GetStaticType_type"), Val.Of(12), Val.Out(__v => L["CallFunc_EnumCompareType_Branches"] = __v) });
     L_003A:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareType_Branches"), Val.Of(0)) != 0);
     L_0059:
@@ -557,9 +557,9 @@ public static Val GetFactionIconAsTexture(IHost H, Val self, Val[] args)
     L_00DF:
         goto L_0382;
     L_00E4:
-        _ = H.Call("GetStaticType", new Val[] { self, GetLocal(L, "cardName"), GetLocal(L, "CallFunc_GetStaticType_type_1") });
+        _ = H.Call("GetStaticType", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticType_type_1"] = __v) });
     L_0100:
-        _ = H.Call("EnumCompareType", new Val[] { self, GetLocal(L, "CallFunc_GetStaticType_type_1"), Val.Of(4), GetLocal(L, "CallFunc_EnumCompareType_Branches_1") });
+        _ = H.Call("EnumCompareType", new Val[] { self, GetLocal(L, "CallFunc_GetStaticType_type_1"), Val.Of(4), Val.Out(__v => L["CallFunc_EnumCompareType_Branches_1"] = __v) });
     L_011E:
         L["K2Node_SwitchEnum_CmpSuccess_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareType_Branches_1"), Val.Of(0)) != 0);
     L_013D:
@@ -571,9 +571,9 @@ public static Val GetFactionIconAsTexture(IHost H, Val self, Val[] args)
     L_0178:
         goto L_0382;
     L_017D:
-        _ = H.Call("GetStaticType", new Val[] { self, GetLocal(L, "cardName"), GetLocal(L, "CallFunc_GetStaticType_type_2") });
+        _ = H.Call("GetStaticType", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticType_type_2"] = __v) });
     L_0199:
-        _ = H.Call("EnumCompareType", new Val[] { self, GetLocal(L, "CallFunc_GetStaticType_type_2"), Val.Of(5), GetLocal(L, "CallFunc_EnumCompareType_Branches_2") });
+        _ = H.Call("EnumCompareType", new Val[] { self, GetLocal(L, "CallFunc_GetStaticType_type_2"), Val.Of(5), Val.Out(__v => L["CallFunc_EnumCompareType_Branches_2"] = __v) });
     L_01B7:
         L["K2Node_SwitchEnum_CmpSuccess_2"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareType_Branches_2"), Val.Of(0)) != 0);
     L_01D6:
@@ -585,7 +585,7 @@ public static Val GetFactionIconAsTexture(IHost H, Val self, Val[] args)
     L_0211:
         goto L_0382;
     L_0216:
-        _ = H.Call("GetStaticFaction", new Val[] { self, GetLocal(L, "cardName"), GetLocal(L, "CallFunc_GetStaticFaction_faction_1") });
+        _ = H.Call("GetStaticFaction", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticFaction_faction_1"] = __v) });
     L_0232:
         _ = H.Call("Get Faction Icon 256 Air", new Val[] { Val.Ref("FactionFunctions"), GetLocal(L, "CallFunc_GetStaticFaction_faction_1"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_Get_Faction_Icon_256_Air_OutSoftTexRef"] = __v) });
     L_0271:
@@ -593,7 +593,7 @@ public static Val GetFactionIconAsTexture(IHost H, Val self, Val[] args)
     L_028C:
         goto L_0382;
     L_0291:
-        _ = H.Call("GetStaticFaction", new Val[] { self, GetLocal(L, "cardName"), GetLocal(L, "CallFunc_GetStaticFaction_faction_2") });
+        _ = H.Call("GetStaticFaction", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticFaction_faction_2"] = __v) });
     L_02AD:
         _ = H.Call("Get Faction Icon 256 Air", new Val[] { Val.Ref("FactionFunctions"), GetLocal(L, "CallFunc_GetStaticFaction_faction_2"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_Get_Faction_Icon_256_Air_OutSoftTexRef_1"] = __v) });
     L_02EC:
@@ -601,7 +601,7 @@ public static Val GetFactionIconAsTexture(IHost H, Val self, Val[] args)
     L_0307:
         goto L_0382;
     L_030C:
-        _ = H.Call("GetStaticFaction", new Val[] { self, GetLocal(L, "cardName"), GetLocal(L, "CallFunc_GetStaticFaction_faction") });
+        _ = H.Call("GetStaticFaction", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticFaction_faction"] = __v) });
     L_0328:
         _ = H.Call("GetFactionIcon_256_Color", new Val[] { Val.Ref("FactionFunctions"), GetLocal(L, "CallFunc_GetStaticFaction_faction"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetFactionIcon_256_Color_OutSoftTexRef"] = __v) });
     L_0367:
@@ -660,7 +660,7 @@ public static Val GetTypeIcon(IHost H, Val self, Val[] args)
         var __out_material = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["material"] = Val.Nothing;
     L_0000:
-        _ = H.Call("GetStaticType", new Val[] { self, GetLocal(L, "cardName"), GetLocal(L, "CallFunc_GetStaticType_type") });
+        _ = H.Call("GetStaticType", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticType_type"] = __v) });
     L_001C:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetStaticType_type"), Val.Of(0)) != 0);
     L_003B:
@@ -774,7 +774,7 @@ public static Val GetTypeIconAsTexture(IHost H, Val self, Val[] args)
         var __out_texture = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["texture"] = Val.Nothing;
     L_0000:
-        _ = H.Call("GetStaticType", new Val[] { self, GetLocal(L, "cardName"), GetLocal(L, "CallFunc_GetStaticType_type") });
+        _ = H.Call("GetStaticType", new Val[] { self, GetLocal(L, "cardName"), Val.Out(__v => L["CallFunc_GetStaticType_type"] = __v) });
     L_001C:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetStaticType_type"), Val.Of(0)) != 0);
     L_003B:

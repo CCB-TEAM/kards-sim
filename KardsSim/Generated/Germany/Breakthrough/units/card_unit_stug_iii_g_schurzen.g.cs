@@ -95,19 +95,19 @@ public static Val ExecuteUbergraph_card_unit_stug_iii_g_schurzen(IHost H, Val se
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_card_1") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_card_1") });
     L_0027:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_00F3;
     L_0035:
-        _ = H.Call("ChangeHeavyArmor", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_card_1"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeHeavyArmor_qqq"] = __v) });
+        _ = H.Call("ChangeHeavyArmor", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_card_1"), H.GetMember(self, "cardID"), Val.Of(1), Val.Of(0), Val.False, Val.Out(__v => L["CallFunc_ChangeHeavyArmor_qqq"] = __v) });
     L_007C:
         goto L_00F3;
     L_0081:
-        L["CallFunc_IsValid_ReturnValue_1"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_card") });
+        L["CallFunc_IsValid_ReturnValue_1"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_card") });
     L_009E:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue_1")).AsBool()) goto L_00F3;
     L_00AC:
-        _ = H.Call("ChangeHeavyArmor", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_card"), H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(__v => L["CallFunc_ChangeHeavyArmor_qqq_1"] = __v) });
+        _ = H.Call("ChangeHeavyArmor", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_card"), H.GetMember(self, "cardID"), Val.Of(0), Val.Of(4), Val.False, Val.Out(__v => L["CallFunc_ChangeHeavyArmor_qqq_1"] = __v) });
     L_00F3:
         goto __halt;
     L_00F5:

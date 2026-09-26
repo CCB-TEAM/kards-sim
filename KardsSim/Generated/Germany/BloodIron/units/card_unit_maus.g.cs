@@ -201,7 +201,7 @@ public static Val ExecuteUbergraph_card_unit_maus(IHost H, Val self, Val[] args)
     L_03F0:
         _ = H.Call("Array_Clear", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(self, "cardsToDestroy") });
     L_0419:
-        H.SetMember(self, "tmpTarget", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tmpTarget", H.GetVar("K2Node_Event_targetCard"));
     L_042C:
         _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
     L_045A:

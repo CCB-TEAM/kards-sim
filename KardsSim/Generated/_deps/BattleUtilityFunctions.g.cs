@@ -50,7 +50,7 @@ public static Val ActivateCardFromHand(IHost H, Val self, Val[] args)
     L_0150:
         if (!(GetLocal(L, "K2Node_DynamicCast_bSuccess")).AsBool()) goto L_0191;
     L_015E:
-        _ = H.Call("OnActorStartDrag", new Val[] { GetLocal(L, "K2Node_DynamicCast_AsInterface_User_Input"), GetLocal(L, "CallFunc_OnActorStartDrag_success") });
+        _ = H.Call("OnActorStartDrag", new Val[] { GetLocal(L, "K2Node_DynamicCast_AsInterface_User_Input"), Val.Out(__v => L["CallFunc_OnActorStartDrag_success"] = __v) });
     L_018C:
         goto L_019C;
     L_0191:
@@ -115,7 +115,7 @@ public static Val Battle_Aspect_Size_Factor(IHost H, Val self, Val[] args)
     L_0056:
         _ = H.Call("GetKardsGameInstancePure", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetKardsGameInstancePure_instance"] = __v) });
     L_008C:
-        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetViewportSize_ReturnValue"), GetLocal(L, "CallFunc_BreakVector2D_X"), GetLocal(L, "CallFunc_BreakVector2D_Y") });
+        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_GetViewportSize_ReturnValue"), Val.Out(__v => L["CallFunc_BreakVector2D_X"] = __v), Val.Out(__v => L["CallFunc_BreakVector2D_Y"] = __v) });
     L_00B1:
         L["CallFunc_Divide_DoubleDouble_ReturnValue"] = (GetLocal(L, "CallFunc_BreakVector2D_X") / GetLocal(L, "CallFunc_BreakVector2D_Y"));
     L_00DF:
@@ -620,7 +620,7 @@ public static Val ChangeSelectedLocation(IHost H, Val self, Val[] args)
     L_050A:
         _ = H.Call("GetBoard", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetBoard_Board"] = __v) });
     L_0540:
-        _ = H.Call("GetCardsByVisualLocation", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board"), GetLocal(L, "NewLocation"), GetLocal(L, "CallFunc_GetCardsByVisualLocation_cardsInLocation") });
+        _ = H.Call("GetCardsByVisualLocation", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board"), GetLocal(L, "NewLocation"), Val.Out(__v => L["CallFunc_GetCardsByVisualLocation_cardsInLocation"] = __v) });
     L_0576:
         L["CardsInLocation"] = GetLocal(L, "CallFunc_GetCardsByVisualLocation_cardsInLocation");
     L_0591:
@@ -711,7 +711,7 @@ public static Val ChangeSelectionAtLocation(IHost H, Val self, Val[] args)
     L_01C7:
         _ = H.Call("GetBoard", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetBoard_Board_1"] = __v) });
     L_01FD:
-        _ = H.Call("GetCardsByVisualLocation", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board_1"), H.GetMember(GetLocal(L, "PlayerController"), "SelectedCardLocation"), GetLocal(L, "CallFunc_GetCardsByVisualLocation_cardsInLocation") });
+        _ = H.Call("GetCardsByVisualLocation", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board_1"), H.GetMember(GetLocal(L, "PlayerController"), "SelectedCardLocation"), Val.Out(__v => L["CallFunc_GetCardsByVisualLocation_cardsInLocation"] = __v) });
     L_0249:
         L["CardsAtLocation"] = GetLocal(L, "CallFunc_GetCardsByVisualLocation_cardsInLocation");
     L_0264:
@@ -765,13 +765,13 @@ public static Val ChangeSelectionAtLocation(IHost H, Val self, Val[] args)
     L_0603:
         _ = H.Call("GetBoard", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetBoard_Board"] = __v) });
     L_0639:
-        _ = H.Call("FindCardCoordinatesInLocation", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board"), H.GetMember(GetLocal(L, "PlayerController"), "SelectedCardLocation"), GetLocal(L, "NewSelectedLocation"), GetLocal(L, "LocationMaxIndex"), GetLocal(L, "CallFunc_FindCardCoordinatesInLocation_coordinates"), GetLocal(L, "CallFunc_FindCardCoordinatesInLocation_found"), GetLocal(L, "CallFunc_FindCardCoordinatesInLocation_row") });
+        _ = H.Call("FindCardCoordinatesInLocation", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board"), H.GetMember(GetLocal(L, "PlayerController"), "SelectedCardLocation"), GetLocal(L, "NewSelectedLocation"), GetLocal(L, "LocationMaxIndex"), Val.Out(__v => L["CallFunc_FindCardCoordinatesInLocation_coordinates"] = __v), Val.Out(__v => L["CallFunc_FindCardCoordinatesInLocation_found"] = __v), Val.Out(__v => L["CallFunc_FindCardCoordinatesInLocation_row"] = __v) });
     L_06A9:
         if (!(GetLocal(L, "CallFunc_FindCardCoordinatesInLocation_found")).AsBool()) goto L_07EE;
     L_06B7:
         _ = H.Call("GetBoard", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetBoard_Board"] = __v) });
     L_06ED:
-        _ = H.Call("FindCardCoordinatesInLocation", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board"), H.GetMember(GetLocal(L, "PlayerController"), "SelectedCardLocation"), GetLocal(L, "NewSelectedLocation"), GetLocal(L, "LocationMaxIndex"), GetLocal(L, "CallFunc_FindCardCoordinatesInLocation_coordinates"), GetLocal(L, "CallFunc_FindCardCoordinatesInLocation_found"), GetLocal(L, "CallFunc_FindCardCoordinatesInLocation_row") });
+        _ = H.Call("FindCardCoordinatesInLocation", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board"), H.GetMember(GetLocal(L, "PlayerController"), "SelectedCardLocation"), GetLocal(L, "NewSelectedLocation"), GetLocal(L, "LocationMaxIndex"), Val.Out(__v => L["CallFunc_FindCardCoordinatesInLocation_coordinates"] = __v), Val.Out(__v => L["CallFunc_FindCardCoordinatesInLocation_found"] = __v), Val.Out(__v => L["CallFunc_FindCardCoordinatesInLocation_row"] = __v) });
     L_075D:
         H.SetMember(GetLocal(L, "PlayerController"), "GamepadWorldLocation", GetLocal(L, "CallFunc_FindCardCoordinatesInLocation_coordinates"));
     L_078E:
@@ -961,7 +961,7 @@ public static Val Destroy_Show_Case_Hand_Card_Utility(IHost H, Val self, Val[] a
     L_0005:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_0010:
-        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_HandCardLook"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
+        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_HandCardLook"), Val.Out(__v => L["CallFunc_GetAllActorsOfClass_OutActors"] = __v) });
     L_0035:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_004C:
@@ -1037,7 +1037,7 @@ public static Val DestroyShowCaseCardUtility(IHost H, Val self, Val[] args)
     L_0005:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_0010:
-        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_CardHelp"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
+        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_CardHelp"), Val.Out(__v => L["CallFunc_GetAllActorsOfClass_OutActors"] = __v) });
     L_0035:
         L["Temp_int_Loop_Counter_Variable_4"] = Val.Of(0);
     L_004C:
@@ -1268,9 +1268,9 @@ public static Val Get_Battle_Sidebar_Settings(IHost H, Val self, Val[] args)
     L_0000:
         _ = H.Call("GetBoard", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetBoard_Board"] = __v) });
     L_0036:
-        _ = H.Call("GetBattleHUD", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board"), GetLocal(L, "CallFunc_GetBattleHUD_HUD") });
+        _ = H.Call("GetBattleHUD", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board"), Val.Out(__v => L["CallFunc_GetBattleHUD_HUD"] = __v) });
     L_0063:
-        _ = H.Call("GetSettingsSidebarWidget", new Val[] { GetLocal(L, "CallFunc_GetBattleHUD_HUD"), GetLocal(L, "CallFunc_GetSettingsSidebarWidget_SettingsSidebar") });
+        _ = H.Call("GetSettingsSidebarWidget", new Val[] { GetLocal(L, "CallFunc_GetBattleHUD_HUD"), Val.Out(__v => L["CallFunc_GetSettingsSidebarWidget_SettingsSidebar"] = __v) });
     L_0090:
         L["SettingsSidebar"] = GetLocal(L, "CallFunc_GetSettingsSidebarWidget_SettingsSidebar");
     L_00A3:
@@ -1332,7 +1332,7 @@ public static Val HandCardIsSelectingTarget(IHost H, Val self, Val[] args)
     L_0005:
         L["CallFunc_GetAllActorsOfClass_OutActors"] = H.MakeArray(new Val[] {  });
     L_0010:
-        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_HandCard"), GetLocal(L, "CallFunc_GetAllActorsOfClass_OutActors") });
+        _ = H.Call("GetAllActorsOfClass", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "__WorldContext"), Val.Ref("BP_HandCard"), Val.Out(__v => L["CallFunc_GetAllActorsOfClass_OutActors"] = __v) });
     L_0035:
         L["Temp_int_Loop_Counter_Variable"] = Val.Of(0);
     L_004C:
@@ -1503,7 +1503,7 @@ public static Val IsSelectHandTargetCorfirmed(IHost H, Val self, Val[] args)
     L_0000:
         _ = H.Call("GetLogic", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetLogic_Logic"] = __v) });
     L_0036:
-        _ = H.Call("GetFirstWidgetInViewport", new Val[] { GetLocal(L, "CallFunc_GetLogic_Logic"), Val.Ref("ConfirmHandTargetButton_Widget"), Val.True, GetLocal(L, "CallFunc_GetFirstWidgetInViewport_theWidget") });
+        _ = H.Call("GetFirstWidgetInViewport", new Val[] { GetLocal(L, "CallFunc_GetLogic_Logic"), Val.Ref("ConfirmHandTargetButton_Widget"), Val.True, Val.Out(__v => L["CallFunc_GetFirstWidgetInViewport_theWidget"] = __v) });
     L_006D:
         L["K2Node_DynamicCast_AsConfirm_Hand_Target_Button_Widget"] = GetLocal(L, "CallFunc_GetFirstWidgetInViewport_theWidget");
     L_0091:
@@ -1686,7 +1686,7 @@ public static Val RefreshSelectedCard(IHost H, Val self, Val[] args)
     L_01B6:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CardsAtLocation"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_01F1:
-        _ = H.Call("GetVisualCardFromID", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board"), GetLocal(L, "CallFunc_Array_Get_Item"), GetLocal(L, "CallFunc_GetVisualCardFromID_cardRef"), GetLocal(L, "CallFunc_GetVisualCardFromID_found") });
+        _ = H.Call("GetVisualCardFromID", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_GetVisualCardFromID_cardRef"] = __v), Val.Out(__v => L["CallFunc_GetVisualCardFromID_found"] = __v) });
     L_0230:
         if (!(GetLocal(L, "CallFunc_GetVisualCardFromID_found")).AsBool())
         {
@@ -1704,7 +1704,7 @@ public static Val RefreshSelectedCard(IHost H, Val self, Val[] args)
     L_0270:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CardsAtLocation"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_02AB:
-        _ = H.Call("GetVisualCardFromID", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board"), GetLocal(L, "CallFunc_Array_Get_Item"), GetLocal(L, "CallFunc_GetVisualCardFromID_cardRef"), GetLocal(L, "CallFunc_GetVisualCardFromID_found") });
+        _ = H.Call("GetVisualCardFromID", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_GetVisualCardFromID_cardRef"] = __v), Val.Out(__v => L["CallFunc_GetVisualCardFromID_found"] = __v) });
     L_02EA:
         L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(GetLocal(L, "CallFunc_GetVisualCardFromID_cardRef"), "cardLocationNumber"), H.GetMember(GetLocal(L, "PlayerController"), "SelectedCardLocationNumber")) == 0);
     L_033C:
@@ -1724,7 +1724,7 @@ public static Val RefreshSelectedCard(IHost H, Val self, Val[] args)
     L_037C:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CardsAtLocation"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_03B7:
-        _ = H.Call("GetVisualCardFromID", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board"), GetLocal(L, "CallFunc_Array_Get_Item"), GetLocal(L, "CallFunc_GetVisualCardFromID_cardRef"), GetLocal(L, "CallFunc_GetVisualCardFromID_found") });
+        _ = H.Call("GetVisualCardFromID", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_GetVisualCardFromID_cardRef"] = __v), Val.Out(__v => L["CallFunc_GetVisualCardFromID_found"] = __v) });
     L_03F6:
         L["NewSelectedCard"] = GetLocal(L, "CallFunc_GetVisualCardFromID_cardRef");
     L_0409:
@@ -2013,7 +2013,7 @@ public static Val SanitycheckCardbackFaction(IHost H, Val self, Val[] args)
     L_07E0:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(GetLocal(L, "CallFunc_GetCardbackAsset_ReturnValue_3"), "Factions"), GetLocal(L, "Temp_int_Array_Index_Variable_1"), Val.Out(__v => L["CallFunc_Array_Get_Item_1"] = __v) });
     L_0831:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, GetLocal(L, "CallFunc_Array_Get_Item_1"), GetLocal(L, "LocalFaction"), GetLocal(L, "CallFunc_EnumCompareFaction_Branches_1") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, GetLocal(L, "CallFunc_Array_Get_Item_1"), GetLocal(L, "LocalFaction"), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches_1"] = __v) });
     L_0856:
         L["K2Node_SwitchEnum_CmpSuccess_1"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches_1"), Val.Of(0)) != 0);
     L_0875:
@@ -2084,7 +2084,7 @@ public static Val SanitycheckCardbackFaction(IHost H, Val self, Val[] args)
     L_0A45:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), H.GetMember(GetLocal(L, "CallFunc_GetCardbackAsset_ReturnValue_2"), "Factions"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_0A96:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, GetLocal(L, "CallFunc_Array_Get_Item"), GetLocal(L, "LocalAllyFaction"), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, GetLocal(L, "CallFunc_Array_Get_Item"), GetLocal(L, "LocalAllyFaction"), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_0ABB:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_0ADA:
@@ -2177,9 +2177,9 @@ public static Val SetCampaignObjectiveVisibility(IHost H, Val self, Val[] args)
     L_0000:
         _ = H.Call("GetBoard", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetBoard_Board"] = __v) });
     L_0036:
-        _ = H.Call("GetBattleHUD", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board"), GetLocal(L, "CallFunc_GetBattleHUD_HUD") });
+        _ = H.Call("GetBattleHUD", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board"), Val.Out(__v => L["CallFunc_GetBattleHUD_HUD"] = __v) });
     L_0063:
-        _ = H.Call("GetCampaignObjectiveWidget", new Val[] { GetLocal(L, "CallFunc_GetBattleHUD_HUD"), GetLocal(L, "CallFunc_GetCampaignObjectiveWidget_CampaignObjectiveWidget") });
+        _ = H.Call("GetCampaignObjectiveWidget", new Val[] { GetLocal(L, "CallFunc_GetBattleHUD_HUD"), Val.Out(__v => L["CallFunc_GetCampaignObjectiveWidget_CampaignObjectiveWidget"] = __v) });
     L_0090:
         L["Temp_bool_Variable"] = GetLocal(L, "isVisible");
     L_00A3:
@@ -2258,7 +2258,7 @@ public static Val SetCursorAtCard(IHost H, Val self, Val[] args)
     L_00C9:
         L["CallFunc_ProjectWorldToScreen_ReturnValue"] = H.Call("ProjectWorldToScreen", new Val[] { Val.Ref("GameplayStatics"), GetLocal(L, "CallFunc_GetPlayerControllerBP_outBPPlayerController_1"), GetLocal(L, "CallFunc_K2_GetActorLocation_ReturnValue"), GetLocal(L, "CallFunc_ProjectWorldToScreen_ScreenPosition"), Val.False });
     L_00F9:
-        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_ProjectWorldToScreen_ScreenPosition"), GetLocal(L, "CallFunc_BreakVector2D_X"), GetLocal(L, "CallFunc_BreakVector2D_Y") });
+        _ = H.Call("BreakVector2D", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_ProjectWorldToScreen_ScreenPosition"), Val.Out(__v => L["CallFunc_BreakVector2D_X"] = __v), Val.Out(__v => L["CallFunc_BreakVector2D_Y"] = __v) });
     L_011E:
         L["CallFunc_FTrunc_ReturnValue"] = H.Call("FTrunc", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_BreakVector2D_X") });
     L_0143:
@@ -2292,7 +2292,7 @@ public static Val SetCursorAtSelectedLocation(IHost H, Val self, Val[] args)
     L_0074:
         _ = H.Call("GetBoard", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetBoard_Board"] = __v) });
     L_00AA:
-        _ = H.Call("GetCardsByVisualLocation", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board"), H.GetMember(GetLocal(L, "PlayerController"), "SelectedCardLocation"), GetLocal(L, "CallFunc_GetCardsByVisualLocation_cardsInLocation") });
+        _ = H.Call("GetCardsByVisualLocation", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board"), H.GetMember(GetLocal(L, "PlayerController"), "SelectedCardLocation"), Val.Out(__v => L["CallFunc_GetCardsByVisualLocation_cardsInLocation"] = __v) });
     L_00F6:
         L["CallFunc_Array_Length_ReturnValue"] = H.Call("Array_Length", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetCardsByVisualLocation_cardsInLocation") });
     L_0131:
@@ -2308,7 +2308,7 @@ public static Val SetCursorAtSelectedLocation(IHost H, Val self, Val[] args)
     L_0227:
         L["CallFunc_SelectInt_ReturnValue"] = H.Call("SelectInt", new Val[] { Val.Ref("KismetMathLibrary"), GetLocal(L, "CallFunc_Add_IntInt_ReturnValue"), GetLocal(L, "CardCount"), GetLocal(L, "CallFunc_BooleanAND_ReturnValue") });
     L_025E:
-        _ = H.Call("FindCardCoordinatesInLocation", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board_1"), H.GetMember(GetLocal(L, "PlayerController"), "SelectedCardLocation"), H.GetMember(GetLocal(L, "PlayerController"), "SelectedCardLocationNumber"), GetLocal(L, "CallFunc_SelectInt_ReturnValue"), GetLocal(L, "CallFunc_FindCardCoordinatesInLocation_coordinates"), GetLocal(L, "CallFunc_FindCardCoordinatesInLocation_found"), GetLocal(L, "CallFunc_FindCardCoordinatesInLocation_row") });
+        _ = H.Call("FindCardCoordinatesInLocation", new Val[] { GetLocal(L, "CallFunc_GetBoard_Board_1"), H.GetMember(GetLocal(L, "PlayerController"), "SelectedCardLocation"), H.GetMember(GetLocal(L, "PlayerController"), "SelectedCardLocationNumber"), GetLocal(L, "CallFunc_SelectInt_ReturnValue"), Val.Out(__v => L["CallFunc_FindCardCoordinatesInLocation_coordinates"] = __v), Val.Out(__v => L["CallFunc_FindCardCoordinatesInLocation_found"] = __v), Val.Out(__v => L["CallFunc_FindCardCoordinatesInLocation_row"] = __v) });
     L_02E4:
         H.SetMember(GetLocal(L, "PlayerController"), "GamepadWorldLocation", GetLocal(L, "CallFunc_FindCardCoordinatesInLocation_coordinates"));
     L_0315:
@@ -2465,7 +2465,7 @@ public static Val UnselectHandTarget(IHost H, Val self, Val[] args)
     L_0000:
         _ = H.Call("GetLogic", new Val[] { Val.Ref("UtilityFunctions"), GetLocal(L, "__WorldContext"), Val.Out(__v => L["CallFunc_GetLogic_Logic"] = __v) });
     L_0036:
-        _ = H.Call("GetFirstWidgetInViewport", new Val[] { GetLocal(L, "CallFunc_GetLogic_Logic"), Val.Ref("ConfirmHandTargetButton_Widget"), Val.True, GetLocal(L, "CallFunc_GetFirstWidgetInViewport_theWidget") });
+        _ = H.Call("GetFirstWidgetInViewport", new Val[] { GetLocal(L, "CallFunc_GetLogic_Logic"), Val.Ref("ConfirmHandTargetButton_Widget"), Val.True, Val.Out(__v => L["CallFunc_GetFirstWidgetInViewport_theWidget"] = __v) });
     L_006D:
         L["K2Node_DynamicCast_AsConfirm_Hand_Target_Button_Widget"] = GetLocal(L, "CallFunc_GetFirstWidgetInViewport_theWidget");
     L_0091:

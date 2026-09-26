@@ -279,7 +279,7 @@ public static Val ExecuteUbergraph_card_unit_royal_west_kents(IHost H, Val self,
             }
         }
     L_0400:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardPlayed"));
     L_0413:
         L["CallFunc_IsValid_ReturnValue_3"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(self, "_tmp_card") });
     L_0430:
@@ -322,7 +322,7 @@ public static Val ExecuteUbergraph_card_unit_royal_west_kents(IHost H, Val self,
             }
         }
     L_046B:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardLeaving"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardLeaving"));
     L_047E:
         goto L_0045;
     L_0483:
@@ -346,7 +346,7 @@ public static Val ExecuteUbergraph_card_unit_royal_west_kents(IHost H, Val self,
             }
         }
     L_04FB:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardChanging"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardChanging"));
     L_050E:
         L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(H.GetMember(self, "_tmp_card"), "cardID"), H.GetMember(self, "cardID")) == 0);
     L_054A:

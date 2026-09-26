@@ -128,7 +128,7 @@ public static Val ExecuteUbergraph_card_event_deep_operation(IHost H, Val self, 
             }
         }
     L_03DC:
-        _ = H.Call("isBuffedByCard", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
+        _ = H.Call("isBuffedByCard", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_isBuffedByCard_isBuffed"] = __v) });
     L_040E:
         if (!(GetLocal(L, "CallFunc_isBuffedByCard_isBuffed")).AsBool())
         {
@@ -141,7 +141,7 @@ public static Val ExecuteUbergraph_card_event_deep_operation(IHost H, Val self, 
             }
         }
     L_0418:
-        H.SetMember(self, "TmpCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "TmpCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_042B:
         _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetMember(self, "TmpCard"), "cardID"), H.GetMember(self, "cardID") });
     L_0477:

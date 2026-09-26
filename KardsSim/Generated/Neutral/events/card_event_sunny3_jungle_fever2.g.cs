@@ -97,7 +97,7 @@ public static Val ExecuteUbergraph_card_event_sunny3_jungle_fever2(IHost H, Val 
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "name"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "salvageFaction"), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardOnBattlefield_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardOnBattlefield", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "side"), Val.False, H.GetMember(H.GetVar("K2Node_Event_targetCard"), "name"), H.GetMember(self, "cardID"), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.False, Val.Of(-1), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "salvageFaction"), Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardOnBattlefield_spawnedCardID"] = __v) });
     L_0099:
         H.SetMember(self, "unitToUnpin", GetLocal(L, "CallFunc_SpawnCardOnBattlefield_spawnedCardID"));
     L_00B4:
@@ -105,7 +105,7 @@ public static Val ExecuteUbergraph_card_event_sunny3_jungle_fever2(IHost H, Val 
     L_00EA:
         goto L_024B;
     L_00EF:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), H.GetMember(self, "enterPlayOnTurn")) == 0);
     L_0115:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool()) goto L_024B;
     L_0123:

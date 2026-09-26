@@ -120,7 +120,7 @@ public static Val ExecuteUbergraph_card_event_feigned_retreat(IHost H, Val self,
     L_0350:
         goto L_027D;
     L_0355:
-        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card_1"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID_1"] = __v), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side") });
+        _ = H.Call("GetLocationCardBySide", new Val[] { H.GetMember(self, "cardFunction"), Val.Out(__v => L["CallFunc_GetLocationCardBySide_card_1"] = __v), Val.Out(__v => L["CallFunc_GetLocationCardBySide_locationCardID_1"] = __v), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side") });
     L_03AA:
         _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "CallFunc_GetLocationCardBySide_card_1"), Val.Of("trigger"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_03E5:
@@ -135,7 +135,7 @@ public static Val ExecuteUbergraph_card_event_feigned_retreat(IHost H, Val self,
             }
         }
     L_03EF:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0418:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool())
         {

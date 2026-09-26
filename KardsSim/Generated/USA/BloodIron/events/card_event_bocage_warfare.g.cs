@@ -103,7 +103,7 @@ public static Val ExecuteUbergraph_card_event_bocage_warfare(IHost H, Val self, 
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("trigger"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("trigger"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_006B:
         goto L_01BF;
     L_0070:
@@ -125,7 +125,7 @@ public static Val ExecuteUbergraph_card_event_bocage_warfare(IHost H, Val self, 
     L_0199:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_01BF;
     L_01A7:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardMoved"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardMoved"));
     L_01BA:
         goto L_0070;
     L_01BF:

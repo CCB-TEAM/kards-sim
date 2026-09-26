@@ -57,7 +57,7 @@ public static Val ExecuteUbergraph_card_event_the_alliance(IHost H, Val self, Va
             }
         }
     L_0089:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, Val.Of(5), H.GetMember(H.GetMember(self, "tempCard"), "faction"), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, Val.Of(5), H.GetMember(H.GetMember(self, "tempCard"), "faction"), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_00BD:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(1)) != 0);
     L_00DC:

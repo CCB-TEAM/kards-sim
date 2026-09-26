@@ -49,13 +49,43 @@ public sealed class Emitter
     /// <summary>本函数内所有 PushExecutionFlow 的常量目标（= Pop 的可能去向）。</summary>
     public readonly SortedSet<long> FlowTargets = new();
 
-    public Emitter(UAsset asset, string fnName, UhtParams uht = null, BlueprintSignatures bp = null)
+    public Emitter(UAsset asset, string fnName, UhtParams uht = null, BlueprintSignatures bp = null,
+                   IReadOnlySet<string> persistentFrameSlots = null)
     {
         _asset = asset;
         _fnName = fnName;
         _uht = uht;
         _bp = bp;
+        _persistentFrameSlots = persistentFrameSlots;
     }
+
+    /// <summary>
+    /// 本资产里所有「持久帧」槽位名（<c>EX_LetValueOnPersistentFrame</c> 的写入目标）。
+    ///
+    /// <para>
+    /// <b>为什么需要单独一张表</b>：Kismet 的持久帧是一块跨函数共享的存储，
+    /// 事件桩用 <c>LetValueOnPersistentFrame</c> 把形参写进去
+    /// （发射成 <c>H.SetVar("K2Node_Event_killer", ...)</c>），
+    /// 然后 ubergraph 从里面读出来用。
+    /// </para>
+    ///
+    /// <para>
+    /// 但同一个名字在 ubergraph 里是通过 <c>EX_LocalVariable</c> 读的，
+    /// 如果按普通局部变量发射成 <c>GetLocal(L, "K2Node_Event_killer")</c>，
+    /// 就读的是<b>另一个存储</b>（函数的局部字典），永远是空值 ——
+    /// 实测 2548 处读取全部读不到，导致 172 个带参事件的效果静默失效。
+    /// </para>
+    ///
+    /// <para>
+    /// 所以名字必须由<b>写入侧</b>收集后传给读取侧，不能靠名字猜
+    /// （虽然实测 129 个槽位确实都叫 <c>K2Node_Event_*</c>，但那是 UE 的命名习惯，
+    /// 不是语言保证）。
+    /// </para>
+    /// </summary>
+    private readonly IReadOnlySet<string> _persistentFrameSlots;
+
+    private bool IsPersistentFrame(string name)
+        => _persistentFrameSlots is not null && _persistentFrameSlots.Contains(name);
 
     private void Line(string s) => _sb.Append(new string(' ', _ind * 4)).Append(s).Append('\n');
     private void Open(string s = null) { if (s != null) Line(s); _sb.Append(new string(' ', _ind * 4)).Append("{\n"); _ind++; }
@@ -403,8 +433,15 @@ public sealed class Emitter
         switch (target)
         {
             case EX_LocalVariable lv:
-                Line($"L[\"{Esc(PropPath(lv.Variable))}\"] = {v};");
+            {
+                // 与读取侧对称：持久帧槽位写 H.SetVar，普通局部写 L[...]。
+                // 两边必须一致，否则写进去的值读不到（这正是事件参数恒为空的原因）。
+                var n = PropPath(lv.Variable);
+                Line(IsPersistentFrame(n)
+                    ? $"H.SetVar(\"{Esc(n)}\", {v});"
+                    : $"L[\"{Esc(n)}\"] = {v};");
                 return;
+            }
             // out 形参也是普通命名槽：Kismet 对它的写与对局部变量的写没有区别。
             // 回传给实参由 Emit 结尾的统一回写完成（见 EmitCallerOutWriteback）。
             case EX_LocalOutVariable lv:
@@ -463,7 +500,17 @@ public sealed class Emitter
             // 但直译出来的字典对「从未写过的名字」会抛 KeyNotFound。
             // 循环体第一次进来读 Array_Get 的 out 槽、或读一个未被赋值的临时量，
             // 都会撞上这个（表现是整张卡抛异常而不是算出结果）。
-            case EX_LocalVariable v: return $"GetLocal(L, \"{Esc(PropPath(v.Variable))}\")";
+            //
+            // 例外：持久帧槽位（事件桩用 LetValueOnPersistentFrame 写的那些）
+            // 是跨函数共享的另一块存储，必须读 H.GetVar 才拿得到。
+            // 读错存储不会报错，只会恒为空 —— 详见 _persistentFrameSlots 的注释。
+            case EX_LocalVariable v:
+            {
+                var n = PropPath(v.Variable);
+                return IsPersistentFrame(n)
+                    ? $"H.GetVar(\"{Esc(n)}\")"
+                    : $"GetLocal(L, \"{Esc(n)}\")";
+            }
             case EX_LocalOutVariable v: return $"GetLocal(L, \"{Esc(PropPath(v.Variable))}\")";
             case EX_InstanceVariable v: return $"H.GetMember(self, \"{Esc(PropPath(v.Variable))}\")";
             case EX_DefaultVariable v: return $"H.GetMember(self, \"{Esc(PropPath(v.Variable))}\")";
@@ -909,6 +956,16 @@ public sealed class Emitter
         {
             var m = _uht.Mods(name, n);
             if (m is not null) return m;
+        }
+
+        // 2c. 调用点证据推导表：以上都查不到时，用「out 实参固定命名为
+        //     CallFunc_<函数名>_<形参名>」这条规律，从转译产物里反推出来的签名。
+        //     见 NativeOutParams 的文档；该表由脚本生成，不在调用点无 Val.Out 时统计，
+        //     所以不会覆盖上面几条更权威的来源。
+        if (name is not null)
+        {
+            var nop = NativeOutParams.Mods(name, n);
+            if (nop is not null) return nop;
         }
 
         // 3. 引擎蓝图库：不在游戏源码里，用显式补充表

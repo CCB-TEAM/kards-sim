@@ -104,7 +104,7 @@ public static Val ExecuteUbergraph_card_event_decoy_tactics(IHost H, Val self, V
     L_001A:
         if (!(H.GetMember(self, "ShouldDiscard")).AsBool()) goto L_000A;
     L_0028:
-        _ = H.Call("DiscardRandomCardFromHand", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed_1"), "side"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_DiscardRandomCardFromHand_discardedCardID"] = __v) });
+        _ = H.Call("DiscardRandomCardFromHand", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed_1"), "side"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_DiscardRandomCardFromHand_discardedCardID"] = __v) });
     L_007D:
         H.SetMember(self, "ShouldDiscard", Val.False);
     L_0088:
@@ -114,17 +114,17 @@ public static Val ExecuteUbergraph_card_event_decoy_tactics(IHost H, Val self, V
     L_00AF:
         if (!(GetLocal(L, "CallFunc_Greater_IntInt_ReturnValue")).AsBool()) goto L_04B9;
     L_00BD:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "currentTarget") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "currentTarget") });
     L_00F0:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_04B9;
     L_00FE:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "currentTarget"), Val.Of("trigger"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "currentTarget"), Val.Of("trigger"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_014F:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt")).AsBool()) goto L_04B9;
     L_015D:
-        _ = H.Call("GetOppositeSide", new Val[] { H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "currentTarget"), Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "currentTarget"), Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_019C:
-        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "side")) == 0);
+        L["CallFunc_EqualEqual_ByteByte_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "side")) == 0);
     L_01D8:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ByteByte_ReturnValue")).AsBool()) goto L_04B9;
     L_01E6:
@@ -136,31 +136,31 @@ public static Val ExecuteUbergraph_card_event_decoy_tactics(IHost H, Val self, V
     L_0201:
         goto L_008D;
     L_0206:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "K2Node_Event_card"), Val.Of("trigger"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt_1"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_card"), Val.Of("trigger"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt_1"] = __v) });
     L_0241:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt_1")).AsBool()) goto L_04B9;
     L_024F:
-        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("trigger"), H.GetMember(GetLocal(L, "K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
+        _ = H.Call("CustomAbilityRemove", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("trigger"), H.GetMember(H.GetVar("K2Node_Event_card"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.Out(__v => L["CallFunc_CustomAbilityRemove_qqq"] = __v) });
     L_02AE:
         goto L_04B9;
     L_02B3:
-        _ = H.Call("GiveAmbush", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
+        _ = H.Call("GiveAmbush", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID") });
     L_02FF:
-        _ = H.Call("GiveShock", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveShock_qqq"] = __v) });
+        _ = H.Call("GiveShock", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveShock_qqq"] = __v) });
     L_0354:
-        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("trigger"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
+        _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("trigger"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_03B5:
         goto L_04B9;
     L_03BA:
-        L["CallFunc_IsValid_ReturnValue_1"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_defenderCard") });
+        L["CallFunc_IsValid_ReturnValue_1"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_defenderCard") });
     L_03D7:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue_1")).AsBool()) goto L_04B9;
     L_03E5:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "K2Node_Event_defenderCard"), Val.Of("trigger"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt_2"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_defenderCard"), Val.Of("trigger"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt_2"] = __v) });
     L_0420:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt_2")).AsBool()) goto L_049B;
     L_042E:
-        _ = H.Call("GetOppositeSide", new Val[] { GetLocal(L, "K2Node_Event_defenderCard"), Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide_1"] = __v) });
+        _ = H.Call("GetOppositeSide", new Val[] { H.GetVar("K2Node_Event_defenderCard"), Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide_1"] = __v) });
     L_0457:
         _ = H.Call("DiscardRandomCardFromHand", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide_1"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_DiscardRandomCardFromHand_discardedCardID_1"] = __v) });
     L_0496:

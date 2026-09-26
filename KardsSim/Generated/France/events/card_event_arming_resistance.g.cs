@@ -95,19 +95,19 @@ public static Val ExecuteUbergraph_card_event_arming_resistance(IHost H, Val sel
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, GetLocal(L, "K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
+        _ = H.Call("GetPlayFromHandDamage", new Val[] { self, H.GetVar("K2Node_Event_targetCard"), Val.Out(__v => L["CallFunc_GetPlayFromHandDamage_damage"] = __v) });
     L_002A:
-        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
+        _ = H.Call("DamageCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), GetLocal(L, "CallFunc_GetPlayFromHandDamage_damage"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_DamageCard_targetDestroyed"] = __v) });
     L_0075:
         goto L_01F3;
     L_007A:
-        L["CallFunc_EqualEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_fromCard"), self) == 0);
+        L["CallFunc_EqualEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_fromCard"), self) == 0);
     L_0098:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ObjectObject_ReturnValue")).AsBool()) goto L_01F3;
     L_00A6:
-        _ = H.Call("getTotalDefense", new Val[] { GetLocal(L, "K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
+        _ = H.Call("getTotalDefense", new Val[] { H.GetVar("K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
     L_00CF:
-        L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_damage") - GetLocal(L, "CallFunc_getTotalDefense_totalDefense"));
+        L["CallFunc_Subtract_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_damage") - GetLocal(L, "CallFunc_getTotalDefense_totalDefense"));
     L_00FD:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue"), Val.Of(0)) > 0);
     L_011F:
@@ -115,9 +115,9 @@ public static Val ExecuteUbergraph_card_event_arming_resistance(IHost H, Val sel
     L_012D:
         _ = H.Call("GetOppositeSide", new Val[] { self, Val.Out(__v => L["CallFunc_GetOppositeSide_oppositeSide"] = __v) });
     L_0140:
-        _ = H.Call("getTotalDefense", new Val[] { GetLocal(L, "K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
+        _ = H.Call("getTotalDefense", new Val[] { H.GetVar("K2Node_Event_toCard"), Val.Out(__v => L["CallFunc_getTotalDefense_totalDefense"] = __v) });
     L_0169:
-        L["CallFunc_Subtract_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_damage") - GetLocal(L, "CallFunc_getTotalDefense_totalDefense"));
+        L["CallFunc_Subtract_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_damage") - GetLocal(L, "CallFunc_getTotalDefense_totalDefense"));
     L_0197:
         _ = H.Call("SpawnCardInDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_GetOppositeSide_oppositeSide"), Val.Name("card_event_resistance_new"), H.GetMember(self, "cardID"), GetLocal(L, "CallFunc_Subtract_IntInt_ReturnValue"), Val.Of(0), Val.False, Val.False, Val.False, Val.False, Val.True, Val.Out(__v => L["CallFunc_SpawnCardInDeckBySide_spawnedCardIDs"] = __v) });
     L_01F3:

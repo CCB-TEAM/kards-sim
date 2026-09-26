@@ -48,7 +48,7 @@ public static Val ExecuteUbergraph_card_event_motherland_calls(IHost H, Val self
     L_0085:
         _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "CallFunc_Array_Get_Item"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_00BB:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "faction"), Val.Of(4), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "faction"), Val.Of(4), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_00EF:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_010E:

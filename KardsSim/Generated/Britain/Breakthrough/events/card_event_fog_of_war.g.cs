@@ -94,9 +94,9 @@ public static Val ExecuteUbergraph_card_event_fog_of_war(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("RemoveCardFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RemoveCardFromBoard_qqq"] = __v) });
+        _ = H.Call("RemoveCardFromBoard", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_RemoveCardFromBoard_qqq"] = __v) });
     L_005F:
-        _ = H.Call("SpawnCardInDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "originalSide"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "name"), H.GetMember(self, "cardID"), Val.Of(2), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "salvageFaction"), Val.False, Val.False, Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardInDeckBySide_spawnedCardIDs"] = __v) });
+        _ = H.Call("SpawnCardInDeckBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "originalSide"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "name"), H.GetMember(self, "cardID"), Val.Of(2), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "salvageFaction"), Val.False, Val.False, Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_SpawnCardInDeckBySide_spawnedCardIDs"] = __v) });
     L_00FC:
         goto __halt;
     L_00FE:

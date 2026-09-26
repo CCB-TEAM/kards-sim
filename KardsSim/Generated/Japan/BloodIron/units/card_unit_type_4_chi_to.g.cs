@@ -220,7 +220,7 @@ public static Val ExecuteUbergraph_card_unit_type_4_chi_to(IHost H, Val self, Va
             }
         }
     L_034C:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardChanging"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardChanging"));
     L_035F:
         _ = H.Call("getHasShock", new Val[] { H.GetMember(self, "_tmp_card"), Val.Out(__v => L["CallFunc_getHasShock_doesIt"] = __v) });
     L_0388:
@@ -262,7 +262,7 @@ public static Val ExecuteUbergraph_card_unit_type_4_chi_to(IHost H, Val self, Va
             }
         }
     L_03D1:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_attackerCard"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_attackerCard"));
     L_03E4:
         goto L_035F;
     L_03E9:
@@ -280,7 +280,7 @@ public static Val ExecuteUbergraph_card_unit_type_4_chi_to(IHost H, Val self, Va
             }
         }
     L_0406:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardLeaving"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardLeaving"));
     L_0419:
         _ = H.Call("getHasShock", new Val[] { H.GetMember(self, "_tmp_card"), Val.Out(__v => L["CallFunc_getHasShock_doesIt_2"] = __v) });
     L_0442:
@@ -383,7 +383,7 @@ public static Val ExecuteUbergraph_card_unit_type_4_chi_to(IHost H, Val self, Va
             }
         }
     L_059D:
-        H.SetMember(self, "_tmp_card", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "_tmp_card", H.GetVar("K2Node_Event_cardPlayed"));
     L_05B0:
         _ = H.Call("getHasShock", new Val[] { H.GetMember(self, "_tmp_card"), Val.Out(__v => L["CallFunc_getHasShock_doesIt_1"] = __v) });
     L_05D9:

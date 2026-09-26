@@ -34,7 +34,7 @@ public static Val ExecuteUbergraph_card_unit_511th_airborne(IHost H, Val self, V
             default: goto __halt;
         }
     L_000A:
-        if (!(GetLocal(L, "K2Node_Event_wasShockAttack")).AsBool()) goto L_0050;
+        if (!(H.GetVar("K2Node_Event_wasShockAttack")).AsBool()) goto L_0050;
     L_0018:
         _ = H.Call("ChangeOperationCost", new Val[] { H.GetMember(self, "cardFunction"), self, H.GetMember(self, "cardID"), Val.Of(-3), Val.Of(1), Val.False, Val.False, Val.False });
     L_0050:

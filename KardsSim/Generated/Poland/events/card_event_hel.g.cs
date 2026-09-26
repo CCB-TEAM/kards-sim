@@ -119,7 +119,7 @@ public static Val ExecuteUbergraph_card_event_hel(IHost H, Val self, Val[] args)
     L_01AD:
         goto L_0602;
     L_01B2:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardLeaving"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardLeaving"));
     L_01C5:
         L["CallFunc_Greater_IntInt_ReturnValue"] = Val.Of(Val.Cmp(H.GetMember(self, "enterPlayOnTurn"), Val.Of(0)) > 0);
     L_01E7:
@@ -131,7 +131,7 @@ public static Val ExecuteUbergraph_card_event_hel(IHost H, Val self, Val[] args)
     L_023E:
         goto L_009E;
     L_0243:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_card"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_card"));
     L_0256:
         goto L_01C5;
     L_025B:
@@ -147,7 +147,7 @@ public static Val ExecuteUbergraph_card_event_hel(IHost H, Val self, Val[] args)
     L_03E4:
         goto L_000A;
     L_03E9:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_cardPlayed"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_cardPlayed"));
     L_03FC:
         L["CallFunc_Greater_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetMember(self, "enterPlayOnTurn"), Val.Of(0)) > 0);
     L_041E:
@@ -169,7 +169,7 @@ public static Val ExecuteUbergraph_card_event_hel(IHost H, Val self, Val[] args)
     L_05E5:
         goto L_0602;
     L_05EA:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_05FD:
         goto L_025B;
     L_0602:

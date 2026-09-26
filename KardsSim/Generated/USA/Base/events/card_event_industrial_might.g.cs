@@ -48,27 +48,27 @@ public static Val ExecuteUbergraph_card_event_industrial_might(IHost H, Val self
     L_00A5:
         goto L_023A;
     L_00AA:
-        _ = H.Call("IsSameSideUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
+        _ = H.Call("IsSameSideUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
     L_00DC:
         if (!(GetLocal(L, "CallFunc_IsSameSideUnit_isIt")).AsBool()) goto L_023A;
     L_00EA:
-        L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_method"), Val.Of(0)) != 0);
+        L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_method"), Val.Of(0)) != 0);
     L_0109:
         if (!(GetLocal(L, "K2Node_SwitchEnum_CmpSuccess")).AsBool()) goto L_01D0;
     L_0117:
-        L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_method"), Val.Of(1)) != 0);
+        L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_method"), Val.Of(1)) != 0);
     L_0136:
         if (!(GetLocal(L, "K2Node_SwitchEnum_CmpSuccess")).AsBool()) goto L_01D0;
     L_0144:
-        L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_method"), Val.Of(2)) != 0);
+        L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_method"), Val.Of(2)) != 0);
     L_0163:
         if (!(GetLocal(L, "K2Node_SwitchEnum_CmpSuccess")).AsBool()) goto L_01D0;
     L_0171:
-        L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_method"), Val.Of(3)) != 0);
+        L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_method"), Val.Of(3)) != 0);
     L_0190:
         if (!(GetLocal(L, "K2Node_SwitchEnum_CmpSuccess")).AsBool()) goto L_01D0;
     L_019E:
-        L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_method"), Val.Of(4)) != 0);
+        L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_method"), Val.Of(4)) != 0);
     L_01BD:
         if (!(GetLocal(L, "K2Node_SwitchEnum_CmpSuccess")).AsBool()) goto L_01D0;
     L_01CB:

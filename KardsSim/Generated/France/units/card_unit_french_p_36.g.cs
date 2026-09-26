@@ -96,7 +96,7 @@ public static Val ExecuteUbergraph_card_unit_french_p_36(IHost H, Val self, Val[
             default: goto __halt;
         }
     L_000A:
-        _ = H.Call("GiveMobilize", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveMobilize_qqq"] = __v) });
+        _ = H.Call("GiveMobilize", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_GiveMobilize_qqq"] = __v) });
     L_005F:
         goto __halt;
     L_0061:

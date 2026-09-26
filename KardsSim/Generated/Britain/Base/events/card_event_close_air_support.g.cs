@@ -49,7 +49,7 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
     L_00AE:
         if (!(GetLocal(L, "CallFunc_IsAirUnit_isIt")).AsBool()) goto L_014F;
     L_00BC:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "faction"), Val.Of(2), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetTargetedCard_card"), "faction"), Val.Of(2), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_00F0:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_010F:
@@ -211,7 +211,7 @@ public static Val ExecuteUbergraph_card_event_close_air_support(IHost H, Val sel
     L_0377:
         goto L_01CC;
     L_037C:
-        H.SetMember(self, "tempCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tempCard", H.GetVar("K2Node_Event_targetCard"));
     L_038F:
         goto L_0257;
     L_0394:

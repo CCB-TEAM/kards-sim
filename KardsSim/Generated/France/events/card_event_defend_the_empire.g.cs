@@ -48,7 +48,7 @@ public static Val ExecuteUbergraph_card_event_defend_the_empire(IHost H, Val sel
     L_00A0:
         _ = H.Call("GetCardFromID", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "tmpCard"), Val.Out(__v => L["CallFunc_GetCardFromID_card"] = __v) });
     L_00D6:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "faction"), Val.Of(6), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_GetCardFromID_card"), "faction"), Val.Of(6), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_010A:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(1)) != 0);
     L_0129:

@@ -110,7 +110,7 @@ public static Val ExecuteUbergraph_card_event_campaign_moscow3_charge(IHost H, V
     L_0125:
         goto L_015D;
     L_012A:
-        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), GetLocal(L, "K2Node_Event_targetCard"), self });
+        _ = H.Call("DestroyCard", new Val[] { H.GetMember(self, "cardFunction"), H.GetVar("K2Node_Event_targetCard"), self });
     L_0158:
         goto L_000A;
     L_015D:

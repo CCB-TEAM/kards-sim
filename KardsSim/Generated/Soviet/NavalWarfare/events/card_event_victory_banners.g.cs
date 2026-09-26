@@ -102,7 +102,7 @@ public static Val ExecuteUbergraph_card_event_victory_banners(IHost H, Val self,
     L_0014:
         _ = H.Call("Array_Get", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_GetAllUnitsOnBoard_cards"), GetLocal(L, "Temp_int_Array_Index_Variable"), Val.Out(__v => L["CallFunc_Array_Get_Item"] = __v) });
     L_004F:
-        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "side"), H.GetMember(H.GetMember(self, "tmpCard"), "side"), GetLocal(L, "CallFunc_EnumCompareSide_Branches") });
+        _ = H.Call("EnumCompareSide", new Val[] { self, H.GetMember(GetLocal(L, "CallFunc_Array_Get_Item"), "side"), H.GetMember(H.GetMember(self, "tmpCard"), "side"), Val.Out(__v => L["CallFunc_EnumCompareSide_Branches"] = __v) });
     L_00A0:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareSide_Branches"), Val.Of(0)) != 0);
     L_00BF:
@@ -160,7 +160,7 @@ public static Val ExecuteUbergraph_card_event_victory_banners(IHost H, Val self,
     L_02EA:
         goto L_02B7;
     L_02EF:
-        H.SetMember(self, "tmpCard", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "tmpCard", H.GetVar("K2Node_Event_targetCard"));
     L_0302:
         _ = H.Call("GetAllUnitsOnBoard", new Val[] { H.GetMember(self, "cardFunction"), Val.False, Val.Out(__v => L["CallFunc_GetAllUnitsOnBoard_cards"] = __v) });
     L_0330:

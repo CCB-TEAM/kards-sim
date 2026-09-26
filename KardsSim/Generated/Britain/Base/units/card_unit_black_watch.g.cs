@@ -265,11 +265,11 @@ public static Val ExecuteUbergraph_card_unit_black_watch(IHost H, Val self, Val[
     L_071D:
         goto L_0581;
     L_0722:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_drawnCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_drawnCardID"));
     L_073D:
         goto L_06B7;
     L_0742:
-        H.SetMember(self, "tempCardID", GetLocal(L, "K2Node_Event_spawnedCardID"));
+        H.SetMember(self, "tempCardID", H.GetVar("K2Node_Event_spawnedCardID"));
     L_075D:
         goto L_06B7;
     L_0762:

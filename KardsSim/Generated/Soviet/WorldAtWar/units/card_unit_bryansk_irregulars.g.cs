@@ -41,7 +41,7 @@ public static Val ExecuteUbergraph_card_unit_bryansk_irregulars(IHost H, Val sel
             default: goto __halt;
         }
     L_000F:
-        _ = H.Call("IsUnit", new Val[] { GetLocal(L, "K2Node_Event_fromCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
+        _ = H.Call("IsUnit", new Val[] { H.GetVar("K2Node_Event_fromCard"), Val.Out(__v => L["CallFunc_IsUnit_isIt"] = __v) });
     L_0038:
         if (!(GetLocal(L, "CallFunc_IsUnit_isIt")).AsBool())
         {
@@ -56,7 +56,7 @@ public static Val ExecuteUbergraph_card_unit_bryansk_irregulars(IHost H, Val sel
     L_0042:
         _ = H.Call("JSON_GetIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("damageUnits"), Val.Out(__v => L["CallFunc_JSON_GetIntArray_values_1"] = __v), Val.Out(__v => L["CallFunc_JSON_GetIntArray_found_1"] = __v) });
     L_0086:
-        L["CallFunc_Array_Contains_ReturnValue"] = H.Call("Array_Contains", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_JSON_GetIntArray_values_1"), H.GetMember(GetLocal(L, "K2Node_Event_fromCard"), "cardID") });
+        L["CallFunc_Array_Contains_ReturnValue"] = H.Call("Array_Contains", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_JSON_GetIntArray_values_1"), H.GetMember(H.GetVar("K2Node_Event_fromCard"), "cardID") });
     L_00D8:
         if (!(GetLocal(L, "CallFunc_Array_Contains_ReturnValue")).AsBool()) goto L_00E7;
     L_00E6:
@@ -68,7 +68,7 @@ public static Val ExecuteUbergraph_card_unit_bryansk_irregulars(IHost H, Val sel
             default: goto __halt;
         }
     L_00E7:
-        _ = H.Call("JSON_AddToIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("damageUnits"), H.GetMember(GetLocal(L, "K2Node_Event_fromCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_AddToIntArray_found"] = __v) });
+        _ = H.Call("JSON_AddToIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("damageUnits"), H.GetMember(H.GetVar("K2Node_Event_fromCard"), "cardID"), Val.Out(__v => L["CallFunc_JSON_AddToIntArray_found"] = __v) });
     L_0141:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_016F:
@@ -222,7 +222,7 @@ public static Val ExecuteUbergraph_card_unit_bryansk_irregulars(IHost H, Val sel
             }
         }
     L_0562:
-        L["CallFunc_Array_Contains_ReturnValue_1"] = H.Call("Array_Contains", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_JSON_GetIntArray_values_2"), H.GetMember(GetLocal(L, "K2Node_Event_cardReset"), "cardID") });
+        L["CallFunc_Array_Contains_ReturnValue_1"] = H.Call("Array_Contains", new Val[] { Val.Ref("KismetArrayLibrary"), GetLocal(L, "CallFunc_JSON_GetIntArray_values_2"), H.GetMember(H.GetVar("K2Node_Event_cardReset"), "cardID") });
     L_05B4:
         if (!(GetLocal(L, "CallFunc_Array_Contains_ReturnValue_1")).AsBool())
         {
@@ -235,7 +235,7 @@ public static Val ExecuteUbergraph_card_unit_bryansk_irregulars(IHost H, Val sel
             }
         }
     L_05BE:
-        _ = H.Call("JSON_RemoveFromIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("damageUnits"), H.GetMember(GetLocal(L, "K2Node_Event_cardReset"), "cardID"), Val.Out(__v => L["CallFunc_JSON_RemoveFromIntArray_found"] = __v) });
+        _ = H.Call("JSON_RemoveFromIntArray", new Val[] { H.GetMember(self, "cardFunction"), self, Val.Of("damageUnits"), H.GetMember(H.GetVar("K2Node_Event_cardReset"), "cardID"), Val.Out(__v => L["CallFunc_JSON_RemoveFromIntArray_found"] = __v) });
     L_0618:
         _ = H.Call("PersistCustomFields", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(self, "cardID"), Val.False });
     L_0646:

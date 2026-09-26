@@ -141,7 +141,7 @@ public static Val ExecuteUbergraph_card_event_dark_deeds(IHost H, Val self, Val[
             }
         }
     L_0410:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value_2"), GetLocal(L, "K2Node_Event_resetCardID")) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_JSON_GetInt_value_2"), H.GetVar("K2Node_Event_resetCardID")) == 0);
     L_0436:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue")).AsBool())
         {

@@ -95,27 +95,27 @@ public static Val ExecuteUbergraph_card_event_retribution7(IHost H, Val self, Va
             default: goto __halt;
         }
     L_000A:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0027:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool()) goto L_0224;
     L_0035:
-        H.SetMember(self, "tmpCardID", H.GetMember(GetLocal(L, "K2Node_Event_targetCard"), "cardID"));
+        H.SetMember(self, "tmpCardID", H.GetMember(H.GetVar("K2Node_Event_targetCard"), "cardID"));
     L_0066:
         _ = H.Call("CustomAbilityAdd", new Val[] { H.GetMember(self, "cardFunction"), Val.Of("destruction"), H.GetMember(self, "tmpCardID"), H.GetMember(self, "cardID"), Val.False, Val.False, Val.False, Val.Out(__v => L["CallFunc_CustomAbilityAdd_qqq"] = __v) });
     L_00B5:
         goto L_0224;
     L_00BA:
-        _ = H.Call("HasCustomAbilityFromCard", new Val[] { GetLocal(L, "K2Node_Event_cardDestroyed"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
+        _ = H.Call("HasCustomAbilityFromCard", new Val[] { H.GetVar("K2Node_Event_cardDestroyed"), Val.Of("destruction"), H.GetMember(self, "cardID"), Val.Out(__v => L["CallFunc_HasCustomAbilityFromCard_doesIt"] = __v) });
     L_00F9:
         if (!(GetLocal(L, "CallFunc_HasCustomAbilityFromCard_doesIt")).AsBool()) goto L_0224;
     L_0107:
-        H.SetMember(self, "cardDestroyed", GetLocal(L, "K2Node_Event_cardDestroyed"));
+        H.SetMember(self, "cardDestroyed", H.GetVar("K2Node_Event_cardDestroyed"));
     L_011A:
         L["Temp_byte_Variable"] = Val.Of(0);
     L_012E:
         L["Temp_bool_Variable"] = H.GetMember(H.GetMember(self, "cardDestroyed"), "isSalvaged");
     L_0157:
-        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "originalSide"), H.GetMember(H.GetMember(self, "cardDestroyed"), "name"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.Switch(GetLocal(L, "Temp_bool_Variable"), new[] { ValueTuple.Create(Val.False, GetLocal(L, "Temp_byte_Variable")), ValueTuple.Create(Val.True, H.GetMember(H.GetMember(self, "cardDestroyed"), "salvageFaction")) }, GetLocal(L, "K2Node_Select_Default")), Val.Out(__v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID"] = __v) });
+        _ = H.Call("SpawnCardInHandBySide", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "originalSide"), H.GetMember(H.GetMember(self, "cardDestroyed"), "name"), H.GetMember(self, "cardID"), Val.True, Val.False, Val.False, Val.Of(""), Val.Out(__v => L["Temp_text_Variable"] = __v), Val.Switch(GetLocal(L, "Temp_bool_Variable"), new[] { ValueTuple.Create(Val.False, GetLocal(L, "Temp_byte_Variable")), ValueTuple.Create(Val.True, H.GetMember(H.GetMember(self, "cardDestroyed"), "salvageFaction")) }, GetLocal(L, "K2Node_Select_Default")), Val.Out(__v => L["CallFunc_SpawnCardinHandbySide_spawnedCardID"] = __v) });
     L_0224:
         goto __halt;
     L_0226:

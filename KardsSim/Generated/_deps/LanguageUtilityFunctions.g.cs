@@ -285,7 +285,7 @@ public static Val GetLanguageTexts(IHost H, Val self, Val[] args)
     L_0205:
         L["CallFunc_GetValidValue_ReturnValue"] = H.Call("GetValidValue", new Val[] { Val.Ref("KismetNodeHelperLibrary"), Val.Ref("ELanguageEnum"), GetLocal(L, "CallFunc_Conv_IntToByte_ReturnValue") });
     L_0233:
-        _ = H.Call("GetCultureStringForLanguage", new Val[] { self, GetLocal(L, "CallFunc_GetValidValue_ReturnValue"), GetLocal(L, "CallFunc_GetCultureStringForLanguage_cultureString") });
+        _ = H.Call("GetCultureStringForLanguage", new Val[] { self, GetLocal(L, "CallFunc_GetValidValue_ReturnValue"), Val.Out(__v => L["CallFunc_GetCultureStringForLanguage_cultureString"] = __v) });
     L_024F:
         L["CallFunc_GetCultureDisplayName_ReturnValue"] = H.Call("GetCultureDisplayName", new Val[] { self, GetLocal(L, "CallFunc_GetCultureStringForLanguage_cultureString"), Val.False });
     L_0275:

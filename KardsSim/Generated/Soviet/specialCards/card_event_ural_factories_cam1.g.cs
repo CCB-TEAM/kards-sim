@@ -624,7 +624,7 @@ public static Val ExecuteUbergraph_card_event_ural_factories_cam1(IHost H, Val s
     L_0EB2:
         goto L_0054;
     L_0EB7:
-        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), GetLocal(L, "K2Node_Event_targetCard") });
+        L["CallFunc_IsValid_ReturnValue"] = H.Call("IsValid", new Val[] { Val.Ref("KismetSystemLibrary"), H.GetVar("K2Node_Event_targetCard") });
     L_0ED4:
         if (!(GetLocal(L, "CallFunc_IsValid_ReturnValue")).AsBool())
         {
@@ -639,7 +639,7 @@ public static Val ExecuteUbergraph_card_event_ural_factories_cam1(IHost H, Val s
             }
         }
     L_0EDE:
-        H.SetMember(self, "currentTarget", GetLocal(L, "K2Node_Event_targetCard"));
+        H.SetMember(self, "currentTarget", H.GetVar("K2Node_Event_targetCard"));
     L_0EF1:
         _ = H.Call("HasCampaignUpgrade", new Val[] { self, Val.Of(6), Val.Out(__v => L["CallFunc_HasCampaignUpgrade_doesIt_6"] = __v) });
     L_0F09:

@@ -182,7 +182,7 @@ public static Val ExecuteUbergraph_card_event_uprising(IHost H, Val self, Val[] 
     L_0599:
         goto L_054F;
     L_059E:
-        if (!(GetLocal(L, "K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_05AD;
+        if (!(H.GetVar("K2Node_Event_TriggerNotDestroyed")).AsBool()) goto L_05AD;
     L_05AC:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -193,7 +193,7 @@ public static Val ExecuteUbergraph_card_event_uprising(IHost H, Val self, Val[] 
             default: goto __halt;
         }
     L_05AD:
-        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(GetLocal(L, "K2Node_Event_cardDestroyed"), "faction"), Val.Of(8), GetLocal(L, "CallFunc_EnumCompareFaction_Branches") });
+        _ = H.Call("EnumCompareFaction", new Val[] { self, H.GetMember(H.GetVar("K2Node_Event_cardDestroyed"), "faction"), Val.Of(8), Val.Out(__v => L["CallFunc_EnumCompareFaction_Branches"] = __v) });
     L_05E1:
         L["K2Node_SwitchEnum_CmpSuccess"] = Val.Of(Val.Cmp(GetLocal(L, "CallFunc_EnumCompareFaction_Branches"), Val.Of(0)) != 0);
     L_0600:
@@ -235,7 +235,7 @@ public static Val ExecuteUbergraph_card_event_uprising(IHost H, Val self, Val[] 
     L_079F:
         goto L_000F;
     L_07A4:
-        L["CallFunc_EqualEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_cardPlayed"), self) == 0);
+        L["CallFunc_EqualEqual_ObjectObject_ReturnValue"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_cardPlayed"), self) == 0);
     L_07C2:
         if (!(GetLocal(L, "CallFunc_EqualEqual_ObjectObject_ReturnValue")).AsBool())
         {

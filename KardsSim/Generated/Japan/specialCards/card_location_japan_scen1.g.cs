@@ -261,7 +261,7 @@ public static Val ExecuteUbergraph_card_location_japan_scen1(IHost H, Val self, 
             default: goto __halt;
         }
     L_06E2:
-        _ = H.Call("IsSameSideUnit", new Val[] { GetLocal(L, "K2Node_Event_cardPlayed"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
+        _ = H.Call("IsSameSideUnit", new Val[] { H.GetVar("K2Node_Event_cardPlayed"), H.GetMember(self, "side"), Val.Out(__v => L["CallFunc_IsSameSideUnit_isIt"] = __v) });
     L_0714:
         if (!(GetLocal(L, "CallFunc_IsSameSideUnit_isIt")).AsBool())
         {
@@ -276,7 +276,7 @@ public static Val ExecuteUbergraph_card_location_japan_scen1(IHost H, Val self, 
             }
         }
     L_071E:
-        _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(GetLocal(L, "K2Node_Event_cardPlayed"), "cardID"), Val.Of(0) });
+        _ = H.Call("GiveBlitz", new Val[] { H.GetMember(self, "cardFunction"), H.GetMember(H.GetVar("K2Node_Event_cardPlayed"), "cardID"), Val.Of(0) });
     L_0766:
         if (__ef.Count == 0) { H.Log("[transpiler] 执行流栈下溢"); goto __halt; }
         switch (__ef.Pop())
@@ -470,7 +470,7 @@ public static Val ExecuteUbergraph_card_location_japan_scen1(IHost H, Val self, 
             }
         }
     L_0E83:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber_1"), Val.Of(1)) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_1"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber_1"), Val.Of(1)) == 0);
     L_0EA5:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_1")).AsBool()) goto L_0B41;
     L_0EB3:
@@ -482,7 +482,7 @@ public static Val ExecuteUbergraph_card_location_japan_scen1(IHost H, Val self, 
     L_0F17:
         L["Temp_byte_Variable_1"] = Val.Of(2);
     L_0F2B:
-        L["CallFunc_Add_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_turnnumber_1") + Val.Of(1));
+        L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_turnnumber_1") + Val.Of(1));
     L_0F55:
         L["CallFunc_Divide_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_Add_IntInt_ReturnValue") / Val.Of(2));
     L_0F7F:
@@ -502,7 +502,7 @@ public static Val ExecuteUbergraph_card_location_japan_scen1(IHost H, Val self, 
     L_1067:
         H.SetMember(GetLocal(L, "K2Node_MakeStruct_FormatArgumentData"), "ArgumentValueGender", Val.Of(0));
     L_1084:
-        L["CallFunc_LessEqual_IntInt_ReturnValue_3"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber_1"), Val.Of(13)) <= 0);
+        L["CallFunc_LessEqual_IntInt_ReturnValue_3"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber_1"), Val.Of(13)) <= 0);
     L_10A6:
         L["K2Node_MakeArray_Array"] = H.MakeArray(new Val[] { GetLocal(L, "K2Node_MakeStruct_FormatArgumentData") });
     L_10BA:
@@ -530,9 +530,9 @@ public static Val ExecuteUbergraph_card_location_japan_scen1(IHost H, Val self, 
     L_11AB:
         L["Temp_byte_Variable_5"] = Val.Of(2);
     L_11BF:
-        L["CallFunc_Add_IntInt_ReturnValue"] = (GetLocal(L, "K2Node_Event_turnnumber_1") + Val.Of(1));
+        L["CallFunc_Add_IntInt_ReturnValue"] = (H.GetVar("K2Node_Event_turnnumber_1") + Val.Of(1));
     L_11E9:
-        L["CallFunc_LessEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber_1"), Val.Of(5)) <= 0);
+        L["CallFunc_LessEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber_1"), Val.Of(5)) <= 0);
     L_120B:
         L["CallFunc_Divide_IntInt_ReturnValue"] = (GetLocal(L, "CallFunc_Add_IntInt_ReturnValue") / Val.Of(2));
     L_1235:
@@ -599,7 +599,7 @@ public static Val ExecuteUbergraph_card_location_japan_scen1(IHost H, Val self, 
             }
         }
     L_14D9:
-        L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(GetLocal(L, "K2Node_Event_turnnumber"), Val.Of(7)) == 0);
+        L["CallFunc_EqualEqual_IntInt_ReturnValue_2"] = Val.Of(Val.Cmp(H.GetVar("K2Node_Event_turnnumber"), Val.Of(7)) == 0);
     L_14FB:
         if (!(GetLocal(L, "CallFunc_EqualEqual_IntInt_ReturnValue_2")).AsBool())
         {
