@@ -1909,14 +1909,41 @@ public sealed class EngineHost : Host
 
             // ---------- 改数值 ----------
             //
+            // AddBuffsToRemoveEndOfTurn(buffType, instigatorID) —— 客户端把它记在
+            // GameStateRef.BuffsToRemoveEndOfTurn（Map<buffType, struct{CardIDs}>），
+            // 回合结束时 RemoveBuffsEndOfTurn 遍历它、按来源撤销。
+            //
+            // 蓝图那份实现**在这里跑不通**，两个原因：
+            //   1. 成员 BuffsToRemoveEndOfTurn 没有 seed（读出来是 none，
+            //      Map_Add 会写进一个随即被丢掉的临时字典）；
+            //   2. 它往映射里存的 struct 是 MakeStruct 节点，转译产物里
+            //      K2Node_MakeStruct_CardIDs 从来没有被构造过（SetMember 打在 none 上），
+            //      于是存进去的是空值，清理时 Array_Length 恒为 0。
+            // 所以这里接成引擎原语：登记「谁给的」，回合结束时按来源精确撤销
+            // （见 GameEngine.ExpireTempBuffs / Card.AttackBuffBySource）。
+            // 只有 buffType 0（攻击）有对应的 API（AddAttackUntilEndOfTurn）。
+            ["AddBuffsToRemoveEndOfTurn"] = (h, a) =>
+            {
+                if (a.Length >= 3 && (int)a[1].AsInt() == 0)
+                    h.Engine.RegisterTempAttackBuff((int)a[2].AsInt());
+                return Val.Nothing;
+            },
+
             // ChangeAttack(card, instigatorID, amount, changeType, skipAction, out qqq)
             // 形参名来自 UHT：见 Generated/_index.g.cs 的 ChangeAttack 条目。
             //
-            // changeType 是 EChangeType（客户端枚举），实际用到的只有四种：
-            //   0/1 = 加成（1 是「临时」那一支，结算时按来源记账）
+            // changeType 是客户端枚举 EChangeType（BattleUtilityFunctions 里能看到它的
+            // 成员名 tempBuffGive / tempBuffRemove）。实际用到的值：
+            //   0/1 = 给加成（0 与 1 都出现，池子里最多的是「amount 1, type 1」151 处）
             //   2   = SetValue（把加成直接设成 amount）
-            //   4   = 撤销<b>该来源</b>的加成（全池 64 处调用点都带自己的 cardID 当 instigatorID）
+            //   4   = 撤销**该来源**的加成（64 处调用点都带自己的 cardID 当 instigatorID）
             // 其余值按「加成」处理，与原来的兜底一致。
+            //
+            // **加成的存活期不看 changeType**：客户端是按来源登记的
+            // （AddAttackUntilEndOfTurn → AddBuffsToRemoveEndOfTurn，回合结束时
+            // RemoveBuffsEndOfTurn 对每个来源调 getCardsBuffedByThisCard 再逐张撤销）。
+            // 同一个 changeType 0 既被「本回合」的 AddAttackUntilEndOfTurn 用，
+            // 也被常驻光环（flaming_matilda）用 —— 区别只在于登记没登记。
             //
             // 关键点：**必须按 instigatorID 分开记账**。光环卡的撤销路径都是
             // ChangeAttack(某张左邻, self.cardID, 0, 4)，只知道「撤销谁给的」，
@@ -2376,6 +2403,9 @@ public sealed class EngineHost : Host
         // 多来源没有等价表示，写 0 而不是随便挑一个（挑一个会让读它的逻辑看到假数据）。
         k.Set("buffedBy", Val.Of(c.AttackBuffBySource.Count == 1 ? c.AttackBuffBySource.Keys.First() : 0));
     }
+
+    /// <summary>供引擎侧按来源清账后同步镜像（见 <c>GameEngine.ExpireTempBuffs</c>）。</summary>
+    public void WriteMirrorAttackBuff(Card c) => WriteAttackBuff(this, c);
 
     /// <summary>
     /// 处理「void F(..., T&amp; out x)」这形态：把结果写进最后一个实参槽并返回 none。

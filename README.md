@@ -416,6 +416,7 @@ Execute*Events  →  逐个调响应卡的事件函数
 | 观测/动作空间里有**两条前线** | 前线本来只有一条且同时只被一方占据，编码却按「己方前线 / 敌方前线」写了两份 → 恒有一份空着（白占 60 维 + 5 个目标槽） |
 | 支援线上的射程 1 单位完全不能攻击 | `CanAttack` 里写死了 `!OnFrontline && Range < 2 → false`；客户端只在「双方都不在前线」时才要求射程 ≥ 2，打敌方前线本来是可以的 |
 | HTTP 的 `actions` 与 `indices` 按下标配对会错位 | `actions` 取的是 `LegalActions()` 原始列表，`indices` 取自 `Enc.Mask()`（丢掉没有动作槽位的动作）→ 两者长度不同。现在都从同一份列表来，原始列表挪到 `allActions` |
+| 「本回合 +N 攻击」变成永久 | 临时加成靠 `AddBuffsToRemoveEndOfTurn` 按来源登记、回合结束 `RemoveBuffsEndOfTurn` 撤销；这条链在无头模拟里没有调用者（登记用的映射也没 seed）→ 引擎自己登记并在 `EndTurn` 里按来源撤销 |
 
 ---
 
@@ -480,11 +481,11 @@ dotnet run --project KardsTranspiler -c Release -- \
   ubergraph，非战斗逻辑）
 - 47.5 万行直译代码 **0 错误编译通过**
 - 自对弈 150 局：**0 异常 / 0 卡死 / 0 非法动作**，宿主未实现调用 **0%**
-- 单卡机制验证（`--mode tests`）**108/108 通过**：Intel、事件载荷、老兵升级、Blitz、
+- 单卡机制验证（`--mode tests`）**115/115 通过**：Intel、事件载荷、老兵升级、Blitz、
   数据表、三选一、CDO 标志位、移动/攻击二选一、指挥点槽 24、反制指令、二段式抉择、
   持续站场光环的加/撤与跟随移动（`card_unit_flaming_matilda_anzac`）、
-  「前线只有一条且要抢」「射程 1 上前线才够得到敌方支援线」，
-  以及 HTTP 侧动作列表按下标对齐（`HttpActionListIsAligned`，用真路由跑）
+  「前线只有一条且要抢」「射程 1 上前线才够得到敌方支援线」、
+  「本回合 +N 攻击」到期撤销，以及 HTTP 侧动作列表按下标对齐（用真路由跑）
 
 ---
 
@@ -564,7 +565,32 @@ dotnet run --project KardsTranspiler -c Release -- \
 最左为 0，与 `SetRightLeftMostWhenPlayed` 的判定一致）。自己再写一份迟早漂移，
 而且很容易漏掉「本卡在场上」那道守卫。
 
-回归哨兵是 `--mode tests` 里的两组断言共 19 条：
+### 加成的存活期：按来源登记，不按 changeType
+
+「本回合 +N 攻击」和「常驻光环」用的是**同一个** `changeType`（0），区别不在参数上，
+而在**登记**：
+
+- 「本回合」走 `AddAttackUntilEndOfTurn(card, instigatorID, n)`，
+  它给完加成再调 `AddBuffsToRemoveEndOfTurn(0, instigatorID)` 把来源记进
+  `GameStateRef.BuffsToRemoveEndOfTurn`（`buffType 0 = 攻击`）；
+- 回合结束时 `RemoveBuffsEndOfTurn` 遍历登记过的来源，对每个来源取
+  `getCardsBuffedByThisCard(来源)` 再逐张撤销；
+- 常驻光环（`flaming_matilda` 等）**不登记**，自己在该撤的时候
+  `ChangeAttack(牌, self.cardID, 0, 4)` —— 所以它不会随回合结束消失。
+
+这条链在无头模拟里跑不到：`ExecuteEndOfTurnEvents` **没有任何调用者**，
+而且 `BuffsToRemoveEndOfTurn` 这个映射成员没被 seed、它往里存的
+`MakeStruct` 节点转译产物里也从没被构造过（`SetMember` 打在 none 上）。
+结果是**临时加成变成永久的**。现在宿主把 `AddBuffsToRemoveEndOfTurn` 接成引擎原语
+（登记 instanceId），`GameEngine.EndTurn` 在 `OnEndOfTurn` 之后调 `ExpireTempBuffs()`
+按来源精确撤销 —— 撤销会扫**全场**（含手牌/弃牌堆：被临时加攻的牌可能已经离场）。
+按来源记账在这里再次是关键：撤销只扣那一个来源的那一份，同张卡上的常驻加成不受影响。
+
+回归哨兵是 `--mode tests` 里的 `TempAttackBuffExpiresAtEndOfTurn`：
+`AddAttackUntilEndOfTurn` 立刻生效 → 同时挂一个不登记的常驻加成 →
+回合结束后只剩常驻的那份 → 再过两回合也不会把常驻的带下去。
+
+光环本身的两组断言共 19 条：
 
 - `AuraAppliesAndRetracts`（11 条）：左邻各 +2、右侧与自身不加、按来源记账、
   镜像一致、两个光环叠加为 +4、先走的那张只撤掉自己的 +2、两张都走之后回到基础值、

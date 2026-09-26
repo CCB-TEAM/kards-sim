@@ -39,11 +39,65 @@ public sealed partial class GameEngine
             u.Pinned = false;
             u.Suppressed = false;
         }
+        // 「本回合 +N 攻击」要在这里过期。
+        //
+        // 客户端把这类加成记在 GameStateRef.BuffsToRemoveEndOfTurn（buffType=0 = 攻击），
+        // 回合结束时 ExecuteEndOfTurnQueue 走完队列后调 RemoveBuffsEndOfTurn：
+        // 对每个登记过的来源取 getCardsBuffedByThisCard(来源) 再逐张撤销。
+        // 那条链在无头模拟里跑不到（ExecuteEndOfTurnEvents 没有任何调用者），
+        // 所以引擎自己在这一步做同样的事 —— 见 ExpireTempBuffs()。
+        ExpireTempBuffs();
 
         if (S.Current == Side.Right) S.Turn++;
         S.Current = GameState.Foe(S.Current);
         if (S.Done) return;
         BeginTurn();
+    }
+
+    /// <summary>
+    /// 本回合登记过的「临时加成」来源（<c>AddAttackUntilEndOfTurn</c> 会登记）。
+    ///
+    /// <para>
+    /// 客户端登记的是 <c>(buffType, instigatorID)</c> 对，只有 buffType 0（攻击）存在
+    /// 对应的 API。这里只留 instanceId —— 「谁加的」就够撤销了，
+    /// 撤销走 <see cref="Card.AttackBuffBySource"/> 那本账（按来源精确扣）。
+    /// </para>
+    /// </summary>
+    private readonly HashSet<int> _tempAttackBuffSources = new();
+
+    /// <summary>
+    /// 登记一个「本回合有效」的攻击加成来源（宿主原语 AddBuffsToRemoveEndOfTurn 调它）。
+    /// </summary>
+    public void RegisterTempAttackBuff(int instigatorId)
+    {
+        if (instigatorId > 0) _tempAttackBuffSources.Add(instigatorId);
+    }
+
+    /// <summary>
+    /// 撤销所有登记过的临时攻击加成，并清空登记表。
+    ///
+    /// <para>
+    /// 两个方向都要顾到：<b>加过的牌</b>要扣掉那一份（可能已经退回手牌 / 进弃牌堆，
+    /// 所以扫全场而不只是场上），以及<b>登记表本身</b>要清空 —— 不清的话下一回合结束时
+    /// 会再撤一次（幂等，但如果那个来源后来又给了永久加成，就会被误撤）。
+    /// </para>
+    /// </summary>
+    public void ExpireTempBuffs()
+    {
+        if (_tempAttackBuffSources.Count == 0) return;
+        foreach (var c in S.AllCards())
+        {
+            var hit = false;
+            foreach (var src in _tempAttackBuffSources)
+                if (c.AttackBuffBySource.ContainsKey(src)) { c.AttackBuffBySource.Remove(src); hit = true; }
+            if (!hit) continue;
+            var total = c.BuffAttackFromNoSource;
+            foreach (var v in c.AttackBuffBySource.Values) total += v;
+            c.BuffAttack = total;
+            // 镜像字段也要跟上：客户端规则库读的是 attackBuff。
+            if (Host is not null) Host.WriteMirrorAttackBuff(c);
+        }
+        _tempAttackBuffSources.Clear();
     }
 
     /// <summary>

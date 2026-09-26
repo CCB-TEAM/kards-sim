@@ -149,6 +149,26 @@ public sealed class GameState
     }
 
     /// <summary>
+    /// 双方**所有位置**的牌（场上 / 前线 / 手牌 / 牌库 / 弃牌堆）。
+    ///
+    /// <para>
+    /// 用于「按来源清账」这类必须覆盖全场的维护（例如回合结束撤销临时加成：
+    /// 一张被临时加攻的牌可能已经被退回手牌或进了弃牌堆，只清场上会留下脏值，
+    /// 它再被打出来或者被复活时就带着不该有的加成）。
+    /// </para>
+    /// </summary>
+    public IEnumerable<Card> AllCards()
+    {
+        foreach (var c in AllOnBoard()) yield return c;
+        foreach (var p in new[] { Left, Right })
+        {
+            foreach (var c in p.Hand) yield return c;
+            foreach (var c in p.Deck) yield return c;
+            foreach (var c in p.Discard) yield return c;
+        }
+    }
+
+    /// <summary>
     /// 按 instanceId 找卡，**覆盖所有位置**（场上 / 前线 / 手牌 / 牌库 / 弃牌堆）。
     ///
     /// <para>

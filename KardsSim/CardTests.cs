@@ -40,6 +40,7 @@ public static class CardTests
         FrontlineIsOneSharedRow();
         RangeOneNeedsTheFrontlineForTheEnemySupportLine();
         HttpActionListIsAligned();
+        TempAttackBuffExpiresAtEndOfTurn();
 
         Console.WriteLine();
         Console.WriteLine($"通过 {_pass} / 失败 {_fail}");
@@ -1012,6 +1013,72 @@ public static class CardTests
             Check("观测: 前线是共享的一条（owner + cards）", frontOwner is not null,
                 "没有 frontline 字段");
         }
+    }
+
+    /// <summary>
+    /// 「本回合 +N 攻击」必须在下个回合之前过期，而常驻光环不能过期。
+    ///
+    /// <para>
+    /// 客户端把「本回合有效」表达成<b>按来源登记</b>：<c>AddAttackUntilEndOfTurn</c>
+    /// 给完加成后调 <c>AddBuffsToRemoveEndOfTurn(0, instigatorID)</c>，
+    /// 回合结束时 <c>RemoveBuffsEndOfTurn</c> 对每个登记过的来源取
+    /// <c>getCardsBuffedByThisCard(来源)</c> 再逐张撤销。这条链在无头模拟里跑不到
+    /// （<c>ExecuteEndOfTurnEvents</c> 没有调用者，登记用的映射也没 seed），
+    /// 于是以前**临时加成是永久的**。现在由引擎登记 + 回合结束按来源撤销。
+    /// </para>
+    /// </summary>
+    private static void TempAttackBuffExpiresAtEndOfTurn()
+    {
+        var g = new Engine.GameEngine(307, null, null, false);
+        var h = new Bridge.EngineHost(g);
+        g.Host = h;
+        g.S.Current = Side.Left;
+        g.S.Left.Kredits = 99;
+
+        var unitDef = CardDb.All.FirstOrDefault(d =>
+            d.IsUnit && d.Attack > 0 && d.Defense > 0 && d.Triggers.Count == 0);
+        if (unitDef is null) { Check("找得到白板单位（临时加成）", false, "卡池里没有"); return; }
+
+        var target = PlaceInFrontline(g, Side.Left, unitDef);
+        var baseAtk = target.TotalAttack;
+        var source = PlaceInFrontline(g, Side.Left, unitDef);   // 充当 instigatorID 的那张牌
+
+        // 客户端 API：本回合 +3 攻击（内部就是 ChangeAttack(type 0) + 登记）
+        h.Call("AddAttackUntilEndOfTurn", new Val[]
+        {
+            Val.Ref(h.CardFunctions), Val.Ref(h.Obj(target)),
+            Val.Of(source.InstanceId), Val.Of(3),
+        });
+        Check($"AddAttackUntilEndOfTurn 立刻生效（{baseAtk} → {baseAtk + 3}）",
+            target.TotalAttack == baseAtk + 3, $"{target.TotalAttack}");
+
+        // 常驻加成（不登记）：走同一张卡的另一个来源，回合结束不该被撤
+        h.Call("ChangeAttack", new Val[]
+        {
+            Val.Ref(h.CardFunctions), Val.Ref(h.Obj(target)),
+            Val.Of(source.InstanceId + 1000), Val.Of(5), Val.Of(0), Val.False, Val.Out(_ => { }),
+        });
+        Check("常驻加成也在（两条来源各自记账）", target.TotalAttack == baseAtk + 8,
+            $"{target.TotalAttack}");
+
+        g.Apply(new GameAction { Type = ActionType.EndTurn });
+        Check("回合结束后临时加成过期（-3），常驻加成留下（+5）",
+            target.TotalAttack == baseAtk + 5, $"{target.TotalAttack}（期望 {baseAtk + 5}）");
+        Check("按来源的账里临时来源已清掉、常驻来源还在",
+            !target.AttackBuffBySource.ContainsKey(source.InstanceId)
+            && target.AttackBuffBySource.ContainsKey(source.InstanceId + 1000),
+            string.Join(",", target.AttackBuffBySource.Select(kv => $"{kv.Key}={kv.Value}")));
+        Check("镜像 attackBuff 跟着改了",
+            h.Obj(target).Get("attackBuff").AsInt() == target.BuffAttack,
+            $"mirror={h.Obj(target).Get("attackBuff")} entity={target.BuffAttack}");
+
+        // 再结束一回合：已经过期的临时加成不会「回头再撤一次」把常驻的也撤掉
+        g.Apply(new GameAction { Type = ActionType.EndTurn });
+        g.Apply(new GameAction { Type = ActionType.EndTurn });
+        Check("临时加成不会把常驻加成带下去", target.TotalAttack == baseAtk + 5,
+            $"{target.TotalAttack}（期望 {baseAtk + 5}）");
+        Check("全程没有未实现的宿主调用", h.Unhandled.Count == 0,
+            string.Join(",", h.Unhandled.Keys.Take(5)));
     }
 
     /// <summary>把一张牌直接放到前线（编号由 <see cref="Engine.GameEngine.RefreshAllLocations"/> 重排）。</summary>
