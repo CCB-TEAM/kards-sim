@@ -72,6 +72,7 @@ public static Val GetSeenCardsFromOppositeSide(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         var __out_seenCards = args.Length > 0 ? args[0].As<Action<Val>>() : null;
         L["seenCards"] = Val.Nothing;
+    L["localSeenCards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(664);
     L_0005:

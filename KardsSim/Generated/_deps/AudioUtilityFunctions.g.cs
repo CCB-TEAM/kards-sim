@@ -31,6 +31,7 @@ public static Val GetMusicForFaction(IHost H, Val self, Val[] args)
         L["__WorldContext"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_OutFactionMusic = args.Length > 3 ? args[3].As<Action<Val>>() : null;
         L["OutFactionMusic"] = Val.Nothing;
+    L["LocalApprovedMusic"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(2891);
     L_0005:

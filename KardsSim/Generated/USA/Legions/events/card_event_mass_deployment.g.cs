@@ -77,6 +77,7 @@ public static Val GetRandomKreditCombo(IHost H, Val self, Val[] args)
         L["outCombo"] = Val.Nothing;
         var __out_ComboFound = args.Length > 3 ? args[3].As<Action<Val>>() : null;
         L["ComboFound"] = Val.Nothing;
+    L["localAllCombos"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1695);
     L_0005:
@@ -235,6 +236,8 @@ public static Val GetUSAUnitsAndKredits(IHost H, Val self, Val[] args)
         L["outAllUSAUnits"] = Val.Nothing;
         var __out_outAllKredits = args.Length > 1 ? args[1].As<Action<Val>>() : null;
         L["outAllKredits"] = Val.Nothing;
+    L["localAllKredits"] = H.MakeArray(new Val[] { });
+    L["localAllUSAUnits"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(841);
     L_0005:
@@ -352,6 +355,7 @@ public static Val SpawnUnitsWithKreditCombo(IHost H, Val self, Val[] args)
         var __out_InAllUSAUnits = args.Length > 0 ? args[0].As<Action<Val>>() : null;
         L["InAllUSAUnits"] = Val.Nothing;
         L["InCombo"] = args.Length > 1 ? args[1] : Val.Nothing;
+    L["UnitsToSpawn"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(2583);
     L_0005:

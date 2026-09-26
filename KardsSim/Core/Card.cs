@@ -96,6 +96,18 @@ public sealed class Card
     /// </summary>
     public int BuffCost;
 
+    /// <summary>
+    /// 反制指令（Gotcha）的激活序号：**> 0 表示已激活**，客户端拿它当
+    /// <c>activeGotchas</c> 映射的排序键（先激活的序号小）。
+    ///
+    /// <para>
+    /// 字段名照抄客户端（<c>gotchaActivated</c>，int 不是 bool）。以前宿主读的是一个
+    /// 谁都不写的 <c>gotcha</c> 布尔字段，于是 50 张反制指令永远不触发。
+    /// 客户端只在 UI 侧赋正值（取消激活时写 0），无头模拟里由引擎在打出时激活。
+    /// </para>
+    /// </summary>
+    public int GotchaActivated;
+
     public bool CanAct => !Pinned && !Suppressed && !Destroyed;
 
     public Card Clone()

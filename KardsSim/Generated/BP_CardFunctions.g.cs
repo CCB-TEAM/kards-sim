@@ -94,6 +94,7 @@ public static Val AddDefenseToMultipleCards(IHost H, Val self, Val[] args)
         L["giverCardID"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_qqq = args.Length > 3 ? args[3].As<Action<Val>>() : null;
         L["qqq"] = Val.Nothing;
+    L["cardsToDestroy"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(2300);
     L_0005:
@@ -616,6 +617,7 @@ public static Val AfterWaitCardPlayFromHand(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["cardPlayed"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["targetCardID"] = args.Length > 1 ? args[1] : Val.Nothing;
+    L["cardsDone"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(2026);
     L_0005:
@@ -1382,6 +1384,14 @@ public static Val ApplyDamageToMultipleCards(IHost H, Val self, Val[] args)
         L["damage"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_outputDestroyedCards = args.Length > 3 ? args[3].As<Action<Val>>() : null;
         L["outputDestroyedCards"] = Val.Nothing;
+    L["_indicesOfElementsToRemove"] = H.MakeArray(new Val[] { });
+    L["affectedLocations"] = H.MakeArray(new Val[] { });
+    L["damageReceivedArr"] = H.MakeArray(new Val[] { });
+    L["destroyedCards"] = H.MakeArray(new Val[] { });
+    L["locationArr"] = H.MakeArray(new Val[] { });
+    L["OldDefenseArr"] = H.MakeArray(new Val[] { });
+    L["receiverDestroyedArr"] = H.MakeArray(new Val[] { });
+    L["receiverIDs"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(10673);
     L_0005:
@@ -2842,6 +2852,8 @@ public static Val ApplyDestroyMultipleCards(IHost H, Val self, Val[] args)
         L["destroyerCardID"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_cardsToDestroy = args.Length > 1 ? args[1].As<Action<Val>>() : null;
         L["cardsToDestroy"] = Val.Nothing;
+    L["affectedLocations"] = H.MakeArray(new Val[] { });
+    L["cardsToDestroyLocations"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(3527);
     L_0005:
@@ -4003,6 +4015,8 @@ public static Val ApplySetCardsSeenByCipher(IHost H, Val self, Val[] args)
         L["card"] = Val.Nothing;
         L["enemyTurn"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["showAnimation"] = args.Length > 2 ? args[2] : Val.Nothing;
+    L["IDs"] = H.MakeArray(new Val[] { });
+    L["seen"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(805);
     L_0005:
@@ -5832,6 +5846,8 @@ public static Val CardPlayedFromHand(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["cardPlayed"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["targetCardID"] = args.Length > 1 ? args[1] : Val.Nothing;
+    L["AfterPlayFromHandActiveGotchasCardIDs"] = H.MakeArray(new Val[] { });
+    L["cardsDone"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(6853);
     L_0005:
@@ -9891,6 +9907,7 @@ public static Val ConvertCard(IHost H, Val self, Val[] args)
         L["skipTrigger"] = args.Length > 4 ? args[4] : Val.Nothing;
         var __out_newCardIDs = args.Length > 5 ? args[5].As<Action<Val>>() : null;
         L["newCardIDs"] = Val.Nothing;
+    L["_newCardIDs"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(4555);
     L_0005:
@@ -12308,6 +12325,8 @@ public static Val DrawCardsFromDeckBySide(IHost H, Val self, Val[] args)
         var __out_cardsIDs = args.Length > 5 ? args[5].As<Action<Val>>() : null;
         L["cardsIDs"] = Val.Nothing;
         L["drawDelay"] = args.Length > 6 ? args[6] : Val.Nothing;
+    L["cardSeenValues"] = H.MakeArray(new Val[] { });
+    L["drawnCards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(645);
     L_0005:
@@ -14077,6 +14096,8 @@ public static Val ExecuteEndOfTurnQueue(IHost H, Val self, Val[] args)
         var __out_CardsToResolve = args.Length > 1 ? args[1].As<Action<Val>>() : null;
         L["CardsToResolve"] = Val.Nothing;
         L["RecursionLoop"] = args.Length > 2 ? args[2] : Val.Nothing;
+    L["endofturn1"] = H.MakeArray(new Val[] { });
+    L["endofturn2"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(2554);
     L_0005:
@@ -14913,6 +14934,7 @@ public static Val ExecuteOnCardDealDamageEffects(IHost H, Val self, Val[] args)
         L["isCombatDamage"] = args.Length > 3 ? args[3] : Val.Nothing;
         L["CounterDamage"] = args.Length > 4 ? args[4] : Val.Nothing;
         L["isRedirected"] = args.Length > 5 ? args[5] : Val.Nothing;
+    L["cardsDone"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1822);
     L_0005:
@@ -15823,6 +15845,7 @@ public static Val ExecuteOnDealDamageAddDamage(IHost H, Val self, Val[] args)
         L["_isDefenderDamage"] = args.Length > 5 ? args[5] : Val.Nothing;
         var __out_calculatedDamage = args.Length > 6 ? args[6].As<Action<Val>>() : null;
         L["calculatedDamage"] = Val.Nothing;
+    L["addDamageToReRun"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1453);
     L_0005:
@@ -15959,6 +15982,7 @@ public static Val ExecuteOnDealDamageAddDamageAfterCalc(IHost H, Val self, Val[]
         L["isRedirected"] = args.Length > 5 ? args[5] : Val.Nothing;
         var __out_finalDamage = args.Length > 6 ? args[6].As<Action<Val>>() : null;
         L["finalDamage"] = Val.Nothing;
+    L["runAfter"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1984);
     L_0005:
@@ -16537,6 +16561,7 @@ public static Val ExecuteOnMoveToFrontlineCardEffects(IHost H, Val self, Val[] a
         L["cardMoved"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["forceMove"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["moveCost"] = args.Length > 2 ? args[2] : Val.Nothing;
+    L["cardsDone"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1887);
     L_0005:
@@ -17098,6 +17123,8 @@ public static Val ExecuteScryingEffectBySide(IHost H, Val self, Val[] args)
         L["cardToDrawID"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["cardPlayed"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["sideScrying"] = args.Length > 2 ? args[2] : Val.Nothing;
+    L["_deckCardIDs"] = H.MakeArray(new Val[] { });
+    L["tmpTopToBottomCardIDs"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(2752);
     L_0005:
@@ -18508,6 +18535,7 @@ public static Val Get_X_AndMoreAttackCardsOnBoard(IHost H, Val self, Val[] args)
         L["cardsIDs"] = Val.Nothing;
         L["Attack"] = args.Length > 2 ? args[2] : Val.Nothing;
         L["includeCovert"] = args.Length > 3 ? args[3] : Val.Nothing;
+    L["LocalCardsIDs"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1100);
     L_0005:
@@ -18628,6 +18656,7 @@ public static Val GetActiveGotchasOrdered(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         var __out_cardIDs = args.Length > 0 ? args[0].As<Action<Val>>() : null;
         L["cardIDs"] = Val.Nothing;
+    L["1"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(3623);
     L_0005:
@@ -18902,6 +18931,7 @@ public static Val GetAdjacentCards(IHost H, Val self, Val[] args)
         L["includeCovertCards"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_adjacentCards = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["adjacentCards"] = Val.Nothing;
+    L["_adjacentCards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1513);
     L_0005:
@@ -19111,6 +19141,7 @@ public static Val GetAllActiveStaticCards(IHost H, Val self, Val[] args)
         L["includeReserved"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_cards = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["cards"] = Val.Nothing;
+    L["_staticCards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(2635);
     L_0005:
@@ -19369,6 +19400,7 @@ public static Val GetAllCardsInFrontline(IHost H, Val self, Val[] args)
         L["includeCovertCards"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_cards = args.Length > 1 ? args[1].As<Action<Val>>() : null;
         L["cards"] = Val.Nothing;
+    L["_cards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(831);
     L_0005:
@@ -19455,6 +19487,7 @@ public static Val GetAllCardsOnBoard(IHost H, Val self, Val[] args)
         L["includeCovertCards"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_cards = args.Length > 1 ? args[1].As<Action<Val>>() : null;
         L["cards"] = Val.Nothing;
+    L["_cards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(819);
     L_0005:
@@ -19540,6 +19573,7 @@ public static Val GetAllCardsPlayedThisBattle(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         var __out_playedCardsIDs = args.Length > 0 ? args[0].As<Action<Val>>() : null;
         L["playedCardsIDs"] = Val.Nothing;
+    L["localAllCardsPlayed"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(709);
     L_0005:
@@ -19629,6 +19663,7 @@ public static Val GetAllForecastCards(IHost H, Val self, Val[] args)
         L["includeReserved"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_forecastCards = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["forecastCards"] = Val.Nothing;
+    L["outCards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(728);
     L_0005:
@@ -19707,6 +19742,7 @@ public static Val GetAllUnitsOnBoard(IHost H, Val self, Val[] args)
         L["includeCovertCards"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_cards = args.Length > 1 ? args[1].As<Action<Val>>() : null;
         L["cards"] = Val.Nothing;
+    L["_cards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1011);
     L_0005:
@@ -19878,6 +19914,7 @@ public static Val GetCardsInFrontlineBySide(IHost H, Val self, Val[] args)
         L["includeCovertCards"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_cards = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["cards"] = Val.Nothing;
+    L["_cards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(929);
     L_0005:
@@ -19968,6 +20005,7 @@ public static Val GetCardsInHandBySide(IHost H, Val self, Val[] args)
         L["side"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_cards = args.Length > 1 ? args[1].As<Action<Val>>() : null;
         L["cards"] = Val.Nothing;
+    L["_cards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(686);
     L_0005:
@@ -20075,6 +20113,7 @@ public static Val GetCardsInSupportLineBySide(IHost H, Val self, Val[] args)
         L["includeCovertCards"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_cards = args.Length > 3 ? args[3].As<Action<Val>>() : null;
         L["cards"] = Val.Nothing;
+    L["_cards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1143);
     L_0005:
@@ -20188,6 +20227,7 @@ public static Val GetCardsOnBoardBySide(IHost H, Val self, Val[] args)
         L["includeCovertCards"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_cards = args.Length > 3 ? args[3].As<Action<Val>>() : null;
         L["cards"] = Val.Nothing;
+    L["_cards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1010);
     L_0005:
@@ -20369,6 +20409,7 @@ public static Val GetCardsPlayedThisTurn(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         var __out_cards = args.Length > 0 ? args[0].As<Action<Val>>() : null;
         L["cards"] = Val.Nothing;
+    L["cardsPlayed"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(603);
     L_0005:
@@ -20447,6 +20488,7 @@ public static Val GetCardsToTheLeft(IHost H, Val self, Val[] args)
         L["includeCovert"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_cards = args.Length > 3 ? args[3].As<Action<Val>>() : null;
         L["cards"] = Val.Nothing;
+    L["returnCards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1585);
     L_0005:
@@ -20585,6 +20627,7 @@ public static Val GetCardsToTheRight(IHost H, Val self, Val[] args)
         L["includeCovert"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_cards = args.Length > 3 ? args[3].As<Action<Val>>() : null;
         L["cards"] = Val.Nothing;
+    L["returnCards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1749);
     L_0005:
@@ -21141,6 +21184,7 @@ public static Val GetNewLocationNumbers(IHost H, Val self, Val[] args)
         L["cardsInSupportline"] = Val.Nothing;
         var __out_cardIdToLocationNumber = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["cardIdToLocationNumber"] = Val.Nothing;
+    L["tmpMap"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(4003);
     L_0005:
@@ -21676,6 +21720,7 @@ public static Val GetRandomCard(IHost H, Val self, Val[] args)
         L["skipCustomAlways"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_randomCard = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["randomCard"] = Val.Nothing;
+    L["alwaysSelected"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1239);
     L_0005:
@@ -22066,6 +22111,7 @@ public static Val GetUnitTypeCountOnBoard(IHost H, Val self, Val[] args)
         L["SideToGet"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_TypeCount = args.Length > 1 ? args[1].As<Action<Val>>() : null;
         L["TypeCount"] = Val.Nothing;
+    L["LocalUnitTypes"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(705);
     L_0005:
@@ -23117,6 +23163,7 @@ public static Val GiveRandomCombatKeyword(IHost H, Val self, Val[] args)
         L["keywordGiven"] = Val.Nothing;
         var __out_success = args.Length > 3 ? args[3].As<Action<Val>>() : null;
         L["success"] = Val.Nothing;
+    L["validKeywords"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(2410);
     L_0005:
@@ -24456,6 +24503,7 @@ public static Val JSON_GetBoolArray(IHost H, Val self, Val[] args)
         L["values"] = Val.Nothing;
         var __out_found = args.Length > 3 ? args[3].As<Action<Val>>() : null;
         L["found"] = Val.Nothing;
+    L["arr"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(808);
     L_0005:
@@ -24582,6 +24630,7 @@ public static Val JSON_GetIntArray(IHost H, Val self, Val[] args)
         L["values"] = Val.Nothing;
         var __out_found = args.Length > 3 ? args[3].As<Action<Val>>() : null;
         L["found"] = Val.Nothing;
+    L["arr"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(816);
     L_0005:
@@ -24708,6 +24757,7 @@ public static Val JSON_GetStringArray(IHost H, Val self, Val[] args)
         L["values"] = Val.Nothing;
         var __out_found = args.Length > 3 ? args[3].As<Action<Val>>() : null;
         L["found"] = Val.Nothing;
+    L["arr"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(816);
     L_0005:
@@ -25358,6 +25408,7 @@ public static Val JSON_SetBoolArray(IHost H, Val self, Val[] args)
         L["values"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_found = args.Length > 3 ? args[3].As<Action<Val>>() : null;
         L["found"] = Val.Nothing;
+    L["jsonArr"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(612);
     L_0005:
@@ -25454,6 +25505,7 @@ public static Val JSON_SetIntArray(IHost H, Val self, Val[] args)
         L["values"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_found = args.Length > 3 ? args[3].As<Action<Val>>() : null;
         L["found"] = Val.Nothing;
+    L["jsonArr"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(612);
     L_0005:
@@ -25550,6 +25602,7 @@ public static Val JSON_SetStringArray(IHost H, Val self, Val[] args)
         L["values"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_found = args.Length > 3 ? args[3].As<Action<Val>>() : null;
         L["found"] = Val.Nothing;
+    L["jsonArr"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(612);
     L_0005:
@@ -33199,6 +33252,9 @@ public static Val SalvageMultipleUnits(IHost H, Val self, Val[] args)
         L["instigatorID"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_qqq = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["qqq"] = Val.Nothing;
+    L["_cardSeenArray"] = H.MakeArray(new Val[] { });
+    L["_createdCardIDs"] = H.MakeArray(new Val[] { });
+    L["localCardIDs"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(2934);
     L_0005:
@@ -33621,6 +33677,7 @@ public static Val selectCardToDraw(IHost H, Val self, Val[] args)
         L["isEffect"] = args.Length > 2 ? args[2] : Val.Nothing;
         var __out_drawnCardID = args.Length > 3 ? args[3].As<Action<Val>>() : null;
         L["drawnCardID"] = Val.Nothing;
+    L["spawnCards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(3564);
     L_0005:
@@ -34812,6 +34869,7 @@ public static Val SpawnCardInDeckBySide(IHost H, Val self, Val[] args)
         L["RandomWithoutShuffle"] = args.Length > 9 ? args[9] : Val.Nothing;
         var __out_spawnedCardIDs = args.Length > 10 ? args[10].As<Action<Val>>() : null;
         L["spawnedCardIDs"] = Val.Nothing;
+    L["tmpspawnedcardids"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1362);
     L_0005:
@@ -35665,6 +35723,7 @@ public static Val SuppressMultipleUnits(IHost H, Val self, Val[] args)
         L["instigatorID"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_qqq = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["qqq"] = Val.Nothing;
+    L["_tmp_customAbilityGivers"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(7867);
     L_0005:

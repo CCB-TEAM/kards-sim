@@ -265,6 +265,7 @@ public static Val getPossibleCardsFromStaticCards(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         var __out_possibleCards = args.Length > 0 ? args[0].As<Action<Val>>() : null;
         L["possibleCards"] = Val.Nothing;
+    L["localPossibleCards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(855);
     L_0005:
@@ -356,6 +357,7 @@ public static Val getTwoCardsFromPossibleCards(IHost H, Val self, Val[] args)
         L["cardNameA"] = Val.Nothing;
         var __out_cardNameB = args.Length > 3 ? args[3].As<Action<Val>>() : null;
         L["cardNameB"] = Val.Nothing;
+    L["possibleAttacksInArray"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1260);
     L_0005:

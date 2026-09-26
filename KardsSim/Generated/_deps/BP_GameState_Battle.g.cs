@@ -875,6 +875,7 @@ public static Val DecrementTurnGameplayRestrictions(IHost H, Val self, Val[] arg
         var L = new Dictionary<string, Val>(StringComparer.Ordinal);
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
+    L["newEffects"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(768);
     L_0005:
@@ -1008,6 +1009,7 @@ public static Val FetchAllCardsWithEventTrigger(IHost H, Val self, Val[] args)
         L["TriggerToFetch"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_cardsWithThisTrigger = args.Length > 1 ? args[1].As<Action<Val>>() : null;
         L["cardsWithThisTrigger"] = Val.Nothing;
+    L["triggerCards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1171);
     L_0005:
@@ -1159,6 +1161,8 @@ public static Val FetchCardsByLocation(IHost H, Val self, Val[] args)
         L["FirstCard"] = Val.Nothing;
         var __out_fetchedCardsIDs = args.Length > 5 ? args[5].As<Action<Val>>() : null;
         L["fetchedCardsIDs"] = Val.Nothing;
+    L["TmpFetchedCards"] = H.MakeArray(new Val[] { });
+    L["TmpFetchedCardsIDs"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(2332);
     L_0005:
@@ -1420,6 +1424,7 @@ public static Val FetchCardsByLocationSorted(IHost H, Val self, Val[] args)
         L["location"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_cardIDs = args.Length > 1 ? args[1].As<Action<Val>>() : null;
         L["cardIDs"] = Val.Nothing;
+    L["_cardIDs"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1072);
     L_0005:
@@ -3090,6 +3095,7 @@ public static Val RemoveGameplayRestrictionEffect(IHost H, Val self, Val[] args)
         L["type"] = args.Length > 1 ? args[1] : Val.Nothing;
         L["cardID"] = args.Length > 2 ? args[2] : Val.Nothing;
         L["removeAll"] = args.Length > 3 ? args[3] : Val.Nothing;
+    L["localNewEffects"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(743);
     L_0005:

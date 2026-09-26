@@ -64,6 +64,7 @@ public static Val GetChooseSpawnCards(IHost H, Val self, Val[] args)
         L["markAsSeen"] = Val.Nothing;
         var __out_keepOrder = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["keepOrder"] = Val.Nothing;
+    L["PossibleCards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1132);
     L_0005:

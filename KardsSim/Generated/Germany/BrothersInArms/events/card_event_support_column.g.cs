@@ -407,6 +407,8 @@ public static Val updateBuffs(IHost H, Val self, Val[] args)
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
         L["targetCard"] = args.Length > 0 ? args[0] : Val.Nothing;
+    L["cardToRemoveBuffs"] = H.MakeArray(new Val[] { });
+    L["currentAdjacent"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(2535);
     L_0005:

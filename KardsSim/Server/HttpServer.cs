@@ -456,6 +456,18 @@ public sealed class HttpServer
             right = View(g, Side.Right),
             legalActions = g.LegalActions().Select(a => new { text = a.ToString(), a.Type, a.SourceId, a.TargetId, a.HandIndex }).ToArray(),
             stats = new { illegal = s.Illegal, triggers = g.TriggerFireCount, unhandled = g.Unhandled.Count },
+            // 抉择预览：效果跑到一半要求选牌时，这里给出候选项，
+            // 同时 legalActions / legalIndices 里只会剩 ChooseCard 这一种动作。
+            pendingChoice = g.Pending is null ? null : new
+            {
+                kind = g.Pending.Kind,
+                sourceCard = g.Pending.Source?.Id,
+                sourceId = g.Pending.Source?.InstanceId ?? -1,
+                isEffect = g.Pending.IsEffect,
+                options = g.Pending.Options
+                    .Select((o, i) => new { index = i, id = o.CardId, label = o.Label })
+                    .ToArray(),
+            },
         };
     }
 

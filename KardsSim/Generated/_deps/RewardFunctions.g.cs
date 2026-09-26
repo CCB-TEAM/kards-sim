@@ -3754,6 +3754,7 @@ public static Val ShowRewardsFromReceipt(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         L["IAPFulfilledReceipt"] = args.Length > 0 ? args[0] : Val.Nothing;
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
+    L["rewards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(814);
     L_0005:

@@ -100,6 +100,7 @@ public static Val GetOppositeUnitsOnBoard(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         var __out_OppositeUnits = args.Length > 0 ? args[0].As<Action<Val>>() : null;
         L["OppositeUnits"] = Val.Nothing;
+    L["localOppositeUnits"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1007);
     L_0005:

@@ -1229,6 +1229,7 @@ public static Val getActiveEffects(IHost H, Val self, Val[] args)
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_effects = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["effects"] = Val.Nothing;
+    L["effectsOnCard"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(4227);
     L_0005:

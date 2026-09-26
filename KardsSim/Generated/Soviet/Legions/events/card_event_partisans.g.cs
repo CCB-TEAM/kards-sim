@@ -36,6 +36,7 @@ public static Val CanPlayFromHand(IHost H, Val self, Val[] args)
         L["reasonParam2"] = Val.Nothing;
         var __out_targetedCard = args.Length > 4 ? args[4].As<Action<Val>>() : null;
         L["targetedCard"] = Val.Nothing;
+    L["cardsinfrontline"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1464);
     L_0005:

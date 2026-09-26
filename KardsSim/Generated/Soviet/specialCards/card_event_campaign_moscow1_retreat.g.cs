@@ -130,6 +130,7 @@ public static Val getUnpinnedEnemyUnits(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         var __out_unpinnedEnemyUnits = args.Length > 0 ? args[0].As<Action<Val>>() : null;
         L["unpinnedEnemyUnits"] = Val.Nothing;
+    L["_unpinnedEnemyUnits"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(659);
     L_0005:

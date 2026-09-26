@@ -13,6 +13,22 @@ public sealed partial class GameEngine
     {
         var res = new List<GameAction>();
         if (S.Done) return res;
+
+        // 二段式抉择的第二段：有待决选择时，动作列表里**只剩候选项**。
+        // 不返回别的动作是刻意的 —— 选择没结算完，对局不该继续往下走。
+        if (Pending is not null)
+        {
+            for (var i = 0; i < Pending.Options.Count; i++)
+                res.Add(new GameAction
+                {
+                    Type = ActionType.ChooseCard,
+                    HandIndex = i,
+                    TargetId = Pending.Options[i].CardId,
+                    SourceId = Pending.Source?.InstanceId ?? -1,
+                });
+            return res;
+        }
+
         var me = S.Current;
         var p = S.Player(me);
 
@@ -128,6 +144,8 @@ public sealed partial class GameEngine
         if (u.Owner != S.Current) return false;
         if (!u.CanAct) return false;
         if (u.AttackedThisTurn) return false;
+        // 移动与攻击默认二选一；坦克与带 CanMoveAndAttackInTheSameTurn 的单位例外。
+        if (u.MovedThisTurn && !CanMoveAndAttackInTheSameTurn(u)) return false;
         // 召唤失调：当回合刚进场不能攻击，但 Blitz 是明确的例外 ——
         // 出牌时的 `if (!c.Has(Kw.Blitz)) c.AttackedThisTurn = true;` 就是给 Blitz
         // 留口子的，这里要是无条件挡，那条豁免就变成死逻辑了。
@@ -157,11 +175,37 @@ public sealed partial class GameEngine
         return SupportCount(u.Owner) < Rules.MaxCardsPerRow;
     }
 
+    /// <summary>
+    /// 这个单位能不能在同一回合里既移动又攻击。
+    ///
+    /// <para>
+    /// 客户端语义（从直译产物读实，两侧对称）：
+    /// <c>SetAttackerHasAttacked</c> 攻击时总是扣 <c>attackLeft</c>，
+    /// 若本函数为假**再扣一个 <c>movementLeft</c>**；<c>MoveCardToFrontline</c> 移动时总是扣
+    /// <c>movementLeft</c>，若为假**把 <c>attackLeft</c> 清 0**。
+    /// 也就是：默认「移动与攻击二选一」。
+    /// </para>
+    ///
+    /// <para>
+    /// 能两者都做的只有两类：<b>坦克</b>（wiki：「坦克可以在同一回合中移动并攻击，顺序不限」），
+    /// 以及卡自己用 <c>CustomName1Add("CanMoveAndAttackInTheSameTurn")</c> 标记过的单位
+    /// （卡面文案「can move and attack during the same turn」是例外能力，反证了默认不行）。
+    /// </para>
+    /// </summary>
+    public bool CanMoveAndAttackInTheSameTurn(Card u)
+    {
+        if (u is null) return false;
+        if (u.Type == CardType.Tank) return true;
+        return Host is not null && Host.HasMoveAndAttackToken(u);
+    }
+
     private bool CanMoveAtAll(Card u)
     {
         if (u == null || u.Destroyed || !u.IsUnit) return false;
         if (u.Owner != S.Current || !u.CanAct) return false;
         if (u.MovedThisTurn) return false;
+        // 已经攻击过就不能再移动（除非这个单位两者都能做）
+        if (u.AttackedThisTurn && !CanMoveAndAttackInTheSameTurn(u)) return false;
         // 与 CanAttack 同一处例外：Blitz 当回合可以行动。
         // 客户端把这条拆在 CanAttack 的 deployment_sickness 和移动判定里，
         // 引擎集中在这里表述。
@@ -338,6 +382,7 @@ public sealed partial class GameEngine
                 ActionType.Attack => DoAttack(a),
                 ActionType.MoveToFrontline => DoMove(a, true),
                 ActionType.MoveToSupport => DoMove(a, false),
+                ActionType.ChooseCard => DoChooseCard(a),
                 _ => false,
             };
             if (ok) Steps++;
@@ -406,6 +451,17 @@ public sealed partial class GameEngine
         S.Log.Line($"  {S.Current} plays {c.Id} (-{c.KreditCost}K)");
         if (a.TargetId > 0) S.Log.Line($"    target -> {a.TargetId}");
         if (choices > 1) S.Log.Line($"    choose -> {a.ChoiceIndex}");
+
+        // 反制指令（Gotcha）：打出即「激活」。
+        //
+        // 客户端由 UI 赋 gotchaActivated 的正值（取消激活时写 0），无头模拟里没有 UI，
+        // 所以引擎自己激活。激活序号是 activeGotchas 映射的排序键，用单调递增计数器。
+        // 不激活的话 IsGotcha / ShouldGotchaTrigger 恒假，50 张反制指令全是死的。
+        if (c.Type == CardType.Gotcha && c.GotchaActivated <= 0)
+        {
+            c.GotchaActivated = ++S.NextGotchaOrder;
+            S.Log.Line($"    gotcha activated #{c.GotchaActivated}");
+        }
 
         c.ChosenTargetId = a.TargetId;
 
@@ -623,6 +679,7 @@ public sealed class GameAction
         ActionType.Attack => $"Attack({SourceId}->{(TargetId == 0 ? "HQ" : TargetId.ToString())})",
         ActionType.MoveToFrontline => $"MoveFront({SourceId})",
         ActionType.MoveToSupport => $"MoveSupport({SourceId})",
+        ActionType.ChooseCard => $"Choose(#{HandIndex} id={TargetId})",
         ActionType.UseAbility => $"Ability({SourceId})",
         _ => Type.ToString(),
     };

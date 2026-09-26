@@ -82,6 +82,7 @@ public static Val TriggerMultipleDeploymentEffects(IHost H, Val self, Val[] args
         var __ret = Val.Nothing;
         var __out_inputCards = args.Length > 0 ? args[0].As<Action<Val>>() : null;
         L["inputCards"] = Val.Nothing;
+    L["cardsTriggerLater"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1326);
     L_0005:

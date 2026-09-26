@@ -169,6 +169,10 @@ public sealed class EngineHost : Host
         k.Set("GameStateRef", Val.Ref(GameStateRef));
         k.Set("CardFunctionsNotifier", Val.Ref(Notifier));
         k.Set("defId", Val.Of(c.Id ?? ""));
+        // 卡的 name 就是它的资产名（cards.json 里 id == name），蓝图大量按名字判卡
+        //（Develop 的候选列表就是 GetMember(item,"name")；天气卡判定也是拿 name 去比集合）。
+        // 不写的话读出来是空值，候选列表变成一串空串。
+        k.Set("name", Val.Of(c.Id ?? ""));
         SeedCdoFields(k, c.Def);
         _byId[c.InstanceId] = k;
         _byObj[k] = c;
@@ -274,6 +278,7 @@ public sealed class EngineHost : Host
         k.Set("GameStateRef", Val.Ref(GameStateRef));
         k.Set("CardFunctionsNotifier", Val.Ref(Notifier));
         k.Set("defId", Val.Of(def.Id));
+        k.Set("name", Val.Of(def.Id));
         k.Set("attack", Val.Of(def.Attack));
         k.Set("defense", Val.Of(def.Defense));
         k.Set("kredits", Val.Of(def.Kredits));
@@ -286,10 +291,14 @@ public sealed class EngineHost : Host
         SeedCdoFields(k, def);
         WriteKeywords(k, def.Keywords);
         _staticCache[def.Id] = k;
+        _staticById[k.Id] = k;
         return k;
     }
 
     private readonly Dictionary<string, KObj> _staticCache = new(StringComparer.Ordinal);
+
+    /// <summary>静态卡的负数 instanceId → KObj。用于让 <c>GetCardFromID</c> 找回静态卡。</summary>
+    private readonly Dictionary<int, KObj> _staticById = new();
 
     /// <summary>
     /// 把关键字位写成蓝图读的 <c>has*</c> 布尔字段。
@@ -412,7 +421,6 @@ public sealed class EngineHost : Host
         k.Set("location", Val.Of(ClientLocation(c)));
         k.Set("locationNumber", Val.Of(c.LocationNumber));
         k.Set("isBeingGuarded", Val.Of(c.IsBeingGuarded));
-        k.Set("attackCountThisTurn", Val.Of(c.AttackedThisTurn ? 1 : 0));
 
         // 客户端规则库读的其余卡面字段。它们原本只在 Obj() 里写一次，
         // 之后的增益/关键字变更不会反映过去 —— 而未回填的字段读出来是 none，
@@ -426,6 +434,17 @@ public sealed class EngineHost : Host
         k.Set("heavyArmor", Val.Of(c.HeavyArmor));
         k.Set("enterPlayOnTurn", Val.Of(c.EnterPlayTurn));
         k.Set("side", Val.Of((int)c.Owner));
+
+        // 行动次数：引擎侧用两个布尔建模，客户端读的是计数/标志位，这里换算过去。
+        // 规则库的 has_already_attacked 读 attackCountThisTurn，
+        // 卡牌逻辑的移动/攻击检查读 attackLeft / movementLeft。
+        k.Set("attackCountThisTurn", Val.Of(c.AttackedThisTurn ? 1 : 0));
+        k.Set("hasAttackedThisTurn", Val.Of(c.AttackedThisTurn));
+        k.Set("hasEverAttacked", Val.Of(c.AttackedThisTurn));
+        k.Set("attackLeft", Val.Of(c.AttackedThisTurn ? 0 : 1));
+        k.Set("movementLeft", Val.Of(c.MovedThisTurn ? 0 : 1));
+        // 反制指令的激活序号（>0 = 已激活），客户端拿它当 activeGotchas 的键。
+        k.Set("gotchaActivated", Val.Of(c.GotchaActivated));
         // 必须用 c.Keywords（实体当前值），不能用 c.Def.Keywords（卡面静态值）：
         // 关键字会被效果动态增删（CampaignAddGuard / 给单位 Shock …），
         // 用静态值回填会把刚加上的关键字冲掉。
@@ -582,6 +601,68 @@ public sealed class EngineHost : Host
             var key = $"SetRightLeftMostWhenPlayed 抛异常: {ex.GetType().Name}";
             Unhandled[key] = Unhandled.TryGetValue(key, out var n) ? n + 1 : 1;
         }
+    }
+
+    /// <summary>
+    /// 结算一次「选牌」回调：调发起卡自己的
+    /// <c>OnHandTargetSelected(handTargetCardID, instigatorID)</c>。
+    ///
+    /// <para>
+    /// 这是客户端 UI 在玩家点完之后做的事，无头模拟里由引擎代劳
+    /// （见 <see cref="Engine.PendingChoice"/>）。回调里可能再发起下一次选择
+    /// （例如「Develop 两次」），所以调用方不能假设一次就结束。
+    /// </para>
+    /// </summary>
+    public bool ResolveHandTargetSelected(Card source, int chosenCardId)
+    {
+        if (source?.Id is null) return false;
+        var fn = FnIndex.Find(source.Id, "OnHandTargetSelected");
+        if (fn is null)
+        {
+            // 这张卡没有自己的回调。和 Handle 里同一套判据：
+            // 「某个资产定义过这个名字」→ 只是这张卡没实现（蓝图里调用未实现的
+            // BlueprintImplementableEvent 就是空操作），不该记成宿主缺口。
+            // 客户端这类卡（例如 card_unit_hampshire_regiment）的 Develop 结果是**UI 直接做的**，
+            // 无头模拟里没有 UI，所以效果不落地 —— 这是已知偏差，不是崩溃。
+            if (!KnownAssetFunctions.Contains("OnHandTargetSelected"))
+            {
+                var k1 = "OnHandTargetSelected 无任何实现";
+                Unhandled[k1] = Unhandled.TryGetValue(k1, out var c1) ? c1 + 1 : 1;
+            }
+            return false;
+        }
+
+        ResetBudget();
+        try
+        {
+            fn(this, Val.Ref(Obj(source)), new Val[] { Val.Of(chosenCardId), Val.Of(0) });
+            SyncBack(Obj(source));
+            return true;
+        }
+        catch (EffectBudgetException) { NoteBudgetTrip(); return true; }
+        catch (Exception ex)
+        {
+            var key = $"OnHandTargetSelected 抛异常: {ex.GetType().Name}";
+            Unhandled[key] = Unhandled.TryGetValue(key, out var n) ? n + 1 : 1;
+            return true;
+        }
+    }
+
+    /// <summary>
+    /// 卡上有没有 <c>CanMoveAndAttackInTheSameTurn</c> 能力标记。
+    ///
+    /// <para>
+    /// 标记由卡自己用 <c>CustomName1Add</c> 写（token 字符串直接取自
+    /// <c>card_event_lightning_conquest_new</c> 与 BP_CardFunctions 的调用点，不是猜的），
+    /// 也可能直接初始化在 CDO 的 <c>customName1</c> 里
+    /// （例如 <c>card_unit_panzergrenadier</c>）。
+    /// </para>
+    /// </summary>
+    public bool HasMoveAndAttackToken(Card c)
+    {
+        if (c?.Id is null) return false;
+        var v = Obj(c).Get("customName1").AsStr();
+        return v.Contains("CanMoveAndAttackInTheSameTurn", StringComparison.OrdinalIgnoreCase);
     }
 
     /// <summary>
@@ -1020,8 +1101,14 @@ public sealed class EngineHost : Host
 
             ["GetCardFromID"] = (h, a) =>
             {
-                var c = h.Engine.S.FindCard((int)a[1].AsInt());
-                Val.TrySetOut(a[^1], c is null ? Val.Nothing : Val.Ref(h.Obj(c)));
+                var id = (int)a[1].AsInt();
+                var c = h.Engine.S.FindCard(id);
+                // 静态卡（GetStaticCard 造的，负数 id）也要能按 id 找回来 ——
+                // Develop / 选手牌的第二段回调就是拿着候选卡的 id 回来的。
+                var v = c is not null ? Val.Ref(h.Obj(c))
+                      : id < 0 && h._staticById.TryGetValue(id, out var sk) ? Val.Ref(sk)
+                      : Val.Nothing;
+                Val.TrySetOut(a[^1], v);
                 return Val.Nothing;
             },
 
@@ -1341,16 +1428,17 @@ public sealed class EngineHost : Host
             ["IsPinned"] = (h, a) => Out(a, h.Card_(a[0])?.Pinned ?? false),
             ["IsGotcha"] = (h, a) =>
             {
-                // Gotcha（伏击/反制）是盖在场上没翻开的状态，等价于 covert + 未 reveal
+                // 反制指令：盖在场上、已激活。客户端用 gotchaActivated（int，>0 = 已激活）
+                // 当 activeGotchas 映射的排序键 —— 以前宿主读的是一个谁都不写的
+                // "gotcha" 布尔字段，于是 50 张反制指令永远不触发。
                 var c = h.Card_(a[0]);
-                return Out(a, c is not null && c.Covert && h.Obj(c).Get("gotcha").AsBool());
+                return Out(a, c is not null && c.GotchaActivated > 0);
             },
             ["ShouldGotchaTrigger"] = (h, a) =>
             {
-                // 参数：(triggerCard, out shouldIt)。只有盖着的反制卡才响应。
+                // 参数：(triggerCard, out shouldIt)。只有已激活且还在场上的反制卡才响应。
                 var self = h.Card_(a[0]);
-                var should = self is not null && self.Covert && !self.Destroyed
-                             && h.Obj(self).Get("gotcha").AsBool();
+                var should = self is not null && self.GotchaActivated > 0 && !self.Destroyed;
                 return Out(a, should);
             },
             ["Get Is Server Config"] = (h, a) => Out(a, false),
@@ -1484,6 +1572,44 @@ public sealed class EngineHost : Host
             // 再 CopyData 把数据灌进去。无头模拟没有 Actor（SpawnObject 就是 no-op），
             // 所以这里也显式登记为 no-op，免得它混进「未实现调用」里污染完备性指标。
             ["CopyData"] = (h, a) => Val.Nothing,
+
+            // void NotifySelectCardToDrawPending(U_CardFunctionsNotifier* notifier, int32 selectingCardID,
+            //        bool, TArray<UBaseCardObject*> candidates, bool isEffect)
+            //
+            // 客户端这里只是「通知 UI 把候选列出来」，真正的效果在玩家点完之后由 UI 回调
+            // OnHandTargetSelected 执行（调用方忽略 selectCardToDraw 的返回值，所以延后是安全的）。
+            // 无头模拟没有 UI，所以宿主把它转成引擎的待决选择：动作列表里只剩候选项，
+            // 选定后引擎再回调 OnHandTargetSelected。见 GameEngine.PendingChoice。
+            ["NotifySelectCardToDrawPending"] = (h, a) =>
+            {
+                var src = h.Engine.S.FindCard(a.Length > 1 ? (int)a[1].AsInt() : 0);
+                var opts = new List<ChoiceOption>();
+                foreach (var v in AsArr(a.Length > 3 ? a[3] : Val.Nothing)?.Items ?? new List<Val>())
+                {
+                    // 候选数组有两种载荷，两条路都要认：
+                    //  - 卡对象（牌库/占卜那条路，K2Node_MakeArray 装的是 UBaseCardObject*）
+                    //  - 卡名字符串（Develop 那条路，装的是 GetMember(item,"name")）
+                    if (v.O is KObj k)
+                    {
+                        var id = k.Get("defId").AsStr();
+                        opts.Add(new ChoiceOption
+                        {
+                            CardId = (int)k.Get("cardID").AsInt(),
+                            Name = id,
+                            Label = string.IsNullOrEmpty(id) ? k.ToString() : id,
+                        });
+                    }
+                    else
+                    {
+                        var nm = v.AsStr();
+                        if (string.IsNullOrEmpty(nm)) continue;
+                        opts.Add(new ChoiceOption { CardId = 0, Name = nm, Label = nm });
+                    }
+                }
+                if (src is not null)
+                    h.Engine.RaiseChoice(src, "selectCardToDraw", opts, a.Length > 4 && a[4].AsBool());
+                return Val.Nothing;
+            },
             // UBaseCardObject* GetStaticCard(FName cardName) —— 造一张「静态卡」对象：
             // 只作数值与身份来源，不代表场上的实体。Develop 类效果靠它列出候选卡
             //（例如 card_unit_hampshire_regiment 的 GetChooseSpawnCards 会连造 3 张）。
@@ -1884,8 +2010,11 @@ public sealed class EngineHost : Host
                 // UHT 形态是 void getMaxPossibleKredits(int32& outputMax)：调用点读 out 槽。
                 // 原来写成 return，调用方拿到 Nothing → Clamp(x, 0, 0) = 0，
                 // 于是「获得一个克redit槽」这类效果会把槽位清成 0。
-                Val.TrySetOut(a[^1], Val.Of(Rules.MaxKredits));
-                return Val.Of(Rules.MaxKredits);
+                //
+                // 值必须是**绝对上限 24**，不是每回合自然增长的上限 12：
+                // ChangeKreditSlotsBySide 用这个值 clamp「卡牌加槽」。
+                Val.TrySetOut(a[^1], Val.Of(Rules.MaxKreditSlots));
+                return Val.Of(Rules.MaxKreditSlots);
             },
 
             // ---------- HQ ----------
@@ -1952,9 +2081,40 @@ public sealed class EngineHost : Host
                 return Val.Nothing;
             },
             ["GetDeckSizeBySide"] = (h, a) =>
-                Val.Of(h.Engine.S.Player((Side)a[1].AsInt()).Deck.Count),
-            ["GetHandSizeBySide"] = (h, a) =>
+                Val.Of(h.Engine.S.Player((Side)a[1].AsInt()).Deck.Count),            ["GetHandSizeBySide"] = (h, a) =>
                 Val.Of(h.Engine.S.Player((Side)a[1].AsInt()).Hand.Count),
+
+            // void DrawSpecificCardFromDeckBySide(int32 instigatorID, int32 CardID, ESideEnum side, bool cardSeen)
+            //
+            // 「把指定的那张卡抽到某方手里」——也就是 Develop 类效果的通用落点
+            //（selectCardToDraw 在候选唯一时先调它，再回调 OnHandTargetSelected）。
+            // 正数 cardID = 牌库里的实体卡；负数 = GetStaticCard 造的静态卡，按 defId 现造一张。
+            ["DrawSpecificCardFromDeckBySide"] = (h, a) =>
+            {
+                var side = (Side)a[3].AsInt();
+                var id = (int)a[2].AsInt();
+                var p = h.Engine.S.Player(side);
+
+                var existing = h.Engine.S.FindCard(id);
+                if (existing is not null)
+                {
+                    if (existing.Loc == Loc.Hand) return Val.Nothing;
+                    p.Deck.Remove(existing);
+                    p.Discard.Remove(existing);
+                    existing.Loc = Loc.Hand;
+                    if (p.Hand.Count < Rules.MaxCardsOnHand) p.Hand.Add(existing);
+                    else { existing.Loc = Loc.Discard; p.Discard.Add(existing); }
+                    h.Engine.FireTrigger(Trigger.OnOtherCardDrawnFromDeck, existing);
+                    return Val.Nothing;
+                }
+
+                if (id < 0 && h._staticById.TryGetValue(id, out var sk))
+                {
+                    var defId = sk.Get("defId").AsStr();
+                    if (!string.IsNullOrEmpty(defId)) h.Engine.SpawnByName(side, defId);
+                }
+                return Val.Nothing;
+            },
 
             // ---------- 回合 ----------
             // UHT: void GetTurnNumber(int32& TurnNumber)（CardFunctionsStub）

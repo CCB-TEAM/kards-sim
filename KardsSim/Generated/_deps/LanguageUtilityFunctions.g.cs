@@ -82,6 +82,7 @@ public static Val GetAllLanguages(IHost H, Val self, Val[] args)
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_languages = args.Length > 1 ? args[1].As<Action<Val>>() : null;
         L["languages"] = Val.Nothing;
+    L["langs"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(546);
     L_0005:
@@ -237,6 +238,7 @@ public static Val GetLanguageTexts(IHost H, Val self, Val[] args)
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_Languages = args.Length > 1 ? args[1].As<Action<Val>>() : null;
         L["Languages"] = Val.Nothing;
+    L["LanguageTexts"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1147);
     L_0005:

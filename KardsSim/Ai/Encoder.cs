@@ -31,16 +31,31 @@ public static class Encoder
     /// <summary>出牌区大小：5 张手牌 × 42 个槽。</summary>
     public const int PlayBlock = PerRow * PlaySlotsPerCard;
 
+    /// <summary>单位区：己方 10 个位置 × 13 个动作。</summary>
+    public const int UnitBlock = 10 * 13;
+
+    /// <summary>EndTurn 的下标。</summary>
+    public const int EndTurnIndex = PlayBlock + UnitBlock;
+
+    /// <summary>「待决选择」的候选槽位数（客户端目前最多一次列 3 张，8 足够）。</summary>
+    public const int ChoiceSlots = 8;
+
+    /// <summary>抉择区起始下标。</summary>
+    public const int ChoiceBlock = EndTurnIndex + 1;
+
     /// <summary>
-    /// 动作空间：出牌区（5×21 目标×2 分支）+ 己方 10 个单位 × (11 目标 + 2 移动) + EndTurn。
+    /// 动作空间：
+    ///   出牌区（5 手牌 × 21 目标 × 2 三选一分支）+ 单位区（10 × 13）+ EndTurn + 抉择区（8）。
     ///
     /// <para>
     /// 出牌从「一张牌一个下标」扩成「一张牌 × 一个目标 × 一个三选一分支」，
     /// 这样「打谁」和「选哪支」都是模型能学的维度 —— 以前 TargetId 恒为 -1、
     /// WhichChooseOne 恒为 0，需要目标或需要选择的牌等于没有决策权。
+    /// 抉择区对应二段式选择（Develop / 选手牌）：效果跑到一半要求选牌时，
+    /// 动作列表里只剩这一区（见 <see cref="Engine.PendingChoice"/>）。
     /// </para>
     /// </summary>
-    public const int ActionSize = PlayBlock + 10 * 13 + 1;
+    public const int ActionSize = ChoiceBlock + ChoiceSlots;
 
     public static float[] Encode(GameEngine g)
     {
@@ -134,10 +149,14 @@ public static class Encoder
     ///   210..339  ：己方 10 个位置（前线 5 + 支援 5），每个 13 个动作
     ///               （11 个攻击目标：0..9 是敌方单位槽，10 是 HQ；11 前移；12 后退）
     ///   340       ：EndTurn
+    ///   341..348  ：待决选择的候选（HandIndex 即候选序号）
     /// </summary>
     public static int Index(GameEngine g, GameAction a)
     {
-        if (a.Type == ActionType.EndTurn) return ActionSize - 1;
+        if (a.Type == ActionType.EndTurn) return EndTurnIndex;
+
+        if (a.Type == ActionType.ChooseCard)
+            return a.HandIndex is >= 0 and < ChoiceSlots ? ChoiceBlock + a.HandIndex : -1;
 
         if (a.Type == ActionType.PlayCard)
         {

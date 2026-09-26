@@ -154,6 +154,7 @@ public static Val MoveCards(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         var __out_EnemyUnits = args.Length > 0 ? args[0].As<Action<Val>>() : null;
         L["EnemyUnits"] = Val.Nothing;
+    L["CardsToMoveRandomly"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(3160);
     L_0005:

@@ -184,6 +184,13 @@ Execute*Events  →  逐个调响应卡的事件函数
 | 栈溢出（第二类） | 转发壳：`A.Foo` 调 `B.Foo`，`B` 没 `Foo` 就落回兜底分支调回 `A.Foo` |
 | 编译报 CS0131 | `SetArray/SetSet/SetMap` 的属性是赋值目标，被当成右值发射 |
 | 原语读到错的参数 | 调用约定是 `{接收者, 实参...}`，`a[0]` 是接收者，实参从 `a[1]` 起 |
+| 追加进数组的项全丢 | 局部 TArray 没初始化：UE 零初始化为空数组，直译产物读成 `Nothing`，`Array_Add(Nothing, x)` 是空操作 |
+| 牌打出后「找不到自己」 | `FindCard` 只搜场上和手牌，而 order 打出后立刻进弃牌堆 → `GetCardFromID(自己)` 返回空，整条效果链断掉 |
+| 所有战斗都不掉血 | `OnCardDealDamage_ModifyDamageDealt` 缺原生默认体（只 24/1638 张卡覆盖它）→ 「不修改伤害」变成「伤害归零」 |
+| 每次 select 都取错分支 | `SelectInt/SelectString/…` 的实参顺序是 `(A, B, 条件)`，不是 `(条件, A, B)` |
+| 所有单位都能移动+攻击 | 客户端是「移动与攻击二选一」，只有坦克和带 `CanMoveAndAttackInTheSameTurn` 的单位例外 |
+| 加指挥点槽被卡在 12 | `getMaxPossibleKredits` 应给**绝对上限 24**（12 只是每回合自然增长的上限） |
+| 50 张反制指令从不触发 | 读的是一个谁都不写的 `gotcha` 布尔字段；真实字段是 `gotchaActivated`（int，>0 = 已激活） |
 
 ---
 
@@ -195,10 +202,12 @@ Execute*Events  →  逐个调响应卡的事件函数
 - 全卡 1638 张强制演练：**0 异常 / 0 未实现调用**
 - 触发点覆盖 **61/61**（卡牌注册的触发点，引擎全部会发）
 - 宿主 API：卡牌逻辑可达的缺口 **0 个**（另外 424 个仅 UI / 平台可达，无头模拟不会走到）
-- 动作空间：出牌 = 手牌 × 目标 × 三选一分支，`stateSize=264`、`actionSize=341`
-- 已知未做：Develop / 选手牌这类「效果中途要选牌」的选择点 —— 客户端走的是
-  UI 往返（`NotifySelectCardToDrawPending` → `OnHandTargetSelected`），
-  要建模成两阶段决策，引擎的动作循环得改（见下）
+- 动作空间：出牌 = 手牌 × 目标 × 三选一分支，另有抉择区与 EndTurn，
+  `stateSize=264`、`actionSize=349`
+- 已知未做：没有 UI 就无法复现的选择点 —— 部分卡（如 `card_unit_hampshire_regiment`）
+  的 Develop 结果在客户端是**UI 直接做的**，它们没有自己的 `OnHandTargetSelected`，
+  无头模拟里选择能被发起和结算，但效果不落地
+- 已知未做：卡组 40 张（`Rules.DeckSize=30`，wiki 说 40，但客户端 CDO 说 30，倾向信客户端）
 
 ---
 
@@ -276,11 +285,20 @@ dotnet run --project KardsTranspiler -c Release -- \
 |---|---|---|
 | 出牌目标 | 卡自己的 `CanPlayFromHand` + CDO 的 `selectTargetOnPlayedFromHand`（401 张） | **是动作**（`GameAction.TargetId`） |
 | 三选一 | 卡上的 `ChooseOne` 成员决定分支（48 张，各 2 支） | **是动作**（`GameAction.ChoiceIndex`） |
-| Develop / 选手牌 | UI 往返：`NotifySelectCardToDrawPending` 通知 → `OnHandTargetSelected` 回调 | **还不是** —— 需要两阶段决策 |
+| Develop / 选手牌 | UI 往返：`NotifySelectCardToDrawPending` 通知 → `OnHandTargetSelected` 回调 | **是动作**（二段式，见下） |
 
-前两类是**出牌前**就能定的（卡牌逻辑同步执行，没有挂起/恢复，所以选择只能前置）。
-第三类相反：效果跑到一半才需要选，客户端靠 UI 回调完成。要建模它得让
-`LegalActions` 在「有待决选择」时只返回选项，并在选定后回调 `OnHandTargetSelected`。
+前两类是**出牌前**就能定的：卡牌逻辑同步执行，没有挂起/恢复机制
+（直译产物里 `AwaitInput` 一次都没被调用），所以选择只能前置。
+
+第三类相反 —— 效果跑到一半才需要选。客户端靠 UI 往返完成，引擎把它做成两段式：
+
+1. 效果体调 `NotifySelectCardToDrawPending` → 宿主记下**待决选择**（`GameEngine.Pending`）；
+2. 有 `Pending` 时 `LegalActions` **只**返回候选项（`ActionType.ChooseCard`），
+   对局不会在你没选之前往下走；
+3. 选定后回调发起卡自己的 `OnHandTargetSelected(选中的卡ID, instigatorID)`。
+
+HTTP 侧有**抉择预览**：`GET /games/{id}/state` 会给出
+`pendingChoice.options[{index,id,label}]`，AI 后端据此决策。
 
 `WhichChooseOne` 以前恒返回第 0 支（确定但不是决策点），现在读卡的 `ChooseOne` 成员，
 引擎在出牌前写入；没写时退回可插拔决策器，保证不接 AI 时仍可复现。

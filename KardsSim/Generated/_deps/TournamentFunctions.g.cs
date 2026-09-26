@@ -363,6 +363,7 @@ public static Val Get_Tournament_Schedule(IHost H, Val self, Val[] args)
         L["OutHourEnd"] = Val.Nothing;
         var __out_OutText = args.Length > 5 ? args[5].As<Action<Val>>() : null;
         L["OutText"] = Val.Nothing;
+    L["LocalDays"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(4163);
     L_0005:

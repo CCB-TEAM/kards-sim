@@ -8,7 +8,15 @@ public static class Rules
 {
     public const int MaxCardsOnHand = 9;
     public const int MaxCardsPerRow = 5;
+    /// <summary>每回合自然增长的上限（BP_Logic 的 MaxKreditsConst）。</summary>
     public const int MaxKredits = 12;
+    /// <summary>
+    /// 指挥点槽的**绝对上限**：卡牌可以把它顶到 24（自然增长只到 12）。
+    /// 三处独立证据一致：wiki「通过卡牌最多可以有 24 个指挥点槽」、
+    /// <c>kreditCombinationsUSUnits</c> 的行名 3..24、
+    /// <c>card_event_mass_deployment</c> 里的 <c>Clamp(槽, 3, 24)</c>。
+    /// </summary>
+    public const int MaxKreditSlots = 24;
     public const int DeckSize = 30;
     public const int StartingHand = 4;
     public const int HqDefense = 20;
@@ -53,6 +61,12 @@ public sealed class GameState
 
     /// <summary>前线归属：由第一张进入前线的单位决定，清空后回到 None。</summary>
     public Side FrontlineOwner = Side.None;
+
+    /// <summary>
+    /// 反制指令的激活序号计数器。激活序号 &gt; 0 表示已激活，
+    /// 客户端拿它当 <c>activeGotchas</c> 映射的排序键（先激活的序号小）。
+    /// </summary>
+    public int NextGotchaOrder;
     /// <summary>前线上的牌（双方共享这一格）。</summary>
     public readonly List<Card> Frontline = new();
 
@@ -123,11 +137,26 @@ public sealed class GameState
         foreach (var c in Right.Board) yield return c;
     }
 
+    /// <summary>
+    /// 按 instanceId 找卡，**覆盖所有位置**（场上 / 前线 / 手牌 / 牌库 / 弃牌堆）。
+    ///
+    /// <para>
+    /// 必须搜弃牌堆：牌打出后引擎会立刻把它移进弃牌堆（order 尤其如此），
+    /// 而它的效果体正是这个时候跑的。客户端 <c>GetCardFromID</c> 查的是全局卡表，
+    /// 弃牌堆里的卡照样能查到。只搜场上和手牌的话，
+    /// <c>GetCardFromID(自己)</c> 返回空 → 依赖它的整条效果链静默断掉
+    /// （Develop 的候选列表就是这么变成空的）。
+    /// </para>
+    /// </summary>
     public Card FindCard(int instanceId)
     {
         foreach (var c in AllOnBoard()) if (c.InstanceId == instanceId) return c;
-        foreach (var c in Left.Hand) if (c.InstanceId == instanceId) return c;
-        foreach (var c in Right.Hand) if (c.InstanceId == instanceId) return c;
+        foreach (var p in new[] { Left, Right })
+        {
+            foreach (var c in p.Hand) if (c.InstanceId == instanceId) return c;
+            foreach (var c in p.Deck) if (c.InstanceId == instanceId) return c;
+            foreach (var c in p.Discard) if (c.InstanceId == instanceId) return c;
+        }
         return null;
     }
 }

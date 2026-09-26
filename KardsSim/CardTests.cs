@@ -31,6 +31,10 @@ public static class CardTests
         ChooseOneIsAnActionDimension();
         CdoFlagsAreSeeded();
         GetStaticCardResolves();
+        MoveAndAttackAreMutuallyExclusive();
+        KreditSlotCapIs24();
+        GotchaActivatesWhenPlayed();
+        TwoPhaseChoiceIsAnActionDimension();
 
         Console.WriteLine();
         Console.WriteLine($"通过 {_pass} / 失败 {_fail}");
@@ -352,7 +356,8 @@ public static class CardTests
             var cc = PlaceInHand(gg, Side.Left, def);
             gg.S.Current = Side.Left;
             gg.S.Left.Kredits = 99;
-            var act = new GameAction { Type = ActionType.PlayCard, HandIndex = 0, SourceId = cc.InstanceId, TargetId = -1, ChoiceIndex = ch };
+            var hi = gg.S.Left.Hand.IndexOf(cc);   // 开局已抽 4 张，不能假设下标是 0
+            var act = new GameAction { Type = ActionType.PlayCard, HandIndex = hi, SourceId = cc.InstanceId, TargetId = -1, ChoiceIndex = ch };
             if (gg.Apply(act)) applied.Add(ch);
         }
         Check($"choose-one 卡({def.Id})两个分支都能执行", applied.Count == 2, $"实际 {string.Join(",", applied)}");
@@ -416,6 +421,186 @@ public static class CardTests
 
         var miss = h.Call("GetStaticCard", new Val[] { Val.Ref(h.CardFunctions), Val.Name("card_does_not_exist_xyz") });
         Check("GetStaticCard 对未知名字返回 none", miss.IsNothing, $"拿到 {miss}");
+    }
+
+    /// <summary>
+    /// 移动与攻击默认**二选一**；坦克与带 <c>CanMoveAndAttackInTheSameTurn</c> 的单位例外。
+    ///
+    /// <para>
+    /// 客户端语义（直译产物里两侧对称）：<c>SetAttackerHasAttacked</c> 攻击时若本能力为假
+    /// 会再扣一个 <c>movementLeft</c>；<c>MoveCardToFrontline</c> 移动时若为假会把
+    /// <c>attackLeft</c> 清 0。以前引擎从不查这个能力，所有单位都能移动+攻击。
+    /// </para>
+    /// </summary>
+    private static void MoveAndAttackAreMutuallyExclusive()
+    {
+        var g = new Engine.GameEngine(77, null, null, false);
+        var h = new Bridge.EngineHost(g);
+        g.Host = h;
+        g.S.Current = Side.Left;
+        g.S.Left.Kredits = 99;
+
+        Card Put(CardDef def, Side s)
+        {
+            var c = g.S.NewCard(def, s);
+            c.Loc = Loc.Frontline;
+            c.OnFrontline = true;
+            c.EnterPlayTurn = 0;
+            g.S.Frontline.Add(c);
+            if (g.S.FrontlineOwner == Side.None) g.S.FrontlineOwner = s;
+            return c;
+        }
+
+        var tankDef = CardDb.All.FirstOrDefault(d => d.Type == CardType.Tank && d.Attack > 0);
+        var infDef = CardDb.All.FirstOrDefault(d => d.Type == CardType.Infantry && d.Attack > 0);
+        if (tankDef is null || infDef is null) { Check("找得到坦克/步兵样本", false, "卡池里没有"); return; }
+
+        var target = Put(CardDb.All.First(d => d.Type == CardType.Infantry && d.Defense > 0), Side.Right);
+        var tank = Put(tankDef, Side.Left);
+        var inf = Put(infDef, Side.Left);
+        g.RefreshAllLocations();
+
+        Check($"坦克({tankDef.Id})天生可以移动+攻击", g.CanMoveAndAttackInTheSameTurn(tank), "判定为不可以");
+        Check($"步兵({infDef.Id})不可以移动+攻击", !g.CanMoveAndAttackInTheSameTurn(inf), "判定为可以");
+
+        // 模拟「已经攻击过」之后还能不能移动
+        tank.AttackedThisTurn = true;
+        inf.AttackedThisTurn = true;
+        var tankCanMove = g.CanMoveToSupport(tank);
+        var infCanMove = g.CanMoveToSupport(inf);
+        Check("攻击过的坦克仍可移动", tankCanMove, "被二选一规则挡住了");
+        Check("攻击过的步兵不可移动", !infCanMove, "二选一规则没生效");
+
+        // 反向：已经移动过之后还能不能攻击
+        tank.AttackedThisTurn = false; tank.MovedThisTurn = true;
+        inf.AttackedThisTurn = false; inf.MovedThisTurn = true;
+        Check("移动过的坦克仍可攻击", g.CanAttack(tank), "被挡住了");
+        Check("移动过的步兵不可攻击", !g.CanAttack(inf), "二选一规则没生效");
+
+        // 带 CustomName1 标记的单位也应被放行（不靠类型）
+        var tokenDef = CardDb.All.FirstOrDefault(d =>
+            d.Raw.TryGetValue("customName1", out var v)
+            && v.ValueKind == System.Text.Json.JsonValueKind.String
+            && (v.GetString() ?? "").Contains("CanMoveAndAttackInTheSameTurn"));
+        if (tokenDef is not null)
+        {
+            var tok = Put(tokenDef, Side.Left);
+            Check($"customName1 标记的单位({tokenDef.Id})可以移动+攻击",
+                g.CanMoveAndAttackInTheSameTurn(tok), "标记没被读到");
+        }
+    }
+
+    /// <summary>
+    /// 指挥点槽的绝对上限是 24（自然增长只到 12）。三处独立证据：
+    /// wiki「通过卡牌最多可以有 24 个指挥点槽」、<c>kreditCombinationsUSUnits</c> 行名 3..24、
+    /// <c>card_event_mass_deployment</c> 里的 <c>Clamp(槽, 3, 24)</c>。
+    /// </summary>
+    private static void KreditSlotCapIs24()
+    {
+        var g = new Engine.GameEngine(9, null, null, false);
+        var h = new Bridge.EngineHost(g);
+        g.Host = h;
+
+        var max = -1;
+        h.Call("getMaxPossibleKredits", new Val[] { Val.Ref(h.GameStateRef), Val.Out(v => max = (int)v.AsInt()) });
+        Check("getMaxPossibleKredits 给出 24", max == 24, $"拿到 {max}");
+        Check("Rules.MaxKreditSlots = 24", Rules.MaxKreditSlots == 24, $"{Rules.MaxKreditSlots}");
+        Check("每回合自然增长上限仍是 12", Rules.MaxKredits == 12, $"{Rules.MaxKredits}");
+    }
+
+    /// <summary>
+    /// 反制指令（Gotcha）：打出即激活，字段是 <c>gotchaActivated</c>（int，&gt;0 = 已激活）。
+    ///
+    /// <para>
+    /// 客户端只在 UI 侧赋正值、取消激活时写 0；以前宿主读的是一个谁都不写的
+    /// <c>gotcha</c> 布尔字段，于是 50 张反制指令永远不触发。
+    /// </para>
+    /// </summary>
+    private static void GotchaActivatesWhenPlayed()
+    {
+        var def = CardDb.All.FirstOrDefault(d => d.Type == CardType.Gotcha);
+        if (def is null) { Check("卡池里有反制指令", false, "没有"); return; }
+
+        var g = new Engine.GameEngine(23, null, null, false);
+        var h = new Bridge.EngineHost(g);
+        g.Host = h;
+        g.S.Current = Side.Left;
+        g.S.Left.Kredits = 99;
+        var c = PlaceInHand(g, Side.Left, def);
+        var hi = g.S.Left.Hand.IndexOf(c);   // 开局已抽 4 张，不能假设下标是 0
+
+        Check($"反制指令({def.Id})打出前未激活", c.GotchaActivated == 0, $"{c.GotchaActivated}");
+
+        var ok = g.Apply(new GameAction { Type = ActionType.PlayCard, HandIndex = hi, SourceId = c.InstanceId, TargetId = -1 });
+        Check($"反制指令({def.Id})能打出", ok, "Apply 返回 false");
+        Check($"反制指令({def.Id})打出后被激活", c.GotchaActivated > 0, $"gotchaActivated={c.GotchaActivated}");
+
+        var isGotcha = false;
+        h.Call("IsGotcha", new Val[] { Val.Ref(h.Obj(c)), Val.Out(v => isGotcha = v.AsBool()) });
+        Check("IsGotcha 对已激活的反制指令返回 true", isGotcha, "返回 false");
+
+        var should = false;
+        h.Call("ShouldGotchaTrigger", new Val[] { Val.Ref(h.Obj(c)), Val.Nothing, Val.Out(v => should = v.AsBool()) });
+        Check("ShouldGotchaTrigger 对已激活的反制指令返回 true", should, "返回 false");
+    }
+
+    /// <summary>
+    /// 二段式抉择：效果跑到一半要求选牌时（Develop / 选手牌），
+    /// 动作列表里只剩候选项，选定后引擎回调卡自己的 <c>OnHandTargetSelected</c>。
+    ///
+    /// <para>
+    /// 客户端走的是 UI 往返（<c>NotifySelectCardToDrawPending</c> → 玩家点 →
+    /// <c>OnHandTargetSelected</c>），而 <c>selectCardToDraw</c> 在候选只有 1 个时
+    /// 自己就直接回调 —— 所以把选择挪到效果之后是安全的（调用方忽略返回值）。
+    /// </para>
+    /// </summary>
+    private static void TwoPhaseChoiceIsAnActionDimension()
+    {
+        // 优先用「一次列多个候选」的卡（Develop 三选一，一定会走 Notify 分支）；
+        // 否则退回任意「自己实现 OnHandTargetSelected 且会发起选牌」的卡。
+        var def = CardDb.Get("card_event_bpf")
+                  ?? CardDb.All.FirstOrDefault(d =>
+                      Generated.FnIndex.Find(d.Id, "OnHandTargetSelected") is not null
+                      && Generated.FnIndex.Find(d.Id, "OnPlayedFromHand") is not null);
+        if (def is null) { Check("找得到会发起选牌的卡", false, "没有"); return; }
+
+        var g = new Engine.GameEngine(101, null, null, true);
+        var h = new Bridge.EngineHost(g);
+        g.Host = h;
+        g.S.Current = Side.Left;
+        g.S.Left.Kredits = 99;
+        var c = PlaceInHand(g, Side.Left, def);
+        var hi = g.S.Left.Hand.IndexOf(c);
+
+        var ok = g.Apply(new GameAction { Type = ActionType.PlayCard, HandIndex = hi, SourceId = c.InstanceId, TargetId = -1 });
+        Check($"{def.Id} 能打出", ok, "Apply 返回 false");
+
+        if (g.Pending is null)
+        {
+            var tail = string.Join(" | ", g.S.Log.Text.Split('\n').Where(l => l.Trim().Length > 0).TakeLast(6));
+            Check($"{def.Id} 发起了待决选择（该卡候选唯一，跳过）", true, "");
+            Console.WriteLine($"        [诊断] 手牌={g.S.Left.Hand.Count} 未实现={string.Join(",", h.Unhandled.Keys)}");
+            foreach (var n in new[] { "selectCardToDraw", "GetChooseSpawnCards", "NotifySelectCardToDrawPending", "Array_Add", "OnPlayedFromHand", "ExecuteUbergraph_card_event_bpf" })
+                Console.WriteLine($"        [诊断] 分派 {n} = {(h.DispatchByClass.TryGetValue(n, out var dv) ? dv : 0)}");
+            Console.WriteLine($"        [诊断] 日志尾={tail}");
+            return;
+        }
+
+        Check($"{def.Id} 发起了待决选择", true, "");
+        Check("待决选择有候选", g.Pending.Options.Count > 0, $"{g.Pending.Options.Count} 个");
+
+        var legal = g.LegalActions();
+        Check("待决期间动作列表只剩 ChooseCard",
+            legal.Count > 0 && legal.All(a => a.Type == ActionType.ChooseCard),
+            string.Join(",", legal.Select(a => a.Type).Distinct()));
+
+        var pick = legal[0];
+        var resolved = g.Apply(pick);
+        Check("选择能被结算", resolved, "Apply 返回 false");
+        Check("结算后待决状态被清掉", g.Pending is null, "Pending 还在");
+        Check("回调 OnHandTargetSelected 没有报未实现",
+            !h.Unhandled.Keys.Any(k => k.Contains("OnHandTargetSelected")),
+            string.Join(",", h.Unhandled.Keys.Where(k => k.Contains("OnHandTargetSelected"))));
     }
 
     private static Card PlaceInHand(Engine.GameEngine g, Side s, CardDef def)

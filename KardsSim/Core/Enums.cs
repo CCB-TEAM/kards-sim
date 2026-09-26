@@ -64,7 +64,12 @@ public enum Kw
 /// <summary>玩家可用的动作种类。</summary>
 public enum ActionType
 {
-    EndTurn, PlayCard, Attack, MoveToFrontline, MoveToSupport, UseAbility, Mulligan
+    EndTurn, PlayCard, Attack, MoveToFrontline, MoveToSupport, UseAbility, Mulligan,
+    /// <summary>
+    /// 结算一个「待决选择」（二段式抉择）：效果跑到一半要求玩家选一张牌时，
+    /// 动作列表里只剩这个类型的选项。见 <see cref="Engine.GameEngine.Pending"/>。
+    /// </summary>
+    ChooseCard,
 }
 
 /// <summary>

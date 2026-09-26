@@ -21950,6 +21950,7 @@ public static Val GetCardsPinnedThisTurn(IHost H, Val self, Val[] args)
         var __ret = Val.Nothing;
         var __out_cardsPinned = args.Length > 0 ? args[0].As<Action<Val>>() : null;
         L["cardsPinned"] = Val.Nothing;
+    L["cardsPinnedThisTurn"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(2218);
     L_0005:
@@ -23957,6 +23958,7 @@ public static Val LoadAllStaticCards(IHost H, Val self, Val[] args)
         var L = new Dictionary<string, Val>(StringComparer.Ordinal);
         var __ef = new Stack<int>();
         var __ret = Val.Nothing;
+    L["isbnCards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(5963);
     L_0005:
@@ -26073,6 +26075,8 @@ public static Val ResolveMulliganResponse(IHost H, Val self, Val[] args)
         var __out_deck = args.Length > 1 ? args[1].As<Action<Val>>() : null;
         L["deck"] = Val.Nothing;
         L["side"] = args.Length > 2 ? args[2] : Val.Nothing;
+    L["_cardsToDrawFromDeck"] = H.MakeArray(new Val[] { });
+    L["_existingHandCardActors"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(4825);
     L_0005:

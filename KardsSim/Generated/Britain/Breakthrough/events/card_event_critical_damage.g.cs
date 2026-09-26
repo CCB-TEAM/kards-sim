@@ -123,6 +123,7 @@ public static Val GetPlayFromHandDamage(IHost H, Val self, Val[] args)
         L["targetCard"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_damage = args.Length > 1 ? args[1].As<Action<Val>>() : null;
         L["damage"] = Val.Nothing;
+    L["AdjacentUnits"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(724);
     L_0005:

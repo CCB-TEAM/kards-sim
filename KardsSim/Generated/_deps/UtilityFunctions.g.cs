@@ -1904,6 +1904,7 @@ public static Val getAllCardsFromActiveSets(IHost H, Val self, Val[] args)
         L["__WorldContext"] = args.Length > 1 ? args[1] : Val.Nothing;
         var __out_cards = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["cards"] = Val.Nothing;
+    L["_staticActiveCards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(1854);
     L_0005:
@@ -2325,6 +2326,7 @@ public static Val getCardbackDeckCodeIDMap(IHost H, Val self, Val[] args)
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_cardbackToDeckCodeID = args.Length > 1 ? args[1].As<Action<Val>>() : null;
         L["cardbackToDeckCodeID"] = Val.Nothing;
+    L["_cardbackToDeckCodeID"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(829);
     L_0005:

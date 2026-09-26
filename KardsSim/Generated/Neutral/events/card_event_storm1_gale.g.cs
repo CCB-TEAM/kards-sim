@@ -90,6 +90,9 @@ public static Val GetChooseSpawnCards(IHost H, Val self, Val[] args)
         L["markAsSeen"] = Val.Nothing;
         var __out_keepOrder = args.Length > 2 ? args[2].As<Action<Val>>() : null;
         L["keepOrder"] = Val.Nothing;
+    L["_heavyWeatherCards"] = H.MakeArray(new Val[] { });
+    L["_lightWeatherCards"] = H.MakeArray(new Val[] { });
+    L["_mediumWeatherCards"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(2111);
     L_0005:

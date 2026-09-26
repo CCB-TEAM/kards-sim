@@ -106,6 +106,7 @@ public sealed class Emitter
         Line("var __ef = new Stack<int>();");
         Line("var __ret = Val.Nothing;");
         EmitParamBindings(fn);
+        EmitContainerInit(fn);
         _ind--;
 
         // 逐语句发射：每条语句一个标签，跳转直接 goto。
@@ -179,6 +180,90 @@ public sealed class Emitter
                 Line($"L[\"{n}\"] = args.Length > {i} ? args[{i}] : Val.Nothing;");
             }
             i++;
+        }
+    }
+
+    /// <summary>
+    /// 会**就地修改第一个参数**的容器库函数。
+    ///
+    /// <para>
+    /// 为什么要单独盯它们：UE 里 TArray / TSet / TMap 的局部变量是零初始化的（空容器），
+    /// 蓝图可以对着一个从没赋过值的局部直接 <c>Array_Add</c>。而直译产物把未写过的局部
+    /// 读成 <c>Val.Nothing</c>，宿主对 Nothing 做 Array_Add 是**空操作** —— 追加全丢，
+    /// 而且不报错。典型受害者是 <c>selectCardToDraw</c> 里的 <c>spawnCards</c>：
+    /// 它收集 Develop 的候选卡名，丢了就导致「候选列表为空、选择永远做不了」。
+    /// </para>
+    /// </summary>
+    private static readonly HashSet<string> ContainerMutators = new(StringComparer.Ordinal)
+    {
+        "Array_Add", "Array_AddUnique", "Array_Append", "Array_Insert", "Array_Remove",
+        "Array_RemoveItem", "Array_Clear", "Array_Set", "Array_Resize", "Array_Reverse",
+        "Array_ShuffleFromStream",
+        "Set_Add", "Set_Clear", "Set_RemoveItems",
+        "Map_Add", "Map_Remove", "Map_Clear",
+    };
+
+    /// <summary>
+    /// 把「被当作容器就地修改目标」的局部变量初始化成空容器。
+    ///
+    /// <para>
+    /// 只排除 in 形参（它们的值来自调用方）；out 形参和普通局部都要给空容器 ——
+    /// 与 UE 的零初始化一致。已经赋过值的局部多这一行也无害（随后会被覆盖）。
+    /// </para>
+    /// </summary>
+    private void EmitContainerInit(FunctionExport fn)
+    {
+        var inParams = new HashSet<string>(StringComparer.Ordinal);
+        if (fn.LoadedProperties is not null)
+            foreach (var p in fn.LoadedProperties)
+            {
+                if (!p.PropertyFlags.HasFlag(EPropertyFlags.CPF_Parm)) continue;
+                if (p.PropertyFlags.HasFlag(EPropertyFlags.CPF_ReturnParm)) continue;
+                var isOut = p.PropertyFlags.HasFlag(EPropertyFlags.CPF_OutParm)
+                            && !p.PropertyFlags.HasFlag(EPropertyFlags.CPF_ConstParm);
+                if (!isOut) inParams.Add(p.Name.ToString());
+            }
+
+        foreach (var n in CollectContainerLocals(fn).OrderBy(x => x, StringComparer.Ordinal))
+            if (!inParams.Contains(n))
+                Line($"L[\"{Esc(n)}\"] = H.MakeArray(new Val[] {{ }});");
+    }
+
+    /// <summary>扫出被容器库函数当作修改目标的局部变量名。</summary>
+    private HashSet<string> CollectContainerLocals(FunctionExport fn)
+    {
+        var names = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var e in fn.ScriptBytecode ?? Array.Empty<KismetExpression>()) Walk(e);
+        return names;
+
+        void Walk(KismetExpression e)
+        {
+            if (e is null) return;
+            string fname = null;
+            KismetExpression[] ps = null;
+            // 派生类型必须排在基类之前（EX_CallMath / EX_LocalFinalFunction : EX_FinalFunction）
+            switch (e)
+            {
+                case EX_CallMath c: fname = ResolveFn(c.StackNode); ps = c.Parameters; break;
+                case EX_LocalFinalFunction f: fname = ResolveFn(f.StackNode); ps = f.Parameters; break;
+                case EX_FinalFunction f: fname = ResolveFn(f.StackNode); ps = f.Parameters; break;
+                case EX_LocalVirtualFunction v: fname = v.VirtualFunctionName.ToString(); ps = v.Parameters; break;
+                case EX_VirtualFunction v: fname = v.VirtualFunctionName.ToString(); ps = v.Parameters; break;
+            }
+            if (fname is not null && ContainerMutators.Contains(fname) && ps is { Length: > 0 }
+                && ps[0] is EX_LocalVariable lv)
+            {
+                var n = PropPath(lv.Variable);
+                // 持久帧槽位是跨函数共享的另一块存储，不走 L 字典
+                if (!string.IsNullOrEmpty(n) && n != "?" && !IsPersistentFrame(n)) names.Add(n);
+            }
+
+            foreach (var f in e.GetType().GetFields())
+            {
+                if (f.FieldType == typeof(KismetExpression) && f.GetValue(e) is KismetExpression sub) Walk(sub);
+                else if (f.FieldType == typeof(KismetExpression[]) && f.GetValue(e) is KismetExpression[] arr)
+                    foreach (var x in arr) Walk(x);
+            }
         }
     }
 

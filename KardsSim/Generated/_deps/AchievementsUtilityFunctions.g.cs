@@ -885,6 +885,7 @@ public static Val GetFeaturedAchievements(IHost H, Val self, Val[] args)
         L["__WorldContext"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_achievements = args.Length > 1 ? args[1].As<Action<Val>>() : null;
         L["achievements"] = Val.Nothing;
+    L["ach"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(609);
     L_0005:

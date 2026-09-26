@@ -29,6 +29,7 @@ public static Val CreateLightInfantryArr(IHost H, Val self, Val[] args)
         L["number"] = args.Length > 0 ? args[0] : Val.Nothing;
         var __out_arr = args.Length > 1 ? args[1].As<Action<Val>>() : null;
         L["arr"] = Val.Nothing;
+    L["array"] = H.MakeArray(new Val[] { });
     L_0000:
         __ef.Push(333);
     L_0005:
