@@ -191,6 +191,10 @@ Execute*Events  →  逐个调响应卡的事件函数
 | 所有单位都能移动+攻击 | 客户端是「移动与攻击二选一」，只有坦克和带 `CanMoveAndAttackInTheSameTurn` 的单位例外 |
 | 加指挥点槽被卡在 12 | `getMaxPossibleKredits` 应给**绝对上限 24**（12 只是每回合自然增长的上限） |
 | 50 张反制指令从不触发 | 读的是一个谁都不写的 `gotcha` 布尔字段；真实字段是 `gotchaActivated`（int，>0 = 已激活） |
+| 持续站场的光环完全不生效 | `OnEnterPlay` / `OnLeaveBoardOrOwner` 这些**裸自事件**不在 `ERegisteredCardFunction` 里，注册触发点那条路找不到它们，必须在真实时机由引擎直接补调 |
+| 光环离场后撤销不掉、加成永久残留 | 撤销要在「牌还站在场上」时做（客户端是 `ExecuteOnBeforeLeaveBoardOrOwnerEvents`）；在 `FireDestroyTriggers` 里调时牌已经标了 `Destroyed`、`location` 变成弃牌堆，`GetCardsToTheLeft(self)` 恒空 |
+| 两个光环叠加时互删 | 攻击加成只记总额，撤销只能清零 → 改成客户端那样按 `instigatorID` 记账（`buffsFromCards`） |
+| 「是否被本卡加成过」判断永远错 | `isBuffedByCard` 是卡上的原生方法，实参是 `(instigatorID, out)`，接收者才是卡；按 `a[1]` 取卡等于拿一个整数当卡查 |
 
 ---
 
@@ -255,7 +259,9 @@ dotnet run --project KardsTranspiler -c Release -- \
   ubergraph，非战斗逻辑）
 - 47.5 万行直译代码 **0 错误编译通过**
 - 自对弈 150 局：**0 异常 / 0 卡死 / 0 非法动作**，宿主未实现调用 **0%**
-- 单卡端到端验证（`panzer_iii_e` 进场加攻 / 离场撤销 / 三个入口等价）**12/12 通过**
+- 单卡机制验证（`--mode tests`）**67/67 通过**：Intel、事件载荷、老兵升级、Blitz、
+  数据表、三选一、CDO 标志位、移动/攻击二选一、指挥点槽 24、反制指令、二段式抉择，
+  以及持续站场光环的加/撤（`card_unit_flaming_matilda_anzac`）
 
 ---
 
@@ -276,6 +282,59 @@ dotnet run --project KardsTranspiler -c Release -- \
 **另一条死路**：蓝图侧的触发登记表 `CardFunctionTriggers` / `AllCardsInBattle`
 从来没被填充过（实测恒为 0），所以 `FetchAllCardsWithEventTrigger` 那条路是死的 ——
 所有触发点实际只走引擎自己的 `FireTrigger` → `CardDispatch`。改动时不要指望蓝图那条路。
+
+---
+
+## 持续站场的效果（光环）：四个入口 + 按来源记账
+
+「站在场上就一直生效」的效果（光环 / 位置型）走的是**另一套入口**：
+`BP_CardFunctions` 的分派器直接调卡上的 `OnEnterPlay`、`OnLeaveBoardOrOwner`、
+`OnMoveToFrontline`、`OnMoveFromFrontline`。这些名字不在 Trigger 枚举里，
+按触发点找函数永远找不到，引擎必须在真实时机自己补调
+（`EngineHost.InvokeBareEvent`）。没覆盖这个可选事件的卡在 `FnIndex` 里查不到，
+是正常 no-op，不会污染 `Unhandled`。
+
+放置时机有讲究，四个入口里有两个踩过坑：
+
+| 入口 | 调用点 | 时机要点 |
+|---|---|---|
+| `OnEnterPlay(card, method=1)` | `DoPlayCard` | 落在场上、`LocationNumber` 排完之后 |
+| `OnMoveToFrontline(card, forceMove, moveCost)` | `TryPlaceOnFrontline` | 同上 |
+| `OnMoveFromFrontline(card)` | `DoMove` 退到支援线 | 同上 |
+| `OnLeaveBoardOrOwner(card, goingTo, method)` | `DestroyCard` **最前面** | **必须在这张牌还站在场上时调** |
+
+最后一条是这一轮的关键：客户端的销毁流程第一步是
+`ExecuteOnBeforeLeaveBoardOrOwnerEvents`（先取旧位置，再 `CardLocationMoved`）。
+放在 `FireDestroyTriggers` 里调就晚了 —— 那时牌已经标了 `Destroyed`、
+`location` 也变成弃牌堆，而光环卡撤销时要先 `GetCardsToTheLeft(self)` 找回那些牌，
+那道查询的第一条守卫正是「本卡 `location` ∈ 场上（5/6/7）」，于是恒空：
+加成留在邻居身上再也撤不掉，比没有光环更糟。
+
+**加成必须按来源记账**。客户端把这份账存在卡上的 `buffsFromCards` 映射里
+（键 = `instigatorID`），`ChangeBuffsFromCards` 增减、`isBuffedByCard` 查询都读它。
+只记总额（`BuffAttack`）的话，`ChangeAttack(邻居, self.cardID, 0, 4)` 这种
+「撤销我这一个来源」只能退化成「把总额清零」——两个光环叠在同一张卡上时，
+先离场的那张会把另一张的加成一起抹掉。现在：
+
+- `Card.AttackBuffBySource`（来源 InstanceId → 该来源加了多少）
+  + `Card.BuffAttackFromNoSource`（`instigatorID ≤ 0` 的匿名加成）；
+- `ChangeAttack` 的 `changeType`：`0/1` 按来源累加、`2` = SetValue（清空后只留这一个）、
+  `4` = 只撤销该来源那一份（全池 64 处调用点都带自己的 `cardID` 当 `instigatorID`）；
+- 总额与镜像 `attackBuff` 由 `WriteAttackBuff` 重算，保证「总额 = 各来源之和」；
+- `isBuffedByCard` / `getCardsBuffedByThisCard` 改成精确查来源表。注意前者的实参布局是
+  `card.isBuffedByCard(instigatorID, out isBuffed)` —— `a[0]` 才是卡，写成 `a[1]`
+  等于拿一个整数当卡查，恒 false，撤销光环的那道 `!isBuffedByCard(...)` 守卫永远不通过。
+
+`GetCardsToTheLeft` / `GetCardsToTheRight` 本身是 `BP_CardFunctions` 的蓝图函数
+（`Card / unitsOnly / includeCovert / out cards`，语义是「同一 `location` 上、
+`locationNumber` 更小/更大」），宿主**故意不实现**，放行给蓝图；
+引擎只负责把 `location` / `locationNumber` 喂对（`RefreshLocationNumbers`，
+最左为 0，与 `SetRightLeftMostWhenPlayed` 的判定一致）。自己再写一份迟早漂移，
+而且很容易漏掉「本卡在场上」那道守卫。
+
+回归哨兵是 `--mode tests` 里的 `AuraAppliesAndRetracts`（11 条断言）：
+左邻各 +2、右侧与自身不加、按来源记账、镜像一致、两个光环叠加为 +4、
+先走的那张只撤掉自己的 +2、两张都走之后回到基础值、没有未实现的宿主调用。
 
 ---
 
