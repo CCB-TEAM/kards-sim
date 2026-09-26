@@ -58,10 +58,15 @@ public static class ReproIssue1
             return;
         }
 
-        // 右方出 7. SCHÜTZEN（攻击方，4/5），左方有 HALFTRACK（2/2）当靶子
-        // 两边都在前线：必须同时设 Loc.Frontline 和 OnFrontline。
-        // 只加到 S.Frontline 列表、不改 Loc 的话，客户端规则库会把它们
-        // 当成还在支援线（location=5/6），于是以 not_enough_range 否决攻击 ——
+        // 右方出 7. SCHÜTZEN（攻击方，4/5）在前线，左方有 HALFTRACK（2/2）当靶子，
+        // 靶子放在**左方的支援线**。
+        //
+        // 前线只有一条、且同时只能被一方占据（CanEnterFrontline），所以「敌我双方
+        // 都在前线」是摆不出来的局面 —— 这里必须是「攻方在前线 + 靶子在敌方支援线」。
+        // 这条也正是 KARDS 的射程规则：射程 1 的单位要上前线才够得到敌方支援线
+        // （客户端的 not_enough_range 只在「双方都不在前线」时才要求射程 ≥ 2）。
+        // 两边都必须同时设 Loc 和 OnFrontline：只加到 S.Frontline 列表、不改 Loc 的话，
+        // 客户端规则库会把它们当成还在支援线（location=5/6），
         // 这正是引擎 Loc 与客户端 ECardLocationEnum 两套位置语义的接缝。
         var atk = g.S.NewCard(schutzenDef, Side.Right);
         atk.Loc = Loc.Frontline;
@@ -71,10 +76,10 @@ public static class ReproIssue1
         g.S.FrontlineOwner = Side.Right;
 
         var def = g.S.NewCard(halftrackDef, Side.Left);
-        def.Loc = Loc.Frontline;
-        def.OnFrontline = true;
+        def.Loc = Loc.Board;
+        def.OnFrontline = false;
         def.EnterPlayTurn = 0;
-        g.S.Frontline.Add(def);
+        g.S.Player(Side.Left).Board.Add(def);
 
         // 让右方成为行动方，并给足行动点
         // （客户端 CanAttack 会查 not_enough_kredits，没给钱会被否掉 ——

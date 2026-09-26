@@ -454,6 +454,15 @@ public sealed class HttpServer
             legalIndices = Enc.Mask(g).actions.Select(a => Enc.Index(g, a)).ToArray(),
             left = View(g, Side.Left),
             right = View(g, Side.Right),
+            // 前线**只有一条**：双方共用，同时只能被一方占据（无敌方单位时才能进，
+            // 见 GameEngine.CanEnterFrontline）。所以这里给一个共享视图，
+            // owner 说明现在是谁占着；left/right 里的 frontline 只是它的过滤切片。
+            frontline = new
+            {
+                owner = g.S.FrontlineOwner.ToString(),
+                count = g.S.Frontline.Count,
+                cards = g.S.Frontline.Select(CardView).ToArray(),
+            },
             legalActions = g.LegalActions().Select(a => new { text = a.ToString(), a.Type, a.SourceId, a.TargetId, a.HandIndex }).ToArray(),
             stats = new { illegal = s.Illegal, triggers = g.TriggerFireCount, unhandled = g.Unhandled.Count },
             // 抉择预览：效果跑到一半要求选牌时，这里给出候选项，
@@ -484,6 +493,8 @@ public sealed class HttpServer
             deckCount = p.Deck.Count,
             discardCount = p.Discard.Count,
             fatigue = p.Fatigue,
+            // 这一方在前线上的单位 —— 前线是共享的一条，所以这里通常是空的，
+            // 完整信息看观测里的顶层 frontline。
             frontline = g.S.Frontline.Where(c => c.Owner == side).Select(CardView).ToArray(),
             board = p.Board.Select(CardView).ToArray(),
             hand = p.Hand.Select(CardView).ToArray(),
@@ -496,6 +507,8 @@ public sealed class HttpServer
         instanceId = c.InstanceId,
         name = c.Name,
         type = c.Type.ToString(),
+        owner = c.Owner.ToString(),
+        onFrontline = c.OnFrontline,
         kredits = c.KreditCost,
         attack = c.TotalAttack,
         defense = c.TotalDefense,

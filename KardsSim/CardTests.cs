@@ -37,6 +37,8 @@ public static class CardTests
         TwoPhaseChoiceIsAnActionDimension();
         AuraAppliesAndRetracts();
         AuraFollowsTheUnitWhenItMoves();
+        FrontlineIsOneSharedRow();
+        RangeOneNeedsTheFrontlineForTheEnemySupportLine();
 
         Console.WriteLine();
         Console.WriteLine($"通过 {_pass} / 失败 {_fail}");
@@ -453,11 +455,24 @@ public static class CardTests
             return c;
         }
 
+        // 敌方靶子放**敌方的支援线**：前线是共享的一条，同时只能被一方占据
+        // （见 CanEnterFrontline），把敌我单位都塞进 S.Frontline 是摆不出来的局面。
+        // 攻方在前线、靶子在敌方支援线是合法且可达的（射程判定见 not_enough_range）。
+        Card PutSupport(CardDef def, Side s)
+        {
+            var c = g.S.NewCard(def, s);
+            c.Loc = Loc.Board;
+            c.OnFrontline = false;
+            c.EnterPlayTurn = 0;
+            g.S.Player(s).Board.Add(c);
+            return c;
+        }
+
         var tankDef = CardDb.All.FirstOrDefault(d => d.Type == CardType.Tank && d.Attack > 0);
         var infDef = CardDb.All.FirstOrDefault(d => d.Type == CardType.Infantry && d.Attack > 0);
         if (tankDef is null || infDef is null) { Check("找得到坦克/步兵样本", false, "卡池里没有"); return; }
 
-        var target = Put(CardDb.All.First(d => d.Type == CardType.Infantry && d.Defense > 0), Side.Right);
+        var target = PutSupport(CardDb.All.First(d => d.Type == CardType.Infantry && d.Defense > 0), Side.Right);
         var tank = Put(tankDef, Side.Left);
         var inf = Put(infDef, Side.Left);
         g.RefreshAllLocations();
@@ -777,6 +792,152 @@ public static class CardTests
         g.S.Player(s).Board.Add(c);
         g.RefreshAllLocations();
         return c;
+    }
+
+    /// <summary>
+    /// 前线<b>只有一条</b>，而且是「抢」来的：无敌方单位时才能占领。
+    ///
+    /// <para>
+    /// 这条规则引擎本来就对（<c>CanEnterFrontline</c> = 归属为无主或己方；
+    /// 归属只在整条线清空时回到无主），但**观测里写成两条**了 ——
+    /// 状态向量原来是「己方前线 / 己方支援 / 敌方前线 / 敌方支援」四行，
+    /// 把同一条线按敌我写了两遍，其中一行必然恒空（白占 60 维，
+    /// 还要求模型自己学会哪一行才是有用的）。现在是一条共享的前线行，
+    /// 归属由全局量表达。这里同时把规则和编码形状都钉住。
+    /// </para>
+    /// </summary>
+    private static void FrontlineIsOneSharedRow()
+    {
+        var g = new Engine.GameEngine(211, null, null, false);
+        var h = new Bridge.EngineHost(g);
+        g.Host = h;
+        g.S.Current = Side.Left;
+        g.S.Left.Kredits = 99;
+
+        // 挑一张没有任何触发点的白板单位，免得它的离场效果干扰断言。
+        var unitDef = CardDb.All.FirstOrDefault(d =>
+            d.IsUnit && d.Attack > 0 && d.Defense > 0 && d.Triggers.Count == 0 && d.ChooseOneCards.Count == 0);
+        if (unitDef is null) { Check("找得到白板单位（前线）", false, "卡池里没有"); return; }
+
+        var mine = PlaceInFrontline(g, Side.Left, unitDef);
+        Check("我占住前线后，敌方不能进（前线是抢的）",
+            !g.CanEnterFrontline(Side.Right), "CanEnterFrontline(Right)=true");
+        Check("敌方不能进时，铸造类入口也拒绝",
+            !g.TryPlaceOnFrontlinePublic(g.S.NewCard(unitDef, Side.Right)), "居然放进去了");
+        Check("前线里只有占据方的牌",
+            g.S.Frontline.Count == 1 && g.S.Frontline.All(c => c.Owner == Side.Left),
+            $"{g.S.Frontline.Count} 张: {string.Join(",", g.S.Frontline.Select(c => c.Owner))}");
+        // 出牌目标槽里前线也只有一份：第 1 格 → 下标 handIndex*32 + 1*2 + 分支 = 2
+        var idxOwnFront = Ai.Encoder.Index(g, new GameAction
+        {
+            Type = ActionType.PlayCard, HandIndex = 0, TargetId = mine.InstanceId, ChoiceIndex = 0,
+        });
+        Check("出牌目标槽里前线只有一份（己方占着时也落在第 1 格）", idxOwnFront == 2, $"{idxOwnFront}");
+
+        // 我方单位离场 → 整条线清空 → 归属回到无主 → 双方都能进
+        g.DestroyCard(mine);
+        Check("前线清空后归属回到无主", g.S.FrontlineOwner == Side.None, g.S.FrontlineOwner.ToString());
+        Check("前线清空后敌方可以进", g.CanEnterFrontline(Side.Right), "CanEnterFrontline(Right)=false");
+
+        var foe = PlaceInFrontline(g, Side.Right, unitDef);
+        Check("敌方占住前线后，我也进不去", !g.CanEnterFrontline(Side.Left), "CanEnterFrontline(Left)=true");
+        Check("前线仍然只有那一条（共用的列表里不会同时有敌我）",
+            g.S.Frontline.All(c => c.Owner == Side.Right), string.Join(",", g.S.Frontline.Select(c => c.Owner)));
+        // 敌方占着时，同一个槽位同样落在第 1 格 —— 说明「己方/敌方前线」确实是同一份槽位
+        var idxFoeFront = Ai.Encoder.Index(g, new GameAction
+        {
+            Type = ActionType.PlayCard, HandIndex = 0, TargetId = foe.InstanceId, ChoiceIndex = 0,
+        });
+        Check("敌方占着时出牌目标也是第 1 格（同一份槽位）", idxFoeFront == 2, $"{idxFoeFront}");
+
+        // 观测：一块 5 格的前线，而不是两块（己方前线 + 敌方前线）
+        var expectState = 3 * 5 * 12 + 24;
+        Check($"状态向量只有一条前线（StateSize={Ai.Encoder.StateSize}，期望 {expectState}）",
+            Ai.Encoder.StateSize == expectState, $"{Ai.Encoder.StateSize}");
+        var v = Ai.Encoder.Encode(g);
+        Check("前线那一行编码的是当前占据方的牌（这里是敌方）",
+            v[0] == 1f && v[1] > 0f, $"occupied={v[0]} type={v[1]}");
+        Check("前线归属写进了全局量（当前行动方是 Left → 敌方占据应为 0）",
+            v[3 * 5 * 12 + 13] == 0f, $"frontlineOwner={v[3 * 5 * 12 + 13]}");
+        Check("前线行与双方支援线是分开的两块，不会重复计数",
+            v[0] == 1f && v[5 * 12] == 0f && v[2 * 5 * 12] == 0f,
+            $"front={v[0]} mySupport={v[5 * 12]} foeSupport={v[2 * 5 * 12]}");
+    }
+
+    /// <summary>
+    /// 射程 1 的单位：要够到<b>敌方支援线</b>必须自己上前线；
+    /// 但在支援线上照样能打敌方<b>前线</b>的单位。
+    ///
+    /// <para>
+    /// 权威判据是客户端规则库的 <c>not_enough_range</c>：
+    /// <c>defender.location != 7 &amp;&amp; attacker.location != 7 &amp;&amp; range &lt; 2</c>
+    /// —— 只有「双方都不在前线」时才要求射程 ≥ 2。
+    /// 引擎以前在 <c>CanAttack</c> 里写死了
+    /// <c>if (!u.OnFrontline &amp;&amp; u.Range &lt; 2) return false;</c>，
+    /// 把支援线上的射程 1 单位整条封死：连打敌方前线都被否掉，比客户端严。
+    /// </para>
+    /// </summary>
+    private static void RangeOneNeedsTheFrontlineForTheEnemySupportLine()
+    {
+        var r1Def = CardDb.All.FirstOrDefault(d =>
+            d.IsUnit && d.Range == 1 && d.Attack > 0 && d.Defense > 0
+            && !d.Has(Kw.Guard) && !d.Has(Kw.Smokescreen) && !d.Has(Kw.Covert));
+        var plainDef = CardDb.All.FirstOrDefault(d =>
+            d.IsUnit && d.Defense > 0 && !d.Has(Kw.Guard) && !d.Has(Kw.Smokescreen) && !d.Has(Kw.Covert));
+        if (r1Def is null || plainDef is null) { Check("找得到射程 1 的样本", false, "卡池里没有"); return; }
+
+        // ── A：敌方占着前线 → 我支援线上的射程 1 单位能打它（修复前这里被否） ──
+        var g = new Engine.GameEngine(223, null, null, false);
+        var h = new Bridge.EngineHost(g);
+        g.Host = h;
+        g.S.Current = Side.Left;
+        g.S.Left.Kredits = 99;
+
+        var foeFront = PlaceInFrontline(g, Side.Right, plainDef);
+        var mineA = PlaceInSupport(g, Side.Left, r1Def);
+        g.RefreshAllLocations();
+
+        Check($"样本射程 {mineA.Range} < 门槛 {Rules.SupportLineAttackRange}（客户端的 not_enough_range 阈值）",
+            mineA.Range < Rules.SupportLineAttackRange, $"range={mineA.Range}");
+        Check("支援线上的射程 1 单位可以攻击（敌方前线有人时）", g.CanAttack(mineA), "CanAttack=false");
+        Check("  而且目标里就有那张敌方前线单位",
+            g.AttackTargetsFor(mineA).Contains(foeFront.InstanceId),
+            $"[{string.Join(",", g.AttackTargetsFor(mineA))}] vs {foeFront.InstanceId}");
+
+        // ── B：前线空着 → 同一个单位够不到敌方支援线 ──
+        var g2 = new Engine.GameEngine(227, null, null, false);
+        var h2 = new Bridge.EngineHost(g2);
+        g2.Host = h2;
+        g2.S.Current = Side.Left;
+        g2.S.Left.Kredits = 99;
+
+        var foeSupport = PlaceInSupport(g2, Side.Right, plainDef);
+        var mineB = PlaceInSupport(g2, Side.Left, r1Def);
+        g2.RefreshAllLocations();
+
+        Check("前线空着时，支援线上射程 1 的单位打不到敌方支援线",
+            !g2.AttackTargetsFor(mineB).Contains(foeSupport.InstanceId),
+            $"[{string.Join(",", g2.AttackTargetsFor(mineB))}] 含 {foeSupport.InstanceId}");
+        Check("  被否的理由是客户端给的 not_enough_range",
+            !g2.ClientCanAttack(mineB, foeSupport, out var why) && why == "not_enough_range",
+            $"reason='{why}'");
+
+        // ── C：同一个单位上前线之后，敌方支援线就能打了 ──
+        Check("它可以移动到前线", g2.CanMoveToFrontline(mineB), "CanMoveToFrontline=false");
+        Check("移动动作被接受",
+            g2.Apply(new GameAction { Type = ActionType.MoveToFrontline, SourceId = mineB.InstanceId, TargetId = -1 }),
+            "Apply 返回 false");
+        // 每回合只能移动一次、且步兵移动会消耗攻击，这里清掉标记代表「下一回合」
+        mineB.MovedThisTurn = false;
+        mineB.AttackedThisTurn = false;
+        g2.RefreshAllLocations();
+
+        Check("上了前线之后，射程 1 也够得到敌方支援线",
+            g2.AttackTargetsFor(mineB).Contains(foeSupport.InstanceId),
+            $"[{string.Join(",", g2.AttackTargetsFor(mineB))}] 含 {foeSupport.InstanceId}");
+        Check("  （此时客户端不再给 not_enough_range）",
+            g2.ClientCanAttack(mineB, foeSupport, out var why2),
+            $"reason='{why2}'");
     }
 
     /// <summary>把一张牌直接放到前线（编号由 <see cref="Engine.GameEngine.RefreshAllLocations"/> 重排）。</summary>

@@ -151,8 +151,13 @@ public sealed partial class GameEngine
         // 留口子的，这里要是无条件挡，那条豁免就变成死逻辑了。
         if (u.SummonedThisTurn && !u.Has(Kw.Blitz)) return false;
         if (u.TotalAttack <= 0) return false;
-        // 支援线上的单位要够得着前线
-        if (!u.OnFrontline && u.Range < Rules.SupportLineAttackRange) return false;
+        // 射程不在这里判。客户端的 not_enough_range 是
+        //   defender.location != 7 && attacker.location != 7 && attacker.range < 2
+        // —— 只有「双方都不在前线」时才要求射程 ≥ 2。也就是说支援线上的射程 1 单位
+        // **照样能打敌方前线的单位**（前线就是挨着的那条线），只是够不到敌方支援线。
+        // 这里曾经写死 `if (!u.OnFrontline && u.Range < 2) return false;`，把支援线
+        // 射程 1 的单位整条封死（连打前线都被否掉），比客户端严。逐对判定交给
+        // 客户端规则库（AttackTargetsFor → ClientCanAttack），不再自己重写一遍。
         return AttackTargetsFor(u).Count > 0;
     }
 

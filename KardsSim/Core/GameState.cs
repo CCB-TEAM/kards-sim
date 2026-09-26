@@ -20,7 +20,18 @@ public static class Rules
     public const int DeckSize = 30;
     public const int StartingHand = 4;
     public const int HqDefense = 20;
-    /// <summary>支援线上的单位要能打到前线，range 至少要有这么多。</summary>
+    /// <summary>
+    /// 打到<b>敌方支援线</b>所需的最低射程。
+    ///
+    /// <para>
+    /// 客户端的 <c>not_enough_range</c> 判据是：防守方与攻击方都不在前线（<c>location != 7</c>）
+    /// 且 <c>range &lt; 2</c>。也就是「支援线打支援线」才要射程 ≥ 2 ——
+    /// 支援线上的射程 1 单位可以打敌方<b>前线</b>（挨着的那条线），只是够不到支援线；
+    /// 而只要有一方在前线，射程就不再是限制。
+    /// 引擎不自己用这个常量做前置否决，逐对判定走客户端规则库，
+    /// 这里只作为文档与测试的参照（见 <c>--mode rules</c> / <c>--mode tests</c>）。
+    /// </para>
+    /// </summary>
     public const int SupportLineAttackRange = 2;
     /// <summary>前线归属为 None 时，任何单位都能进。</summary>
     public const Side FrontlineNone = Side.None;

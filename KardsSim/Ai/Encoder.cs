@@ -12,15 +12,33 @@ namespace KardsSim.Ai;
 public static class Encoder
 {
     public const int PerRow = 5;         // 每行最多 5 张
-    public const int Rows = 4;           // 己方前线/己方支援/敌方前线/敌方支援
+    /// <summary>
+    /// 行数 = 3：<b>前线（双方共用一条）</b> / 己方支援线 / 敌方支援线。
+    ///
+    /// <para>
+    /// 这里曾经是 4 行（己方前线 / 己方支援 / 敌方前线 / 敌方支援），也就是把同一条
+    /// 前线按「我的 / 他的」写了两遍。KARDS 的前线只有一条，而且**同时只能被一方占据**
+    /// （见 <see cref="Engine.GameEngine.CanEnterFrontline"/>：前线无敌方单位时才能进），
+    /// 所以那两行必然一行恒空 —— 白占 60 维，还要模型自己学会「哪一行才是有用的那行」。
+    /// 现在写成一条，归属由全局量 <c>前线归属</c> 表达。
+    /// </para>
+    /// </summary>
+    public const int Rows = 3;
     public const int CardFeatures = 12;  // 每张牌的编码宽度
     public const int Globals = 24;
 
     public const int StateSize = Rows * PerRow * CardFeatures + Globals;
 
-    /// <summary>每张手牌的目标槽位数（见 <see cref="PlaySlot"/>）：
-    /// 0 = 不需要目标；1..5 敌方前线；6..10 敌方支援；11..15 己方前线；16..20 己方支援。</summary>
-    public const int PlayTargetSlots = 21;
+    /// <summary>
+    /// 每张手牌的目标槽位数（见 <see cref="PlaySlot"/>）：
+    /// 0 = 不需要目标；1..5 前线（第 0..4 格）；6..10 敌方支援线；11..15 己方支援线。
+    ///
+    /// <para>
+    /// 前线的 5 格只有一份：前线同时只能被一方占据，所以「己方前线」和「敌方前线」
+    /// 是同一格子的两种状态，分两套槽位必然有一套恒空（同样出自「只有一条前线」）。
+    /// </para>
+    /// </summary>
+    public const int PlayTargetSlots = 16;
 
     /// <summary>「三选一」的分支槽位数（卡池里 choose-one 卡都是 2 个分支）。</summary>
     public const int ChooseSlots = 2;
@@ -28,7 +46,7 @@ public static class Encoder
     /// <summary>每张手牌占用的出牌槽位数 = 目标槽 × 分支槽。</summary>
     public const int PlaySlotsPerCard = PlayTargetSlots * ChooseSlots;
 
-    /// <summary>出牌区大小：5 张手牌 × 42 个槽。</summary>
+    /// <summary>出牌区大小：5 张手牌 × 32 个槽。</summary>
     public const int PlayBlock = PerRow * PlaySlotsPerCard;
 
     /// <summary>单位区：己方 10 个位置 × 13 个动作。</summary>
@@ -45,7 +63,7 @@ public static class Encoder
 
     /// <summary>
     /// 动作空间：
-    ///   出牌区（5 手牌 × 21 目标 × 2 三选一分支）+ 单位区（10 × 13）+ EndTurn + 抉择区（8）。
+    ///   出牌区（5 手牌 × 16 目标 × 2 三选一分支）+ 单位区（10 × 13）+ EndTurn + 抉择区（8）。
     ///
     /// <para>
     /// 出牌从「一张牌一个下标」扩成「一张牌 × 一个目标 × 一个三选一分支」，
@@ -64,10 +82,9 @@ public static class Encoder
         var foe = GameState.Foe(me);
         var i = 0;
 
-        // 4 行 × 5 格
-        i = WriteRow(v, i, g.S.Frontline.Where(c => c.Owner == me));
+        // 3 行 × 5 格：前线（双方共用一条，谁占着看全局量「前线归属」）+ 双方支援线
+        i = WriteRow(v, i, g.S.Frontline);
         i = WriteRow(v, i, g.S.Player(me).Board);
-        i = WriteRow(v, i, g.S.Frontline.Where(c => c.Owner == foe));
         i = WriteRow(v, i, g.S.Player(foe).Board);
 
         var mp = g.S.Player(me);
@@ -144,12 +161,12 @@ public static class Encoder
 
     /// <summary>
     /// 动作 → 下标。
-    ///   0..209    ：出牌区。handIndex * 42 + 目标槽 * 2 + 三选一分支
+    ///   0..159    ：出牌区。handIndex * 32 + 目标槽 * 2 + 三选一分支
     ///               （目标槽见 <see cref="PlaySlot"/>，分支 0/1）
-    ///   210..339  ：己方 10 个位置（前线 5 + 支援 5），每个 13 个动作
+    ///   160..289  ：己方 10 个位置（前线 5 + 支援 5），每个 13 个动作
     ///               （11 个攻击目标：0..9 是敌方单位槽，10 是 HQ；11 前移；12 后退）
-    ///   340       ：EndTurn
-    ///   341..348  ：待决选择的候选（HandIndex 即候选序号）
+    ///   290       ：EndTurn
+    ///   291..298  ：待决选择的候选（HandIndex 即候选序号）
     /// </summary>
     public static int Index(GameEngine g, GameAction a)
     {
@@ -185,6 +202,11 @@ public static class Encoder
     /// <summary>
     /// 出牌目标 → 槽位；-1 表示这个目标不在编码范围里。
     /// 出牌目标与攻击目标分开编码：出牌可以是己方单位（增益类），攻击只能是敌方。
+    ///
+    /// <para>
+    /// 前线只占 1..5 一份（不分敌我）：前线同时只能被一方占据，
+    /// 「己方前线 / 敌方前线」是同一格的两种状态，分两套必然有一套恒空。
+    /// </para>
     /// </summary>
     private static int PlaySlot(GameEngine g, int targetId)
     {
@@ -192,34 +214,35 @@ public static class Encoder
         var me = g.S.Current;
         var foe = GameState.Foe(me);
 
+        // 1..5：前线第 0..4 格（谁在都算，前线只可能有一方的单位）
         var n = 0;
-        foreach (var c in g.S.Frontline.Where(x => x.Owner == foe))
+        foreach (var c in g.S.Frontline)
         {
             if (c.InstanceId == targetId) return 1 + n;
             if (++n >= PerRow) break;
         }
+        // 6..10：敌方支援线
         n = 0;
         foreach (var c in g.S.Player(foe).Board)
         {
             if (c.InstanceId == targetId) return 6 + n;
             if (++n >= PerRow) break;
         }
-        n = 0;
-        foreach (var c in g.S.Frontline.Where(x => x.Owner == me))
-        {
-            if (c.InstanceId == targetId) return 11 + n;
-            if (++n >= PerRow) break;
-        }
+        // 11..15：己方支援线
         n = 0;
         foreach (var c in g.S.Player(me).Board)
         {
-            if (c.InstanceId == targetId) return 16 + n;
+            if (c.InstanceId == targetId) return 11 + n;
             if (++n >= PerRow) break;
         }
         return -1;
     }
 
-    /// <summary>己方单位的槽位：前线 0..4，支援线 5..9。</summary>
+    /// <summary>
+    /// 己方单位的槽位：前线 0..4，支援线 5..9。
+    /// （前线是共享的一条；这里只可能挑出自己的单位 —— 前线被敌方占着时，
+    /// 自己压根没有单位在那条线上。）
+    /// </summary>
     private static int SlotOf(GameEngine g, int instanceId)
     {
         var me = g.S.Current;
@@ -240,7 +263,14 @@ public static class Encoder
         return -1;
     }
 
-    /// <summary>攻击目标的槽位：敌方前线 0..4，敌方支援 5..9，HQ = 10。</summary>
+    /// <summary>
+    /// 攻击目标的槽位：前线 0..4，敌方支援 5..9，HQ = 10。
+    ///
+    /// <para>
+    /// 「敌方前线」就是那条共享前线 —— 只有敌方占着前线时它才可能有单位，
+    /// 所以这里不需要区分敌我两套槽位（<see cref="PlaySlot"/> 同理）。
+    /// </para>
+    /// </summary>
     private static int TargetSlot(GameEngine g, int targetId)
     {
         if (targetId == 0) return 10;
