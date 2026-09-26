@@ -84,6 +84,178 @@ dotnet run --project KardsSim -c Release -- --mode tests
 
 ---
 
+## HTTP 接口（给 AI 后端）
+
+```bash
+# 默认 http://127.0.0.1:8642/
+dotnet run --project KardsSim -c Release -- --mode serve
+# 换地址/端口
+dotnet run --project KardsSim -c Release -- --mode serve --url http://127.0.0.1:9000/
+```
+
+**一个 session = 一局对局**：`POST /games` 拿 id，之后反复
+`GET /games/{id}/state`（观测）→ 挑合法动作 → `POST /games/{id}/step` 推进。
+引擎、宿主、直译产物与 `--mode selfplay` **完全是同一套**（`HttpServer.NewEngine`
+建完引擎立刻挂 `EngineHost`）。这一点很要紧：不挂宿主时引擎会退回读卡面文本猜效果的
+`EffectPlanner`，那 API 跑的就是另一套、而且是最差的规则。
+
+用 `TcpListener` 手写 HTTP/1.1，而不是 `HttpListener` —— 后者在 Windows 上依赖
+HTTP.sys 与 URL ACL，需要额外权限，受限环境直接起不来。
+
+### 端点
+
+| 方法 | 路径 | 请求体 | 返回 |
+|---|---|---|---|
+| GET | `/` | — | 服务信息 + 端点清单 + `stateSize`/`actionSize` + `actionTypes` |
+| GET | `/cards?q=&limit=` | — | 卡池检索（`q` 匹配 id/name，`limit` 默认 100、上限 2000） |
+| GET | `/cards/{name}` | — | 单卡详情（文本、数值、关键词、注册的触发点、Develop 出的卡名） |
+| GET | `/stats` | — | 卡池统计（按类型/阵营计数、有触发点/有衍生卡的张数） |
+| POST | `/games` | `{seed?,leftDeck?,rightDeck?,log?}` | 建局，返回第一帧观测（含 `sessionId`） |
+| GET | `/games/{id}` | — | 等价于 `/state` |
+| GET | `/games/{id}/state` | — | 当前观测：状态向量 + 双方视图 + 合法动作 + 抉择预览 |
+| GET | `/games/{id}/legal` | — | `{actions, indices, mask}`，只要动作集时用它（不带 264 维向量） |
+| POST | `/games/{id}/step` | `{index:N}` 或 `{action:{...}}` | 推进一步：`{ok, applied, reward, obs, done}` |
+| POST | `/games/{id}/reset` | `{seed?}` | 用同一套卡组重开（`seed` 省略则沿用） |
+| GET | `/games/{id}/log` | — | 引擎的可读日志（`log:true` 建局才有内容） |
+| DELETE | `/games/{id}` | — | 删掉 session |
+| POST | `/selfplay` | `{games?,maxSteps?}` | 在服务里跑自对弈并汇总（`games` 默认 10，`maxSteps` 默认 2000） |
+
+`seed` 省略时取 `Environment.TickCount`；`/selfplay` 固定用 `1000+i` 作种，同参数可复现。
+`leftDeck`/`rightDeck` 传 `"random"` 或省略即随机 30 张，也可以直接给
+id 列表（`card_event_bpf,card_unit_7_schutzen,...`，用 `,` 或 `;` 分隔）。
+
+### 走一局
+
+```bash
+# 建局（seed 固定 → 可复现）
+curl -s -X POST http://127.0.0.1:8642/games \
+     -H 'content-type: application/json' \
+     -d '{"seed":42}'
+# → {"sessionId":"1a2bf118b","turn":1,"currentSide":"Left","done":false,
+#    "state":[...264 个数...],"stateSize":264,"actionSize":349,
+#    "legalIndices":[126,340],"left":{...},"right":{...},
+#    "legalActions":[{"text":"Play(hand=3)","Type":"PlayCard","SourceId":2,
+#                     "TargetId":-1,"HandIndex":3},
+#                    {"text":"EndTurn","Type":"EndTurn",...}],
+#    "stats":{"illegal":0,"triggers":0,"unhandled":0},"pendingChoice":null}
+
+# 按下标推进（推荐给模型：下标是动作空间的唯一定位）
+curl -s -X POST http://127.0.0.1:8642/games/1a2bf118b/step \
+     -H 'content-type: application/json' -d '{"index":126}'
+# → {"ok":true,"applied":"Play(hand=3)","reward":0,"obs":{...},"done":false}
+
+# 也可以给动作对象（便于手写脚本；PlayCard 需要 handIndex 或 sourceId）
+curl -s -X POST http://127.0.0.1:8642/games/1a2bf118b/step \
+     -H 'content-type: application/json' \
+     -d '{"action":{"type":"Attack","sourceId":17,"targetId":31}}'
+```
+
+`reward` 只在终局给分：`1` = 本步**行动方**（推进前的 `currentSide`）赢，`-1` = 输，
+未结束或平局为 `0`。`applied` 是动作的可读形式
+（`EndTurn` / `Play(hand=3,target=17)` / `Attack(17->HQ)` / `MoveFront(17)` /
+`MoveSupport(17)` / `Choose(#1 id=0)`）。
+
+### 状态向量（264 维，`stateSize`）
+
+```
+[0,240)   4 行 × 5 格 × 12 维。行序：己方前线 / 己方支援 / 敌方前线 / 敌方支援；
+          行内格序 = 站位顺序（locationNumber 从小到大，也就是引擎列表顺序）；
+          未占用的格子全 0。**「己方」指当前行动方，所以向量会随轮到谁而转置。**
+每格 12 维：
+  0 占用   1 type/7      2 TotalAttack/12   3 TotalDefense/12
+  4 KreditCost/12        5 Guard           6 Blitz            7 Smokescreen
+  8 本回合已攻击         9 Pinned|Suppressed  10 Range/5       11 HeavyArmor/5
+[240,264) 24 个全局量（顺序即下表）：
+  双方 HQ/HqDefense、当前方 Kredits/MaxKredits、双方 KreditSlots/MaxKredits、
+  双方 Hand.Count/MaxCardsOnHand、双方 Deck.Count/DeckSize、双方 Discard.Count/DeckSize、
+  Turn/40、当前方是否 Left、前线归属（己方 1 / 无主 0.5 / 敌方 0）、
+  双方场上单位数/(5×2)、双方 Fatigue/10、双方手牌平均费用/MaxKredits、
+  双方场上总攻击/30、双方场上总防御/60
+```
+
+**手牌内容不在状态向量里**（只有张数与平均费用），对手手牌同理 —— 它本来就是隐藏信息，
+要打某张牌得先看 `left.hand[i]`（自己的）并记下它的 `handIndex`。
+
+### 动作空间（349 维，`actionSize`）
+
+```
+0..209     出牌区：handIndex × 42 + 目标槽 × 2 + 三选一分支
+             目标槽 0 = 不需要目标；1..5 敌方前线；6..10 敌方支援；
+                    11..15 己方前线；16..20 己方支援
+210..339   单位区：210 + 己方槽位 × 13
+             槽位 0..4 己方前线、5..9 己方支援
+             槽内 0..9 = 攻击敌方前线/支援的目标槽，10 = 打 HQ，
+             11 = MoveToFrontline，12 = MoveToSupport
+340        EndTurn
+341..348   待决选择的候选（下标 341 + 候选序号）
+```
+
+`GET /legal` 与观测里的 `legalIndices` 是**同一套下标**；`mask` 是 349 长的 0/1 数组，
+可以直接当策略网络的合法动作掩码。同一个下标恒对应同一语义（同一帧内）。
+出牌区的下标可以反推：`handIndex = index / 42`、`目标槽 = index % 42 / 2`、`分支 = index % 2`。
+
+### ⚠️ 坑：`actions` 与 `indices` **不能按下标配对**
+
+`GET /legal` 里 `actions` 来自 `LegalActions()` 原始列表，`indices` 来自 `Enc.Mask()`
+——后者会**丢掉没有动作槽位的动作**，所以两者长度可能不同、按下标 zip 会错位。
+观测里同样是裸的 `legalActions` 对过滤过的 `legalIndices`。
+
+具体会差在哪：手牌上限是 9 张，而出牌区只编码 `handIndex < 5`（`PerRow`），
+所以**手牌第 6 张起没有下标能表达它**（引擎本身允许打，只是动作空间里没这个格子）。
+实测手牌 7 张时：
+
+```
+GET /games/{id}/legal  →  actions=7 条  indices=6 个  [0,42,84,126,168,340]
+  actions: Play(hand=0) … Play(hand=5) EndTurn      ← hand=5 那个动作没有下标
+```
+
+所以：
+
+- **模型 / 远端后端只用 `indices`（配合 `mask`）**，`actions` 当可读日志看；
+- 手牌那 5 张以外的牌**引擎允许打**，用动作对象即可：
+  `{"action":{"type":"PlayCard","handIndex":5}}` —— 受限的只是动作空间编码，不是引擎；
+- 需要严格对齐的接口，得改 `Server/HttpServer.cs`（把 `actions` 也按 `indices` 过滤，
+  或把出牌区从 5 张手牌扩到 9 张）。**当前没有改**，因为它会改变 `actionSize` 与响应长度，
+  已经按 349 训练/对接的一方会受影响。
+
+### 抉择预览（`pendingChoice`）
+
+二段式选择（Develop / 选手牌）出现时，`pendingChoice` 非空，而且
+`legalActions` / `legalIndices` **只剩 ChooseCard 一种**，对局不会在你选完之前往下走：
+
+```json
+{"kind":"selectCardToDraw","sourceCard":"card_event_bpf","sourceId":12,"isEffect":false,
+ "options":[{"index":0,"id":0,"label":"card_event_blast"},
+            {"index":1,"id":0,"label":"card_event_plan"},
+            {"index":2,"id":0,"label":"card_event_production"}]}
+```
+
+用 `{"index":341}`（= 341 + `options[].index`）或 `{"action":{"type":"ChooseCard","handIndex":1}}`
+结算。`options[].id` 为 0 表示这条路径给的是**卡名**（`label`）而不是卡 id
+（客户端 Develop 传的就是名字数组）。
+
+### 错误约定
+
+- **HTTP 码只管路由与参数**：未知路由 / 找不到 session / 找不到卡 → `404`，
+  请求体不是合法 JSON 之类 → `500 {error,type}`。**方法不对也是 404**（没有 405）。
+- **动作层面的失败不占 HTTP 错误**：`step` 恒返回 `200`，失败时
+  `{"ok":false,"reason":"..."}`，`reason` 取值 `illegal index` /
+  `bad action type` / `PlayCard needs handIndex or sourceId` /
+  `body must contain 'index' or 'action'`。失败会计入观测里的 `stats.illegal`。
+- 支持的请求方法只有 `GET/POST/DELETE/OPTIONS`（`OPTIONS` 回空对象，方便浏览器直连；
+  `HEAD` 不参与路由）。响应带 `Access-Control-Allow-Origin: *`，
+  且一律 `Connection: close`，**不要依赖长连接**。
+- 字段命名**不统一**：匿名类型里显式写的字段是小写（`sessionId` / `state` /
+  `legalIndices` / `pendingChoice` / card view 的 `id`、`attack`…），
+  而直接引用 C# 属性的那些保持原名（`legalActions[].Type` / `SourceId` / `TargetId` /
+  `HandIndex`、`/cards` 的 `Id` / `Name` / `Kredits` / `Attack` / `Defense` / `Range`、
+  `/cards/{name}` 的 `CardSet` / `OperationCost` / `HeavyArmor`）。
+  枚举一律序列化成**名字**（`"PlayCard"` 而不是数字）。
+- session 只在内存里，重启即丢；一个 session 的多步请求要**串行**发
+  （每个连接一个线程、session 没有加锁）。
+
+---
+
 ## 七个审计模式
 
 跑多少局自对弈都不能证明「完备」—— 随机对局抽不到那些卡，等于没测。
@@ -370,7 +542,8 @@ dotnet run --project KardsTranspiler -c Release -- \
 3. 选定后回调发起卡自己的 `OnHandTargetSelected(选中的卡ID, instigatorID)`。
 
 HTTP 侧有**抉择预览**：`GET /games/{id}/state` 会给出
-`pendingChoice.options[{index,id,label}]`，AI 后端据此决策。
+`pendingChoice.options[{index,id,label}]`，AI 后端据此决策
+（响应形状与结算方式见上面 [HTTP 接口 → 抉择预览](#抉择预览pendingchoice)）。
 
 `WhichChooseOne` 以前恒返回第 0 支（确定但不是决策点），现在读卡的 `ChooseOne` 成员，
 引擎在出牌前写入；没写时退回可插拔决策器，保证不接 AI 时仍可复现。
