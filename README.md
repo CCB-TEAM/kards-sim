@@ -40,12 +40,15 @@ KardsSim/
   Bridge/
     EngineHost.cs          分派器：原语 → 转译产物递归
     CardDispatch.cs        触发器 → 卡牌事件函数
-  Core/                    GameState / CardDef / 枚举 / RNG
+  Core/                    GameState / CardDef / 枚举 / RNG / DeckCode（卡组码解析）
   Engine/                  对局规则、动作、伤害、回合
   Server/HttpServer.cs     HTTP 接口（给不同 AI 后端用）
   Ai/Encoder.cs            状态/动作编码
 KardsDataExtract/          从资产里抽 cards.json
+tools/gen-deckcodes.ps1    从私服数据表生成 deckcodes.json
 cards.json                 1906 张卡的定义（运行时需要）
+deckcodes.json             卡组码里 2 字符代码 -> 卡牌 id（2499 条，运行时需要）
+decks.json                 22 套社区推荐卡组预设（卡组码）
 ```
 
 ---
@@ -80,6 +83,13 @@ dotnet run --project KardsSim -c Release -- --mode serve
 
 # 机制单测（带断言的，能失败）
 dotnet run --project KardsSim -c Release -- --mode tests
+
+# 卡组码审计：22 套推荐卡组逐条解析，报「哪几套这套模拟器能打完整」
+dotnet run --project KardsSim -c Release -- --mode decks
+
+# 用推荐卡组自对弈（预设名 / 卡组码 / 卡牌 id 列表都能传；--swap-sides 每局交换左右）
+dotnet run --project KardsSim -c Release -- --mode selfplay --games 200 \
+    --left-deck jp-pol-boom --right-deck "%%15|2L2Q2Z31…" --swap-sides
 ```
 
 ---
@@ -110,6 +120,8 @@ HTTP.sys 与 URL ACL，需要额外权限，受限环境直接起不来。
 | GET | `/cards?q=&limit=` | — | 卡池检索（`q` 匹配 id/name，`limit` 默认 100、上限 2000） |
 | GET | `/cards/{name}` | — | 单卡详情（文本、数值、关键词、注册的触发点、Develop 出的卡名） |
 | GET | `/stats` | — | 卡池统计（按类型/阵营计数、有触发点/有衍生卡的张数） |
+| GET | `/decks` | — | 预设卡组清单（`decks.json`）：主国/盟国、HQ、张数、**`complete`/`missing`** —— 训练前先看这里 |
+| GET | `/decks/{key\|名字\|#序号}` | — | 单个预设：解析结果 + 展开后的卡牌清单（`id`/`copies`/`name`/费用） |
 | POST | `/games` | `{seed?,leftDeck?,rightDeck?,log?}` | 建局，返回第一帧观测（含 `sessionId`） |
 | GET | `/games/{id}` | — | 等价于 `/state` |
 | GET | `/games/{id}/state` | — | 当前观测：状态向量 + 双方视图 + **共享前线**（`frontline{owner,count,cards}`）+ 合法动作 + 抉择预览 |
@@ -121,8 +133,21 @@ HTTP.sys 与 URL ACL，需要额外权限，受限环境直接起不来。
 | POST | `/selfplay` | `{games?,maxSteps?}` | 在服务里跑自对弈并汇总（`games` 默认 10，`maxSteps` 默认 2000） |
 
 `seed` 省略时取 `Environment.TickCount`；`/selfplay` 固定用 `1000+i` 作种，同参数可复现。
-`leftDeck`/`rightDeck` 传 `"random"` 或省略即随机 30 张，也可以直接给
-id 列表（`card_event_bpf,card_unit_7_schutzen,...`，用 `,` 或 `;` 分隔）。
+`leftDeck`/`rightDeck` 有三种写法（省略或 `"random"` = 随机 30 张）：
+
+1. **卡组码**：`"%%38|5CjQp2pezq;…"`（真实构筑卡组，39 张，见「卡组码」一节）；
+2. **预设名**：`"jp-pol-boom"` / `"日波炸槽"` / `"#7"`，来自 `decks.json`；
+3. **卡牌 id 列表**：`"card_event_bpf,card_unit_7_schutzen,…"`（`,` 或 `;` 分隔）。
+
+```bash
+# 用推荐卡组建局：左 = 日波炸槽，右 = 另一套（卡组码直接贴）
+curl -s -X POST http://127.0.0.1:8642/games -H 'content-type: application/json' \
+     -d '{"seed":42,"leftDeck":"jp-pol-boom","rightDeck":"ger-usa"}'
+```
+
+卡组里有本卡库没有的牌时**不报错、不静默**：解析时按能解析的牌发牌，
+并在 stderr 打一行 `[卡组] … 只有 35/39 张；卡库缺 2 张（…）`（每种卡组只打一次）。
+要事先知道哪些卡组能打完整，用 `GET /decks` 或 `--mode decks`。
 
 ### 走一局
 
@@ -167,7 +192,7 @@ curl -s -X POST http://127.0.0.1:8642/games/1a2bf118b/step \
   8 本回合已攻击         9 Pinned|Suppressed  10 Range/5       11 HeavyArmor/5
 [180,204) 24 个全局量（顺序即下表）：
   双方 HQ/HqDefense、当前方 Kredits/MaxKredits、双方 KreditSlots/MaxKredits、
-  双方 Hand.Count/MaxCardsOnHand、双方 Deck.Count/DeckSize、双方 Discard.Count/DeckSize、
+  双方 Hand.Count/MaxCardsOnHand、双方 Deck.Count/StandardDeckSize(39)、双方 Discard.Count/StandardDeckSize、
   Turn/40、当前方是否 Left、前线归属（己方 1 / 无主 0.5 / 敌方 0）、
   双方场上单位数/(5×2)、双方 Fatigue/10、双方手牌平均费用/MaxKredits、
   双方场上总攻击/30、双方场上总防御/60
@@ -264,6 +289,132 @@ curl -s -X POST .../games/{id}/step -H 'content-type: application/json' \
 
 ---
 
+## 卡组码（deck code）
+
+训练一个「会打 KARDS」的模型，牌得是**真人的牌**。客户端复制出来的卡组是一串
+`%%…` 开头的代码，解析规则在私服协议文档
+（[06 · 卡组与卡组码](https://ccb-team.github.io/private-server/06-decks)）里，
+参考实现（fyserver / kards-server-go）也有一份简化版。这里按文档实现，
+并和参考实现的 `GetCardsFromDeck` 对过账。
+
+### 格式解剖
+
+```
+%%21|4v3232…sU;;;~;;;|0N1b
+││ │└┬┘└┬┘└┬┘└┬┘    │
+││ │ │  │  │  └──────┴─ 第 3 段：HQ。前 2 字符是主国 HQ 的卡牌代码（0N=伦敦）
+││ │ │  │  └────────── 第 2 段：用 ; 分成最多 4 组，**组号 i = 组里每张算 i+1 张**
+││ │ └──┴─────────────  （组 0 算 1 张、组 1 算 2 张、组 2 算 3 张、组 3 算 4 张）
+││ └──────────────────── 主国代码 + 盟国代码，各 1 位
+│└────────────────────── 固定前缀
+└─────────────────────── 固定前缀
+```
+
+**国家代码**：`1` Germany、`2` Britain、`3` Japan、`4` Soviet、`5` USA、
+`6` France、`7` Italy、`8` Poland、`9` Finland、`a` Anzac（OceaniaStorm 的新阵营，
+项目里 `Faction.Anzac`）。前 9 个就是 `EFactionEnum` 的值，`a` 是第 10 个。
+
+**卡牌代码**：每张牌 2 个字符，取自客户端数据表的 `deck_code_id`
+（`deckcodes.json`，2499 条）。它和 `card_type`/资产名无关 ——
+`card_unit_…` 那套名字是另一回事。
+
+**张数**：组号就是倍数，同一张牌可以出现在多个组里累加，但总和不能超过 4。
+私服文档的例子 `%%21|4v32323232sT…` 里 `32` 出现 4 次 = 4 张。
+
+### 三个坑（都踩过）
+
+1. **卡牌代码大小写敏感**。`0A` 是 `card_event_the_empire`、`0a` 是
+   `card_event_daylight_bombing`；`ux` 是德军的 Sd.Kfz. 10、`uX` 是苏军的 `rush_bal`。
+   用大小写不敏感的字典读这张表，整副牌会悄悄错一截（本仓库的测试盯着这条）。
+   顺带一提：这份数据表里确实有 **17 个代码被两张卡共用**（完全相同的字符串，
+   不是大小写差异），形态很一致 —— 一张 Anzac 卡对一张别的阵营的 `_bal`（平衡版）卡，
+   例如 `xX` = `card_unit_dingo_armored_car`(Anzac) / `card_unit_lancaster_bal`(Britain)。
+   `deckcodes.json` 里这种写成数组，解析时按「**卡库里有哪张 + 阵营是否合法**（主国/盟国/中立）」
+   挑：日澳卡组里的 `xX` 只能是那张 Anzac 装甲车。
+2. **`~` 到第 2 段结尾要整段丢掉**。客户端在它后面塞备注/卡背（官方默认卡组就是
+   `…sU;;;~;;;|0N1b`）。不先截断再切组，`~` 后面的空组会被算成 5/6/7 张。
+3. **卡组是 39 张，不是 30**。`Rules.DeckSize = 30` 是 BP_Logic CDO 里的
+   `NumCardsInDeck`，和实测对不上：卡组码解开全是 39 张，私服发牌也是
+   「每侧 40 = HQ 1 + 手牌 4/5 + 牌库 35/34」。所以引擎给显式卡组按
+   `Rules.StandardDeckSize = 39` 发牌（随机凑牌那条路仍是 30），
+   状态向量也改用 39 归一化。HQ 卡片本身**不进卡组**，只当元数据
+   （没有 HQ 段时用该国默认值：`3v` 柏林 / `0N` 伦敦 / `6l` 长春 / `8v` 斯大林格勒 /
+   `ce` 瑟堡；老写法把 HQ 代码塞在第 0 组开头的那种会先摘出来再数牌）。
+
+### 数据文件与出处
+
+| 文件 | 内容 | 出处 / 复现 |
+|---|---|---|
+| `deckcodes.json` | 2 字符代码 → 卡牌资产名（数组 = 一码多卡），2499 条 | 私服参考实现自带的客户端数据表 `library/deckCodeIDsTable2.json`；`pwsh tools/gen-deckcodes.ps1` 重新生成 |
+| `decks.json` | 22 套社区推荐卡组（短名 + 名字 + 卡组码） | 用户提供的推荐列表，原样保留卡组码 |
+| `cards.json` | 卡牌定义 | 客户端资产导出（`KardsDataExtract`） |
+
+代码：`Core/DeckCode.cs`（解析）、`Core/DeckPresets.cs`（预设）、
+`Core/GameState.cs` 的 `DeckLists.Resolve`（卡组串入口）、`DeckAudit.cs`（审计）。
+
+### 怎么用
+
+```bash
+# 22 套预设逐条审计（主国/盟国、HQ、张数、缺哪些牌、有没有超 4 张、一码多卡怎么挑）
+dotnet run --project KardsSim -c Release -- --mode decks
+
+# 只审一套 / 审任意卡组码 / 顺带建一局验证发牌 / CI 里严格模式（不完整就退出码 1）
+dotnet run --project KardsSim -c Release -- --mode decks --deck jp-pol-boom
+dotnet run --project KardsSim -c Release -- --mode decks \
+    --code "%%38|5CjQp2pezq;5B5Z6w6xtFztzw;p1p6zpzs;pczi" --build
+dotnet run --project KardsSim -c Release -- --mode decks --strict
+
+# 自对弈 / 打印 / fuzz 都能直接吃卡组码、预设名、卡牌 id 列表
+dotnet run --project KardsSim -c Release -- --mode selfplay --games 200 \
+    --left-deck jp-pol-boom --right-deck ger-usa --swap-sides
+dotnet run --project KardsSim -c Release -- --mode dump --seed 42 --left-deck "%%15|2L2Q2Z31…"
+```
+
+HTTP：`GET /decks`（清单 + 覆盖度）、`GET /decks/{key|名字|#序号}`（解析结果 + 卡牌清单）、
+`POST /games {leftDeck:"jp-pol-boom"}`。
+
+程序里的入口是 `DeckLists.Resolve(spec, …)`：`%%` 开头当卡组码、能在 `decks.json`
+里查到的当预设、否则按 `,`/`;` 切 id 列表。解析出缺牌时在 stderr 打一行警告
+（每种卡组只打一次），**不抛异常也不静默** —— 训练脚本想要严格模式，
+先读 `GET /decks` 的 `complete` 字段。
+
+### 22 套推荐卡组的覆盖度（本卡库现状）
+
+22 套里 **6 套能完整还原 39 张**，其余缺 1~4 张牌 ——
+缺的原因是**本仓库的卡牌导出不全**（`_input/Cards` 里没有那些 `_bal` 平衡版资产），
+不是解析错误：所有 22 套的代码都能解析、没有未知代码、没有超过 4 张。
+
+| # | 短名 | 名字 | 主+盟 | 张数 | 缺的牌 |
+|---|---|---|---|---|---|
+| 7 | `jp-pol-boom` | 日波炸槽 | Japan+Poland | **39/39** | — |
+| 17 | `ger-usa` | 无名德美 | Germany+USA | **39/39** | — |
+| 18 | `bri-jp` | 无名英日 | Britain+Japan | **39/39** | — |
+| 19 | `bri-usa-2` | 无名英美 | Britain+USA | **39/39** | — |
+| 20 | `jp-usa` | 无名日美 | Japan+USA | **39/39** | — |
+| 22 | `bri-fin` | 无名英芬 | Britain+Finland | **39/39** | — |
+| 14 | `usa-anz-ramp` | 美澳跳 | USA+Anzac | 37/39 | `card_event_repel_the_attack` |
+| 21 | `jp-fra` | 无名日法 | Japan+France | 37/39 | `card_unit_j2m_raiden` |
+| 13 | `sov-selfharm` | 自残苏 | Soviet+Poland | 36/39 | `card_unit_28th_infantry_regiment` |
+| 3 | `ger-fin-cars` | 德芬车 | Germany+Finland | 35/39 | `card_unit_14_panzergrenadier`、`card_event_tank_wedge` |
+| 4 | `ger-anz-vet` | 德澳老兵 | Germany+Anzac | 35/39 | 同上 |
+| 8 | `jp-anz-aggro` | 日澳快攻 | Japan+Anzac | 35/39 | `card_event_repel_the_attack`、`card_event_ferocious_assault` |
+| 12 | `sov-anz-mid` | 苏澳中速 | Soviet+Anzac | 35/39 | `card_event_repel_the_attack`、`card_unit_stz_5_katyusha` |
+| 15 | `usa-bri-ramp` | 美英跳 | USA+Britain | 35/39 | `card_unit_2nd_west_africa` |
+| 9 | `jp-pol-intel-sid` | Sid日波情报 | Japan+Poland | 34/39 | `card_event_ferocious_assault`、`card_unit_1st_recon` |
+| 6 | `bri-usa-mice` | 米色团 | Britain+USA | 33/39 | `card_unit_yokosuka_e14y_bal`、`card_unit_2nd_west_africa` |
+| 10 | `jp-pol-intel` | 日波情报 | Japan+Poland | 33/39 | `card_event_ferocious_assault`、`card_unit_1st_recon` |
+| 16 | `usa-anz-aggro` | 美澳极限快 | USA+Anzac | 33/39 | `card_unit_4th_brigade_nz`、`card_unit_7th_brigade_anzac` |
+| 1 | `ger-fin` | 无名德芬 | Germany+Finland | 32/39 | `card_unit_panther_a_zimm`、`card_event_tank_wedge`、`card_unit_30_infantry_regiment` |
+| 5 | `bri-sov` | 英苏中立 | Britain+Soviet | 32/39 | `card_unit_the_holy_boys`、`card_unit_stz_5_katyusha`、`card_unit_2nd_west_africa` |
+| 11 | `sov-bri-demo` | 苏英爆破 | Soviet+Britain | 32/39 | 同上 |
+| 2 | `bri-anz` | 无名英澳 | Britain+Anzac | 30/39 | `card_event_repel_the_attack`、`card_event_the_rock_of_gibraltar`、`card_event_pams`、`card_unit_2nd_west_africa` |
+
+把缺牌补齐的路子：把客户端完整的 `Content/Blueprints/Cards` 重新导出到
+`_input/Cards`（比现在这份多 600 来个资产），再跑 `KardsDataExtract` +
+`KardsTranspiler`，然后 `--mode decks` 应该全绿。
+
+---
+
 ## 场地：只有一条前线（双方抢夺）
 
 棋盘是 **1 条共享前线 + 各自的支援线**，不是「每人一条前线」：
@@ -302,13 +453,14 @@ not_enough_range  ⟺  defender.location != 7   // 7 = 前线
 
 ---
 
-## 八个审计模式
+## 九个审计模式
 
 跑多少局自对弈都不能证明「完备」—— 随机对局抽不到那些卡，等于没测。
-所以除了对局，还有八个专门查完备性的模式：
+所以除了对局，还有九个专门查完备性的模式：
 
 | 模式 | 查什么 | 为什么需要 |
 |---|---|---|
+| `decks` | 卡组码解析：22 套推荐卡组逐条对账（张数/缺牌/一码多卡/超 4 张） | 训练前确认「哪些卡组这套模拟器能打完整」；缺牌是导出不全，不是引擎问题 |
 | `apicheck` | 静态全扫 `H.Call` 的所有目标，判断有没有地方接 | 不依赖采样运气；能区分「卡牌逻辑可达」和「仅 UI 可达」 |
 | `smoke` | 逐卡强制触发它注册的**每一个**触发点 | 自对弈抽不到的卡在这里一定被跑到 |
 | `triggerhits` | 运行期实测每个触发点命中多少次 | 「引擎发了」不等于「有卡接住」，静态审计看不出发空跑 |
@@ -431,6 +583,8 @@ Execute*Events  →  逐个调响应卡的事件函数
 - 宿主 API：卡牌逻辑可达的缺口 **0 个**（另外 424 个仅 UI / 平台可达，无头模拟不会走到）
 - 动作空间：出牌 = 手牌 × 目标 × 三选一分支，另有抉择区与 EndTurn，
   棋盘编码成 **1 条共享前线 + 2 条支援线**，`stateSize=204`、`actionSize=299`
+- 卡组：卡组码解析已接入（`%%…` / 预设名 / id 列表三种写法），显式卡组按 **39 张**发牌；
+  22 套社区推荐卡组里 **6 套能完整还原**，其余缺 1~4 张（本仓库卡牌导出不全，见「卡组码」一节）
 - 已知未做：没有 UI 就无法复现的选择点 —— 部分卡（如 `card_unit_hampshire_regiment`）
   的 Develop 结果在客户端是**UI 直接做的**，它们没有自己的 `OnHandTargetSelected`，
   无头模拟里选择能被发起和结算，但效果不落地
@@ -589,11 +743,14 @@ dotnet run --project KardsTranspiler -c Release -- \
   ubergraph，非战斗逻辑）
 - 47.5 万行直译代码 **0 错误编译通过**
 - 自对弈 150 局：**0 异常 / 0 卡死 / 0 非法动作**，宿主未实现调用 **0%**
-- 单卡机制验证（`--mode tests`）**128/128 通过**：Intel、事件载荷、老兵升级、Blitz、
+- 单卡机制验证（`--mode tests`）**153/153 通过**：Intel、事件载荷、老兵升级、Blitz、
   数据表、三选一、CDO 标志位、移动/攻击二选一、指挥点槽 24、反制指令、二段式抉择、
   持续站场光环的加/撤与跟随移动（`card_unit_flaming_matilda_anzac`）、
   「前线只有一条且要抢」「射程 1 上前线才够得到敌方支援线」、
-  「本回合 +N 攻击」到期撤销、by-ref 修复后随机目标真的取得到牌，撤退（引擎列表真的跟着变）、以及 HTTP 侧动作列表按下标对齐（用真路由跑）
+  「本回合 +N 攻击」到期撤销、by-ref 修复后随机目标真的取得到牌，撤退（引擎列表真的跟着变）、
+  HTTP 侧动作列表按下标对齐（用真路由跑），以及卡组码这一批：
+  组号即倍数 / 大小写敏感的码表 / `~` 截断 / 老写法的 HQ 借位 / 一码多卡按阵营挑 /
+  缺牌如实报告 / 22 套预设都能解析
 
 ---
 
@@ -737,8 +894,10 @@ HTTP 侧有**抉择预览**：`GET /games/{id}/state` 会给出
 
 ## 版权
 
-`cards.json` 与 `KardsSim/Generated/` 是从游戏客户端资产派生的，仅供本地研究 /
+`cards.json`、`deckcodes.json` 与 `KardsSim/Generated/` 是从游戏客户端资产派生的，仅供本地研究 /
 AI 训练，请勿再分发。游戏资产本身（`_input/`）不入库。
+`deckcodes.json` 的原始数据表来自私服参考实现（fyserver）自带的客户端数据导出，
+`decks.json` 里的卡组码来自社区推荐列表 —— 都只作本地模拟用。
 
 
 

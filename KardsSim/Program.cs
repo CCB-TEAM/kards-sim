@@ -14,12 +14,16 @@ namespace KardsSim;
 ///   dotnet run -- --mode selfplay    → 批量自对弈体检
 ///   dotnet run -- --mode dump        → 单局逐步打印
 ///   dotnet run -- --mode coverage    → 报告效果解析覆盖率
+///   dotnet run -- --mode decks       → 卡组码审计（22 套推荐卡组哪几套能打完整）
+///
+/// 需要卡组的模式都认 <c>--left-deck</c> / <c>--right-deck</c>：
+/// 卡组码（<c>%%…</c>）、decks.json 里的预设名、或逗号分隔的卡牌 id 列表。
 /// </summary>
 public static class Program
 {
     public static int Main(string[] args)
     {
-        var cardsPath = Arg(args, "--cards") ?? FindCards();
+        var cardsPath = Arg(args, "--cards") ?? DataFiles.Find("cards.json");
         if (cardsPath == null || !File.Exists(cardsPath))
         {
             Console.Error.WriteLine("找不到 cards.json。用 --cards <path> 指定，或先运行 KardsDataExtract。");
@@ -36,6 +40,7 @@ public static class Program
             "dump" => Dump(args),
             "coverage" => Coverage(args),
             "fuzz" => Fuzz(args),
+            "decks" => DeckAudit.Run(args),
             "triggers" => TriggerAudit.Run(args),
             "triggerhits" => TriggerRuntimeAudit.Run(args),
             "smoke" => SmokeAll.Run(args),
@@ -54,24 +59,16 @@ public static class Program
     private static int UnknownMode(string mode)
     {
         Console.Error.WriteLine($"未知 --mode: {mode}");
-        Console.Error.WriteLine("可用: selfplay | dump | coverage | fuzz | triggers | triggerhits | smoke | apicheck | rules | tests | repro1 | paramaudit | byref | serve");
+        Console.Error.WriteLine("可用: selfplay | dump | coverage | fuzz | decks | triggers | triggerhits | smoke | apicheck | rules | tests | repro1 | paramaudit | byref | serve");
         return 2;
     }
 
-    /// <summary>优先用输出目录里的副本；开发时回退到仓库根。</summary>
-    private static string FindCards()
-    {
-        var local = Path.Combine(AppContext.BaseDirectory, "cards.json");
-        if (File.Exists(local)) return local;
-        var walk = AppContext.BaseDirectory;
-        for (var i = 0; i < 6 && walk != null; i++)
-        {
-            var p = Path.Combine(walk, "cards.json");
-            if (File.Exists(p)) return p;
-            walk = Path.GetDirectoryName(walk);
-        }
-        return null;
-    }
+    /// <summary>
+    /// 卡组参数：<c>--left-deck</c> / <c>--right-deck</c> 接受卡组码（<c>%%…</c>）、
+    /// decks.json 里的预设名（中文名 / 短名 / <c>#序号</c>）、逗号分隔的卡牌 id 列表。
+    /// </summary>
+    private static (string Left, string Right) Decks(string[] args) =>
+        (Arg(args, "--left-deck"), Arg(args, "--right-deck"));
 
     private static int Serve(string[] args)
     {
@@ -86,7 +83,11 @@ public static class Program
         var maxSteps = Int(args, "--max-steps") ?? 2000;
         // 默认接直译产物。加 --legacy 才退回旧的文本解析效果表。
         var useHost = !args.Contains("--legacy");
+        var (leftDeck, rightDeck) = Decks(args);
+        // 给了卡组就每局交换左右：同一套卡组只打左方会带位置偏差。
+        var swap = args.Contains("--swap-sides") && (leftDeck != null || rightDeck != null);
         Console.WriteLine($"自对弈 {games} 局  效果来源: {(useHost ? "Kismet 直译产物" : "旧文本解析表")}");
+        Console.WriteLine($"  卡组: 左={leftDeck ?? "random"} 右={rightDeck ?? "random"}{(swap ? "（每局交换）" : "")}");
 
         var illegal = 0; var stuck = 0; var exceptions = 0;
         var steps = 0L; var triggers = 0L; var unhandled = 0L;
@@ -103,7 +104,8 @@ public static class Program
         {
             try
             {
-                var g = new GameEngine(1000 + i, null, null, false);
+                var flip = swap && i % 2 == 1;
+                var g = new GameEngine(1000 + i, flip ? rightDeck : leftDeck, flip ? leftDeck : rightDeck, false);
                 if (useHost)
                 {
                     var h = new EngineHost(g);
@@ -180,13 +182,15 @@ public static class Program
     {
         // 随机动作 + 随机 seed，专找崩溃与非法的边界情况
         var games = Int(args, "--games") ?? 200;
+        var (leftDeck, rightDeck) = Decks(args);
         Console.WriteLine($"Fuzz {games} 局（随机 seed + 随机动作）");
+        Console.WriteLine($"  卡组: 左={leftDeck ?? "random"} 右={rightDeck ?? "random"}");
         var bad = 0;
         for (var i = 0; i < games; i++)
         {
             try
             {
-                var g = new GameEngine(i * 7919, null, null, false);
+                var g = new GameEngine(i * 7919, leftDeck, rightDeck, false);
                 var n = 0;
                 while (!g.IsDone && n < 3000)
                 {
@@ -211,7 +215,8 @@ public static class Program
     {
         var seed = Int(args, "--seed") ?? 42;
         var maxSteps = Int(args, "--max-steps") ?? 60;
-        var g = new GameEngine(seed, null, null, true);
+        var (leftDeck, rightDeck) = Decks(args);
+        var g = new GameEngine(seed, leftDeck, rightDeck, true);
         var n = 0;
         while (!g.IsDone && n < maxSteps)
         {

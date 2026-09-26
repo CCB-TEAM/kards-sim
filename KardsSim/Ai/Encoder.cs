@@ -96,10 +96,12 @@ public static class Encoder
         v[i++] = fp.KreditSlots / (float)Rules.MaxKredits;
         v[i++] = mp.Hand.Count / (float)Rules.MaxCardsOnHand;
         v[i++] = fp.Hand.Count / (float)Rules.MaxCardsOnHand;
-        v[i++] = mp.Deck.Count / (float)Rules.DeckSize;
-        v[i++] = fp.Deck.Count / (float)Rules.DeckSize;
-        v[i++] = mp.Discard.Count / (float)Rules.DeckSize;
-        v[i++] = fp.Discard.Count / (float)Rules.DeckSize;
+        // 归一化基数用 39（真实构筑卡组的牌数）：随机卡组是 30 张，卡组码是 39 张，
+        // 用 30 当分母会让 39 张的卡组一开局就编码成 > 1 的值。
+        v[i++] = mp.Deck.Count / (float)Rules.StandardDeckSize;
+        v[i++] = fp.Deck.Count / (float)Rules.StandardDeckSize;
+        v[i++] = mp.Discard.Count / (float)Rules.StandardDeckSize;
+        v[i++] = fp.Discard.Count / (float)Rules.StandardDeckSize;
         v[i++] = g.S.Turn / 40f;
         v[i++] = g.S.Current == Side.Left ? 1f : 0f;
         v[i++] = g.S.FrontlineOwner == me ? 1f : (g.S.FrontlineOwner == Side.None ? 0.5f : 0f);

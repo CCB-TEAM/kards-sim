@@ -43,6 +43,10 @@ public static class CardTests
         TempAttackBuffExpiresAtEndOfTurn();
         RetreatToHandMovesTheCardAndRetractsAura();
         ByRefFixMakesRandomTargetsWork();
+        DeckCodesParseIntoRealDecks();
+        DeckCodeTableIsCaseSensitive();
+        DeckCodeHandlesLegacyAndGarbage();
+        DeckPresetsAndLists();
 
         Console.WriteLine();
         Console.WriteLine($"通过 {_pass} / 失败 {_fail}");
@@ -1254,6 +1258,133 @@ public static class CardTests
             Val.Out(Val.Nothing, v => empty = v),
         });
         Check("候选为空时返回空（不崩）", empty.IsNothing, $"{empty.K}");
+    }
+
+    /// <summary>
+    /// 卡组码：能不能把社区推荐卡组准确还原成 39 张牌。
+    ///
+    /// <para>
+    /// 用「日波炸槽」当样本，因为它四个组都用到了（1/2/3/4 张），
+    /// 能把「组号 i = 每张算 i+1 张」这条规则整个覆盖住。
+    /// </para>
+    /// </summary>
+    private static void DeckCodesParseIntoRealDecks()
+    {
+        const string boom = "%%38|5CjQp2pezq;5B5Z6w6xtFztzw;p1p6zpzs;pczi";
+        var p = DeckCode.Parse(boom);
+
+        Check("卡组码：%% 开头才算卡组码", DeckCode.IsDeckCode(boom) && !DeckCode.IsDeckCode("random"), boom);
+        Check("卡组码：主国 Japan / 盟国 Poland", p.Main == Faction.Japan && p.Ally == Faction.Poland,
+              $"{p.Main}+{p.Ally}");
+        Check("卡组码：39 张（组号 i = 每张 i+1 张）", p.Total == 39, $"{p.Total}");
+        Check("卡组码：18 种", p.UniqueCount == 18, $"{p.UniqueCount}");
+        Check("卡组码：不缺牌、不超 4 张", p.Complete && p.Legal,
+              $"missing={string.Join(",", p.MissingCards)} warn={string.Join(";", p.Warnings)}");
+        Check("卡组码：默认 HQ = 日本 6l", p.HqCode == "6l" && p.HqSource == "默认", $"{p.HqCode}/{p.HqSource}");
+        Check("卡组码：第 3 组里的牌正好 4 张", p.Counts.GetValueOrDefault("card_event_anders_army") == 4,
+              $"{p.Counts.GetValueOrDefault("card_event_anders_army")}");
+
+        var g = new Engine.GameEngine(20260215, boom, null, false);
+        Check("卡组码：引擎按 39 张发牌（手牌 + 牌库 = 39）",
+              g.S.Left.Hand.Count + g.S.Left.Deck.Count == 39,
+              $"hand={g.S.Left.Hand.Count} deck={g.S.Left.Deck.Count}");
+    }
+
+    /// <summary>
+    /// 卡牌代码大小写敏感。<c>ux</c> 是德军的 Sd.Kfz. 10，
+    /// <c>uX</c> 是苏军的 rush_bal —— 用大小写不敏感的字典会把整副牌读错。
+    /// </summary>
+    private static void DeckCodeTableIsCaseSensitive()
+    {
+        var ux = DeckCode.Table.GetValueOrDefault("ux");
+        var uX = DeckCode.Table.GetValueOrDefault("uX");
+        Check("码表：ux/uX 是两个不同的代码", ux != null && uX != null && ux[0] != uX[0],
+              $"{ux?[0]} vs {uX?[0]}");
+        Check("码表：ux = card_unit_sd_kfz_10_38", ux is { Length: > 0 } && ux[0] == "card_unit_sd_kfz_10_38",
+              ux?[0] ?? "<missing>");
+        var a0 = DeckCode.Table.GetValueOrDefault("0A");
+        var a1 = DeckCode.Table.GetValueOrDefault("0a");
+        Check("码表：0A/0a 都存在且是两张卡", a0 != null && a1 != null && a0[0] != a1[0],
+              $"{a0?[0]} vs {a1?[0]}");
+    }
+
+    /// <summary>老卡组码的 HQ 借位、<c>~</c> 截断、坏码报错。</summary>
+    private static void DeckCodeHandlesLegacyAndGarbage()
+    {
+        // 老写法：没有 |HQ 段，HQ 代码被塞在第 0 组开头 —— 借出去，且不能算成一张牌
+        var p = DeckCode.Parse("%%19|3v4v;ux");
+        Check("老卡组码：HQ 从第 0 组借出", p.HqSource == "第 0 组" && p.HqCode == "3v",
+              $"{p.HqCode}/{p.HqSource}");
+        Check("老卡组码：借出的 HQ 不再算一张牌（1 + 2 = 3 张）", p.Total == 3, $"{p.Total}");
+        Check("老卡组码：第 1 组的牌算 2 张",
+              p.Counts.GetValueOrDefault("card_unit_sd_kfz_10_38") == 2,
+              $"{p.Counts.GetValueOrDefault("card_unit_sd_kfz_10_38")}");
+
+        // ~ 到段尾是客户端附加信息（私服文档里的默认卡组就是这种写法）：
+        // 截断后只剩第 0 组的 39 张（每张 1 张），后面的空组不能再算成 5/6/7 张。
+        const string doc = "%%21|4v32323232sTgv0z0C0C0C0CoBoBoBoB0Y0Y101010hShShShS1902020202030303ououpRpRpRsU;;;~;;;|0N1b";
+        var d = DeckCode.Parse(doc);
+        Check("~ 之后整段丢掉（不把后面的空组算成 5/6/7 张）", d.Total == 39, $"{d.Total}");
+        Check("~ 段不影响 HQ 段解析", d.HqCode == "0N" && d.HqCardId == "card_location_london",
+              $"{d.HqCode}={d.HqCardId}");
+
+        Check("坏码：不是 %% 开头 -> 抛错", Throws(() => DeckCode.Parse("19|ux")), "没有抛错");
+        Check("坏码：段数不对 -> 抛错", Throws(() => DeckCode.Parse("%%19")), "没有抛错");
+        Check("坏码：不认识的国家代码 -> 抛错", Throws(() => DeckCode.Parse("%%z9|ux")), "没有抛错");
+    }
+
+    /// <summary>
+    /// 预设卡组与卡组接线：预设名能当卡组串直接用；
+    /// 一个代码对应两张卡时按阵营挑；卡库里缺的牌要如实报出来（不能悄悄少牌）。
+    /// </summary>
+    private static void DeckPresetsAndLists()
+    {
+        Check("预设：decks.json 有 22 套", DeckPresets.All.Count == 22, $"{DeckPresets.All.Count}");
+
+        var byKey = DeckPresets.Find("jp-pol-boom");
+        var byName = DeckPresets.Find("日波炸槽");
+        var byIndex = DeckPresets.Find("#7");
+        Check("预设：短名 / 中文名 / #序号 都能找到同一条",
+              byKey != null && ReferenceEquals(byKey, byName) && ReferenceEquals(byKey, byIndex),
+              $"{byKey?.Key} {byName?.Key} {byIndex?.Key}");
+
+        var ids = DeckLists.Resolve("jp-pol-boom", Side.Left, new Rng(1));
+        Check("预设名可以直接当卡组用（展开 39 张）", ids.Count == 39, $"{ids.Count}");
+
+        // xX 同时是 Anzac 的 dingo 装甲车和英国的 lancaster_bal —— 日澳卡组里只能是前者
+        var agg = DeckCode.Parse(DeckPresets.Find("jp-anz-aggro").Code);
+        Check("一码多卡：按阵营挑（xX -> Anzac 装甲车）",
+              agg.Counts.ContainsKey("card_unit_dingo_armored_car")
+              && !agg.Counts.ContainsKey("card_unit_lancaster_bal"),
+              string.Join(",", agg.Counts.Keys));
+
+        // 缺牌是「卡牌导出不全」，必须报出来：德芬车少 2 种、只剩 35 张
+        var cars = DeckCode.Parse(DeckPresets.Find("ger-fin-cars").Code);
+        Check("缺牌：如实报告（德芬车 35/39、缺 2 种）",
+              cars.Total == 35 && cars.MissingCards.Count == 2 && !cars.Complete,
+              $"{cars.Total} missing={string.Join(",", cars.MissingCards)}");
+
+        var bad = new List<string>();
+        foreach (var preset in DeckPresets.All)
+        {
+            try
+            {
+                var q = DeckCode.Parse(preset.Code);
+                if (q.Counts.Values.Any(v => v > 4)) bad.Add($"{preset.Key}:同一张超过 4 张");
+                if (q.UnknownCodes.Count > 0) bad.Add($"{preset.Key}:码表不认 {string.Join(",", q.UnknownCodes)}");
+            }
+            catch (Exception ex)
+            {
+                bad.Add($"{preset.Key}:{ex.Message}");
+            }
+        }
+        Check("22 套预设全部能解析、没有超 4 张、没有码表不认的代码", bad.Count == 0, string.Join("；", bad));
+    }
+
+    private static bool Throws(Action a)
+    {
+        try { a(); return false; }
+        catch { return true; }
     }
 
     /// <summary>把一张牌直接放到前线（编号由 <see cref="Engine.GameEngine.RefreshAllLocations"/> 重排）。</summary>

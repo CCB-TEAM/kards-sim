@@ -168,6 +168,8 @@ public sealed class HttpServer
             if (method == "GET" && p == "/cards") return (200, J(Cards(query)));
             if (method == "GET" && p.StartsWith("/cards/")) return Card(Uri.UnescapeDataString(p[7..]));
             if (method == "GET" && p == "/stats") return (200, J(Stats()));
+            if (method == "GET" && p == "/decks") return (200, J(DecksList()));
+            if (method == "GET" && p.StartsWith("/decks/")) return Deck(Uri.UnescapeDataString(p[7..]));
 
             if (method == "POST" && p == "/games") return (200, J(NewGame(body)));
             if (method == "POST" && p == "/selfplay") return (200, J(SelfPlay(body)));
@@ -211,7 +213,9 @@ public sealed class HttpServer
             "GET  /cards?q=&limit=",
             "GET  /cards/{name}",
             "GET  /stats",
-            "POST /games {seed?,leftDeck?,rightDeck?,log?}",
+            "GET  /decks",
+            "GET  /decks/{key|name|#序号}",
+            "POST /games {seed?,leftDeck?,rightDeck?,log?}   leftDeck/rightDeck 可传卡组码 %%…、预设名或卡牌 id 列表",
             "GET  /games/{id}",
             "GET  /games/{id}/state",
             "GET  /games/{id}/legal",
@@ -276,6 +280,142 @@ public sealed class HttpServer
         d.Range,
         keywords = d.Keywords.ToString(),
     };
+
+    /// <summary>预设卡组清单里的一条。</summary>
+    private sealed class DeckSummary
+    {
+        public int Index { get; set; }
+        public string Key { get; set; }
+        public string Name { get; set; }
+        public string Note { get; set; }
+        public string Code { get; set; }
+        public string Main { get; set; }
+        public string Ally { get; set; }
+        public string Hq { get; set; }
+        public string HqSource { get; set; }
+        public int Total { get; set; }
+        public int Unique { get; set; }
+        public bool Complete { get; set; }
+        public bool Legal { get; set; }
+        public string[] Missing { get; set; } = Array.Empty<string>();
+        public string[] Unknown { get; set; } = Array.Empty<string>();
+        public string[] Ambiguous { get; set; } = Array.Empty<string>();
+        public string[] Fallbacks { get; set; } = Array.Empty<string>();
+        public string[] IllegalFaction { get; set; } = Array.Empty<string>();
+        public string[] Hints { get; set; } = Array.Empty<string>();
+        public string[] Warnings { get; set; } = Array.Empty<string>();
+        public string Error { get; set; }
+    }
+
+    /// <summary>
+    /// 预设卡组清单（decks.json）。每条都带上「这套牌在当前卡库里能不能打完整」，
+    /// 训练前先看一眼这里，比跑起来发现牌库只有 35 张强。
+    /// </summary>
+    private object DecksList()
+    {
+        var items = new List<DeckSummary>();
+        for (var i = 0; i < DeckPresets.All.Count; i++) items.Add(DeckView(i + 1, DeckPresets.All[i]));
+        return new
+        {
+            total = items.Count,
+            complete = items.Count(x => x.Complete),
+            deckSize = Rules.StandardDeckSize,
+            source = "decks.json",
+            items,
+        };
+    }
+
+    private static DeckSummary DeckView(int index, DeckPreset p)
+    {
+        var s = new DeckSummary { Index = index, Key = p.Key, Name = p.Name, Note = p.Note, Code = p.Code };
+        try
+        {
+            var d = DeckCode.Parse(p.Code);
+            s.Main = d.Main.ToString();
+            s.Ally = d.Ally.ToString();
+            s.Hq = d.HqCardId;
+            s.HqSource = d.HqSource;
+            s.Total = d.Total;
+            s.Unique = d.UniqueCount;
+            s.Complete = d.Complete;
+            s.Legal = d.Legal;
+            s.Missing = d.MissingCards.ToArray();
+            s.Unknown = d.UnknownCodes.ToArray();
+            s.Ambiguous = d.Ambiguous.ToArray();
+            s.Fallbacks = d.Fallbacks.ToArray();
+            s.IllegalFaction = d.IllegalFaction.ToArray();
+            s.Hints = d.Hints.ToArray();
+            s.Warnings = d.Warnings.ToArray();
+        }
+        catch (Exception ex)
+        {
+            s.Error = ex.Message;
+        }
+        return s;
+    }
+
+    /// <summary>单个预设：解析结果 + 展开后的卡牌清单（id、张数、卡名、费用）。</summary>
+    private (int, string) Deck(string token)
+    {
+        var preset = DeckPresets.Find(token);
+        if (preset == null) return (404, J(new { error = "no such deck", token }));
+
+        ParsedDeck d;
+        try
+        {
+            d = DeckCode.Parse(preset.Code);
+        }
+        catch (Exception ex)
+        {
+            return (400, J(new { error = "bad deck code", code = preset.Code, message = ex.Message }));
+        }
+
+        var cards = d.Counts
+            .OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key, StringComparer.Ordinal)
+            .Select(kv =>
+            {
+                var def = CardDb.Get(kv.Key);
+                return new
+                {
+                    id = kv.Key,
+                    copies = kv.Value,
+                    name = def?.Name,
+                    text = def?.Text,
+                    type = def?.Type.ToString(),
+                    faction = def?.Faction.ToString(),
+                    kredits = def?.Kredits ?? 0,
+                    attack = def?.Attack ?? 0,
+                    defense = def?.Defense ?? 0,
+                    range = def?.Range ?? 0,
+                };
+            }).ToArray();
+
+        return (200, J(new
+        {
+            index = DeckPresets.All.ToList().FindIndex(x => ReferenceEquals(x, preset)) + 1,
+            key = preset.Key,
+            name = preset.Name,
+            note = preset.Note,
+            code = preset.Code,
+            main = d.Main.ToString(),
+            ally = d.Ally.ToString(),
+            hq = d.HqCardId,
+            hqSource = d.HqSource,
+            total = d.Total,
+            unique = d.UniqueCount,
+            deckSize = Rules.StandardDeckSize,
+            complete = d.Complete,
+            legal = d.Legal,
+            missing = d.MissingCards.ToArray(),
+            unknown = d.UnknownCodes.ToArray(),
+            ambiguous = d.Ambiguous.ToArray(),
+            fallbacks = d.Fallbacks.ToArray(),
+            illegalFaction = d.IllegalFaction.ToArray(),
+            hints = d.Hints.ToArray(),
+            warnings = d.Warnings.ToArray(),
+            cards,
+        }));
+    }
 
     private object Stats()
     {
