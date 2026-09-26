@@ -45,6 +45,33 @@ public static class CardDispatch
 
         fn(host, self, args);
         host.SyncBack(host.Obj(card));
+        if (host.TraceFire) host.OnTriggerFired?.Invoke(t, card.Id);
+        return true;
+    }
+
+    /// <summary>
+    /// 触发点带额外数值参数的版本（目前只有 <c>OnIntelTriggered(card, value)</c>）。
+    ///
+    /// <para>
+    /// 为什么不能复用 <see cref="Fire"/>：那里的第二个实参是「相关卡」，
+    /// 而这里的第二个是整数。混用会让卡的逻辑把整数当成卡对象读。
+    /// </para>
+    /// </summary>
+    public static bool FireWith(EngineHost host, Card card, Trigger t, params Val[] extra)
+    {
+        if (card?.Id is null || t == Trigger.NotAvailable) return false;
+
+        var fn = FnIndex.Find(card.Id, t.ToString());
+        if (fn is null) return false;
+
+        var self = Val.Ref(host.Obj(card));
+        var args = new Val[1 + extra.Length];
+        args[0] = self;
+        Array.Copy(extra, 0, args, 1, extra.Length);
+
+        fn(host, self, args);
+        host.SyncBack(host.Obj(card));
+        if (host.TraceFire) host.OnTriggerFired?.Invoke(t, card.Id);
         return true;
     }
 

@@ -56,6 +56,20 @@ public sealed class Card
     public int BuffAttack;
     public int BuffDefense;
 
+    /// <summary>
+    /// Intel（情报）值：打出本卡时随机翻开对手手牌的张数。
+    /// 客户端存在 <c>cipher</c> 字段里（AddIntelToCard 会把它 clamp 到 0..9），
+    /// 所以这里沿用同一个名字，语义才能和直译产物对齐。
+    /// </summary>
+    public int Cipher;
+
+    /// <summary>
+    /// 费用上的临时增减（蓝图里的 kreditBuff）。客户端把它加密存着防内存修改，
+    /// 无头模拟直接读明文。与 <see cref="KreditCost"/> 分开存，因为
+    /// 「基础费用」和「本回合的费用修正」在判定时用法不同。
+    /// </summary>
+    public int BuffCost;
+
     public bool CanAct => !Pinned && !Suppressed && !Destroyed;
 
     public Card Clone()

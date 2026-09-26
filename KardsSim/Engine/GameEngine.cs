@@ -13,6 +13,44 @@ public sealed partial class GameEngine
     public int TriggerFireCount { get; private set; }
     public int Steps { get; private set; }
 
+    /// <summary>
+    /// 「客户端视角」的阵营。蓝图的 <c>GetClientSide</c> 返回本机玩家是哪一方，
+    /// 效果里用它区分「自己 / 对手」。无头模拟恒为左方，只是让链路能跑通。
+    /// </summary>
+    public Side Perspective => Side.Left;
+
+    /// <summary>
+    /// 按阵营把一张牌生成到手牌（蓝图 <c>SpawnCardOnBattlefield</c> 的入口）。
+    /// 与 <see cref="SpawnByName(Card, string)"/> 的区别是不需要「施法者」，
+    /// 客户端那个接口直接指定阵营。
+    /// </summary>
+    public Card SpawnByName(Side side, string name)
+    {
+        var def = CardDb.Resolve(name);
+        if (def is null)
+        {
+            Unhandled.Add($"spawn unresolved: '{name}'");
+            return null;
+        }
+        var p = S.Player(side);
+        var c = S.NewCard(def, side);
+        if (p.Hand.Count >= Rules.MaxCardsOnHand)
+        {
+            c.Loc = Loc.Discard;
+            p.Discard.Add(c);
+            S.Log.Line($"    hand full, {c.Id} burned");
+            return c;
+        }
+        c.Loc = Loc.Hand;
+        p.Hand.Add(c);
+        S.Log.Line($"    {side} gains {c.Id}");
+        FireSpawnedInHandTriggers(c);
+        return c;
+    }
+
+    /// <summary>给宿主用的前线放置入口（<c>TryPlaceOnFrontline</c> 是 private）。</summary>
+    public bool TryPlaceOnFrontlinePublic(Card c) => TryPlaceOnFrontline(c);
+
     public GameEngine(int seed, string leftDeck = null, string rightDeck = null, bool log = false)
     {
         S = new GameState(seed, leftDeck, rightDeck, log);

@@ -36,8 +36,22 @@ public static class Program
             "dump" => Dump(args),
             "coverage" => Coverage(args),
             "fuzz" => Fuzz(args),
-            _ => Serve(args),
+            "triggers" => TriggerAudit.Run(args),
+            "triggerhits" => TriggerRuntimeAudit.Run(args),
+            "smoke" => SmokeAll.Run(args),
+            "apicheck" => ApiAudit.Run(args),
+            "tests" => CardTests.Run(args),
+            // 未知 mode 必须报错而不是回落到 Serve：写错一个字母就会静默起一个 HTTP 服务，
+            // 看起来「跑起来了」，实际什么都没测。
+            _ => UnknownMode(mode),
         };
+    }
+
+    private static int UnknownMode(string mode)
+    {
+        Console.Error.WriteLine($"未知 --mode: {mode}");
+        Console.Error.WriteLine("可用: selfplay | dump | coverage | fuzz | triggers | triggerhits | smoke | apicheck | serve");
+        return 2;
     }
 
     /// <summary>优先用输出目录里的副本；开发时回退到仓库根。</summary>
@@ -141,6 +155,20 @@ public static class Program
         }
 
         foreach (var kv in wins) Console.WriteLine($"  {kv.Key,-10}: {kv.Value}");
+
+        // 没检查触发点的自对弈等于没跑：一张牌的逻辑全对，
+        // 但如果引擎从不发它注册的那个触发点，它在模拟里就是白板 —— 而这是静默的。
+        if (useHost && !args.Contains("--no-trigger-check"))
+        {
+            var (registered, cardCount) = TriggerAudit.RegisteredStats();
+            var missed = TriggerAudit.UnfiredButRegistered();
+            Console.WriteLine();
+            Console.WriteLine($"  卡牌注册触发点 : {registered.Count} 个 / {cardCount} 张卡");
+            Console.WriteLine($"  引擎从不触发   : {missed.Count} 个 ({(missed.Count == 0 ? "完整" : "缺口")})");
+            foreach (var t in missed.Take(10))
+                Console.WriteLine($"      {t}");
+        }
+
         return illegal == 0 && stuck == 0 && exceptions == 0 ? 0 : 1;
     }
 
@@ -230,4 +258,5 @@ public static class Program
     private static int? Int(string[] a, string k)
         => int.TryParse(Arg(a, k), out var v) ? v : null;
 }
+
 

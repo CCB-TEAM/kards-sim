@@ -24,16 +24,15 @@ public sealed partial class GameEngine
 
         S.Log.Line($"--- turn {S.Turn} ({S.Current}) kredits={p.Kredits}/{p.KreditSlots} ---");
 
-        FireTrigger(Trigger.OnBeforeStartOfTurn, null);
+        FireTurnStartTriggers();
         DrawTo(p, 1);
-        FireTrigger(Trigger.OnStartofTurn, null);
     }
 
     /// <summary>结束当前方回合并交给对手；连续两方都结束则回合数 +1。</summary>
     private void EndTurn()
     {
         var p = S.Player(S.Current);
-        FireTrigger(Trigger.OnEndOfTurn, null);
+        FireTurnEndTriggers();
         // 回合结束清除临时状态
         foreach (var u in S.UnitsOnBoard(S.Current))
         {
@@ -59,6 +58,7 @@ public sealed partial class GameEngine
             {
                 p.Fatigue++;
                 S.Log.Line($"  {p.Side} deck empty, fatigue {p.Fatigue}");
+                FireFatigueTriggers();
                 DamageHq(p.Side, p.Fatigue);
                 if (S.Done) return;
                 continue;
@@ -72,12 +72,12 @@ public sealed partial class GameEngine
                 c.Loc = Loc.Discard;
                 p.Discard.Add(c);
                 S.Log.Line($"  {p.Side} hand full, burned {c.Id}");
-                FireTrigger(Trigger.OnOtherCardDiscarded, c);
+                FireDiscardedTriggers(c);
                 continue;
             }
             p.Hand.Add(c);
             S.Log.Line($"  {p.Side} draws {c.Id}");
-            FireTrigger(Trigger.OnOtherCardDrawnFromDeck, c);
+            FireDrawnTriggers(c);
             if (S.Done) return;
         }
     }
@@ -113,10 +113,10 @@ public sealed partial class GameEngine
     public void DamageCard(Card c, int amount, bool lethal = false)
     {
         if (c == null || c.Destroyed || amount <= 0 && !lethal) return;
+        FireDamageModifyTriggers(c);      // 结算前让卡牌改伤害
         c.Defense -= amount;
         S.Log.Line($"    {c.Id} takes {amount} -> {c.Defense}");
-        FireTrigger(Trigger.OnOtherCardReceiveDamage, c);
-        FireTrigger(Trigger.OnOtherCardDealDamage, c);
+        FireDamageTakenTriggers(c);
         var dies = lethal && amount > 0 || c.TotalDefense <= 0;
         if (dies) DestroyCard(c);
     }
@@ -126,7 +126,7 @@ public sealed partial class GameEngine
     {
         if (c == null || c.Destroyed) return;
         c.Destroyed = true;
-        FireTrigger(Trigger.OnBeforeOtherCardDestroyed, c);
+        FireBeforeDestroyTriggers(c);
 
         var p = S.Player(c.Owner);
         bool removed;
@@ -145,6 +145,6 @@ public sealed partial class GameEngine
             S.Log.Line($"    {c.Id} destroyed");
         }
         if (S.Frontline.Count == 0) S.FrontlineOwner = Side.None;
-        FireTrigger(Trigger.OnOtherCardDestroyed, c);
+        FireDestroyTriggers(c);   // OtherCardDestroyed + DestructionEffect + LeaveBoard(before/after)
     }
 }

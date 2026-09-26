@@ -43,7 +43,17 @@ public sealed class EngineHost : Host
     {
         Engine = engine;
         Globals["GameStateRef"] = Val.Ref(GameStateRef);
+
+        // 两个单例必须互相知道对方。蓝图里的转发壳就是这么写的：
+        //   BP_CardFunctions.GetClientSide  ->  GameStateRef.GetClientSide
+        // 少了 CardFunctions 这一侧的反向指针，转发壳里的接收者会算成 none，
+        // 分派器只好回落到「没有接收者」的兜底分支，又找回 BP_CardFunctions 的
+        // 同名壳 —— 无限递归到栈溢出。
         GameStateRef.Set("cardFunction", Val.Ref(CardFunctions));
+        CardFunctions.Set("GameStateRef", Val.Ref(GameStateRef));
+        CardFunctions.Set("CardFunctionsNotifier", Val.Ref(Notifier));
+        CardFunctions.Set("GameState_Battle", Val.Ref(GameStateRef));
+
         RuleDispatch = Handle;
         Logger = _ => { };
     }
@@ -109,6 +119,36 @@ public sealed class EngineHost : Host
         // 所以转进去之前要去掉第 0 位；out 回写也跟着一起对齐。
         var rest = a.Length > 0 ? a[1..] : a;
 
+        // 重入防护：同一个函数名在栈上连续出现 8 次就判定为转发壳死循环。
+        // 蓝图的转发壳（A.Foo 里调 B.Foo，B 里又没有 Foo 于是落回 A.Foo）
+        // 在静态分派下会无限递归；栈溢出会把整个进程带走，比记一笔未实现糟糕得多。
+        _depth.TryGetValue(f, out var depth);
+        depth++;
+        _depth[f] = depth;
+        try
+        {
+            if (depth > 8)
+            {
+                const string key = "(转发壳递归, 已截断)";
+                Unhandled[key] = Unhandled.TryGetValue(key, out var d) ? d + 1 : 1;
+                if (Verbose) Log($"转发壳递归截断: {f}");
+                return null;   // 记为未处理，交给上层继续
+            }
+
+            return Dispatch(f, a, recv, rest);
+        }
+        finally
+        {
+            if (--depth <= 0) _depth.Remove(f);
+            else _depth[f] = depth;
+        }
+    }
+
+    /// <summary>同名调用的当前递归深度（转发壳防护用）。</summary>
+    private readonly Dictionary<string, int> _depth = new(StringComparer.Ordinal);
+
+    private Val? Dispatch(string f, Val[] a, Val recv, Val[] rest)
+    {
         // 2a. cardFunction.* → 转译出来的 BP_CardFunctions（它自己还会继续 H.Call）
         if (recv.O is KObj cf && ReferenceEquals(cf, CardFunctions))
         {
@@ -166,6 +206,14 @@ public sealed class EngineHost : Host
     }
 
     // ===================== 引擎原语 =====================
+
+    /// <summary>引擎原语表里的所有函数名（给完备性审计用）。</summary>
+    public static IReadOnlyCollection<string> PrimitiveNames => Primitives.Keys.ToList();
+
+    /// <summary>
+    /// 把引擎原语表暴露成只读名字集合。审计要判断「一个调用目标有没有地方接」，
+    /// 原语是其中一类接收方，所以需要能问到它的键。
+    /// </summary>
 
     /// <summary>
     /// 真正接触 GameState 的叶子函数。名字取自实测调用频次最高的那批
@@ -303,6 +351,239 @@ public sealed class EngineHost : Host
             ["GetCampaignStrategy"] = (h, a) => Out(a, 0),
             ["GetEnumeratorUserFriendlyName"] = (h, a) => Val.Of(a.Length > 1 ? a[1].AsStr() : ""),
 
+            // ---------- 纸牌属性（Has* 系列，客户端来自卡牌 CDO 的 tag/关键字）----------
+            // 注意这些是「卡牌定义上的静态属性」，不是场上单位的临时状态。
+            ["getHasFury"] = (h, a) => Out(a, HasKw(h.Card_(a[0]), Kw.Fury)),
+            ["getHasGuard"] = (h, a) => Out(a, HasKw(h.Card_(a[0]), Kw.Guard)),
+            ["getHasBlitz"] = (h, a) => Out(a, HasKw(h.Card_(a[0]), Kw.Blitz)),
+            ["getHasSmokescreen"] = (h, a) => Out(a, HasKw(h.Card_(a[0]), Kw.Smokescreen)),
+            ["getHasAmbush"] = (h, a) => Out(a, HasKw(h.Card_(a[0]), Kw.Ambush)),
+            ["getHasMobilize"] = (h, a) => Out(a, HasKw(h.Card_(a[0]), Kw.Mobilize)),
+
+            // ---------- 位置 / 状态查询 ----------
+            ["IsLocatedInDeck"] = (h, a) => Out(a, h.Card_(a[0])?.Loc == Loc.Deck),
+            ["IsPinned"] = (h, a) => Out(a, h.Card_(a[0])?.Pinned ?? false),
+            ["IsGotcha"] = (h, a) =>
+            {
+                // Gotcha（伏击/反制）是盖在场上没翻开的状态，等价于 covert + 未 reveal
+                var c = h.Card_(a[0]);
+                return Out(a, c is not null && c.Covert && h.Obj(c).Get("gotcha").AsBool());
+            },
+            ["ShouldGotchaTrigger"] = (h, a) =>
+            {
+                // 参数：(triggerCard, out shouldIt)。只有盖着的反制卡才响应。
+                var self = h.Card_(a[0]);
+                var should = self is not null && self.Covert && !self.Destroyed
+                             && h.Obj(self).Get("gotcha").AsBool();
+                return Out(a, should);
+            },
+            ["Get Is Server Config"] = (h, a) => Out(a, false),
+            ["GetClientSide"] = (h, a) => Out(a, (int)h.Engine.Perspective),
+
+            // ---------- 攻防的「解密」读法 ----------
+            // 客户端把 attack/defense 加密存着防内存修改；无头模拟直接读明文。
+            ["getAndDecryptDefense"] = (h, a) => Out(a, h.Card_(a[0])?.Defense ?? 0),
+            ["getAndDecryptKreditBuff"] = (h, a) => Out(a, h.Card_(a[0])?.BuffCost ?? 0),
+            ["setAndEncryptKreditBuff"] = (h, a) =>
+            {
+                var c = h.Card_(a[0]);
+                if (c is not null) c.BuffCost = (int)a[1].AsInt();
+                return Val.Nothing;
+            },
+            ["getKreditTempBuffAmount"] = (h, a) => Out(a, h.Card_(a[0])?.BuffCost ?? 0),
+            ["getTotalKreditCost"] = (h, a) =>
+                Out(a, Math.Max(0, h.Card_(a[0])?.KreditCost ?? 0)),
+            ["getCardsBuffedByThisCard"] = (h, a) =>
+            {
+                var me = h.Card_(a[0])?.InstanceId ?? -1;
+                var ids = h.Engine.S.AllOnBoard()
+                    .Where(c => h.Obj(c).Get("buffedBy").AsInt() == me)
+                    .Select(c => Val.Of(c.InstanceId));
+                Val.TrySetOut(a[^1], Val.Ref(new KArr(ids)));
+                return Val.Nothing;
+            },
+
+            // ---------- 战役 / 加密 / 静态数据：无头模拟里是空实现 ----------
+            ["InitializeEncryption"] = (h, a) => Val.Nothing,
+            ["GetEncryptionKey"] = (h, a) => Val.Of(0),
+            ["InitStaticGameplayTags"] = (h, a) => Val.Nothing,
+            ["GetStaticCampaignName"] = (h, a) => Val.Of(""),
+            ["SetObjectiveCounter"] = (h, a) => Val.Nothing,
+            ["NotiferStarCounterChanged"] = (h, a) => Val.Nothing,
+            ["OnCreateCard"] = (h, a) => Val.Nothing,
+            ["GetDataTableRowFromName"] = (h, a) =>
+            {
+                // 数据表行：无头模拟不加载 DataTable，返回空结构而不是 null，
+                // 否则调用方解引用会炸。
+                return Val.Nothing;
+            },
+
+            // ---------- 随机 / 时间 ----------
+            // 客户端的两条随机流分别服务「表现层随机」和「逻辑层随机」。
+            // 逻辑层必须走引擎自己的 RNG，否则同一 seed 的复现性就没了。
+            ["RandomIntegerInRangeFromStream"] = (h, a) =>
+            {
+                var lo = (int)a[^3].AsInt();
+                var hi = (int)a[^2].AsInt();
+                if (hi < lo) (lo, hi) = (hi, lo);
+                return Out(a, lo + (int)(h.Engine.S.Rng.NextULong() % (ulong)(hi - lo + 1)));
+            },
+            ["GetFrameCount"] = (h, a) => Val.Of(h.Engine.Steps),
+
+            // ---------- 生成 / 造牌 ----------
+            ["SpawnCardOnBattlefield"] = (h, a) =>
+            {
+                // 签名（去掉接收者后从 0 起）：
+                //   0 side, 1 Frontline, 2 card_name, 3 spawnerID, 4 campaignName(Ref,文本),
+                //   5 NewGiveBlitz, 6 locationNumber, 7 salvageFaction,
+                //   8 NewMakeVeteran, 9 forceGoldCard, 10 (out) spawnedCardID
+                // 签名: SpawnCardOnBattlefield(side, Frontline, card_name, spawnerID,
+                //          campaignName, NewGiveBlitz, locationNumber, salvageFaction,
+                //          NewMakeVeteran, forceGoldCard, int32& spawnedCardID)
+                // a[0] 是接收者，实参整体后移一位。
+                var side = (Side)a[1].AsInt();
+                var name = a[3].AsStr();
+                var spawned = h.Engine.SpawnByName(side, name);
+                if (spawned is not null)
+                {
+                    if (a[2].AsBool()) h.Engine.TryPlaceOnFrontlinePublic(spawned);
+                    if (a[6].AsBool()) h.Obj(spawned).Set("blitz", Val.Of(true));
+                    if (a[9].AsBool()) spawned.Veteran = true;
+                }
+                Val.TrySetOut(a[^1], Val.Of(spawned?.InstanceId ?? 0));
+                return Val.Nothing;
+            },
+            ["SpawnObject"] = (h, a) => Val.Nothing,   // 表现层 Actor，无头模拟忽略
+            ["GetStaticCard"] = (h, a) => Val.Nothing,
+
+            // ---------- 自定义名后缀的增删 ----------
+            ["CustomName1Add"] = (h, a) => { SuffixAdd(h, a, "customName1"); return Val.Nothing; },
+            ["CustomName1Remove"] = (h, a) => { SuffixRemove(h, a, "customName1"); return Val.Nothing; },
+            ["CustomName2Remove"] = (h, a) => { SuffixRemove(h, a, "customName"); return Val.Nothing; },
+
+            // ---------- 阵营 / 情报 / 关键字 ----------
+            ["GetFactionEnum"] = (h, a) =>
+            {
+                var s = a[1].AsStr();
+                if (string.IsNullOrEmpty(s)) return Val.Of(0);
+                var def = CardDb.Resolve(s);
+                return Val.Of((int)(def?.Faction ?? Faction.Neutral));
+            },
+            ["HasIntel"] = (h, a) => Out(a, (h.Card_(a[0])?.Cipher ?? 0) > 0),
+            ["getIntel"] = (h, a) => Out(a, h.Card_(a[0])?.Cipher ?? 0),
+            ["AddIntelToCard"] = (h, a) =>
+            {
+                // 签名: AddIntelToCard(int32 CardID, int32 instigatorID, int32 amount, int32& qqq)
+                // a[0] 是接收者，实参从 a[1] 起。
+                var c = h.Engine.S.FindCard((int)a[1].AsInt());
+                if (c is null) return Val.Nothing;
+                c.Cipher = Math.Clamp(c.Cipher + (int)a[3].AsInt(), 0, 9);
+                Val.TrySetOut(a[^1], Val.Of(c.Cipher));
+                return Val.Nothing;
+            },
+            ["IsActionProcess"] = (h, a) => Out(a, false),   // 表现层动画状态，无头模拟恒 false
+            ["SetCardsSeenByCipher"] = (h, a) => Intel(h, a),
+            ["RemoveGameplayTag"] = (h, a) =>
+            {
+                // GameplayTags 是卡的标签容器；引擎建模成 Cards 之外的字符串集合。
+                var c = h.Card_(a[0]);
+                var tag = a.Length > 2 ? a[2].AsStr() : "";   // (receiver, tags, tag)
+                var tags = h.Obj(c)?.Get("gameplayTags");
+                if (tags?.O is KArr arr && tag.Length > 0)
+                    arr.Items.RemoveAll(v => v.AsStr() == tag);
+                return Val.Of(true);
+            },
+
+            // ---------- 训练里要做的选择：默认取第 0 支 ----------
+            // 三选一是玩家/AI 的真实决策点。现在恒返回 0 支（确定性的），
+            // 保证同一 seed 可复现；等动作空间把「选哪支」暴露出来再改这里。
+            ["WhichChooseOne"] = (h, a) => Out(a, 0),
+
+            // ---------- 费用 / 老兵版本的读取 ----------
+            ["getAndDecryptKredit"] = (h, a) => Out(a, h.Card_(a[0])?.KreditCost ?? 0),
+            ["getStaticVeteranUpgrade"] = (h, a) =>
+            {
+                // 老兵版本的静态卡对象：数据里没有独立资产，返回 none 让调用方走原版分支
+                Val.TrySetOut(a[^1], Val.Nothing);
+                return Val.Nothing;
+            },
+            ["GetEmptyText"] = (h, a) => Val.Ref(new KObj("Text")),
+
+            // ---------- 战役升级 ----------
+            // 战役卡的「升级」直接改本卡的静态属性。无头模拟里照做，
+            // 否则战役卡会完全变成白板。
+            ["CampaignAddAttack"] = (h, a) => { StatAdd(h, a, "attack"); return Val.Nothing; },
+            ["CampaignAddDefense"] = (h, a) => { StatAdd(h, a, "defense"); return Val.Nothing; },
+            ["CampaignIncreaseHeavyArmor"] = (h, a) => { StatAdd(h, a, "heavyArmor"); return Val.Nothing; },
+            ["CampaignAddKreditCost"] = (h, a) =>
+            {
+                // 签名: CampaignAddKreditCost(int32 Value, bool secondUpgrade, bool Clear)
+                var c = h.Card_(a[0]);
+                if (c is null) return Val.Nothing;
+                if (a[3].AsBool()) c.KreditCost = (int)a[1].AsInt();          // Clear
+                else c.KreditCost += (int)a[1].AsInt();
+                return Val.Nothing;
+            },
+            ["CampaignSetOpCost"] = (h, a) =>
+            {
+                var c = h.Card_(a[0]);
+                if (c is not null) h.Obj(c).Set("operationCost", Val.Of((int)a[1].AsInt()));
+                return Val.Nothing;
+            },
+            ["CampaignAddOpCost"] = (h, a) =>
+            {
+                var c = h.Card_(a[0]);
+                if (c is not null)
+                    h.Obj(c).Set("operationCost", Val.Of(h.Obj(c).Get("operationCost").AsInt() + a[1].AsInt()));
+                return Val.Nothing;
+            },
+            ["CampaignAddAmbush"] = (h, a) => { KwAdd(h, a, Kw.Ambush); return Val.Nothing; },
+            ["CampaignAddBlitz"] = (h, a) => { KwAdd(h, a, Kw.Blitz); return Val.Nothing; },
+            ["CampaignAddFury"] = (h, a) => { KwAdd(h, a, Kw.Fury); return Val.Nothing; },
+            ["CampaignAddGuard"] = (h, a) => { KwAdd(h, a, Kw.Guard); return Val.Nothing; },
+            ["CampaignAddMobilize"] = (h, a) => { KwAdd(h, a, Kw.Mobilize); return Val.Nothing; },
+            ["CampaignAddSmokescreen"] = (h, a) => { KwAdd(h, a, Kw.Smokescreen); return Val.Nothing; },
+            ["CampaignRemoveMobilize"] = (h, a) => { KwRemove(h, a, Kw.Mobilize); return Val.Nothing; },
+            ["CampaignRemoveSmokescreen"] = (h, a) => { KwRemove(h, a, Kw.Smokescreen); return Val.Nothing; },
+
+            // ---------- 直接生成到手牌 ----------
+            ["SpawnCardInHandBySide"] = (h, a) =>
+            {
+                // 签名: SpawnCardInHandBySide(side, card_name, spawnerID, ...)
+                var side = (Side)a[1].AsInt();
+                var name = a[2].AsStr();
+                var c = h.Engine.SpawnByName(side, name);
+                Val.TrySetOut(a[^1], Val.Of(c?.InstanceId ?? 0));
+                return Val.Nothing;
+            },
+
+            // CustomName1 / CustomName2 是两段独立的后缀，各自判定
+            ["CustomName1HasAttribute"] = (h, a) =>
+            {
+                var c = h.Card_(a[0]);
+                var attr = a[1].AsStr();
+                var name = h.Obj(c)?.Get("customName1").AsStr() ?? "";
+                return Out(a, name.Contains(attr, StringComparison.OrdinalIgnoreCase));
+            },
+            ["GetCustomName2Attributes"] = (h, a) =>
+            {
+                var c = h.Card_(a[0]);
+                var name = h.Obj(c)?.Get("customName").AsStr() ?? "";
+                var parts = name.Length == 0
+                    ? Array.Empty<string>()
+                    : name.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                Val.TrySetOut(a[^1], Val.Ref(new KArr(parts.Select(x => Val.Of(x)))));
+                return Val.Nothing;
+            },
+            ["GetSupportLineBySide"] = (h, a) =>
+            {
+                // 签名：static ECardLocationEnum GetSupportLineBySide(ESideEnum, const UObject* WorldContextObject)
+                // 尾参是静态库惯例的 WorldContextObject，真正的实参是 a[1]。
+                // 支援线每个阵营一张，编号见 ECardLocationEnum（Left=5, Right=6）。
+                var s = (Side)a[1].AsInt();
+                return Val.Of(s == Side.Left ? 5 : 6);
+            },
+
             ["getTotalDefense"] = (h, a) =>
             {
                 var c = h.Card_(a[0]);
@@ -363,7 +644,45 @@ public sealed class EngineHost : Host
             ["HealCard"] = (h, a) =>
             {
                 var c = h.Card_(a[1]);
-                if (c is not null) c.Defense = Math.Min(c.MaxDefense, c.Defense + (int)a[3].AsInt());
+                if (c is not null)
+                {
+                    h.Engine.FireRepairTriggers(c);
+                    var before = c.Defense;
+                    c.Defense = Math.Min(c.MaxDefense, c.Defense + (int)a[3].AsInt());
+                    if (c.Defense != before) h.Engine.FireDefenseChangedTriggers(c);
+                }
+                return Val.Nothing;
+            },
+
+            // ---------- 钉住 / 压制 ----------
+            ["PinUnit"] = (h, a) =>
+            {
+                var c = h.Card_(a[1]);
+                if (c is not null && !c.Pinned)
+                {
+                    c.Pinned = true;
+                    h.Engine.FirePinTriggers(c, true);
+                }
+                return Val.Nothing;
+            },
+            ["RemovePin"] = (h, a) =>
+            {
+                var c = h.Card_(a[1]);
+                if (c is not null && c.Pinned)
+                {
+                    c.Pinned = false;
+                    h.Engine.FirePinTriggers(c, false);
+                }
+                return Val.Nothing;
+            },
+            ["SuppressUnit"] = (h, a) =>
+            {
+                var c = h.Card_(a[1]);
+                if (c is not null && !c.Suppressed)
+                {
+                    c.Suppressed = true;
+                    h.Engine.FireSuppressTriggers(c);
+                }
                 return Val.Nothing;
             },
 
@@ -511,6 +830,97 @@ public sealed class EngineHost : Host
         return Val.Nothing;
     }
 
+    /// <summary>卡牌定义上是否带某个关键字（与场上临时状态无关）。</summary>
+    private static bool HasKw(Card c, Kw k) => c is not null && c.Has(k);
+
+    // ---------- Intel（情报）----------
+
+    /// <summary>
+    /// Intel 的完整语义：打出带 Intel n 的卡时，随机把对手 n 张手牌标成「已明牌」，
+    /// 然后通知所有注册了 <c>OnIntelTriggered</c> 的卡。
+    ///
+    /// <para>
+    /// 客户端把「已明牌」记在卡的 <c>seenByCipher</c> 上，用 <c>SetCardsSeenByCipher</c>
+    /// 写入；这里是它的宿主实现。玩家自己的手牌永远是明的，所以只翻对手的。
+    /// </para>
+    /// <para>
+    /// 参数（含 a[0] 接收者）：a[1] 数量, a[2] 触发者ID。数量为 0 或对手手牌为空时什么都不做。
+    /// </para>
+    /// </summary>
+    private static Val? Intel(EngineHost h, Val[] a)
+    {
+        var seen = (int)a[1].AsInt();
+        var instigatorId = (int)a[2].AsInt();
+        if (seen <= 0) return Val.Nothing;
+
+        // 触发者是哪一方，就翻另一方的牌
+        var src = h.Engine.S.FindCard(instigatorId);
+        var viewer = src?.Owner ?? h.Engine.Perspective;
+        var foeHand = h.Engine.S.Player(GameState.Foe(viewer)).Hand;
+        if (foeHand.Count == 0) return Val.Nothing;
+
+        var n = Math.Min(seen, foeHand.Count);
+        // 洗一份下标再取前 n 个：直接洗牌会打乱对手手牌顺序（那是可见信息，不能动）
+        var idx = Enumerable.Range(0, foeHand.Count).ToList();
+        h.Engine.S.Rng.Shuffle(idx);
+        foreach (var i in idx.Take(n))
+            h.Obj(foeHand[i]).Set("seenByCipher", Val.Of(true));
+
+        h.Engine.FireIntelTriggers(src, n);
+        return Val.Nothing;
+    }
+
+    // ---------- 自定义名后缀（逗号分隔的标记串）----------
+
+    private static void SuffixAdd(EngineHost h, Val[] a, string field)
+    {
+        var c = h.Card_(a[0]);
+        if (c is null) return;
+        var k = h.Obj(c);
+        var tag = a[1].AsStr();
+        var cur = k.Get(field).AsStr();
+        if (tag.Length > 0 && cur.Split(',').Contains(tag)) return;   // 幂等
+        k.Set(field, Val.Of(cur.Length == 0 ? tag : cur + "," + tag));
+    }
+
+    private static void SuffixRemove(EngineHost h, Val[] a, string field)
+    {
+        var c = h.Card_(a[0]);
+        if (c is null) return;
+        var k = h.Obj(c);
+        var tag = a[1].AsStr();
+        var kept = k.Get(field).AsStr()
+                    .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                    .Where(x => x != tag);
+        k.Set(field, Val.Of(string.Join(",", kept)));
+    }
+
+    // ---------- 战役升级：直接改静态属性 ----------
+
+    /// <summary>CampaignAdd{Attack,Defense} / CampaignIncreaseHeavyArmor 共用的加法。</summary>
+    private static void StatAdd(EngineHost h, Val[] a, string which)
+    {
+        var c = h.Card_(a[0]);
+        if (c is null) return;
+        var v = (int)a[1].AsInt();
+        switch (which)
+        {
+            case "attack": c.Attack += v; break;
+            case "defense": c.Defense += v; c.MaxDefense += v; break;
+            case "heavyArmor": c.HeavyArmor += v; break;
+        }
+    }
+
+    private static void KwAdd(EngineHost h, Val[] a, Kw k)
+    {
+        if (h.Card_(a[0]) is { } c) c.Keywords |= k;
+    }
+
+    private static void KwRemove(EngineHost h, Val[] a, Kw k)
+    {
+        if (h.Card_(a[0]) is { } c) c.Keywords &= ~k;
+    }
+
     /// <summary>
     /// 卡牌的「自定义能力」字符串集合。
     /// 蓝图用 CustomName2Add 往自定义名后缀里追加标记，能力判定就读这个后缀。
@@ -547,6 +957,8 @@ public sealed class EngineHost : Host
         return false;
     }
 }
+
+
 
 
 

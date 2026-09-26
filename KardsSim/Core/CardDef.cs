@@ -22,6 +22,12 @@ public sealed class CardDef
     public int OperationCost;
     public int HeavyArmor;
 
+    /// <summary>
+    /// Intel（情报）值：打出本卡时随机翻开对手手牌的张数。
+    /// 客户端字段名是 <c>cipher</c>，沿用同一个名字语义才对得上直译产物。
+    /// </summary>
+    public int Cipher;
+
     public Kw Keywords;
     public List<Trigger> Triggers = new();
     public List<string> Tags = new();
@@ -110,6 +116,7 @@ public static class CardDb
             d.Range = raw.TryGetProperty("range", out var rg) ? Math.Max(0, rg.GetInt32()) : 1;
             d.OperationCost = I(raw, "operationCost");
             d.HeavyArmor = I(raw, "heavyArmor");
+            d.Cipher = I(raw, "cipher");
             d.FlavorText = Str(raw, "flavorText");
         }
 
@@ -128,6 +135,17 @@ public static class CardDb
             {
                 var n = t.GetString();
                 if (n != null) d.Tags.Add(n);
+            }
+
+        // extraHelpBubbleTypes 是「卡面标签」，Intel 这类关键字只在这里出现
+        // （gameplayTags 绝大多数卡是 null）。漏掉它 HasIntel 就永远是 false。
+        if (raw.ValueKind == JsonValueKind.Object
+            && raw.TryGetProperty("extraHelpBubbleTypes", out var hb)
+            && hb.ValueKind == JsonValueKind.Array)
+            foreach (var t in hb.EnumerateArray())
+            {
+                var n = t.GetString();
+                if (n != null && !d.Tags.Contains(n)) d.Tags.Add(n);
             }
 
         var spawn = S(e, "spawnCardName");

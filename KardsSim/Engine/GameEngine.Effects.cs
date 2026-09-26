@@ -26,13 +26,7 @@ public sealed partial class GameEngine
     public void FireTrigger(Trigger t, Card subject)
     {
         if (S.Done) return;
-        var order = new List<Card>();
-        foreach (var side in new[] { S.Current, GameState.Foe(S.Current) })
-        {
-            foreach (var c in S.Player(side).Board) order.Add(c);
-            foreach (var c in S.Frontline.Where(x => x.Owner == side)) order.Add(c);
-        }
-        foreach (var c in order)
+        foreach (var c in TriggerOrder())
         {
             if (c.Destroyed) continue;
 
@@ -53,6 +47,24 @@ public sealed partial class GameEngine
             TriggerFireCount++;
             if (S.Done) return;
         }
+    }
+
+    /// <summary>
+    /// 触发点的响应者顺序：当前方 → 对手，每方先支援线再前线。
+    ///
+    /// 顺序必须稳定，否则同一 seed 跑不出同一局；这里的顺序也是客户端
+    /// <c>FetchAllCardsWithEventTrigger</c> 的顺序（它按 CardFunctionTriggers 里的
+    /// 登记序取，而登记序就是创建序，等价于按 instanceId）。
+    /// </summary>
+    internal IEnumerable<Card> TriggerOrder()
+    {
+        var order = new List<Card>();
+        foreach (var side in new[] { S.Current, GameState.Foe(S.Current) })
+        {
+            foreach (var c in S.Player(side).Board) order.Add(c);
+            foreach (var c in S.Frontline.Where(x => x.Owner == side)) order.Add(c);
+        }
+        return order;
     }
 
     /// <summary>跑一张牌在某个触发点上的效果（优先直译产物）。</summary>

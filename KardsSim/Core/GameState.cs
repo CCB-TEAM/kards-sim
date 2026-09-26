@@ -85,6 +85,7 @@ public sealed class GameState
             KreditCost = def.Kredits,
             Keywords = def.Keywords,
             HeavyArmor = def.HeavyArmor,
+            Cipher = def.Cipher,
         };
         return c;
     }

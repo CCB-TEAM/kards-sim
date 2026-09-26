@@ -167,8 +167,8 @@ public sealed partial class GameEngine
             else { c.OnFrontline = false; p.Board.Add(c); }
         }
 
-        FireTrigger(Trigger.OnOtherCardPlayedFromHand, c);
-        FireTrigger(Trigger.OnOtherCardEnterPlay, c);
+        FirePlayTriggers(c);
+        FireEnterPlayTriggers(c);
 
         // 部署效果
         if (c.Has(Kw.Deployment))
@@ -178,7 +178,9 @@ public sealed partial class GameEngine
         }
         RunCardEffect(c, Trigger.NotAvailable);   // OnPlayedFromHand 效果入口
 
-        FireTrigger(Trigger.OnOtherCardDeveloped, c);
+        // Intel 不在这里发：游戏自己的 CardPlayedFromHand（BP_CardFunctions）里已经有
+        //   if (cardPlayed.cipher > 0) SetCardsSeenByCipher(cipher, cardID)
+        // 再发一次会翻两倍张数。那条链路由 CardPlayedFromHand 走。
         return true;
     }
 
@@ -193,8 +195,11 @@ public sealed partial class GameEngine
         var before = S.FrontlineOwner;
         if (S.FrontlineOwner == Side.None) S.FrontlineOwner = c.Owner;
         if (before != S.FrontlineOwner) S.Log.Line($"  frontline owner: {before} -> {S.FrontlineOwner}");
-        FireTrigger(Trigger.OnFrontlineOwnershipChange, c);
-        FireTrigger(Trigger.OnOtherCardMoveToFrontline, c);
+        // 只有归属真的变了才发归属变更：客户端也是在 UpdateFrontlineIfNeeded 里判断的，
+        // 无脑发会让「前线归属改变」类卡牌反复触发。
+        if (before != S.FrontlineOwner) Fire(Trigger.OnFrontlineOwnershipChange, c);
+        Fire(Trigger.OnOtherCardMoveToFrontline, c);
+        FireLocationMovedTriggers(c);
         return true;
     }
 
@@ -210,13 +215,14 @@ public sealed partial class GameEngine
 
         atk.AttackedThisTurn = true;
         FireTrigger(Trigger.OnBeforeOtherCardAttacks, atk);
+        FireTargetConfirmTriggers(atk, def);
 
         if (a.TargetId == 0)
         {
             var foe = GameState.Foe(atk.Owner);
             S.Log.Line($"  {atk.Id} ({atk.TotalAttack}) attacks {foe} HQ");
             DamageHq(foe, atk.TotalAttack);
-            FireTrigger(Trigger.OnOtherCardAttacks, atk);
+            FireAttackEndTriggers(atk, null);
             return true;
         }
 
@@ -224,7 +230,7 @@ public sealed partial class GameEngine
         if (def == null || def.Destroyed || !AttackTargetsFor(atk).Contains(a.TargetId))
         {
             S.Log.Line($"    {atk.Id} attack fizzled (target gone)");
-            FireTrigger(Trigger.OnOtherCardAttacks, atk);
+            FireAttackEndTriggers(atk, null);
             return true;
         }
 
@@ -244,9 +250,7 @@ public sealed partial class GameEngine
         if (atkDies) DestroyCard(atk);
         else if (dmgToAtk == 0 && dmgToDef == 0) { /* 双方都打不动 */ }
 
-        FireTrigger(Trigger.OnOtherCardAttacks, atk);
-        FireTrigger(Trigger.OnAfterOtherCardAttacks, atk);
-        if (!def.Destroyed) FireTrigger(Trigger.OnOtherCardSurvivedCombat, def);
+        FireAttackEndTriggers(atk, def);
         return true;
     }
 
@@ -269,12 +273,14 @@ public sealed partial class GameEngine
             u.OnFrontline = false;
             u.Loc = Loc.Board;
             S.Player(u.Owner).Board.Add(u);
+            var hadOwner = S.FrontlineOwner;
             if (S.Frontline.Count == 0) S.FrontlineOwner = Side.None;
             S.Log.Line($"  {u.Id} retreats to support line");
-            FireTrigger(Trigger.OnOtherCardMoveFromFrontline, u);
+            FireMoveFromFrontlineTriggers(u);
+            FireRetreatTriggers(u);
         }
         u.MovedThisTurn = true;
-        FireTrigger(Trigger.OnOtherCardLocationMoved, u);
+        FireLocationMovedTriggers(u);
         return true;
     }
 

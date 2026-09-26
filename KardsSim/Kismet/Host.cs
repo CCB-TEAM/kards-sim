@@ -33,11 +33,50 @@ public class Host : IHost
     /// <summary>状态根对象（GameState / self 等），按名字索引。</summary>
     public readonly Dictionary<string, Val> Globals = new(StringComparer.Ordinal);
 
-    /// <summary>被调用过但没有实现的函数 → 调用次数。这是「还缺多少宿主 API」的实测清单。</summary>
+    /// <summary>
+    /// 引擎库内建（Array/Map/Set/String/Math…）的函数名，给完备性审计用。
+    ///
+    /// 这份名单是<b>探测出来的</b>，不是手写维护的：拿 Generated 里所有实际调用目标
+    /// 逐个去问 <see cref="Builtin"/> 认不认。手写名单一定会和 switch 里的 case 漂移，
+    /// 那样审计就会把「其实有实现」的函数误报成缺口。
+    /// </summary>
+    public static IReadOnlyCollection<string> BuiltinNames { get; } = ProbeBuiltins();
+
+    private static List<string> ProbeBuiltins()
+    {
+        var names = new List<string>();
+        var genDir = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "Generated");
+        if (!Directory.Exists(genDir)) genDir = "Generated";
+        if (!Directory.Exists(genDir)) return names;
+
+        var seen = new HashSet<string>(StringComparer.Ordinal);
+        var rx = new System.Text.RegularExpressions.Regex("H\\.Call\\(\"([^\"]+)\"");
+        foreach (var f in Directory.EnumerateFiles(genDir, "*.g.cs", SearchOption.AllDirectories))
+            foreach (System.Text.RegularExpressions.Match m in rx.Matches(File.ReadAllText(f)))
+                seen.Add(m.Groups[1].Value);
+
+        // 8 个 Nothing 占位：内建实现都按需取用，越界前会自己判断
+        var probe = new Host();
+        var dummy = Enumerable.Repeat(Val.Nothing, 8).ToArray();
+        foreach (var n in seen)
+            if (probe.Builtin(n, dummy).Found) names.Add(n);
+        return names;
+    }
     public readonly Dictionary<string, int> Unhandled = new(StringComparer.Ordinal);
 
     /// <summary>所有 Call 的总次数（用于算覆盖率）。</summary>
     public long CallCount;
+
+    /// <summary>
+    /// 触发点实测钩子：引擎真要跑一张卡的某个触发点时回调一次。
+    ///
+    /// 存在的理由是静态覆盖会说谎 —— 「引擎发了 OnX」不等于「有卡接住了」。
+    /// 只有实测命中数才能区分「完整」和「空跑」（发出去但场上没有响应者）。
+    /// </summary>
+    public Action<Core.Trigger, string> OnTriggerFired;
+
+    /// <summary>打开触发点实测（有额外开销，只在审计时开）。</summary>
+    public bool TraceFire;
 
     /// <summary>诊断日志；默认丢弃。</summary>
     public Action<string> Logger;
