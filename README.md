@@ -302,10 +302,10 @@ not_enough_range  ⟺  defender.location != 7   // 7 = 前线
 
 ---
 
-## 七个审计模式
+## 八个审计模式
 
 跑多少局自对弈都不能证明「完备」—— 随机对局抽不到那些卡，等于没测。
-所以除了对局，还有七个专门查完备性的模式：
+所以除了对局，还有八个专门查完备性的模式：
 
 | 模式 | 查什么 | 为什么需要 |
 |---|---|---|
@@ -315,6 +315,7 @@ not_enough_range  ⟺  defender.location != 7   // 7 = 前线
 | `triggers` | 对照「卡牌注册 / 引擎发出 / 游戏侧分派器」三张表 | 找出白板卡 |
 | `rules` | 客户端规则库（`cardsCheckFunctions`）的 18 条否决理由 vs 引擎侧现状，外加一个 Guard 行为抽检 | 规则只在客户端存在时，AI 会学到不存在的规则 |
 | `paramaudit` | 把引擎原语的实现和 UHT 头文件签名逐条比对，找「UHT 是 void 带 out、实现却直接 return」 | 这类缺陷不报错、不进 `Unhandled`，只是值永远传不回来 |
+| `byref` | 扫直译产物：形参被判成纯 `out`、函数体里却**先读后写**的那些函数 | UE 里被调帧能读到调用方传的值，直译产物读成 `Val.Nothing` → 整条效果空转（见 [已知缺口](#已知缺口by-ref-形参被当成纯-out)） |
 | `repro1` | issue #1 的端到端复现：击杀 → 变老兵 → 打 HQ 3 点 | 跨「事件载荷 → 持久帧变量 → 老兵换用 → HQ 合成对象」四层，是回归哨兵 |
 
 ### out 参数：两类静默失败
@@ -434,6 +435,51 @@ Execute*Events  →  逐个调响应卡的事件函数
   的 Develop 结果在客户端是**UI 直接做的**，它们没有自己的 `OnHandTargetSelected`，
   无头模拟里选择能被发起和结算，但效果不落地
 - 已知未做：卡组 40 张（`Rules.DeckSize=30`，wiki 说 40，但客户端 CDO 说 30，倾向信客户端）
+- 已知缺口：**by-ref 形参被当成纯 out** —— 见下一节，48 处 / 40 个函数
+
+---
+
+## 已知缺口：by-ref 形参被当成纯 out
+
+直译产物把 out 形参发射成「调用方不传值，退出时回调写回」：
+
+```csharp
+var __out_cards = args.Length > 0 ? args[0].As<Action<Val>>() : null;
+L["cards"] = Val.Nothing;          // ← 读到的永远是空
+```
+
+这在**只写不读**时是对的。但 UE 的 Kismet 里所有形参都是把求值结果送进被调帧的：
+被调函数<b>能读到</b>调用方传进来的值，`out` 只表示「退出时还要写回」。
+于是凡是「把 out 形参当输入读」的函数，在直译产物里都是**空操作** ——
+不报错、不进 `Unhandled`、`smoke` 与自对弈也全绿。
+
+`--mode byref` 会扫出全部（实测 **48 处 / 40 个函数 / 16 个文件**），影响对局的包括：
+
+| 函数 | 后果 |
+|---|---|
+| `GetRandomCard(cards)` | **所有「随机一个敌方单位」类效果空转**（返回空） |
+| `ApplyMakeCardRetreat(cards)` | 把单位「送回手牌」什么也不做（光环也不会被撤销） |
+| `ApplySetCardsSeenByCipher(card)` | Intel 的翻牌链 |
+| `AttackCard(defenderCardID)` / `ApplyDestroyMultipleCards` | 攻击/批量摧毁的分派 |
+| `ExecuteOnDestructionEffectTriggered` | 摧毁效果分派 |
+| `TriggerMultipleDeploymentEffects(inputCards)` | 「触发多个部署效果」 |
+| `GetRandomKreditCombo` / `SpawnUnitsWithKreditCombo` / `MoveCards(EnemyUnits)` / `findPairOfUnits` | 随机/批量类效果 |
+| `SortCardsByLocationNumber` / `GetNewLocationNumbers` / `CreateLocationNumberGapForCard` | 撤退时的位置重排 |
+| `CanAttack(cardsInAttackedLocation)` | 规则库里「未明牌 Covert」那一段（读的是空数组 → 循环不执行） |
+
+`--mode tests` 里的 `SentToHandIsAKnownGap` 是**刻意的反向断言**：它记录「现在
+`MakeCardRetreat` 是空操作」。等修好落地，这条会失败，正好提醒换成正式断言。
+
+**修法**（在转译器侧，不需要改引擎）：UE 的 out 形参在字节码里也是把调用方求值后的
+参数送进被调帧，所以 out 应当按 **in-out** 发射 ——
+调用点 <code>Val.Out(当前值, 写回)</code>、被调帧
+<code>L["x"] = args[i].In</code>。改完重新生成，`--mode byref` 应当清零。
+
+**重新生成要注意**：仓库里只有 `BP_CardFunctions` 与 `BP_Logic` 的资产，转译
+`_deps/`（`BP_GameState_Battle`、`Library/*`、`cardsCheckFunctions`）需要的 uasset
+不在 `_input/` 里，`_index.g.cs` 也不能照抄 —— 否则 `FnIndex` 会丢掉那些资产。
+所以这一步要么拿到完整资产做全量重新生成，要么只覆盖能生成的部分并保留 `_deps/`
+（后者会让 `_deps` 里那几处继续坏着）。
 
 ---
 

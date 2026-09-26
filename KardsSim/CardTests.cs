@@ -41,6 +41,7 @@ public static class CardTests
         RangeOneNeedsTheFrontlineForTheEnemySupportLine();
         HttpActionListIsAligned();
         TempAttackBuffExpiresAtEndOfTurn();
+        SentToHandIsAKnownGap();
 
         Console.WriteLine();
         Console.WriteLine($"通过 {_pass} / 失败 {_fail}");
@@ -1079,6 +1080,64 @@ public static class CardTests
             $"{target.TotalAttack}（期望 {baseAtk + 5}）");
         Check("全程没有未实现的宿主调用", h.Unhandled.Count == 0,
             string.Join(",", h.Unhandled.Keys.Take(5)));
+    }
+
+    /// <summary>
+    /// <b>已知缺口（当前是坏的，这条断言记录的就是「它还坏着」）</b>：
+    /// 把单位「送回手牌」什么也不做，所以光环也不会被撤销。
+    ///
+    /// <para>
+    /// 根因不在引擎，而在直译产物：<c>ApplyMakeCardRetreat(cards, instigatorID)</c>
+    /// 的 <c>cards</c> 被发射成**纯 out 形参**（<c>L["cards"] = Val.Nothing;</c>），
+    /// 可函数体第一句就是 <c>Array_Length(cards)</c> —— 读到空数组，整条链直接返回。
+    /// UE 的 Kismet 里被调帧是能读到调用方传进来的值的（所有形参都送进帧），
+    /// out 只是「退出时还要写回」。同一类问题全仓共 45 处，清单见
+    /// <c>--mode byref</c>（含 <c>GetRandomCard</c>、<c>ApplySetCardsSeenByCipher</c>、
+    /// <c>TriggerMultipleDeploymentEffects</c> 等影响对局的函数）。
+    /// </para>
+    ///
+    /// <para>
+    /// 修法在转译器 + 重新生成（把 out 按 in-out 发射）。<b>本测试是刻意的反向断言</b>：
+    /// 等那个改动落地，这里会失败，正好提醒把它换成「回手牌后光环被撤销」的正式断言。
+    /// </para>
+    /// </summary>
+    private static void SentToHandIsAKnownGap()
+    {
+        var def = CardDb.Get("card_unit_flaming_matilda_anzac");
+        var sample = CardDb.All.FirstOrDefault(d =>
+            d.Type == CardType.Infantry && d.Attack > 0 && d.Defense > 0 && d.Id != def?.Id);
+        if (def is null || sample is null) { Check("找得到 flaming_matilda 与步兵样本", false, "卡池里没有"); return; }
+
+        var g = new Engine.GameEngine(401, null, null, false);
+        var h = new Bridge.EngineHost(g);
+        g.Host = h;
+        g.S.Current = Side.Left;
+        g.S.Left.Kredits = 99;
+
+        var left0 = PlaceInFrontline(g, Side.Left, sample);
+        var base0 = left0.TotalAttack;
+        var matilda = PlaceInFrontline(g, Side.Left, def);
+        g.RefreshAllLocations();
+        h.Call("ChangeAttack", new Val[]
+        {
+            Val.Ref(h.CardFunctions), Val.Ref(h.Obj(left0)),
+            Val.Of(matilda.InstanceId), Val.Of(2), Val.Of(0), Val.False, Val.Out(_ => { }),
+        });
+        Check("前置：左邻带着光环 +2", left0.TotalAttack == base0 + 2, $"{left0.TotalAttack}");
+
+        h.Call("MakeCardRetreat", new Val[]
+        {
+            Val.Ref(h.CardFunctions),
+            Val.Ref(new KArr(new[] { Val.Ref(h.Obj(matilda)) })),
+            Val.Of(matilda.InstanceId),
+        });
+
+        Check("已知缺口：MakeCardRetreat 现在是空操作（matilda 还在前线）",
+            g.S.Frontline.Contains(matilda),
+            "它居然动了！缺口已修 → 把这条换成「回手牌后光环被撤销」的正式断言");
+        Check("已知缺口：所以光环也没被撤销",
+            left0.TotalAttack == base0 + 2,
+            $"{left0.TotalAttack}（期望仍是 {base0 + 2}）");
     }
 
     /// <summary>把一张牌直接放到前线（编号由 <see cref="Engine.GameEngine.RefreshAllLocations"/> 重排）。</summary>
