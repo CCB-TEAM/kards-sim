@@ -69,20 +69,115 @@ dotnet build KardsSim/KardsSim.csproj -c Release -p:SkipGenerated=true
 ## 运行
 
 ```bash
-# 自对弈（默认走直译产物），并打印宿主 API 覆盖率
+# 自对弈（默认走直译产物），并打印宿主 API 覆盖率 + 触发点完整性检查
 dotnet run --project KardsSim -c Release -- --mode selfplay --games 200
 
 # 用旧的文本解析效果表跑（对照用）
 dotnet run --project KardsSim -c Release -- --mode selfplay --games 200 --legacy
 
 # HTTP 接口，默认 http://127.0.0.1:8642/
-dotnet run --project KardsSim -c Release
+dotnet run --project KardsSim -c Release -- --mode serve
 
-# 其它：dump / coverage / fuzz
+# 机制单测（带断言的，能失败）
+dotnet run --project KardsSim -c Release -- --mode tests
 ```
 
-自对弈会打印**宿主未实现调用清单**（函数名 + 调用次数），这是「还缺哪些宿主 API」
-的实测依据，而不是靠猜。
+---
+
+## 四个审计模式
+
+跑多少局自对弈都不能证明「完备」—— 随机对局抽不到那些卡，等于没测。
+所以除了对局，还有四个专门查完备性的模式：
+
+| 模式 | 查什么 | 为什么需要 |
+|---|---|---|
+| `apicheck` | 静态全扫 `H.Call` 的所有目标，判断有没有地方接 | 不依赖采样运气；能区分「卡牌逻辑可达」和「仅 UI 可达」 |
+| `smoke` | 逐卡强制触发它注册的**每一个**触发点 | 自对弈抽不到的卡在这里一定被跑到 |
+| `triggerhits` | 运行期实测每个触发点命中多少次 | 「引擎发了」不等于「有卡接住」，静态审计看不出发空跑 |
+| `triggers` | 对照「卡牌注册 / 引擎发出 / 游戏侧分派器」三张表 | 找出白板卡 |
+
+### 为什么需要四个而不是一个
+
+这三个层次会给出**互相矛盾**的结论，而这正是它们的价值：
+
+- **静态覆盖**说 61/61 完整 —— 因为它只扫 `Fire(Trigger.X)` 字面量，
+  包括那些**从来没被调用过**的辅助函数。本轮就是这么抓出 23 个死包装函数的。
+- **运行期命中**说 34 个触发点空跑 —— 但其中大多数只是随机对局没抽到对应卡。
+- **smoke** 才能分辨：强制触发后 0 异常 0 未实现，说明分派是通的，空跑纯粹是采样问题。
+
+`apicheck` 把 2814 个调用目标分成两类：**卡牌逻辑可达**（从卡牌 ubergraph 或
+`BP_CardFunctions` / `BP_GameState_Battle` 发起）和**仅 UI / 平台可达**。
+前者是 0 —— 这才是「完备」的可验证定义。
+
+---
+
+## 触发点是怎么接上的
+
+游戏的触发分发链路（已从直译产物里确认）：
+
+```
+卡牌 CDO.usedTriggers  (TArray<ERegisteredCardFunction>)
+    ↓ CreateCardObject 遍历
+UpdateCardFunctionTriggerMap(triggerEnum, cardID)
+    ↓ 写入
+GameState.CardFunctionTriggers  (map<triggerID, set<cardID>>)
+    ↓ FetchAllCardsWithEventTrigger 查
+Execute*Events  →  逐个调响应卡的事件函数
+```
+
+**「什么时候发哪个触发点 / 谁响应 / 什么顺序」这些信息游戏自己就有** ——
+63 个 `Execute*Events` 函数把 triggerID 硬编码在里面。
+
+引擎侧对应的是 `Engine/GameEngine.Triggers.cs` 里的 43 个语义化包装
+（`FireTurnStartTriggers` / `FireDestroyTriggers` …），集中在一处免得散落漏掉。
+
+**注意**：包装函数必须写成 `if (x) Fire(Trigger.A, c); else Fire(Trigger.B, c);`
+这种显式分支，不能写 `Fire(x ? A : B, c)` —— 审计是静态扫字面量的，三元表达式它看不见。
+
+---
+
+## 根因：Intel（情报）
+
+`cipher` 值 = 打出时随机翻开对手手牌的张数，然后通知注册了 `OnIntelTriggered` 的卡。
+
+两个容易搞错的地方：
+
+1. **Intel 不是关键字位，也不是标签**，是卡上的数值字段 `cipher`
+   （`AddIntelToCard` 会把它 clamp 到 0..9）。数据在 `cards.json` 的 `raw.cipher`。
+2. **`OnIntelTriggered` 的第二个形参是整数，不是卡对象** —— 而其他所有触发点的
+   第二个形参都是「相关卡」。混用不炸但结果全错，所以单开了
+   `CardDispatch.FireWith` 走显式实参。
+
+翻牌只加 `seenByCipher` 标记，**不动手牌顺序**：顺序是对局的可见信息，
+洗错地方会让同一 seed 跑出不同结果（`--mode tests` 有断言守这条）。
+
+---
+
+## 已修过的坑（都是静默出错型，不测发现不了）
+
+| 症状 | 根因 |
+|---|---|
+| 判断永远为假、整段效果被跳过 | 无 context 调用成员函数时接收者发成了 `Val.Nothing` |
+| 整张卡抛 `KeyNotFound` | 局部变量直读 `L["x"]`；Kismet 局部槽是零初始化的 |
+| 条件判断走反 | 宿主规则回调只回 `bool`，函数**返回值被丢掉** |
+| 遍历型卡拿不到元素 | `Array_Get` 的结果走 out 形参，宿主没回写 |
+| 卡面文本变成类型名 | `EX_TextConst` 的 `Value.ToString()` 不是字面量，要按 `TextLiteralType` 取字段 |
+| 栈溢出 | 依赖蓝图只当签名表、没转译（见上） |
+| 栈溢出（第二类） | 转发壳：`A.Foo` 调 `B.Foo`，`B` 没 `Foo` 就落回兜底分支调回 `A.Foo` |
+| 编译报 CS0131 | `SetArray/SetSet/SetMap` 的属性是赋值目标，被当成右值发射 |
+| 原语读到错的参数 | 调用约定是 `{接收者, 实参...}`，`a[0]` 是接收者，实参从 `a[1]` 起 |
+
+---
+
+## 状态
+
+- 1670 个资产 / 6254 个函数，**0 空体**，1 处未支持节点（`BP_EntryPointActor`，非战斗逻辑）
+- 37 万行直译代码 **0 错误编译通过**
+- 自对弈 400 局：**0 异常 / 0 卡死 / 0 非法动作 / 0% 未实现调用**
+- 全卡 1638 张强制演练：**0 异常 / 0 未实现调用**
+- 触发点覆盖 **61/61**（卡牌注册的触发点，引擎全部会发）
+- 宿主 API：卡牌逻辑可达的缺口 **0 个**（另外 341 个仅 UI / 平台可达，无头模拟不会走到）
+- 已知未做：`WhichChooseOne`（三选一）恒返回第 0 支，是确定性的但不是真实决策点
 
 ---
 
@@ -123,19 +218,6 @@ dotnet run --project KardsTranspiler -c Release -- \
 
 ---
 
-## 已修过的坑（都是静默出错型，不测发现不了）
-
-| 症状 | 根因 |
-|---|---|
-| 判断永远为假、整段效果被跳过 | 无 context 调用成员函数时接收者发成了 `Val.Nothing` |
-| 整张卡抛 `KeyNotFound` | 局部变量直读 `L["x"]`；Kismet 局部槽是零初始化的 |
-| 条件判断走反 | 宿主规则回调只回 `bool`，函数**返回值被丢掉** |
-| 遍历型卡拿不到元素 | `Array_Get` 的结果走 out 形参，宿主没回写 |
-| 卡面文本变成类型名 | `EX_TextConst` 的 `Value.ToString()` 不是字面量，要按 `TextLiteralType` 取字段 |
-| 栈溢出 | 依赖蓝图只当签名表、没转译（见上） |
-| 编译报 CS0131 | `SetArray/SetSet/SetMap` 的属性是赋值目标，被当成右值发射 |
-
----
 
 ## 状态
 
@@ -151,3 +233,4 @@ dotnet run --project KardsTranspiler -c Release -- \
 
 `cards.json` 与 `KardsSim/Generated/` 是从游戏客户端资产派生的，仅供本地研究 /
 AI 训练，请勿再分发。游戏资产本身（`_input/`）不入库。
+
